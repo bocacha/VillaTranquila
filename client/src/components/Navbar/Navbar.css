@@ -1,0 +1,30 @@
+.navbar {
+    position: absolute;
+    overflow: hidden;
+    background-color: #b9e28c;
+    width: 100%;
+    top: 0;
+  }
+  
+  .navbar li {
+    float: left;
+    display: inline;
+    color: black;
+    text-align: center;
+    padding: 0px 10px 10px;
+    text-decoration: none;
+  }
+
+  .navbar button{
+    height: 43px;
+    border: transparent;
+    background-color: transparent;
+    font-size: medium;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  .navbar button:hover{
+    background-color: #e3e9c2;
+    color: black;
+  }
