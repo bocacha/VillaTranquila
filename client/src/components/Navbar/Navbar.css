@@ -1,7 +1,7 @@
 .navbar {
     position: absolute;
     overflow: hidden;
-    background-color: #b9e28c;
+    background-color: #9db17c;
     width: 100%;
     top: 0;
   }
@@ -9,7 +9,6 @@
   .navbar li {
     float: left;
     display: inline;
-    color: black;
     text-align: center;
     padding: 0px 10px 10px;
     text-decoration: none;
@@ -23,8 +22,9 @@
     border-radius: 8px;
     margin-top: 10px;
     cursor: pointer;
+    color: #4b3b40;
+    transition: all 0.2s ease;
   }
   .navbar button:hover{
-    background-color: #e3e9c2;
-    color: black;
+    background-color: #b6ca97;
   }
