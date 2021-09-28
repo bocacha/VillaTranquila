@@ -1,23 +1,10 @@
 import React from "react";
-<<<<<<< Updated upstream
-=======
 import BannerIntro from "../BannerIntro/BannerIntro";
 import Footer from "../Footer/Footer";
->>>>>>> Stashed changes
 import Navbar from "../Navbar/Navbar";
-import './Home.css';
+import Slider from "../Slider/Slider";
+import styles from "./Home.module.css";
 
-<<<<<<< Updated upstream
-export default function Home(){
-
-    return (
-        <div>
-            <Navbar />
-            <h1 className='HOME'>HOME</h1>
-        </div>
-    )
-}
-=======
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -44,4 +31,3 @@ export default function Home() {
     </div>
   );
 }
->>>>>>> Stashed changes
