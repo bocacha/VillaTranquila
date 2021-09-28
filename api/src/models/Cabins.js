@@ -19,11 +19,11 @@ module.exports = (sequelize) => {
     allownull:false,
   },
    Available:{ 
-    type: DataTypes.JSON,
+    type: DataTypes.STRING,
     allowNull: false,
   },
    Price:{
-    type: DataTypes.JSON ,
+    type: DataTypes.STRING ,
     allowNull: false,
    },
    Description:{
