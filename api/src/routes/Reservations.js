@@ -16,10 +16,14 @@ router.get("/", async (req, res)=>{
 });
 
 router.post("/NewReservation" , (req, res)=>{
-    const {Checkin, Checkout} = req.body;
+    const {Checkin, Checkout, UserId, Paymentsid, Cabinid, ExtraServices} = req.body;
     Reservations.create({
      Checkin,
-     Checkout
+     Checkout,
+     UserId, 
+     Paymentsid, 
+     Cabinid, 
+     ExtraServices
     })
     .then(doneTemp=>{
         return res.status(200).json(doneTemp)

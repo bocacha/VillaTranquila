@@ -15,6 +15,22 @@ module.exports = (sequelize) => {
     Checkout:{
       type: DataTypes.STRING,
       allowNull: false
+    },
+    UserId:{
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    Paymentsid:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    Cabinid:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    ExtraServices:{
+      type: DataTypes.STRING,
+      allowNull: true,
     }
   },{timestamps: false,});
 };

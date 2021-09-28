@@ -13,12 +13,6 @@ module.exports = (sequelize) => {
     UserName:{
       type: DataTypes.STRING,
       allownull: false,
-      validate:{
-          isAlphanumeric:{
-            args:true,
-            msg:"El Username solo puede contener letras y numeros"
-          }
-        }
      },
     FirstName:{
     type: DataTypes.STRING,
@@ -61,10 +55,12 @@ module.exports = (sequelize) => {
    },
    Premium:{
     type: DataTypes.BOOLEAN ,
+    defaultValue: false,
     allowNull: false,
    }, 
    Admin:{ 
     type: DataTypes.BOOLEAN,
+    defaultValue: false,
     allowNull: false,
   },
     Email:{
@@ -78,10 +74,12 @@ module.exports = (sequelize) => {
   },
    ReservationsHistory:{
     type: DataTypes.JSON,
+    defaultValue: [],
     allowNull: false,
    },
    Blocked:{
     type: DataTypes.BOOLEAN,
+    defaultValue: false,
     allowNull: false,
    },
   },{timestamps: false,});

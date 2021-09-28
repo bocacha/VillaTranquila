@@ -7,10 +7,13 @@ module.exports = (sequelize) => {
       defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
       allowNull: false,
-    }, 
-    Amount:{
+    },
+    TotalAmount:{
         type: DataTypes.STRING,
         allowNull: false
+    },
+    PaydAmount:{
+      type: DataTypes.STRING
     },
     Date:{
       type: DataTypes.STRING,

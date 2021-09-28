@@ -1,25 +1,26 @@
 const { Router } = require('express');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-const { Pictures} = require('../db');
+const { Services} = require('../db');
 const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 router.get("/", async (req, res)=>{
-    const dbPictures = await Pictures.findAll()
+    const dbServices = await Services.findAll()
     try{
-        res.send(dbPictures)
+        res.send(dbServices)
     }catch(error){
         console.log(error)
     }
 });
 
-router.post("/NewPicture" , (req, res)=>{
-    const {Description, Url} = req.body;
-    Pictures.create({
+router.post("/NewService" , (req, res)=>{
+    const {Description, Name, Price} = req.body;
+    Services.create({
      Description,
-     Url
+     Name,
+     Price,
     })
     .then(doneTemp=>{
         return res.status(200).json(doneTemp)

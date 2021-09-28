@@ -16,9 +16,10 @@ router.get("/", async (req, res)=>{
 });
 
 router.post("/NewPayment" , (req, res)=>{
-    const {Amount, Date, idClient} = req.body;
+    const {Date, idClient, TotalAmount, PaydAmount} = req.body;
     Payments.create({
-      Amount, 
+      TotalAmount, 
+      PaydAmount,
       Date, 
       idClient
     })
