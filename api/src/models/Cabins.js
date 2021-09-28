@@ -4,7 +4,7 @@ const { DataTypes, Sequelize } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('Cabins', {
-  id:{
+  ID:{
     type: DataTypes.UUID,
     defaultValue: Sequelize.UUIDV4,
     primaryKey: true,
