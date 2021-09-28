@@ -29,6 +29,26 @@ router.post("/NewReservation" , (req, res)=>{
         return res.status(200).json(doneTemp)
     })
     .catch(error=>{ res.send(error)})
+});
+router.put("/EditCabin", (req,res) =>{
+    const {Number, Capacity, Available, Price, Description} = req.body;
+    const ID= req.body.id;
+        Cabins.update({
+
+            Number,
+            Capacity,
+            Available,
+            Price,
+            Description
+        },
+        {
+            where: {id: ID}
+
+        })
+        .then(doneTemp=>{
+            return res.status(200).json(doneTemp)
+        })
+        .catch(error=>{ res.send(error)})
 })
 
 module.exports = router;
