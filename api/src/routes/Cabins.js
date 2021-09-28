@@ -51,34 +51,6 @@ router.put("/EditCabin", (req,res) =>{
         .catch(error=>{console.log(error)})
 })
 
-router.put("/EditCabin", async (req,res) =>{
-    const {ID,Number, Capacity, Available, Price, Description} = req.body;
-    try {
-        
-        const response =  await Cabins.update({
-            
-            Number:Number,
-            Capacity:Capacity,
-            Available:Available,
-            Price:Price,
-            Description:Description
-        },
-        {
-            where: {ID}
-        
-        })
-        // .then(function(data){
-        //     res= { success: true, data: data,message:"Upload succesfull"}
-        //     return res;
-        // })
-        // .catch(error =>{ 
-        //     res={success: false,error:error}
-        //     return res;
-        // })
-        res.json(response);
-    } catch (e) {
-        console.log(e);
-    }   
-})
+
 
 module.exports = router;

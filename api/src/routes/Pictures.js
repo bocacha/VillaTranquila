@@ -26,5 +26,23 @@ router.post("/NewPicture" , (req, res)=>{
     })
     .catch(error=>{ res.send(error)})
 })
+router.put("/EditPicture", (req,res) =>{
+    const {Description, Url} = req.body;
+    const objecttoupdate={
+        Description: Description,
+        Url: Url      
+    }
+        Pictures.update(
+          objecttoupdate
+        ,
+        {
+            where: {id: req.body.id}
+
+        })
+        .then(doneTemp=>{
+            return res.status(200).json(doneTemp)
+        })
+        .catch(error=>{console.log(error)})
+})
 
 module.exports = router;
