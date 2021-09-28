@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { RiTeamLine, RiMailLine, RiLoginBoxLine } from 'react-icons/ri';
 import { GoSignIn } from 'react-icons/go';
+import { ImCalendar } from 'react-icons/im';
 import styles from "./Navbar.module.css";
 
 export default function Navbar(){
@@ -10,16 +11,19 @@ export default function Navbar(){
         <div>
             <ul className={styles.navbar} >
                 <li>
-                    <Link to='/nosotros' ><button><strong>Nosotros <RiTeamLine/></strong></button></Link>
+                    <Link to='/reserva' ><button><strong>Comenzar reserva <ImCalendar/></strong></button></Link>
                 </li>
                 <li>
                     <Link to='/contacto' ><button><strong>Contacto <RiMailLine/></strong></button></Link>
                 </li>
                 <li>
+                    <Link to='/nosotros' ><button><strong>Nosotros <RiTeamLine/></strong></button></Link>
+                </li>
+                <li>
                     <button><strong>Sign in <GoSignIn/></strong></button>
                 </li>
                 <li>
-                    <button><strong>Log in <RiLoginBoxLine/></strong></button>
+                    <button><strong>Register <RiLoginBoxLine/></strong></button>
                 </li>
             </ul>
         </div>
