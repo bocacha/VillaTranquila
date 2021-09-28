@@ -1,0 +1,80 @@
+.container {
+  background: #323031;
+  color: #fff;
+  margin-bottom: 0px;
+  margin-top: 5px;
+}
+
+.arriba {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding-top: 10px;
+
+}
+
+.contacto,
+.links,
+.redes,
+.newsletter {
+  margin-right: 30px;
+  text-align: start;
+}
+
+.derechos {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+.hr {
+  width: 100%;
+}
+
+.title {
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+}
+
+.link {
+  text-decoration: none;
+  color: #fff;
+  transition-duration: 0.4s;
+}
+
+.link:hover {
+    color: #000;
+}
+
+.redesIconos {
+  color: #fff;
+  margin-right: 7px;
+  font-size: 23px;
+  transition-duration: 0.4s;
+}
+
+.redesIconos:hover{
+    color: #000;
+}
+
+.input{
+    border-radius:10px;
+    padding:3px 0px 3px 10px;
+    border: none;
+}
+
+.btn{
+    border-radius:10px;
+    padding: 6px ;
+    margin-top:5px;
+    background: #f8f8f8;
+    border: none;
+    color: #000;
+    transition-duration: 0.4s;
+
+}
+
+.btn:hover{
+    color:#fff;
+    background: #323031;
+}
