@@ -27,5 +27,24 @@ router.post("/NewService" , (req, res)=>{
     })
     .catch(error=>{ res.send(error)})
 })
+router.put("/EditService", (req,res) =>{
+    const {Description, Name, Price} = req.body;
+    const objecttoupdate={
+        Description: Description,
+        Name: Name,
+        Price: Price     
+    }
+        Pictures.update(
+          objecttoupdate
+        ,
+        {
+            where: {id: req.body.id}
+
+        })
+        .then(doneTemp=>{
+            return res.status(200).json(doneTemp)
+        })
+        .catch(error=>{console.log(error)})
+})
 
 module.exports = router;

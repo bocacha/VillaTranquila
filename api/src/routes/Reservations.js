@@ -30,25 +30,27 @@ router.post("/NewReservation" , (req, res)=>{
     })
     .catch(error=>{ res.send(error)})
 });
-router.put("/EditCabin", (req,res) =>{
-    const {Number, Capacity, Available, Price, Description} = req.body;
-    const ID= req.body.id;
-        Cabins.update({
-
-            Number,
-            Capacity,
-            Available,
-            Price,
-            Description
-        },
+router.put("/EditReservation", (req,res) =>{
+    const {Checkin, Checkout, UserId, Paymentsid, Cabinid, ExtraServices} = req.body;
+    const objecttoupdate={
+        Checkin: Checkin,
+        Checkout: Checkout,
+        UserId: UserId,
+        Paymentsid: Paymentsid,
+        Cabinid: Cabinid,
+        ExtraServices: ExtraServices
+    }
+        Cabins.update(
+          objecttoupdate
+        ,
         {
-            where: {id: ID}
+            where: {id: req.body.id}
 
         })
         .then(doneTemp=>{
             return res.status(200).json(doneTemp)
         })
-        .catch(error=>{ res.send(error)})
+        .catch(error=>{console.log(error)})
 })
 
 module.exports = router;
