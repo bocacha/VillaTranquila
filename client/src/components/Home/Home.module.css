@@ -22,6 +22,7 @@
   box-shadow: 6px 7px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
+
 .mapaContainer {
   width: 50%;
   display: flex;
@@ -34,3 +35,4 @@
   width: 100%;
   height: 400px;
 }
+

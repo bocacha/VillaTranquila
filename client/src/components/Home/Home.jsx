@@ -1,5 +1,7 @@
 import React from "react";
+
 import BannerIntro from "../BannerIntro/BannerIntro";
+
 import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 import Slider from "../Slider/Slider";
@@ -16,6 +18,7 @@ export default function Home() {
           Villa Tranquila
         </div>
       </div>
+
       <div>
         <BannerIntro />
         <Slider />
@@ -28,6 +31,7 @@ export default function Home() {
         ></iframe>
       </div>
         <Footer />
+
     </div>
   );
 }
