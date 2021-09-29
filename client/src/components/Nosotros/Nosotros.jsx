@@ -3,10 +3,12 @@ import { Link } from "react-router-dom";
 import { GrLinkedin } from 'react-icons/gr';
 import { AiFillGithub } from 'react-icons/ai';
 import styles from "./Nosotros.module.css";
+import Navbar from "../Navbar/Navbar";
 
 export default function Nosotros(){
     return (
         <div className={styles.nosotros}>
+            <Navbar/>
             <Link to='/' ><button className={styles.home} ><span><strong>Home</strong></span></button></Link>
             <ul className={styles.container}>
                 <li className={styles.card} >

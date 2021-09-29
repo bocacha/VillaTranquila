@@ -4,7 +4,8 @@ import Paginado from './Paginado/Paginado';
 import styles from "./Reserva.module.css";
 import { Link } from 'react-router-dom';
 import { getCabins, filterCabinsByCapacity, filterCabinsByPrice } from "../../actions";
-import {GoHome} from 'react-icons/go'
+import {GoHome} from 'react-icons/go';
+import Navbar from "../Navbar/Navbar";
 
 export default function Reserva() {
     const dispatch = useDispatch();
@@ -40,24 +41,27 @@ export default function Reserva() {
 
     return (
         <div>
+            <Navbar/>
             <ul className={styles.reserva}>
                 <li>
-                    <Link to='/' ><button className={styles.home} ><span><GoHome/></span></button></Link>
-                </li>
-                <li>
-                    <button className={styles.home} onClick={e => handleReload(e)}>Reload all cabins</button>
+                    <button className={styles.reload} onClick={e => handleReload(e)}>Recargar todas las cabañas</button>
                 </li>
                 <hr/>
                 <li>
                     <label>Fecha de check in: </label>
                     <input
+                        type="datetime-local"
                         placeholder='Ingrese su fecha de llegada aquí...'
                         className={styles.fechas}
                     />
                 </li>
                 <li>
                     <label>Fecha de check out: </label>
-                    <input placeholder='Ingrese su fecha de salida aquí...' className={styles.fechas} />
+                    <input
+                        type="datetime-local"
+                        placeholder='Ingrese su fecha de salida aquí...'
+                        className={styles.fechas}
+                    />
                 </li>
                 <li>
                     <label>Cantidad de personas: </label>

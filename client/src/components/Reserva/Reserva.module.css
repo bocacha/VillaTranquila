@@ -36,7 +36,7 @@
       width: 250px;
   }
 
-  .home {
+  .reload {
     border-radius: 4px;
     background-color: #82735c;
     border-color: transparent;
@@ -45,28 +45,28 @@
     font-size: x-large;
     transition: all 0.2s ease;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 85px;
     padding: 5px 20px;
   }
-  .home span {
+  .reload span {
     cursor: pointer;
     display: inline-block;
     position: relative;
     transition: all 0.2s ease;
   }
-  .home span:after {
+  .reload span:after {
     opacity: 0;
     right: -20px;
     transition: 0.5s;
   }
   
-  .home:hover {
+  .reload:hover {
     background-color: #d1f5be;
     color: #82735c;
     border-color: #82735c;
   }
   
-  .home:hover span:after {
+  .reload:hover span:after {
     opacity: 1;
     right: 0;
   }
