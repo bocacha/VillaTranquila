@@ -34,11 +34,11 @@ router.put("/EditService", (req,res) =>{
         Name: Name,
         Price: Price     
     }
-        Pictures.update(
+        Services.update(
           objecttoupdate
         ,
         {
-            where: {id: req.body.id}
+            where: {ID: req.body.id}
 
         })
         .then(doneTemp=>{
