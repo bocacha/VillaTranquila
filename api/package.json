@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {    
+  "scripts": {
     "start": "node index.js",
     "test": "mocha -w ./tests/**/*.spec.js",
-    "dev": "nodemon index.js"    
+    "dev": "nodemon index.js"
   },
   "author": "Henry",
   "license": "ISC",
