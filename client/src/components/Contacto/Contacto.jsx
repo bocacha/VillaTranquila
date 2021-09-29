@@ -15,7 +15,6 @@ export default function Contacto(){
 
     const [error, setError] = useState(false);
     const [errorEmail, setErrorEmail] = useState(false);
-    
     const {name, tel, email, query} = control;
 
     const changeControl = (e) =>{
