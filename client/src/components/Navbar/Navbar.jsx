@@ -23,10 +23,10 @@ export default function Navbar() {
                     <Link to='/nosotros' ><button><strong>Nosotros <RiTeamLine /></strong></button></Link>
                 </li>
                 <li>
-                    <button><strong>Sign in <GoSignIn /></strong></button>
+                    <button className={styles.signlog} ><strong>Sign in <GoSignIn /></strong></button>
                 </li>
                 <li>
-                    <button><strong>Register <RiLoginBoxLine /></strong></button>
+                    <button className={styles.signlog} ><strong>Register <RiLoginBoxLine /></strong></button>
                 </li>
             </ul>
         </div>

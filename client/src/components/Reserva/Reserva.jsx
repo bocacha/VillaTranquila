@@ -5,6 +5,12 @@ import Paginado from './Paginado/Paginado';
 import Navbar from "../Navbar/Navbar";
 import Cabaña from "./Cabaña/Cabaña";
 import styles from "./Reserva.module.css";
+import { FaWifi, FaCarAlt } from 'react-icons/fa';
+import { GiVacuumCleaner, GiCampCookingPot } from 'react-icons/gi';
+import { IoMdPeople } from 'react-icons/io';
+import { MdAttachMoney } from 'react-icons/md';
+import { ImCalendar } from 'react-icons/im';
+import { BiTime } from 'react-icons/bi';
 
 export default function Reserva() {
     const dispatch = useDispatch();
@@ -66,23 +72,21 @@ export default function Reserva() {
                 </li>
                 <hr />
                 <li>
-                    <label>Fecha de check in: </label>
+                    <label><ImCalendar/> Fecha y hora estimada de check in: <BiTime/></label>
                     <input
                         type="datetime-local"
-                        placeholder='Ingrese su fecha de llegada aquí...'
                         className={styles.fechas}
                     />
                 </li>
                 <li>
-                    <label>Fecha de check out: </label>
+                    <label><ImCalendar/> Fecha y hora estimada de check out: <BiTime/></label>
                     <input
                         type="datetime-local"
-                        placeholder='Ingrese su fecha de salida aquí...'
                         className={styles.fechas}
                     />
                 </li>
                 <li>
-                    <label>Cantidad de personas: </label>
+                    <label><IoMdPeople/> Cantidad de personas <IoMdPeople/></label>
                     <select onChange={e => handleFilterCapacity(e)}>
                         <option value='selected' hidden>Personas</option>
                         <option value='all'>Todavía no sé</option>
@@ -93,9 +97,9 @@ export default function Reserva() {
                     </select>
                 </li>
                 <li>
-                    <label>Rango de precios por noche en pesos: </label>
+                    <label><MdAttachMoney/> Precio por noche en pesos <MdAttachMoney/> </label>
                     <select onChange={e => handleFilterPrice(e)} >
-                        <option value='selected' hidden>Precio</option>
+                        <option value='selected' hidden>Precio por noche</option>
                         <option value='all'>No tengo un precio definido</option>
                         <option value='1500'>$1500</option>
                         <option value='2500'>$2500</option>
@@ -104,23 +108,24 @@ export default function Reserva() {
                     </select>
                 </li>
                 <li>
+                    <hr/>
                     <label>Que cuente con:</label>
-                    <ul>
+                    <ul className={styles.serviceCont}>
                         <li>
-                            <label>Wifi</label>
-                            <input type='checkbox' name='Wifi' onChange={e => handleCheck(e)} />
+                            <label>Wifi <FaWifi/></label>
+                            <input type='checkbox' name='Wifi' onChange={e => handleCheck(e)} className={styles.service} />
                         </li>
                         <li>
-                            <label>Limpieza incluida</label>
-                            <input type='checkbox' name='Cleaning' onChange={e => handleCheck(e)} />
+                            <label>Parrilla <GiCampCookingPot/></label>
+                            <input type='checkbox' name='Barbecue' onChange={e => handleCheck(e)} className={styles.service} />
                         </li>
                         <li>
-                            <label>Parrilla</label>
-                            <input type='checkbox' name='Barbecue' onChange={e => handleCheck(e)} />
+                            <label>Limpieza incluida <GiVacuumCleaner/></label>
+                            <input type='checkbox' name='Cleaning' onChange={e => handleCheck(e)} className={styles.service} />
                         </li>
                         <li>
-                            <label>Estacionamiento techado</label>
-                            <input type='checkbox' name='Parking' onChange={e => handleCheck(e)} />
+                            <label>Estacionamiento techado <FaCarAlt/></label>
+                            <input type='checkbox' name='Parking' onChange={e => handleCheck(e)} className={styles.service} />
                         </li>
                     </ul>
                 </li>
