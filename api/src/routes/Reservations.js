@@ -40,11 +40,11 @@ router.put("/EditReservation", (req,res) =>{
         Cabinid: Cabinid,
         ExtraServices: ExtraServices
     }
-        Cabins.update(
+        Reservations.update(
           objecttoupdate
         ,
         {
-            where: {id: req.body.id}
+            where: {ID: req.body.id}
 
         })
         .then(doneTemp=>{
