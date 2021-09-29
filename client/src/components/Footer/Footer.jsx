@@ -2,16 +2,19 @@ import React from "react";
 import styles from "./Footer.module.css";
 import { BiMailSend } from "react-icons/bi";
 import { FaMapPin } from "react-icons/fa";
+
 import {
   AiOutlineInstagram,
   AiFillFacebook,
   AiFillYoutube,
 } from "react-icons/ai";
+
 import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
     <div className={styles.container}>
+
       <div className={styles.arriba}>
         <div className={styles.contacto}>
           <span className={styles.title}> Contacto </span> <br />
@@ -69,6 +72,7 @@ export default function Footer() {
       <hr className={styles.hr} />
       <div className={styles.derechos}>
         <div className={styles.a}>2021 - Todos los derechos reservados</div>
+
       </div>
     </div>
   );
