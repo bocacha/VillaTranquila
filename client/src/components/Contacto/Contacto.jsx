@@ -1,6 +1,9 @@
-
 import React, { useState } from "react";
+import { useDispatch,  } from "react-redux";
+import {useHistory} from "react-router-dom";
+import { sendEmail } from "../../actions";
 import style from '../Contacto/Contacto.module.css'
+
 
 
 
@@ -12,7 +15,8 @@ export default function Contacto(){
         email:'',
         query:''
     })
-
+    const dispatch = useDispatch();
+    const history = useHistory();
     const [error, setError] = useState(false);
     const [errorEmail, setErrorEmail] = useState(false);
     const {name, tel, email, query} = control;
@@ -42,6 +46,9 @@ export default function Contacto(){
         
         setErrorEmail(false);
 
+        dispatch(sendEmail(control));
+        alert("Tu consulta fue enviada, muchas gracias");
+        history.push("/");
         
     }
 
@@ -58,8 +65,8 @@ export default function Contacto(){
                 :  
                     null}
                 <h2>Contacto</h2>
-                <p type="Nombre:"><input name="name" value={name} onChange={changeControl} placeholder="Nombre"></input></p>
-                <p type="Telefono:"><input name="tel"value={tel} onChange={changeControl} placeholder="Telefono"></input></p>
+                <p type="Nombre:"><input name="name" value={control.name} onChange={changeControl} placeholder="Nombre"></input></p>
+                <p type="Telefono:"><input name="tel"value={control.tel} onChange={changeControl} placeholder="Telefono"></input></p>
                 {errorEmail ?
                      <div className={style.Error}>
                         <h4>correo electronico incorrecto</h4>
@@ -67,8 +74,8 @@ export default function Contacto(){
                     null 
             
                 }
-                <p type="Email:"><input name="email"value={email} onChange={changeControl} placeholder="Email"></input></p>
-                <p type="Consulta:"><input name="query" value={query} onChange={changeControl} placeholder="Consulta"></input></p>
+                <p type="Email:"><input name="email"value={control.email} onChange={changeControl} placeholder="Email"></input></p>
+                <p type="Consulta:"><input name="query" value={control.query} onChange={changeControl} placeholder="Consulta"></input></p>
                 <button type="submit">Enviar</button>
                 
         </form>
