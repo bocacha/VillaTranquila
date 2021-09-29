@@ -5,6 +5,7 @@ import BannerIntro from "../BannerIntro/BannerIntro";
 import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 import Slider from "../Slider/Slider";
+import Searchbar from "../Searchbar/Searchbar";
 import styles from "./Home.module.css";
 
 export default function Home() {
@@ -18,7 +19,9 @@ export default function Home() {
           Villa Tranquila
         </div>
       </div>
-
+      <div>
+        <Searchbar/>
+      </div>
       <div>
         <BannerIntro />
         <Slider />
