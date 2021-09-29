@@ -30,11 +30,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^8.2.1",
-<<<<<<< HEAD
-    "nodemon": "^2.0.6",
-=======
     "nodemon": "^2.0.13",
->>>>>>> 6b124ebcd7a4a5201135724eff516d5bf84226c9
     "supertest": "^6.0.1",
     "supertest-session": "^4.1.0"
   }
