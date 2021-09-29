@@ -4,38 +4,36 @@ import {useHistory} from "react-router-dom";
 import { sendEmail } from "../../actions";
 import style from '../Contacto/Contacto.module.css'
 
-
-
-
 export default function Contacto(){
-
     const [control, setControl] = useState({
         name: '',
-        tel:'',
-        email:'',
-        query:''
+        tel: '',
+        email: '',
+        query: ''
     })
     const dispatch = useDispatch();
     const history = useHistory();
     const [error, setError] = useState(false);
     const [errorEmail, setErrorEmail] = useState(false);
-    const {name, tel, email, query} = control;
 
-    const changeControl = (e) =>{
+
+    const { name, tel, email, query } = control;
+
+    const changeControl = (e) => {
         setControl({
             ...control,
-                [e.target.name]: e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
-    const submitQuery = (e)=>{  
-        e.preventDefault(); 
-        
+    const submitQuery = (e) => {
+        e.preventDefault();
 
-        if(name ===''|| tel=== ''|| email ==='' || query === ''){
+
+        if (name === '' || tel === '' || email === '' || query === '') {
             setError(true)
             return;
-        } 
+        }
 
         setError(false);
 
@@ -43,9 +41,8 @@ export default function Contacto(){
             setErrorEmail(true)
             return;
         }
-        
-        setErrorEmail(false);
 
+        setErrorEmail(false);
         dispatch(sendEmail(control));
         alert("Tu consulta fue enviada, muchas gracias");
         history.push("/");
@@ -79,8 +76,8 @@ export default function Contacto(){
                 <button type="submit">Enviar</button>
                 
         </form>
-
+            </div>
         </div>
-        
+
     )
 }

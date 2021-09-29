@@ -39,3 +39,4 @@ export function sendEmail(payload) {
     return json;
   };
 }
+
