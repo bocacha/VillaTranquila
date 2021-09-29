@@ -51,7 +51,6 @@ export default function Contacto() {
     return (
         <div>
             <Navbar />
-            
             <div className={style.containerForm}>
                 <form
                     onSubmit={submitQuery}

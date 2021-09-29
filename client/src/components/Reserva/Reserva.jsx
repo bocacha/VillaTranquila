@@ -11,6 +11,7 @@ import { IoMdPeople } from 'react-icons/io';
 import { MdAttachMoney } from 'react-icons/md';
 import { ImCalendar } from 'react-icons/im';
 import { BiTime } from 'react-icons/bi';
+import { AiOutlineReload } from 'react-icons/ai';
 
 export default function Reserva() {
     const dispatch = useDispatch();
@@ -65,10 +66,10 @@ export default function Reserva() {
 
     return (
         <div>
-            <Navbar />
+            <Navbar className={styles.navbar} />
             <ul className={styles.reserva}>
                 <li>
-                    <button className={styles.reload} onClick={e => handleReload(e)}>Recargar todas las cabañas</button>
+                    <button className={styles.reload} onClick={e => handleReload(e)}>Recargar todas las cabañas <AiOutlineReload/></button>
                 </li>
                 <hr />
                 <li>

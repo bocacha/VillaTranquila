@@ -1,5 +1,5 @@
 .nosotros {
-  background-color: #d1f5be;
+  background-color: #355978;
   height: 100%;
 }
 
@@ -13,12 +13,8 @@
   align-items: center;
   flex-wrap: wrap;
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 250px);
-
-  gap: 100px;
-  padding: 40px;
-  justify-content: center;
+  gap: 80px;
+  padding: 80px;
 }
 
 .card {
@@ -35,12 +31,12 @@
   border-radius: 2em;
   width: 18em;
   height: 25em;
-  background-color: #9db17c;
+  background-color: #293c4f;
   float: left;
 }
 
 .info {
-  color: #4b3b40;
+  color: #fff;
   text-decoration: none;
 }
 
@@ -61,42 +57,9 @@
   background-color: transparent;
   cursor: pointer;
   transition: all 0.3s ease 0s;
+  color: #fff;
 }
 .linkedin:hover {
   transform: scale(1.1);
 }
 
-.home {
-  border-radius: 4px;
-  background-color: #82735c;
-  border: none;
-  color: #d1f5be;
-  text-align: center;
-  font-size: x-large;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  float: left;
-  padding: 5px 20px;
-}
-.home span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: all 0.2s ease;
-}
-.home span:after {
-  content: "\00ab";
-  opacity: 0;
-  right: -20px;
-  transition: 0.5s;
-}
-
-.home:hover {
-  background-color: #d1f5be;
-  color: #82735c;
-}
-
-.home:hover span:after {
-  opacity: 1;
-  right: 0;
-}

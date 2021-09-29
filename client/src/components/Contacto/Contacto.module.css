@@ -9,12 +9,16 @@
     background: #7f7979;
     border-radius: 8px;
     box-shadow: 0 0 40px -10px #000;
-    margin: calc(50vh - 220px) auto;
+    /* margin: calc(50vh - 220px) auto; */
     padding: 20px 30px;
     max-width: calc(100vw - 40px);
     box-sizing: border-box;
     font-family: "Montserrat", sans-serif;
-    position: relative;
+    /* position: relative; */
+    position: absolute;
+    align-content: center;
+    margin: 6% auto;
+    justify-content: center;
   }
  .form h2 {
     margin: 10px 0;
@@ -69,6 +73,8 @@
 
   .containerForm{
     height: fit-content;
+    display: flex;
+  justify-content: center;
   }
  
  
