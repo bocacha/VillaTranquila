@@ -1,52 +1,70 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
+import { getCabins, filterCabinsByCapacity, filterCabinsByPrice, filterCabinsByServices } from "../../actions";
 import Paginado from './Paginado/Paginado';
-import styles from "./Reserva.module.css";
-import { Link } from 'react-router-dom';
-import { getCabins, filterCabinsByCapacity, filterCabinsByPrice } from "../../actions";
-import {GoHome} from 'react-icons/go';
 import Navbar from "../Navbar/Navbar";
+import Cabaña from "./Cabaña/Cabaña";
+import styles from "./Reserva.module.css";
 
 export default function Reserva() {
     const dispatch = useDispatch();
-    // const allCabins = useSelector((state) => state.cabins);
+    // const allCabins = useSelector(state => state.cabins);
 
     // // Paginado---------------------------------------------------------------
-    const [currentPage, setCurrentPage] = useState(1);
+    // const [currentPage, setCurrentPage] = useState(1);
     // const [cabinsPerPage, setCabinsPerPage] = useState(9);
     // const indexOfLastCabin = currentPage * cabinsPerPage;
     // const indexOfFirstCabin = indexOfLastCabin - cabinsPerPage;
     // const currentCabins = allCabins.slice(indexOfFirstCabin, indexOfLastCabin);
+
+    // const paginado = (pageNumber) => {
+    //     setCurrentPage(pageNumber);
+    // }
     // //-------------------------------------------------------------------------
 
     useEffect(() => {
         dispatch(getCabins())
     }, [dispatch]);
 
-    function handleReload(e){
+
+
+    function handleReload(e) {
         e.preventDefault();
-        setCurrentPage(1);
+        //setCurrentPage(1);
         dispatch(getCabins());
     }
 
-    function handleFilterCapacity(e){
+    function handleFilterCapacity(e) {
         e.preventDefault();
         dispatch(filterCabinsByCapacity(e.target.value))
     }
 
-    function handleFilterPrice(e){
+    function handleFilterPrice(e) {
         e.preventDefault();
         dispatch(filterCabinsByPrice(e.target.value))
     }
 
+    var status = [];
+    function handleCheck(e){
+        let name = e.target.name;
+        if(status.includes(name)){
+            status = status.filter(el => el !== name);
+        }
+        else{
+            status.push(name);
+        }
+        console.log(name, status);
+        dispatch(filterCabinsByServices(status));
+    }
+
     return (
         <div>
-            <Navbar/>
+            <Navbar />
             <ul className={styles.reserva}>
                 <li>
                     <button className={styles.reload} onClick={e => handleReload(e)}>Recargar todas las cabañas</button>
                 </li>
-                <hr/>
+                <hr />
                 <li>
                     <label>Fecha de check in: </label>
                     <input
@@ -84,6 +102,27 @@ export default function Reserva() {
                         <option value='3500'>$3500</option>
                         <option value='4500'>$4500</option>
                     </select>
+                </li>
+                <li>
+                    <label>Que cuente con:</label>
+                    <ul>
+                        <li>
+                            <label>Wifi</label>
+                            <input type='checkbox' name='Wifi' onChange={e => handleCheck(e)} />
+                        </li>
+                        <li>
+                            <label>Limpieza incluida</label>
+                            <input type='checkbox' name='Cleaning' onChange={e => handleCheck(e)} />
+                        </li>
+                        <li>
+                            <label>Parrilla</label>
+                            <input type='checkbox' name='Barbecue' onChange={e => handleCheck(e)} />
+                        </li>
+                        <li>
+                            <label>Estacionamiento techado</label>
+                            <input type='checkbox' name='Parking' onChange={e => handleCheck(e)} />
+                        </li>
+                    </ul>
                 </li>
             </ul >
 
