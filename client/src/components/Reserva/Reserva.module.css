@@ -1,0 +1,73 @@
+.reserva {
+    position: fixed;
+    overflow: auto;
+    background-color: #d1f5be;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 25%;
+    list-style-type: none;
+  }
+  
+  .reserva li {
+    display: block;
+    text-align: center;
+    padding: 0px 10px 10px;
+    text-decoration: none;
+  }
+
+  .reserva div button{
+    height: 43px;
+    border: transparent;
+    background-color: transparent;
+    font-size: medium;
+    border-radius: 8px;
+    margin-top: 10px;
+    cursor: pointer;
+    color: #fff;
+    transition: all 0.2s ease;
+  }
+  .navbar div button:hover{
+    background-color: #323031;
+  }
+
+  .fechas{
+      width: 250px;
+  }
+
+  .home {
+    border-radius: 4px;
+    background-color: #82735c;
+    border-color: transparent;
+    color: #d1f5be;
+    text-align: center;
+    font-size: x-large;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    margin-top: 10px;
+    padding: 5px 20px;
+  }
+  .home span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: all 0.2s ease;
+  }
+  .home span:after {
+    opacity: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .home:hover {
+    background-color: #d1f5be;
+    color: #82735c;
+    border-color: #82735c;
+  }
+  
+  .home:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+  
