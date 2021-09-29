@@ -36,7 +36,7 @@ router.put("/EditPicture", (req,res) =>{
           objecttoupdate
         ,
         {
-            where: {id: req.body.id}
+            where: {ID: req.body.id}
 
         })
         .then(doneTemp=>{
