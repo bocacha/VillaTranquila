@@ -4,7 +4,7 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
 const cors = require('cors');
-const { auth } = require('express-openid-connect');
+
 
 require('./db.js');
 
