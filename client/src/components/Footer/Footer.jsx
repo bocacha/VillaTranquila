@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { sendEmail } from "../../actions";
 import styles from "./Footer.module.css";
 import { BiMailSend } from "react-icons/bi";
 import { FaMapPin } from "react-icons/fa";
@@ -12,9 +14,30 @@ import {
 import { Link } from "react-router-dom";
 
 export default function Footer() {
+  const dispatch = useDispatch();
+  const [footer, setFooter] = useState({email:""});
+  const [errorEmail, setErrorEmail] = useState(false);
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (footer === "") {
+      setErrorEmail(true);
+      return;
+    }
+    dispatch(sendEmail(footer));
+    alert("Tu solicitud para la suscripción a la newsletter fue enviada, muchas gracias");
+    setFooter("")
+  };
+
+  function handleChange(e) {
+    setFooter({
+      ...footer,
+      [e.target.name]: e.target.value,
+    });  
+  }
+
   return (
     <div className={styles.container}>
-
       <div className={styles.arriba}>
         <div className={styles.contacto}>
           <span className={styles.title}> Contacto </span> <br />
@@ -48,7 +71,8 @@ export default function Footer() {
           </Link>
         </div>
         <div className={styles.newsletter}>
-          <form action="">
+          {/* {errorEmail ? alert('Tiene que ingresar su correo') : null} */}
+          <form action="" onSubmit={handleSubmit}>
             <span className={styles.title}>
               {" "}
               ¡Suscríbete a nuestra NewsLetter!{" "}
@@ -58,6 +82,9 @@ export default function Footer() {
               <input
                 type="text"
                 placeholder="E-mail"
+                name="email"
+                value={footer.email}
+                onChange={handleChange}
                 className={styles.input}
               />
             </div>
@@ -72,7 +99,6 @@ export default function Footer() {
       <hr className={styles.hr} />
       <div className={styles.derechos}>
         <div className={styles.a}>2021 - Todos los derechos reservados</div>
-
       </div>
     </div>
   );
