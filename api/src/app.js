@@ -1,3 +1,4 @@
+import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 const express = require('express');
 const cookieParser = require('cookie-parser');
 //const bodyParser = require('body-parser');
@@ -44,6 +45,12 @@ const checkPermissions = jwtAuthz(["admin:read"], {
   customScopeKey: "permissions",
   checkAllScopes: true
 });
+
+const {
+  loginWithPopup,
+  getAccessTokenWithPopup,
+  getAccessTokenSilently
+} = useAuth0();
 
 server.get("/api/role", authorizeAccessToken, checkPermissions, (req, res) => {
   res.send({
