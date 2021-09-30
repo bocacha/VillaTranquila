@@ -29,7 +29,7 @@ export default function Navbar() {
                     </li>
                 </div>
                 <div className={styles.logins}>
-                    <Link to='https://villa-tranquila.vercel.app/login'>
+                    <Link to='/login'>
                         <li >
                             <button className={styles.signlog} ><strong>Iniciar sesión <GoSignIn /></strong></button>
                         </li>
