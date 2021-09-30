@@ -23,12 +23,58 @@ module.exports = (sequelize) => {
     allowNull: false,
   },
    Price:{
-    type: DataTypes.JSON ,
+    type: DataTypes.INTEGER ,
     allowNull: false,
    },
    Description:{
     type: DataTypes.STRING,
     allowNull: false,
-   }
+   },
+   Coffe:{
+     type: DataTypes.BOOLEAN,
+     allowNull: false,
+     defaultValue: false
+  },
+  Microondas:{
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  Calefaccion:{
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  Barbecue:{
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  Wifi:{
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  Cleaning:{
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  Refrigerator:{
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  Stove:{
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  },
+  Parking:{
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false
+  }
+
   },{timestamps: false,});
 };
