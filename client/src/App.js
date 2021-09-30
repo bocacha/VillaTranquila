@@ -4,7 +4,8 @@ import Home from './components/Home/Home';
 import Nosotros from './components/Nosotros/Nosotros';
 import Contacto from './components/Contacto/Contacto';
 import Reserva from './components/Reserva/Reserva';
-import Admin from './components/Admin/Admin';
+import Admin from "./components/Admin/Admin";
+import Cabañas from './components/Admin/Cabañas/Cabañas';
 
 
 function App() {
@@ -16,7 +17,8 @@ function App() {
           <Route path='/nosotros' component={Nosotros} />
           <Route path='/contacto' component={Contacto} />
           <Route path='/reserva' component={Reserva} />
-          <Route path='/admin' component={Admin} />
+          <Route exact path="/admin" component={Admin} />
+          <Route exact path="/admin/cabañas" component={Cabañas} />
         </Switch>
       </div>
     </BrowserRouter>
