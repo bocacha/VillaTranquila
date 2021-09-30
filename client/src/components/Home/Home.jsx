@@ -16,8 +16,9 @@ export default function Home() {
       </div>
       <div className={styles.nombre}>
         <div className={styles.nombre1}>
-          Villa Tranquila
-        </div>
+          <p className={styles.villa}>Villa Tranquila </p> 
+          <p className={styles.complejo}>- complejo de cabañas -</p>
+        </div> 
       </div>
       <div>
         <Searchbar/>
