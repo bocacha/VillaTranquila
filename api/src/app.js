@@ -44,7 +44,7 @@ const config = {
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 server.use(auth(config));
 
-app.get('/authorized', function (req, res) {
+server.get('/authorized', function (req, res) {
   res.send('Secured Resource');
 });
 
