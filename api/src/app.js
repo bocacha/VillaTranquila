@@ -37,8 +37,7 @@ const checkJwt = jwt({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    // jwksUri: `https://dev-2py8q024.us.auth0.com/.well-known/jwks.json`
-    jwksUri: `5a64dw6f5h4f64u6ft565eqa6wq65w4x4vb78x78def65e4qwd8adshs`
+    jwksUri: `https://dev-2py8q024.us.auth0.com/.well-known/jwks.json`    
   }),
 
   // Validate the audience and the issuer.
