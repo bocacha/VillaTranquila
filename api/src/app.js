@@ -1,4 +1,4 @@
-import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
+const { useAuth0, withAuthenticationRequired } =require ("@auth0/auth0-react");
 const express = require('express');
 const cookieParser = require('cookie-parser');
 //const bodyParser = require('body-parser');
