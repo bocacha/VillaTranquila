@@ -23,6 +23,15 @@ router.post("/NewCabin" , (req, res)=>{
         Available, 
         Price, 
         Description,
+        Coffe,
+        Microwaves,
+        Heat,
+        Barbecue,
+        Wifi,
+        Cleaning,
+        Refrigerator,
+        Stove,
+        Parking
     })
     .then(doneTemp=>{
         return res.status(200).json(doneTemp)
@@ -36,7 +45,16 @@ router.put("/EditCabin", (req,res) =>{
         Capacity: Capacity,
         Available: Available,
         Price: Price,
-        Description: Description
+        Description: Description,
+        Coffe: Coffe,
+        Microwaves: Microwaves,
+        Heat:Heat,
+        Barbecue: Barbecue,
+        Wifi: Wifi,
+        Cleaning: Cleaning,
+        Refrigerator: Refrigerator,
+        Stove: Stove,
+        Parking: Parking
     }
         Cabins.update(
           objecttoupdate

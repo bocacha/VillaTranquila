@@ -52,7 +52,7 @@ server.get('/', (req, res) => {
 });
 
 server.get('/profile', requiresAuth(),  (req, res) => {
-  res.send(JSON.stringify(req.oidc.user));
+  res.send(JSON.stringify(req.oidc));
 });
 
 server.get('/api/private', checkJwt, function(req, res) {
