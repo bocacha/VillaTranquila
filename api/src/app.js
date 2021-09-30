@@ -40,6 +40,11 @@ issuer: 'https://dev-2py8q024.us.auth0.com/',
 algorithms: ['RS256']
 });
 
+const checkPermissions = jwtAuthz(["admin:read"], {
+  customScopeKey: "permissions",
+  checkAllScopes: true
+});
+
 server.get("/api/role", authorizeAccessToken, checkPermissions, (req, res) => {
   res.send({
     msg: "You called the role endpoint!"
