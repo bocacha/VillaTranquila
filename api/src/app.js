@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
 const cors = require('cors');
+const jwt = require('express-jwt');
+const jwks = require('jwks-rsa');
 
 
 require('./db.js');
@@ -13,6 +15,22 @@ const server = express();
 server.name = 'API';
 
 const { auth, requiresAuth} = require('express-openid-connect');
+
+var jwtCheck = jwt({
+  secret: jwks.expressJwtSecret({
+      cache: true,
+      rateLimit: true,
+      jwksRequestsPerMinute: 5,
+      jwksUri: 'https://dev-2py8q024.us.auth0.com/.well-known/jwks.json'
+}),
+audience: 'https://villatranquila.herokuapp.com/',
+issuer: 'https://dev-2py8q024.us.auth0.com/',
+algorithms: ['RS256']
+});
+
+
+
+server.use(jwtCheck);
 
 const config = {
   authRequired: false,
@@ -31,7 +49,12 @@ server.get('/', (req, res) => {
   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out')
 });
 
-server.get('/profile', requiresAuth(), (req, res) => {
+
+server.get('/user', (req, res) => {
+  res.send(req.user)
+})
+
+server.get('/profile', requiresAuth(),  (req, res) => {
   res.send(JSON.stringify(req.oidc.user));
 });
 
