@@ -37,12 +37,12 @@ const checkJwt = jwt({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: `https://villatranquila.herokuapp.com.well-known/jwks.json`
+    jwksUri: `https://dev-2py8q024.us.auth0.com/.well-known/jwks.json`
   }),
 
   // Validate the audience and the issuer.
   audience: 'https://villatranquila.herokuapp.com/',
-  issuer: [`https://dev-2py8q024.us.auth0.com/`],
+  issuer: `https://dev-2py8q024.us.auth0.com/`,
   algorithms: ['RS256']
 });
 
