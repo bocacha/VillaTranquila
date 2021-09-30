@@ -69,7 +69,7 @@ server.get('/api/private-scoped', checkJwt, checkScopes, function(req, res) {
   });
 });
 
-
+server.use(checkJwt);
 
 server.use(express.urlencoded({ extended: true, limit: '50mb' }));
 server.use(express.json({ limit: '50mb' }));
