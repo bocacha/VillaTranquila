@@ -54,6 +54,10 @@ export default function Footer() {
           <Link to="/contacto" className={styles.link}>
             Contacto
           </Link>
+          <br />
+          <Link to="/reserva" className={styles.link}>
+            Reservar
+          </Link>
         </div>
         <div className={styles.redes}>
           <span className={styles.title}> Redes sociales </span> <br />
