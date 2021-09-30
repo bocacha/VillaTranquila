@@ -37,7 +37,7 @@ const checkJwt = jwt({
     cache: true,
     rateLimit: true,
     jwksRequestsPerMinute: 5,
-    jwksUri: `https://dev-2py8q024.us.auth0.com/.well-known/jwks.json`
+    jwksUri: `https://villatranquila.herokuapp.com/.well-known/jwks.json`
   }),
 
   // Validate the audience and the issuer.
