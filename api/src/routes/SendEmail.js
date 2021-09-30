@@ -5,13 +5,13 @@ const router = Router();
 router.post("/", (req, res) => {
   const {name, tel, email, query}  = req.body;
   const transporter = nodemailer.createTransport({
-    host: "smtp.ethereal.email",
+    host: 'smtp.ethereal.email',
     port: 587,
     auth: {
-      user: "brendon.marvin@ethereal.email",
-      pass: "GbJH1xfeGhHduXG1bA",
-    },
-  });
+        user: 'lucienne.will7@ethereal.email',
+        pass: 'sUm7qhjRzaY39ve7Kt'
+    }
+});
 
   var mailOptions = {
       form: name,
