@@ -12,7 +12,7 @@ export default function Navbar() {
             <ul className={styles.navbar} >
                 <div>
                     <li>
-                        <Link to='/' ><button><strong>Home <GoHome/></strong></button></Link>
+                        <Link to='/' ><button><strong>Inicio <GoHome/></strong></button></Link>
                     </li>
                     <li>
                         <Link to='/reserva' ><button><strong>Comenzar reserva <ImCalendar /></strong></button></Link>
@@ -26,10 +26,10 @@ export default function Navbar() {
                 </div>
                 <div className={styles.logins}>
                     <li >
-                        <button className={styles.signlog} ><strong>Sign in <GoSignIn /></strong></button>
+                        <button className={styles.signlog} ><strong>Iniciar sesión <GoSignIn /></strong></button>
                     </li>
                     <li>
-                        <button className={styles.signlog} ><strong>Register <RiLoginBoxLine /></strong></button>
+                        <button className={styles.signlog} ><strong>Regístrate <RiLoginBoxLine /></strong></button>
                     </li>
                 </div>
             </ul>

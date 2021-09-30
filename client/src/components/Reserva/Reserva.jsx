@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getCabins, filterCabinsByCapacity, filterCabinsByPrice, } from "../../actions";
+import { getCabins, filterCabinsByCapacity, filterCabinsByPrice, filterCabinsByServices } from "../../actions";
 import Paginado from './Paginado/Paginado';
 import Navbar from "../Navbar/Navbar";
 import Cabaña from "./Cabaña/Cabaña";
 import styles from "./Reserva.module.css";
-import { FaWifi, FaCarAlt } from 'react-icons/fa';
+import { FaWifi, FaCarAlt, FaGamepad } from 'react-icons/fa';
 import { GiVacuumCleaner, GiCampCookingPot } from 'react-icons/gi';
 import { IoMdPeople } from 'react-icons/io';
-import { MdAttachMoney } from 'react-icons/md';
-import { ImCalendar } from 'react-icons/im';
-import { BiTime } from 'react-icons/bi';
+import { MdAttachMoney, MdRoomService } from 'react-icons/md';
+import { ImCalendar, ImSearch } from 'react-icons/im';
 import { AiOutlineReload } from 'react-icons/ai';
+import RangeSlider from "./Slider/Slider";
 
 export default function Reserva() {
     const dispatch = useDispatch();
@@ -52,42 +52,42 @@ export default function Reserva() {
     }
 
     var status = [];
-    // function handleCheck(e){
-    //     let name = e.target.name;
-    //     if(status.includes(name)){
-    //         status = status.filter(el => el !== name);
-    //     }
-    //     else{
-    //         status.push(name);
-    //     }
-    //     console.log(name, status);
-    //     dispatch(filterCabinsByServices(status));
-    // }
+    function handleCheck(e){
+        let name = e.target.name;
+        if(status.includes(name)){
+            status = status.filter(el => el !== name);
+        }
+        else{
+            status.push(name);
+        }
+        console.log(name, status);
+        dispatch(filterCabinsByServices(status));
+    }
 
     return (
         <div>
             <Navbar className={styles.navbar} />
             <ul className={styles.reserva}>
                 <li>
-                    <button className={styles.reload} onClick={e => handleReload(e)}>Recargar todas las cabañas <AiOutlineReload/></button>
+                    <button className={styles.reload} onClick={e => handleReload(e)}>Limpiar filtros <AiOutlineReload/></button>
                 </li>
                 <hr />
                 <li>
-                    <label><ImCalendar/> Fecha y hora estimada de check in: <BiTime/></label>
+                    <label><ImCalendar/> Fecha de llegada: </label>
                     <input
-                        type="datetime-local"
+                        type="date"
                         className={styles.fechas}
                     />
                 </li>
                 <li>
-                    <label><ImCalendar/> Fecha y hora estimada de check out: <BiTime/></label>
+                    <label><ImCalendar/> Fecha de salida: </label>
                     <input
-                        type="datetime-local"
+                        type="date"
                         className={styles.fechas}
                     />
                 </li>
                 <li>
-                    <label><IoMdPeople/> Cantidad de personas <IoMdPeople/></label>
+                    <label><IoMdPeople/> Cantidad de personas </label>
                     <select onChange={e => handleFilterCapacity(e)}>
                         <option value='selected' hidden>Personas</option>
                         <option value='all'>Todavía no sé</option>
@@ -98,37 +98,48 @@ export default function Reserva() {
                     </select>
                 </li>
                 <li>
-                    <label><MdAttachMoney/> Precio por noche en pesos <MdAttachMoney/> </label>
-                    <select onChange={e => handleFilterPrice(e)} >
-                        <option value='selected' hidden>Precio por noche</option>
-                        <option value='all'>No tengo un precio definido</option>
-                        <option value='1500'>$1500</option>
-                        <option value='2500'>$2500</option>
-                        <option value='3500'>$3500</option>
-                        <option value='4500'>$4500</option>
-                    </select>
+                    <label><MdAttachMoney/> Precio por noche en pesos </label>
+                    {/*SLIDER<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/}
+                    <RangeSlider/>
                 </li>
                 <li>
                     <hr/>
-                    <label>Que cuente con:</label>
+                    <label className={styles.serviceTitle}><MdRoomService/> Que cuente con:</label>
                     <ul className={styles.serviceCont}>
                         <li>
                             <label>Wifi <FaWifi/></label>
-                            {/* <input type='checkbox' name='Wifi' onChange={e => handleCheck(e)} className={styles.service} /> */}
+                            <input type='checkbox' name='Wifi' onChange={e => handleCheck(e)} className={styles.service} />
                         </li>
                         <li>
                             <label>Parrilla <GiCampCookingPot/></label>
-                            {/* <input type='checkbox' name='Barbecue' onChange={e => handleCheck(e)} className={styles.service} /> */}
+                            <input type='checkbox' name='Barbecue' onChange={e => handleCheck(e)} className={styles.service} />
                         </li>
                         <li>
                             <label>Limpieza incluida <GiVacuumCleaner/></label>
-                            {/* <input type='checkbox' name='Cleaning' onChange={e => handleCheck(e)} className={styles.service} /> */}
+                            <input type='checkbox' name='Cleaning' onChange={e => handleCheck(e)} className={styles.service} />
                         </li>
                         <li>
                             <label>Estacionamiento techado <FaCarAlt/></label>
-                            {/* <input type='checkbox' name='Parking' onChange={e => handleCheck(e)} className={styles.service} /> */}
+                            <input type='checkbox' name='Parking' onChange={e => handleCheck(e)} className={styles.service} />
                         </li>
                     </ul>
+                </li>
+                <li>
+                    <hr/>
+                    <label className={styles.serviceTitle}><MdRoomService/> Servicios adicionales: </label>
+                    <ul className={styles.serviceCont}>
+                        <li>
+                            <label>Consola de videojuegos <FaGamepad/></label>
+                            <input type='checkbox' name='Videogames' onChange={e => handleCheck(e)} className={styles.service} />
+                        </li>
+                        <li>
+                            <label>Alquiler de auto <FaCarAlt/></label>
+                            <input type='checkbox' name='RentCar' onChange={e => handleCheck(e)} className={styles.service} />
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <button type='submit' className={styles.reload} id={styles.search}><span><ImSearch/></span></button>
                 </li>
             </ul >
 
