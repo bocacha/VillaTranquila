@@ -30,7 +30,7 @@ algorithms: ['RS256']
 
 
 
-server.use(jwtCheck);
+server.use( '/token',jwtCheck);
 
 const config = {
   authRequired: false,
