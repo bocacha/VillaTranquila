@@ -1,4 +1,4 @@
-const { useAuth0, withAuthenticationRequired } =require ("@auth0/auth0-react");
+
 const express = require('express');
 const cookieParser = require('cookie-parser');
 //const bodyParser = require('body-parser');
@@ -29,58 +29,6 @@ const config = {
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 server.use(auth(config));
 
-const authorizeAccessToken = jwt({
-  secret: jwks.expressJwtSecret({
-      cache: true,
-      rateLimit: true,
-      jwksRequestsPerMinute: 5,
-      jwksUri: 'https://dev-2py8q024.us.auth0.com/.well-known/jwks.json'
-}),
-audience: 'https://villatranquila.herokuapp.com/',
-issuer: 'https://dev-2py8q024.us.auth0.com/',
-algorithms: ['RS256']
-});
-
-const checkPermissions = jwtAuthz(["admin:read"], {
-  customScopeKey: "permissions",
-  checkAllScopes: true
-});
-
-const {
-  loginWithPopup,
-  getAccessTokenWithPopup,
-  getAccessTokenSilently
-} = useAuth0();
-
-const callRoleBasedEndpoint = async () => {
-  try {
-    const token = await getAccessTokenSilently();
-    console.log(token);
-    const response = await fetch('https://villatranquila.herokuapp.com/api/role', {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    });
-    const responseData = await response.json();
-    setState({
-      ...state,
-      showResult: true,
-      endpointMessage: responseData
-    });
-  } catch (error) {
-    setState({
-      ...state,
-      error: error.error
-    });
-  }
-};
-
-
-server.get("/api/role", authorizeAccessToken, checkPermissions, (req, res) => {
-  res.send({
-    msg: "You called the role endpoint!"
-  });
-});
 
 // req.isAuthenticated is provided from the auth router
 server.get('/', (req, res) => {
@@ -90,9 +38,7 @@ server.get('/', (req, res) => {
 server.get('/profile', requiresAuth(),  (req, res) => {
   res.send(JSON.stringify(req.oidc.user));
 });
-server.get('/api', callRoleBasedEndpoint, (req, res) => {
-  res.send('<html> <head>server Response</head><body><h1> This page was render direcly from the server <p>Hello there welcome to my website</p></h1><button onClick={callRoleBasedEndpoint}>prueba</button></body></html>')
-})
+
 
 
 server.use(express.urlencoded({ extended: true, limit: '50mb' }));
