@@ -59,6 +59,9 @@ server.get('/', (req, res) => {
 server.get('/profile', requiresAuth(),  (req, res) => {
   res.send(JSON.stringify(req.oidc.user));
 });
+server.get('/api', (req, res) => {
+  res.send('<html> <head>server Response</head><body><h1> This page was render direcly from the server <p>Hello there welcome to my website</p></h1><button>prueba</button></body></html>')
+})
 
 
 server.use(express.urlencoded({ extended: true, limit: '50mb' }));
