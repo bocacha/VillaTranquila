@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getCabins, filterCabinsByCapacity, filterCabinsByPrice, filterCabinsByServices } from "../../actions";
+import { getCabins, filterCabins } from "../../actions";
 import Paginado from './Paginado/Paginado';
 import Navbar from "../Navbar/Navbar";
 import Cabaña from "./Cabaña/Cabaña";
 import styles from "./Reserva.module.css";
-import { FaWifi, FaCarAlt, FaGamepad } from 'react-icons/fa';
+import { FaWifi, FaCarAlt } from 'react-icons/fa';
 import { GiVacuumCleaner, GiCampCookingPot } from 'react-icons/gi';
 import { IoMdPeople } from 'react-icons/io';
 import { MdAttachMoney, MdRoomService } from 'react-icons/md';
@@ -19,7 +19,7 @@ export default function Reserva() {
 
     // Paginado---------------------------------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
-    const [cabinsPerPage, setCabinsPerPage] = useState(9);
+    const [cabinsPerPage, /*setCabinsPerPage*/] = useState(9);
     const indexOfLastCabin = currentPage * cabinsPerPage;
     const indexOfFirstCabin = indexOfLastCabin - cabinsPerPage;
     const currentCabins = allCabins.slice(indexOfFirstCabin, indexOfLastCabin);
@@ -37,31 +37,44 @@ export default function Reserva() {
 
     function handleReload(e) {
         e.preventDefault();
-        //setCurrentPage(1);
-        dispatch(getCabins());
+        setFilters({
+            inDate: '',
+            outDate: '',
+            people: '',
+            priceRange: '',
+            wifi: '',
+            barbecue: '',
+            cleaning: '',
+            parking: '',
+        })
+        //dispatch(getCabins());
     }
 
-    function handleFilterCapacity(e) {
-        e.preventDefault();
-        dispatch(filterCabinsByCapacity(e.target.value))
-    }
-
-    function handleFilterPrice(e) {
-        e.preventDefault();
-        dispatch(filterCabinsByPrice(e.target.value))
-    }
-
-    var status = [];
+    const [filters, setFilters] = useState({
+        inDate: '',
+        outDate: '',
+        people: '',
+        priceRange: '',
+        wifi: '',
+        barbecue: '',
+        cleaning: '',
+        parking: '',
+    });
     function handleCheck(e) {
-        let name = e.target.name;
-        if (status.includes(name)) {
-            status = status.filter(el => el !== name);
-        }
-        else {
-            status.push(name);
-        }
-        console.log(name, status);
-        dispatch(filterCabinsByServices(status));
+        let evt = e.target.name;
+        e.target.value = filters[evt] === 'on' ? 'off' : 'on';
+    }
+    function handleChange(e) {
+        setFilters({
+            ...filters,
+            [e.target.name]: e.target.value
+        });
+        console.log(filters);
+    }
+
+    function handleSubmit(e) {
+        dispatch(filterCabins(filters));
+        console.log('Filters submited')
     }
 
     return (
@@ -77,6 +90,8 @@ export default function Reserva() {
                     <input
                         type="date"
                         className={styles.fechas}
+                        name='inDate'
+                        onChange={e => handleChange(e)}
                     />
                 </li>
                 <li>
@@ -84,11 +99,13 @@ export default function Reserva() {
                     <input
                         type="date"
                         className={styles.fechas}
+                        name='outDate'
+                        onChange={e => handleChange(e)}
                     />
                 </li>
                 <li>
                     <label><IoMdPeople /> Cantidad de personas </label>
-                    <select onChange={e => handleFilterCapacity(e)}>
+                    <select onChange={e => handleChange(e)} name='people'>
                         <option value='selected' hidden>Personas</option>
                         <option value='all'>Todavía no sé</option>
                         <option value='2' >2</option>
@@ -108,38 +125,61 @@ export default function Reserva() {
                     <ul className={styles.serviceCont}>
                         <li>
                             <label>Wifi <FaWifi /></label>
-                            <input type='checkbox' name='Wifi' onChange={e => handleCheck(e)} className={styles.service} />
+                            <input
+                                type='checkbox'
+                                name='wifi'
+                                onChange={e => {
+                                    handleCheck(e);
+                                    return handleChange(e);
+                                }}
+                                className={styles.service}
+                            />
                         </li>
                         <li>
                             <label>Parrilla <GiCampCookingPot /></label>
-                            <input type='checkbox' name='Barbecue' onChange={e => handleCheck(e)} className={styles.service} />
+                            <input
+                                type='checkbox'
+                                name='barbecue'
+                                onChange={e => {
+                                    handleCheck(e);
+                                    return handleChange(e);
+                                }}
+                                className={styles.service}
+                            />
                         </li>
                         <li>
                             <label>Limpieza incluida <GiVacuumCleaner /></label>
-                            <input type='checkbox' name='Cleaning' onChange={e => handleCheck(e)} className={styles.service} />
+                            <input
+                                type='checkbox'
+                                name='cleaning'
+                                onChange={e => {
+                                    handleCheck(e);
+                                    return handleChange(e);
+                                }}
+                                className={styles.service}
+                            />
                         </li>
                         <li>
                             <label>Estacionamiento techado <FaCarAlt /></label>
-                            <input type='checkbox' name='Parking' onChange={e => handleCheck(e)} className={styles.service} />
+                            <input
+                                type='checkbox'
+                                name='parking'
+                                onChange={e => {
+                                    handleCheck(e);
+                                    return handleChange(e);
+                                }}
+                                className={styles.service}
+                            />
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <hr />
-                    <label className={styles.serviceTitle}><MdRoomService /> Servicios adicionales: </label>
-                    <ul className={styles.serviceCont}>
-                        <li>
-                            <label>Consola de videojuegos <FaGamepad /></label>
-                            <input type='checkbox' name='Videogames' onChange={e => handleCheck(e)} className={styles.service} />
-                        </li>
-                        <li>
-                            <label>Alquiler de auto <FaCarAlt /></label>
-                            <input type='checkbox' name='RentCar' onChange={e => handleCheck(e)} className={styles.service} />
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <button type='submit' className={styles.reload} id={styles.search}><span><ImSearch /></span></button>
+                    <button
+                        type='submit'
+                        className={styles.reload}
+                        id={styles.search}
+                        onSubmit={e => handleSubmit(e)}
+                    ><span><ImSearch /></span></button>
                 </li>
             </ul >
 

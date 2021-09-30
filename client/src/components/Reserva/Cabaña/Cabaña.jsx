@@ -1,5 +1,5 @@
 import React from "react";
-import styles from './Cabaña.module.css';
+//import styles from './Cabaña.module.css';
 
 export default function Cabaña(number, capacity, available, price, description, img){
     return (

@@ -1,10 +1,8 @@
 import axios from "axios";
 
 export const GET_CABINS = "GET_CABINS";
-export const FILTER_BY_CAPACITY = "FILTER_BY_CAPACITY";
-export const FILTER_BY_PRICE = "FILTER_BY_PRICE";
-export const FILTER_BY_SERVICES = 'FILTER_BY_SERVICES';
 export const SEND_EMAIL = "SEND_EMAIL";
+export const FILTER_CABINS = 'FILTER_CABINS';
 
 export function getCabins() {
   return async function (dispatch) {
@@ -20,25 +18,32 @@ export function getCabins() {
   };
 }
 
-export function filterCabinsByCapacity(payload) {
-  return {
-    type: FILTER_BY_CAPACITY,
-    payload,
-  };
-}
+// export function filterCabinsByCapacity(payload) {
+//   return {
+//     type: FILTER_BY_CAPACITY,
+//     payload,
+//   };
+// }
 
-export function filterCabinsByPrice(payload) {
-  return {
-    type: FILTER_BY_PRICE,
-    payload,
-  };
-}
+// export function filterCabinsByPrice(payload) {
+//   return {
+//     type: FILTER_BY_PRICE,
+//     payload,
+//   };
+// }
 
-export function filterCabinsByServices(payload){
+// export function filterCabinsByServices(payload){
+//   return {
+//     type: FILTER_BY_SERVICES,
+//     payload,
+//   };
+// }
+
+export function filterCabins(payload){
   return {
-    type: FILTER_BY_SERVICES,
+    tpe: FILTER_CABINS,
     payload,
-  };
+  }
 }
 
 export function sendEmail(payload) {
