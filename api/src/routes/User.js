@@ -32,5 +32,31 @@ router.post("/NewUser" , (req, res)=>{
     })
     .catch(error=>{ res.status(504).json(error)})
 })
+router.put("/EditUser", (req,res) =>{
+    const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email, Admin,Premium} = req.body;
+    const objecttoupdate={
+        UserName: UserName,
+        UserPassword: UserPassword,
+        FirstName: FirstName,
+        LastName: LastName,
+        Address: Address,
+        Phone: Phone,
+        Email: Email,
+        Admin: Admin,
+        Premium: Premium
+    }
+        User.update(
+          objecttoupdate
+        ,
+        {
+            where: {ID: req.body.id}
+
+        })
+        .then(doneTemp=>{
+            return res.status(200).json(doneTemp)
+        })
+        .catch(error=>{console.log(error)})
+})
+
 
 module.exports = router;

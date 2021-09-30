@@ -42,7 +42,7 @@ router.put("/EditCabin", (req,res) =>{
           objecttoupdate
         ,
         {
-            where: {id: req.body.id}
+            where: {ID: req.body.id}
 
         })
         .then(doneTemp=>{
@@ -50,5 +50,7 @@ router.put("/EditCabin", (req,res) =>{
         })
         .catch(error=>{console.log(error)})
 })
+
+
 
 module.exports = router;

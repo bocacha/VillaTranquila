@@ -28,5 +28,25 @@ router.post("/NewPayment" , (req, res)=>{
     })
     .catch(error=>{ res.send(error)})
 })
+router.put("/EditPayment", (req,res) =>{
+    const {Date, idClient, TotalAmount, PaydAmount} = req.body;
+    const objecttoupdate={
+        Date: Date, 
+        idClient: idClient, 
+        TotalAmount: TotalAmount, 
+        PaydAmount: PaydAmount        
+    }
+        Payments.update(
+          objecttoupdate
+        ,
+        {
+            where: {ID: req.body.id}
+
+        })
+        .then(doneTemp=>{
+            return res.status(200).json(doneTemp)
+        })
+        .catch(error=>{console.log(error)})
+})
 
 module.exports = router;
