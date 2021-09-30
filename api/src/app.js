@@ -60,9 +60,7 @@ server.get('/', (req, res) => {
 });
 
 
-server.get('/user', (req, res) => {
-  res.send(req.user)
-})
+
 
 server.get('/profile', requiresAuth(),  (req, res) => {
   res.send(JSON.stringify(req.oidc.user));
