@@ -24,7 +24,7 @@ var jwtCheck = jwt({
       jwksRequestsPerMinute: 5,
       jwksUri: 'https://dev-2py8q024.us.auth0.com/.well-known/jwks.json'
 }),
-audience: 'https://villatranquila.herokuapp.com/cabins',
+audience: 'https://villatranquila.herokuapp.com/',
 issuer: 'https://dev-2py8q024.us.auth0.com/',
 algorithms: ['RS256']
 });
