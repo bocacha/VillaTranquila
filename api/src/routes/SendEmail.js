@@ -12,7 +12,6 @@ router.post("/", (req, res) => {
         pass: 'sUm7qhjRzaY39ve7Kt'
     }
 });
-
   var mailOptions = {
       form: name,
       to: email,
