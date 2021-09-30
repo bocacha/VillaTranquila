@@ -1,14 +1,11 @@
-import React from "react";
-import styles from "./Admin.module.css";
-import Navbar from "../Navbar/Navbar";
+import React from 'react'
+import { Link } from 'react-router-dom';
 
 
-
-export default function Admin() {
+const Admin = () => {
     return (
-        <div className={styles.container}>
-            {/* <Navbar/> */}
-            holas
-        </div>
-    )
+       <button><Link to='admin/cabañas'><h3>Cabañas</h3></Link></button> 
+      );
 }
+ 
+export default Admin;
