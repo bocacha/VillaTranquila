@@ -4,10 +4,35 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
 const cors = require('cors');
+require('dotenv').config()
 
 require('./db.js');
-
+const { auth, requiresAuth} = require('express-openid-connect');
 const server = express();
+
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  baseURL: process.env.BASE_URL,
+  clientID: process.env.CLIENT_ID,
+  issuerBaseURL: process.env.ISSUER_BASE_URL,
+  secret: process.env.SECRET
+};
+
+// auth router attaches /login, /logout, and /callback routes to the baseURL
+server.use(auth(config));
+
+// req.isAuthenticated is provided from the auth router
+server.get('/', (req, res) => {
+  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out')
+});
+
+server.get('/profile', requiresAuth(), (req, res) => {
+  res.send(JSON.stringify(req.oidc.user));
+});
+
+
+
 
 server.name = 'API';
 
