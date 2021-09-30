@@ -52,6 +52,30 @@ const {
   getAccessTokenSilently
 } = useAuth0();
 
+const callRoleBasedEndpoint = async () => {
+  try {
+    const token = await getAccessTokenSilently();
+    console.log(token);
+    const response = await fetch('https://villatranquila.herokuapp.com/api/role', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    const responseData = await response.json();
+    setState({
+      ...state,
+      showResult: true,
+      endpointMessage: responseData
+    });
+  } catch (error) {
+    setState({
+      ...state,
+      error: error.error
+    });
+  }
+};
+
+
 server.get("/api/role", authorizeAccessToken, checkPermissions, (req, res) => {
   res.send({
     msg: "You called the role endpoint!"
@@ -66,8 +90,8 @@ server.get('/', (req, res) => {
 server.get('/profile', requiresAuth(),  (req, res) => {
   res.send(JSON.stringify(req.oidc.user));
 });
-server.get('/api', (req, res) => {
-  res.send('<html> <head>server Response</head><body><h1> This page was render direcly from the server <p>Hello there welcome to my website</p></h1><button>prueba</button></body></html>')
+server.get('/api', callRoleBasedEndpoint, (req, res) => {
+  res.send('<html> <head>server Response</head><body><h1> This page was render direcly from the server <p>Hello there welcome to my website</p></h1><button onClick={callRoleBasedEndpoint}>prueba</button></body></html>')
 })
 
 
