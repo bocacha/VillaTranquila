@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './Paginado.module.css';
 
 export default function Paginado({cabinsPerPage, allCabins, paginado}) {
     const pageNumbers = [];
@@ -8,7 +9,10 @@ export default function Paginado({cabinsPerPage, allCabins, paginado}) {
     }
 
     return (
-        <nav>
+        <div className={styles.paginado}>
+
+            <p>Paginado</p>
+            
             <ul>
                 {pageNumbers.length > 1 && 
                 pageNumbers.map(number => (
@@ -17,6 +21,6 @@ export default function Paginado({cabinsPerPage, allCabins, paginado}) {
                     </li>
                 ))}
             </ul>
-        </nav>
+        </div>
     )
 }

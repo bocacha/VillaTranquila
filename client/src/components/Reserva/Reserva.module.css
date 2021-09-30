@@ -2,7 +2,6 @@
     position: fixed;
     overflow: auto;
     background-color: #293c4f ;
-    width: 100%;
     margin: 0;
     padding: 0;
     height: 100%;
@@ -138,4 +137,25 @@
 }
 #search:hover span{
   padding-left: 10px;
+}
+
+.cabinCont{
+  width: 75%;
+  height: 100%;
+  position: fixed;
+  overflow: auto;
+  background-color: #94adbc  ;
+  margin-left: 25%;
+}
+
+.paginado1{
+  position: absolute;
+  top: 20px;
+  margin-left: 50%;
+}
+
+.paginado2{
+  position: absolute;
+  bottom: 100px;
+  margin-left: 50%;
 }

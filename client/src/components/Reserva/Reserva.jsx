@@ -15,19 +15,19 @@ import RangeSlider from "./Slider/Slider";
 
 export default function Reserva() {
     const dispatch = useDispatch();
-    // const allCabins = useSelector(state => state.cabins);
+    const allCabins = useSelector(state => state.cabins);
 
-    // // Paginado---------------------------------------------------------------
-    // const [currentPage, setCurrentPage] = useState(1);
-    // const [cabinsPerPage, setCabinsPerPage] = useState(9);
-    // const indexOfLastCabin = currentPage * cabinsPerPage;
-    // const indexOfFirstCabin = indexOfLastCabin - cabinsPerPage;
-    // const currentCabins = allCabins.slice(indexOfFirstCabin, indexOfLastCabin);
+    // Paginado---------------------------------------------------------------
+    const [currentPage, setCurrentPage] = useState(1);
+    const [cabinsPerPage, setCabinsPerPage] = useState(9);
+    const indexOfLastCabin = currentPage * cabinsPerPage;
+    const indexOfFirstCabin = indexOfLastCabin - cabinsPerPage;
+    const currentCabins = allCabins.slice(indexOfFirstCabin, indexOfLastCabin);
 
-    // const paginado = (pageNumber) => {
-    //     setCurrentPage(pageNumber);
-    // }
-    // //-------------------------------------------------------------------------
+    const paginado = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    }
+    //-------------------------------------------------------------------------
 
     useEffect(() => {
         dispatch(getCabins())
@@ -52,12 +52,12 @@ export default function Reserva() {
     }
 
     var status = [];
-    function handleCheck(e){
+    function handleCheck(e) {
         let name = e.target.name;
-        if(status.includes(name)){
+        if (status.includes(name)) {
             status = status.filter(el => el !== name);
         }
-        else{
+        else {
             status.push(name);
         }
         console.log(name, status);
@@ -69,25 +69,25 @@ export default function Reserva() {
             <Navbar className={styles.navbar} />
             <ul className={styles.reserva}>
                 <li>
-                    <button className={styles.reload} onClick={e => handleReload(e)}>Limpiar filtros <AiOutlineReload/></button>
+                    <button className={styles.reload} onClick={e => handleReload(e)}>Limpiar filtros <AiOutlineReload /></button>
                 </li>
                 <hr />
                 <li>
-                    <label><ImCalendar/> Fecha de llegada: </label>
+                    <label><ImCalendar /> Fecha de llegada: </label>
                     <input
                         type="date"
                         className={styles.fechas}
                     />
                 </li>
                 <li>
-                    <label><ImCalendar/> Fecha de salida: </label>
+                    <label><ImCalendar /> Fecha de salida: </label>
                     <input
                         type="date"
                         className={styles.fechas}
                     />
                 </li>
                 <li>
-                    <label><IoMdPeople/> Cantidad de personas </label>
+                    <label><IoMdPeople /> Cantidad de personas </label>
                     <select onChange={e => handleFilterCapacity(e)}>
                         <option value='selected' hidden>Personas</option>
                         <option value='all'>Todavía no sé</option>
@@ -98,70 +98,76 @@ export default function Reserva() {
                     </select>
                 </li>
                 <li>
-                    <label><MdAttachMoney/> Precio por noche en pesos </label>
+                    <label><MdAttachMoney /> Precio por noche en pesos </label>
                     {/*SLIDER<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/}
-                    <RangeSlider/>
+                    <RangeSlider />
                 </li>
                 <li>
-                    <hr/>
-                    <label className={styles.serviceTitle}><MdRoomService/> Que cuente con:</label>
+                    <hr />
+                    <label className={styles.serviceTitle}><MdRoomService /> Que cuente con:</label>
                     <ul className={styles.serviceCont}>
                         <li>
-                            <label>Wifi <FaWifi/></label>
+                            <label>Wifi <FaWifi /></label>
                             <input type='checkbox' name='Wifi' onChange={e => handleCheck(e)} className={styles.service} />
                         </li>
                         <li>
-                            <label>Parrilla <GiCampCookingPot/></label>
+                            <label>Parrilla <GiCampCookingPot /></label>
                             <input type='checkbox' name='Barbecue' onChange={e => handleCheck(e)} className={styles.service} />
                         </li>
                         <li>
-                            <label>Limpieza incluida <GiVacuumCleaner/></label>
+                            <label>Limpieza incluida <GiVacuumCleaner /></label>
                             <input type='checkbox' name='Cleaning' onChange={e => handleCheck(e)} className={styles.service} />
                         </li>
                         <li>
-                            <label>Estacionamiento techado <FaCarAlt/></label>
+                            <label>Estacionamiento techado <FaCarAlt /></label>
                             <input type='checkbox' name='Parking' onChange={e => handleCheck(e)} className={styles.service} />
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <hr/>
-                    <label className={styles.serviceTitle}><MdRoomService/> Servicios adicionales: </label>
+                    <hr />
+                    <label className={styles.serviceTitle}><MdRoomService /> Servicios adicionales: </label>
                     <ul className={styles.serviceCont}>
                         <li>
-                            <label>Consola de videojuegos <FaGamepad/></label>
+                            <label>Consola de videojuegos <FaGamepad /></label>
                             <input type='checkbox' name='Videogames' onChange={e => handleCheck(e)} className={styles.service} />
                         </li>
                         <li>
-                            <label>Alquiler de auto <FaCarAlt/></label>
+                            <label>Alquiler de auto <FaCarAlt /></label>
                             <input type='checkbox' name='RentCar' onChange={e => handleCheck(e)} className={styles.service} />
                         </li>
                     </ul>
                 </li>
                 <li>
-                    <button type='submit' className={styles.reload} id={styles.search}><span><ImSearch/></span></button>
+                    <button type='submit' className={styles.reload} id={styles.search}><span><ImSearch /></span></button>
                 </li>
             </ul >
 
-            {/* <Paginado cabinsPerPage={cabinsPerPage} allCabins={allCabins.length} paginado={paginado} /> */}
 
-            {/* {
-                currentCabins?.map(el => {
-                    return (
-                        <div key={el.number} >
-                            <Cabaña 
-                                number={el.number}
-                                capacity={el.capacity}
-                                available={el.available}
-                                price={el.price}
-                                description={el.description}
-                                img={el.img} />
-                        </div>
-                    )
-                })
-            } */}
+            <div className={styles.cabinCont}>
+                <div className={styles.paginado1}>
+                    <Paginado cabinsPerPage={cabinsPerPage} allCabins={allCabins.length} paginado={paginado} />
+                </div>
+                {
+                    currentCabins?.map(el => {
+                        return (
+                            <div key={el.number} >
+                                <Cabaña
+                                    number={el.number}
+                                    capacity={el.capacity}
+                                    available={el.available}
+                                    price={el.price}
+                                    description={el.description}
+                                    img={el.img} />
+                            </div>
+                        )
+                    })
+                }
+                <div className={styles.paginado2}>
+                    <Paginado cabinsPerPage={cabinsPerPage} allCabins={allCabins.length} paginado={paginado} />
+                </div>
+            </div>
 
-            {/* <Paginado cabinsPerPage={cabinsPerPage} allCabins={allCabins.length} paginado={paginado} /> */}
         </div >
     )
 }
