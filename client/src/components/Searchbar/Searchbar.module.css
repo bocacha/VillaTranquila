@@ -1,0 +1,31 @@
+.container{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.input{
+    margin-top:10px;
+    width: 89%;
+    border: solid 1px black;
+    border-radius: 5px;
+}
+
+.button{
+    height:fit-content;
+    margin-left:.3em;
+    padding:.3em .3em;
+    border-radius: 5px;
+    font-size: 1.2em;
+    background-color: #293c4f;
+    border: none;
+    color: #fff;
+    transition-duration: 0.4s;
+}
+
+.button:hover{
+    background: transparent;
+    color:#000;
+    border: 1px solid #000;
+}
+
