@@ -28,6 +28,24 @@ const config = {
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 server.use(auth(config));
 
+const authorizeAccessToken = jwt({
+  secret: jwks.expressJwtSecret({
+      cache: true,
+      rateLimit: true,
+      jwksRequestsPerMinute: 5,
+      jwksUri: 'https://dev-2py8q024.us.auth0.com/.well-known/jwks.json'
+}),
+audience: 'https://villatranquila.herokuapp.com/',
+issuer: 'https://dev-2py8q024.us.auth0.com/',
+algorithms: ['RS256']
+});
+
+server.get("/api/role", authorizeAccessToken, checkPermissions, (req, res) => {
+  res.send({
+    msg: "You called the role endpoint!"
+  });
+});
+
 // req.isAuthenticated is provided from the auth router
 server.get('/', (req, res) => {
   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out')
