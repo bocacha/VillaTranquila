@@ -6,6 +6,7 @@ const routes = require('./routes/index.js');
 const cors = require('cors');
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
+const jwtAuthz = require('express-jwt-authz');
 
 
 require('./db.js');
@@ -28,7 +29,12 @@ issuer: 'https://dev-2py8q024.us.auth0.com/',
 algorithms: ['RS256']
 });
 
-
+server.get('/user', requiresAuth(),checkpermissions, (req, res)=>{
+  res.send({message:"viendo user"})
+})
+const checkpermissions = jwtAuthz(["admin:read"], {
+  customScopeKey: "permissions"
+})
 
 server.use( '/token',jwtCheck);
 
@@ -54,9 +60,7 @@ server.get('/', (req, res) => {
 });
 
 
-server.get('/user', (req, res) => {
-  res.send(req.user)
-})
+
 
 server.get('/profile', requiresAuth(),  (req, res) => {
   res.send(JSON.stringify(req.oidc.user));
