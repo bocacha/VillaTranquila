@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getCabins, filterCabinsByCapacity, filterCabinsByPrice, filterCabinsByServices } from "../../actions";
+import { getCabins, filterCabinsByCapacity, filterCabinsByPrice, } from "../../actions";
 import Paginado from './Paginado/Paginado';
 import Navbar from "../Navbar/Navbar";
 import Cabaña from "./Cabaña/Cabaña";
@@ -52,17 +52,17 @@ export default function Reserva() {
     }
 
     var status = [];
-    function handleCheck(e){
-        let name = e.target.name;
-        if(status.includes(name)){
-            status = status.filter(el => el !== name);
-        }
-        else{
-            status.push(name);
-        }
-        console.log(name, status);
-        dispatch(filterCabinsByServices(status));
-    }
+    // function handleCheck(e){
+    //     let name = e.target.name;
+    //     if(status.includes(name)){
+    //         status = status.filter(el => el !== name);
+    //     }
+    //     else{
+    //         status.push(name);
+    //     }
+    //     console.log(name, status);
+    //     dispatch(filterCabinsByServices(status));
+    // }
 
     return (
         <div>
@@ -114,19 +114,19 @@ export default function Reserva() {
                     <ul className={styles.serviceCont}>
                         <li>
                             <label>Wifi <FaWifi/></label>
-                            <input type='checkbox' name='Wifi' onChange={e => handleCheck(e)} className={styles.service} />
+                            {/* <input type='checkbox' name='Wifi' onChange={e => handleCheck(e)} className={styles.service} /> */}
                         </li>
                         <li>
                             <label>Parrilla <GiCampCookingPot/></label>
-                            <input type='checkbox' name='Barbecue' onChange={e => handleCheck(e)} className={styles.service} />
+                            {/* <input type='checkbox' name='Barbecue' onChange={e => handleCheck(e)} className={styles.service} /> */}
                         </li>
                         <li>
                             <label>Limpieza incluida <GiVacuumCleaner/></label>
-                            <input type='checkbox' name='Cleaning' onChange={e => handleCheck(e)} className={styles.service} />
+                            {/* <input type='checkbox' name='Cleaning' onChange={e => handleCheck(e)} className={styles.service} /> */}
                         </li>
                         <li>
                             <label>Estacionamiento techado <FaCarAlt/></label>
-                            <input type='checkbox' name='Parking' onChange={e => handleCheck(e)} className={styles.service} />
+                            {/* <input type='checkbox' name='Parking' onChange={e => handleCheck(e)} className={styles.service} /> */}
                         </li>
                     </ul>
                 </li>
