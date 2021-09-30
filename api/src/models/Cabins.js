@@ -27,18 +27,13 @@ module.exports = (sequelize) => {
     allowNull: false,
    },
    Description:{
-    type: DataTypes.JSON,
+    type: DataTypes.STRING,
     allowNull: false,
    },
    Coffe:{
      type: DataTypes.BOOLEAN,
      allowNull: false,
      defaultValue: false
-  },
-   Coffe:{
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    defaultValue: false
   },
   Microondas:{
     type: DataTypes.BOOLEAN,
