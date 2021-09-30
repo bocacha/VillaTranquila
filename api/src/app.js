@@ -29,6 +29,22 @@ const config = {
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 server.use(auth(config));
 
+const checkJwt = jwt({
+  // Dynamically provide a signing key
+  // based on the kid in the header and 
+  // the signing keys provided by the JWKS endpoint.
+  secret: jwksRsa.expressJwtSecret({
+    cache: true,
+    rateLimit: true,
+    jwksRequestsPerMinute: 5,
+    jwksUri: `https://villatranquila.herokuapp.com.well-known/jwks.json`
+  }),
+
+  // Validate the audience and the issuer.
+  audience: 'https://villatranquila.herokuapp.com/',
+  issuer: [`https://dev-2py8q024.us.auth0.com/`],
+  algorithms: ['RS256']
+});
 
 // req.isAuthenticated is provided from the auth router
 server.get('/', (req, res) => {
@@ -37,6 +53,20 @@ server.get('/', (req, res) => {
 
 server.get('/profile', requiresAuth(),  (req, res) => {
   res.send(JSON.stringify(req.oidc.user));
+});
+
+app.get('/api/private', checkJwt, function(req, res) {
+  res.json({
+    message: 'Hello from a private endpoint! You need to be authenticated to see this.'
+  });
+});
+
+const checkScopes = jwtAuthz([ 'admin:read' ]);
+
+app.get('/api/private-scoped', checkJwt, checkScopes, function(req, res) {
+  res.json({
+    message: 'Hello from a private endpoint! You need to be authenticated and have a scope of read:messages to see this.'
+  });
 });
 
 
