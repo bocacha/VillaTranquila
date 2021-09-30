@@ -7,7 +7,7 @@ const routes = require('./routes/index.js');
 const cors = require('cors');
 const { auth, requiresAuth} = require('express-openid-connect');
 const jwt = require('express-jwt');
-const jwks = require('jwks-rsa');
+const jwksRsa = require('jwks-rsa');
 const jwtAuthz = require('express-jwt-authz');
 
 
