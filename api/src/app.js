@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
 const cors = require('cors');
+const { auth, requiresAuth} = require('express-openid-connect');
 const jwt = require('express-jwt');
 const jwks = require('jwks-rsa');
 const jwtAuthz = require('express-jwt-authz');
@@ -14,29 +15,6 @@ require('./db.js');
 const server = express();
 
 server.name = 'API';
-
-const { auth, requiresAuth} = require('express-openid-connect');
-
-var jwtCheck = jwt({
-  secret: jwks.expressJwtSecret({
-      cache: true,
-      rateLimit: true,
-      jwksRequestsPerMinute: 5,
-      jwksUri: 'https://dev-2py8q024.us.auth0.com/.well-known/jwks.json'
-}),
-audience: 'https://villatranquila.herokuapp.com/',
-issuer: 'https://dev-2py8q024.us.auth0.com/',
-algorithms: ['RS256']
-});
-
-server.get('/user', requiresAuth(),checkpermissions, (req, res)=>{
-  res.send({message:"viendo user"})
-})
-const checkpermissions = jwtAuthz(["admin:read"], {
-  customScopeKey: "permissions"
-})
-
-server.use( '/token',jwtCheck);
 
 const config = {
   authRequired: false,
@@ -50,23 +28,14 @@ const config = {
 // auth router attaches /login, /logout, and /callback routes to the baseURL
 server.use(auth(config));
 
-server.get('/authorized', function (req, res) {
-  res.send('Secured Resource');
-});
-
 // req.isAuthenticated is provided from the auth router
 server.get('/', (req, res) => {
   res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out')
 });
 
-
-
-
 server.get('/profile', requiresAuth(),  (req, res) => {
   res.send(JSON.stringify(req.oidc.user));
 });
-
-
 
 
 server.use(express.urlencoded({ extended: true, limit: '50mb' }));
