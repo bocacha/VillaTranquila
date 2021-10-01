@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import axios from 'axios';
+ import axios from 'axios';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
@@ -12,7 +12,7 @@ import { store } from './store';
 // import dotenv from "dotenv";
 // dotenv.config();
 
-// axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
+ axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
 ReactDOM.render(
   <Provider store={store} >
