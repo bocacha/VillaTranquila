@@ -29,9 +29,11 @@ export default function Navbar() {
                     </li>
                 </div>
                 <div className={styles.logins}>
-                    <li >
-                        <button className={styles.signlog} ><strong>Iniciar sesión <GoSignIn /></strong></button>
-                    </li>
+                    <Link to='/login'>
+                        <li >
+                            <button className={styles.signlog} ><strong>Iniciar sesión <GoSignIn /></strong></button>
+                        </li>
+                    </Link>
                     <li>
                         <button className={styles.signlog} ><strong>Registrarse <RiLoginBoxLine /></strong></button>
                     </li>

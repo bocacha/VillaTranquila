@@ -22,11 +22,10 @@ export const EDIT_SERVICES = "EDIT_SERVICES";
 export const EDIT_PAYMENT = "EDIT_PAYMENT";
 export const EDIT_PICTURES = "EDIT_PICTURES";
 
-
 export function getCabins() {
   return async function (dispatch) {
     try {
-      let json = await axios.get("http://localhost:3001/cabins");
+      let json = await axios.get("/cabins");
       return dispatch({
         type: GET_CABINS,
         payload: json.data,
@@ -53,11 +52,10 @@ export function filterCabinsByPrice(payload) {
 
 export function sendEmail(payload) {
   return (dispatch) => {
-    const json = axios.post("http://localhost:3001/sendEmail", payload);
+    const json = axios.post("/sendEmail", payload);
     return json;
   };
 }
-
 export function createReservation(payload) {
   return async function (dispatch) {
     const response = await axios.post("http://localhost:3001/reservations/NewReservation", payload);
@@ -101,7 +99,6 @@ export function createCabains(payload) {
     return json;
   };
 }
-
 export function readPayment(id) {
   return async function (dispatch) {
     try {
@@ -255,7 +252,5 @@ export function editPictures(payload) {
     }
   };
 }
-
-
 
 

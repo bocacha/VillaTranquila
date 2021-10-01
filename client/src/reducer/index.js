@@ -21,7 +21,6 @@ import {
   EDIT_PAYMENT,
   EDIT_PICTURES,
 } from "../actions";
-
 const initialState = {
   cabins: [],
   allCabins: [],
@@ -138,7 +137,6 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
-
     default:
       return state;
   }
