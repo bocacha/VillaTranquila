@@ -16,7 +16,12 @@ export const READ_PICTURES = "READ_PICTURES";
 export const READ_USERS = "READ_USERS"; 
 export const READ_SERVICES = "READ_SERVICES"; 
 export const READ_CABINS = "READ_CABINS"; 
-export const EDIT_RESERVATION = "CREATE_RESERVATION";
+export const EDIT_RESERVATIONS = "EDIT_RESERVATIONS";
+export const EDIT_USER = "EDIT_USER";
+export const EDIT_SERVICES = "EDIT_SERVICES";
+export const EDIT_PAYMENT = "EDIT_PAYMENT";
+export const EDIT_PICTURES = "EDIT_PICTURES";
+
 export function getCabins() {
   return async function (dispatch) {
     try {
@@ -178,9 +183,74 @@ export function readCabains(id) {
   };
 }
 
-export function editReservation(payload) {
+export function editUsers(payload) {
   return async function (dispatch) {
-    const response = await axios.post("http://localhost:3001/reservations/NewReservation", payload);
-    return response;
+    try {
+      var json = await axios.put("http://localhost:3001/users/EditUser", payload);
+      return dispatch({
+        type: EDIT_USER,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 }
+
+export function editReservations(payload) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.put("http://localhost:3001/reservations/EditReservation", payload);
+      return dispatch({
+        type: EDIT_RESERVATIONS,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+}
+
+export function editServices(payload) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.put("http://localhost:3001/services/EditService", payload);
+      return dispatch({
+        type: EDIT_SERVICES,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+}
+
+export function editPayments(payload) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.put("http://localhost:3001/payments/EditPayment", payload);
+      return dispatch({
+        type: EDIT_PAYMENT,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+}
+
+export function editPictures(payload) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.put("http://localhost:3001/pictures/EditPicture", payload);
+      return dispatch({
+        type: EDIT_PICTURES,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+}
+
+

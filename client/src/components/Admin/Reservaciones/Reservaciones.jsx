@@ -3,15 +3,27 @@ import styles from "./Reservaciones.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createReservation,
-  editReservation,
+  editReservations,
   readReservation,
 } from "../../../actions";
 import ReservacionesDetail from "./ReservacionesDetail";
+import { Link } from "react-router-dom";
 
 export default function Reservaciones() {
   const dispatch = useDispatch();
   const allReservations = useSelector((state) => state.reservaciones);
+  console.log("ALL",allReservations);
   const [input, setInput] = useState({
+    id:"",
+    Checkin: "",
+    Checkout: "",
+    UserId: "",
+    Paymentsid: "",
+    Cabinid: "",
+    ExtraServices: "",
+  });
+  const [edit, setEdit] = useState({
+    id:"",
     Checkin: "",
     Checkout: "",
     UserId: "",
@@ -31,11 +43,34 @@ export default function Reservaciones() {
     });
   }
 
+  function handleChangeEdit(e) {
+    setEdit({
+      ...edit,
+      [e.target.name]: e.target.value,
+    });
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(createReservation(input));
     alert("Reserva creada con éxito");
     setInput({
+      id:"",
+      Checkin: "",
+      Checkout: "",
+      UserId: "",
+      Paymentsid: "",
+      Cabinid: "",
+      ExtraServices: "",
+    });
+    window.location.reload();
+  }
+  function handleSubmitEdit(e) {
+    e.preventDefault();
+    dispatch(editReservations(edit));
+    alert("Reserva editada con éxito");
+    setInput({
+      id:"",
       Checkin: "",
       Checkout: "",
       UserId: "",
@@ -48,6 +83,11 @@ export default function Reservaciones() {
 
   return (
     <div className={styles.container}>
+      <div className={styles.btnVolver}>
+        <Link to="/admin">
+          <button>Volver</button>
+        </Link>
+      </div>
       {/* CREAR */}
       <div>
         Crear una nueva reservación
@@ -107,55 +147,63 @@ export default function Reservaciones() {
           </div>
         </form>
       </div>
-      {/* EDITAR
+      {/* EDITAR */}
       <div>
         Editar reserva
-        <form onSubmit={(e) => handleSubmit(e)}>
+        <form onSubmit={(e) => handleSubmitEdit(e)}>
           <input
             type="text"
-            value={input.Checkin}
+            value={edit.id}
+            name="id"
+            onChange={(e) => handleChangeEdit(e)}
+            placeholder="ID"
+            className={styles.id}
+          />
+          <input
+            type="text"
+            value={edit.Checkin}
             name="Checkin"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleChangeEdit(e)}
             placeholder="Checkin"
             className={styles.Checkin}
           />
           <input
             type="text"
-            value={input.Checkout}
+            value={edit.Checkout}
             name="Checkout"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleChangeEdit(e)}
             placeholder="Checkout"
             className={styles.Checkout}
           />
           <input
             type="text"
-            value={input.UserId}
+            value={edit.UserId}
             name="UserId"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleChangeEdit(e)}
             placeholder="UserId"
             className={styles.UserId}
           />
           <input
             type="text"
-            value={input.Paymentsid}
+            value={edit.Paymentsid}
             name="Paymentsid"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleChangeEdit(e)}
             placeholder="Paymentsid"
             className={styles.paymentsid}
           />
           <input
             type="text"
-            value={input.Cabinid}
+            value={edit.Cabinid}
             name="Cabinid"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleChangeEdit(e)}
             placeholder="Cabinid"
             className={styles.cabinid}
           />
           <input
             type="text"
-            value={input.ExtraServices}
+            value={edit.ExtraServices}
             name="ExtraServices"
-            onChange={(e) => handleChange(e)}
+            onChange={(e) => handleChangeEdit(e)}
             placeholder="ExtraServices"
             className={styles.extraServices}
           />
@@ -165,13 +213,14 @@ export default function Reservaciones() {
             </button>
           </div>
         </form>
-      </div> */}
+      </div>
       {/* VER */}
       <div>
         {allReservations?.map((el) => {
           return (
             <div className={styles.detalles} key={el.ID}>
               <ReservacionesDetail
+                ID={el.ID}
                 Checkin={el.Checkin}
                 Checkout={el.Checkout}
                 UserId={el.UserId}

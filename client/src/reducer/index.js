@@ -4,7 +4,6 @@ import {
   FILTER_BY_PRICE,
   SEND_EMAIL,
   CREATE_RESERVATION,
-  EDIT_RESERVATION,
   CREATE_SERVICES,
   CREATE_USERS,
   CREATE_PAYMENT,
@@ -16,13 +15,18 @@ import {
   READ_USERS,
   READ_SERVICES,
   READ_CABINS,
+  EDIT_USER,
+  EDIT_RESERVATIONS,
+  EDIT_SERVICES,
+  EDIT_PAYMENT,
+  EDIT_PICTURES,
 } from "../actions";
 const initialState = {
   cabins: [],
   allCabins: [],
   pagos: [],
-  reservaciones: [],
-  fotos:[],
+  C: [],
+  fotos: [],
   usuarios: [],
   servicios: [],
   cabañas: [],
@@ -113,7 +117,23 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         cabañas: action.payload,
       };
-    case EDIT_RESERVATION:
+    case EDIT_USER:
+      return {
+        ...state,
+      };
+    case EDIT_RESERVATIONS:
+      return {
+        ...state,
+      };
+    case EDIT_SERVICES:
+      return {
+        ...state,
+      };
+    case EDIT_PAYMENT:
+      return {
+        ...state,
+      };
+    case EDIT_PICTURES:
       return {
         ...state,
       };
