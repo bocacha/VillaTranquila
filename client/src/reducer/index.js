@@ -17,7 +17,6 @@ import {
   READ_SERVICES,
   READ_CABINS,
 } from "../actions";
-
 const initialState = {
   cabins: [],
   allCabins: [],
@@ -118,7 +117,6 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
-
     default:
       return state;
   }
