@@ -6,6 +6,8 @@ import Contacto from './components/Contacto/Contacto';
 import Reserva from './components/Reserva/Reserva';
 import Admin from "./components/Admin/Admin";
 import Cabañas from './components/Admin/Cabañas/Cabañas';
+import Fotos from "./components/Admin/Fotos/Fotos";
+
 
 
 function App() {
@@ -19,6 +21,8 @@ function App() {
           <Route path='/reserva' component={Reserva} />
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/admin/cabañas" component={Cabañas} />
+          <Route exact path="/admin/fotos" component={Fotos} />
+         
         </Switch>
       </div>
     </BrowserRouter>

@@ -42,7 +42,6 @@ export function sendEmail(payload) {
 }
 
 export function createCabains(payload) {
-  console.log('data',payload)
   return async (dispatch) => {
     const json = await axios.post("/cabins/NewCabin", payload);
     return json;
