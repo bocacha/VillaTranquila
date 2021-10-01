@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { createCabains, readCabains } from "../../../actions";
 import styles from "./Cabañas.module.css";
 import CabañasDetail  from "../Cabañas/CabañasDetail";
+import { Link } from "react-router-dom";
+
 
 const Cabañas = () => {
   const dispatch = useDispatch();
@@ -52,6 +54,9 @@ const Cabañas = () => {
 
   return (
     <div>
+      <div className={styles.btnVolver}>
+        <Link to="/admin"><button>Volver</button></Link>
+      </div>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Numero de Personas</label>

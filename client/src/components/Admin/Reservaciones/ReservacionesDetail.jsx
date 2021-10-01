@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./ReservacionesDetail.module.css";
 
 export default function reservacionesDetail({
+  ID,
   Checkin,
   Checkout,
   UserId,
@@ -11,6 +12,7 @@ export default function reservacionesDetail({
 }) {
   return (
     <div className={styles.container}>
+      <p>Id: {ID}</p>
       <p>Checkin: {Checkin}</p>
       <p>Checkout: {Checkout}</p>
       <p>UserId: {UserId}</p>
