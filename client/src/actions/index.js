@@ -17,7 +17,7 @@ export const READ_USERS = "READ_USERS";
 export const READ_SERVICES = "READ_SERVICES"; 
 export const READ_CABINS = "READ_CABINS"; 
 export const EDIT_RESERVATION = "CREATE_RESERVATION";
-
+export const LOG_USER= "LOG_USER"
 
 export function getCabins() {
   return async function (dispatch) {
@@ -188,6 +188,17 @@ export function editReservation(payload) {
     return response;
   };
 }
-
-
-
+export function Loguser(payload) {
+  console.log(payload)
+  return async function (dispatch) {
+    try {
+      let json = await axios.post("http://localhost:3001/login", payload);
+      return dispatch({
+        type: LOG_USER,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}

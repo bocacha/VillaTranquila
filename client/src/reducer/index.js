@@ -16,6 +16,7 @@ import {
   READ_USERS,
   READ_SERVICES,
   READ_CABINS,
+  LOG_USER
 } from "../actions";
 
 const initialState = {
@@ -27,6 +28,7 @@ const initialState = {
   usuarios: [],
   servicios: [],
   cabañas: [],
+  user:{}
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -56,6 +58,11 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         cabins: cabinsFilteredPrice,
       };
+      case LOG_USER:
+        return {
+          ...state,
+          user: action.payload,
+        };
     case SEND_EMAIL:
       return {
         ...state,
@@ -118,7 +125,6 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
-
     default:
       return state;
   }

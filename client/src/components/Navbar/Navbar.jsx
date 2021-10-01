@@ -5,6 +5,7 @@ import { GoSignIn, GoHome } from 'react-icons/go';
 import { ImCalendar } from 'react-icons/im';
 import { RiAdminFill } from 'react-icons/ri';
 import styles from "./Navbar.module.css";
+import axios from "axios"
 
 export default function Navbar() {
 
@@ -30,7 +31,9 @@ export default function Navbar() {
                 </div>
                 <div className={styles.logins}>
                     <li >
-                        <button className={styles.signlog} ><strong>Iniciar sesión <GoSignIn /></strong></button>
+                        <Link to="/login">
+                        <button className={styles.signlog}><strong>Sign in</strong></button>
+                        </Link>
                     </li>
                     <li>
                         <button className={styles.signlog} ><strong>Registrarse <RiLoginBoxLine /></strong></button>

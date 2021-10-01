@@ -1,10 +1,11 @@
-import "./App.css";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Home from "./components/Home/Home";
-import Nosotros from "./components/Nosotros/Nosotros";
-import Contacto from "./components/Contacto/Contacto";
-import Reserva from "./components/Reserva/Reserva";
 
+import './App.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Home from './components/Home/Home';
+import Nosotros from './components/Nosotros/Nosotros';
+import Contacto from './components/Contacto/Contacto';
+import Reserva from './components/Reserva/Reserva';
+import Login from './components/Login/Login';
 import Admin from "./components/Admin/Admin";
 import Cabañas from "./components/Admin/Cabañas/Cabañas";
 import Reservaciones from "./components/Admin/Reservaciones/Reservaciones";
@@ -29,6 +30,7 @@ function App() {
           <Route exact path="/admin/pagos" component={Pagos} />
           <Route exact path="/admin/fotos" component={Fotos} />
           <Route exact path="/admin/usuarios" component={Usuarios} />
+          <Route path='/login' component={Login} />
         </Switch>
       </div>
     </BrowserRouter>
