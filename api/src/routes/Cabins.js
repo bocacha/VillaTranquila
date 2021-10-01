@@ -41,6 +41,15 @@ if(!decodedToken.Admin){
         Available, 
         Price, 
         Description,
+        Coffe,
+        Microondas,
+        Calefaccion,
+        Barbecue,
+        Wifi,
+        Cleaning,
+        Refrigerator,
+        Stove,
+        Parking
     })
     .then(doneTemp=>{
         return res.status(200).json(doneTemp)

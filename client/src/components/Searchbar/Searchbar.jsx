@@ -13,9 +13,9 @@ function handleOnChange(){
 
 export default function Searchbar() {
     return (
-        <div>
-            <input className={styles.input} onChange={(e) => handleOnChange(e)} type="text" placeholder="What are you looking for?" />
-            <button className={styles.button} onClick={(e)=>handleOnClick(e)}>Search</button>
+        <div className={styles.container}>
+            <input className={styles.input} onChange={(e) => handleOnChange(e)} type="text" placeholder="¿Que quieres buscar?" />
+            <button className={styles.button} onClick={(e)=>handleOnClick(e)}>Buscar</button>
         </div>
     )
 }
