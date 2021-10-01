@@ -47,27 +47,26 @@ router.post("/Singup" , async (req, res)=>{
         Email,
     })
     .then(doneTemp=>{
-        console.log(doneTemp)
         return res.status(200).json(doneTemp)
     })
     .catch(error=>{ res.status(504).json(error)})
 })
 router.put("/EditUser", (req,res) =>{
-    const authorizations = req.get("Authorization") 
-         let token = ""
-    if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
-       token = authorizations.substring(7)
-       console.log(token)
-    }
-    const decodedToken= jwt.verify(token, config.JWT_SECRET)
-    if(!token || !decodedToken.id){
-        return res.status(401).json({
-            error:"token missing or invalid"
-        })
-    }
-    if(!decodedToken.Admin){
-        return res.status(400).json({error:"Ops.. No tenes permisos"})
-    }
+    // const authorizations = req.get("Authorization") 
+    //      let token = ""
+    // if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
+    //    token = authorizations.substring(7)
+    //    console.log(token)
+    // }
+    // const decodedToken= jwt.verify(token, config.JWT_SECRET)
+    // if(!token || !decodedToken.id){
+    //     return res.status(401).json({
+    //         error:"token missing or invalid"
+    //     })
+    // }
+    // if(!decodedToken.Admin){
+    //     return res.status(400).json({error:"Ops.. No tenes permisos"})
+    // }
     const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email, Admin,Premium} = req.body;
     const objecttoupdate={
         UserName: UserName,

@@ -7,6 +7,7 @@ import UsuariosDetail from "./UsuariosDetail";
 export default function Usuarios() {
   const dispatch = useDispatch();
   const allUsers = useSelector((state) => state.usuarios);
+  const logeduser = useSelector ((state) => state.user)
   const [input, setInput] = useState({
     UserName: "",
     UserPassword: "",
@@ -29,6 +30,7 @@ export default function Usuarios() {
   }
 
   function handleSubmit(e) {
+    const {token} = logeduser
     e.preventDefault();
     dispatch(createUsers(input));
     alert("Usuario creado con éxito");
@@ -41,7 +43,7 @@ export default function Usuarios() {
       Phone: "",
       Email: "",
     });
-    window.location.reload();
+    dispatch(readUsers({token}))
   }
 
   return (

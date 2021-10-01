@@ -7,6 +7,8 @@ import CabañasDetail  from "../Cabañas/CabañasDetail";
 const Cabañas = () => {
   const dispatch = useDispatch();
   const allCabains = useSelector((state) => state.cabañas);
+  const logeduser = useSelector ((state) => state.user);
+  
   const [cabain, setCabain] = useState({
     Number: "",
     Capacity: "",
@@ -42,10 +44,10 @@ const Cabañas = () => {
   };
 
   const handleSubmit = (e) => {
+    const {token} = logeduser
     e.preventDefault();
     alert("su cabaña fue creada con exito");
-    dispatch(createCabains(cabain));
-    window.location.reload();
+    dispatch(createCabains(cabain,{token}));
   };
 
   return (
