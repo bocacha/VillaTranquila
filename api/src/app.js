@@ -21,9 +21,9 @@ const config = {
   authRequired: false,
   auth0Logout: true,
   baseURL:"https://villatranquila.herokuapp.com/" ,
-  clientID: "X0L9KdnZ9YanIX48yvB1cP0itcWp4zU2",
+  clientID: "6xQjpivlJTOTqemgaPcllFj7J3DcKoCa",
   issuerBaseURL:"https://dev-2py8q024.us.auth0.com/" ,
-  secret:"5a64dw6f5h4f64u6ft565eqa6wq65w4x4vb78x78def65e4qwd8adshs"
+  secret:"Ec7hPBdyXtTAt4N8X61H4tri-njWh77woe2amvzahBbtkCe9WF8Mo3pfhLlDc-5r"
 };
 
 // auth router attaches /login, /logout, and /callback routes to the baseURL
@@ -60,6 +60,8 @@ server.get('/api/private',requiresAuth(), checkJwt, function(req, res) {
     message: 'Hello from a private endpoint! You need to be authenticated to see this.'
   });
 });
+
+server.
 
 const checkScopes = jwtAuthz([ 'admin:read' ]);
 
