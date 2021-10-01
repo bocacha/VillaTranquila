@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./Reservaciones.module.css";
-import { useDispatch } from "react-redux";
-import { createReservation, editReservation } from "../../../actions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  createReservation,
+  editReservation,
+  readReservation,
+} from "../../../actions";
+import ReservacionesDetail from "./ReservacionesDetail";
 
 export default function Reservaciones() {
   const dispatch = useDispatch();
+  const allReservations = useSelector((state) => state.reservaciones);
   const [input, setInput] = useState({
     Checkin: "",
     Checkout: "",
@@ -13,6 +19,10 @@ export default function Reservaciones() {
     Cabinid: "",
     ExtraServices: "",
   });
+
+  useEffect(() => {
+    dispatch(readReservation());
+  }, [dispatch]);
 
   function handleChange(e) {
     setInput({
@@ -23,21 +33,22 @@ export default function Reservaciones() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(createReservation, editReservation(input));
+    dispatch(createReservation(input));
     alert("Reserva creada con éxito");
     setInput({
-        Checkin: "",
-        Checkout: "",
-        UserId: "",
-        Paymentsid: "",
-        Cabinid: "",
-        ExtraServices: "",
+      Checkin: "",
+      Checkout: "",
+      UserId: "",
+      Paymentsid: "",
+      Cabinid: "",
+      ExtraServices: "",
     });
+    window.location.reload();
   }
 
   return (
     <div className={styles.container}>
-        {/* CREAR */}
+      {/* CREAR */}
       <div>
         Crear una nueva reservación
         <form onSubmit={(e) => handleSubmit(e)}>
@@ -96,7 +107,7 @@ export default function Reservaciones() {
           </div>
         </form>
       </div>
-      {/* EDITAR */}
+      {/* EDITAR
       <div>
         Editar reserva
         <form onSubmit={(e) => handleSubmit(e)}>
@@ -154,9 +165,26 @@ export default function Reservaciones() {
             </button>
           </div>
         </form>
+      </div> */}
+      {/* VER */}
+      <div>
+        {allReservations?.map((el) => {
+          return (
+            <div className={styles.detalles} key={el.ID}>
+              <ReservacionesDetail
+                Checkin={el.Checkin}
+                Checkout={el.Checkout}
+                UserId={el.UserId}
+                Paymentsid={el.Paymentsid}
+                Cabinid={el.Cabinid}
+                ExtraServices={el.ExtraServices}
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
 }
 
-
+// const {Checkin, Checkout, UserId, Paymentsid, Cabinid, ExtraServices} = req.body;
