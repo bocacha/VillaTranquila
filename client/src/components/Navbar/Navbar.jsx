@@ -36,7 +36,9 @@ export default function Navbar() {
                         </Link>
                     </li>
                     <li>
+                        <Link to="/Singup">
                         <button className={styles.signlog} ><strong>Registrarse <RiLoginBoxLine /></strong></button>
+                        </Link>                   
                     </li>
                 </div>
             </ul>

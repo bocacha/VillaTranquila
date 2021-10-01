@@ -13,6 +13,7 @@ import Servicios from "./components/Admin/Servicios/Servicios";
 import Pagos from "./components/Admin/Pagos/Pagos";
 import Fotos from "./components/Admin/Fotos/Fotos";
 import Usuarios from "./components/Admin/Usuarios/Usuarios";
+import Registro from "./components/Registrarse/Registro";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route exact path="/admin/fotos" component={Fotos} />
           <Route exact path="/admin/usuarios" component={Usuarios} />
           <Route path='/login' component={Login} />
+          <Route path='/SingUp' component={Registro} />
         </Switch>
       </div>
     </BrowserRouter>
