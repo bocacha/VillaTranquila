@@ -61,7 +61,7 @@ server.get('/api/private',requiresAuth(), checkJwt, function(req, res) {
   });
 });
 
-server.
+
 
 const checkScopes = jwtAuthz([ 'admin:read' ]);
 
