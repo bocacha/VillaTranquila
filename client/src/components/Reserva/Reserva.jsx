@@ -61,8 +61,8 @@ export default function Reserva() {
         parking: '',
     });
     function handleCheck(e) {
-        let evt = e.target.name;
-        e.target.value = filters[evt] === 'on' ? 'off' : 'on';
+        let evt = filters[e.target.name];
+        e.target.value = evt === 'true' ? false : true;
     }
     function handleChange(e) {
         setFilters({
