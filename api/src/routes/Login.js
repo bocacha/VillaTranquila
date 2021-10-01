@@ -9,7 +9,7 @@ const config = require("../config")
 router.post("/", async (req, res)=>{
     const {UserName, UserPassword} = req.body;
 
-    const user = await User.findOne({UserName});
+    const user = await User.findOne({ where: { UserName: UserName } });
     const passwordCorrect = user === null
     ? false
     : await bcrypt.compare(UserPassword, user.UserPasswordHashed)

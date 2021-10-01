@@ -22,6 +22,10 @@ try {    const authorizations = req.get("Authorization")
             error:"token missing or invalid"
         })
     }
+    if(!decodedToken.Admin){
+        return res.status(400).json({error:"no sos admin papa"})
+    }
+    console.log(decodedToken.Admin)
     const dbUser = await User.findAll()
     res.send(dbUser)
 }catch(error){
@@ -41,7 +45,7 @@ router.post("/Singup" , async (req, res)=>{
         LastName, 
         Address, 
         Phone, 
-        Email
+        Email,
     })
     .then(doneTemp=>{
         console.log(doneTemp)
