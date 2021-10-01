@@ -4,6 +4,7 @@ import Home from './components/Home/Home';
 import Nosotros from './components/Nosotros/Nosotros';
 import Contacto from './components/Contacto/Contacto';
 import Reserva from './components/Reserva/Reserva';
+import Login from './components/Login/Login';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
           <Route path='/nosotros' component={Nosotros} />
           <Route path='/contacto' component={Contacto} />
           <Route path='/reserva' component={Reserva} />
+          <Route path='/login' component={Login} />
         </Switch>
       </div>
     </BrowserRouter>

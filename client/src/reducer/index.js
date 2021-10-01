@@ -1,8 +1,9 @@
-import { GET_CABINS, FILTER_BY_CAPACITY, FILTER_BY_PRICE, SEND_EMAIL } from "../actions";
+import { GET_CABINS, FILTER_BY_CAPACITY, FILTER_BY_PRICE, SEND_EMAIL, LOG_USER } from "../actions";
 
 const initialState = {
   cabins: [],
   allCabins: [],
+  user:{}
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -32,10 +33,16 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         cabins: cabinsFilteredPrice,
       };
+      case LOG_USER:
+        return {
+          ...state,
+          user: action.payload,
+        };
     case SEND_EMAIL:
       return {
         ...state,
       };
+      
     default:
       return state;
   }
