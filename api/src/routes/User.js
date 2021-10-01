@@ -1,4 +1,7 @@
-const { Router } = require('express');
+const { Router, request } = require('express');
+const config= require('../config')
+const bcrypt = require('bcrypt')
+const jwt= require('jsonwebtoken')
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const { User} = require('../db');
@@ -7,19 +10,33 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 router.get("/", async (req, res)=>{
-    const dbUser = await User.findAll()
-    try{
-        res.send(dbUser)
-    }catch(error){
-        console.log(error)
+try {    const authorizations = req.get("Authorization") 
+         let token = ""
+    if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
+       token = authorizations.substring(7)
+       console.log(token)
     }
+    const decodedToken= jwt.verify(token, config.JWT_SECRET)
+    if(!token || !decodedToken.id){
+        return res.status(401).json({
+            error:"token missing or invalid"
+        })
+    }
+    const dbUser = await User.findAll()
+    res.send(dbUser)
+}catch(error){
+    res.send({error : error})
+}
+
+    const dbUser = await User.findAll() 
 });
 
-router.post("/NewUser" , (req, res)=>{
+router.post("/Singup" , async (req, res)=>{
     const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email} = req.body;
+    const UserPasswordHashed = await bcrypt.hash(UserPassword,10)
     User.create({
         UserName, 
-        UserPassword, 
+        UserPasswordHashed,
         FirstName, 
         LastName, 
         Address, 
