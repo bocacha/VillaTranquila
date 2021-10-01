@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 export default function Pagos() {
   const dispatch = useDispatch();
   const allPayments = useSelector((state) => state.pagos);
-
+  const logeduser = useSelector ((state) => state.user);
   const [input, setInput] = useState({
     Date: "",
     idClient: "",
@@ -42,6 +42,7 @@ export default function Pagos() {
   }
 
   function handleSubmit(e) {
+    const {token} = logeduser
     e.preventDefault();
     dispatch(createPayment(input));
     alert("Pago creado con éxito");
@@ -51,7 +52,7 @@ export default function Pagos() {
       TotalAmount: "",
       PaydAmount: "",
     });
-    window.location.reload();
+    dispatch(readPayment({token}))
   }
   function handleSubmitEdit(e) {
     e.preventDefault();

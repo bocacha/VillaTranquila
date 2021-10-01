@@ -12,7 +12,8 @@ import { Link } from "react-router-dom";
 export default function Reservaciones() {
   const dispatch = useDispatch();
   const allReservations = useSelector((state) => state.reservaciones);
-  console.log("ALL",allReservations);
+  const logeduser = useSelector ((state) => state.user);
+  const {token}  = logeduser
   const [input, setInput] = useState({
     id:"",
     Checkin: "",
@@ -33,8 +34,8 @@ export default function Reservaciones() {
   });
 
   useEffect(() => {
-    dispatch(readReservation());
-  }, [dispatch]);
+    dispatch(readReservation({token}));
+  }, [dispatch,token]);
 
   function handleChange(e) {
     setInput({
@@ -78,7 +79,6 @@ export default function Reservaciones() {
       Cabinid: "",
       ExtraServices: "",
     });
-    window.location.reload();
   }
 
   return (

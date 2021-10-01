@@ -20,6 +20,7 @@ import {
   EDIT_SERVICES,
   EDIT_PAYMENT,
   EDIT_PICTURES,
+  LOG_USER
 } from "../actions";
 const initialState = {
   cabins: [],
@@ -30,6 +31,7 @@ const initialState = {
   usuarios: [],
   servicios: [],
   cabañas: [],
+  user:{}
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -59,6 +61,11 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         cabins: cabinsFilteredPrice,
       };
+      case LOG_USER:
+        return {
+          ...state,
+          user: action.payload,
+        };
     case SEND_EMAIL:
       return {
         ...state,

@@ -21,6 +21,7 @@ export const EDIT_USER = "EDIT_USER";
 export const EDIT_SERVICES = "EDIT_SERVICES";
 export const EDIT_PAYMENT = "EDIT_PAYMENT";
 export const EDIT_PICTURES = "EDIT_PICTURES";
+export const LOG_USER= "LOG_USER"
 
 export function getCabins() {
   return async function (dispatch) {
@@ -63,18 +64,22 @@ export function createReservation(payload) {
   };
 }
 
-export function createServices(payload) {
+export function createServices(payload ,{token}) {
+  const config={
+    headers:{
+    Authorization: `Bearer ${token}`,
+  }
+  }
   return async function (dispatch) {
-    const response = await axios.post("http://localhost:3001/services/NewService", payload);
+    const response = await axios.post("http://localhost:3001/services/NewService", payload, config);
     return response;
   };
 }
 
 export function createUsers(payload) {
-  console.log('TESTT',payload)
 
   return async function (dispatch) {
-    const response = await axios.post("http://localhost:3001/users/NewUser", payload);
+    const response = await axios.post("http://localhost:3001/users/Singup", payload);
     return response;
   };
 }
@@ -86,23 +91,39 @@ export function createPayment(payload) {
   };
 }
 
-export function createimage(payload) {
+export function createimage(payload , {token}) {
+  const config={
+    headers:{
+    Authorization: `Bearer ${token}`,
+  }
+  }
   return async function (dispatch) {
-    const response = await axios.post("http://localhost:3001/pictures/NewPicture", payload);
+    const response = await axios.post("http://localhost:3001/pictures/NewPicture", payload,config);
     return response;
   };
 }
 
-export function createCabains(payload) {
+export function createCabains(payload, {token}) {
+  const config={
+    headers:{
+    Authorization: `Bearer ${token}`,
+  }
+  }
   return async (dispatch) => {
-    const json = await axios.post("/cabins/NewCabin", payload);
+    const json = await axios.post("/cabins/NewCabin", payload, config);
     return json;
   };
 }
-export function readPayment(id) {
+
+export function readPayment({token}) {
+  const config={
+    headers:{
+    Authorization: `Bearer ${token}`,
+  }
+  }
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/payments/");
+      var json = await axios.get("http://localhost:3001/payments/", config);
       return dispatch({
         type: READ_PAYMENT,
         payload: json.data,
@@ -113,10 +134,15 @@ export function readPayment(id) {
   };
 }
 
-export function readReservation(id) {
+export function readReservation({token}) {
+  const config={
+    headers:{
+    Authorization: `Bearer ${token}`,
+  }
+  }
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/reservations/");
+      var json = await axios.get("http://localhost:3001/reservations/", config);
       return dispatch({
         type: READ_RESERVATIONS,
         payload: json.data,
@@ -141,10 +167,15 @@ export function readPictures(id) {
   };
 }
 
-export function readUsers(id) {
+export function readUsers({token}) {
+  const config={
+    headers:{
+    Authorization: `Bearer ${token}`,
+  }
+  }
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/users/");
+      var json = await axios.get("http://localhost:3001/users/", config);
       return dispatch({
         type: READ_USERS,
         payload: json.data,
@@ -197,20 +228,6 @@ export function editUsers(payload) {
   };
 }
 
-export function editReservations(payload) {
-  return async function (dispatch) {
-    try {
-      var json = await axios.put("http://localhost:3001/reservations/EditReservation", payload);
-      return dispatch({
-        type: EDIT_RESERVATIONS,
-        payload: json.data,
-      });
-    } catch (err) {
-      console.error(err);
-    }
-  };
-}
-
 export function editServices(payload) {
   return async function (dispatch) {
     try {
@@ -253,4 +270,27 @@ export function editPictures(payload) {
   };
 }
 
-
+export function editReservation(payload, {token}) {
+  const config={
+    headers:{
+    Authorization: `Bearer ${token}`,
+  }
+  }
+  return async function (dispatch) {
+    const response = await axios.post("http://localhost:3001/reservations/NewReservation", payload, config);
+    return response;
+  };
+}
+export function Loguser(payload) {
+  return async function (dispatch) {
+    try {
+      let json = await axios.post("http://localhost:3001/login", payload);
+      return dispatch({
+        type: LOG_USER,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}

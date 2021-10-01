@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 export default function Usuarios() {
   const dispatch = useDispatch();
   const allUsers = useSelector((state) => state.usuarios);
+  const logeduser = useSelector ((state) => state.user)
   const [input, setInput] = useState({
     id:"",
     UserName: "",
@@ -53,6 +54,7 @@ export default function Usuarios() {
   }
 
   function handleSubmit(e) {
+    const {token} = logeduser
     e.preventDefault();
     dispatch(editUsers(input));
     alert("Usuario editado con éxito");
@@ -69,7 +71,7 @@ export default function Usuarios() {
       Premium: "",
       Blocked: "",
     });
-    window.location.reload();
+    dispatch(readUsers({token}))
   }
 
   return (
