@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createCabains, readCabains } from "../../../actions";
+import { createCabains, readCabains,editCabains } from "../../../actions";
 import styles from "./Cabañas.module.css";
 import CabañasDetail  from "../Cabañas/CabañasDetail";
 import { Link } from "react-router-dom";
@@ -9,7 +9,26 @@ import { Link } from "react-router-dom";
 const Cabañas = () => {
   const dispatch = useDispatch();
   const allCabains = useSelector((state) => state.cabañas);
+  const logeduser = useSelector ((state) => state.user);
+  
   const [cabain, setCabain] = useState({
+    Number: "",
+    Capacity: "",
+    Available: "",
+    Price: "",
+    Description: "",
+    Coffe: false,
+    Microondas: false,
+    Calefaccion: false,
+    Barbecue: false,
+    Wifi: false,
+    Cleaning: false,
+    Refrigerator: false,
+    Stove: false,
+    Parking: false,
+  });
+  const [edit, setEdit] = useState({
+    id: "",
     Number: "",
     Capacity: "",
     Available: "",
@@ -36,18 +55,37 @@ const Cabañas = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  function handleChangeEdit(e) {
+    setEdit({
+      ...edit,
+      [e.target.name]: e.target.value,
+    });
+  }
+
   const handleCheckBox = (e) => {
     setCabain({
       ...cabain,
       [e.target.name]: true,
     });
   };
-
+  const handleeditCheckBox = (e) => {
+    setEdit({
+      ...cabain,
+      [e.target.name]: true,
+    });
+  };
   const handleSubmit = (e) => {
+    const {token} = logeduser
     e.preventDefault();
     alert("su cabaña fue creada con exito");
-    dispatch(createCabains(cabain));
-    window.location.reload();
+    dispatch(createCabains(cabain,{token}));
+  };
+  const handleeditSubmit = (e) => {
+    const {token} = logeduser
+    e.preventDefault();
+    alert("su cabaña fue creada con exito");
+    dispatch(editCabains(edit,{token}));
   };
 
   return (
@@ -55,6 +93,7 @@ const Cabañas = () => {
       <div className={styles.btnVolver}>
         <Link to="/admin"><button>Volver</button></Link>
       </div>
+      Crear Cabaña
       <form onSubmit={handleSubmit}>
         <div>
           <label>Numero de Personas</label>
@@ -170,12 +209,141 @@ const Cabañas = () => {
           <input type="submit" value="Crear" />
         </div>
       </form>
+       {/* EDITAR */}
+       Editar Cabaña
+       <form onSubmit={handleeditSubmit}>
+       <div>
+          <label>id</label>
+          <input
+            type="text"
+            name="id"
+            value={edit.id}
+            onChange={handleChangeEdit}
+          />
+        </div>
+        <div>
+          <label>Numero de Personas</label>
+          <input
+            type="text"
+            name="Number"
+            value={edit.Number}
+            onChange={handleChangeEdit}
+          />
+        </div>
+        <div>
+          <label>Capacidad</label>
+          <input
+            type="number"
+            name="Capacity"
+            value={edit.Capacity}
+            onChange={handleChangeEdit}
+          />
+        </div>
+        <div>
+          <label>Disponibilidad</label>
+          <input
+            type="text"
+            name="Available"
+            value={edit.Available}
+            onChange={handleChangeEdit}
+          />
+        </div>
+        <div>
+          <label>Precio</label>
+          <input
+            type="number"
+            name="Price"
+            value={edit.Price}
+            onChange={handleChangeEdit}
+          />
+        </div>
+        <div>
+          <label>Descripcion</label>
+          <input
+            type="text"
+            name="Description"
+            value={edit.Description}
+            onChange={handleChangeEdit}
+          />
+        </div>
+        <div>
+          <label>Cafe</label>
+          <input
+            type="checkbox"
+            name="Coffe"
+            value={edit.Coffe}
+            onChange={handleeditCheckBox}
+          />
+          <label>Microondas</label>
+          <input
+            type="checkbox"
+            name="Microondas"
+            value={edit.Microondas}
+            onChange={handleeditCheckBox}
+          />
+          <label>Calefaccion</label>
+          <input
+            type="checkbox"
+            name="Calefaccion"
+            value={edit.Calefaccion}
+            onChange={handleeditCheckBox}
+          />
+          <label>Parrilla</label>
+          <input
+            type="checkbox"
+            name="Barbecue"
+            value={edit.Barbecue}
+            onChange={handleeditCheckBox}
+          />
+          <label>Wifi</label>
+          <input
+            type="checkbox"
+            name="Wifi"
+            value={edit.Wifi}
+            onChange={handleeditCheckBox}
+          />
+          <label>Limpieza</label>
+          <input
+            type="checkbox"
+            name="Cleaning"
+            value={edit.Cleaning}
+            onChange={handleeditCheckBox}
+          />
+          <label>Heladera</label>
+          <input
+            type="checkbox"
+            name="Refrigerator"
+            value={edit.Refrigerator}
+            onChange={handleeditCheckBox}
+          />
+          <label>Cocina</label>
+          <input
+            type="checkbox"
+            name="Stove"
+            value={edit.Stove}
+            onChange={handleeditCheckBox}
+          />
+          <label>Estacionamiento</label>
+          <input
+            type="checkbox"
+            name="Parking"
+            value={edit.Parking}
+            onChange={handleeditCheckBox}
+          />
+        </div>
+        <div>
+          <input type="submit" value="Edit" />
+        </div>
+      </form>
+
+
       {/* VER */}
       <div>
         {allCabains?.map((el) => {
           return (
             <div className={styles.detalles} key={el.ID}>
               <CabañasDetail
+                ID={el.ID}
                 Number={el.Number}
                 Capacity={el.Capacity}
                 Available={el.Available}

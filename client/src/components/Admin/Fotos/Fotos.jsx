@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 export default function Fotos() {
   const dispatch = useDispatch();
   const allPictures = useSelector((state) => state.fotos);
+  const logeduser = useSelector ((state) => state.user);
   console.log(allPictures);
   const [input, setInput] = useState({
     Description: "",
@@ -37,8 +38,9 @@ export default function Fotos() {
   }
 
   function handleSubmit(e) {
+    const {token} = logeduser
     e.preventDefault();
-    dispatch(createimage(input));
+    dispatch(createimage(input, {token}));
     alert("Foto creada con éxito");
     setInput({
       Description: "",

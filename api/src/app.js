@@ -4,39 +4,12 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
 const cors = require('cors');
-
-
+require('dotenv').config()
 require('./db.js');
-
 const server = express();
 
+
 server.name = 'API';
-
-const { auth, requiresAuth} = require('express-openid-connect');
-
-const config = {
-  authRequired: false,
-  auth0Logout: true,
-  baseURL:"https://villatranquila.herokuapp.com/" ,
-  clientID: "X0L9KdnZ9YanIX48yvB1cP0itcWp4zU2",
-  issuerBaseURL:"https://dev-2py8q024.us.auth0.com/" ,
-  secret:"5a64dw6f5h4f64u6ft565eqa6wq65w4x4vb78x78def65e4qwd8adshs"
-};
-
-// auth router attaches /login, /logout, and /callback routes to the baseURL
-server.use(auth(config));
-
-// req.isAuthenticated is provided from the auth router
-server.get('/', (req, res) => {
-  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out')
-});
-
-server.get('/profile', requiresAuth(), (req, res) => {
-  res.send(JSON.stringify(req.oidc.user));
-});
-
-
-
 
 server.use(express.urlencoded({ extended: true, limit: '50mb' }));
 server.use(express.json({ limit: '50mb' }));

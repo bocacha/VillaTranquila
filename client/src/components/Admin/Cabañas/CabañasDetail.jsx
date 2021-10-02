@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./Cabañas.module.css";
 
-export default function FotosDetail({ 
+export default function CabinsDetail({ 
+    ID,
     Number,
     Capacity,
     Available,
@@ -20,6 +21,7 @@ export default function FotosDetail({
 }) {
   return (
     <div className={styles.container}>
+      <p>ID: {ID} </p>
       <p>Number: {Number}</p>
       <p>Capacity: {Capacity}</p>
       <p>Available: {Available}</p>

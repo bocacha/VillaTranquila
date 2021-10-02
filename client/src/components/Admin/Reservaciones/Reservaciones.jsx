@@ -3,7 +3,7 @@ import styles from "./Reservaciones.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createReservation,
-  editReservations,
+  editReservation,
   readReservation,
 } from "../../../actions";
 import ReservacionesDetail from "./ReservacionesDetail";
@@ -12,7 +12,8 @@ import { Link } from "react-router-dom";
 export default function Reservaciones() {
   const dispatch = useDispatch();
   const allReservations = useSelector((state) => state.reservaciones);
-  console.log("ALL",allReservations);
+  const logeduser = useSelector ((state) => state.user);
+  const {token}  = logeduser
   const [input, setInput] = useState({
     id:"",
     Checkin: "",
@@ -33,8 +34,8 @@ export default function Reservaciones() {
   });
 
   useEffect(() => {
-    dispatch(readReservation());
-  }, [dispatch]);
+    dispatch(readReservation({token}));
+  }, [dispatch,token]);
 
   function handleChange(e) {
     setInput({
@@ -63,11 +64,10 @@ export default function Reservaciones() {
       Cabinid: "",
       ExtraServices: "",
     });
-    window.location.reload();
   }
   function handleSubmitEdit(e) {
     e.preventDefault();
-    dispatch(editReservations(edit));
+    dispatch(editReservation(edit));
     alert("Reserva editada con éxito");
     setInput({
       id:"",
@@ -78,7 +78,6 @@ export default function Reservaciones() {
       Cabinid: "",
       ExtraServices: "",
     });
-    window.location.reload();
   }
 
   return (
