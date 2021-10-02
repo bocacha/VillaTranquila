@@ -228,10 +228,15 @@ export function editUsers(payload) {
   };
 }
 
-export function editServices(payload) {
+export function editServices(payload, {token}) {
+  const config={
+    headers:{
+    Authorization: `Bearer ${token}`,
+  }
+  }
   return async function (dispatch) {
     try {
-      var json = await axios.put("http://localhost:3001/services/EditService", payload);
+      var json = await axios.put("http://localhost:3001/services/EditService", payload,config);
       return dispatch({
         type: EDIT_SERVICES,
         payload: json.data,
@@ -242,10 +247,15 @@ export function editServices(payload) {
   };
 }
 
-export function editPayments(payload) {
+export function editPayments(payload, {token}) {
+  const config={
+    headers:{
+    Authorization: `Bearer ${token}`,
+  }
+  }
   return async function (dispatch) {
     try {
-      var json = await axios.put("http://localhost:3001/payments/EditPayment", payload);
+      var json = await axios.put("http://localhost:3001/payments/EditPayment", payload, config);
       return dispatch({
         type: EDIT_PAYMENT,
         payload: json.data,
@@ -256,10 +266,15 @@ export function editPayments(payload) {
   };
 }
 
-export function editPictures(payload) {
+export function editPictures(payload, {token}) {
+  const config={
+    headers:{
+    Authorization: `Bearer ${token}`,
+  }
+  }
   return async function (dispatch) {
     try {
-      var json = await axios.put("http://localhost:3001/pictures/EditPicture", payload);
+      var json = await axios.put("http://localhost:3001/pictures/EditPicture", payload, config);
       return dispatch({
         type: EDIT_PICTURES,
         payload: json.data,
@@ -277,7 +292,18 @@ export function editReservation(payload, {token}) {
   }
   }
   return async function (dispatch) {
-    const response = await axios.post("http://localhost:3001/reservations/NewReservation", payload, config);
+    const response = await axios.put("http://localhost:3001/reservations/NewReservation", payload, config);
+    return response;
+  };
+}
+export function editCabains(payload, {token}) {
+  const config={
+    headers:{
+    Authorization: `Bearer ${token}`,
+  }
+  }
+  return async function (dispatch) {
+    const response = await axios.put("http://localhost:3001/cabins/EditCabin", payload, config);
     return response;
   };
 }
