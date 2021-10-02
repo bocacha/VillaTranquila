@@ -37,23 +37,32 @@ try {    const authorizations = req.get("Authorization")
 router.post("/Singup" , async (req, res)=>{
     const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email} = req.body;
     const UserPasswordHashed = await bcrypt.hash(UserPassword,10)
-    User.create({
-        UserName, 
-        UserPasswordHashed,
-        FirstName, 
-        LastName, 
-        Address, 
-        Phone, 
-        Email,
-    })
-    .then(doneTemp=>{
-        return res.status(200).json(doneTemp)
-    })
-    .catch(error=>{
-        console.log(error)
-        res.status(504).json(error)})
+    const dbUser = await User.findOne({ where:{UserName: UserName}})
+    if(dbUser){
+        res.status(504).send({msg:" error nombre de usuario no disponible"})
+
+    }
+    if(!dbUser){
+        User.create({
+            UserName, 
+            UserPasswordHashed,
+            FirstName, 
+            LastName, 
+            Address, 
+            Phone, 
+            Email,
+        })
+        .then(doneTemp=>{
+            console.log(doneTemp)
+            return res.status(200).json(doneTemp)
+        })
+        .catch(error=>{
+            console.log(error)
+            res.status(504).json(console.log(error))})
+    }
+    
 })
-router.put("/EditUser", (req,res) =>{
+router.put("/EditUser", async (req,res) =>{
     const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email, Admin,Premium, Blocked} = req.body;
     // const authorizations = req.get("Authorization") 
     //      let token = ""
@@ -70,9 +79,10 @@ router.put("/EditUser", (req,res) =>{
     // if(!decodedToken.Admin){
     //     return res.status(400).json({error:"Ops.. No tenes permisos"})
     // }
+    const UserPasswordHashed = await bcrypt.hash(UserPassword,10)
     const objecttoupdate={
         UserName: UserName,
-        UserPassword: UserPassword,
+        UserPasswordHashed: UserPasswordHashed,
         FirstName: FirstName,
         LastName: LastName,
         Address: Address,
