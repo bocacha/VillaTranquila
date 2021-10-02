@@ -6,9 +6,11 @@ import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 import Slider from "../Slider/Slider";
 import Searchbar from "../Searchbar/Searchbar";
+import Gallery from "../Gallery";
 import styles from "./Home.module.css";
 
 export default function Home() {
+
   return (
     <div className={styles.container}>
       <div>
@@ -16,11 +18,13 @@ export default function Home() {
       </div>
       <div className={styles.nombre}>
         <div className={styles.nombre1}>
-          Villa Tranquila
-        </div>
+          <p className={styles.villa}>Villa Tranquila </p> 
+          <p className={styles.complejo}>- complejo de cabañas -</p>
+        </div> 
       </div>
       <div>
         <Searchbar/>
+        {/* <Gallery/> */}
       </div>
       <div>
         <BannerIntro />
