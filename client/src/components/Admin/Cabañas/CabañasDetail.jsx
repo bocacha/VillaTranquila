@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Cabañas.module.css";
+import styles from "./CabañasDetail.module.css";
 
 export default function CabinsDetail({ 
     ID,
@@ -21,21 +21,21 @@ export default function CabinsDetail({
 }) {
   return (
     <div className={styles.container}>
-      <p>ID: {ID} </p>
-      <p>Number: {Number}</p>
-      <p>Capacity: {Capacity}</p>
-      <p>Available: {Available}</p>
-      <p>Price: {Price}</p>
-      <p>Descripcion: {Description}</p>
-      <p>Coffe: {Coffe?<span>si</span>:<span>no</span>}</p>
-      <p>Microondas: {Microondas?<span>si</span>:<span>no</span>}</p>
-      <p>Calefaccion: {Calefaccion?<span>si</span>:<span>no</span>}</p>
-      <p>Barbecue: {Barbecue?<span>si</span>:<span>no</span>}</p>
-      <p>Wifi: {Wifi?<span>si</span>:<span>no</span>}</p>
-      <p>Cleaning: {Cleaning?<span>si</span>:<span>no</span>}</p>
-      <p>Refrigerator: {Refrigerator?<span>si</span>:<span>no</span>}</p>
-      <p>Stove: {Stove?<span>si</span>:<span>no</span>}</p>
-      <p>Parking: {Parking?<span>si</span>:<span>no</span>}</p>
+      <p><strong>Id:</strong>  {ID} </p>
+      <p><strong> Number:</strong> {Number}</p>
+      <p><strong>Capacity:</strong>  {Capacity}</p>
+      <p><strong>Available:</strong>  {Available}</p>
+      <p><strong>Price:</strong>  {Price}</p>
+      <p><strong>Descripcion:</strong>  {Description}</p>
+      <p><strong>Coffe:</strong>  {Coffe?<span>si</span>:<span>no</span>}</p>
+      <p><strong>Microondas:</strong>  {Microondas?<span>si</span>:<span>no</span>}</p>
+      <p><strong>Calefaccion:</strong>  {Calefaccion?<span>si</span>:<span>no</span>}</p>
+      <p><strong>Barbecue:</strong>  {Barbecue?<span>si</span>:<span>no</span>}</p>
+      <p><strong> Wifi:</strong> {Wifi?<span>si</span>:<span>no</span>}</p>
+      <p><strong>Cleaning: </strong> {Cleaning?<span>si</span>:<span>no</span>}</p>
+      <p><strong>Refrigerator:</strong>  {Refrigerator?<span>si</span>:<span>no</span>}</p>
+      <p><strong>Stove:</strong>  {Stove?<span>si</span>:<span>no</span>}</p>
+      <p><strong>Parking:</strong>  {Parking?<span>si</span>:<span>no</span>}</p>
     </div>
   );
 }

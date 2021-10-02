@@ -8,7 +8,8 @@ import { Link } from "react-router-dom";
 export default function Pagos() {
   const dispatch = useDispatch();
   const allPayments = useSelector((state) => state.pagos);
-  const logeduser = useSelector ((state) => state.user);
+  const logeduser = useSelector((state) => state.user);
+  const { token } = logeduser;
   const [input, setInput] = useState({
     Date: "",
     idClient: "",
@@ -25,8 +26,8 @@ export default function Pagos() {
   });
 
   useEffect(() => {
-    dispatch(readPayment());
-  }, [dispatch]);
+    dispatch(readPayment({ token }));
+  }, [dispatch, token]);
 
   function handleChange(e) {
     setInput({
@@ -42,7 +43,7 @@ export default function Pagos() {
   }
 
   function handleSubmit(e) {
-    const {token} = logeduser
+    const { token } = logeduser;
     e.preventDefault();
     dispatch(createPayment(input));
     alert("Pago creado con éxito");
@@ -52,7 +53,7 @@ export default function Pagos() {
       TotalAmount: "",
       PaydAmount: "",
     });
-    dispatch(readPayment({token}))
+    dispatch(readPayment({ token }));
   }
   function handleSubmitEdit(e) {
     e.preventDefault();
@@ -72,102 +73,104 @@ export default function Pagos() {
     <div className={styles.container}>
       <div className={styles.btnVolver}>
         <Link to="/admin">
-          <button>Volver</button>
+          <button className={styles.btn}>Volver</button>
         </Link>
       </div>
-      {/* CREAR */}
-      <div>
-        Crear un nuevo pago
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <input
-            type="text"
-            value={input.Date}
-            name="Date"
-            onChange={(e) => handleChange(e)}
-            placeholder="Date"
-            className={styles.Date}
-          />
-          <input
-            type="text"
-            value={input.idClient}
-            name="idClient"
-            onChange={(e) => handleChange(e)}
-            placeholder="idClient"
-            className={styles.idClient}
-          />
-          <input
-            type="text"
-            value={input.TotalAmount}
-            name="TotalAmount"
-            onChange={(e) => handleChange(e)}
-            placeholder="TotalAmount"
-            className={styles.TotalAmount}
-          />
-          <input
-            type="text"
-            value={input.PaydAmount}
-            name="PaydAmount"
-            onChange={(e) => handleChange(e)}
-            placeholder="PaydAmount"
-            className={styles.PaydAmount}
-          />
-          <div className={styles.btns}>
-            <button type="submit" className={styles.submit_btn}>
-              Crear
-            </button>
-          </div>
-        </form>
-      </div>
-      {/* EDITAR */}
-      <div>
-        Editar un nuevo pago
-        <form onSubmit={(e) => handleSubmitEdit(e)}>
-          <input
-            type="text"
-            value={edit.id}
-            name="id"
-            onChange={(e) => handleChangeEdit(e)}
-            placeholder="id"
-            className={styles.id}
-          />
-          <input
-            type="text"
-            value={edit.Date}
-            name="Date"
-            onChange={(e) => handleChangeEdit(e)}
-            placeholder="Date"
-            className={styles.Date}
-          />
-          <input
-            type="text"
-            value={edit.idClient}
-            name="idClient"
-            onChange={(e) => handleChangeEdit(e)}
-            placeholder="idClient"
-            className={styles.idClient}
-          />
-          <input
-            type="text"
-            value={edit.TotalAmount}
-            name="TotalAmount"
-            onChange={(e) => handleChangeEdit(e)}
-            placeholder="TotalAmount"
-            className={styles.TotalAmount}
-          />
-          <input
-            type="text"
-            value={edit.PaydAmount}
-            name="PaydAmount"
-            onChange={(e) => handleChangeEdit(e)}
-            placeholder="PaydAmount"
-            className={styles.PaydAmount}
-          />
-          <div className={styles.btns}>
-            <button type="submit" className={styles.submit_btn}>
-              Crear
-            </button>
-          </div>
-        </form>
+      <div className={styles.formsCont}>
+        {/* CREAR */}
+        <div className={styles.crearCont}>
+          <div className={styles.title}>Crear un nuevo pago</div>
+          <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
+            <input
+              type="text"
+              value={input.Date}
+              name="Date"
+              onChange={(e) => handleChange(e)}
+              placeholder="Fecha"
+              className={styles.formInputs}
+            />
+            <input
+              type="text"
+              value={input.idClient}
+              name="idClient"
+              onChange={(e) => handleChange(e)}
+              placeholder="Cliente id"
+              className={styles.formInputs}
+            />
+            <input
+              type="text"
+              value={input.TotalAmount}
+              name="TotalAmount"
+              onChange={(e) => handleChange(e)}
+              placeholder="Monto total"
+              className={styles.formInputs}
+            />
+            <input
+              type="text"
+              value={input.PaydAmount}
+              name="PaydAmount"
+              onChange={(e) => handleChange(e)}
+              placeholder="Monto a pagar"
+              className={styles.formInputs}
+            />
+            <div className={styles.btns}>
+              <button type="submit" className={styles.btn}>
+                Crear
+              </button>
+            </div>
+          </form>
+        </div>
+        {/* EDITAR */}
+        <div className={styles.editarCont}>
+          <div className={styles.title}> Editar un nuevo pago</div>
+          <form onSubmit={(e) => handleSubmitEdit(e)} className={styles.form}>
+            <input
+              type="text"
+              value={edit.id}
+              name="id"
+              onChange={(e) => handleChangeEdit(e)}
+              placeholder="Id"
+              className={styles.formInputs}
+            />
+            <input
+              type="text"
+              value={edit.Date}
+              name="Date"
+              onChange={(e) => handleChangeEdit(e)}
+              placeholder="Fecha"
+              className={styles.formInputs}
+            />
+            <input
+              type="text"
+              value={edit.idClient}
+              name="idClient"
+              onChange={(e) => handleChangeEdit(e)}
+              placeholder="Cliente id"
+              className={styles.formInputs}
+            />
+            <input
+              type="text"
+              value={edit.TotalAmount}
+              name="TotalAmount"
+              onChange={(e) => handleChangeEdit(e)}
+              placeholder="Monto total"
+              className={styles.formInputs}
+            />
+            <input
+              type="text"
+              value={edit.PaydAmount}
+              name="PaydAmount"
+              onChange={(e) => handleChangeEdit(e)}
+              placeholder="Monto a pagar"
+              className={styles.formInputs}
+            />
+            <div className={styles.btns}>
+              <button type="submit" className={styles.btn}>
+                Editar
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
 
       {/* VER */}

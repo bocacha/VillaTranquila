@@ -8,14 +8,14 @@ import { Link } from "react-router-dom";
 export default function Fotos() {
   const dispatch = useDispatch();
   const allPictures = useSelector((state) => state.fotos);
-  const logeduser = useSelector ((state) => state.user);
+  const logeduser = useSelector((state) => state.user);
   console.log(allPictures);
   const [input, setInput] = useState({
     Description: "",
     Url: "",
   });
   const [edit, setEdit] = useState({
-    id:"",
+    id: "",
     Description: "",
     Url: "",
   });
@@ -38,9 +38,9 @@ export default function Fotos() {
   }
 
   function handleSubmit(e) {
-    const {token} = logeduser
+    const { token } = logeduser;
     e.preventDefault();
-    dispatch(createimage(input, {token}));
+    dispatch(createimage(input, { token }));
     alert("Foto creada con éxito");
     setInput({
       Description: "",
@@ -53,7 +53,7 @@ export default function Fotos() {
     dispatch(editPictures(edit));
     alert("Foto editada con éxito");
     setEdit({
-      id:"",
+      id: "",
       Description: "",
       Url: "",
     });
@@ -64,76 +64,82 @@ export default function Fotos() {
     <div className={styles.container}>
       <div className={styles.btnVolver}>
         <Link to="/admin">
-          <button>Volver</button>
+          <button className={styles.btn}>Volver</button>
         </Link>
       </div>
-      {/* CREAR */}
-      <div>
-        Crear una nueva foto
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <input
-            type="text"
-            value={input.Description}
-            name="Description"
-            onChange={(e) => handleChange(e)}
-            placeholder="Description"
-            className={styles.Description}
-          />
-          <input
-            type="text"
-            value={input.Url}
-            name="Url"
-            onChange={(e) => handleChange(e)}
-            placeholder="Url"
-            className={styles.Url}
-          />
-          <div className={styles.btns}>
-            <button type="submit" className={styles.submit_btn}>
-              Crear
-            </button>
-          </div>
-        </form>
-      </div>
-      {/* EDITAR */}
-      <div>
-        Editar una nueva foto
-        <form onSubmit={(e) => handleSubmitEdit(e)}>
-          <input
-            type="text"
-            value={edit.id}
-            name="id"
-            onChange={(e) => handleChangeEdit(e)}
-            placeholder="id"
-            className={styles.id}
-          />
-          <input
-            type="text"
-            value={edit.Description}
-            name="Description"
-            onChange={(e) => handleChangeEdit(e)}
-            placeholder="Description"
-            className={styles.Description}
-          />
-          <input
-            type="text"
-            value={edit.Url}
-            name="Url"
-            onChange={(e) => handleChangeEdit(e)}
-            placeholder="Url"
-            className={styles.Url}
-          />
-          <div className={styles.btns}>
-            <button type="submit" className={styles.submit_btn}>
-              Editar
-            </button>
-          </div>
-        </form>
+      <div className={styles.formsCont}>
+        {/* CREAR */}
+        <div className={styles.crearCont}>
+          <div className={styles.title}> Crear una nueva foto</div>
+          <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
+            <input
+              type="text"
+              value={input.Description}
+              name="Description"
+              onChange={(e) => handleChange(e)}
+              placeholder="Descripción"
+              className={styles.formInputs}
+            />
+            <input
+              type="text"
+              value={input.Url}
+              name="Url"
+              onChange={(e) => handleChange(e)}
+              placeholder="Url"
+              className={styles.formInputs}
+            />
+            <div className={styles.btns}>
+              <button type="submit" className={styles.btn}>
+                Crear
+              </button>
+            </div>
+          </form>
+        </div>
+        {/* EDITAR */}
+        <div className={styles.editarCont}>
+          <div className={styles.title}> Editar una nueva foto</div>
+          <form onSubmit={(e) => handleSubmitEdit(e)} className={styles.form}>
+            <input
+              type="text"
+              value={edit.id}
+              name="id"
+              onChange={(e) => handleChangeEdit(e)}
+              placeholder="Id"
+              className={styles.formInputs}
+            />
+            <input
+              type="text"
+              value={edit.Description}
+              name="Description"
+              onChange={(e) => handleChangeEdit(e)}
+              placeholder="Descripción"
+              className={styles.formInputs}
+            />
+            <input
+              type="text"
+              value={edit.Url}
+              name="Url"
+              onChange={(e) => handleChangeEdit(e)}
+              placeholder="Url"
+              className={styles.formInputs}
+            />
+            <div className={styles.btns}>
+              <button type="submit" className={styles.btn}>
+                Editar
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
       <div>
         {allPictures?.map((el) => {
           return (
             <div className={styles.detalles} key={el.ID}>
-              <FotosDetail Description={el.Description} Url={el.Url} ID={el.ID} />
+              <FotosDetail
+                Description={el.Description}
+                Url={el.Url}
+                ID={el.ID}
+              />
             </div>
           );
         })}

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Usuarios.module.css";
+import styles from "./UsuariosDetail.module.css";
 
 export default function UsuariosDetail({
     ID,
@@ -13,14 +13,14 @@ export default function UsuariosDetail({
 }) {
   return (
     <div className={styles.container}>
-      <p>Id: {ID}</p>
-      <p>UserName: {UserName}</p>
-      <p>UserPassword: {UserPassword}</p>
-      <p>FirstName: {FirstName}</p>
-      <p>LastName: {LastName}</p>
-      <p>Address: {Address}</p>
-      <p>Phone: {Phone}</p>
-      <p>Email: {Email}</p>
+      <p><strong>Id:</strong> {ID}</p>
+      <p><strong>UserName:</strong> {UserName}</p>
+      <p><strong>UserPassword:</strong> {UserPassword}</p>
+      <p><strong>FirstName:</strong> {FirstName}</p>
+      <p><strong>LastName:</strong> {LastName}</p>
+      <p><strong>Address:</strong> {Address}</p>
+      <p><strong>Phone:</strong> {Phone}</p>
+      <p><strong>Email:</strong> {Email}</p> 
     </div>
   );
 }

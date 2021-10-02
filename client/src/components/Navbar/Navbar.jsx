@@ -32,7 +32,7 @@ export default function Navbar() {
                 <div className={styles.logins}>
                     <li >
                         <Link to="/login">
-                        <button className={styles.signlog}><strong>Sign in</strong></button>
+                        <button className={styles.signlog}><strong>Iniciar sesión <GoSignIn/> </strong></button>
                         </Link>
                     </li>
                     <li>
