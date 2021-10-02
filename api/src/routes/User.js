@@ -52,6 +52,7 @@ router.post("/Singup" , async (req, res)=>{
     .catch(error=>{ res.status(504).json(error)})
 })
 router.put("/EditUser", (req,res) =>{
+    const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email, Admin,Premium, Blocked} = req.body;
     // const authorizations = req.get("Authorization") 
     //      let token = ""
     // if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
@@ -67,7 +68,6 @@ router.put("/EditUser", (req,res) =>{
     // if(!decodedToken.Admin){
     //     return res.status(400).json({error:"Ops.. No tenes permisos"})
     // }
-    const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email, Admin,Premium} = req.body;
     const objecttoupdate={
         UserName: UserName,
         UserPassword: UserPassword,
@@ -77,7 +77,8 @@ router.put("/EditUser", (req,res) =>{
         Phone: Phone,
         Email: Email,
         Admin: Admin,
-        Premium: Premium
+        Premium: Premium,
+        Blocked: Blocked,
     }
         User.update(
           objecttoupdate
