@@ -91,7 +91,20 @@ router.put("/EditUser", (req,res) =>{
             return res.status(200).json(doneTemp)
         })
         .catch(error=>{console.log(error)})
-})
+});
+router.delete('/RemoveUser', (req,res) =>{
+    const {id}= req.body;
+    if(!id){
+        return res.json({status: 404},{message:"User not found"})
+    }
+    User.destroy(
+        {where:{ID: id}}
+    ).then (doneTemp=>{
+        return res.status(200).json(doneTemp)
+    })
+    .catch(error=>{console.log(error)})
+        
+});  
 
 
 module.exports = router;

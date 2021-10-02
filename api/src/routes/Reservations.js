@@ -84,6 +84,19 @@ if(!decodedToken.Admin){
             return res.status(200).json(doneTemp)
         })
         .catch(error=>{console.log(error)})
-})
+});
+router.delete('/RemoveReservation', (req,res) =>{
+    const {id}= req.body;
+    if(!id){
+        return res.json({status: 404},{message:"Reservation not found"})
+    }
+    Reservations.destroy(
+        {where:{ID: id}}
+    ).then (doneTemp=>{
+        return res.status(200).json(doneTemp)
+    })
+    .catch(error=>{console.log(error)})
+        
+});  
 
 module.exports = router;
