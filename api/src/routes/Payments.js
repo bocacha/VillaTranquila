@@ -47,6 +47,19 @@ router.put("/EditPayment", (req,res) =>{
             return res.status(200).json(doneTemp)
         })
         .catch(error=>{console.log(error)})
-})
+});
+router.delete('/RemovePayment', (req,res) =>{
+    const {id}= req.body;
+    if(!id){
+        return res.json({status: 404},{message:"Payment not found"})
+    }
+    Payments.destroy(
+        {where:{ID: id}}
+    ).then (doneTemp=>{
+        return res.status(200).json(doneTemp)
+    })
+    .catch(error=>{console.log(error)})
+        
+});  
 
 module.exports = router;

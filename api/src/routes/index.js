@@ -7,6 +7,8 @@ const picturesrouter= require('./Pictures')
 const reservationsrouter = require('./Reservations')
 const servicesrouter = require('./Services')
 const usersrouter = require('./User')
+const sendEmail = require('./SendEmail')
+const showGallery = require('./ShowGallery')
 
 const router = Router();
 router.use("/cabins" , cabinsrouter)
@@ -15,6 +17,8 @@ router.use("/pictures", picturesrouter)
 router.use("/reservations", reservationsrouter)
 router.use("/services", servicesrouter)
 router.use("/users", usersrouter)
+router.use("/sendEmail", sendEmail)
+router.use("/showImages", showGallery)
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
