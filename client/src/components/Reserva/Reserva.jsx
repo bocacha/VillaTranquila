@@ -12,9 +12,13 @@ import { MdAttachMoney } from 'react-icons/md';
 import { ImCalendar } from 'react-icons/im';
 import { BiTime } from 'react-icons/bi';
 import { AiOutlineReload } from 'react-icons/ai';
+import { Logeduser } from "../../actions";
 
 export default function Reserva() {
     const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(Logeduser())
+    }, [dispatch]);
     // const allCabins = useSelector(state => state.cabins);
 
     // // Paginado---------------------------------------------------------------

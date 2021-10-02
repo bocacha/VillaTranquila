@@ -49,7 +49,9 @@ router.post("/Singup" , async (req, res)=>{
     .then(doneTemp=>{
         return res.status(200).json(doneTemp)
     })
-    .catch(error=>{ res.status(504).json(error)})
+    .catch(error=>{
+        console.log(error)
+        res.status(504).json(error)})
 })
 router.put("/EditUser", (req,res) =>{
     const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email, Admin,Premium, Blocked} = req.body;

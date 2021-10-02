@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Usuarios.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createUsers, readUsers, editUsers } from "../../../actions";
+import { createUsers, readUsers, editUsers, Logeduser} from "../../../actions";
 import UsuariosDetail from "./UsuariosDetail";
 import { Link } from "react-router-dom";
 
@@ -9,6 +9,7 @@ export default function Usuarios() {
   const dispatch = useDispatch();
   const allUsers = useSelector((state) => state.usuarios);
   const logeduser = useSelector ((state) => state.user)
+  const {token} = logeduser
   const [input, setInput] = useState({
     id:"",
     UserName: "",
@@ -22,10 +23,13 @@ export default function Usuarios() {
     Premium: "",
     Blocked: "",
   });
-
   useEffect(() => {
-    dispatch(readUsers());
+    dispatch(Logeduser());
   }, [dispatch]);
+  
+  useEffect(() => {
+    dispatch(readUsers({token}));
+  }, [dispatch, token]);
 
   function handleChange(e) {
     setInput({

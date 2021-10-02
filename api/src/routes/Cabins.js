@@ -52,6 +52,7 @@ if(!decodedToken.Admin){
         Parking
     })
     .then(doneTemp=>{
+        console.log(doneTemp)
         return res.status(200).json(doneTemp)
     })
     .catch(error=>{ res.send(error)})

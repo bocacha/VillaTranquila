@@ -2,9 +2,15 @@ import React, { useState, useEffect } from "react";
 import styles from "./Usuarios.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { createUsers} from "../../actions/index";
+import { Link } from "react-router-dom";
+import { Loguser } from "../../actions";
+
 
 export default function Usuarios() {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(Loguser())
+}, [dispatch]);
   const allUsers = useSelector((state) => state.usuarios);
   const [input, setInput] = useState({
     UserName: "",
@@ -52,7 +58,7 @@ export default function Usuarios() {
             className={styles.UserName}
           />
           <input
-            type="text"
+            type="password"
             value={input.UserPassword}
             name="UserPassword"
             onChange={(e) => handleChange(e)}
@@ -100,9 +106,11 @@ export default function Usuarios() {
             className={styles.Email}
           />
           <div className={styles.btns}>
+            <Link to="/">
             <button type="submit" className={styles.submit_btn}>
               Crear
             </button>
+              </Link>
           </div>
         </form>
       </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Pagos.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createPayment, readPayment, editPayments } from "../../../actions";
+import { createPayment, readPayment, editPayments, Logeduser } from "../../../actions";
 import PagosDetail from "./PagosDetail";
 import { Link } from "react-router-dom";
 
@@ -9,6 +9,7 @@ export default function Pagos() {
   const dispatch = useDispatch();
   const allPayments = useSelector((state) => state.pagos);
   const logeduser = useSelector ((state) => state.user);
+  const {token}  = logeduser
   const [input, setInput] = useState({
     Date: "",
     idClient: "",
@@ -23,10 +24,13 @@ export default function Pagos() {
     TotalAmount: "",
     PaydAmount: "",
   });
-
   useEffect(() => {
-    dispatch(readPayment());
+    dispatch(Logeduser());
   }, [dispatch]);
+  
+  useEffect(() => {
+    dispatch(readPayment({token}));
+  }, [dispatch, token]);
 
   function handleChange(e) {
     setInput({

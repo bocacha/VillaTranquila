@@ -1,14 +1,19 @@
 import React from "react";
-
 import BannerIntro from "../BannerIntro/BannerIntro";
-
 import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 import Slider from "../Slider/Slider";
 import Searchbar from "../Searchbar/Searchbar";
 import styles from "./Home.module.css";
+import{useEffect} from "react"
+import { useDispatch} from 'react-redux';
+import { Logeduser } from "../../actions";
 
 export default function Home() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(Logeduser());
+  }, [dispatch]);
   return (
     <div className={styles.container}>
       <div>

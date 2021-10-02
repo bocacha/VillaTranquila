@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Fotos.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createimage, readPictures, editPictures } from "../../../actions";
+import { createimage, readPictures, editPictures, Logeduser} from "../../../actions";
 import FotosDetail from "./FotosDetail";
 import { Link } from "react-router-dom";
 
@@ -19,7 +19,10 @@ export default function Fotos() {
     Description: "",
     Url: "",
   });
-
+  useEffect(() => {
+    dispatch(Logeduser());
+  }, [dispatch]);
+  
   useEffect(() => {
     dispatch(readPictures());
   }, [dispatch]);

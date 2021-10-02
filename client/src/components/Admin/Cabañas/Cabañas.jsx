@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createCabains, readCabains,editCabains } from "../../../actions";
+import { createCabains, readCabains,editCabains, Logeduser } from "../../../actions";
 import styles from "./Cabañas.module.css";
 import CabañasDetail  from "../Cabañas/CabañasDetail";
 import { Link } from "react-router-dom";
@@ -10,7 +10,6 @@ const Cabañas = () => {
   const dispatch = useDispatch();
   const allCabains = useSelector((state) => state.cabañas);
   const logeduser = useSelector ((state) => state.user);
-  
   const [cabain, setCabain] = useState({
     Number: "",
     Capacity: "",
@@ -49,6 +48,11 @@ const Cabañas = () => {
     dispatch(readCabains());
   }, [dispatch]);
 
+
+  useEffect(() => {
+    dispatch(Logeduser());
+  }, [dispatch]);
+  
   const handleChange = (e) => {
     setCabain({
       ...cabain,
