@@ -3,7 +3,7 @@ import styles from "./Reservaciones.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
   createReservation,
-  editReservations,
+  editReservation,
   readReservation,
 } from "../../../actions";
 import ReservacionesDetail from "./ReservacionesDetail";
@@ -64,11 +64,10 @@ export default function Reservaciones() {
       Cabinid: "",
       ExtraServices: "",
     });
-    window.location.reload();
   }
   function handleSubmitEdit(e) {
     e.preventDefault();
-    dispatch(editReservations(edit));
+    dispatch(editReservation(edit));
     alert("Reserva editada con éxito");
     setInput({
       id:"",
