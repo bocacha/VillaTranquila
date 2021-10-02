@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 export default function Servicios() {
   const dispatch = useDispatch();
   const allServices = useSelector((state) => state.servicios);
-  const logeduser = useSelector ((state) => state.user);
+ const logeduser = useSelector ((state) => state.user);
   const [input, setInput] = useState({
     Name: "",
     Description: "",
@@ -38,7 +38,7 @@ export default function Servicios() {
   }, [dispatch]);
 function handleSubmit(e) {
     const {token} = logeduser
-    e.preventDefault();
+     e.preventDefault();
     dispatch(createServices(input, {token}));
     alert("Servicio creado con éxito");
     setInput({

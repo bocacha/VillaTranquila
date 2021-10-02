@@ -1,6 +1,7 @@
 import React from "react";
 
 import BannerIntro from "../BannerIntro/BannerIntro";
+import ChatBot from 'react-simple-chatbot';
 
 import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
@@ -9,6 +10,26 @@ import Searchbar from "../Searchbar/Searchbar";
 import styles from "./Home.module.css";
 
 export default function Home() {
+
+  const steps = [
+    {
+      id: '1',
+      message: 'Please type a number',
+      trigger: '2',
+    },
+    {
+      id: '2',
+      user: true,
+      validator: (value) => {
+        if (value ==='pago') {
+          return 'http://localhost:3000/reserva';
+        }
+        
+      },
+      trigger: '1',
+    },
+    
+  ];
   return (
     <div className={styles.container}>
       <div>
@@ -34,6 +55,14 @@ export default function Home() {
           className={styles.mapa}
         ></iframe>
       </div>
+      <div>
+         <ChatBot
+             headerTitle="Habla Conmigo"
+             floating={true}
+             steps={steps}
+               />
+       </div>,
+        
         <Footer />
 
     </div>
