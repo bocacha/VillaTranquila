@@ -67,7 +67,21 @@ router.put("/EditCabin", (req,res) =>{
             return res.status(200).json(doneTemp)
         })
         .catch(error=>{console.log(error)})
-})
+});
+
+router.delete('/RemoveCabin', (req,res) =>{
+    const {id}= req.body;
+    if(!id){
+        return res.json({status: 404},{message:"Cabin not found"})
+    }
+    Cabins.destroy(
+        {where:{ID: id}}
+    ).then (doneTemp=>{
+        return res.status(200).json(doneTemp)
+    })
+    .catch(error=>{console.log(error)})
+        
+});  
 
 
 
