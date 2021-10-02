@@ -1,11 +1,12 @@
 import React from "react";
-import styles from "./Fotos.module.css";
+import styles from "./FotosDetail.module.css";
 
-export default function FotosDetail({ Description, Url }) {
+export default function FotosDetail({ Description, Url, ID }) {
   return (
     <div className={styles.container}>
-      <p>Descripcion: {Description}</p>
-      <p>Url: {Url}</p>
+      <p><strong>Id:</strong> {ID}</p>
+      <p><strong>Descripcion:</strong> {Description}</p>
+      <p><strong>Url:</strong> {Url}</p>
     </div>
   );
 }

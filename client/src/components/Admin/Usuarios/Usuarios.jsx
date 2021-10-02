@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Usuarios.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createUsers, readUsers } from "../../../actions";
+import { createUsers, readUsers, editUsers } from "../../../actions";
 import UsuariosDetail from "./UsuariosDetail";
+import { Link } from "react-router-dom";
 
 export default function Usuarios() {
   const dispatch = useDispatch();
   const allUsers = useSelector((state) => state.usuarios);
+  const logeduser = useSelector((state) => state.user);
   const [input, setInput] = useState({
+    id: "",
     UserName: "",
     UserPassword: "",
     FirstName: "",
@@ -15,6 +18,9 @@ export default function Usuarios() {
     Address: "",
     Phone: "",
     Email: "",
+    Admin: "",
+    Premium: "",
+    Blocked: "",
   });
 
   useEffect(() => {
@@ -28,11 +34,32 @@ export default function Usuarios() {
     });
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    dispatch(createUsers(input));
-    alert("Usuario creado con éxito");
+  function handleSelectAdmin(e) {
     setInput({
+      ...input,
+      Admin: e.target.value,
+    });
+  }
+  function handleSelectPremium(e) {
+    setInput({
+      ...input,
+      Premium: e.target.value,
+    });
+  }
+  function handleSelectBlocked(e) {
+    setInput({
+      ...input,
+      Blocked: e.target.value,
+    });
+  }
+
+  function handleSubmit(e) {
+    const { token } = logeduser;
+    e.preventDefault();
+    dispatch(editUsers(input));
+    alert("Usuario editado con éxito");
+    setInput({
+      id: "",
       UserName: "",
       UserPassword: "",
       FirstName: "",
@@ -40,85 +67,134 @@ export default function Usuarios() {
       Address: "",
       Phone: "",
       Email: "",
+      Admin: "",
+      Premium: "",
+      Blocked: "",
     });
-    window.location.reload();
+    dispatch(readUsers({ token }));
   }
 
   return (
     <div className={styles.container}>
-      {/* CREAR */}
-      <div>
-        Crear un nuevo usuario
-        <form onSubmit={(e) => handleSubmit(e)}>
-          <input
-            type="text"
-            value={input.UserName}
-            name="UserName"
-            onChange={(e) => handleChange(e)}
-            placeholder="UserName"
-            className={styles.UserName}
-          />
-          <input
-            type="text"
-            value={input.UserPassword}
-            name="UserPassword"
-            onChange={(e) => handleChange(e)}
-            placeholder="UserPassword"
-            className={styles.UserPassword}
-          />
-          <input
-            type="text"
-            value={input.FirstName}
-            name="FirstName"
-            onChange={(e) => handleChange(e)}
-            placeholder="FirstName"
-            className={styles.FirstName}
-          />
-          <input
-            type="text"
-            value={input.LastName}
-            name="LastName"
-            onChange={(e) => handleChange(e)}
-            placeholder="LastName"
-            className={styles.LastName}
-          />
-          <input
-            type="text"
-            value={input.Address}
-            name="Address"
-            onChange={(e) => handleChange(e)}
-            placeholder="Address"
-            className={styles.Address}
-          />
-          <input
-            type="text"
-            value={input.Phone}
-            name="Phone"
-            onChange={(e) => handleChange(e)}
-            placeholder="Phone"
-            className={styles.Phone}
-          />
-          <input
-            type="text"
-            value={input.Email}
-            name="Email"
-            onChange={(e) => handleChange(e)}
-            placeholder="Email"
-            className={styles.Email}
-          />
-          <div className={styles.btns}>
-            <button type="submit" className={styles.submit_btn}>
-              Crear
-            </button>
-          </div>
-        </form>
+      <div className={styles.btnVolver}>
+        <Link to="/admin">
+          <button className={styles.btn}>Volver</button>
+        </Link>
       </div>
-
+      <div className={styles.formsCont}>
+        {/* CREAR */}
+        <div className={styles.crearCont}>
+          <div className={styles.title}> Editar un nuevo usuario</div>
+          <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
+            <input
+              type="text"
+              value={input.id}
+              name="id"
+              onChange={(e) => handleChange(e)}
+              placeholder="Id"
+              className={styles.formInputs}
+            />
+            <input
+              type="text"
+              value={input.UserName}
+              name="UserName"
+              onChange={(e) => handleChange(e)}
+              placeholder="Nombre de usuario"
+              className={styles.formInputs}
+            />
+            <input
+              type="text"
+              value={input.UserPassword}
+              name="UserPassword"
+              onChange={(e) => handleChange(e)}
+              placeholder="Contraseña del usuario"
+              className={styles.formInputs}
+            />
+            <input
+              type="text"
+              value={input.FirstName}
+              name="FirstName"
+              onChange={(e) => handleChange(e)}
+              placeholder="Nombre"
+              className={styles.formInputs}
+            />
+            <input
+              type="text"
+              value={input.LastName}
+              name="LastName"
+              onChange={(e) => handleChange(e)}
+              placeholder="Apellido"
+              className={styles.formInputs}
+            />
+            <input
+              type="text"
+              value={input.Address}
+              name="Address"
+              onChange={(e) => handleChange(e)}
+              placeholder="Dirección"
+              className={styles.formInputs}
+            />
+            <input
+              type="text"
+              value={input.Phone}
+              name="Phone"
+              onChange={(e) => handleChange(e)}
+              placeholder="Télefono"
+              className={styles.formInputs}
+            />
+            <input
+              type="text"
+              value={input.Email}
+              name="Email"
+              onChange={(e) => handleChange(e)}
+              placeholder="E-mail"
+              className={styles.formInputs}
+            />
+            <select
+              onChange={(e) => handleSelectAdmin(e)}
+              value={input.Admin}
+              className={styles.formInputs}
+              required
+            >
+              <option value="">Admin:</option>
+              <option value="true">true</option>
+              <option value="false">false</option>
+            </select>
+            <select
+              onChange={(e) => handleSelectPremium(e)}
+              value={input.Premium}
+              className={styles.formInputs}
+              required
+            >
+              <option value="">Premium:</option>
+              <option value="true">true</option>
+              <option value="false">false</option>
+            </select>
+            <select
+              onChange={(e) => handleSelectBlocked(e)}
+              value={input.Blocked}
+              className={styles.formInputs}
+              required
+            >
+              <option value="">Blocked:</option>
+              <option value="true">true</option>
+              <option value="false">false</option>
+            </select>
+            <div className={styles.btns}>
+              <button type="submit" className={styles.btn}>
+                Editar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+      {/* VER */}
       <div>
         {allUsers?.map((el) => {
           return (
             <div className={styles.detalles} key={el.ID}>
               <UsuariosDetail
+                ID={el.ID}
                 UserName={el.UserName}
                 UserPassword={el.UserPassword}
                 FirstName={el.FirstName}
