@@ -2,8 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Admin.module.css";
 import Navbar from "../Navbar/Navbar";
+import{useEffect} from "react"
+import { useDispatch} from 'react-redux';
+import { Logeduser } from "../../actions";
 
 export default function Admin() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(Logeduser())
+}, [dispatch]);
   return (
     <div>
       <Navbar />
