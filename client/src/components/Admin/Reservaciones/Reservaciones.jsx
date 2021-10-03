@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Reservaciones.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import {
   createReservation,
   editReservation,
   readReservation,
+  Logeduser
 } from "../../../actions";
 import ReservacionesDetail from "./ReservacionesDetail";
 import DatePicker from "react-datepicker";
@@ -37,7 +38,10 @@ export default function Reservaciones() {
     Cabinid: "",
     ExtraServices: "",
   });
-
+  useEffect(() => {
+    dispatch(Logeduser());
+  }, [dispatch]);
+  
   useEffect(() => {
     dispatch(readReservation({ token }));
   }, [dispatch, token]);

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Loguser } from "../../actions";
 import Navbar from "../Navbar/Navbar";
+import { Link } from "react-router-dom";
 import styles from "./Login.module.css";
 
 export default function Login() {

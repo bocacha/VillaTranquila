@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Pagos.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createPayment, readPayment, editPayments } from "../../../actions";
+import { createPayment, readPayment, editPayments, Logeduser } from "../../../actions";
 import PagosDetail from "./PagosDetail";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
@@ -28,9 +28,12 @@ export default function Pagos() {
     TotalAmount: "",
     PaydAmount: "",
   });
-
   useEffect(() => {
-    dispatch(readPayment({ token }));
+    dispatch(Logeduser());
+  }, [dispatch]);
+  
+  useEffect(() => {
+    dispatch(readPayment({token}));
   }, [dispatch, token]);
 
   function handleChange(e) {
