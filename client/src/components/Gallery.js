@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import  {Image}  from 'cloudinary-react';
+import styles from "./Gallery.module.css";
 
 export default function Gallery() {
     const [imageIds, setImageIds] = useState();
@@ -17,22 +18,20 @@ useEffect(() => {
         loadImages();
     }, []);
 return (
-        <div>
-            <h1 className="title">Cloudinary Gallery</h1>
-            <div className="gallery">
-                {/* {imageIds && */}
-                {imageIds?.map((imageId, index) => (
-                        <Image
+        <div className={styles.slidershow}>            
+            <div className={styles.slides}>
+                {imageIds?.map((imageId, index) => (                    
+                        <Image className={styles.img}
                             key={index}
-                            // cloudName={process.env.REACT_APP_CLOUDINARY_NAME}
                             cloudName={'villatranquila'}
                             publicId={imageId}
-                            width="300"
-                            height="200"
+                            width="225"
+                            height="150"
                             crop="scale"
-                        />
+                        />                    
                     ))}
-            </div>
+            </div> 
+            
         </div>
     );
 }

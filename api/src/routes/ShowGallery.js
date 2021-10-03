@@ -5,7 +5,6 @@ const router = Router();
 router.get('/images',async (req, res) => {
     try {
     const { resources } = await cloudinary.search
-    
     .expression('folder:Cabins')
     .sort_by('public_id','desc')
     .max_results(30)
