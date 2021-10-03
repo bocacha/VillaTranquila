@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Loguser } from "../../actions";
+import { useDispatch , useSelector} from "react-redux";
+import { Loguser, Logeduser } from "../../actions";
 import Navbar from "../Navbar/Navbar";
 import { Link } from "react-router-dom";
 import styles from "./Login.module.css";
@@ -9,7 +9,7 @@ export default function Login() {
   const dispatch = useDispatch();
   const [user, setuser] = useState({ UserName: "", UserPassword: "" });
   useEffect(() => {
-    dispatch(Loguser());
+    dispatch(Logeduser());
   }, [dispatch]);
   const Handlechange = (e) => {
     e.preventDefault();
@@ -21,6 +21,7 @@ export default function Login() {
   const handleLogin = (e) => {
     e.preventDefault();
     dispatch(Loguser(user));
+    // window.location.href='/'
   };
   return (
     <div className={styles.container}>
