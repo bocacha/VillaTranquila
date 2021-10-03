@@ -20,6 +20,7 @@ export default function ReservacionesDetail({
     alert("su Reserva fue Eliminada con exito");
     let obj = {id:ID};
     dispatch(removeReservations(obj));
+    window.location.reload();
   } 
   return (
     <div className={styles.container}>

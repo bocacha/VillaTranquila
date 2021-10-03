@@ -19,6 +19,7 @@ export default function PagosDetail({
     alert("su pago fue Eliminado con exito");
     let obj = {id:ID}
     dispatch(removePayments(obj));
+    window.location.reload();
   }
   
   return (
