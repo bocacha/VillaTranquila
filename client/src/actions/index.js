@@ -1,6 +1,9 @@
 import axios from "axios";
 
 export const GET_CABINS = "GET_CABINS";
+
+export const SEND_EMAIL = "SEND_EMAIL";
+export const FILTER_CABINS = 'FILTER_CABINS';
 export const FILTER_BY_CAPACITY = "FILTER_BY_CAPACITY";
 export const FILTER_BY_PRICE = "FILTER_BY_PRICE";
 export const SEND_EMAIL = "SEND_EMAIL";
@@ -42,18 +45,32 @@ export function getCabins() {
   };
 }
 
-export function filterCabinsByCapacity(payload) {
-  return {
-    type: FILTER_BY_CAPACITY,
-    payload,
-  };
-}
+// export function filterCabinsByCapacity(payload) {
+//   return {
+//     type: FILTER_BY_CAPACITY,
+//     payload,
+//   };
+// }
 
-export function filterCabinsByPrice(payload) {
+// export function filterCabinsByPrice(payload) {
+//   return {
+//     type: FILTER_BY_PRICE,
+//     payload,
+//   };
+// }
+
+// export function filterCabinsByServices(payload){
+//   return {
+//     type: FILTER_BY_SERVICES,
+//     payload,
+//   };
+// }
+
+export function filterCabins(payload){
   return {
-    type: FILTER_BY_PRICE,
+    type: FILTER_CABINS,
     payload,
-  };
+  }
 }
 
 export function sendEmail(payload) {
@@ -173,15 +190,15 @@ export function readPictures(id) {
   };
 }
 
-export function readUsers({token}) {
-  const config={
-    headers:{
-    Authorization: `Bearer ${token}`,
-  }
-  }
+export function readUsers() {
+  // const config={
+  //   headers:{
+  //   Authorization: `Bearer ${token}`,
+  // }
+  // }
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/users/", config);
+      var json = await axios.get("http://localhost:3001/users/");
       return dispatch({
         type: READ_USERS,
         payload: json.data,
@@ -317,9 +334,23 @@ export function Loguser(payload) {
   return async function (dispatch) {
     try {
       let json = await axios.post("http://localhost:3001/login", payload);
+      localStorage.setItem("LogedUser", JSON.stringify(json.data));
       return dispatch({
         type: LOG_USER,
         payload: json.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+export function Logeduser() {
+  return async function (dispatch) {
+    try {
+      let json = localStorage.getItem("LogedUser");
+      return dispatch({
+        type: LOG_USER,
+        payload: JSON.parse(json),
       });
     } catch (err) {
       console.log(err);

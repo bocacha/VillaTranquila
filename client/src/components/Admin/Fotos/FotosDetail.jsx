@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./FotosDetail.module.css";
 import styles from "./Fotos.module.css";
 import { useDispatch } from "react-redux";
 import {removePictures}  from '../../../actions'
@@ -15,9 +16,9 @@ export default function FotosDetail({ Description, Url, ID }) {
   }
   return (
     <div className={styles.container}>
-      <p>Id: {ID}</p>
-      <p>Descripcion: {Description}</p>
-      <p>Url: {Url}</p>
+      <p><strong>Id:</strong> {ID}</p>
+      <p><strong>Descripcion:</strong> {Description}</p>
+      <p><strong>Url:</strong> {Url}</p>
       <div>
         <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
       </div>

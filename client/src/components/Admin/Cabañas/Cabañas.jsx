@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createCabains, readCabains,editCabains } from "../../../actions";
+import { createCabains, readCabains,editCabains, Logeduser } from "../../../actions";
 import styles from "./Cabañas.module.css";
-import CabañasDetail  from "../Cabañas/CabañasDetail";
+import CabañasDetail from "../Cabañas/CabañasDetail";
 import { Link } from "react-router-dom";
-
 
 const Cabañas = () => {
   const dispatch = useDispatch();
   const allCabains = useSelector((state) => state.cabañas);
   const logeduser = useSelector ((state) => state.user);
-  
-  
   const [cabain, setCabain] = useState({
     Number: "",
     Capacity: "",
@@ -50,6 +47,11 @@ const Cabañas = () => {
     dispatch(readCabains());
   }, [dispatch]);
 
+
+  useEffect(() => {
+    dispatch(Logeduser());
+  }, [dispatch]);
+  
   const handleChange = (e) => {
     setCabain({
       ...cabain,
@@ -77,269 +79,315 @@ const Cabañas = () => {
     });
   };
   const handleSubmit = (e) => {
-    const {token} = logeduser
+    const { token } = logeduser;
     e.preventDefault();
     alert("su cabaña fue creada con exito");
-    dispatch(createCabains(cabain,{token}));
+    dispatch(createCabains(cabain, { token }));
   };
   const handleeditSubmit = (e) => {
-    const {token} = logeduser
+    const { token } = logeduser;
     e.preventDefault();
     alert("su cabaña fue creada con exito");
-    dispatch(editCabains(edit,{token}));
+    dispatch(editCabains(edit, { token }));
   };
 
   
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.btnVolver}>
-        <Link to="/admin"><button>Volver</button></Link>
+        <Link to="/admin">
+          <button className={styles.btn}>Volver</button>
+        </Link>
       </div>
-      Crear Cabaña
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Numero de Personas</label>
-          <input
-            type="text"
-            name="Number"
-            value={cabain.Number}
-            onChange={handleChange}
-          />
+      <div className={styles.formsCont}>
+        <div className={styles.crearCont}>
+          <div className={styles.title}>Crear Cabaña</div>
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <div>
+              <input
+                type="number"
+                name="Number"
+                value={cabain.Number}
+                onChange={handleChange}
+                placeholder="Numero de Personas"
+                className={styles.formInputs}
+                requiered
+              />
+            </div>
+            <div>
+              <input
+                type="number"
+                name="Capacity"
+                value={cabain.Capacity}
+                onChange={handleChange}
+                placeholder="Capacidad"
+                className={styles.formInp
+                requiered
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                name="Available"
+                value={cabain.Available}
+                onChange={handleChange}
+                placeholder="Disponibilidad"
+                className={styles.formInputs}
+                requiered
+              />
+            </div>
+            <div>
+              <input
+                type="number"
+                name="Price"
+                value={cabain.Price}
+                onChange={handleChange}
+                placeholder="Precio"
+                className={styles.formInputs}
+                max="50000"
+                requiered
+              />
+            </div>
+            <div>
+              <textarea
+                type="text"
+                name="Description"
+                value={cabain.Description}
+                onChange={handleChange}
+                placeholder="Descripción"
+                className={styles.formInputs}
+                requiered
+              />
+            </div>
+            <div>
+              <label>Cafe</label>
+              <input
+                type="checkbox"
+                name="Coffe"
+                value={cabain.Coffe}
+                onChange={handleCheckBox}
+                className={styles.formInputs}
+              />
+              <label>Microondas</label>
+              <input
+                type="checkbox"
+                name="Microondas"
+                value={cabain.Microondas}
+                onChange={handleCheckBox}
+                className={styles.formInputs}
+              />
+              <label>Calefaccion</label>
+              <input
+                type="checkbox"
+                name="Calefaccion"
+                value={cabain.Calefaccion}
+                onChange={handleCheckBox}
+                className={styles.formInputs}
+              />
+              <label>Parrilla</label>
+              <input
+                type="checkbox"
+                name="Barbecue"
+                value={cabain.Barbecue}
+                onChange={handleCheckBox}
+                className={styles.formInputs}
+              />
+              <label>Wifi</label>
+              <input
+                type="checkbox"
+                name="Wifi"
+                value={cabain.Wifi}
+                onChange={handleCheckBox}
+                className={styles.formInputs}
+              />
+              <label>Limpieza</label>
+              <input
+                type="checkbox"
+                name="Cleaning"
+                value={cabain.Cleaning}
+                onChange={handleCheckBox}
+                className={styles.formInputs}
+              />
+              <label>Heladera</label>
+              <input
+                type="checkbox"
+                name="Refrigerator"
+                value={cabain.Refrigerator}
+                onChange={handleCheckBox}
+                className={styles.formInputs}
+              />
+              <label>Cocina</label>
+              <input
+                type="checkbox"
+                name="Stove"
+                value={cabain.Stove}
+                onChange={handleCheckBox}
+                className={styles.formInputs}
+              />
+              <label>Estacionamiento</label>
+              <input
+                type="checkbox"
+                name="Parking"
+                value={cabain.Parking}
+                onChange={handleCheckBox}
+                className={styles.formInputs}
+              />
+            </div>
+            <div className={styles.btns}>
+              <button type="submit" className={styles.btn}>
+                Crear
+              </button>
+            </div>
+          </form>
         </div>
-        <div>
-          <label>Capacidad</label>
-          <input
-            type="number"
-            name="Capacity"
-            value={cabain.Capacity}
-            onChange={handleChange}
-          />
+        {/* EDITAR */}
+        <div className={styles.editarCont}>
+          <div className={styles.title}>Editar Cabaña</div>
+          <form onSubmit={handleeditSubmit}>
+            <div>
+              <input
+                type="text"
+                name="id"
+                value={edit.id}
+                onChange={handleChangeEdit}
+                placeholder="Id"
+                className={styles.formInputs}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                name="Number"
+                value={edit.Number}
+                onChange={handleChangeEdit}
+                placeholder="Numero de Personas"
+                className={styles.formInputs}
+              />
+            </div>
+            <div>
+              <input
+                type="number"
+                name="Capacity"
+                value={edit.Capacity}
+                onChange={handleChangeEdit}
+                placeholder="Capacidad"
+                className={styles.formInputs}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                name="Available"
+                value={edit.Available}
+                onChange={handleChangeEdit}
+                placeholder="Disponibilidad"
+                className={styles.formInputs}
+              />
+            </div>
+            <div>
+              <input
+                type="number"
+                name="Price"
+                value={edit.Price}
+                onChange={handleChangeEdit}
+                placeholder="Precio"
+                className={styles.formInputs}
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                name="Description"
+                value={edit.Description}
+                onChange={handleChangeEdit}
+                placeholder="Descripción"
+                className={styles.formInputs}
+              />
+            </div>
+            <div>
+              <label>Cafe</label> 
+              <input
+                type="checkbox"
+                name="Coffe"
+                value={edit.Coffe}
+                onChange={handleeditCheckBox}
+                placeholder="h"
+                className={styles.formInputs}
+              /> 
+              <label>Microondas</label>
+              <input
+                type="checkbox"
+                name="Microondas"
+                value={edit.Microondas}
+                onChange={handleeditCheckBox}
+                className={styles.formInputs}
+              />
+              <label>Calefaccion</label>
+              <input
+                type="checkbox"
+                name="Calefaccion"
+                value={edit.Calefaccion}
+                onChange={handleeditCheckBox}
+                className={styles.formInputs}
+              />
+              <label>Parrilla</label>
+              <input
+                type="checkbox"
+                name="Barbecue"
+                value={edit.Barbecue}
+                onChange={handleeditCheckBox}
+                className={styles.formInputs}
+              />
+              <label>Wifi</label>
+              <input
+                type="checkbox"
+                name="Wifi"
+                value={edit.Wifi}
+                onChange={handleeditCheckBox}
+                className={styles.formInputs}
+              />
+              <label>Limpieza</label>
+              <input
+                type="checkbox"
+                name="Cleaning"
+                value={edit.Cleaning}
+                onChange={handleeditCheckBox}
+                className={styles.formInputs}
+              />
+              <label>Heladera</label>
+              <input
+                type="checkbox"
+                name="Refrigerator"
+                value={edit.Refrigerator}
+                onChange={handleeditCheckBox}
+                className={styles.formInputs}
+              />
+              <label>Cocina</label>
+              <input
+                type="checkbox"
+                name="Stove"
+                value={edit.Stove}
+                onChange={handleeditCheckBox}
+                className={styles.formInputs}
+              />
+              <label>Estacionamiento</label>
+              <input
+                type="checkbox"
+                name="Parking"
+                value={edit.Parking}
+                onChange={handleeditCheckBox}
+                className={styles.formInputs}
+              />
+            </div>
+            <div className={styles.btns}>
+              <button type="submit" className={styles.btn}>
+                Editar
+              </button>
+            </div>
+          </form>
         </div>
-        <div>
-          <label>Disponibilidad</label>
-          <input
-            type="text"
-            name="Available"
-            value={cabain.Available}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Precio</label>
-          <input
-            type="number"
-            name="Price"
-            value={cabain.Price}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Descripcion</label>
-          <input
-            type="text"
-            name="Description"
-            value={cabain.Description}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Cafe</label>
-          <input
-            type="checkbox"
-            name="Coffe"
-            value={cabain.Coffe}
-            onChange={handleCheckBox}
-          />
-          <label>Microondas</label>
-          <input
-            type="checkbox"
-            name="Microondas"
-            value={cabain.Microondas}
-            onChange={handleCheckBox}
-          />
-          <label>Calefaccion</label>
-          <input
-            type="checkbox"
-            name="Calefaccion"
-            value={cabain.Calefaccion}
-            onChange={handleCheckBox}
-          />
-          <label>Parrilla</label>
-          <input
-            type="checkbox"
-            name="Barbecue"
-            value={cabain.Barbecue}
-            onChange={handleCheckBox}
-          />
-          <label>Wifi</label>
-          <input
-            type="checkbox"
-            name="Wifi"
-            value={cabain.Wifi}
-            onChange={handleCheckBox}
-          />
-          <label>Limpieza</label>
-          <input
-            type="checkbox"
-            name="Cleaning"
-            value={cabain.Cleaning}
-            onChange={handleCheckBox}
-          />
-          <label>Heladera</label>
-          <input
-            type="checkbox"
-            name="Refrigerator"
-            value={cabain.Refrigerator}
-            onChange={handleCheckBox}
-          />
-          <label>Cocina</label>
-          <input
-            type="checkbox"
-            name="Stove"
-            value={cabain.Stove}
-            onChange={handleCheckBox}
-          />
-          <label>Estacionamiento</label>
-          <input
-            type="checkbox"
-            name="Parking"
-            value={cabain.Parking}
-            onChange={handleCheckBox}
-          />
-        </div>
-        <div>
-          <input type="submit" value="Crear" />
-        </div>
-      </form>
-       {/* EDITAR */}
-       Editar Cabaña
-       <form onSubmit={handleeditSubmit}>
-       <div>
-          <label>id</label>
-          <input
-            type="text"
-            name="id"
-            value={edit.id}
-            onChange={handleChangeEdit}
-          />
-        </div>
-        <div>
-          <label>Numero de Personas</label>
-          <input
-            type="text"
-            name="Number"
-            value={edit.Number}
-            onChange={handleChangeEdit}
-          />
-        </div>
-        <div>
-          <label>Capacidad</label>
-          <input
-            type="number"
-            name="Capacity"
-            value={edit.Capacity}
-            onChange={handleChangeEdit}
-          />
-        </div>
-        <div>
-          <label>Disponibilidad</label>
-          <input
-            type="text"
-            name="Available"
-            value={edit.Available}
-            onChange={handleChangeEdit}
-          />
-        </div>
-        <div>
-          <label>Precio</label>
-          <input
-            type="number"
-            name="Price"
-            value={edit.Price}
-            onChange={handleChangeEdit}
-          />
-        </div>
-        <div>
-          <label>Descripcion</label>
-          <input
-            type="text"
-            name="Description"
-            value={edit.Description}
-            onChange={handleChangeEdit}
-          />
-        </div>
-        <div>
-          <label>Cafe</label>
-          <input
-            type="checkbox"
-            name="Coffe"
-            value={edit.Coffe}
-            onChange={handleeditCheckBox}
-          />
-          <label>Microondas</label>
-          <input
-            type="checkbox"
-            name="Microondas"
-            value={edit.Microondas}
-            onChange={handleeditCheckBox}
-          />
-          <label>Calefaccion</label>
-          <input
-            type="checkbox"
-            name="Calefaccion"
-            value={edit.Calefaccion}
-            onChange={handleeditCheckBox}
-          />
-          <label>Parrilla</label>
-          <input
-            type="checkbox"
-            name="Barbecue"
-            value={edit.Barbecue}
-            onChange={handleeditCheckBox}
-          />
-          <label>Wifi</label>
-          <input
-            type="checkbox"
-            name="Wifi"
-            value={edit.Wifi}
-            onChange={handleeditCheckBox}
-          />
-          <label>Limpieza</label>
-          <input
-            type="checkbox"
-            name="Cleaning"
-            value={edit.Cleaning}
-            onChange={handleeditCheckBox}
-          />
-          <label>Heladera</label>
-          <input
-            type="checkbox"
-            name="Refrigerator"
-            value={edit.Refrigerator}
-            onChange={handleeditCheckBox}
-          />
-          <label>Cocina</label>
-          <input
-            type="checkbox"
-            name="Stove"
-            value={edit.Stove}
-            onChange={handleeditCheckBox}
-          />
-          <label>Estacionamiento</label>
-          <input
-            type="checkbox"
-            name="Parking"
-            value={edit.Parking}
-            onChange={handleeditCheckBox}
-          />
-        </div>
-        <div>
-          <input type="submit" value="Edit" />
-        </div>
-      </form>
-
-
+      </div>
       {/* VER */}
       <div>
         {allCabains?.map((el) => {
