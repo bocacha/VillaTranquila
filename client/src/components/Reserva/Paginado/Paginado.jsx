@@ -10,10 +10,7 @@ export default function Paginado({cabinsPerPage, allCabins, paginado}) {
 
     return (
         <div className={styles.paginado}>
-
-            <p>Paginado</p>
-            
-            <ul>
+            <ul className={styles.numeros}>
                 {pageNumbers.length > 1 && 
                 pageNumbers.map(number => (
                     <li key={number}>

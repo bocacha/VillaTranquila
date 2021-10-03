@@ -12,6 +12,7 @@ import { MdAttachMoney, MdRoomService } from 'react-icons/md';
 import { ImCalendar, ImSearch } from 'react-icons/im';
 import { AiOutlineReload } from 'react-icons/ai';
 import RangeSlider from "./Slider/Slider";
+import Slider from "./Slider/Slider";
 
 export default function Reserva() {
     const dispatch = useDispatch();
@@ -19,7 +20,7 @@ export default function Reserva() {
 
     // Paginado---------------------------------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
-    const [cabinsPerPage, /*setCabinsPerPage*/] = useState(9);
+    const [cabinsPerPage, /*setCabinsPerPage*/] = useState(6);
     const indexOfLastCabin = currentPage * cabinsPerPage;
     const indexOfFirstCabin = indexOfLastCabin - cabinsPerPage;
     const currentCabins = allCabins.slice(indexOfFirstCabin, indexOfLastCabin);
@@ -40,20 +41,20 @@ export default function Reserva() {
         setFilters({
             inDate: '',
             outDate: '',
-            people: '',
+            capacity: '',
             priceRange: '',
             wifi: '',
             barbecue: '',
             cleaning: '',
             parking: '',
         })
-        //dispatch(getCabins());
+        window.location.reload();
     }
 
     const [filters, setFilters] = useState({
         inDate: '',
         outDate: '',
-        people: '',
+        capacity: '',
         priceRange: '',
         wifi: '',
         barbecue: '',
@@ -72,9 +73,10 @@ export default function Reserva() {
         console.log(filters);
     }
 
-    function handleSubmit(e) {
+    function handleFilters(e) {
+        e.preventDefault();
+        console.log('Filters submited');
         dispatch(filterCabins(filters));
-        console.log('Filters submited')
     }
 
     return (
@@ -105,7 +107,7 @@ export default function Reserva() {
                 </li>
                 <li>
                     <label><IoMdPeople /> Cantidad de personas </label>
-                    <select onChange={e => handleChange(e)} name='people'>
+                    <select onChange={e => handleChange(e)} name='capacity'>
                         <option value='selected' hidden>Personas</option>
                         <option value='all'>Todavía no sé</option>
                         <option value='2' >2</option>
@@ -118,6 +120,7 @@ export default function Reserva() {
                     <label><MdAttachMoney /> Precio por noche en pesos </label>
                     {/*SLIDER<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/}
                     <RangeSlider />
+                    {/* <Slider/> */}
                 </li>
                 <li>
                     <hr />
@@ -173,37 +176,46 @@ export default function Reserva() {
                         </li>
                     </ul>
                 </li>
+                <hr/>
                 <li>
                     <button
-                        type='submit'
                         className={styles.reload}
                         id={styles.search}
-                        onSubmit={e => handleSubmit(e)}
-                    ><span><ImSearch /></span></button>
+                        onClick={(e) => handleFilters(e)}
+                    ><span><ImSearch /> Iniciar búsqueda</span></button>
                 </li>
             </ul >
 
 
-            <div className={styles.cabinCont}>
-                <div className={styles.paginado1}>
-                    <Paginado cabinsPerPage={cabinsPerPage} allCabins={allCabins.length} paginado={paginado} />
+            <div className={styles.cabinPage}>
+                <div className={styles.cabinCont}>
+                    {
+                        currentCabins?.map(el => {
+                            return (
+                                <div key={el.number} >
+                                    <Cabaña
+                                        number={el.Number}
+                                        capacity={el.Capacity}
+                                        notAvailable={el.NotAvailable}
+                                        price={el.Price}
+                                        description={el.Description}
+                                        image={el.Image}
+                                        coffe={el.Coffe}
+                                        microwaves={el.Microwaves}
+                                        heat={el.Heat}
+                                        barbecue={el.Barbecue}
+                                        wifi={el.Wifi}
+                                        cleaning={el.Cleaning}
+                                        refrigerator={el.Refrigerator}
+                                        stove={el.Stove}
+                                        parking={el.Parking}
+                                    />
+                                </div>
+                            )
+                        })
+                    }
                 </div>
-                {
-                    currentCabins?.map(el => {
-                        return (
-                            <div key={el.number} >
-                                <Cabaña
-                                    number={el.number}
-                                    capacity={el.capacity}
-                                    available={el.available}
-                                    price={el.price}
-                                    description={el.description}
-                                    img={el.img} />
-                            </div>
-                        )
-                    })
-                }
-                <div className={styles.paginado2}>
+                <div className={styles.paginado}>
                     <Paginado cabinsPerPage={cabinsPerPage} allCabins={allCabins.length} paginado={paginado} />
                 </div>
             </div>

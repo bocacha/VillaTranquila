@@ -17,61 +17,7 @@ const server = express();
 
 server.name = 'API';
 
-const config = {
-  authRequired: false,
-  auth0Logout: true,
-  baseURL:"https://villatranquila.herokuapp.com/" ,
-  clientID: "6xQjpivlJTOTqemgaPcllFj7J3DcKoCa",
-  issuerBaseURL:"https://dev-2py8q024.us.auth0.com/" ,
-  secret:"Ec7hPBdyXtTAt4N8X61H4tri-njWh77woe2amvzahBbtkCe9WF8Mo3pfhLlDc-5r"
-};
 
-// auth router attaches /login, /logout, and /callback routes to the baseURL
-server.use(auth(config));
-
-const checkJwt = jwt({
-  // Dynamically provide a signing key
-  // based on the kid in the header and 
-  // the signing keys provided by the JWKS endpoint.
-  secret: jwksRsa.expressJwtSecret({
-    cache: true,
-    rateLimit: true,
-    jwksRequestsPerMinute: 5,
-    jwksUri: `https://dev-2py8q024.us.auth0.com/.well-known/jwks.json`    
-  }),
-
-  // Validate the audience and the issuer.
-  audience: 'https://villatranquila.herokuapp.com/',
-  issuer: `https://dev-2py8q024.us.auth0.com/`,
-  algorithms: ['RS256']
-});
-
-// req.isAuthenticated is provided from the auth router
-server.get('/', (req, res) => {
-  res.send(req.oidc.isAuthenticated() ? 'Logged in' : 'Logged out')
-});
-
-server.get('/profile', requiresAuth(),  (req, res) => {
-  res.send(JSON.stringify(req.oidc));
-});
-
-server.get('/api/private',requiresAuth(), checkJwt, function(req, res) {
-  res.json({
-    message: 'Hello from a private endpoint! You need to be authenticated to see this.'
-  });
-});
-
-
-
-const checkScopes = jwtAuthz([ 'admin:read' ]);
-
-server.get('/api/private-scoped',requiresAuth(), checkJwt, checkScopes, function(req, res) {
-  res.json({
-    message: 'Hello from a private endpoint! You need to be authenticated and have a scope of read:messages to see this.'
-  });
-});
-
-server.use(checkJwt);
 
 server.use(express.urlencoded({ extended: true, limit: '50mb' }));
 server.use(express.json({ limit: '50mb' }));

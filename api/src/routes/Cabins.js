@@ -16,7 +16,22 @@ router.get("/", async (req, res)=>{
 });
 
 router.post("/NewCabin" , (req, res)=>{
-    const {Number, Capacity, Available, Price, Description} = req.body;
+    const {
+        Number,
+        Capacity,
+        Available,
+        Price,
+        Description,
+        Coffe,
+        Microwaves,
+        Heat,
+        Barbecue,
+        Wifi,
+        Cleaning,
+        Refrigerator,
+        Stove,
+        Parking,    
+    } = req.body;
     Cabins.create({
         Number, 
         Capacity, 

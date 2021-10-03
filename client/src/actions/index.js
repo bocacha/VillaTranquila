@@ -41,7 +41,7 @@ export function getCabins() {
 
 export function filterCabins(payload){
   return {
-    tpe: FILTER_CABINS,
+    type: FILTER_CABINS,
     payload,
   }
 }

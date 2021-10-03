@@ -80,8 +80,8 @@
     font-size: large;
     transition: all 0.2s ease;
     cursor: pointer;
-    margin-top: 85px;
     padding: 5px 20px;
+    margin-top: 85px;;
   }
   .reload span {
     cursor: pointer;
@@ -124,6 +124,7 @@
 #search{
   width: 100%;
   justify-content: center;
+  margin-top: 0;
 }
 #search span{
   display: inline-block;
@@ -132,14 +133,14 @@
   align-items: center;
 }
 #search span:after{
-  content: 'Iniciar búsqueda';
+  content: '\00bb';
   transition: 0.5s;
 }
 #search:hover span{
   padding-left: 10px;
 }
 
-.cabinCont{
+.cabinPage{
   width: 75%;
   height: 100%;
   position: fixed;
@@ -148,14 +149,12 @@
   margin-left: 25%;
 }
 
-.paginado1{
-  position: absolute;
-  top: 80px;
-  margin-left: 50%;
+.cabinCont{
+  position: relative;
+  margin: 10% 5% 10% 5%  
 }
 
-.paginado2{
+.paginado{
   position: absolute;
-  bottom: 20px;
-  margin-left: 50%;
+  margin-left: 45%;
 }
