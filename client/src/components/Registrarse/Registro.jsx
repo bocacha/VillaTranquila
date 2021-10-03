@@ -40,6 +40,7 @@ export default function Usuarios() {
       Phone: "",
       Email: "",
     });
+    // window.location.href='/login'
   }
 
   return (

@@ -110,7 +110,7 @@ const Cabañas = () => {
                 name="Number"
                 value={cabain.Number}
                 onChange={handleChange}
-                placeholder="Numero de Personas"
+                placeholder="Numero de Habitaciones"
                 className={styles.formInputs}
                 requiered
               />
@@ -121,7 +121,7 @@ const Cabañas = () => {
                 name="Capacity"
                 value={cabain.Capacity}
                 onChange={handleChange}
-                placeholder="Capacidad"
+                placeholder="Numero de Camas"
                 className={styles.formInp}
                 requiered
               />
@@ -261,7 +261,7 @@ const Cabañas = () => {
                 name="Number"
                 value={edit.Number}
                 onChange={handleChangeEdit}
-                placeholder="Numero de Personas"
+                placeholder="Numero de Habitaciones"
                 className={styles.formInputs}
               />
             </div>
@@ -271,7 +271,7 @@ const Cabañas = () => {
                 name="Capacity"
                 value={edit.Capacity}
                 onChange={handleChangeEdit}
-                placeholder="Capacidad"
+                placeholder="Numero de Camas"
                 className={styles.formInputs}
               />
             </div>
