@@ -55,57 +55,90 @@ export default function Usuarios() {
             value={input.UserName}
             name="UserName"
             onChange={(e) => handleChange(e)}
-            placeholder="UserName"
+            placeholder="Nombre de usuario"
+            pattern='^[0-9a-zA-Z]+$'
             className={styles.UserName}
+            required
           />
+
           <input
             type="text"
             value={input.UserPassword}
             name="UserPassword"
             onChange={(e) => handleChange(e)}
-            placeholder="UserPassword"
+            placeholder="Contraseña"
             className={styles.UserPassword}
+            pattern= '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$'
+            required
           />
+            {/* Minimo 8 caracteres
+            Maximo 15
+            Al menos una letra mayúscula
+            Al menos una letra minucula
+            Al menos un dígito
+            No espacios en blanco
+            Al menos 1 caracter especial */}
+
           <input
             type="text"
             value={input.FirstName}
             name="FirstName"
             onChange={(e) => handleChange(e)}
-            placeholder="FirstName"
+            placeholder="Nombre"
             className={styles.FirstName}
+            pattern='[a-zA-Z ]{2,254}'
+            required
           />
+
           <input
             type="text"
             value={input.LastName}
             name="LastName"
             onChange={(e) => handleChange(e)}
-            placeholder="LastName"
+            placeholder="Apellido"
             className={styles.LastName}
+            pattern='[a-zA-Z ]{2,254}'
+            required
           />
+
           <input
             type="text"
             value={input.Address}
             name="Address"
             onChange={(e) => handleChange(e)}
-            placeholder="Address"
+            placeholder="Direccion"
+            pattern='^[0-9a-zA-Z]+$'
             className={styles.Address}
+            required
           />
+
           <input
             type="text"
             value={input.Phone}
             name="Phone"
             onChange={(e) => handleChange(e)}
-            placeholder="Phone"
+            placeholder="Teléfono"
             className={styles.Phone}
+            maxLength="17" 
+            minLength="10" 
+            pattern="[+]{2}[0-9]{10-14}" 
+            placeholder="+54 9 11 12345678" 
+            required
           />
+
+          <small>Ej: +54 9 11 12345678 </small>
+
           <input
-            type="text"
+            type="email"
             value={input.Email}
             name="Email"
             onChange={(e) => handleChange(e)}
             placeholder="Email"
+            pattern='^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$'
             className={styles.Email}
+            required
           />
+
           <div className={styles.btns}>
             <button type="submit" className={styles.submit_btn}>
               Crear

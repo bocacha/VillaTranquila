@@ -52,12 +52,13 @@ const Cabañas = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Numero de Personas</label>
+          <label>Numero de Cabaña</label> 
           <input
-            type="text"
+            type="number"
             name="Number"
             value={cabain.Number}
             onChange={handleChange}
+            required
           />
         </div>
         <div>
@@ -67,6 +68,7 @@ const Cabañas = () => {
             name="Capacity"
             value={cabain.Capacity}
             onChange={handleChange}
+            required
           />
         </div>
         <div>
@@ -76,6 +78,7 @@ const Cabañas = () => {
             name="Available"
             value={cabain.Available}
             onChange={handleChange}
+            required
           />
         </div>
         <div>
@@ -85,15 +88,18 @@ const Cabañas = () => {
             name="Price"
             value={cabain.Price}
             onChange={handleChange}
+            max="50000"
+            requiered
           />
         </div>
         <div>
           <label>Descripcion</label>
-          <input
+          <textarea
             type="text"
             name="Description"
             value={cabain.Description}
             onChange={handleChange}
+            required
           />
         </div>
         <div>

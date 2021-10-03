@@ -45,17 +45,21 @@ export default function Fotos() {
             type="text"
             value={input.Description}
             name="Description"
+            maxLength="100"
             onChange={(e) => handleChange(e)}
             placeholder="Description"
             className={styles.Description}
+            required
           />
           <input
-            type="text"
+            type="file" 
+            accept="image/*"
             value={input.Url}
             name="Url"
             onChange={(e) => handleChange(e)}
             placeholder="Url"
             className={styles.Url}
+            required
           />
           <div className={styles.btns}>
             <button type="submit" className={styles.submit_btn}>
