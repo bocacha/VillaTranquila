@@ -1,0 +1,39 @@
+.paginado{
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.numeros {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    font-size: medium;
+}
+.numeros li {
+    display: inline;
+}
+
+.numeros li button {
+    float: left;
+    padding: 8px 18px;
+    border-radius: 8px;
+    background-color: #ddbea9;
+    border: transparent;
+    margin: 3px;
+}
+
+.numeros li button:hover{
+    background-color: #cb997e;
+    color: black;
+  }
+
+.numeros li button:active{
+    background-color: #cb997e;
+    box-shadow: 0 1px #666;
+    transform: translateY(1px);
+}
+
+.numeros li button:focus{
+    background-color: #cb997e;
+}

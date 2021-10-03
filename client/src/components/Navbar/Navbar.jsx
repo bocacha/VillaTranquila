@@ -19,7 +19,7 @@ export default function Navbar() {
             <ul className={styles.navbar} >
                 <div>
                     <li>
-                        <Link to='/' ><button><strong>Home <GoHome/></strong></button></Link>
+                        <Link to='/' ><button><strong>Inicio <GoHome/></strong></button></Link>
                     </li>
                     <li>
                         <Link to='/reserva' ><button><strong>Comenzar reserva <ImCalendar /></strong></button></Link>
@@ -37,7 +37,7 @@ export default function Navbar() {
                 <div className={styles.logins}>
                     <li >
                         <Link to="/login">
-                        <button className={styles.signlog}><strong>Login</strong></button>
+                        <button className={styles.signlog}><strong>Login <GoSignIn/> </strong></button>
                         </Link>
                     </li>
                     <li>
