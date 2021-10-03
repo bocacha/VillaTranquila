@@ -83,12 +83,14 @@ const Cabañas = () => {
     e.preventDefault();
     alert("su cabaña fue creada con exito");
     dispatch(createCabains(cabain, { token }));
+    window.location.reload();
   };
   const handleeditSubmit = (e) => {
     const { token } = logeduser;
     e.preventDefault();
     alert("su cabaña fue creada con exito");
     dispatch(editCabains(edit, { token }));
+    window.location.reload();
   };
 
   

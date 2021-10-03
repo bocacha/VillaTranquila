@@ -60,6 +60,7 @@ export default function Pagos() {
       PaydAmount: "",
     });
     dispatch(readPayment({ token }));
+    window.location.reload();
   }
   function handleSubmitEdit(e) {
     e.preventDefault();

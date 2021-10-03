@@ -39,7 +39,7 @@ export default function Navbar() {
                     </li>
                     <li>
                     {logeduser.admin ? (
-                        <Link to='/admin' ><button><strong>Administardor <RiAdminFill /></strong></button></Link>
+                        <Link to='/admin' ><button><strong>Administrador <RiAdminFill /></strong></button></Link>
           ) : (
 <div></div>)         
 } 
@@ -55,7 +55,7 @@ export default function Navbar() {
                         </Link>
                         <Link to="/Singup">
                     <li>
-                        <button className={styles.signlog} ><strong>Cerrar Sesion <RiLoginBoxLine /></strong></button>
+                        <button className={styles.signlog}><strong>Registrarse<RiLoginBoxLine /></strong></button>                 
                     </li>
                         </Link>                   
                     </div>
@@ -63,7 +63,7 @@ export default function Navbar() {
           ) : (
                     <Link to="/">
                     <li>
-                        <button className={styles.signlog} onClick={()=>Logout()} ><strong>Registrarse<RiLoginBoxLine /></strong></button>                 
+                        <button className={styles.signlog} onClick={()=>Logout()} ><strong>Cerrar Sesion <RiLoginBoxLine /></strong></button>
                     </li>
                         </Link>
 
