@@ -11,12 +11,19 @@ import { IoMdPeople } from 'react-icons/io';
 import { MdAttachMoney, MdRoomService } from 'react-icons/md';
 import { ImCalendar, ImSearch } from 'react-icons/im';
 import { AiOutlineReload } from 'react-icons/ai';
+import { Logeduser } from "../../actions";
 import RangeSlider from "./Slider/Slider";
 import Slider from "./Slider/Slider";
 
+
 export default function Reserva() {
     const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(Logeduser())
+    }, [dispatch]);
+    const dispatch = useDispatch();
     const allCabins = useSelector(state => state.cabins);
+
 
     // Paginado---------------------------------------------------------------
     const [currentPage, setCurrentPage] = useState(1);

@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from "react";
-import styles from "./Usuarios.module.css";
+import styles from "./Registro.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { createUsers} from "../../actions/index";
+import { Link } from "react-router-dom";
+import { Loguser } from "../../actions";
+import Navbar from "../Navbar/Navbar";
 
 export default function Usuarios() {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(Loguser())
+}, [dispatch]);
   const allUsers = useSelector((state) => state.usuarios);
   const [input, setInput] = useState({
     UserName: "",
@@ -39,25 +45,26 @@ export default function Usuarios() {
 
   return (
     <div className={styles.container}>
+      <Navbar />
       {/* CREAR */}
-      <div>
-        Crear un nuevo usuario
-        <form onSubmit={(e) => handleSubmit(e)}>
+      <div className={styles.containerForm}>
+        <div className={styles.title}>Registrate</div>
+        <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
           <input
             type="text"
             value={input.UserName}
             name="UserName"
             onChange={(e) => handleChange(e)}
             placeholder="UserName"
-            className={styles.UserName}
+            className={styles.formInputs}
           />
           <input
-            type="text"
+            type="password"
             value={input.UserPassword}
             name="UserPassword"
             onChange={(e) => handleChange(e)}
             placeholder="UserPassword"
-            className={styles.UserPassword}
+            className={styles.formInputs}
           />
           <input
             type="text"
@@ -65,7 +72,7 @@ export default function Usuarios() {
             name="FirstName"
             onChange={(e) => handleChange(e)}
             placeholder="FirstName"
-            className={styles.FirstName}
+            className={styles.formInputs}
           />
           <input
             type="text"
@@ -73,7 +80,7 @@ export default function Usuarios() {
             name="LastName"
             onChange={(e) => handleChange(e)}
             placeholder="LastName"
-            className={styles.LastName}
+            className={styles.formInputs}
           />
           <input
             type="text"
@@ -81,7 +88,7 @@ export default function Usuarios() {
             name="Address"
             onChange={(e) => handleChange(e)}
             placeholder="Address"
-            className={styles.Address}
+            className={styles.formInputs}
           />
           <input
             type="text"
@@ -89,7 +96,7 @@ export default function Usuarios() {
             name="Phone"
             onChange={(e) => handleChange(e)}
             placeholder="Phone"
-            className={styles.Phone}
+            className={styles.formInputs}
           />
           <input
             type="text"
@@ -97,12 +104,13 @@ export default function Usuarios() {
             name="Email"
             onChange={(e) => handleChange(e)}
             placeholder="Email"
-            className={styles.Email}
+            className={styles.formInputs}
           />
           <div className={styles.btns}>
-            <button type="submit" className={styles.submit_btn}>
+            <button type="submit" className={styles.btn}>
               Crear
             </button>
+              </Link>
           </div>
         </form>
       </div>

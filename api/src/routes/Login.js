@@ -28,8 +28,10 @@ router.post("/", async (req, res)=>{
     }
     const token = jwt.sign(userForToken,config.JWT_SECRET)
     res.send({
-        name: user.FirstName,
+        userid: user.ID,
         user: user.UserName,
+        admin: user.Admin,
+        email: user.Email,
         token
     })
 })
