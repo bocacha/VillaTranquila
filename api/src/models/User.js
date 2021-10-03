@@ -35,15 +35,9 @@ module.exports = (sequelize) => {
       }
    },
 
-   UserPassword:{
+   UserPasswordHashed:{
     type: DataTypes.STRING,
     allownull: false,
-    validate:{
-        len:{
-          args:[8,20],
-          msg:"El UserPassword debe tener entre 8 y 20 caracteres"
-        }
-      }
    },
    Address:{
      type: DataTypes.STRING,

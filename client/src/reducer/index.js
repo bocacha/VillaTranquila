@@ -4,7 +4,6 @@ import {
   FILTER_BY_PRICE,
   SEND_EMAIL,
   CREATE_RESERVATION,
-  EDIT_RESERVATION,
   CREATE_SERVICES,
   CREATE_USERS,
   CREATE_PAYMENT,
@@ -16,16 +15,31 @@ import {
   READ_USERS,
   READ_SERVICES,
   READ_CABINS,
+  EDIT_USER,
+  EDIT_RESERVATIONS,
+  EDIT_SERVICES,
+  EDIT_PAYMENT,
+  EDIT_PICTURES,
+  LOG_USER,
+  REMOVE_CABAINS,
+  REMOVE_RESERVATIONS,
+  REMOVE_SERVICES,
+  REMOVE_PICTURES,
+  REMOVE_PAYMENTS,
+  REMOVE_USERS
+  
 } from "../actions";
 const initialState = {
   cabins: [],
   allCabins: [],
   pagos: [],
-  reservaciones: [],
-  fotos:[],
+  C: [],
+  fotos: [],
   usuarios: [],
   servicios: [],
   cabañas: [],
+  user:{},
+  reservaciones:[],
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -55,6 +69,11 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         cabins: cabinsFilteredPrice,
       };
+      case LOG_USER:
+        return {
+          ...state,
+          user: action.payload,
+        };
     case SEND_EMAIL:
       return {
         ...state,
@@ -113,10 +132,56 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         cabañas: action.payload,
       };
-    case EDIT_RESERVATION:
+    case EDIT_USER:
       return {
         ...state,
       };
+    case EDIT_RESERVATIONS:
+      return {
+        ...state,
+      };
+    case EDIT_SERVICES:
+      return {
+        ...state,
+      };
+    case EDIT_PAYMENT:
+      return {
+        ...state,
+      };
+    case EDIT_PICTURES:
+      return {
+        ...state,
+      };
+      case REMOVE_CABAINS:
+        return {
+          ...state,
+          cabañas: state.cabañas.filter((cabaña)=> cabaña.id !== action.payload)
+        };
+        case REMOVE_RESERVATIONS:
+          return {
+            ...state,
+            reservaciones: state.reservaciones.filter((reserva)=> reserva.id !== action.payload)
+          };
+        case REMOVE_SERVICES:
+          return {
+            ...state,
+            servicios: state.servicios.filter((reserva)=> reserva.id !== action.payload)
+          };
+        case REMOVE_PICTURES:
+          return {
+            ...state,
+            fotos: state.fotos.filter((foto)=> foto.id !== action.payload)
+          };
+        case REMOVE_PAYMENTS:
+          return {
+            ...state,
+            pagos: state.pagos.filter((pago)=> pago.id !== action.payload)
+          };
+        case REMOVE_USERS:
+          return {
+            ...state,
+            usuarios: state.usuarios.filter((usuario)=> usuario.id !== action.payload)
+          };
     default:
       return state;
   }

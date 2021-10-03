@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Usuarios.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createUsers, readUsers } from "../../../actions";
+import { createUsers, readUsers, editUsers } from "../../../actions";
 import UsuariosDetail from "./UsuariosDetail";
+import { Link } from "react-router-dom";
 
 export default function Usuarios() {
   const dispatch = useDispatch();
   const allUsers = useSelector((state) => state.usuarios);
+  const logeduser = useSelector ((state) => state.user)
   const [input, setInput] = useState({
+    id:"",
     UserName: "",
     UserPassword: "",
     FirstName: "",
@@ -15,6 +18,9 @@ export default function Usuarios() {
     Address: "",
     Phone: "",
     Email: "",
+    Admin: "",
+    Premium: "",
+    Blocked: "",
   });
 
   useEffect(() => {
@@ -28,11 +34,32 @@ export default function Usuarios() {
     });
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    dispatch(createUsers(input));
-    alert("Usuario creado con éxito");
+  function handleSelectAdmin(e) {
     setInput({
+      ...input,
+      Admin: e.target.value,
+    });
+  }
+  function handleSelectPremium(e) {
+    setInput({
+      ...input,
+      Premium: e.target.value,
+    });
+  }
+  function handleSelectBlocked(e) {
+    setInput({
+      ...input,
+      Blocked: e.target.value,
+    });
+  }
+
+  function handleSubmit(e) {
+    const {token} = logeduser
+    e.preventDefault();
+    dispatch(editUsers(input));
+    alert("Usuario editado con éxito");
+    setInput({
+      id:"",
       UserName: "",
       UserPassword: "",
       FirstName: "",
@@ -40,16 +67,32 @@ export default function Usuarios() {
       Address: "",
       Phone: "",
       Email: "",
+      Admin: "",
+      Premium: "",
+      Blocked: "",
     });
-    window.location.reload();
+    dispatch(readUsers({token}))
   }
 
   return (
     <div className={styles.container}>
+      <div className={styles.btnVolver}>
+        <Link to="/admin">
+          <button>Volver</button>
+        </Link>
+      </div>
       {/* CREAR */}
       <div>
-        Crear un nuevo usuario
+        Editar un nuevo usuario
         <form onSubmit={(e) => handleSubmit(e)}>
+          <input
+            type="text"
+            value={input.id}
+            name="id"
+            onChange={(e) => handleChange(e)}
+            placeholder="id"
+            className={styles.id}
+          />
           <input
             type="text"
             value={input.UserName}
@@ -106,19 +149,50 @@ export default function Usuarios() {
             placeholder="Email"
             className={styles.Email}
           />
+          <select
+            onChange={(e) => handleSelectAdmin(e)}
+            value={input.Admin}
+            className={styles.select}
+            required
+          >
+            <option value="">Admin:</option>
+            <option value="true">true</option>
+            <option value="false">false</option>
+          </select>
+          <select
+            onChange={(e) => handleSelectPremium(e)}
+            value={input.Premium}
+            className={styles.select}
+            required
+          >
+            <option value="">Premium:</option>
+            <option value="true">true</option>
+            <option value="false">false</option>
+          </select>
+          <select
+            onChange={(e) => handleSelectBlocked(e)}
+            value={input.Blocked}
+            className={styles.select}
+            required
+          >
+            <option value="">Blocked:</option>
+            <option value="true">true</option>
+            <option value="false">false</option>
+          </select>
           <div className={styles.btns}>
             <button type="submit" className={styles.submit_btn}>
-              Crear
+              Editar
             </button>
           </div>
         </form>
       </div>
-
+    {/* VER */}
       <div>
         {allUsers?.map((el) => {
           return (
             <div className={styles.detalles} key={el.ID}>
               <UsuariosDetail
+                ID={el.ID}
                 UserName={el.UserName}
                 UserPassword={el.UserPassword}
                 FirstName={el.FirstName}
