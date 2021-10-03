@@ -85,7 +85,7 @@ if(!decodedToken.Admin){
         })
         .catch(error=>{console.log(error)})
 });
-router.delete('/RemoveReservation', (req,res) =>{
+router.put('/RemoveReservation', (req,res) =>{
     const {id}= req.body;
     if(!id){
         return res.json({status: 404},{message:"Reservation not found"})

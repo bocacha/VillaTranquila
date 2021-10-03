@@ -20,7 +20,14 @@ import {
   EDIT_SERVICES,
   EDIT_PAYMENT,
   EDIT_PICTURES,
-  LOG_USER
+  LOG_USER,
+  REMOVE_CABAINS,
+  REMOVE_RESERVATIONS,
+  REMOVE_SERVICES,
+  REMOVE_PICTURES,
+  REMOVE_PAYMENTS,
+  REMOVE_USERS
+  
 } from "../actions";
 const initialState = {
   cabins: [],
@@ -31,7 +38,8 @@ const initialState = {
   usuarios: [],
   servicios: [],
   cabañas: [],
-  user:{}
+  user:{},
+  reservaciones:[],
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -144,6 +152,36 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
+      case REMOVE_CABAINS:
+        return {
+          ...state,
+          cabañas: state.cabañas.filter((cabaña)=> cabaña.id !== action.payload)
+        };
+        case REMOVE_RESERVATIONS:
+          return {
+            ...state,
+            reservaciones: state.reservaciones.filter((reserva)=> reserva.id !== action.payload)
+          };
+        case REMOVE_SERVICES:
+          return {
+            ...state,
+            servicios: state.servicios.filter((reserva)=> reserva.id !== action.payload)
+          };
+        case REMOVE_PICTURES:
+          return {
+            ...state,
+            fotos: state.fotos.filter((foto)=> foto.id !== action.payload)
+          };
+        case REMOVE_PAYMENTS:
+          return {
+            ...state,
+            pagos: state.pagos.filter((pago)=> pago.id !== action.payload)
+          };
+        case REMOVE_USERS:
+          return {
+            ...state,
+            usuarios: state.usuarios.filter((usuario)=> usuario.id !== action.payload)
+          };
     default:
       return state;
   }

@@ -14,19 +14,23 @@ export default function Home() {
   const steps = [
     {
       id: '1',
-      message: 'Please type a number',
+      message: 'Hola bienvenido a villa tranquila en que  puedo ayudarte',
       trigger: '2',
     },
     {
       id: '2',
       user: true,
-      validator: (value) => {
-        if (value ==='pago') {
-          return 'http://localhost:3000/reserva';
-        }
-        
-      },
-      trigger: '1',
+      trigger: '3',
+    },
+    {
+      id: '3',
+      message: 'Hola bienvenido a villa tranquila en que  puedo ayudarte',
+      trigger: '4',
+    },
+    {
+      id: '4',
+      message: '  {previousValue} hola',
+      end: true,
     },
     
   ];
