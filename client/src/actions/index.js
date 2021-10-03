@@ -190,15 +190,15 @@ export function readPictures(id) {
   };
 }
 
-export function readUsers({token}) {
-  const config={
-    headers:{
-    Authorization: `Bearer ${token}`,
-  }
-  }
+export function readUsers() {
+  // const config={
+  //   headers:{
+  //   Authorization: `Bearer ${token}`,
+  // }
+  // }
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/users/", config);
+      var json = await axios.get("http://localhost:3001/users/");
       return dispatch({
         type: READ_USERS,
         payload: json.data,
