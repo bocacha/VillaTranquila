@@ -1,17 +1,21 @@
 import React from "react";
-
 import BannerIntro from "../BannerIntro/BannerIntro";
 import ChatBot from 'react-simple-chatbot';
-
 import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 import Slider from "../Slider/Slider";
 import Searchbar from "../Searchbar/Searchbar";
 //import Gallery from "../Gallery";
 import styles from "./Home.module.css";
+import{useEffect} from "react"
+import { useDispatch} from 'react-redux';
+import { Logeduser } from "../../actions";
 
 export default function Home() {
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(Logeduser());
+  }, [dispatch]);
   const steps = [
     {
       id: '1',

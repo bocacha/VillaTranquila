@@ -334,9 +334,23 @@ export function Loguser(payload) {
   return async function (dispatch) {
     try {
       let json = await axios.post("http://localhost:3001/login", payload);
+      localStorage.setItem("LogedUser", JSON.stringify(json.data));
       return dispatch({
         type: LOG_USER,
         payload: json.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+export function Logeduser() {
+  return async function (dispatch) {
+    try {
+      let json = localStorage.getItem("LogedUser");
+      return dispatch({
+        type: LOG_USER,
+        payload: JSON.parse(json),
       });
     } catch (err) {
       console.log(err);
