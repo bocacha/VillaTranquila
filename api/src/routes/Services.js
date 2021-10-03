@@ -79,7 +79,7 @@ if(!decodedToken.Admin){
         })
         .catch(error=>{console.log(error)})
 });
-router.delete('/RemoveService', (req,res) =>{
+router.put('/RemoveService', (req,res) =>{
     const {id}= req.body;
     if(!id){
         return res.json({status: 404},{message:"Service not found"})
