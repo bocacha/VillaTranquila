@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./FotosDetail.module.css";
-import styles from "./Fotos.module.css";
 import { useDispatch } from "react-redux";
 import {removePictures}  from '../../../actions'
 
