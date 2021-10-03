@@ -7,6 +7,7 @@
     z-index: 1;
     display:flex;
     justify-content: space-between;
+    font-size: large;
   }
   
   .navbar li {
@@ -21,7 +22,6 @@
     height: 43px;
     border: transparent;
     background-color: transparent;
-    font-size: medium;
     border-radius: 8px;
     margin-top: 10px;
     cursor: pointer;

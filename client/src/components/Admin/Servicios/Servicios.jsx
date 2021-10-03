@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 export default function Servicios() {
   const dispatch = useDispatch();
   const allServices = useSelector((state) => state.servicios);
-  const logeduser = useSelector ((state) => state.user);
+ const logeduser = useSelector ((state) => state.user);
   const [input, setInput] = useState({
     Name: "",
     Description: "",
@@ -33,14 +33,12 @@ export default function Servicios() {
       [e.target.name]: e.target.value,
     });
   }
-
-  useEffect(() => {
+ useEffect(() => {
     dispatch(readServices());
   }, [dispatch]);
-
-  function handleSubmit(e) {
+function handleSubmit(e) {
     const {token} = logeduser
-    e.preventDefault();
+     e.preventDefault();
     dispatch(createServices(input, {token}));
     alert("Servicio creado con éxito");
     setInput({
@@ -59,10 +57,8 @@ export default function Servicios() {
       Description: "",
       Price: "",
     });
-    window.location.reload();
-  }
-
-  return (
+ }
+return (
     <div className={styles.container}>
       <div className={styles.btnVolver}>
         <Link to="/admin">
@@ -147,7 +143,7 @@ export default function Servicios() {
           </div>
         </form>
       </div>
-      <div>
+   <div>
         {allServices?.map((el) => {
           return (
             <div className={styles.detalles} key={el.ID}>

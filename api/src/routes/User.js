@@ -10,7 +10,7 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 router.get("/", async (req, res)=>{
-try {    const authorizations = req.get("Authorization") 
+try {    /* const authorizations = req.get("Authorization") 
          let token = ""
     if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
        token = authorizations.substring(7)
@@ -24,7 +24,7 @@ try {    const authorizations = req.get("Authorization")
     }
     if(!decodedToken.Admin){
         return res.status(400).json({error:"Ops.. No tenes permisos"})
-    }
+    } */
     const dbUser = await User.findAll()
     res.send(dbUser)
 }catch(error){
@@ -92,7 +92,7 @@ router.put("/EditUser", (req,res) =>{
         })
         .catch(error=>{console.log(error)})
 });
-router.delete('/RemoveUser', (req,res) =>{
+router.put('/RemoveUser', (req,res) =>{
     const {id}= req.body;
     if(!id){
         return res.json({status: 404},{message:"User not found"})

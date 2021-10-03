@@ -1,5 +1,7 @@
 import React from "react";
 import styles from "./Cabañas.module.css";
+import { useDispatch } from "react-redux";
+import {removeCabains}  from '../../../actions'
 
 export default function CabinsDetail({ 
     ID,
@@ -19,6 +21,14 @@ export default function CabinsDetail({
     Parking
 
 }) {
+  const dispatch = useDispatch();
+
+  const handleSubmitDelete = (ID)=>{
+    console.log('funcion', ID)
+    alert("su cabaña fue Eliminada con exito");
+    let obj = {id:ID}
+    dispatch(removeCabains(obj));
+  }
   return (
     <div className={styles.container}>
       <p>ID: {ID} </p>
@@ -36,6 +46,10 @@ export default function CabinsDetail({
       <p>Refrigerator: {Refrigerator?<span>si</span>:<span>no</span>}</p>
       <p>Stove: {Stove?<span>si</span>:<span>no</span>}</p>
       <p>Parking: {Parking?<span>si</span>:<span>no</span>}</p>
+      <div>
+        <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
+      </div>
     </div>
+    
   );
 }
