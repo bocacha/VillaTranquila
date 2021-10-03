@@ -12,8 +12,8 @@ import { MdAttachMoney, MdRoomService } from 'react-icons/md';
 import { ImCalendar, ImSearch } from 'react-icons/im';
 import { AiOutlineReload } from 'react-icons/ai';
 import { Logeduser } from "../../actions";
-import RangeSlider from "./Slider/Slider";
-import Slider from "./Slider/Slider";
+import RangeSlider from "./slider/slider";
+//import Slider from "../Slider/Slider";
 
 
 export default function Reserva() {
@@ -21,7 +21,7 @@ export default function Reserva() {
     useEffect(() => {
         dispatch(Logeduser())
     }, [dispatch]);
-    const dispatch = useDispatch();
+    //const dispatch = useDispatch();
     const allCabins = useSelector(state => state.cabins);
 
 

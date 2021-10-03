@@ -11,7 +11,7 @@ export default function Pagos() {
   const dispatch = useDispatch();
   const allPayments = useSelector((state) => state.pagos);
   const [selectedDate, setSelectedDate] = useState(null);
-  const [input, setInput] = useState ({
+  //const [input, setInput] = useState ({
   const logeduser = useSelector((state) => state.user);
   const { token } = logeduser;
   const [input, setInput] = useState({
@@ -84,12 +84,12 @@ export default function Pagos() {
           <div className={styles.title}>Crear un nuevo pago</div>
           <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
              <DatePicker
-          selected={selectedDate}
-          onChange={date=> setSelectedDate(date)}
-          dateFormat='dd/MM/yyyy'
-          minDate={new Date()
+              selected={selectedDate}
+              onChange={date=> setSelectedDate(date)}
+              dateFormat='dd/MM/yyyy'
+              minDate={new Date()}
           className={styles.formInputs}
-          }
+          //}
           //isClearable
           />
 
@@ -111,7 +111,7 @@ export default function Pagos() {
               onChange={(e) => handleChange(e)}
               placeholder="Cliente id"
               className={styles.formInputs}
-              pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$
+              pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
               required
             />
             <input

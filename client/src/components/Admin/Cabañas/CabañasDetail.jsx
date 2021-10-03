@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./CabañasDetail.module.css";
-import styles from "./Cabañas.module.css";
+//import styles from "./Cabañas.module.css";
 import { useDispatch } from "react-redux";
 import {removeCabains}  from '../../../actions'
 

@@ -107,10 +107,8 @@ export default function Usuarios() {
             className={styles.formInputs}
           />
           <div className={styles.btns}>
-            <button type="submit" className={styles.btn}>
-              Crear
-            </button>
-              </Link>
+            <button type="submit" className={styles.btn}>Crear</button>
+              {/* <Link/> */}
           </div>
         </form>
       </div>
