@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createCabains, readCabains, editCabains } from "../../../actions";
+import { createCabains, readCabains,editCabains, Logeduser } from "../../../actions";
 import styles from "./Cabañas.module.css";
 import CabañasDetail from "../Cabañas/CabañasDetail";
 import { Link } from "react-router-dom";
@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Cabañas = () => {
   const dispatch = useDispatch();
   const allCabains = useSelector((state) => state.cabañas);
-  const logeduser = useSelector((state) => state.user);
+  const logeduser = useSelector ((state) => state.user);
   const [cabain, setCabain] = useState({
     Number: "",
     Capacity: "",
@@ -47,6 +47,11 @@ const Cabañas = () => {
     dispatch(readCabains());
   }, [dispatch]);
 
+
+  useEffect(() => {
+    dispatch(Logeduser());
+  }, [dispatch]);
+  
   const handleChange = (e) => {
     setCabain({
       ...cabain,
@@ -101,12 +106,13 @@ const Cabañas = () => {
           <form onSubmit={handleSubmit} className={styles.form}>
             <div>
               <input
-                type="text"
+                type="number"
                 name="Number"
                 value={cabain.Number}
                 onChange={handleChange}
                 placeholder="Numero de Personas"
                 className={styles.formInputs}
+                requiered
               />
             </div>
             <div>
@@ -116,7 +122,8 @@ const Cabañas = () => {
                 value={cabain.Capacity}
                 onChange={handleChange}
                 placeholder="Capacidad"
-                className={styles.formInputs}
+                className={styles.formInp
+                requiered
               />
             </div>
             <div>
@@ -127,6 +134,7 @@ const Cabañas = () => {
                 onChange={handleChange}
                 placeholder="Disponibilidad"
                 className={styles.formInputs}
+                requiered
               />
             </div>
             <div>
@@ -137,16 +145,19 @@ const Cabañas = () => {
                 onChange={handleChange}
                 placeholder="Precio"
                 className={styles.formInputs}
+                max="50000"
+                requiered
               />
             </div>
             <div>
-              <input
+              <textarea
                 type="text"
                 name="Description"
                 value={cabain.Description}
                 onChange={handleChange}
                 placeholder="Descripción"
                 className={styles.formInputs}
+                requiered
               />
             </div>
             <div>

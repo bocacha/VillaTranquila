@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Servicios.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createServices, readServices, editServices } from "../../../actions";
+import { createServices, readServices, editServices, Logeduser} from "../../../actions";
 import ServiciosDetail from "./ServiciosDetail";
 import { Link } from "react-router-dom";
 
@@ -33,7 +33,11 @@ export default function Servicios() {
       [e.target.name]: e.target.value,
     });
   }
- useEffect(() => {
+  useEffect(() => {
+    dispatch(Logeduser());
+  }, [dispatch]);
+  
+  useEffect(() => {
     dispatch(readServices());
   }, [dispatch]);
 function handleSubmit(e) {
@@ -76,23 +80,28 @@ return (
               name="Name"
               onChange={(e) => handleChange(e)}
               placeholder="Nombre"
-              className={styles.formInputs}
+              className={styles.formInputs} 
+              required
             />
-            <input
+            <textarea
               type="text"
               value={input.Description}
               name="Description"
               onChange={(e) => handleChange(e)}
               placeholder="Descripción"
-              className={styles.formInputs}
+              className={styles.formInputs} 
+              required
             />
             <input
-              type="text"
+              type="number"
               value={input.Price}
-              name="Price"
+              name="Price" 
+              min='1000' 
+              max='20000'
               onChange={(e) => handleChange(e)}
               placeholder="Precio"
-              className={styles.formInputs}
+              className={styles.formInputs} 
+              required
             />
             <div className={styles.btns}>
               <button type="submit" className={styles.btn}>
