@@ -10,6 +10,7 @@ import {
 import ReservacionesDetail from "./ReservacionesDetail";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
+import { Link } from "react-router-dom";
 
 export default function Reservaciones() {
 

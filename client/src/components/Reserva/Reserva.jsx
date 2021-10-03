@@ -12,8 +12,8 @@ import { MdAttachMoney, MdRoomService } from 'react-icons/md';
 import { ImCalendar, ImSearch } from 'react-icons/im';
 import { AiOutlineReload } from 'react-icons/ai';
 import { Logeduser } from "../../actions";
-import RangeSlider from "./Slider/Slider";
-import Slider from "./Slider/Slider";
+// import RangeSlider from "./Slider/Slider.jsx";
+// import Slider from "./Slider/Slider.jsx";
 
 
 export default function Reserva() {
@@ -21,7 +21,6 @@ export default function Reserva() {
     useEffect(() => {
         dispatch(Logeduser())
     }, [dispatch]);
-    const dispatch = useDispatch();
     const allCabins = useSelector(state => state.cabins);
 
 
@@ -49,7 +48,9 @@ export default function Reserva() {
             inDate: '',
             outDate: '',
             capacity: '',
-            priceRange: '',
+            // priceRange: '',
+            priceMin: '',
+            priceMax: '',
             wifi: '',
             barbecue: '',
             cleaning: '',
@@ -62,7 +63,9 @@ export default function Reserva() {
         inDate: '',
         outDate: '',
         capacity: '',
-        priceRange: '',
+        // priceRange: '',
+        priceMin: '',
+        priceMax: '',
         wifi: '',
         barbecue: '',
         cleaning: '',
@@ -124,10 +127,39 @@ export default function Reserva() {
                     </select>
                 </li>
                 <li>
-                    <label><MdAttachMoney /> Precio por noche en pesos </label>
+                    <label><MdAttachMoney /> Rango de precios por noche: </label>
                     {/*SLIDER<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/}
-                    <RangeSlider />
+                    {/* <RangeSlider /> */}
                     {/* <Slider/> */}
+                    {/* <select onChange={e => handleChange(e)} name='priceRange'>
+                        <option value='selected' hidden>$</option>
+                        <option value='all'>No tengo precio definido</option>
+                        <option value='1500 - 3000' >1500 - 3000</option>
+                        <option value='3001 - 4500'>3001 - 4500</option>
+                        <option value='4501 - 6000'>4501 - 6000</option>
+                        <option value='6001 - 7500'>6001 - 7500</option>
+                        <option value='7501 - 9000'>7501 - 9000</option>
+                    </select> */}
+                    <div id={styles.priceRange}>
+                        <select onChange={e => handleChange(e)} name='priceMin' className={styles.prices}>
+                            <option value='selected' hidden>Mínimo</option>
+                            <option value='all'>Sin mínimo</option>
+                            <option value='1500'>$1500</option>
+                            <option value='3000'>$3000</option>
+                            <option value='4500'>$4500</option>
+                            <option value='6000'>$6000</option>
+                            <option value='7500'>$7500</option>
+                        </select>
+                        <select onChange={e => handleChange(e)} name='priceMax' className={styles.prices}>
+                            <option value='selected' hidden>Máximo</option>
+                            <option value='all'>Sin máximo</option>
+                            <option value='3000'>$3000</option>
+                            <option value='4500'>$4500</option>
+                            <option value='6000'>$6000</option>
+                            <option value='7500'>$7500</option>
+                            <option value='9000'>$9000</option>
+                        </select>
+                    </div>
                 </li>
                 <li>
                     <hr />
@@ -183,7 +215,7 @@ export default function Reserva() {
                         </li>
                     </ul>
                 </li>
-                <hr/>
+                <hr />
                 <li>
                     <button
                         className={styles.reload}

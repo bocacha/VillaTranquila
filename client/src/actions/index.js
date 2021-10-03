@@ -6,7 +6,6 @@ export const SEND_EMAIL = "SEND_EMAIL";
 export const FILTER_CABINS = 'FILTER_CABINS';
 export const FILTER_BY_CAPACITY = "FILTER_BY_CAPACITY";
 export const FILTER_BY_PRICE = "FILTER_BY_PRICE";
-export const SEND_EMAIL = "SEND_EMAIL";
 export const CREATE_RESERVATION = "CREATE_RESERVATION";
 export const CREATE_SERVICES = "CREATE_SERVICES"; 
 export const CREATE_USERS = "CREATE_USERS"; 
@@ -31,6 +30,7 @@ export const REMOVE_SERVICES= "REMOVE_SERVICES";
 export const REMOVE_PICTURES= "REMOVE_PICTURES";
 export const REMOVE_PAYMENTS= "REMOVE_PAYMENTS";
 export const REMOVE_USERS= "REMOVE_USERS";
+
 export function getCabins() {
   return async function (dispatch) {
     try {
@@ -44,27 +44,6 @@ export function getCabins() {
     }
   };
 }
-
-// export function filterCabinsByCapacity(payload) {
-//   return {
-//     type: FILTER_BY_CAPACITY,
-//     payload,
-//   };
-// }
-
-// export function filterCabinsByPrice(payload) {
-//   return {
-//     type: FILTER_BY_PRICE,
-//     payload,
-//   };
-// }
-
-// export function filterCabinsByServices(payload){
-//   return {
-//     type: FILTER_BY_SERVICES,
-//     payload,
-//   };
-// }
 
 export function filterCabins(payload){
   return {
