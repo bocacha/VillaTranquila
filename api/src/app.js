@@ -1,3 +1,4 @@
+
 const express = require('express');
 const cookieParser = require('cookie-parser');
 //const bodyParser = require('body-parser');
@@ -7,8 +8,6 @@ const cors = require('cors');
 require('dotenv').config()
 require('./db.js');
 const server = express();
-
-
 server.name = 'API';
 
 server.use(express.urlencoded({ extended: true, limit: '50mb' }));

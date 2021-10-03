@@ -10,21 +10,23 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 router.get("/", async (req, res)=>{
-try {    const authorizations = req.get("Authorization") 
-         let token = ""
-    if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
-       token = authorizations.substring(7)
-       console.log(token)
-    }
-    const decodedToken= jwt.verify(token, config.JWT_SECRET)
-    if(!token || !decodedToken.id){
-        return res.status(401).json({
-            error:"token missing or invalid"
-        })
-    }
-    if(!decodedToken.Admin){
-        return res.status(400).json({error:"Ops.. No tenes permisos"})
-    }
+try {    
+    // const authorizations = req.get("Authorization") 
+    //      let token = ""
+    // if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
+    //    token = authorizations.substring(7)
+    //    console.log(token)
+    // }
+    // const decodedToken= jwt.verify(token, config.JWT_SECRET)
+    // if(!token || !decodedToken.id){
+    //     return res.status(401).json({
+    //         error:"token missing or invalid"
+    //     })
+    // }
+    // if(!decodedToken.Admin){
+    //     return res.status(400).json({error:"Ops.. No tenes permisos"})
+    // }
+
     const dbUser = await User.findAll()
     res.send(dbUser)
 }catch(error){
@@ -103,7 +105,20 @@ router.put("/EditUser", async (req,res) =>{
             return res.status(200).json(doneTemp)
         })
         .catch(error=>{console.log(error)})
-})
+});
+router.put('/RemoveUser', (req,res) =>{
+    const {id}= req.body;
+    if(!id){
+        return res.json({status: 404},{message:"User not found"})
+    }
+    User.destroy(
+        {where:{ID: id}}
+    ).then (doneTemp=>{
+        return res.status(200).json(doneTemp)
+    })
+    .catch(error=>{console.log(error)})
+        
+});  
 
 
 module.exports = router;

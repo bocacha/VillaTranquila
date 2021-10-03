@@ -35,12 +35,12 @@ module.exports = (sequelize) => {
      allowNull: false,
      defaultValue: false
   },
-  Microondas:{
+  Microwaves:{
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: false
   },
-  Calefaccion:{
+  Heat:{
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: false
