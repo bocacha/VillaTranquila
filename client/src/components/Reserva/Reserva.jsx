@@ -21,7 +21,6 @@ export default function Reserva() {
     useEffect(() => {
         dispatch(Logeduser())
     }, [dispatch]);
-    const dispatch = useDispatch();
     const allCabins = useSelector(state => state.cabins);
 
 
