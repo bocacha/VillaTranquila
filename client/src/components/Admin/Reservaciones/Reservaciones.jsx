@@ -7,8 +7,14 @@ import {
   readReservation,
 } from "../../../actions";
 import ReservacionesDetail from "./ReservacionesDetail";
+import DatePicker from "react-datepicker";
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function Reservaciones() {
+
+  const [selectDateCI, setSelectDateCI] = useState(null);
+  const [selectDateCO, setSelectDateCO] = useState(null);
+
   const dispatch = useDispatch();
   const allReservations = useSelector((state) => state.reservaciones);
   const [input, setInput] = useState({
@@ -57,48 +63,75 @@ export default function Reservaciones() {
             value={input.Checkin}
             name="Checkin"
             onChange={(e) => handleChange(e)}
-            placeholder="Checkin"
+            placeholder="Fecha de entrada"
             className={styles.Checkin}
+            required
           />
+
+          {/* <DatePicker
+          selected={selectDateCI}
+          onChange={date=> setSelectDateCI(date)}
+          dateFormat='dd/MM/yyyy'
+          minDate={new Date()}
+          //isClearable
+          /> */}
+
           <input
             type="text"
             value={input.Checkout}
             name="Checkout"
             onChange={(e) => handleChange(e)}
-            placeholder="Checkout"
+            placeholder="Fecha de salida"
             className={styles.Checkout}
+            required
           />
+{/* 
+          <DatePicker
+          selected={selectDateCO}
+          onChange={date=> setSelectDateCO(date)}
+          dateFormat='dd/MM/yyyy'
+          minDate={new Date()}
+          //isClearable
+          /> */}
+
           <input
             type="text"
             value={input.UserId}
             name="UserId"
             onChange={(e) => handleChange(e)}
-            placeholder="UserId"
+            placeholder="ID usuario"
             className={styles.UserId}
+            pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
+            required
           />
           <input
             type="text"
             value={input.Paymentsid}
             name="Paymentsid"
             onChange={(e) => handleChange(e)}
-            placeholder="Paymentsid"
+            placeholder="ID de pago"
             className={styles.paymentsid}
+            pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
+            required
           />
           <input
             type="text"
             value={input.Cabinid}
             name="Cabinid"
             onChange={(e) => handleChange(e)}
-            placeholder="Cabinid"
+            placeholder="ID de cabaña"
             className={styles.cabinid}
+            pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
+            required
           />
           <input
             type="text"
             value={input.ExtraServices}
             name="ExtraServices"
             onChange={(e) => handleChange(e)}
-            placeholder="ExtraServices"
+            placeholder="Servicios Extras"
             className={styles.extraServices}
+            required
           />
           <div className={styles.btns}>
             <button type="submit" className={styles.submit_btn}>
