@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useDispatch,  } from "react-redux";
 import {useHistory} from "react-router-dom";
 import { sendEmail } from "../../actions";
-import style from '../Contacto/Contacto.module.css'
+import style from '../Contacto/Contacto.module.css';
+import Navbar from "../Navbar/Navbar";
 
 export default function Contacto(){
     const [control, setControl] = useState({
@@ -51,6 +52,7 @@ export default function Contacto(){
 
     return (
         <div className={style.containerForm}>
+            <Navbar/>
            <form
                  onSubmit={submitQuery} 
                  className={style.form}
@@ -61,12 +63,11 @@ export default function Contacto(){
                     </div>  
                 :  
                     null}
-                <h2>Contacto</h2>
-                
+                <h2>Contacto</h2>     
                 <p type="Nombre:">
                     <input type="text" 
                     name="name" 
-                    value={control.name} 
+                    value={control.name}  
                     pattern='[a-zA-Z ]{2,254}' 
                     title='Sólo letras' 
                     onChange={changeControl} 
@@ -85,7 +86,6 @@ export default function Contacto(){
                     placeholder="+54 9 11 12345678" 
                     required/>
                 </p>
-
                 <small>Ej: +54 9 11 12345678 </small>
                 {errorEmail ?
                      <div className={style.Error}>
@@ -111,7 +111,6 @@ export default function Contacto(){
                     placeholder="Consulta" 
                     required />
                 </p>
-
                 <button type="submit">Enviar</button>
                 
         </form>

@@ -2,12 +2,12 @@
     position: fixed;
     overflow: auto;
     background-color: #293c4f ;
-    width: 100%;
     margin: 0;
     padding: 0;
     height: 100%;
     width: 25%;
     list-style-type: none;
+    font-size: large;
   }
   
   .reserva li {
@@ -48,6 +48,7 @@
     border:2px solid #8bafbf;
   }
   
+  
   .navbar div button:hover{
     background-color: #8bafbf ;
   }
@@ -59,7 +60,7 @@
     width: 100%;
     font-size: 1em;
     background-color: #355978 ;
-    color: solid #fff;
+    color: #fff;
     border: solid #355978;
     border-radius: 8px;
     transition: all 0.25s ease;
@@ -79,8 +80,8 @@
     font-size: large;
     transition: all 0.2s ease;
     cursor: pointer;
-    margin-top: 85px;
     padding: 5px 20px;
+    margin-top: 85px;;
   }
   .reload span {
     cursor: pointer;
@@ -104,11 +105,56 @@
     opacity: 1;
     right: 0;
   }
-  
+
+.serviceTitle{
+  margin-left:0;
+  margin-bottom: 10px;
+}
 .service{
   background-color: #7f7979;
   height: 25px;
 }
+.serviceCont{
+  margin: 0;
+}
 .serviceCont li{
-  margin: 10px;
+  margin: 0px;
+}
+
+#search{
+  width: 100%;
+  justify-content: center;
+  margin-top: 0;
+}
+#search span{
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+  align-items: center;
+}
+#search span:after{
+  content: '\00bb';
+  transition: 0.5s;
+}
+#search:hover span{
+  padding-left: 10px;
+}
+
+.cabinPage{
+  width: 75%;
+  height: 100%;
+  position: fixed;
+  overflow: auto;
+  background-color: #94adbc  ;
+  margin-left: 25%;
+}
+
+.cabinCont{
+  position: relative;
+  margin: 10% 5% 10% 5%  
+}
+
+.paginado{
+  position: absolute;
+  margin-left: 45%;
 }
