@@ -7,7 +7,7 @@ function valuetext(value) {
 }
 
 export default function RangeSlider() {
-  const [value, setValue] = React.useState([0, 100]);
+  const [value, setValue] = React.useState([20, 60]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -57,7 +57,7 @@ export default function RangeSlider() {
 //             1500
 //           </div>
 //         </div>
-//         <input id={styles.input} type="range" min="1500" max="8500" value={value} steps="1" />
+//         <input id={styles.input} type="range" min="1500" max="8500" value="5000" steps="1" />
 //         <div className={styles.value}>
 //           <div id={styles.right}>
 //             8500
