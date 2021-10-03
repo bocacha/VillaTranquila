@@ -5,19 +5,10 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
 const cors = require('cors');
-const { auth, requiresAuth} = require('express-openid-connect');
-const jwt = require('express-jwt');
-const jwksRsa = require('jwks-rsa');
-const jwtAuthz = require('express-jwt-authz');
-
-
+require('dotenv').config()
 require('./db.js');
-
 const server = express();
-
 server.name = 'API';
-
-
 
 server.use(express.urlencoded({ extended: true, limit: '50mb' }));
 server.use(express.json({ limit: '50mb' }));

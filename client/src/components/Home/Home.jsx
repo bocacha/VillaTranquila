@@ -1,6 +1,7 @@
 import React from "react";
 
 import BannerIntro from "../BannerIntro/BannerIntro";
+import ChatBot from 'react-simple-chatbot';
 
 import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
@@ -9,6 +10,30 @@ import Searchbar from "../Searchbar/Searchbar";
 import styles from "./Home.module.css";
 
 export default function Home() {
+
+  const steps = [
+    {
+      id: '1',
+      message: 'Hola bienvenido a villa tranquila en que  puedo ayudarte',
+      trigger: '2',
+    },
+    {
+      id: '2',
+      user: true,
+      trigger: '3',
+    },
+    {
+      id: '3',
+      message: 'Hola bienvenido a villa tranquila en que  puedo ayudarte',
+      trigger: '4',
+    },
+    {
+      id: '4',
+      message: '  {previousValue} hola',
+      end: true,
+    },
+    
+  ];
   return (
     <div className={styles.container}>
       <div>
@@ -16,8 +41,9 @@ export default function Home() {
       </div>
       <div className={styles.nombre}>
         <div className={styles.nombre1}>
-          Villa Tranquila
-        </div>
+          <p className={styles.villa}>Villa Tranquila </p> 
+          <p className={styles.complejo}>- complejo de cabañas -</p>
+        </div> 
       </div>
       <div>
         <Searchbar/>
@@ -33,6 +59,14 @@ export default function Home() {
           className={styles.mapa}
         ></iframe>
       </div>
+      <div>
+         <ChatBot
+             headerTitle="Habla Conmigo"
+             floating={true}
+             steps={steps}
+               />
+       </div>,
+        
         <Footer />
 
     </div>
