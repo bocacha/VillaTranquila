@@ -122,7 +122,7 @@ const Cabañas = () => {
                 value={cabain.Capacity}
                 onChange={handleChange}
                 placeholder="Capacidad"
-                className={styles.formInp
+                className={styles.formInp}
                 requiered
               />
             </div>
