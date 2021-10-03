@@ -74,11 +74,13 @@ export default function Fotos() {
           <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
             <input
               type="text"
-              value={input.Description}
+              value={input.Description} 
+              maxLength="100"
               name="Description"
               onChange={(e) => handleChange(e)}
               placeholder="Descripción"
               className={styles.formInputs}
+              required
             />
             <input
               type="text"
@@ -87,6 +89,7 @@ export default function Fotos() {
               onChange={(e) => handleChange(e)}
               placeholder="Url"
               className={styles.formInputs}
+              required
             />
             <div className={styles.btns}>
               <button type="submit" className={styles.btn}>

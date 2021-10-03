@@ -7,9 +7,14 @@ import {
   readReservation,
 } from "../../../actions";
 import ReservacionesDetail from "./ReservacionesDetail";
-import { Link } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import 'react-datepicker/dist/react-datepicker.css';
 
 export default function Reservaciones() {
+
+  const [selectDateCI, setSelectDateCI] = useState(null);
+  const [selectDateCO, setSelectDateCO] = useState(null);
+
   const dispatch = useDispatch();
   const allReservations = useSelector((state) => state.reservaciones);
   const logeduser = useSelector((state) => state.user);
@@ -99,7 +104,15 @@ export default function Reservaciones() {
               onChange={(e) => handleChange(e)}
               placeholder="Check in"
               className={styles.formInputs}
+              required
             />
+                   {/* <DatePicker
+          selected={selectDateCI}
+          onChange={date=> setSelectDateCI(date)}
+          dateFormat='dd/MM/yyyy'
+          minDate={new Date()}
+          //isClearable
+          /> */}
             <input
               type="text"
               value={input.Checkout}
@@ -107,14 +120,25 @@ export default function Reservaciones() {
               onChange={(e) => handleChange(e)}
               placeholder="Check out"
               className={styles.formInputs}
+              required
             />
+              {/* 
+          <DatePicker
+          selected={selectDateCO}
+          onChange={date=> setSelectDateCO(date)}
+          dateFormat='dd/MM/yyyy'
+          minDate={new Date()}
+          //isClearable
+          /> */}  
             <input
               type="text"
               value={input.UserId}
               name="UserId"
               onChange={(e) => handleChange(e)}
               placeholder="Usuario Id"
-              className={styles.formInputs}
+              className={styles.formInputs} 
+              pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
+              required
             />
             <input
               type="text"
@@ -122,7 +146,9 @@ export default function Reservaciones() {
               name="Paymentsid"
               onChange={(e) => handleChange(e)}
               placeholder="Pagos id"
-              className={styles.formInputs}
+              className={styles.formInputs} 
+              pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
+              required
             />
             <input
               type="text"
@@ -130,7 +156,9 @@ export default function Reservaciones() {
               name="Cabinid"
               onChange={(e) => handleChange(e)}
               placeholder="Cabaña id"
-              className={styles.formInputs}
+              className={styles.formInputs} 
+              pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
+              required
             />
             <input
               type="text"

@@ -3,11 +3,15 @@ import styles from "./Pagos.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { createPayment, readPayment, editPayments } from "../../../actions";
 import PagosDetail from "./PagosDetail";
+import DatePicker from "react-datepicker";
+import 'react-datepicker/dist/react-datepicker.css';
 import { Link } from "react-router-dom";
 
 export default function Pagos() {
   const dispatch = useDispatch();
   const allPayments = useSelector((state) => state.pagos);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [input, setInput] = useState ({
   const logeduser = useSelector((state) => state.user);
   const { token } = logeduser;
   const [input, setInput] = useState({
@@ -71,24 +75,32 @@ export default function Pagos() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.btnVolver}>
-        <Link to="/admin">
-          <button className={styles.btn}>Volver</button>
-        </Link>
-      </div>
-      <div className={styles.formsCont}>
+       <div className={styles.formsCont}>
         {/* CREAR */}
         <div className={styles.crearCont}>
           <div className={styles.title}>Crear un nuevo pago</div>
           <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
-            <input
-              type="text"
-              value={input.Date}
-              name="Date"
-              onChange={(e) => handleChange(e)}
-              placeholder="Fecha"
-              className={styles.formInputs}
-            />
+             <DatePicker
+          selected={selectedDate}
+          onChange={date=> setSelectedDate(date)}
+          dateFormat='dd/MM/yyyy'
+          minDate={new Date()
+          className={styles.formInputs}
+          }
+          //isClearable
+          />
+
+          {/* 
+          <input
+            type="date"
+            value={input.Date}
+            minDate= {new Date()}
+            name="Date"
+            onChange={(e) => handleChange(e)}
+            placeholder="Date"
+            className={styles.Date}
+            required
+          /> */}
             <input
               type="text"
               value={input.idClient}
@@ -96,6 +108,8 @@ export default function Pagos() {
               onChange={(e) => handleChange(e)}
               placeholder="Cliente id"
               className={styles.formInputs}
+              pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$
+              required
             />
             <input
               type="text"
@@ -104,6 +118,7 @@ export default function Pagos() {
               onChange={(e) => handleChange(e)}
               placeholder="Monto total"
               className={styles.formInputs}
+              required
             />
             <input
               type="text"
@@ -112,6 +127,7 @@ export default function Pagos() {
               onChange={(e) => handleChange(e)}
               placeholder="Monto a pagar"
               className={styles.formInputs}
+              required
             />
             <div className={styles.btns}>
               <button type="submit" className={styles.btn}>

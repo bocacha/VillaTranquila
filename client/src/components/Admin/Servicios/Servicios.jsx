@@ -76,23 +76,28 @@ return (
               name="Name"
               onChange={(e) => handleChange(e)}
               placeholder="Nombre"
-              className={styles.formInputs}
+              className={styles.formInputs} 
+              required
             />
-            <input
+            <textarea
               type="text"
               value={input.Description}
               name="Description"
               onChange={(e) => handleChange(e)}
               placeholder="Descripción"
-              className={styles.formInputs}
+              className={styles.formInputs} 
+              required
             />
             <input
-              type="text"
+              type="number"
               value={input.Price}
-              name="Price"
+              name="Price" 
+              min='1000' 
+              max='20000'
               onChange={(e) => handleChange(e)}
               placeholder="Precio"
-              className={styles.formInputs}
+              className={styles.formInputs} 
+              required
             />
             <div className={styles.btns}>
               <button type="submit" className={styles.btn}>
