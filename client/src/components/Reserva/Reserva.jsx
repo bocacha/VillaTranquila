@@ -12,9 +12,7 @@ import { MdAttachMoney, MdRoomService } from 'react-icons/md';
 import { ImCalendar, ImSearch } from 'react-icons/im';
 import { AiOutlineReload } from 'react-icons/ai';
 import { Logeduser } from "../../actions";
-// import RangeSlider from "./Slider/Slider.jsx";
-// import Slider from "./Slider/Slider.jsx";
-
+import RangeSlider from "./Slider/Slider.jsx";
 
 export default function Reserva() {
     const dispatch = useDispatch();
