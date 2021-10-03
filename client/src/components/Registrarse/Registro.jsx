@@ -3,13 +3,13 @@ import styles from "./Usuarios.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { createUsers} from "../../actions/index";
 import { Link } from "react-router-dom";
-import { Loguser } from "../../actions";
+import { Logeduser } from "../../actions";
 
 
 export default function Usuarios() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(Loguser())
+    dispatch(Logeduser())
 }, [dispatch]);
   const allUsers = useSelector((state) => state.usuarios);
   const [input, setInput] = useState({
@@ -31,7 +31,6 @@ export default function Usuarios() {
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(createUsers(input));
-    alert("Usuario creado con éxito");
     setInput({
       UserName: "",
       UserPassword: "",
@@ -106,11 +105,11 @@ export default function Usuarios() {
             className={styles.Email}
           />
           <div className={styles.btns}>
-            <Link to="/">
+            {/* <Link to="/"> */}
             <button type="submit" className={styles.submit_btn}>
               Crear
             </button>
-              </Link>
+              {/* </Link> */}
           </div>
         </form>
       </div>
