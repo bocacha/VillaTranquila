@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./UsuariosDetail.module.css";
-//import styles from "./Usuarios.module.css";
 import { useDispatch } from "react-redux";
 import {removeUsers}  from '../../../actions'
 

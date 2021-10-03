@@ -3,13 +3,13 @@ import styles from "./Registro.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { createUsers} from "../../actions/index";
 import { Link } from "react-router-dom";
-import { Loguser } from "../../actions";
+import { Logeduser } from "../../actions";
 import Navbar from "../Navbar/Navbar";
 
 export default function Usuarios() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(Loguser())
+    dispatch(Logeduser())
 }, [dispatch]);
   const allUsers = useSelector((state) => state.usuarios);
   const [input, setInput] = useState({
@@ -31,7 +31,6 @@ export default function Usuarios() {
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(createUsers(input));
-    alert("Usuario creado con éxito");
     setInput({
       UserName: "",
       UserPassword: "",
@@ -107,8 +106,10 @@ export default function Usuarios() {
             className={styles.formInputs}
           />
           <div className={styles.btns}>
-            <button type="submit" className={styles.btn}>Crear</button>
-              {/* <Link/> */}
+            <button type="submit" className={styles.btn}>
+              Crear
+            </button>
+              {/* </Link> */}
           </div>
         </form>
       </div>

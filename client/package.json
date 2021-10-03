@@ -26,7 +26,11 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
     "rsuite": "^5.0.0",
+<<<<<<< HEAD
     "styled-components": "^4.0.0",
+=======
+    "styled-components":"^4.0.0",
+>>>>>>> 92bbfe7be978fc5d91690dd4d8d969d37e06c9e3
     "web-vitals": "^0.2.4"
   },
   "scripts": {
