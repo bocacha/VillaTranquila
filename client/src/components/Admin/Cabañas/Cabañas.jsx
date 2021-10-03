@@ -9,7 +9,6 @@ const Cabañas = () => {
   const dispatch = useDispatch();
   const allCabains = useSelector((state) => state.cabañas);
   const logeduser = useSelector((state) => state.user);
-
   const [cabain, setCabain] = useState({
     Number: "",
     Capacity: "",
@@ -86,6 +85,8 @@ const Cabañas = () => {
     alert("su cabaña fue creada con exito");
     dispatch(editCabains(edit, { token }));
   };
+
+  
 
   return (
     <div className={styles.container}>
@@ -398,6 +399,7 @@ const Cabañas = () => {
                 Stove={el.Stove}
                 Parking={el.Parking}
               />
+              
             </div>
           );
         })}
