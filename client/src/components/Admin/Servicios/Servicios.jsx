@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Servicios.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createServices, readServices, editServices } from "../../../actions";
+import { createServices, readServices, editServices, Logeduser} from "../../../actions";
 import ServiciosDetail from "./ServiciosDetail";
 import { Link } from "react-router-dom";
 
@@ -33,7 +33,11 @@ export default function Servicios() {
       [e.target.name]: e.target.value,
     });
   }
- useEffect(() => {
+  useEffect(() => {
+    dispatch(Logeduser());
+  }, [dispatch]);
+  
+  useEffect(() => {
     dispatch(readServices());
   }, [dispatch]);
 function handleSubmit(e) {

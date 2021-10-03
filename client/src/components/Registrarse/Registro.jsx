@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Registro.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createUsers } from "../../actions/index";
+import { createUsers} from "../../actions/index";
+import { Link } from "react-router-dom";
+import { Loguser } from "../../actions";
 import Navbar from "../Navbar/Navbar";
 
 export default function Usuarios() {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(Loguser())
+}, [dispatch]);
   const allUsers = useSelector((state) => state.usuarios);
   const [input, setInput] = useState({
     UserName: "",
@@ -54,7 +59,7 @@ export default function Usuarios() {
             className={styles.formInputs}
           />
           <input
-            type="text"
+            type="password"
             value={input.UserPassword}
             name="UserPassword"
             onChange={(e) => handleChange(e)}
@@ -105,6 +110,7 @@ export default function Usuarios() {
             <button type="submit" className={styles.btn}>
               Crear
             </button>
+              </Link>
           </div>
         </form>
       </div>
