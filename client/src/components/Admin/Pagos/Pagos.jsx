@@ -11,7 +11,6 @@ export default function Pagos() {
   const dispatch = useDispatch();
   const allPayments = useSelector((state) => state.pagos);
   const [selectedDate, setSelectedDate] = useState(null);
-  // const [input, setInput] = useState ({
   const logeduser = useSelector((state) => state.user);
   const { token } = logeduser;
   const [input, setInput] = useState({
