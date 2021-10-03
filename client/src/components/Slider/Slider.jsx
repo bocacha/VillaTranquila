@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import { Carousel } from "react-bootstrap";
 import styles from "./Slider.module.css";
 
@@ -14,7 +15,7 @@ export default function Slider() {
             alt="Uno slide"
           />
           <Carousel.Caption>
-            <h3 className={styles.h3}>First slide label</h3>
+            <Link className={styles.link} to="/reserva"><div className={styles.wrapper}><h3 className={styles.h3}>Reserve Ya!</h3></div></Link>
             <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
           </Carousel.Caption>
         </Carousel.Item>
@@ -26,7 +27,7 @@ export default function Slider() {
           />
 
           <Carousel.Caption>
-            <h3>Second slide label</h3>
+          <Link className={styles.link} to="/contacto"><div className={styles.wrapper}><h3 className={styles.consulta}>Haga su consulta</h3></div></Link>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           </Carousel.Caption>
         </Carousel.Item>
