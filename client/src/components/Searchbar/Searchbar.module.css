@@ -9,6 +9,7 @@
     width: 89%;
     border: solid 1px black;
     border-radius: 5px;
+    padding:.6em .6em;
 }
 
 .button{
@@ -18,7 +19,7 @@
     border-radius: 5px;
     font-size: 1.2em;
     background-color: #293c4f;
-    border: none;
+    border: solid 1px #293c4f;
     color: #fff;
     transition-duration: 0.4s;
 }
