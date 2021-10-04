@@ -65,13 +65,13 @@ export default function Home() {
           className={styles.mapa}
         ></iframe>
       </div>
-      <div>
+      {/* <div>
          <ChatBot
              headerTitle="Habla Conmigo"
              floating={true}
              steps={steps}
                />
-       </div>,
+       </div>, */}
         
         <Footer />
 

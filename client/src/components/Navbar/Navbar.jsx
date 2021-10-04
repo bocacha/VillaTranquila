@@ -1,4 +1,4 @@
-import React from "react";
+import React  from "react";
 import { Link } from "react-router-dom";
 import { RiTeamLine, RiMailLine, RiLoginBoxLine } from 'react-icons/ri';
 import { GoSignIn, GoHome } from 'react-icons/go';
@@ -7,13 +7,21 @@ import { RiAdminFill } from 'react-icons/ri';
 import styles from "./Navbar.module.css";
 import axios from "axios"
 import { BiWindows } from "react-icons/bi";
+import {useSelector } from "react-redux";
 
 export default function Navbar() {
+    let logeduser = useSelector ((state) => state.user);
+    if(logeduser===null){
+        logeduser = {}
+        logeduser.admin = false 
+        logeduser.token =false
+    }
     const Logout = ()=>{
         localStorage.removeItem("LogedUser")
         alert("Good by")
+        window.location.href='/'
     }
-
+    
     return (
         <div>
             <ul className={styles.navbar} >
@@ -31,25 +39,37 @@ export default function Navbar() {
                         <Link to='/nosotros' ><button><strong>Nosotros <RiTeamLine /></strong></button></Link>
                     </li>
                     <li>
-                        <Link to='/admin' ><button><strong>Administardor <RiAdminFill /></strong></button></Link>
+                    {logeduser.admin ? (
+                        <Link to='/admin' ><button><strong>Administrador <RiAdminFill /></strong></button></Link>
+          ) : (
+<div></div>)         
+} 
                     </li>
                 </div>
                 <div className={styles.logins}>
-                    <li >
+                {!logeduser.token ? (
+                    <div>
                         <Link to="/login">
-                        <button className={styles.signlog}><strong>Login <GoSignIn/> </strong></button>
-                        </Link>
+                    <li >
+                        <button className={styles.signlog}><strong>Iniciar Sesion <GoSignIn/> </strong></button>
                     </li>
-                    <li>
-                    <Link to="/">
-                        <button className={styles.signlog} onClick={()=>Logout()} ><strong>LogOut<RiLoginBoxLine /></strong></button>                 
                         </Link>
-                    </li>
-                    <li>
                         <Link to="/Singup">
-                        <button className={styles.signlog} ><strong>Signup <RiLoginBoxLine /></strong></button>
-                        </Link>                   
+                    <li>
+                        <button className={styles.signlog}><strong>Registrarse<RiLoginBoxLine /></strong></button>                 
                     </li>
+                        </Link>                   
+                    </div>
+                       
+          ) : (
+                    <Link to="/">
+                    <li>
+                        <button className={styles.signlog} onClick={()=>Logout()} ><strong>Cerrar Sesion <RiLoginBoxLine /></strong></button>                 
+                    </li>
+                        </Link>
+
+)         
+} 
                 </div>
             </ul>
         </div>
