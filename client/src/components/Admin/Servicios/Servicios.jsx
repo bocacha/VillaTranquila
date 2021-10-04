@@ -50,6 +50,7 @@ function handleSubmit(e) {
       Description: "",
       Price: "",
     });
+    window.location.reload();
   }
   function handleSubmitEdit(e) {
     e.preventDefault();
@@ -61,6 +62,7 @@ function handleSubmit(e) {
       Description: "",
       Price: "",
     });
+    window.location.reload();
  }
 return (
     <div className={styles.container}>

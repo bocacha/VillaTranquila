@@ -83,12 +83,14 @@ const Cabañas = () => {
     e.preventDefault();
     alert("su cabaña fue creada con exito");
     dispatch(createCabains(cabain, { token }));
+    window.location.reload();
   };
   const handleeditSubmit = (e) => {
     const { token } = logeduser;
     e.preventDefault();
     alert("su cabaña fue creada con exito");
     dispatch(editCabains(edit, { token }));
+    window.location.reload();
   };
 
   
@@ -110,7 +112,7 @@ const Cabañas = () => {
                 name="Number"
                 value={cabain.Number}
                 onChange={handleChange}
-                placeholder="Numero de Habitaciones"
+                placeholder="Numero de Cabaña"
                 className={styles.formInputs}
                 requiered
               />
@@ -160,7 +162,7 @@ const Cabañas = () => {
                 requiered
               />
             </div>
-            <div>
+            {/* <div>
               <label>Cafe</label>
               <input
                 type="checkbox"
@@ -233,7 +235,7 @@ const Cabañas = () => {
                 onChange={handleCheckBox}
                 className={styles.formInputs}
               />
-            </div>
+            </div> */}
             <div className={styles.btns}>
               <button type="submit" className={styles.btn}>
                 Crear
@@ -261,7 +263,7 @@ const Cabañas = () => {
                 name="Number"
                 value={edit.Number}
                 onChange={handleChangeEdit}
-                placeholder="Numero de Habitaciones"
+                placeholder="Numero de Cabaña"
                 className={styles.formInputs}
               />
             </div>
@@ -296,7 +298,7 @@ const Cabañas = () => {
               />
             </div>
             <div>
-              <input
+              <textarea
                 type="text"
                 name="Description"
                 value={edit.Description}
@@ -305,7 +307,7 @@ const Cabañas = () => {
                 className={styles.formInputs}
               />
             </div>
-            <div>
+            {/* <div>
               <label>Cafe</label> 
               <input
                 type="checkbox"
@@ -379,7 +381,7 @@ const Cabañas = () => {
                 onChange={handleeditCheckBox}
                 className={styles.formInputs}
               />
-            </div>
+            </div> */}
             <div className={styles.btns}>
               <button type="submit" className={styles.btn}>
                 Editar

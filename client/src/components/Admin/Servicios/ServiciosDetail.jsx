@@ -12,6 +12,7 @@ export default function ServiciosDetail({ ID, Name, Description, Price }) {
     alert("se servicio fue Eliminada con exito");
     let obj = {id:ID}
     dispatch(removeServices(obj));
+    window.location.reload();
   }
   return (
     <div className={styles.container}>

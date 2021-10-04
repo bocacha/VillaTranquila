@@ -74,6 +74,7 @@ export default function Reservaciones() {
       Cabinid: "",
       ExtraServices: "",
     });
+    window.location.reload();
   }
   function handleSubmitEdit(e) {
     e.preventDefault();
@@ -88,6 +89,7 @@ export default function Reservaciones() {
       Cabinid: "",
       ExtraServices: "",
     });
+    window.location.reload();
   }
 
   return (
@@ -259,6 +261,7 @@ export default function Reservaciones() {
                 Checkout={el.Checkout}
                 UserId={el.UserId}
                 Paymentsid={el.Paymentsid}
+                CostoFinal={el.CostoFinal}
                 Cabinid={el.Cabinid}
                 ExtraServices={el.ExtraServices}
               />

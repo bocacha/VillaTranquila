@@ -23,9 +23,19 @@ export default function Login() {
     dispatch(Loguser(user));
     // window.location.href='/'
   };
+  const goHome =()=>{
+    window.location.href='/'
+  }
+  let logeduser = useSelector ((state) => state.user);
+  if(logeduser===null){
+      logeduser = {}
+      logeduser.admin = false 
+      logeduser.token =false
+  }
   return (
     <div className={styles.container}>
       <Navbar />
+      {!logeduser.token ? (
       <div className={styles.containerForm}>
         <form>
           <input
@@ -47,6 +57,16 @@ export default function Login() {
           <button onClick={handleLogin} className={styles.btn}>Iniciar sesión</button>
         </form>
       </div>
+       ) : (
+         <div className={styles.container}> 
+           <div className={styles.containerForm}>
+         <h4> Bienvenido/a    {logeduser.user} </h4>
+            <button className={styles.btn1}onClick={goHome} ><strong>Home</strong></button>                 
+         </div>
+           </div>
+
+)         
+} 
     </div>
   );
 }

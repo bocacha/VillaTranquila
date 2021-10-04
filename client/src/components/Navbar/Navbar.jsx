@@ -19,8 +19,9 @@ export default function Navbar() {
     const Logout = ()=>{
         localStorage.removeItem("LogedUser")
         alert("Good by")
+        window.location.href='/'
     }
-
+    
     return (
         <div>
             <ul className={styles.navbar} >
@@ -39,7 +40,7 @@ export default function Navbar() {
                     </li>
                     <li>
                     {logeduser.admin ? (
-                        <Link to='/admin' ><button><strong>Administardor <RiAdminFill /></strong></button></Link>
+                        <Link to='/admin' ><button><strong>Administrador <RiAdminFill /></strong></button></Link>
           ) : (
 <div></div>)         
 } 
@@ -48,14 +49,14 @@ export default function Navbar() {
                 <div className={styles.logins}>
                 {!logeduser.token ? (
                     <div>
-                        <Link to="/login">
+                        <Link to="/iniciarsesion">
                     <li >
                         <button className={styles.signlog}><strong>Iniciar Sesion <GoSignIn/> </strong></button>
                     </li>
                         </Link>
-                        <Link to="/Singup">
+                        <Link to="/registrarse">
                     <li>
-                        <button className={styles.signlog} ><strong>Cerrar Sesion <RiLoginBoxLine /></strong></button>
+                        <button className={styles.signlog}><strong>Registrarse<RiLoginBoxLine /></strong></button>                 
                     </li>
                         </Link>                   
                     </div>
@@ -63,7 +64,7 @@ export default function Navbar() {
           ) : (
                     <Link to="/">
                     <li>
-                        <button className={styles.signlog} onClick={()=>Logout()} ><strong>Registrarse<RiLoginBoxLine /></strong></button>                 
+                        <button className={styles.signlog} onClick={()=>Logout()} ><strong>Cerrar Sesion <RiLoginBoxLine /></strong></button>                 
                     </li>
                         </Link>
 
