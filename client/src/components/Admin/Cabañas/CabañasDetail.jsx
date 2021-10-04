@@ -28,6 +28,7 @@ export default function CabinsDetail({
     alert("su cabaña fue Eliminada con exito");
     let obj = {id:ID}
     dispatch(removeCabains(obj));
+    window.location.reload();
   }
   return (
     <div className={styles.container}>
