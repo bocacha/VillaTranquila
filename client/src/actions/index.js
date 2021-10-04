@@ -30,6 +30,7 @@ export const REMOVE_SERVICES= "REMOVE_SERVICES";
 export const REMOVE_PICTURES= "REMOVE_PICTURES";
 export const REMOVE_PAYMENTS= "REMOVE_PAYMENTS";
 export const REMOVE_USERS= "REMOVE_USERS";
+
 export function getCabins() {
   return async function (dispatch) {
     try {
@@ -43,27 +44,6 @@ export function getCabins() {
     }
   };
 }
-
-// export function filterCabinsByCapacity(payload) {
-//   return {
-//     type: FILTER_BY_CAPACITY,
-//     payload,
-//   };
-// }
-
-// export function filterCabinsByPrice(payload) {
-//   return {
-//     type: FILTER_BY_PRICE,
-//     payload,
-//   };
-// }
-
-// export function filterCabinsByServices(payload){
-//   return {
-//     type: FILTER_BY_SERVICES,
-//     payload,
-//   };
-// }
 
 export function filterCabins(payload){
   return {

@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
     },
     Paymentsid:{
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     Cabinid:{
       type: DataTypes.STRING,
@@ -30,6 +30,10 @@ module.exports = (sequelize) => {
     },
     ExtraServices:{
       type: DataTypes.STRING,
+      allowNull: true,
+    },
+    CostoFinal:{
+      type: DataTypes.INTEGER,
       allowNull: true,
     }
   },{timestamps: false,});

@@ -50,7 +50,7 @@ module.exports = (sequelize) => {
    Premium:{
     type: DataTypes.BOOLEAN ,
     defaultValue: false,
-    allowNull: false,
+    allowNull: true,
    }, 
    Admin:{ 
     type: DataTypes.BOOLEAN,
@@ -74,7 +74,7 @@ module.exports = (sequelize) => {
    Blocked:{
     type: DataTypes.BOOLEAN,
     defaultValue: false,
-    allowNull: false,
+    allowNull: true,
    },
   },{timestamps: false,});
 };

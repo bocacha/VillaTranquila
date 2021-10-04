@@ -3,8 +3,10 @@ import styles from './Cabaña.module.css';
 import { GiCoffeeCup, GiChickenOven, GiFireplace, GiCampCookingPot, GiVacuumCleaner, GiCookingPot } from 'react-icons/gi';
 import { RiFridgeLine } from 'react-icons/ri';
 import { FaWifi, FaCarAlt } from 'react-icons/fa';
+import {Link} from 'react-router-dom';
 
 export default function Cabaña({
+    ID,
     number,
     capacity,
     notAvailable,
@@ -21,14 +23,26 @@ export default function Cabaña({
     parking,
     image
     }){
+        const id = ID;
+        const prices = price;
+        const id_cabaña = () => {
+            localStorage.setItem("id_cabaña", JSON.stringify(id));
+            console.log(ID);
+            const local = localStorage.getItem("id_cabaña");
+            console.log(JSON.parse(local));
+            localStorage.setItem("costo", JSON.stringify(prices))
+        }
+        
+        
+
     return (
         <div className={styles.cabaña}>
             <h1>Cabaña número {number}</h1>
             <img src={image} alt={`Cabaña número ${number}`} />
-            <span>Capacidad: {capacity}</span>
-            <span>Disponible a partir del: {notAvailable}</span>
-            <span>Precio por noche: {price}</span>
-            <span>{description}</span>
+            <span> Capacidad: {capacity}</span>
+            <span> Disponible a partir del: {notAvailable}</span>
+            <span> Precio por noche: {price}</span>
+            <span> Descripción: {description}</span>
             <span> Servicios disponibles: 
                 {coffe && <GiCoffeeCup/>}
                 {microwaves && <GiChickenOven/>}
@@ -40,7 +54,9 @@ export default function Cabaña({
                 {parking && <FaCarAlt/>}
                 {refrigerator && <RiFridgeLine/>}
             </span>
-            <button>Reserva ya</button>
+            <Link to="/reserva/reservar">
+                <button onClick={id_cabaña}>Reserva ya</button>
+            </Link>
         </div>
     )
 }

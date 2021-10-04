@@ -8,6 +8,7 @@ import Login from './components/Login/Login';
 import Admin from "./components/Admin/Admin";
 import Cabañas from "./components/Admin/Cabañas/Cabañas";
 import Reservaciones from "./components/Admin/Reservaciones/Reservaciones";
+import LinkReserva from "./components/LinkReserva/LinkReserva";
 import Servicios from "./components/Admin/Servicios/Servicios";
 import Pagos from "./components/Admin/Pagos/Pagos";
 import Fotos from "./components/Admin/Fotos/Fotos";
@@ -22,7 +23,8 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route path="/nosotros" component={Nosotros} />
           <Route path="/contacto" component={Contacto} />
-          <Route path="/reserva" component={Reserva} />
+          <Route exact path="/reserva" component={Reserva} />
+          <Route path="/reserva/reservar" component={LinkReserva} />
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/admin/cabañas" component={Cabañas} />
           <Route exact path="/admin/reservaciones" component={Reservaciones} />
@@ -30,8 +32,8 @@ function App() {
           <Route exact path="/admin/pagos" component={Pagos} />
           <Route exact path="/admin/fotos" component={Fotos} />
           <Route exact path="/admin/usuarios" component={Usuarios} />
-          <Route path='/login' component={Login} />
-          <Route path='/SingUp' component={Registro} />
+          <Route path='/iniciarsesion' component={Login} />
+          <Route path='/registrarse' component={Registro} />
         </Switch>
       </div>
     </BrowserRouter>

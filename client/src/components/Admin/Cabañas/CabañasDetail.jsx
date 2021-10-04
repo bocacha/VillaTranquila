@@ -28,16 +28,17 @@ export default function CabinsDetail({
     alert("su cabaña fue Eliminada con exito");
     let obj = {id:ID}
     dispatch(removeCabains(obj));
+    window.location.reload();
   }
   return (
     <div className={styles.container}>
       <p><strong>Id:</strong>  {ID} </p>
-      <p><strong> Number:</strong> {Number}</p>
-      <p><strong>Capacity:</strong>  {Capacity}</p>
+      <p><strong>Habitaciones:</strong> {Number}</p>
+      <p><strong>Camas:</strong>  {Capacity}</p>
       <p><strong>Available:</strong>  {Available}</p>
       <p><strong>Price:</strong>  {Price}</p>
       <p><strong>Descripcion:</strong>  {Description}</p>
-      <p><strong>Coffe:</strong>  {Coffe?<span>si</span>:<span>no</span>}</p>
+      {/* <p><strong>Coffe:</strong>  {Coffe?<span>si</span>:<span>no</span>}</p>
       <p><strong>Microondas:</strong>  {Microondas?<span>si</span>:<span>no</span>}</p>
       <p><strong>Calefaccion:</strong>  {Calefaccion?<span>si</span>:<span>no</span>}</p>
       <p><strong>Barbecue:</strong>  {Barbecue?<span>si</span>:<span>no</span>}</p>
@@ -45,7 +46,7 @@ export default function CabinsDetail({
       <p><strong>Cleaning: </strong> {Cleaning?<span>si</span>:<span>no</span>}</p>
       <p><strong>Refrigerator:</strong>  {Refrigerator?<span>si</span>:<span>no</span>}</p>
       <p><strong>Stove:</strong>  {Stove?<span>si</span>:<span>no</span>}</p>
-      <p><strong>Parking:</strong>  {Parking?<span>si</span>:<span>no</span>}</p>
+      <p><strong>Parking:</strong>  {Parking?<span>si</span>:<span>no</span>}</p> */}
       <div>
         <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
       </div>
