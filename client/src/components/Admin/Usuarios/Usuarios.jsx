@@ -20,8 +20,8 @@ export default function Usuarios() {
     Phone: "",
     Email: "",
     Admin: "",
-    Premium: "",
-    Blocked: "",
+    Premium: false,
+    Blocked: false,
   });
   useEffect(() => {
     dispatch(Logeduser());
@@ -72,8 +72,8 @@ export default function Usuarios() {
       Phone: "",
       Email: "",
       Admin: "",
-      Premium: "",
-      Blocked: "",
+      Premium: false,
+      Blocked: false,
     });
     dispatch(readUsers({ token }));
     window.location.reload();
@@ -265,7 +265,7 @@ export default function Usuarios() {
               <option value="true">true</option>
               <option value="false">false</option>
             </select>
-            <select
+            {/* <select
               onChange={(e) => handleSelectPremium(e)}
               value={input.Premium}
               className={styles.formInputs}
@@ -274,8 +274,8 @@ export default function Usuarios() {
               <option value="">Premium:</option>
               <option value="true">true</option>
               <option value="false">false</option>
-            </select>
-            <select
+            </select> */}
+            {/* <select
               onChange={(e) => handleSelectBlocked(e)}
               value={input.Blocked}
               className={styles.formInputs}
@@ -284,7 +284,7 @@ export default function Usuarios() {
               <option value="">Blocked:</option>
               <option value="true">true</option>
               <option value="false">false</option>
-            </select>
+            </select> */}
             <div className={styles.btns}>
               <button type="submit" className={styles.btn}>
                 Editar
@@ -301,12 +301,12 @@ export default function Usuarios() {
               <UsuariosDetail
                 ID={el.ID}
                 UserName={el.UserName}
-                UserPassword={el.UserPassword}
                 FirstName={el.FirstName}
                 LastName={el.LastName}
                 Address={el.Address}
                 Phone={el.Phone}
                 Email={el.Email}
+                Admin={el.Admin}
               />
             </div>
           );
