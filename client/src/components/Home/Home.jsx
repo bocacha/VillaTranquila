@@ -5,7 +5,7 @@ import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 import Slider from "../Slider/Slider";
 import Searchbar from "../Searchbar/Searchbar";
-//import Gallery from "../Gallery";
+import Gallery from "../Gallery";
 import styles from "./Home.module.css";
 import{useEffect} from "react"
 import { useDispatch} from 'react-redux';
@@ -52,7 +52,7 @@ export default function Home() {
       </div>
       <div>
         <Searchbar/>
-        {/* <Gallery/> */}
+        <Gallery/>
       </div>
       <div>
         <BannerIntro />
@@ -65,13 +65,13 @@ export default function Home() {
           className={styles.mapa}
         ></iframe>
       </div>
-      <div>
+      {/* <div>
          <ChatBot
              headerTitle="Habla Conmigo"
              floating={true}
              steps={steps}
                />
-       </div>,
+       </div>, */}
         
         <Footer />
 
