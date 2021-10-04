@@ -33,7 +33,7 @@ module.exports = (sequelize) => {
       allowNull: true,
     },
     CostoFinal:{
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true,
     }
   },{timestamps: false,});
