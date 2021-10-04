@@ -33,7 +33,7 @@ export default function CabinsDetail({
   return (
     <div className={styles.container}>
       <p><strong>Id:</strong>  {ID} </p>
-      <p><strong>Habitaciones:</strong> {Number}</p>
+      <p><strong>Número de cabaña:</strong> {Number}</p>
       <p><strong>Camas:</strong>  {Capacity}</p>
       <p><strong>Available:</strong>  {Available}</p>
       <p><strong>Price:</strong>  {Price}</p>
