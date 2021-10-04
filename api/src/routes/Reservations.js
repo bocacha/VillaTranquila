@@ -34,14 +34,15 @@ if(!decodedToken.Admin){
 });
 
 router.post("/NewReservation" , (req, res)=>{
-    const {Checkin, Checkout, UserId, Paymentsid, Cabinid, ExtraServices} = req.body;
+    const {Checkin, Checkout, UserId, Paymentsid, Cabinid, ExtraServices, CostoFinal} = req.body;
     Reservations.create({
      Checkin,
      Checkout,
      UserId, 
      Paymentsid, 
      Cabinid, 
-     ExtraServices
+     ExtraServices,
+     CostoFinal
     })
     .then(doneTemp=>{
         return res.status(200).json(doneTemp)

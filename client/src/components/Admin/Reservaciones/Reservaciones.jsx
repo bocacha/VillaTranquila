@@ -264,7 +264,8 @@ export default function Reservaciones() {
                 CostoFinal={el.CostoFinal}
                 Cabinid={el.Cabinid}
                 ExtraServices={el.ExtraServices}
-              />
+                />
+                {console.log(el.CostoFinal)}
             </div>
           );
         })}
