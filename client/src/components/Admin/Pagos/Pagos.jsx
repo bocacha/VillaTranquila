@@ -5,7 +5,7 @@ import { createPayment, readPayment, editPayments, Logeduser } from "../../../ac
 import PagosDetail from "./PagosDetail";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 export default function Pagos() {
   const dispatch = useDispatch();
@@ -60,6 +60,7 @@ export default function Pagos() {
       PaydAmount: "",
     });
     dispatch(readPayment({ token }));
+    window.location.reload();
   }
   function handleSubmitEdit(e) {
     e.preventDefault();
