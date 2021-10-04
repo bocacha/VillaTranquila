@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./CabañasDetail.module.css";
-import styles from "./Cabañas.module.css";
 import { useDispatch } from "react-redux";
 import {removeCabains}  from '../../../actions'
 
@@ -29,12 +28,13 @@ export default function CabinsDetail({
     alert("su cabaña fue Eliminada con exito");
     let obj = {id:ID}
     dispatch(removeCabains(obj));
+    window.location.reload();
   }
   return (
     <div className={styles.container}>
       <p><strong>Id:</strong>  {ID} </p>
-      <p><strong> Number:</strong> {Number}</p>
-      <p><strong>Capacity:</strong>  {Capacity}</p>
+      <p><strong>Habitaciones:</strong> {Number}</p>
+      <p><strong>Camas:</strong>  {Capacity}</p>
       <p><strong>Available:</strong>  {Available}</p>
       <p><strong>Price:</strong>  {Price}</p>
       <p><strong>Descripcion:</strong>  {Description}</p>

@@ -83,12 +83,14 @@ const Cabañas = () => {
     e.preventDefault();
     alert("su cabaña fue creada con exito");
     dispatch(createCabains(cabain, { token }));
+    window.location.reload();
   };
   const handleeditSubmit = (e) => {
     const { token } = logeduser;
     e.preventDefault();
     alert("su cabaña fue creada con exito");
     dispatch(editCabains(edit, { token }));
+    window.location.reload();
   };
 
   
@@ -110,7 +112,7 @@ const Cabañas = () => {
                 name="Number"
                 value={cabain.Number}
                 onChange={handleChange}
-                placeholder="Numero de Personas"
+                placeholder="Numero de Habitaciones"
                 className={styles.formInputs}
                 requiered
               />
@@ -121,8 +123,8 @@ const Cabañas = () => {
                 name="Capacity"
                 value={cabain.Capacity}
                 onChange={handleChange}
-                placeholder="Capacidad"
-                className={styles.formInp
+                placeholder="Numero de Camas"
+                className={styles.formInp}
                 requiered
               />
             </div>
@@ -261,7 +263,7 @@ const Cabañas = () => {
                 name="Number"
                 value={edit.Number}
                 onChange={handleChangeEdit}
-                placeholder="Numero de Personas"
+                placeholder="Numero de Habitaciones"
                 className={styles.formInputs}
               />
             </div>
@@ -271,7 +273,7 @@ const Cabañas = () => {
                 name="Capacity"
                 value={edit.Capacity}
                 onChange={handleChangeEdit}
-                placeholder="Capacidad"
+                placeholder="Numero de Camas"
                 className={styles.formInputs}
               />
             </div>

@@ -10,6 +10,7 @@ import {
 import ReservacionesDetail from "./ReservacionesDetail";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
+import {Link} from "react-router-dom";
 
 export default function Reservaciones() {
 
@@ -73,6 +74,7 @@ export default function Reservaciones() {
       Cabinid: "",
       ExtraServices: "",
     });
+    window.location.reload();
   }
   function handleSubmitEdit(e) {
     e.preventDefault();
@@ -87,6 +89,7 @@ export default function Reservaciones() {
       Cabinid: "",
       ExtraServices: "",
     });
+    window.location.reload();
   }
 
   return (
