@@ -52,7 +52,7 @@ export default function Home() {
       </div>
       <div>
         <Searchbar/>
-        <Gallery/>
+        {/* <Gallery/> */}
       </div>
       <div>
         <BannerIntro />
