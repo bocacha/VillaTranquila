@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./FotosDetail.module.css";
-import styles from "./Fotos.module.css";
 import { useDispatch } from "react-redux";
 import {removePictures}  from '../../../actions'
 
@@ -13,6 +12,7 @@ export default function FotosDetail({ Description, Url, ID }) {
     alert("su Foto fue Eliminada con exito");
     let obj = {id:ID}
     dispatch(removePictures(obj));
+    window.location.reload();
   }
   return (
     <div className={styles.container}>

@@ -1,8 +1,6 @@
 import {
   GET_CABINS,
   FILTER_CABINS,
-  FILTER_BY_CAPACITY,
-  FILTER_BY_PRICE,
   SEND_EMAIL,
   CREATE_RESERVATION,
   CREATE_SERVICES,
@@ -28,8 +26,9 @@ import {
   REMOVE_PICTURES,
   REMOVE_PAYMENTS,
   REMOVE_USERS
-  
+
 } from "../actions";
+
 const initialState = {
   cabins: [],
   allCabins: [],
@@ -39,8 +38,8 @@ const initialState = {
   usuarios: [],
   servicios: [],
   cabañas: [],
-  user:{},
-  reservaciones:[],
+  user: {},
+  reservaciones: [],
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -60,6 +59,24 @@ export default function rootReducer(state = initialState, action) {
       cabinsFiltered = capacity === 'all' ?
         cabinsFiltered :
         cabinsFiltered.filter(el => el.Capacity >= capacity);
+      // Filter by priceRange:
+
+      // con un solo select:
+      // let priceRange = action.payload.priceRange.split(' - ');
+      // cabinsFiltered = priceRange === 'all' ?
+      //   cabinsFiltered :
+      //   cabinsFiltered.filter(el => el.Price >= priceRange[0] && el.Price <= priceRange[1]);
+
+      // con dos select:
+      let priceMin = action.payload.priceMin;
+      let priceMax = action.payload.priceMax;
+      cabinsFiltered = priceMin === 'all' ?
+        cabinsFiltered :
+        cabinsFiltered.filter(el => el.Price >= priceMin);
+      cabinsFiltered = priceMax === 'al' ?
+        cabinsFiltered :
+        cabinsFiltered.filter(el => el.Price <= priceMax);
+
       // Filter by wifi:
       let wifi = action.payload.wifi;
       cabinsFiltered = wifi === '' || wifi === 'false' ?
@@ -84,11 +101,11 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         cabins: cabinsFiltered
       }
-      case LOG_USER:
-        return {
-          ...state,
-          user: action.payload,
-        };
+    case LOG_USER:
+      return {
+        ...state,
+        user: action.payload,
+      };
     case SEND_EMAIL:
       return {
         ...state,
@@ -167,36 +184,36 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
-      case REMOVE_CABAINS:
-        return {
-          ...state,
-          cabañas: state.cabañas.filter((cabaña)=> cabaña.id !== action.payload)
-        };
-        case REMOVE_RESERVATIONS:
-          return {
-            ...state,
-            reservaciones: state.reservaciones.filter((reserva)=> reserva.id !== action.payload)
-          };
-        case REMOVE_SERVICES:
-          return {
-            ...state,
-            servicios: state.servicios.filter((reserva)=> reserva.id !== action.payload)
-          };
-        case REMOVE_PICTURES:
-          return {
-            ...state,
-            fotos: state.fotos.filter((foto)=> foto.id !== action.payload)
-          };
-        case REMOVE_PAYMENTS:
-          return {
-            ...state,
-            pagos: state.pagos.filter((pago)=> pago.id !== action.payload)
-          };
-        case REMOVE_USERS:
-          return {
-            ...state,
-            usuarios: state.usuarios.filter((usuario)=> usuario.id !== action.payload)
-          };
+    case REMOVE_CABAINS:
+      return {
+        ...state,
+        cabañas: state.cabañas.filter((cabaña) => cabaña.id !== action.payload)
+      };
+    case REMOVE_RESERVATIONS:
+      return {
+        ...state,
+        reservaciones: state.reservaciones.filter((reserva) => reserva.id !== action.payload)
+      };
+    case REMOVE_SERVICES:
+      return {
+        ...state,
+        servicios: state.servicios.filter((reserva) => reserva.id !== action.payload)
+      };
+    case REMOVE_PICTURES:
+      return {
+        ...state,
+        fotos: state.fotos.filter((foto) => foto.id !== action.payload)
+      };
+    case REMOVE_PAYMENTS:
+      return {
+        ...state,
+        pagos: state.pagos.filter((pago) => pago.id !== action.payload)
+      };
+    case REMOVE_USERS:
+      return {
+        ...state,
+        usuarios: state.usuarios.filter((usuario) => usuario.id !== action.payload)
+      };
     default:
       return state;
   }
