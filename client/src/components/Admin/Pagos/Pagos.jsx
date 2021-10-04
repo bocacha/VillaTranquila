@@ -5,7 +5,7 @@ import { createPayment, readPayment, editPayments, Logeduser } from "../../../ac
 import PagosDetail from "./PagosDetail";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 export default function Pagos() {
   const dispatch = useDispatch();
@@ -30,9 +30,9 @@ export default function Pagos() {
   useEffect(() => {
     dispatch(Logeduser());
   }, [dispatch]);
-  
+
   useEffect(() => {
-    dispatch(readPayment({token}));
+    dispatch(readPayment({ token }));
   }, [dispatch, token]);
 
   function handleChange(e) {
@@ -60,6 +60,7 @@ export default function Pagos() {
       PaydAmount: "",
     });
     dispatch(readPayment({ token }));
+    window.location.reload();
   }
   function handleSubmitEdit(e) {
     e.preventDefault();
@@ -77,7 +78,7 @@ export default function Pagos() {
 
   return (
     <div className={styles.container}>
-       <div className={styles.formsCont}>
+      <div className={styles.formsCont}>
         {/* CREAR */}
         <div className={styles.crearCont}>
           <div className={styles.title}>Crear un nuevo pago</div>
@@ -91,7 +92,7 @@ export default function Pagos() {
           //isClearable
           />
 
-          {/* 
+            {/* 
           <input
             type="date"
             value={input.Date}

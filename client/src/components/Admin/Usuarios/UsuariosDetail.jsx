@@ -21,6 +21,7 @@ export default function UsuariosDetail({
     alert("su usuario fue Eliminado con exito");
     let obj = {id:ID}
     dispatch(removeUsers(obj));
+    window.location.reload();
   }
   return (
     <div className={styles.container}>
