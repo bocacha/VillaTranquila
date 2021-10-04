@@ -12,6 +12,7 @@ export default function FotosDetail({ Description, Url, ID }) {
     alert("su Foto fue Eliminada con exito");
     let obj = {id:ID}
     dispatch(removePictures(obj));
+    window.location.reload();
   }
   return (
     <div className={styles.container}>

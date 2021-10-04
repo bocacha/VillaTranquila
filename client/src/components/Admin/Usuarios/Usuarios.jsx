@@ -76,6 +76,7 @@ export default function Usuarios() {
       Blocked: "",
     });
     dispatch(readUsers({ token }));
+    window.location.reload();
   }
 
   return (
