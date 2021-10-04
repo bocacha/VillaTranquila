@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
     allownull:false,
   },
    Available:{ 
-    type: DataTypes.JSON,
+    type: DataTypes.STRING,
     allowNull: false,
   },
    Price:{
@@ -35,12 +35,12 @@ module.exports = (sequelize) => {
      allowNull: false,
      defaultValue: false
   },
-  Microondas:{
+  Microwaves:{
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: false
   },
-  Calefaccion:{
+  Heat:{
     type: DataTypes.BOOLEAN,
     allowNull: false,
     defaultValue: false

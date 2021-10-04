@@ -84,12 +84,13 @@ export default function Footer() {
             <br />
             <div>
               <input
-                type="text"
-                placeholder="E-mail"
-                name="email"
-                value={footer.email}
-                onChange={handleChange}
-                className={styles.input}
+               type="email"
+               name="email"
+               value={footer.email}
+               placeholder='usuario@ejemplo.com'
+               onChange={handleChange}
+               className={styles.input}
+               required
               />
             </div>
             <div>
