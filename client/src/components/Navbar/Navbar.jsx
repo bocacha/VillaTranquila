@@ -19,8 +19,9 @@ export default function Navbar() {
     const Logout = ()=>{
         localStorage.removeItem("LogedUser")
         alert("Good by")
+        window.location.href='/'
     }
-
+    
     return (
         <div>
             <ul className={styles.navbar} >
@@ -63,7 +64,7 @@ export default function Navbar() {
           ) : (
                     <Link to="/">
                     <li>
-                        <button className={styles.signlog} onClick={()=>Logout()} ><strong>Cerrar Sesion <RiLoginBoxLine /></strong></button>
+                        <button className={styles.signlog} onClick={()=>Logout()} ><strong>Cerrar Sesion <RiLoginBoxLine /></strong></button>                 
                     </li>
                         </Link>
 

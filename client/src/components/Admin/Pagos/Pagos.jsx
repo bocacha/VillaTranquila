@@ -30,9 +30,9 @@ export default function Pagos() {
   useEffect(() => {
     dispatch(Logeduser());
   }, [dispatch]);
-  
+
   useEffect(() => {
-    dispatch(readPayment({token}));
+    dispatch(readPayment({ token }));
   }, [dispatch, token]);
 
   function handleChange(e) {
@@ -78,7 +78,7 @@ export default function Pagos() {
 
   return (
     <div className={styles.container}>
-       <div className={styles.formsCont}>
+      <div className={styles.formsCont}>
         {/* CREAR */}
         <div className={styles.crearCont}>
           <div className={styles.title}>Crear un nuevo pago</div>
@@ -92,7 +92,7 @@ export default function Pagos() {
           //isClearable
           />
 
-          {/* 
+            {/* 
           <input
             type="date"
             value={input.Date}
