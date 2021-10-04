@@ -1,30 +1,30 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
+// import * as React from 'react';
+// import Box from '@mui/material/Box';
+// import Slider from '@mui/material/Slider';
 
-function valuetext(value) {
-  return `${value}°C`;
-}
+// function valuetext(value) {
+//   return `${value}°C`;
+// }
 
-export default function RangeSlider() {
-  const [value, setValue] = React.useState([0, 100]);
+// export default function RangeSlider() {
+//   const [value, setValue] = React.useState([20, 60]);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+//   const handleChange = (event, newValue) => {
+//     setValue(newValue);
+//   };
 
-  return (
-    <Box >
-      <Slider
-        getAriaLabel={() => 'Temperature range'}
-        value={value}
-        onChange={handleChange}
-        valueLabelDisplay="auto"
-        getAriaValueText={valuetext}
-      />
-    </Box>
-  );
-}
+//   return (
+//     <Box >
+//       <Slider
+//         getAriaLabel={() => 'Temperature range'}
+//         value={value}
+//         onChange={handleChange}
+//         valueLabelDisplay="auto"
+//         getAriaValueText={valuetext}
+//       />
+//     </Box>
+//   );
+// }
 
 // import React from "react";
 // import styles from './Slider.module.css';
@@ -57,7 +57,7 @@ export default function RangeSlider() {
 //             1500
 //           </div>
 //         </div>
-//         <input id={styles.input} type="range" min="1500" max="8500" value={value} steps="1" />
+//         <input id={styles.input} type="range" min="1500" max="8500" value="5000" steps="1" />
 //         <div className={styles.value}>
 //           <div id={styles.right}>
 //             8500
@@ -69,3 +69,4 @@ export default function RangeSlider() {
 //     </div>
 //   )
 // }
+
