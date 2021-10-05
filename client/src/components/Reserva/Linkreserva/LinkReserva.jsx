@@ -30,18 +30,7 @@ export default function Reservaciones() {
   const verificacion = (e) => {
     if (e.target.checked) console.log(e.target.value);
   };
-  const checkboxselected = (e) => {
-    lala = [];
-    const checkbox = Array.from(document.getElementsByClassName("Servicios"));
-    for (let i = 0; i < checkbox.length; i++) {
-      if (checkbox[i].checked) {
-        lala.push(checkbox[i].value);
-        setSelected([...lala]);
-        console.log(checkbox[i].value);
-      }
-    }
-    console.log(selected);
-  };
+  
 
   //const [selectDateCI, setSelectDateCI] = useState(null);
   //const [selectDateCO, setSelectDateCO] = useState(null);
@@ -59,6 +48,22 @@ export default function Reservaciones() {
     Cabinid: JSON.parse(cabinId),
     ExtraServices: "",
   });
+  const checkboxselected = (e) => {
+    e.preventDefault()
+    let costoplus = parseFloat(input.CostoFinal)
+    lala = [];
+    const checkbox = Array.from(document.getElementsByClassName("Servicios"));
+    for (let i = 0; i < checkbox.length; i++) {
+      if (checkbox[i].checked) {
+        costoplus = costoplus + parseFloat(checkbox[i].name)
+        console.log(costoplus)
+        lala.push(checkbox[i].value);
+        setInput({...input, ExtraServices: [...lala],CostoFinal: costoplus});
+        console.log(checkbox[i].value);
+      }
+    }
+    console.log(selected);
+  };
 
   useEffect(() => {
     dispatch(readReservation({ token }));
@@ -67,13 +72,14 @@ export default function Reservaciones() {
   function handleChange(e) {
     setInput({
       ...input,
+      UserId: logeduser.userid,
       [e.target.name]: e.target.value,
     });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(createReservation(input));
+   // console.log(input)
     // alert("Reserva creada con éxito");
     // window.location.reload();
   }
@@ -89,7 +95,15 @@ export default function Reservaciones() {
         {/* CREAR */}
         <div className={styles.crearCont}>
           <div className={styles.title}>Crear una nueva reservación</div>
-          <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
+          <form onSubmit={(e) => handleSubmit(e)}className={styles.form}>
+          <input
+              type="number"
+              value={input.CostoFinal}
+              name="Checkin"
+              placeholder={input.CostoFinal}
+              className={styles.formInputs}
+              required
+            />
             <input
               type="text"
               value={input.Checkin}
@@ -164,15 +178,14 @@ export default function Reservaciones() {
             <div>
               <p>Servicios Adicionales:</p>
               <button onClick={checkboxselected}>Seleccionar Servicios</button>
-              <button onClick={() => console.log(selected)}>consolelog</button>
               <div>
                 {servicios.map((el) => (
                   <div>
-                    {el.Name}
+                    {el.Name +" " + el.Price }
                     <input
                       className="Servicios"
                       type="checkbox"
-                      Name={el.Name}
+                      name={el.Price}
                       value={el.Name}
                       id={id1++}
                       onChange={verificacion}
@@ -183,7 +196,7 @@ export default function Reservaciones() {
               </div>
             </div>
             <div className={styles.btns}>
-              <button type="submit" className={styles.btn}>
+              <button onClick={createReservation(input)} className={styles.btn}>
                 Crear
               </button>
             </div>

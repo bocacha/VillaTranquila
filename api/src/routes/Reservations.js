@@ -57,16 +57,17 @@ if(!decodedToken.Admin){
 });
 
 router.post("/NewReservation" , (req, res)=>{
-    const {Checkin, Checkout, UserId, Paymentsid, Cabinid, ExtraServices} = req.body;
-    Reservations.create({
+    const {Checkin, Checkout, UserId, Cabinid, ExtraServices, CostoFinal,} = req.body;
+     Reservations.create({
      Checkin,
      Checkout,
      UserId, 
-     Paymentsid, 
      Cabinid, 
-     ExtraServices
+     ExtraServices,
+     CostoFinal
     })
     .then(doneTemp=>{
+        console.log("awdawda"+ doneTemp)
         return res.status(200).json(doneTemp)
     })
     .catch(error=>{ res.send(error)})
@@ -117,7 +118,7 @@ router.put('/RemoveReservation', (req,res) =>{
         {Show:false},
         {where:{ID: id}}
     ).then (doneTemp=>{
-        return res.status(200).json(doneTemp)
+        res.status(200).json(doneTemp)
     })
     .catch(error=>{console.log(error)})
         

@@ -27,7 +27,7 @@ try {
     //     return res.status(400).json({error:"Ops.. No tenes permisos"})
     // }
 
-    const dbUser = await User.findAll({where:{Show:true}})
+    const dbUser = await User.findAll({where:{Blocked:false}})
     res.send(dbUser)
 }catch(error){
     res.send({error : error})
@@ -53,7 +53,7 @@ router.get("/ocultados", async (req, res)=>{
         //     return res.status(400).json({error:"Ops.. No tenes permisos"})
         // }
     
-        const dbUser = await User.findAll({where:{Show:false}})
+        const dbUser = await User.findAll({where:{Blocked:true}})
         res.send(dbUser)
     }catch(error){
         res.send({error : error})
@@ -138,7 +138,7 @@ router.put('/RemoveUser', (req,res) =>{
         return res.json({status: 404},{message:"User not found"})
     }
     User.update(
-        {Show:false},
+        {Blocked:true},
         {where:{ID: id}}
     ).then (doneTemp=>{
         return res.status(200).json(doneTemp)
@@ -152,7 +152,7 @@ router.put('/RestoreUser', (req,res) =>{
         return res.json({status: 404},{message:"User not found"})
     }
     User.update(
-        {Show:true},
+        {Blocked:false},
         {where:{ID: id}}
     ).then (doneTemp=>{
         return res.status(200).json(doneTemp)
