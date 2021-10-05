@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export const GET_CABINS = "GET_CABINS";
-
 export const SEND_EMAIL = "SEND_EMAIL";
 export const FILTER_CABINS = 'FILTER_CABINS';
 export const FILTER_BY_CAPACITY = "FILTER_BY_CAPACITY";
@@ -18,7 +17,13 @@ export const READ_PICTURES = "READ_PICTURES";
 export const READ_USERS = "READ_USERS"; 
 export const READ_SERVICES = "READ_SERVICES"; 
 export const READ_CABINS = "READ_CABINS"; 
-export const EDIT_RESERVATIONS = "EDIT_RESERVATIONS_OCULTADOS";
+export const READ_PAYMENT_OCULTADOS = "READ_PAYMENT_OCULTADOS"; 
+export const READ_RESERVATIONS_OCULTADOS = "READ_RESERVATIONS_OCULTADOS"; 
+export const READ_PICTURES_OCULTADOS = "READ_PICTURES_OCULTADOS"; 
+export const READ_USERS_OCULTADOS = "READ_USERS_OCULTADOS"; 
+export const READ_SERVICES_OCULTADOS = "READ_SERVICES_OCULTADOS"; 
+export const READ_CABINS_OCULTADOS = "READ_CABINS_OCULTADOS"; 
+export const EDIT_RESERVATIONS = "EDIT_RESERVATIONS";
 export const EDIT_USER = "EDIT_USER";
 export const EDIT_SERVICES = "EDIT_SERVICES";
 export const EDIT_PAYMENT = "EDIT_PAYMENT";
@@ -207,6 +212,104 @@ export function readCabains(id) {
   return async function (dispatch) {
     try {
       var json = await axios.get("http://localhost:3001/cabins");
+      return dispatch({
+        type: READ_CABINS,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+}
+export function readPaymentocultados({token}) {
+  const config={
+    headers:{
+    Authorization: `Bearer ${token}`,
+  }
+  }
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("http://localhost:3001/payments/ocultados", config);
+      return dispatch({
+        type: READ_PAYMENT,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+}
+
+export function readReservationocultados({token}) {
+  const config={
+    headers:{
+    Authorization: `Bearer ${token}`,
+  }
+  }
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("http://localhost:3001/reservations/ocultadas", config);
+      return dispatch({
+        type: READ_RESERVATIONS,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+}
+
+export function readPicturesocultados(id) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("http://localhost:3001/pictures/ocultadas");
+      return dispatch({
+        type: READ_PICTURES,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+}
+
+export function readUsersocultados({token}) {
+  const config={
+    headers:{
+    Authorization: `Bearer ${token}`,
+  }
+  }
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("http://localhost:3001/users/ocultados", config);
+      return dispatch({
+        type: READ_USERS,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+}
+
+export function readServicesocultados() {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("http://localhost:3001/services/ocultados");
+      return dispatch({
+        type: READ_SERVICES,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+}
+
+export function readCabainsocultados(id) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("http://localhost:3001/cabins/ocultadas");
       return dispatch({
         type: READ_CABINS,
         payload: json.data,
