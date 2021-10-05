@@ -14,6 +14,7 @@ import Pagos from "./components/Admin/Pagos/Pagos";
 import Fotos from "./components/Admin/Fotos/Fotos";
 import Usuarios from "./components/Admin/Usuarios/Usuarios";
 import Registro from "./components/Registrarse/Registro";
+import LinkReserva from"./components/Reserva/Linkreserva/LinkReserva"
 
 function App() {
   return (

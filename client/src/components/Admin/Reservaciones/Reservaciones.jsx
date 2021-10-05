@@ -260,7 +260,6 @@ export default function Reservaciones() {
                 Checkin={el.Checkin}
                 Checkout={el.Checkout}
                 UserId={el.UserId}
-                Paymentsid={el.Paymentsid}
                 CostoFinal={el.CostoFinal}
                 Cabinid={el.Cabinid}
                 ExtraServices={el.ExtraServices}

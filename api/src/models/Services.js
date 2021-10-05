@@ -19,6 +19,11 @@ module.exports = (sequelize) => {
     Price:{
       type: DataTypes.STRING,
       allowNull: false
-    }
+    },
+    Show:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue:true
+     }
   },{timestamps: false,});
 };

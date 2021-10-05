@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 export default function Usuarios() {
   const dispatch = useDispatch();
-  const allUsers = useSelector((state) => state.usuarios);
+  
   const logeduser = useSelector ((state) => state.user)
   const {token} = logeduser
   const [input, setInput] = useState({
@@ -30,7 +30,7 @@ export default function Usuarios() {
   useEffect(() => {
     dispatch(readUsers({token}));
   }, [dispatch, token]);
-
+  const allUsers = useSelector((state) => state.usuarios);
   function handleChange(e) {
     setInput({
       ...input,
@@ -295,8 +295,7 @@ export default function Usuarios() {
       </div>
       {/* VER */}
       <div>
-        {allUsers?.map((el) => {
-          return (
+        {allUsers?.map((el)=>(           
             <div className={styles.detalles} key={el.ID}>
               <UsuariosDetail
                 ID={el.ID}
@@ -309,8 +308,7 @@ export default function Usuarios() {
                 Admin={el.Admin}
               />
             </div>
-          );
-        })}
+        ))}
       </div>
     </div>
   );
