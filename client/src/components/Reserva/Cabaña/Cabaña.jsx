@@ -4,12 +4,8 @@ import styles from './Cabaña.module.css';
 import { GiCoffeeCup, GiChickenOven, GiFireplace, GiCampCookingPot, GiVacuumCleaner, GiCookingPot } from 'react-icons/gi';
 import { RiFridgeLine } from 'react-icons/ri';
 import { FaWifi, FaCarAlt } from 'react-icons/fa';
-<<<<<<< HEAD
-import {Link} from 'react-router-dom';
-=======
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
->>>>>>> d5c2ab2fc7d827c2a92870228d251184cfe13734
 
 export default function Cabaña({
     ID,
