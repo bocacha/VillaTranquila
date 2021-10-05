@@ -8,7 +8,7 @@ import {
   readServices,
 } from "../../../actions";
 // import ReservacionesDetail from "./ReservacionesDetail";
-// import DatePicker from "react-datepicker";
+ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
 import { RiCreativeCommonsZeroLine } from "react-icons/ri";
@@ -32,8 +32,8 @@ export default function Reservaciones() {
   };
   
 
-  //const [selectDateCI, setSelectDateCI] = useState(null);
-  //const [selectDateCO, setSelectDateCO] = useState(null);
+  const [selectDateCI, setSelectDateCI] = useState(null);
+  const [selectDateCO, setSelectDateCO] = useState(null);
 
   const costo = localStorage.getItem("costo");
   const cabinId = localStorage.getItem("id_cabaña");
@@ -50,7 +50,12 @@ export default function Reservaciones() {
   });
   const checkboxselected = (e) => {
     e.preventDefault()
-    let costoplus = parseFloat(input.CostoFinal)
+      setInput({
+      ...input, CostoFinal:JSON.parse(costo),
+      Checkin:selectDateCI,Checkout:selectDateCO,
+    })
+    let costoplus = 0
+    console.log(costoplus)
     lala = [];
     const checkbox = Array.from(document.getElementsByClassName("Servicios"));
     for (let i = 0; i < checkbox.length; i++) {
@@ -58,7 +63,7 @@ export default function Reservaciones() {
         costoplus = costoplus + parseFloat(checkbox[i].name)
         console.log(costoplus)
         lala.push(checkbox[i].value);
-        setInput({...input, ExtraServices: [...lala],CostoFinal: costoplus});
+        setInput({...input, ExtraServices: [...lala],CostoFinal: parseFloat(input.CostoFinal)+ costoplus});
         console.log(checkbox[i].value);
       }
     }
@@ -83,7 +88,6 @@ export default function Reservaciones() {
     // alert("Reserva creada con éxito");
     // window.location.reload();
   }
-
   return (
     <div className={styles.container}>
       <div className={styles.btnVolver}>
@@ -104,7 +108,7 @@ export default function Reservaciones() {
               className={styles.formInputs}
               required
             />
-            <input
+            {/* <input
               type="text"
               value={input.Checkin}
               name="Checkin"
@@ -112,15 +116,15 @@ export default function Reservaciones() {
               placeholder="Check in"
               className={styles.formInputs}
               required
-            />
-            {/* <DatePicker
+            /> */}
+           <DatePicker
           selected={selectDateCI}
           onChange={date=> setSelectDateCI(date)}
           dateFormat='dd/MM/yyyy'
           minDate={new Date()}
           //isClearable
-          /> */}
-            <input
+          />
+            {/* <input
               type="text"
               value={input.Checkout}
               name="Checkout"
@@ -128,15 +132,15 @@ export default function Reservaciones() {
               placeholder="Check out"
               className={styles.formInputs}
               required
-            />
-            {/* 
+            /> */}
+         
           <DatePicker
           selected={selectDateCO}
           onChange={date=> setSelectDateCO(date)}
           dateFormat='dd/MM/yyyy'
           minDate={new Date()}
           //isClearable
-          /> */}
+          />
             {/* <input
               type="text"
               value={input.UserId}

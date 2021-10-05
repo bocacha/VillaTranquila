@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
     allownull:false,
   },
    Available:{ 
-    type: DataTypes.STRING,
+    type: DataTypes.JSON,
     allowNull: false,
   },
    Price:{
@@ -30,6 +30,21 @@ module.exports = (sequelize) => {
     type: DataTypes.STRING,
     allowNull: false,
    },
+   Wifi:{
+     type: DataTypes.BOOLEAN,
+     allowNull:false,
+     defaultValue:false,
+   },
+   Parking:{
+    type: DataTypes.BOOLEAN,
+    allowNull:false,
+    defaultValue:false,
+  },
+  Parrilla:{
+    type: DataTypes.BOOLEAN,
+    allowNull:false,
+    defaultValue:false,
+  },
    Show:{
     type: DataTypes.BOOLEAN,
     allowNull: false,
