@@ -8,10 +8,12 @@ import {
   readServices,
 } from "../../../actions";
 // import ReservacionesDetail from "./ReservacionesDetail";
- import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
 import { RiCreativeCommonsZeroLine } from "react-icons/ri";
+import DatePicker,{registerLocale} from "react-datepicker";
+import es from 'date-fns/locale/es';
+registerLocale('es', es)
 
 export default function Reservaciones() {
   const dispatch = useDispatch();
@@ -97,7 +99,14 @@ export default function Reservaciones() {
       [e.target.name]: e.target.value,
     });
   }
-
+const mostrarFecha = selectDateCI =>{
+    const options = {year:'numeric', month:'numeric', day:'numeric'}
+    setInput({...input,  Checkin: selectDateCI.toLocaleDateString('es-ES', options)})
+}
+const mostrarFecha2 = selectDateCI =>{
+  const options = {year:'numeric', month:'numeric', day:'numeric'}
+  setInput({...input,  Checkout: selectDateCI.toLocaleDateString('es-ES', options)})
+}
   function handleSubmit(e) {
     e.preventDefault();
    // console.log(input)
@@ -133,13 +142,16 @@ export default function Reservaciones() {
               className={styles.formInputs}
               required
             />
-           {/* <DatePicker
-          selected={selectDateCI}
-          onChange={date=> setSelectDateCI(date)}
-          dateFormat='dd/MM/yyyy'
-          minDate={new Date()}
-          //isClearable
-          /> */}
+          <DatePicker
+            selected={selectDateCI}
+            onChange={date=> setSelectDateCI(date)}
+            //onChange = {onChange}
+            dateFormat="dd 'de' MMMM 'de' yyyy"
+            minDate={new Date()}
+            locale='es'
+            //isClearable
+            />
+            <input type='button' onClick={()=> mostrarFecha(selectDateCI)} name="Seleccionar fecha"/>
             <input
               type="text"
               value={input.Checkout}
@@ -149,14 +161,16 @@ export default function Reservaciones() {
               className={styles.formInputs}
               required
             />
-         
-          {/* <DatePicker
-          selected={selectDateCO}
-          onChange={date=> setSelectDateCO(date)}
-          dateFormat='dd/MM/yyyy'
-          minDate={new Date()}
-          //isClearable
-          /> */}
+        <DatePicker
+            selected={selectDateCO}
+            onChange={date=> setSelectDateCO(date)}
+            //onChange = {onChange}
+            dateFormat="dd 'de' MMMM 'de' yyyy"
+            minDate={new Date()}
+            locale='es'
+            //isClearable
+            />
+            <input type='button' onClick={()=> mostrarFecha2(selectDateCO)} name="Seleccionar fecha"/>
             {/* <input
               type="text"
               value={input.UserId}
@@ -226,3 +240,7 @@ export default function Reservaciones() {
     </div>
   );
 }
+            // <input type='button' onClick={()=> mostrarFecha(selectDateCI)}/>
+            // <input type='button' onClick={()=> console}/>
+
+
