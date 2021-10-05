@@ -12,7 +12,7 @@ import { MdAttachMoney, MdRoomService } from 'react-icons/md';
 import { ImCalendar, ImSearch } from 'react-icons/im';
 import { AiOutlineReload } from 'react-icons/ai';
 import { Logeduser } from "../../actions";
-import Slider from "./Slider/Slider.jsx";
+// import Slider from "./Slider/Slider.jsx";
 
 
 export default function Reserva() {
@@ -21,6 +21,20 @@ export default function Reserva() {
         dispatch(Logeduser())
     }, [dispatch]);
     const allCabins = useSelector(state => state.cabins);
+
+    // Slider-----------------------------------------------------------------
+    const slideValue = document.getElementById("span");
+    const inputSlider = document.getElementById("input");
+    const oninput = (() => {
+        let value = inputSlider.defaultValue;
+        slideValue.textContent = value;
+        slideValue.style.left = (value / 2) + "%";
+        slideValue.classList.add("show");
+    });
+    const onblur = (() => {
+        slideValue.classList.remove("show");
+    });
+    //------------------------------------------------------------------------
 
 
     // Paginado---------------------------------------------------------------
@@ -126,8 +140,40 @@ export default function Reserva() {
                 <li>
                     <label><p><MdAttachMoney /></p> Rango de precios por noche: </label>
                     {/*SLIDER<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/}
+
+                    <div className={styles.range}>
+                        <div class={styles.sliderValue}>
+                            <span id={styles.span}>5000</span>
+                        </div>
+                        <div className={styles.field}>
+                            <div className={styles.value}>
+                                <div id={styles.left}>
+                                    1500
+                                </div>
+                            </div>
+                            <input
+                                id={styles.input}
+                                type="range"
+                                min="1500"
+                                max="8500"
+                                defaultValue='5000'
+                                steps="1"
+                                onInput={oninput}
+                                onBlur={onblur}
+                                onChange={e => handleChange(e)}
+                            />
+                            <div className={styles.value}>
+                                <div id={styles.right}>
+                                    8500
+                                </div>
+                            </div>
+                        </div>
+                        <script src="slider.js"></script>
+
+                    </div>
+
                     {/* <RangeSlider /> */}
-                    <Slider/>
+                    {/* <Slider /> */}
                     {/* <select onChange={e => handleChange(e)} name='priceRange'>
                         <option value='selected' hidden>$</option>
                         <option value='all'>No tengo precio definido</option>
