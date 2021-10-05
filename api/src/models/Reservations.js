@@ -31,6 +31,11 @@ module.exports = (sequelize) => {
     ExtraServices:{
       type: DataTypes.STRING,
       allowNull: true,
-    }
+    },
+    Show:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue:true
+     }
   },{timestamps: false,});
 };
