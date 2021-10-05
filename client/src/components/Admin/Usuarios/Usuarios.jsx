@@ -198,6 +198,9 @@ export default function Usuarios() {
               onChange={(e) => handleChange(e)}
               placeholder="Id"
               className={styles.formInputs}
+              title='Formato: UUID4'
+              pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
+              required
             />
             <input
               type="text"
@@ -206,6 +209,9 @@ export default function Usuarios() {
               onChange={(e) => handleChange(e)}
               placeholder="Nombre de usuario"
               className={styles.formInputs}
+              pattern='^[0-9a-zA-Z\s]+$'
+              title='debe contener letras y numeros'
+              required
             />
             <input
               type="text"
@@ -214,6 +220,9 @@ export default function Usuarios() {
               onChange={(e) => handleChange(e)}
               placeholder="Contraseña del usuario"
               className={styles.formInputs}
+              title='Debe contener mayusculas, minusculas, numeros y caracter especial'
+              pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$'
+              required
             />
             <input
               type="text"
@@ -222,6 +231,9 @@ export default function Usuarios() {
               onChange={(e) => handleChange(e)}
               placeholder="Nombre"
               className={styles.formInputs}
+              title='Solo letras'
+              pattern='[a-zA-Z ]{2,254}'
+              required
             />
             <input
               type="text"
@@ -229,7 +241,10 @@ export default function Usuarios() {
               name="LastName"
               onChange={(e) => handleChange(e)}
               placeholder="Apellido"
+              title='Solo letras'
               className={styles.formInputs}
+              pattern='[a-zA-Z ]{2,254}'
+              required
             />
             <input
               type="text"
@@ -238,6 +253,8 @@ export default function Usuarios() {
               onChange={(e) => handleChange(e)}
               placeholder="Dirección"
               className={styles.formInputs}
+              pattern='^[0-9a-zA-Z\s]+$'
+              required
             />
             <input
               type="text"
@@ -246,14 +263,22 @@ export default function Usuarios() {
               onChange={(e) => handleChange(e)}
               placeholder="Télefono"
               className={styles.formInputs}
+              maxLength="17" 
+              minLength="10" 
+              pattern="[+]{2}[0-9]{10-14}" 
+              placeholder="+54 9 11 12345678" 
+              required
+              
             />
             <input
-              type="text"
+              type="emal"
               value={input.Email}
               name="Email"
               onChange={(e) => handleChange(e)}
               placeholder="E-mail"
               className={styles.formInputs}
+              pattern='^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$'
+              required
             />
             <select
               onChange={(e) => handleSelectAdmin(e)}

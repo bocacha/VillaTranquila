@@ -83,6 +83,8 @@ return (
               onChange={(e) => handleChange(e)}
               placeholder="Nombre"
               className={styles.formInputs} 
+              title='Solo letras'
+              pattern='[a-zA-Z ]{2,254}'
               required
             />
             <textarea
@@ -131,6 +133,7 @@ return (
               onChange={(e) => handleChangeEdit(e)}
               placeholder="Nombre"
               className={styles.formInputs}
+              required
             />
             <input
               type="text"
@@ -139,14 +142,18 @@ return (
               onChange={(e) => handleChangeEdit(e)}
               placeholder="Descripción"
               className={styles.formInputs}
+              required
             />
             <input
               type="text"
               value={edit.Price}
               name="Price"
+              min='1000' 
+              max='20000'
               onChange={(e) => handleChangeEdit(e)}
               placeholder="Precio"
               className={styles.formInputs}
+              required
             />
             <div className={styles.btns}>
               <button type="submit" className={styles.btn}>

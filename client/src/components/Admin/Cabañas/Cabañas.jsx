@@ -112,7 +112,7 @@ const Cabañas = () => {
                 name="Number"
                 value={cabain.Number}
                 onChange={handleChange}
-                placeholder="Numero de Habitaciones"
+                placeholder="Numero de Cabaña"
                 className={styles.formInputs}
                 requiered
               />
