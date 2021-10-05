@@ -231,6 +231,7 @@ export default function Reserva() {
                             return (
                                 <div key={el.number} >
                                     <Cabaña
+                                        ID={el.ID}
                                         number={el.Number}
                                         capacity={el.Capacity}
                                         notAvailable={el.NotAvailable}
