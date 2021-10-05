@@ -188,7 +188,7 @@ export function readUsers() {
   };
 }
 
-export function readServices(id) {
+export function readServices() {
   return async function (dispatch) {
     try {
       var json = await axios.get("http://localhost:3001/services/");

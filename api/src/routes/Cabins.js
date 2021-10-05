@@ -10,7 +10,15 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 router.get("/", async (req, res)=>{
-    const dbCabins = await Cabins.findAll()
+    const dbCabins = await Cabins.findAll({where:{Show:true}})
+    try{
+        res.send(dbCabins)
+    }catch(error){
+        console.log(error)
+    }
+});
+router.get("/ocultadas", async (req, res)=>{
+    const dbCabins = await Cabins.findAll({where:{Show:false}})
     try{
         res.send(dbCabins)
     }catch(error){
@@ -34,22 +42,15 @@ if(!token || !decodedToken.id){
 if(!decodedToken.Admin){
    return res.status(400).json({error:"Ops.. No tenes permisos"})
 }
-    const {Number, Capacity, Available, Price, Description,  Coffe, Microondas, Calefaccion, Barbecue,Wifi, Cleaning, Refrigerator, Stove, Parking} = req.body;
+    const {Number, Capacity, Available, Price, Description, Show, Servicios} = req.body;
     Cabins.create({
         Number, 
         Capacity, 
         Available, 
         Price, 
         Description,
-        Coffe,
-        Microondas,
-        Calefaccion,
-        Barbecue,
-        Wifi,
-        Cleaning,
-        Refrigerator,
-        Stove,
-        Parking
+        Show,
+        Servicios,
     })
     .then(doneTemp=>{
         console.log(doneTemp)
@@ -80,15 +81,8 @@ if(!decodedToken.Admin){
         Available: Available,
         Price: Price,
         Description: Description,
-        Coffe: Coffe, 
-        Microondas: Microondas, 
-        Calefaccion: Calefaccion, 
-        Barbecue: Barbecue,
-        Wifi: Wifi, 
-        Cleaning: Cleaning, 
-        Refrigerator: Refrigerator, 
-        Stove: Stove, 
-        Parking: Parking
+        Show: Show,
+        Servicios: Servicios,
     }
         Cabins.update(
           objecttoupdate
@@ -109,7 +103,8 @@ router.put('/RemoveCabin', (req,res) =>{
     if(!id){
         return res.json({status: 404},{message:"Cabin not found"})
     }
-    Cabins.destroy(
+    Cabins.update(
+        {Show:false},
         {where:{ID: id}}
     ).then (doneTemp=>{
         return res.status(200).json(doneTemp)
@@ -117,7 +112,21 @@ router.put('/RemoveCabin', (req,res) =>{
     .catch(error=>{console.log(error)})
         
 });  
-
+router.put('/RestoreCabin', (req,res) =>{
+    const {id}= req.body;
+    console.log(id);
+    if(!id){
+        return res.json({status: 404},{message:"Cabin not found"})
+    }
+    Cabins.update(
+        {Show:true},
+        {where:{ID: id}}
+    ).then (doneTemp=>{
+        return res.status(200).json(doneTemp)
+    })
+    .catch(error=>{console.log(error)})
+        
+});  
 
 
 module.exports = router;

@@ -15,6 +15,11 @@ module.exports = (sequelize) => {
     Url:{
       type: DataTypes.STRING,
       allowNull:false
-    }
+    },
+    Show:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue:true
+     }
   },{timestamps: false,});
 };
