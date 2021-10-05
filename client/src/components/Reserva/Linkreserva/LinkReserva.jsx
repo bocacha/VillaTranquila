@@ -25,6 +25,8 @@ export default function Reservaciones() {
   const [selected, setSelected] = useState([]);
   let lala = [];
   let id1 = 0;
+  let suma = []
+  let costoadicional = 0
   const id = localStorage.getItem("id_cabaña");
   const price = localStorage.getItem("costo");
   const verificacion = (e) => {
@@ -48,22 +50,36 @@ export default function Reservaciones() {
     Cabinid: JSON.parse(cabinId),
     ExtraServices: "",
   });
+  const consultarprecio=(e)=>{
+    suma = []
+    costoadicional = 0
+    // parseFloat(input.CostoFinal)
+    const checkbox = Array.from(document.getElementsByClassName("Servicios"));
+    for (let i = 0; i < checkbox.length; i++) {
+      if (checkbox[i].checked) {
+        suma.push(parseFloat(checkbox[i].name))
+      }
+    }
+    for(let j=0; j < suma.length; j++){
+     costoadicional = costoadicional + parseFloat(suma[j])
+      
+    }
+    costoadicional = costoadicional+ parseFloat(JSON.parse(costo))
+  console.log(costoadicional)
+    setInput({...input,CostoFinal:costoadicional})
+  }
   const checkboxselected = (e) => {
     e.preventDefault()
       setInput({
       ...input, CostoFinal:JSON.parse(costo),
       Checkin:selectDateCI,Checkout:selectDateCO,
     })
-    let costoplus = 0
-    console.log(costoplus)
     lala = [];
     const checkbox = Array.from(document.getElementsByClassName("Servicios"));
     for (let i = 0; i < checkbox.length; i++) {
       if (checkbox[i].checked) {
-        costoplus = costoplus + parseFloat(checkbox[i].name)
-        console.log(costoplus)
         lala.push(checkbox[i].value);
-        setInput({...input, ExtraServices: [...lala],CostoFinal: parseFloat(input.CostoFinal)+ costoplus});
+        setInput({...input, ExtraServices: [...lala]});
         console.log(checkbox[i].value);
       }
     }
@@ -108,7 +124,7 @@ export default function Reservaciones() {
               className={styles.formInputs}
               required
             />
-            {/* <input
+            <input
               type="text"
               value={input.Checkin}
               name="Checkin"
@@ -116,15 +132,15 @@ export default function Reservaciones() {
               placeholder="Check in"
               className={styles.formInputs}
               required
-            /> */}
-           <DatePicker
+            />
+           {/* <DatePicker
           selected={selectDateCI}
           onChange={date=> setSelectDateCI(date)}
           dateFormat='dd/MM/yyyy'
           minDate={new Date()}
           //isClearable
-          />
-            {/* <input
+          /> */}
+            <input
               type="text"
               value={input.Checkout}
               name="Checkout"
@@ -132,15 +148,15 @@ export default function Reservaciones() {
               placeholder="Check out"
               className={styles.formInputs}
               required
-            /> */}
+            />
          
-          <DatePicker
+          {/* <DatePicker
           selected={selectDateCO}
           onChange={date=> setSelectDateCO(date)}
           dateFormat='dd/MM/yyyy'
           minDate={new Date()}
           //isClearable
-          />
+          /> */}
             {/* <input
               type="text"
               value={input.UserId}
@@ -192,7 +208,7 @@ export default function Reservaciones() {
                       name={el.Price}
                       value={el.Name}
                       id={id1++}
-                      onChange={verificacion}
+                      onChange={consultarprecio}
                     />
                     <label htmlFor="temperament">{el.name}</label>
                   </div>
