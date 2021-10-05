@@ -22,13 +22,17 @@ module.exports = (sequelize) => {
     },
     Paymentsid:{
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     Cabinid:{
       type: DataTypes.STRING,
       allowNull: false,
     },
     ExtraServices:{
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    CostoFinal:{
       type: DataTypes.STRING,
       allowNull: true,
     }

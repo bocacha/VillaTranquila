@@ -14,6 +14,7 @@ import { AiOutlineReload } from 'react-icons/ai';
 import { Logeduser } from "../../actions";
 import RangeSlider from "./Slider/Slider.jsx";
 
+
 export default function Reserva() {
     const dispatch = useDispatch();
     useEffect(() => {
@@ -61,7 +62,7 @@ export default function Reserva() {
         inDate: '',
         outDate: '',
         capacity: '',
-        // priceRange: '',
+        priceRange: '',
         priceMin: '',
         priceMax: '',
         wifi: '',
@@ -95,7 +96,7 @@ export default function Reserva() {
                     <button className={styles.reload} onClick={e => handleReload(e)}>Limpiar filtros <AiOutlineReload /></button>
                 </li>
                 <hr />
-                <li>
+                {/* <li>
                     <label><ImCalendar /> Fecha de llegada: </label>
                     <input
                         type="date"
@@ -112,7 +113,7 @@ export default function Reserva() {
                         name='outDate'
                         onChange={e => handleChange(e)}
                     />
-                </li>
+                </li> */}
                 <li>
                     <label><IoMdPeople /> Cantidad de personas </label>
                     <select onChange={e => handleChange(e)} name='capacity'>
@@ -231,6 +232,7 @@ export default function Reserva() {
                             return (
                                 <div key={el.number} >
                                     <Cabaña
+                                        ID={el.ID}
                                         number={el.Number}
                                         capacity={el.Capacity}
                                         notAvailable={el.NotAvailable}

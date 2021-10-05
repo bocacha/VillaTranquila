@@ -59,6 +59,7 @@ export function sendEmail(payload) {
   };
 }
 export function createReservation(payload) {
+  console.log(payload);
   return async function (dispatch) {
     const response = await axios.post("http://localhost:3001/reservations/NewReservation", payload);
     return response;

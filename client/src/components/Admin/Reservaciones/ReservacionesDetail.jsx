@@ -11,6 +11,7 @@ export default function ReservacionesDetail({
   Paymentsid,
   Cabinid,
   ExtraServices,
+  CostoFinal,
 }) {
 
  const dispatch = useDispatch();
@@ -20,6 +21,7 @@ export default function ReservacionesDetail({
     alert("su Reserva fue Eliminada con exito");
     let obj = {id:ID};
     dispatch(removeReservations(obj));
+    window.location.reload();
   } 
   return (
     <div className={styles.container}>
@@ -27,9 +29,9 @@ export default function ReservacionesDetail({
       <p><strong>Checkin:</strong> {Checkin}</p>
       <p><strong>Checkout:</strong> {Checkout}</p>
       <p><strong>UserId:</strong> {UserId}</p>
-      <p><strong>Paymentsid:</strong> {Paymentsid}</p>
+      <p><strong>Costo final:</strong> {CostoFinal}</p>
       <p><strong>Cabinid:</strong> {Cabinid}</p>
-      <p><strong>ExtraServices:</strong> {ExtraServices}</p>
+      {/* <p><strong>ExtraServices:</strong> {ExtraServices}</p> */}
       <div>
         <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
       </div>
