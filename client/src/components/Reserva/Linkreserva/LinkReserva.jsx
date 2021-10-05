@@ -6,6 +6,7 @@ import {
   readReservation,
   Logeduser,
   readServices,
+  readFechas,
 } from "../../../actions";
 // import ReservacionesDetail from "./ReservacionesDetail";
 import "react-datepicker/dist/react-datepicker.css";
@@ -13,6 +14,7 @@ import { Link } from "react-router-dom";
 import { RiCreativeCommonsZeroLine } from "react-icons/ri";
 import DatePicker,{registerLocale} from "react-datepicker";
 import es from 'date-fns/locale/es';
+import axios from "axios"
 registerLocale('es', es)
 
 export default function Reservaciones() {
@@ -24,18 +26,11 @@ export default function Reservaciones() {
     dispatch(readServices());
   }, [dispatch]);
   const servicios = useSelector((state) => state.servicios);
-  const [selected, setSelected] = useState([]);
   let lala = [];
   let id1 = 0;
   let suma = []
   let costoadicional = 0
-  const id = localStorage.getItem("id_cabaña");
-  const price = localStorage.getItem("costo");
-  const verificacion = (e) => {
-    if (e.target.checked) console.log(e.target.value);
-  };
-  
-
+  const ocupadas = useSelector((state) => state.fechasnodisponibles)
   const [selectDateCI, setSelectDateCI] = useState(null);
   const [selectDateCO, setSelectDateCO] = useState(null);
 
@@ -85,12 +80,14 @@ export default function Reservaciones() {
         console.log(checkbox[i].value);
       }
     }
-    console.log(selected);
   };
 
   useEffect(() => {
     dispatch(readReservation({ token }));
   }, [dispatch, token]);
+  useEffect(() => {
+    dispatch(readFechas());
+  }, [dispatch]);
 
   function handleChange(e) {
     setInput({
@@ -99,7 +96,7 @@ export default function Reservaciones() {
       [e.target.name]: e.target.value,
     });
   }
-const mostrarFecha = selectDateCI =>{
+const mostrarFecha =async selectDateCI =>{
     const options = {year:'numeric', month:'numeric', day:'numeric'}
     setInput({...input,  Checkin: selectDateCI.toLocaleDateString('es-ES', options)})
 }
@@ -124,6 +121,13 @@ const mostrarFecha2 = selectDateCI =>{
         {/* CREAR */}
         <div className={styles.crearCont}>
           <div className={styles.title}>Crear una nueva reservación</div>
+          <div>
+            Fechas disponibles no de la cabaña
+            <div>{ocupadas.map((e)=>(
+              <div>  Del   {e.Checkin} Al {e.Checkout}</div>
+            ))}</div>
+            <div>fin</div>
+          </div>
           <form onSubmit={(e) => handleSubmit(e)}className={styles.form}>
           <input
               type="number"
@@ -151,7 +155,7 @@ const mostrarFecha2 = selectDateCI =>{
             locale='es'
             //isClearable
             />
-            <input type='button' onClick={()=> mostrarFecha(selectDateCI)} name="Seleccionar fecha"/>
+            <input type='button' onClick={()=> mostrarFecha(selectDateCI)} value="comprobar fecha"/>
             <input
               type="text"
               value={input.Checkout}
@@ -170,7 +174,7 @@ const mostrarFecha2 = selectDateCI =>{
             locale='es'
             //isClearable
             />
-            <input type='button' onClick={()=> mostrarFecha2(selectDateCO)} name="Seleccionar fecha"/>
+            <input type='button' onClick={()=> mostrarFecha2(selectDateCO)} value="comprobar fecha"/>
             {/* <input
               type="text"
               value={input.UserId}

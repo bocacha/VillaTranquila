@@ -25,6 +25,18 @@ router.get("/ocultadas", async (req, res)=>{
         console.log(error)
     }
 });
+router.get("/:id", async (req, res)=>{
+    let Cabindetails = []
+  if(req.params.id.length>4) { 
+    try{
+    let searchdetails = await Cabins.findByPk(req.params.id)
+    let found = searchdetails.dataValues;
+    Cabindetails.push(found)
+    res.send(Cabindetails)
+    } catch(error) {
+            console.log(error)
+        }}
+    })
 
 router.post("/NewCabin" , (req, res)=>{
     const authorizations = req.get("Authorization") 

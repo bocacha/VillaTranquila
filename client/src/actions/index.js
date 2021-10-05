@@ -35,6 +35,7 @@ export const REMOVE_SERVICES= "REMOVE_SERVICES";
 export const REMOVE_PICTURES= "REMOVE_PICTURES";
 export const REMOVE_PAYMENTS= "REMOVE_PAYMENTS";
 export const REMOVE_USERS= "REMOVE_USERS";
+export const READ_FECHASNODISPONIBLES = "READ_FECHASNODISPONIBLES"
 
 export function getCabins() {
   return async function (dispatch) {
@@ -517,6 +518,20 @@ export function removeUsers(id){
       return dispatch({
         type: REMOVE_USERS,
         payload: id
+       
+       })
+       
+  };
+}
+
+export function readFechas(){
+  const cabinId = localStorage.getItem("id_cabaña");
+  return async function (dispatch) {
+   
+      var json = await axios.get(`http://localhost:3001/cabins/${JSON.parse(cabinId)}`)
+      return dispatch({
+        type: READ_FECHASNODISPONIBLES,
+        payload: json.data[0].Available
        
        })
        
