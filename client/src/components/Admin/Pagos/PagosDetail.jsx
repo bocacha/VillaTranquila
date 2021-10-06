@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./PagosDetail.module.css";
 import { useDispatch } from "react-redux";
-import {removePayments}  from '../../../actions';
+import {removePayments, restorePayments}  from '../../../actions';
 
 
 export default function PagosDetail({
@@ -10,6 +10,7 @@ export default function PagosDetail({
   PaydAmount,
   Date,
   idClient,
+  restaurar
 }) {
 
   const dispatch = useDispatch();
@@ -19,6 +20,14 @@ export default function PagosDetail({
     alert("su pago fue Eliminado con exito");
     let obj = {id:ID}
     dispatch(removePayments(obj));
+    window.location.reload();
+  }
+  const handleSubmitrestore = (ID)=>{
+    console.log('funcion', ID)
+    alert("su cabaña fue Eliminada con exito");
+    let obj = {id:ID}
+    dispatch(restorePayments(obj));
+    window.location.reload();
   }
   
   return (
@@ -29,7 +38,12 @@ export default function PagosDetail({
       <p> <strong>Monto inicial:</strong>  ${PaydAmount}.00</p>
       <p> <strong>Monto total:</strong>  ${TotalAmount}.00</p>
       <div>
-        <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
+      {!restaurar?(
+          <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
+
+        ):(
+          <button onClick={()=>handleSubmitrestore(ID)}>Restaurar</button>
+        )}
       </div>
     </div>
   );

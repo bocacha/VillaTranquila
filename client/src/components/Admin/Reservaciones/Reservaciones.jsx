@@ -5,7 +5,8 @@ import {
   createReservation,
   editReservation,
   readReservation,
-  Logeduser
+  Logeduser,
+  readReservationocultados
 } from "../../../actions";
 import ReservacionesDetail from "./ReservacionesDetail";
 import DatePicker from "react-datepicker";
@@ -19,6 +20,7 @@ export default function Reservaciones() {
 
   const dispatch = useDispatch();
   const allReservations = useSelector((state) => state.reservaciones);
+  const [habilitar, setHabilitar]= useState(false)
   const logeduser = useSelector((state) => state.user);
   const { token } = logeduser;
   const [input, setInput] = useState({
@@ -74,6 +76,7 @@ export default function Reservaciones() {
       Cabinid: "",
       ExtraServices: "",
     });
+    window.location.reload();
   }
   function handleSubmitEdit(e) {
     e.preventDefault();
@@ -88,8 +91,14 @@ export default function Reservaciones() {
       Cabinid: "",
       ExtraServices: "",
     });
+    window.location.reload();
   }
-
+  const ocultadas= () => {
+   return dispatch(readReservationocultados())
+  }
+  const showtrue=()=>{
+    dispatch(readReservation())
+  }
   return (
     <div className={styles.container}>
       <div className={styles.btnVolver}>
@@ -97,6 +106,12 @@ export default function Reservaciones() {
           <button className={styles.btn}>Volver</button>
         </Link>
       </div>
+      {!habilitar ?(
+            <button onClick={ocultadas}>Mostrar ocultadas</button>
+          ):(
+            <button onClick={showtrue}>Mostrar habilitadas</button>
+          )
+          }
       <div className={styles.formsCont}>
         {/* CREAR */}
         <div className={styles.crearCont}>
@@ -258,9 +273,10 @@ export default function Reservaciones() {
                 Checkin={el.Checkin}
                 Checkout={el.Checkout}
                 UserId={el.UserId}
-                Paymentsid={el.Paymentsid}
+                CostoFinal={el.CostoFinal}
                 Cabinid={el.Cabinid}
                 ExtraServices={el.ExtraServices}
+                restaurar={habilitar}
               />
             </div>
           );

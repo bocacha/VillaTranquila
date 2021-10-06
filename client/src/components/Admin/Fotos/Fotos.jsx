@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Fotos.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createimage, readPictures, editPictures, Logeduser} from "../../../actions";
+import { createimage, readPictures, editPictures, Logeduser,readPicturesocultados} from "../../../actions";
 import FotosDetail from "./FotosDetail";
 import { Link } from "react-router-dom";
 
@@ -9,6 +9,7 @@ export default function Fotos() {
   const dispatch = useDispatch();
   const allPictures = useSelector((state) => state.fotos);
   const logeduser = useSelector((state) => state.user);
+  const [habilitar, setHabilitar]= useState(false)
   console.log(allPictures);
   const [input, setInput] = useState({
     Description: "",
@@ -62,7 +63,14 @@ export default function Fotos() {
     });
     window.location.reload();
   }
-
+const ocultadas=() => {
+  dispatch(readPicturesocultados())
+  setHabilitar(true)
+}
+const showtrue=()=>{
+  dispatch(readPictures())
+  setHabilitar(false)
+}
   return (
     <div className={styles.container}>
       <div className={styles.btnVolver}>
@@ -71,6 +79,12 @@ export default function Fotos() {
         </Link>
       </div>
       <div className={styles.formsCont}>
+      {!habilitar ?(
+            <button onClick={ocultadas}>Mostrar ocultadas</button>
+          ):(
+            <button onClick={showtrue}>Mostrar habilitadas</button>
+          )
+          }
         {/* CREAR */}
         <div className={styles.crearCont}>
           <div className={styles.title}> Crear una nueva foto</div>
@@ -145,6 +159,7 @@ export default function Fotos() {
                 Description={el.Description}
                 Url={el.Url}
                 ID={el.ID}
+                restaurar={habilitar}
               />
             </div>
           );

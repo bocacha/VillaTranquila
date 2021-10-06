@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./UsuariosDetail.module.css";
 import { useDispatch } from "react-redux";
-import {removeUsers}  from '../../../actions'
+import {removeUsers, restoreUsers}  from '../../../actions'
 
 export default function UsuariosDetail({
     ID,
@@ -12,6 +12,7 @@ export default function UsuariosDetail({
     Address,
     Phone,
     Email,
+    restaurar
 }) {
 
   const dispatch = useDispatch();
@@ -21,6 +22,14 @@ export default function UsuariosDetail({
     alert("su usuario fue Eliminado con exito");
     let obj = {id:ID}
     dispatch(removeUsers(obj));
+    window.location.reload();
+  }
+  const handleSubmitrestore = (ID)=>{
+    console.log('funcion', ID)
+    alert("su cabaña fue Eliminada con exito");
+    let obj = {id:ID}
+    dispatch(restoreUsers(obj));
+    window.location.reload();
   }
   return (
     <div className={styles.container}>
@@ -33,7 +42,12 @@ export default function UsuariosDetail({
       <p><strong>Phone:</strong> {Phone}</p>
       <p><strong>Email:</strong> {Email}</p> 
       <div>
-        <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
+      {!restaurar?(
+          <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
+
+        ):(
+          <button onClick={()=>handleSubmitrestore(ID)}>Restaurar</button>
+        )}
       </div>
     </div>
   );
