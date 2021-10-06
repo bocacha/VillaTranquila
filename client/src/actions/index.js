@@ -112,7 +112,7 @@ export function createimage(payload , {token}) {
 }
 
 export function createCabains(payload, {token}) {
-  console.log(payload)
+  
   const config={
     headers:{
     Authorization: `Bearer ${token}`,

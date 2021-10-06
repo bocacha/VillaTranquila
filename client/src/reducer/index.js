@@ -171,6 +171,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         cabañas: action.payload,
+        
       };
       case READ_PAYMENT_OCULTADOS:
         return {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./UsuariosDetail.module.css";
 import { useDispatch } from "react-redux";
 import {removeUsers, restoreUsers}  from '../../../actions'
@@ -12,11 +12,13 @@ export default function UsuariosDetail({
     Address,
     Phone,
     Email,
+    handlePrueba,
+    handleSubmitEdit,
     restaurar
 }) {
 
   const dispatch = useDispatch();
-
+  const [mostrar, setMostrar] = useState(true);
   const handleSubmitDelete = (ID)=>{
     console.log('funcion', ID)
     alert("su usuario fue Eliminado con exito");
@@ -49,6 +51,23 @@ export default function UsuariosDetail({
           <button onClick={()=>handleSubmitrestore(ID)}>Restaurar</button>
         )}
       </div>
+      {mostrar 
+      
+      ?  
+      <div>
+         <button onClick={(e)=> {handleSubmitEdit(e,ID);
+                                      setMostrar(false);
+                                      ;        } 
+        }>Editar</button>
+      </div> 
+        
+      :
+       <div>
+          <button onClick={(e)=>handlePrueba(e,ID)}>Guardar</button>
+       </div> 
+      
+      }
+
     </div>
   );
 }

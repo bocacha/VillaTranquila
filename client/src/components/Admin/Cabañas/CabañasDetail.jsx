@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./CabañasDetail.module.css";
 import { useDispatch} from "react-redux";
 import {removeCabains,restoreCabains}  from '../../../actions'
+
 
 export default function CabinsDetail({ 
     ID,
@@ -13,12 +14,13 @@ export default function CabinsDetail({
     Barbecue,
     Wifi,
     Parking,
+    handleeditSubmit,
+    handlePrueba,
     restaurar
-
 }) {
   const dispatch = useDispatch();
+  const [mostrar, setMostrar] = useState(true);
   const handleSubmitDelete = (ID)=>{
-    console.log('funcion', ID)
     alert("su cabaña fue Eliminada con exito");
     let obj = {id:ID}
     dispatch(removeCabains(obj));
@@ -50,6 +52,21 @@ export default function CabinsDetail({
           <button onClick={()=>handleSubmitrestore(ID)}>Restaurar</button>
         )}
       </div>
+      {mostrar      
+      ?  
+      <div>
+         <button onClick={(e)=> {handleeditSubmit(e,ID);
+                                      setMostrar(false);
+                                      ;        } 
+        }>Editar</button>
+      </div> 
+        
+      :
+       <div>
+          <button onClick={(e)=>handlePrueba(e,ID)}>Guardar</button>
+       </div> 
+      
+      }
     </div>
     
   );

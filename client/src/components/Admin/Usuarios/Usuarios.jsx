@@ -7,8 +7,10 @@ import { Link } from "react-router-dom";
 
 export default function Usuarios() {
   const dispatch = useDispatch();
+  const allUsers = useSelector((state) => state.usuarios);
+  const logeduser = useSelector ((state) => state.user);
+  const [mostrar, setMostrar] = useState(false);
   const [habilitar, setHabilitar]= useState(false)
-  const logeduser = useSelector ((state) => state.user)
   const {token} = logeduser
   const [input, setInput] = useState({
     id: "",
@@ -30,7 +32,6 @@ export default function Usuarios() {
   useEffect(() => {
     dispatch(readUsers({token}));
   }, [dispatch, token]);
-  const allUsers = useSelector((state) => state.usuarios);
   function handleChange(e) {
     setInput({
       ...input,
@@ -57,27 +58,32 @@ export default function Usuarios() {
     });
   }
 
-  function handleSubmit(e) {
-    const { token } = logeduser;
+  function handleSubmitEdit(e, ID) {
+   // const { token } = logeduser;
     e.preventDefault();
     dispatch(editUsers(input));
-    alert("Usuario editado con éxito");
+    setMostrar(true);
+    //alert("Usuario editado con éxito");
     setInput({
-      id: "",
-      UserName: "",
-      UserPassword: "",
-      FirstName: "",
-      LastName: "",
-      Address: "",
-      Phone: "",
-      Email: "",
-      Admin: "",
-      Premium: "",
-      Blocked: "",
+      ...input,
+      id: ID,
     });
-    dispatch(readUsers({ token }));
-    window.location.reload();
+    //dispatch(readUsers({ token }));
+    //window.location.reload();
   }
+  function handlePrueba(e, ID) {
+    // const { token } = logeduser;
+     e.preventDefault();
+     dispatch(editUsers(input));
+     setMostrar(true);
+     //alert("Usuario editado con éxito");
+     setInput({
+       ...input,
+       id: ID,
+     });
+     //dispatch(readUsers({ token }));
+     window.location.reload();
+   }
 const ocultadas= () => {
   const { token } = logeduser;
   dispatch(readUsersocultados({ token}))
@@ -202,110 +208,105 @@ const showtrue=()=>{
       </div>
       <div className={styles.formsCont}>
         {/* editar */}
-        <div className={styles.crearCont}>
-          <div className={styles.title}> Editar un nuevo usuario</div>
-          <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
-            <input
-              type="text"
-              value={input.id}
-              name="id"
-              onChange={(e) => handleChange(e)}
-              placeholder="Id"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={input.UserName}
-              name="UserName"
-              onChange={(e) => handleChange(e)}
-              placeholder="Nombre de usuario"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={input.UserPassword}
-              name="UserPassword"
-              onChange={(e) => handleChange(e)}
-              placeholder="Contraseña del usuario"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={input.FirstName}
-              name="FirstName"
-              onChange={(e) => handleChange(e)}
-              placeholder="Nombre"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={input.LastName}
-              name="LastName"
-              onChange={(e) => handleChange(e)}
-              placeholder="Apellido"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={input.Address}
-              name="Address"
-              onChange={(e) => handleChange(e)}
-              placeholder="Dirección"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={input.Phone}
-              name="Phone"
-              onChange={(e) => handleChange(e)}
-              placeholder="Télefono"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={input.Email}
-              name="Email"
-              onChange={(e) => handleChange(e)}
-              placeholder="E-mail"
-              className={styles.formInputs}
-            />
-            <select
-              onChange={(e) => handleSelectAdmin(e)}
-              value={input.Admin}
-              className={styles.formInputs}
-              required
-            >
-              <option value="">Admin:</option>
-              <option value="true">true</option>
-              <option value="false">false</option>
-            </select>
-            {/* <select
-              onChange={(e) => handleSelectPremium(e)}
-              value={input.Premium}
-              className={styles.formInputs}
-              required
-            >
-              <option value="">Premium:</option>
-              <option value="true">true</option>
-              <option value="false">false</option>
-            </select> */}
-            <select
-              onChange={(e) => handleSelectBlocked(e)}
-              value={input.Blocked}
-              className={styles.formInputs}
-              required
-            >
-              <option value="">Blocked:</option>
-              <option value="true">true</option>
-              <option value="false">false</option>
-            </select>
-            <div className={styles.btns}>
-              <button type="submit" className={styles.btn}>
-                Editar
-              </button>
-            </div>
-          </form>
+        {mostrar ? 
+
+            <div className={styles.crearCont}>
+            <div className={styles.title}> Editar un nuevo usuario</div>
+            <form className={styles.form}>
+              
+              <input
+                type="text"
+                value={input.UserName}
+                name="UserName"
+                onChange={(e) => handleChange(e)}
+                placeholder="Nombre de usuario"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
+                value={input.UserPassword}
+                name="UserPassword"
+                onChange={(e) => handleChange(e)}
+                placeholder="Contraseña del usuario"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
+                value={input.FirstName}
+                name="FirstName"
+                onChange={(e) => handleChange(e)}
+                placeholder="Nombre"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
+                value={input.LastName}
+                name="LastName"
+                onChange={(e) => handleChange(e)}
+                placeholder="Apellido"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
+                value={input.Address}
+                name="Address"
+                onChange={(e) => handleChange(e)}
+                placeholder="Dirección"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
+                value={input.Phone}
+                name="Phone"
+                onChange={(e) => handleChange(e)}
+                placeholder="Télefono"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
+                value={input.Email}
+                name="Email"
+                onChange={(e) => handleChange(e)}
+                placeholder="E-mail"
+                className={styles.formInputs}
+              />
+              <select
+                onChange={(e) => handleSelectAdmin(e)}
+                value={input.Admin}
+                className={styles.formInputs}
+                required
+              >
+                <option value="">Admin:</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+              </select>
+              <select
+                onChange={(e) => handleSelectPremium(e)}
+                value={input.Premium}
+                className={styles.formInputs}
+                required
+              >
+                <option value="">Premium:</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+              </select>
+              <select
+                onChange={(e) => handleSelectBlocked(e)}
+                value={input.Blocked}
+                className={styles.formInputs}
+                required
+              >
+                <option value="">Blocked:</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+              </select>
+            </form>   
         </div>
+        : 
+            null       
+            }
+        
+        
       </div>
       {/* VER */}
       <div>
@@ -320,6 +321,8 @@ const showtrue=()=>{
                 Address={el.Address}
                 Phone={el.Phone}
                 Email={el.Email}
+                handlePrueba={handlePrueba}
+                handleSubmitEdit={handleSubmitEdit}
                 restaurar={habilitar}
               />
             </div>
