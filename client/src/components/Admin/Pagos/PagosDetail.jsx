@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./PagosDetail.module.css";
 import { useDispatch } from "react-redux";
 import {removePayments}  from '../../../actions';
@@ -10,10 +10,12 @@ export default function PagosDetail({
   PaydAmount,
   Date,
   idClient,
+  handleSubmitEdit,
+  handlePrueba
 }) {
 
   const dispatch = useDispatch();
-
+  const [mostrar, setMostrar] = useState(true);
   const handleSubmitDelete = (ID)=>{
     console.log('funcion', ID)
     alert("su pago fue Eliminado con exito");
@@ -32,6 +34,18 @@ export default function PagosDetail({
       <div>
         <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
       </div>
+    {mostrar 
+      ?
+      <div>
+             <button onClick={(e)=> {handleSubmitEdit(e,ID);
+              setMostrar(false);}}>
+      Editar</button>
+     </div> 
+     :
+     <div>
+          <button onClick={(e)=>handlePrueba(e,ID)}>Guardar</button>
+    </div> 
+    }
     </div>
   );
 }

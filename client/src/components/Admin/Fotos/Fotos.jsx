@@ -9,7 +9,7 @@ export default function Fotos() {
   const dispatch = useDispatch();
   const allPictures = useSelector((state) => state.fotos);
   const logeduser = useSelector((state) => state.user);
-  console.log(allPictures);
+ 
   const [input, setInput] = useState({
     Description: "",
     Url: "",
@@ -19,6 +19,7 @@ export default function Fotos() {
     Description: "",
     Url: "",
   });
+  const [mostrar, setMostrar] = useState(false);
   useEffect(() => {
     dispatch(Logeduser());
   }, [dispatch]);
@@ -51,15 +52,24 @@ export default function Fotos() {
     });
     window.location.reload();
   }
-  function handleSubmitEdit(e) {
+  function handleSubmitEdit(e, ID) {
     e.preventDefault();
-    dispatch(editPictures(edit));
+    setMostrar(true);
+    const { token } = logeduser;
+    dispatch(editPictures(edit, { token }));
+    setEdit({...edit,
+      id:ID  
+    })
+    
+  }
+  function handlePrueba(e, ID) {
+    e.preventDefault();
+    const { token } = logeduser;
+    dispatch(editPictures(edit, { token }));
     alert("Foto editada con éxito");
-    setEdit({
-      id: "",
-      Description: "",
-      Url: "",
-    });
+    setEdit({...edit,
+      id:ID  
+    })
     window.location.reload();
   }
 
@@ -102,17 +112,20 @@ export default function Fotos() {
           </form>
         </div>
         {/* EDITAR */}
-        <div className={styles.editarCont}>
+        {mostrar 
+        
+        ?  
+          <div className={styles.editarCont}>
           <div className={styles.title}> Editar una nueva foto</div>
-          <form onSubmit={(e) => handleSubmitEdit(e)} className={styles.form}>
-            <input
+          <form  className={styles.form}>
+           {/*  <input
               type="text"
               value={edit.id}
               name="id"
               onChange={(e) => handleChangeEdit(e)}
               placeholder="Id"
               className={styles.formInputs}
-            />
+            /> */}
             <input
               type="text"
               value={edit.Description}
@@ -129,13 +142,14 @@ export default function Fotos() {
               placeholder="Url"
               className={styles.formInputs}
             />
-            <div className={styles.btns}>
-              <button type="submit" className={styles.btn}>
-                Editar
-              </button>
-            </div>
+            
           </form>
         </div>
+        :
+          null
+      
+      }
+        
       </div>
       <div>
         {allPictures?.map((el) => {
@@ -145,6 +159,8 @@ export default function Fotos() {
                 Description={el.Description}
                 Url={el.Url}
                 ID={el.ID}
+                handleSubmitEdit={handleSubmitEdit}
+                handlePrueba={handlePrueba}
               />
             </div>
           );

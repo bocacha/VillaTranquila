@@ -163,6 +163,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         cabañas: action.payload,
+        
       };
     case EDIT_USER:
       return {

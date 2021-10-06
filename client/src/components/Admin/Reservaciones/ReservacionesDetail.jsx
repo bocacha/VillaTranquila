@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import styles from "./ReservacionesDetail.module.css";
 import { useDispatch } from "react-redux";
 import {removeReservations}  from '../../../actions'
@@ -11,10 +11,12 @@ export default function ReservacionesDetail({
   Paymentsid,
   Cabinid,
   ExtraServices,
+  handleSubmitEdit,
+  handlePrueba
 }) {
 
  const dispatch = useDispatch();
-
+ const [mostrar, setMostrar] = useState(true);
   const handleSubmitDelete = (ID)=>{
     console.log('funcion', ID)
     alert("su Reserva fue Eliminada con exito");
@@ -24,7 +26,6 @@ export default function ReservacionesDetail({
   } 
   return (
     <div className={styles.container}>
-      <p><strong>Id:</strong> {ID}</p>
       <p><strong>Checkin:</strong> {Checkin}</p>
       <p><strong>Checkout:</strong> {Checkout}</p>
       <p><strong>UserId:</strong> {UserId}</p>
@@ -34,6 +35,20 @@ export default function ReservacionesDetail({
       <div>
         <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
       </div>
+      {mostrar
+      
+      ?
+      <div>
+          <button onClick={(e)=> {handleSubmitEdit(e,ID);
+                                       setMostrar(false);
+                                       ;        } 
+         }>Editar</button>
+      </div>
+       :
+      <div>
+         <button onClick={(e)=>handlePrueba(e,ID)}>Guardar</button>
+      </div> 
+        }
     </div>
   );
 }
