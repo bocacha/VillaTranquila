@@ -9,7 +9,7 @@ export default function ServiciosDetail({ ID, Name, Description, Price }) {
 
   const handleSubmitDelete = (ID)=>{
     console.log('funcion', ID)
-    alert("se servicio fue Eliminada con exito");
+    alert("el servicio fue eliminado con exito");
     let obj = {id:ID}
     dispatch(removeServices(obj));
     window.location.reload();
