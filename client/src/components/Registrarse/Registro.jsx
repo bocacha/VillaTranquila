@@ -35,6 +35,7 @@ export default function Usuarios() {
     e.preventDefault();
     dispatch(createUsers(input));
     // window.location.href='/login'
+    alert("Usuario creado con éxito");
   }
   const registroexitoso = async () => {
     const newuser = await axios.get("http://localhost:3001/users/");
@@ -133,7 +134,7 @@ export default function Usuarios() {
         <div className={styles.container}> 
         <div className={styles.containerForm}>
       <h4> Cuenta creada </h4>
-         <button className={styles.btn1}onClick={()=>{window.location.href="/login"}} ><strong>Iniciar Sesion</strong></button>                 
+         <button className={styles.btn1}onClick={()=>{window.location.href="/iniciarsesion"}} ><strong>Iniciar Sesion</strong></button>                 
       </div>
         </div>
       )}

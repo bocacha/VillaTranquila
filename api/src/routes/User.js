@@ -27,7 +27,7 @@ try {
     //     return res.status(400).json({error:"Ops.. No tenes permisos"})
     // }
 
-    const dbUser = await User.findAll()
+    const dbUser = await User.findAll({where:{Blocked:false}})
     res.send(dbUser)
 }catch(error){
     res.send({error : error})
@@ -35,6 +35,32 @@ try {
 
     const dbUser = await User.findAll() 
 });
+router.get("/ocultados", async (req, res)=>{
+    try {    
+        // const authorizations = req.get("Authorization") 
+        //      let token = ""
+        // if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
+        //    token = authorizations.substring(7)
+        //    console.log(token)
+        // }
+        // const decodedToken= jwt.verify(token, config.JWT_SECRET)
+        // if(!token || !decodedToken.id){
+        //     return res.status(401).json({
+        //         error:"token missing or invalid"
+        //     })
+        // }
+        // if(!decodedToken.Admin){
+        //     return res.status(400).json({error:"Ops.. No tenes permisos"})
+        // }
+    
+        const dbUser = await User.findAll({where:{Blocked:true}})
+        res.send(dbUser)
+    }catch(error){
+        res.send({error : error})
+    }
+    
+        const dbUser = await User.findAll() 
+    });
 
 router.post("/Singup" , async (req, res)=>{
     const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email} = req.body;
@@ -65,7 +91,7 @@ router.post("/Singup" , async (req, res)=>{
     
 })
 router.put("/EditUser", async (req,res) =>{
-    const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email, Admin,Premium, Blocked} = req.body;
+    const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email, Admin,Premium} = req.body;
     // const authorizations = req.get("Authorization") 
     //      let token = ""
     // if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
@@ -92,7 +118,7 @@ router.put("/EditUser", async (req,res) =>{
         Email: Email,
         Admin: Admin,
         Premium: Premium,
-        Blocked: Blocked,
+       
     }
         User.update(
           objecttoupdate
@@ -111,7 +137,8 @@ router.put('/RemoveUser', (req,res) =>{
     if(!id){
         return res.json({status: 404},{message:"User not found"})
     }
-    User.destroy(
+    User.update(
+        {Blocked:true},
         {where:{ID: id}}
     ).then (doneTemp=>{
         return res.status(200).json(doneTemp)
@@ -119,6 +146,19 @@ router.put('/RemoveUser', (req,res) =>{
     .catch(error=>{console.log(error)})
         
 });  
-
+router.put('/RestoreUser', (req,res) =>{
+    const {id}= req.body;
+    if(!id){
+        return res.json({status: 404},{message:"User not found"})
+    }
+    User.update(
+        {Blocked:false},
+        {where:{ID: id}}
+    ).then (doneTemp=>{
+        return res.status(200).json(doneTemp)
+    })
+    .catch(error=>{console.log(error)})
+        
+});  
 
 module.exports = router;
