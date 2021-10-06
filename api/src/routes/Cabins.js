@@ -86,15 +86,16 @@ if(!token || !decodedToken.id){
 if(!decodedToken.Admin){
    return res.status(400).json({error:"Ops.. No tenes permisos"})
 }
-    const {Number, Capacity, Available, Price, Description, Coffe, Microondas, Calefaccion, Barbecue,Wifi, Cleaning, Refrigerator, Stove, Parking} = req.body;
+    const {Number, Capacity, Available, Price, Description, Barbecue, Wifi, Parking} = req.body;
     const objecttoupdate={
         Number: Number,
         Capacity: Capacity,
         Available: Available,
         Price: Price,
         Description: Description,
-        Show: Show,
-        Servicios: Servicios,
+        Barbecue: Barbecue,
+        Wifi: Wifi, 
+        Parking: Parking,
     }
         Cabins.update(
           objecttoupdate

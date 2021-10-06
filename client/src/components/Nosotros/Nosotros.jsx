@@ -37,7 +37,7 @@ export default function Nosotros(){
                 <li className={styles.card}>
                     <div>
                         <h2 className={styles.info}>José Gutierrez</h2>
-                        <img src='' alt='José Gutierrez' className={styles.img} />
+                        <img src='https://avatars.githubusercontent.com/u/29823485?v=4' alt='José Gutierrez' className={styles.img} />
                         <Link to={{pathname: 'https://www.linkedin.com/in/josemagut/'}} target='_blank' style={{ textDecoration: 'none' }} ><button className={styles.linkedin} ><GrLinkedin/></button></Link>
                         <Link to={{pathname: 'https://github.com/josegutib'}} target='_blank' style={{ textDecoration: 'none' }} ><button className={styles.linkedin} ><AiFillGithub/></button></Link>
                     </div>
@@ -53,7 +53,7 @@ export default function Nosotros(){
                 <li className={styles.card}>
                     <div>
                         <h2 className={styles.info}>Joaquín Sosa</h2>
-                        <img src='' alt='Joaquín Sosa' className={styles.img}/>
+                        <img src='https://avatars.githubusercontent.com/u/81209349?v=4' alt='Joaquín Sosa' className={styles.img}/>
                         <Link to={{pathname: ''}} target='_blank' style={{ textDecoration: 'none' }} ><button className={styles.linkedin} ><GrLinkedin/></button></Link>
                         <Link to={{pathname: 'https://github.com/SpyraL-dev'}} target='_blank' style={{ textDecoration: 'none' }} ><button className={styles.linkedin} ><AiFillGithub/></button></Link>
                     </div>
