@@ -107,6 +107,8 @@ return (
                 onChange={(e) => handleChange(e)}
                 placeholder="Nombre"
                 className={styles.formInputs}
+                pattern='^[0-9a-zA-Z\s]+$'
+                title='debe contener letras y numeros'
                 required
               />
               <textarea
@@ -149,6 +151,7 @@ return (
               onChange={(e) => handleChangeEdit(e)}
               placeholder="Nombre"
               className={styles.formInputs}
+              required
             />
             <input
               type="text"
@@ -157,14 +160,18 @@ return (
               onChange={(e) => handleChangeEdit(e)}
               placeholder="Descripción"
               className={styles.formInputs}
+              required
             />
             <input
               type="text"
               value={edit.Price}
               name="Price"
+              min='1000' 
+              max='20000'
               onChange={(e) => handleChangeEdit(e)}
               placeholder="Precio"
               className={styles.formInputs}
+              required
             />
             
           </form> 
