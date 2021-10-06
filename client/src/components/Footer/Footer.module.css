@@ -71,7 +71,7 @@
     padding: 6px ;
     margin-top:5px;
     background: #f8f8f8;
-    border: none;
+    border: 1px solid #f8f8f8;
     color: #000;
     transition-duration: 0.4s;
 
@@ -80,5 +80,6 @@
 .btn:hover{
     color:#fff;
     background: #323031;
+    border: 1px solid #fff;
 }
 

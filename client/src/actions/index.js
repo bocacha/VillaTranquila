@@ -35,7 +35,8 @@ export const REMOVE_SERVICES= "REMOVE_SERVICES";
 export const REMOVE_PICTURES= "REMOVE_PICTURES";
 export const REMOVE_PAYMENTS= "REMOVE_PAYMENTS";
 export const REMOVE_USERS= "REMOVE_USERS";
-export const READ_FECHASNODISPONIBLES = "READ_FECHASNODISPONIBLES"
+export const READ_FECHASNODISPONIBLES = "READ_FECHASNODISPONIBLES";
+export const GET_USER_DATA = "GET_USER_DATA";
 
 export function getCabins() {
   return async function (dispatch) {
@@ -640,5 +641,19 @@ export function readFechas(){
        
        })
        
+  };
+}
+
+export function getUserData(username){
+  return async function (dispatch) {
+    try {
+      let json = await axios.get("http://localhost:3001/cabins/" + username);
+      return dispatch({
+        type: GET_USER_DATA,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 }
