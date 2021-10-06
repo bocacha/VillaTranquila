@@ -9,6 +9,7 @@ export default function Servicios() {
   const dispatch = useDispatch();
   const allServices = useSelector((state) => state.servicios);
   const logeduser = useSelector ((state) => state.user);
+  const [mostrar, setMostrar] = useState(false);
   const [input, setInput] = useState({
     Name: "",
     Description: "",
@@ -52,18 +53,29 @@ function handleSubmit(e) {
     });
     window.location.reload();
   }
-  function handleSubmitEdit(e) {
+  function handleSubmitEdit(e, ID) {
+    const {token} = logeduser
     e.preventDefault();
-    dispatch(editServices(edit));
-    alert("Servicio editado con éxito");
+    dispatch(editServices(edit, {token}));
+    setMostrar(true);
     setEdit({
-      id: "",
-      Name: "",
-      Description: "",
-      Price: "",
+        ...edit,
+        id:ID
     });
-    window.location.reload();
+    //window.location.reload();
  }
+
+ function handlePrueba(e,ID) {
+  const {token} = logeduser
+  e.preventDefault();
+  dispatch(editServices(edit, {token}));
+  setMostrar(true);
+  setEdit({
+    ...edit,
+    id:ID
+  });
+ //window.location.reload();
+}
 return (
     <div className={styles.container}>
       <div className={styles.btnVolver}>
@@ -113,17 +125,11 @@ return (
           </form>
         </div>
         {/* EDITAR */}
-        <div className={styles.editarCont}>
+        {mostrar ?
+          <div className={styles.editarCont}>
           <div className={styles.title}> Editar un nuevo servicio</div>
-          <form onSubmit={(e) => handleSubmitEdit(e)}>
-            <input
-              type="text"
-              value={edit.id}
-              name="id"
-              onChange={(e) => handleChangeEdit(e)}
-              placeholder="Id"
-              className={styles.formInputs}
-            />
+          <form >
+          
             <input
               type="text"
               value={edit.Name}
@@ -148,13 +154,14 @@ return (
               placeholder="Precio"
               className={styles.formInputs}
             />
-            <div className={styles.btns}>
-              <button type="submit" className={styles.btn}>
-                Editar
-              </button>
-            </div>
+            
           </form>
         </div>
+        :
+          null
+        }
+        
+
       </div>
    <div>
         {allServices?.map((el) => {
@@ -165,6 +172,8 @@ return (
                 Name={el.Name}
                 Description={el.Description}
                 Price={el.Price}
+                handlePrueba={handlePrueba}
+                handleSubmitEdit={handleSubmitEdit}
               />
             </div>
           );

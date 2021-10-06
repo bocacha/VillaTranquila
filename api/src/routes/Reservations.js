@@ -10,7 +10,7 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 router.get("/", async (req, res)=>{
-    const authorizations = req.get("Authorization") 
+   /*  const authorizations = req.get("Authorization") 
     let token = ""
 if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
   token = authorizations.substring(7)
@@ -24,7 +24,7 @@ if(!token || !decodedToken.id){
 }
 if(!decodedToken.Admin){
    return res.status(400).json({error:"Ops.. No tenes permisos"})
-}
+} */
     const dbReservations = await Reservations.findAll()
     try{
         res.send(dbReservations)

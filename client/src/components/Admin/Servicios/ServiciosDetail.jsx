@@ -1,11 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./Servicios.module.css";
 import { useDispatch } from "react-redux";
 import {removeServices}  from '../../../actions'
 
-export default function ServiciosDetail({ ID, Name, Description, Price }) {
+export default function ServiciosDetail({ ID, Name, Description, Price, handleSubmitEdit,handlePrueba }) {
 
   const dispatch = useDispatch();
+  const [mostrar, setMostrar] = useState(true);
 
   const handleSubmitDelete = (ID)=>{
     console.log('funcion', ID)
@@ -23,6 +24,23 @@ export default function ServiciosDetail({ ID, Name, Description, Price }) {
       <div>
         <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
       </div>
+      {mostrar 
+      
+      ?  
+      <div>
+         <button onClick={(e)=> {handleSubmitEdit(e,ID);
+                                      setMostrar(false);
+                                      ;        } 
+        }>Editar</button>
+      </div> 
+        
+      :
+       <div>
+          <button onClick={(e)=>handlePrueba(e,ID)}>Guardar</button>
+       </div> 
+      
+      }
+
     </div>
   );
 }
