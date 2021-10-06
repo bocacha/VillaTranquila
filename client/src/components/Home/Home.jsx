@@ -53,6 +53,7 @@ export default function Home() {
       </div>
       <div>
         {/* <Searchbar/> */}
+        {/* <Gallery/> */}
       </div>
       <div>
         <BannerIntro />
@@ -65,13 +66,13 @@ export default function Home() {
           className={styles.mapa}
         ></iframe>
       </div>
-      {/* <div>
+      <div>
          <ChatBot
              headerTitle="Habla Conmigo"
              floating={true}
              steps={steps}
                />
-       </div>, */}
+       </div>,
         
         <Footer />
 

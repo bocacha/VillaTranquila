@@ -68,6 +68,13 @@
     display: flex;
     justify-content: space-between;
   }
+.reserva li label{
+  display: inline-flex;
+}
+.reserva li label p{
+  line-height: 22px;
+  padding-right: 5px;
+}
   
   
   .navbar div button:hover{
@@ -99,16 +106,20 @@
     color: #fff;
     text-align: center;
     font-size: large;
-    transition: all 0.2s ease;
+    transition: all 0.5s ease;
     cursor: pointer;
     padding: 5px 20px;
-    margin-top: 85px;;
+    margin-top: 85px;
+    display: inline-flex;
+    height: auto;
+    line-height: 35px;
   }
-  .reload span {
+  .reload p {
     cursor: pointer;
     display: inline-block;
     position: relative;
-    transition: all 0.2s ease;
+    line-height: 25px;
+    padding-left: 5px;
   }
   .reload span:after {
     opacity: 0;
@@ -131,15 +142,15 @@
   margin-left:0;
   margin-bottom: 10px;
 }
-.service{
-  background-color: #7f7979;
-  height: 25px;
-}
 .serviceCont{
   margin: 0;
 }
 .serviceCont li{
   margin: 0px;
+}
+
+.services{
+  padding-left: 5px;
 }
 
 #search{

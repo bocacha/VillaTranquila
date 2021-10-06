@@ -46,7 +46,7 @@ export default function Footer() {
           <FaMapPin /> Ubicacion
         </div>
         <div className={styles.links}>
-          <span className={styles.title}> Links útiles </span> <br />
+          <span className={styles.title}> Links útiles </span>  <br />
           <Link to="/nosotros" className={styles.link}>
             Nosotros
           </Link>{" "}
