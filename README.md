@@ -55,7 +55,7 @@ El servidor, comunmente conocido como API ( Interfaz de Programación de Aplicac
 
 
 ### Interfaz de Usuario
-
+<hr/>
 El cliente o Frontend de Villa Tranquila posee la siguiente estructura:
 
 - Carpeta Actions:
