@@ -524,6 +524,88 @@ export function removeUsers(id){
   };
 }
 
+export function restoreCabains(id){
+  return async function (dispatch) {
+   
+      var json = await axios.put("http://localhost:3001/cabins/RestoreCabin", id);
+      return dispatch({
+        type: REMOVE_CABAINS,
+        payload: id
+       
+       })
+       
+  };
+}
+
+export function restoreReservations(id){
+  console.log('remove',id);
+  return async function (dispatch) {
+   
+      var json = await axios.put("http://localhost:3001/reservations/RestoreReservation", id);
+      return dispatch({
+        type: REMOVE_RESERVATIONS,
+        payload: id
+       
+       })
+       
+  };
+}
+
+export function restoreServices(id){
+  console.log('remove',id);
+  return async function (dispatch) {
+   
+      var json = await axios.put("http://localhost:3001/services/RestoreService", id);
+      return dispatch({
+        type: REMOVE_SERVICES,
+        payload: id
+       
+       })
+       
+  };
+}
+
+export function restorePictures(id){
+  console.log('remove',id);
+  return async function (dispatch) {
+   
+      var json = await axios.put("http://localhost:3001/pictures/RestorePicture", id);
+      return dispatch({
+        type: REMOVE_PICTURES,
+        payload: id
+       
+       })
+       
+  };
+}
+export function restorePayments(id){
+  console.log('remove',id);
+  return async function (dispatch) {
+   
+      var json = await axios.put("http://localhost:3001/payments/RestorePayment", id);
+      return dispatch({
+        type: REMOVE_PAYMENTS,
+        payload: id
+       
+       })
+       
+  };
+}
+
+export function restoreUsers(id){
+  console.log('remove',id);
+  return async function (dispatch) {
+   
+      var json = await axios.put("http://localhost:3001/users/RestoreUser", id);
+      return dispatch({
+        type: REMOVE_USERS,
+        payload: id
+       
+       })
+       
+  };
+}
+
 export function readFechas(){
   const cabinId = localStorage.getItem("id_cabaña");
   return async function (dispatch) {

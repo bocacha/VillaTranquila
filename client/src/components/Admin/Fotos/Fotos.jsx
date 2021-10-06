@@ -9,6 +9,7 @@ export default function Fotos() {
   const dispatch = useDispatch();
   const allPictures = useSelector((state) => state.fotos);
   const logeduser = useSelector((state) => state.user);
+  const [habilitar, setHabilitar]= useState(false)
   console.log(allPictures);
   const [input, setInput] = useState({
     Description: "",
@@ -64,9 +65,11 @@ export default function Fotos() {
   }
 const ocultadas=() => {
   dispatch(readPicturesocultados())
+  setHabilitar(true)
 }
 const showtrue=()=>{
   dispatch(readPictures())
+  setHabilitar(false)
 }
   return (
     <div className={styles.container}>
@@ -76,7 +79,12 @@ const showtrue=()=>{
         </Link>
       </div>
       <div className={styles.formsCont}>
-      <button onClick={ocultadas}>Mostrar ocultadas</button>
+      {!habilitar ?(
+            <button onClick={ocultadas}>Mostrar ocultadas</button>
+          ):(
+            <button onClick={showtrue}>Mostrar habilitadas</button>
+          )
+          }
         {/* CREAR */}
         <div className={styles.crearCont}>
           <div className={styles.title}> Crear una nueva foto</div>
@@ -151,6 +159,7 @@ const showtrue=()=>{
                 Description={el.Description}
                 Url={el.Url}
                 ID={el.ID}
+                restaurar={habilitar}
               />
             </div>
           );

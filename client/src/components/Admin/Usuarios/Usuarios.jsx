@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 export default function Usuarios() {
   const dispatch = useDispatch();
-  
+  const [habilitar, setHabilitar]= useState(false)
   const logeduser = useSelector ((state) => state.user)
   const {token} = logeduser
   const [input, setInput] = useState({
@@ -89,7 +89,12 @@ const showtrue=()=>{
 
   return (
     <div className={styles.container}>
-      <button onClick={ocultadas}>Mostrar ocultadas</button>
+       {!habilitar ?(
+            <button onClick={ocultadas}>Mostrar ocultadas</button>
+          ):(
+            <button onClick={showtrue}>Mostrar habilitadas</button>
+          )
+          }
       {/* CREAR 
       <div>
         Crear un nuevo usuario
@@ -315,6 +320,7 @@ const showtrue=()=>{
                 Address={el.Address}
                 Phone={el.Phone}
                 Email={el.Email}
+                restaurar={habilitar}
               />
             </div>
         ))}

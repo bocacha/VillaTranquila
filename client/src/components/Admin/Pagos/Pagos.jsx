@@ -11,6 +11,7 @@ export default function Pagos() {
   const dispatch = useDispatch();
   const allPayments = useSelector((state) => state.pagos);
   const [selectedDate, setSelectedDate] = useState(null);
+  const [habilitar, setHabilitar]= useState(false)
   const logeduser = useSelector((state) => state.user);
   const { token } = logeduser;
   const [input, setInput] = useState({
@@ -84,7 +85,12 @@ export default function Pagos() {
   return (
     <div className={styles.container}>
       <div className={styles.formsCont}>
-      <button onClick={ocultadas}>Mostrar ocultadas</button>
+      {!habilitar ?(
+            <button onClick={ocultadas}>Mostrar ocultadas</button>
+          ):(
+            <button onClick={showtrue}>Mostrar habilitadas</button>
+          )
+          }
         {/* CREAR */}
         <div className={styles.crearCont}>
           <div className={styles.title}>Crear un nuevo pago</div>
@@ -208,6 +214,7 @@ export default function Pagos() {
                 Date={el.Date}
                 PaydAmount={el.PaydAmount}
                 TotalAmount={el.TotalAmount}
+                restaurar={habilitar}
               />
             </div>
           );

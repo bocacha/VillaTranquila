@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 export default function Servicios() {
   const dispatch = useDispatch();
   const allServices = useSelector((state) => state.servicios);
+  const [habilitar, setHabilitar]= useState(false)
   const logeduser = useSelector ((state) => state.user);
   const [input, setInput] = useState({
     Name: "",
@@ -77,7 +78,12 @@ return (
           <button className={styles.btn}>Volver</button>
         </Link>
       </div>
-      <button onClick={ocultadas}>Mostrar ocultadas</button>
+      {!habilitar ?(
+            <button onClick={ocultadas}>Mostrar ocultadas</button>
+          ):(
+            <button onClick={showtrue}>Mostrar habilitadas</button>
+          )
+          }
       <div className={styles.formsCont}>
         {/* CREAR */}
         <div className={styles.crearCont}>
@@ -172,6 +178,7 @@ return (
                 Name={el.Name}
                 Description={el.Description}
                 Price={el.Price}
+                restaurar={habilitar}
               />
             </div>
           );

@@ -20,6 +20,7 @@ export default function Reservaciones() {
 
   const dispatch = useDispatch();
   const allReservations = useSelector((state) => state.reservaciones);
+  const [habilitar, setHabilitar]= useState(false)
   const logeduser = useSelector((state) => state.user);
   const { token } = logeduser;
   const [input, setInput] = useState({
@@ -105,7 +106,12 @@ export default function Reservaciones() {
           <button className={styles.btn}>Volver</button>
         </Link>
       </div>
-      <button onClick={ocultadas}>Mostrar ocultadas</button>
+      {!habilitar ?(
+            <button onClick={ocultadas}>Mostrar ocultadas</button>
+          ):(
+            <button onClick={showtrue}>Mostrar habilitadas</button>
+          )
+          }
       <div className={styles.formsCont}>
         {/* CREAR */}
         <div className={styles.crearCont}>
@@ -270,6 +276,7 @@ export default function Reservaciones() {
                 CostoFinal={el.CostoFinal}
                 Cabinid={el.Cabinid}
                 ExtraServices={el.ExtraServices}
+                restaurar={habilitar}
               />
             </div>
           );

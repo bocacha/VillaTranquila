@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./ReservacionesDetail.module.css";
 import { useDispatch } from "react-redux";
-import {removeReservations}  from '../../../actions'
+import {removeReservations, restoreReservations}  from '../../../actions'
 
 export default function ReservacionesDetail({
   ID,
@@ -11,6 +11,7 @@ export default function ReservacionesDetail({
   Paymentsid,
   Cabinid,
   ExtraServices,
+  restaurar
 }) {
 
  const dispatch = useDispatch();
@@ -22,6 +23,13 @@ export default function ReservacionesDetail({
     dispatch(removeReservations(obj));
     window.location.reload();
   } 
+  const handleSubmitrestore = (ID)=>{
+    console.log('funcion', ID)
+    alert("su cabaña fue Eliminada con exito");
+    let obj = {id:ID}
+    dispatch(restoreReservations(obj));
+    window.location.reload();
+  }
   return (
     <div className={styles.container}>
       <p><strong>Id:</strong> {ID}</p>
@@ -32,7 +40,12 @@ export default function ReservacionesDetail({
       <p><strong>Cabinid:</strong> {Cabinid}</p>
       <p><strong>ExtraServices:</strong> {ExtraServices}</p>
       <div>
-        <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
+      {!restaurar?(
+          <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
+
+        ):(
+          <button onClick={()=>handleSubmitrestore(ID)}>Restaurar</button>
+        )}
       </div>
     </div>
   );

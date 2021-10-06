@@ -9,6 +9,7 @@ const Cabañas = () => {
   const dispatch = useDispatch();
   const allCabains = useSelector((state) => state.cabañas);
   const logeduser = useSelector ((state) => state.user);
+  const [habilitar, setHabilitar]= useState(false)
   const [cabain, setCabain] = useState({
     Number: "",
     Capacity: "",
@@ -95,9 +96,11 @@ const Cabañas = () => {
 
   const ocultadas= () => {
     dispatch(readCabainsocultados())
+    setHabilitar(true)
   }
   const showtrue=()=>{
     dispatch(readCabains())
+    setHabilitar(false)
   }
 
   return (
@@ -109,8 +112,14 @@ const Cabañas = () => {
       </div>
       <div className={styles.formsCont}>
         <div className={styles.crearCont}>
-          <button onClick={ocultadas}>Mostrar ocultadas</button>
-          <button onClick={showtrue}>Mostrar habilitadas</button>
+          {!habilitar ?(
+            <button onClick={ocultadas}>Mostrar ocultadas</button>
+          ):(
+            <button onClick={showtrue}>Mostrar habilitadas</button>
+          )
+          }
+          
+          
           <div className={styles.title}>Crear Cabaña</div>
           <form onSubmit={handleSubmit} className={styles.form}>
             <div>
@@ -321,6 +330,7 @@ const Cabañas = () => {
                 Refrigerator={el.Refrigerator}
                 Stove={el.Stove}
                 Parking={el.Parking}
+                restaurar={habilitar}
               />
               
             </div>
