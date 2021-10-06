@@ -133,7 +133,7 @@ export default function Usuarios() {
         <div className={styles.container}> 
         <div className={styles.containerForm}>
       <h4> Cuenta creada </h4>
-         <button className={styles.btn1}onClick={()=>{window.location.href="/login"}} ><strong>Iniciar Sesion</strong></button>                 
+         <button className={styles.btn1}onClick={()=>{window.location.href="/iniciarsesion"}} ><strong>Iniciar Sesion</strong></button>                 
       </div>
         </div>
       )}

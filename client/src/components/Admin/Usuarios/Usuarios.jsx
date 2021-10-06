@@ -22,8 +22,8 @@ export default function Usuarios() {
     Phone: "",
     Email: "",
     Admin: "",
-    Premium: "",
-    Blocked: "",
+    Premium: false,
+    Blocked: false,
   });
   useEffect(() => {
     dispatch(Logeduser());
@@ -315,12 +315,12 @@ const showtrue=()=>{
               <UsuariosDetail
                 ID={el.ID}
                 UserName={el.UserName}
-                UserPassword={el.UserPassword}
                 FirstName={el.FirstName}
                 LastName={el.LastName}
                 Address={el.Address}
                 Phone={el.Phone}
                 Email={el.Email}
+                Admin={el.Admin}
                 handlePrueba={handlePrueba}
                 handleSubmitEdit={handleSubmitEdit}
                 restaurar={habilitar}

@@ -49,12 +49,12 @@ export default function Navbar() {
                 <div className={styles.logins}>
                 {!logeduser.token ? (
                     <div>
-                        <Link to="/login">
+                        <Link to="/iniciarsesion">
                     <li >
                         <button className={styles.signlog}><strong>Iniciar Sesion <GoSignIn/> </strong></button>
                     </li>
                         </Link>
-                        <Link to="/Singup">
+                        <Link to="/registrarse">
                     <li>
                         <button className={styles.signlog}><strong>Registrarse<RiLoginBoxLine /></strong></button>                 
                     </li>

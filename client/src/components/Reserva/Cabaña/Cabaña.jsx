@@ -32,16 +32,14 @@ export default function Cabaña({
             localStorage.setItem("costo", JSON.stringify(prices))
         }
 
-
-
     return (
         <div className={styles.cabaña}>
             <h1>Cabaña número {number}</h1>
             <img src={image} alt={`Cabaña número ${number}`} />
-            <span>Capacidad: {capacity}</span>
-            <span>Disponible a partir del: {notAvailable}</span>
-            <span>Precio por noche: {price}</span>
-            <span>{description}</span>
+            <span> Capacidad: {capacity}</span>
+            <span> Disponible a partir del: {notAvailable}</span>
+            <span> Precio por noche: {price}</span>
+            <span> Descripción: {description}</span>
             {/* <span> Servicios disponibles: 
                 {coffe && <GiCoffeeCup/>}
                 {microwaves && <GiChickenOven/>}

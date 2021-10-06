@@ -72,7 +72,9 @@ export default function Contacto(){
                     title='Sólo letras' 
                     onChange={changeControl} 
                     placeholder="Nombre" 
-                    required/>
+                    required
+                    className={style.formInputs}
+                    />
                 </p>
 
                 <p type="Telefono:">
@@ -84,7 +86,9 @@ export default function Contacto(){
                     pattern="[+]{2}[0-9]{10-14}" 
                     onChange={changeControl}  
                     placeholder="+54 9 11 12345678" 
-                    required/>
+                    required
+                    className={style.formInputs}
+                    />
                 </p>
                 <small>Ej: +54 9 11 12345678 </small>
                 {errorEmail ?
@@ -99,7 +103,9 @@ export default function Contacto(){
                     value={control.email} 
                     onChange={changeControl} 
                     placeholder="Email" 
-                    required/>
+                    required
+                    className={style.formInputs}
+                    />
                 </p>
 
                 <p type="Consulta:">
@@ -109,7 +115,9 @@ export default function Contacto(){
                     cols="23" 
                     onChange={changeControl} 
                     placeholder="Consulta" 
-                    required />
+                    required
+                    className={style.formInputs}
+                    />
                 </p>
                 <button type="submit">Enviar</button>
                 

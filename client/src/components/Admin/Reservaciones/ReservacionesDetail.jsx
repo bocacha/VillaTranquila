@@ -11,6 +11,7 @@ export default function ReservacionesDetail({
   Paymentsid,
   Cabinid,
   ExtraServices,
+  CostoFinal,
   handleSubmitEdit,
   handlePrueba,
   restaurar
@@ -37,9 +38,9 @@ export default function ReservacionesDetail({
       <p><strong>Checkin:</strong> {Checkin}</p>
       <p><strong>Checkout:</strong> {Checkout}</p>
       <p><strong>UserId:</strong> {UserId}</p>
-      <p><strong>Paymentsid:</strong> {Paymentsid}</p>
+      <p><strong>Costo final:</strong> {CostoFinal}</p>
       <p><strong>Cabinid:</strong> {Cabinid}</p>
-      <p><strong>ExtraServices:</strong> {ExtraServices}</p>
+      {/* <p><strong>ExtraServices:</strong> {ExtraServices}</p> */}
       <div>
       {!restaurar?(
           <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>

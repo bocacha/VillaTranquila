@@ -22,7 +22,7 @@ module.exports = (sequelize) => {
     },
     CostoFinal:{
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     Cabinid:{
       type: DataTypes.STRING,
