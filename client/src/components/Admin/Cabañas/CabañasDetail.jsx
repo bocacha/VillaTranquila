@@ -25,7 +25,7 @@ export default function CabinsDetail({
 
   const handleSubmitDelete = (ID)=>{
     console.log('funcion', ID)
-    alert("su cabaña fue Eliminada con exito");
+    alert("su cabaña fue eliminada con exito");
     let obj = {id:ID}
     dispatch(removeCabains(obj));
     window.location.reload();
