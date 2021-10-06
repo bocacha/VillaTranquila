@@ -14,6 +14,13 @@ import {
   READ_USERS,
   READ_SERVICES,
   READ_CABINS,
+  READ_PAYMENT_OCULTADOS,
+  READ_RESERVATIONS_OCULTADOS,
+  READ_PICTURES_OCULTADOS,
+  READ_USERS_OCULTADOS,
+  READ_SERVICES_OCULTADOS,
+  READ_CABINS_OCULTADOS,
+  READ_FECHASNODISPONIBLES,
   EDIT_USER,
   EDIT_RESERVATIONS,
   EDIT_SERVICES,
@@ -40,6 +47,7 @@ const initialState = {
   cabañas: [],
   user: {},
   reservaciones: [],
+  fechasnodisponibles:[]
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -161,7 +169,38 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         cabañas: action.payload,
+        
       };
+      case READ_PAYMENT_OCULTADOS:
+        return {
+          ...state,
+          pagos: action.payload,
+        };
+      case READ_RESERVATIONS_OCULTADOS:
+        return {
+          ...state,
+          reservaciones: action.payload,
+        };
+      case READ_PICTURES_OCULTADOS:
+        return {
+          ...state,
+          fotos: action.payload,
+        };
+      case READ_USERS_OCULTADOS:
+        return {
+          ...state,
+          usuarios: action.payload,
+        };
+      case READ_SERVICES_OCULTADOS:
+        return {
+          ...state,
+          servicios: action.payload,
+        };
+      case READ_CABINS_OCULTADOS:
+        return {
+          ...state,
+          cabañas: action.payload,
+        };
     case EDIT_USER:
       return {
         ...state,
@@ -211,6 +250,11 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         usuarios: state.usuarios.filter((usuario) => usuario.id !== action.payload)
+      };
+      case READ_FECHASNODISPONIBLES:
+      return {
+        ...state,
+        fechasnodisponibles: action.payload,
       };
     default:
       return state;

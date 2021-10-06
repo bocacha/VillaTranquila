@@ -8,12 +8,13 @@ import Login from './components/Login/Login';
 import Admin from "./components/Admin/Admin";
 import Cabañas from "./components/Admin/Cabañas/Cabañas";
 import Reservaciones from "./components/Admin/Reservaciones/Reservaciones";
-import LinkReserva from "./components/LinkReserva/LinkReserva";
 import Servicios from "./components/Admin/Servicios/Servicios";
 import Pagos from "./components/Admin/Pagos/Pagos";
 import Fotos from "./components/Admin/Fotos/Fotos";
 import Usuarios from "./components/Admin/Usuarios/Usuarios";
 import Registro from "./components/Registrarse/Registro";
+import LinkReserva from"./components/Reserva/Linkreserva/LinkReserva"
+import Gallery from './components/Gallery/Gallery';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/contacto" component={Contacto} />
           <Route exact path="/reserva" component={Reserva} />
           <Route path="/reserva/reservar" component={LinkReserva} />
+          <Route path="/galeria" component={Gallery} />
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/admin/cabañas" component={Cabañas} />
           <Route exact path="/admin/reservaciones" component={Reservaciones} />
