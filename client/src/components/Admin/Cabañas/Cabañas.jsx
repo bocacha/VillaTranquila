@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 const Cabañas = () => {
   const dispatch = useDispatch();
   const allCabains = useSelector((state) => state.cabañas);
+
   const logeduser = useSelector ((state) => state.user);
   const [cabain, setCabain] = useState({
     Number: "",
@@ -26,7 +27,7 @@ const Cabañas = () => {
     Parking: false,
   });
   const [edit, setEdit] = useState({
-    id: "",
+    id: '',
     Number: "",
     Capacity: "",
     Available: "",
@@ -42,6 +43,9 @@ const Cabañas = () => {
     Stove: false,
     Parking: false,
   });
+
+  const [mostrar, setMostrar] = useState(false);
+  
 
   useEffect(() => {
     dispatch(readCabains());
@@ -65,6 +69,7 @@ const Cabañas = () => {
       [e.target.name]: e.target.value,
     });
   }
+  console.log('handle',edit)
 
   const handleCheckBox = (e) => {
     setCabain({
@@ -85,17 +90,31 @@ const Cabañas = () => {
     dispatch(createCabains(cabain, { token }));
     window.location.reload();
   };
-  const handleeditSubmit = (e) => {
-    const { token } = logeduser;
+ 
+  const  handleeditSubmit = (e, ID) => {
+    setEdit({...edit,
+          id:ID  
+    })
     e.preventDefault();
-    alert("su cabaña fue creada con exito");
-    dispatch(editCabains(edit, { token }));
-    window.location.reload();
+    setMostrar(true);
+    const { token } = logeduser;
+    dispatch(editCabains(edit, { token }) );
+    
+    
   };
 
-  
-
-  return (
+  const  handlePrueba = (e, ID) => {
+    setEdit({...edit,
+          id:ID  
+    })
+    e.preventDefault();
+    setMostrar(true);
+    const { token } = logeduser;
+    dispatch(editCabains(edit, { token }) );
+    window.location.reload();
+};
+   
+return (
     <div className={styles.container}>
       <div className={styles.btnVolver}>
         <Link to="/admin">
@@ -244,10 +263,11 @@ const Cabañas = () => {
           </form>
         </div>
         {/* EDITAR */}
+      {mostrar ?
         <div className={styles.editarCont}>
           <div className={styles.title}>Editar Cabaña</div>
-          <form onSubmit={handleeditSubmit}>
-            <div>
+          <form>
+            {/* <div>
               <input
                 type="text"
                 name="id"
@@ -256,7 +276,7 @@ const Cabañas = () => {
                 placeholder="Id"
                 className={styles.formInputs}
               />
-            </div>
+            </div> */}
             <div>
               <input
                 type="text"
@@ -382,13 +402,14 @@ const Cabañas = () => {
                 className={styles.formInputs}
               />
             </div>
-            <div className={styles.btns}>
+            {/*  <div className={styles.btns}>
               <button type="submit" className={styles.btn}>
-                Editar
+                Guardar
               </button>
-            </div>
+            </div>  */}
           </form>
         </div>
+       : null }
       </div>
       {/* VER */}
       <div>
@@ -411,6 +432,9 @@ const Cabañas = () => {
                 Refrigerator={el.Refrigerator}
                 Stove={el.Stove}
                 Parking={el.Parking}
+                handlePrueba={handlePrueba}
+                handleeditSubmit={handleeditSubmit}
+              
               />
               
             </div>

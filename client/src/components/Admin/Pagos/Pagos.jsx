@@ -9,16 +9,28 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 export default function Pagos() {
   const dispatch = useDispatch();
-  const allPayments = useSelector((state) => state.pagos);
-  const [selectedDate, setSelectedDate] = useState(null);
+  
+  useEffect(() => {
+    dispatch(Logeduser());
+  }, [dispatch]);
+
   const logeduser = useSelector((state) => state.user);
   const { token } = logeduser;
+
+  useEffect(() => {
+    dispatch(readPayment({ token }));
+  }, [dispatch, token]);
+
+  const allPayments = useSelector((state) => state.pagos);
+  const [selectedDate, setSelectedDate] = useState(null);
+ 
   const [input, setInput] = useState({
     Date: "",
     idClient: "",
     TotalAmount: "",
     PaydAmount: "",
   });
+  const [mostrar, setMostrar] = useState(false);
 
   const [edit, setEdit] = useState({
     id: "",
@@ -27,13 +39,7 @@ export default function Pagos() {
     TotalAmount: "",
     PaydAmount: "",
   });
-  useEffect(() => {
-    dispatch(Logeduser());
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(readPayment({ token }));
-  }, [dispatch, token]);
+  
 
   function handleChange(e) {
     setInput({
@@ -59,21 +65,29 @@ export default function Pagos() {
       TotalAmount: "",
       PaydAmount: "",
     });
-    dispatch(readPayment({ token }));
+    
     window.location.reload();
   }
-  function handleSubmitEdit(e) {
+  function handleSubmitEdit(e, ID) {
     e.preventDefault();
-    dispatch(editPayments(edit));
-    alert("Pago editado con éxito");
-    setEdit({
-      id: "",
-      Date: "",
-      idClient: "",
-      TotalAmount: "",
-      PaydAmount: "",
-    });
-    window.location.reload();
+    setMostrar(true);
+    setEdit({...edit,
+      id:ID  
+    })
+    //dispatch(editPayments(edit, { token }));
+   
+    
+  }
+
+  function handlePrueba(e,ID) {
+    e.preventDefault();
+    setMostrar(true);
+    setEdit({...edit,
+      id:ID  
+    })
+    dispatch(editPayments(edit, { token }));
+   
+   // window.location.reload();
   }
 
   return (
@@ -110,7 +124,7 @@ export default function Pagos() {
               onChange={(e) => handleChange(e)}
               placeholder="Cliente id"
               className={styles.formInputs}
-              pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
+              //pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
               required
             />
             <input
@@ -139,56 +153,50 @@ export default function Pagos() {
           </form>
         </div>
         {/* EDITAR */}
-        <div className={styles.editarCont}>
-          <div className={styles.title}> Editar un nuevo pago</div>
-          <form onSubmit={(e) => handleSubmitEdit(e)} className={styles.form}>
-            <input
-              type="text"
-              value={edit.id}
-              name="id"
-              onChange={(e) => handleChangeEdit(e)}
-              placeholder="Id"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={edit.Date}
-              name="Date"
-              onChange={(e) => handleChangeEdit(e)}
-              placeholder="Fecha"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={edit.idClient}
-              name="idClient"
-              onChange={(e) => handleChangeEdit(e)}
-              placeholder="Cliente id"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={edit.TotalAmount}
-              name="TotalAmount"
-              onChange={(e) => handleChangeEdit(e)}
-              placeholder="Monto total"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={edit.PaydAmount}
-              name="PaydAmount"
-              onChange={(e) => handleChangeEdit(e)}
-              placeholder="Monto a pagar"
-              className={styles.formInputs}
-            />
-            <div className={styles.btns}>
-              <button type="submit" className={styles.btn}>
-                Editar
-              </button>
-            </div>
-          </form>
-        </div>
+        {mostrar ?
+            <div className={styles.editarCont}>
+            <div className={styles.title}> Editar un nuevo pago</div>
+            <form className={styles.form}>
+              <input
+                type="text"
+                value={edit.Date}
+                name="Date"
+                onChange={(e) => handleChangeEdit(e)}
+                placeholder="Fecha"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
+                value={edit.idClient}
+                name="idClient"
+                onChange={(e) => handleChangeEdit(e)}
+                placeholder="Cliente id"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
+                value={edit.TotalAmount}
+                name="TotalAmount"
+                onChange={(e) => handleChangeEdit(e)}
+                placeholder="Monto total"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
+                value={edit.PaydAmount}
+                name="PaydAmount"
+                onChange={(e) => handleChangeEdit(e)}
+                placeholder="Monto a pagar"
+                className={styles.formInputs}
+              />
+             
+            </form>
+          </div>
+          :
+          null
+        }
+        
+
       </div>
 
       {/* VER */}
@@ -202,6 +210,8 @@ export default function Pagos() {
                 Date={el.Date}
                 PaydAmount={el.PaydAmount}
                 TotalAmount={el.TotalAmount}
+                handlePrueba={handlePrueba}
+                handleSubmitEdit={handleSubmitEdit}
               />
             </div>
           );
