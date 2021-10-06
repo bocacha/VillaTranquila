@@ -19,9 +19,11 @@ export default function FotosDetail({ Description, Url, ID }) {
       <p><strong>Id:</strong> {ID}</p>
       <p><strong>Descripcion:</strong> {Description}</p>
       <p><strong>Url:</strong> {Url}</p>
+      <img onClick={()=>console.log('edit')}className={styles.img} src={Url}/>
       <div>
         <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
       </div>
+      
     </div>
   );
 }

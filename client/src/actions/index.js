@@ -7,29 +7,29 @@ export const FILTER_CABINS = 'FILTER_CABINS';
 export const FILTER_BY_CAPACITY = "FILTER_BY_CAPACITY";
 export const FILTER_BY_PRICE = "FILTER_BY_PRICE";
 export const CREATE_RESERVATION = "CREATE_RESERVATION";
-export const CREATE_SERVICES = "CREATE_SERVICES"; 
-export const CREATE_USERS = "CREATE_USERS"; 
-export const CREATE_PAYMENT = "CREATE_PAYMENT"; 
-export const CREATE_IMAGE = "CREATE_IMAGE"; 
-export const CREATE_CABAINS = "CREATE_CABAINS"; 
-export const READ_PAYMENT = "READ_PAYMENT"; 
-export const READ_RESERVATIONS = "READ_RESERVATIONS"; 
-export const READ_PICTURES = "READ_PICTURES"; 
-export const READ_USERS = "READ_USERS"; 
-export const READ_SERVICES = "READ_SERVICES"; 
-export const READ_CABINS = "READ_CABINS"; 
+export const CREATE_SERVICES = "CREATE_SERVICES";
+export const CREATE_USERS = "CREATE_USERS";
+export const CREATE_PAYMENT = "CREATE_PAYMENT";
+export const CREATE_IMAGE = "CREATE_IMAGE";
+export const CREATE_CABAINS = "CREATE_CABAINS";
+export const READ_PAYMENT = "READ_PAYMENT";
+export const READ_RESERVATIONS = "READ_RESERVATIONS";
+export const READ_PICTURES = "READ_PICTURES";
+export const READ_USERS = "READ_USERS";
+export const READ_SERVICES = "READ_SERVICES";
+export const READ_CABINS = "READ_CABINS";
 export const EDIT_RESERVATIONS = "EDIT_RESERVATIONS";
 export const EDIT_USER = "EDIT_USER";
 export const EDIT_SERVICES = "EDIT_SERVICES";
 export const EDIT_PAYMENT = "EDIT_PAYMENT";
 export const EDIT_PICTURES = "EDIT_PICTURES";
-export const LOG_USER= "LOG_USER"
-export const REMOVE_CABAINS= "REMOVE_CABAINS";
-export const REMOVE_RESERVATIONS= "REMOVE_RESERVATIONS";
-export const REMOVE_SERVICES= "REMOVE_SERVICES";
-export const REMOVE_PICTURES= "REMOVE_PICTURES";
-export const REMOVE_PAYMENTS= "REMOVE_PAYMENTS";
-export const REMOVE_USERS= "REMOVE_USERS";
+export const LOG_USER = "LOG_USER"
+export const REMOVE_CABAINS = "REMOVE_CABAINS";
+export const REMOVE_RESERVATIONS = "REMOVE_RESERVATIONS";
+export const REMOVE_SERVICES = "REMOVE_SERVICES";
+export const REMOVE_PICTURES = "REMOVE_PICTURES";
+export const REMOVE_PAYMENTS = "REMOVE_PAYMENTS";
+export const REMOVE_USERS = "REMOVE_USERS";
 
 export function getCabins() {
   return async function (dispatch) {
@@ -45,7 +45,7 @@ export function getCabins() {
   };
 }
 
-export function filterCabins(payload){
+export function filterCabins(payload) {
   return {
     type: FILTER_CABINS,
     payload,
@@ -65,11 +65,11 @@ export function createReservation(payload) {
   };
 }
 
-export function createServices(payload ,{token}) {
-  const config={
-    headers:{
-    Authorization: `Bearer ${token}`,
-  }
+export function createServices(payload, { token }) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
   }
   return async function (dispatch) {
     const response = await axios.post("http://localhost:3001/services/NewService", payload, config);
@@ -92,24 +92,38 @@ export function createPayment(payload) {
   };
 }
 
-export function createimage(payload , {token}) {
-  const config={
-    headers:{
-    Authorization: `Bearer ${token}`,
-  }
+export function createimage(payload, { token }) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
   }
   return async function (dispatch) {
-    const response = await axios.post("http://localhost:3001/pictures/NewPicture", payload,config);
+    const formData = new FormData()
+    formData.append('file', payload.file)
+    formData.append('upload_preset', 'bxxbrwfk')
+    
+    const cloudinaryResponse = await axios.post('https://api.cloudinary.com/v1_1/vt-cabin/image/upload', formData)
+    
+    const Url = cloudinaryResponse.data.secure_url 
+    
+
+    const response = await axios.post("http://localhost:3001/pictures/NewPicture", {
+      Description: payload.description,
+      Url: Url
+    }, config);
+
+    console.log(response)
     return response;
   };
 }
 
-export function createCabains(payload, {token}) {
+export function createCabains(payload, { token }) {
   console.log(payload)
-  const config={
-    headers:{
-    Authorization: `Bearer ${token}`,
-  }
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
   }
   return async (dispatch) => {
     const json = await axios.post("/cabins/NewCabin", payload, config);
@@ -117,11 +131,11 @@ export function createCabains(payload, {token}) {
   };
 }
 
-export function readPayment({token}) {
-  const config={
-    headers:{
-    Authorization: `Bearer ${token}`,
-  }
+export function readPayment({ token }) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
   }
   return async function (dispatch) {
     try {
@@ -136,11 +150,11 @@ export function readPayment({token}) {
   };
 }
 
-export function readReservation({token}) {
-  const config={
-    headers:{
-    Authorization: `Bearer ${token}`,
-  }
+export function readReservation({ token }) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
   }
   return async function (dispatch) {
     try {
@@ -230,15 +244,15 @@ export function editUsers(payload) {
   };
 }
 
-export function editServices(payload, {token}) {
-  const config={
-    headers:{
-    Authorization: `Bearer ${token}`,
-  }
+export function editServices(payload, { token }) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
   }
   return async function (dispatch) {
     try {
-      var json = await axios.put("http://localhost:3001/services/EditService", payload,config);
+      var json = await axios.put("http://localhost:3001/services/EditService", payload, config);
       return dispatch({
         type: EDIT_SERVICES,
         payload: json.data,
@@ -249,11 +263,11 @@ export function editServices(payload, {token}) {
   };
 }
 
-export function editPayments(payload, {token}) {
-  const config={
-    headers:{
-    Authorization: `Bearer ${token}`,
-  }
+export function editPayments(payload, { token }) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
   }
   return async function (dispatch) {
     try {
@@ -268,11 +282,11 @@ export function editPayments(payload, {token}) {
   };
 }
 
-export function editPictures(payload, {token}) {
-  const config={
-    headers:{
-    Authorization: `Bearer ${token}`,
-  }
+export function editPictures(payload, { token }) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
   }
   return async function (dispatch) {
     try {
@@ -287,22 +301,22 @@ export function editPictures(payload, {token}) {
   };
 }
 
-export function editReservation(payload, {token}) {
-  const config={
-    headers:{
-    Authorization: `Bearer ${token}`,
-  }
+export function editReservation(payload, { token }) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
   }
   return async function (dispatch) {
     const response = await axios.put("http://localhost:3001/reservations/NewReservation", payload, config);
     return response;
   };
 }
-export function editCabains(payload, {token}) {
-  const config={
-    headers:{
-    Authorization: `Bearer ${token}`,
-  }
+export function editCabains(payload, { token }) {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
   }
   return async function (dispatch) {
     const response = await axios.put("http://localhost:3001/cabins/EditCabin", payload, config);
@@ -337,84 +351,84 @@ export function Logeduser() {
   };
 }
 
-export function removeCabains(id){
+export function removeCabains(id) {
   return async function (dispatch) {
-   
-      var json = await axios.put("http://localhost:3001/cabins/RemoveCabin", id);
-      return dispatch({
-        type: REMOVE_CABAINS,
-        payload: id
-       
-       })
-       
+
+    var json = await axios.put("http://localhost:3001/cabins/RemoveCabin", id);
+    return dispatch({
+      type: REMOVE_CABAINS,
+      payload: id
+
+    })
+
   };
 }
 
-export function removeReservations(id){
-  console.log('remove',id);
+export function removeReservations(id) {
+  console.log('remove', id);
   return async function (dispatch) {
-   
-      var json = await axios.put("http://localhost:3001/reservations/RemoveReservation", id);
-      return dispatch({
-        type: REMOVE_RESERVATIONS,
-        payload: id
-       
-       })
-       
+
+    var json = await axios.put("http://localhost:3001/reservations/RemoveReservation", id);
+    return dispatch({
+      type: REMOVE_RESERVATIONS,
+      payload: id
+
+    })
+
   };
 }
 
-export function removeServices(id){
-  console.log('remove',id);
+export function removeServices(id) {
+  console.log('remove', id);
   return async function (dispatch) {
-   
-      var json = await axios.put("http://localhost:3001/services/RemoveService", id);
-      return dispatch({
-        type: REMOVE_SERVICES,
-        payload: id
-       
-       })
-       
+
+    var json = await axios.put("http://localhost:3001/services/RemoveService", id);
+    return dispatch({
+      type: REMOVE_SERVICES,
+      payload: id
+
+    })
+
   };
 }
 
-export function removePictures(id){
-  console.log('remove',id);
+export function removePictures(id) {
+  console.log('remove', id);
   return async function (dispatch) {
-   
-      var json = await axios.put("http://localhost:3001/pictures/RemovePicture", id);
-      return dispatch({
-        type: REMOVE_PICTURES,
-        payload: id
-       
-       })
-       
+
+    var json = await axios.put("http://localhost:3001/pictures/RemovePicture", id);
+    return dispatch({
+      type: REMOVE_PICTURES,
+      payload: id
+
+    })
+
   };
 }
-export function removePayments(id){
-  console.log('remove',id);
+export function removePayments(id) {
+  console.log('remove', id);
   return async function (dispatch) {
-   
-      var json = await axios.put("http://localhost:3001/payments/RemovePayment", id);
-      return dispatch({
-        type: REMOVE_PAYMENTS,
-        payload: id
-       
-       })
-       
+
+    var json = await axios.put("http://localhost:3001/payments/RemovePayment", id);
+    return dispatch({
+      type: REMOVE_PAYMENTS,
+      payload: id
+
+    })
+
   };
 }
 
-export function removeUsers(id){
-  console.log('remove',id);
+export function removeUsers(id) {
+  console.log('remove', id);
   return async function (dispatch) {
-   
-      var json = await axios.put("http://localhost:3001/users/RemoveUser", id);
-      return dispatch({
-        type: REMOVE_USERS,
-        payload: id
-       
-       })
-       
+
+    var json = await axios.put("http://localhost:3001/users/RemoveUser", id);
+    return dispatch({
+      type: REMOVE_USERS,
+      payload: id
+
+    })
+
   };
 }
