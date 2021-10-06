@@ -107,7 +107,7 @@ router.put('/RestoreService', (req,res) =>{
         return res.json({status: 404},{message:"Service not found"})
     }
     Services.update(
-        {Show:false},
+        {Show:true},
         {where:{ID: id}}
     ).then (doneTemp=>{
         return res.status(200).json(doneTemp)

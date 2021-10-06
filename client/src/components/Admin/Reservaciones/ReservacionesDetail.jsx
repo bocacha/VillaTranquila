@@ -56,7 +56,7 @@ export default function ReservacionesDetail({
           <button onClick={(e)=> {handleSubmitEdit(e,ID);
                                        setMostrar(false);
                                        ;        } 
-         }>Editar</button>
+         }className={styles.btn} >Editar</button>
       </div>
        :
       <div>

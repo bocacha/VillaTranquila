@@ -23,3 +23,26 @@
   }
   
   
+.container1{
+    align-items: center;
+    border:.5px solid black;
+    margin:0 auto;
+    margin-bottom:10px;
+    display:flex;
+    justify-content: space-between;
+    grid-gap:2em;
+    padding:5px;
+    width: 70vw;
+    
+}
+
+.img1{
+    height:auto;
+    width: 150px;
+}
+
+@media (max-width: 1280px){
+    .container{
+        flex-direction: column;
+    }
+}

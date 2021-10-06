@@ -73,13 +73,15 @@ export default function Servicios() {
   setEdit({
     ...edit,
     id:ID
-  });
+  })};
  //window.location.reload();
  const ocultadas= () => {
    dispatch(readServicesocultados())
+   setHabilitar(true)
  }
  const showtrue=()=>{
   dispatch(readServices())
+  setHabilitar(false)
 }
 return (
     <div className={styles.container}>
@@ -198,5 +200,7 @@ return (
         })}
       </div>
     </div>
+    </div>
   );
+
 }
