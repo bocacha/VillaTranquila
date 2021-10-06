@@ -33,12 +33,13 @@ export default function FotosDetail({
     <div className={styles.container}>
       <p><strong>Descripcion:</strong> {Description}</p>
       <p><strong>Url:</strong> {Url}</p>
+      <img onClick={()=>console.log('edit')}className={styles.img} src={Url}/>
       <div>
       {!restaurar?(
-          <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
+          <button onClick={()=>handleSubmitDelete(ID)} className={styles.btn}>Eliminar</button>
 
         ):(
-          <button onClick={()=>handleSubmitrestore(ID)}>Restaurar</button>
+          <button onClick={()=>handleSubmitrestore(ID)} className={styles.btn} >Restaurar</button>
         )}
       </div>
       {mostrar ?

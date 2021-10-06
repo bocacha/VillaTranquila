@@ -35,6 +35,7 @@ export default function Usuarios() {
     e.preventDefault();
     dispatch(createUsers(input));
     // window.location.href='/login'
+    alert("Usuario creado con éxito");
   }
   const registroexitoso = async () => {
     const newuser = await axios.get("http://localhost:3001/users/");

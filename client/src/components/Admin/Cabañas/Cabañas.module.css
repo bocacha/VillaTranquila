@@ -1,6 +1,15 @@
 .container {
-  width: 50%;
+  width: 100%;
   min-height: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #94adbc;
+}
+
+.container2 {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -9,7 +18,7 @@
   margin-bottom: 20px;
   display: flex;
   align-items: start;
-  margin-left: 20px;
+  margin-left: 290px;
   padding-top: 10px;
 }
 
@@ -32,6 +41,7 @@
 
 .formsCont {
   display: flex;
+  flex-direction: row;
 }
 
 .crearCont {
@@ -46,6 +56,7 @@
   flex-direction: column;
   width: 33%;
   padding: 3px;
+  margin-left: 70px;
 }
 
 .title {
@@ -53,10 +64,28 @@
   font-family: Lato, Arial, sans-serif;
   font-weight: 300;
   font-size: 17px;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+.form {
+  width: fit-content;
 }
 
 .formInputs {
   margin-bottom: 8px;
   padding: 3px;
   border: solid 1.5px #293c4f;
+  width: 200px;
 }
+
+.detalles {
+  margin-left: 30px;
+  background: #293c4f;
+  color: #fff;
+  border-radius: 7px;
+  padding: 10px 25px;
+  margin-bottom: 10px;
+  width: 400px;
+}
+

@@ -34,17 +34,16 @@ export default function PagosDetail({
   
   return (
     <div className={styles.container}>
-      <p> <strong>Id:</strong>  {ID}</p>
       <p> <strong>Id cliente:</strong>  {idClient}</p>
       <p> <strong>Fecha:</strong>  {Date}</p>
       <p> <strong>Monto inicial:</strong>  ${PaydAmount}.00</p>
       <p> <strong>Monto total:</strong>  ${TotalAmount}.00</p>
       <div>
       {!restaurar?(
-          <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
+          <button onClick={()=>handleSubmitDelete(ID)} className={styles.btn}>Eliminar</button>
 
         ):(
-          <button onClick={()=>handleSubmitrestore(ID)}>Restaurar</button>
+          <button onClick={()=>handleSubmitrestore(ID)} className={styles.btn}>Restaurar</button>
         )}
       </div>
     {mostrar 
