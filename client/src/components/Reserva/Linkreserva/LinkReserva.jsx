@@ -106,20 +106,20 @@ const mostrarFecha2 = selectDateCI =>{
 }
   function handleSubmit(e) {
     e.preventDefault();
-   // console.log(input)
+    // console.log(input)
     // alert("Reserva creada con éxito");
     // window.location.reload();
   }
   return (
     <div className={styles.container}>
-      <div className={styles.btnVolver}>
-        <Link to="/reserva">
-          <button className={styles.btn}>Volver</button>
-        </Link>
-      </div>
       <div className={styles.formsCont}>
         {/* CREAR */}
         <div className={styles.crearCont}>
+          <div className={styles.btnVolver}>
+            <Link to="/reserva">
+              <button className={styles.btn}>Volver</button>
+            </Link>
+          </div>
           <div className={styles.title}>Crear una nueva reservación</div>
           <div>
             Fechas disponibles no de la cabaña
@@ -149,6 +149,7 @@ const mostrarFecha2 = selectDateCI =>{
           <DatePicker
             selected={selectDateCI}
             onChange={date=> setSelectDateCI(date)}
+            className={styles.formInputs}
             //onChange = {onChange}
             dateFormat="dd 'de' MMMM 'de' yyyy"
             minDate={new Date()}
@@ -168,6 +169,7 @@ const mostrarFecha2 = selectDateCI =>{
         <DatePicker
             selected={selectDateCO}
             onChange={date=> setSelectDateCO(date)}
+            className={styles.formInputs}
             //onChange = {onChange}
             dateFormat="dd 'de' MMMM 'de' yyyy"
             minDate={new Date()}
@@ -214,14 +216,14 @@ const mostrarFecha2 = selectDateCI =>{
               className={styles.formInputs}
             /> */}
             <div>
-              <p>Servicios Adicionales:</p>
+              <div className={styles.p}>Servicios Adicionales:</div>
               <button onClick={checkboxselected}>Seleccionar Servicios</button>
               <div>
                 {servicios.map((el) => (
-                  <div>
-                    {el.Name +" " + el.Price }
+                  <div className={styles.servicios}>
+                    {el.Name + " $" + el.Price}
                     <input
-                      className="Servicios"
+                      className={styles.checkbox}
                       type="checkbox"
                       name={el.Price}
                       value={el.Name}
@@ -234,13 +236,14 @@ const mostrarFecha2 = selectDateCI =>{
               </div>
             </div>
             <div className={styles.btns}>
-              <button onClick={createReservation(input)} className={styles.btn}>
-                Crear
+              <button onClick={createReservation(input)} className={styles.btnRes}>
+                Reservar
               </button>
             </div>
           </form>
         </div>
       </div>
+      <div className={styles.imagenFondo}></div>
     </div>
   );
 }

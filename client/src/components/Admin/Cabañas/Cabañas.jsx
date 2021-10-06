@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 const Cabañas = () => {
   const dispatch = useDispatch();
   const allCabains = useSelector((state) => state.cabañas);
-
   const logeduser = useSelector ((state) => state.user);
   const [habilitar, setHabilitar]= useState(false)
   const [cabain, setCabain] = useState({
@@ -52,11 +51,10 @@ const Cabañas = () => {
     dispatch(readCabains());
   }, [dispatch]);
 
-
   useEffect(() => {
     dispatch(Logeduser());
   }, [dispatch]);
-  
+
   const handleChange = (e) => {
     setCabain({
       ...cabain,
@@ -104,16 +102,20 @@ const Cabañas = () => {
     
   };
 
+
   const  handlePrueba = (e, ID) => {
     setEdit({...edit,
           id:ID  
     })
     e.preventDefault();
     setMostrar(true);
-    const { token } = logeduser;
-    dispatch(editCabains(edit, { token }) );
-    window.location.reload();
+    pruebadispatch()
 };
+const pruebadispatch=() => {
+  const { token } = logeduser;
+  dispatch(editCabains(edit,{token}));
+  window.location.reload()
+}
   const ocultadas= () => {
     dispatch(readCabainsocultados())
     setHabilitar(true)
@@ -130,6 +132,7 @@ const Cabañas = () => {
           <button className={styles.btn}>Volver</button>
         </Link>
       </div>
+      <div className={styles.container2}>
       <div className={styles.formsCont}>
         <div className={styles.crearCont}>
           {!habilitar ?(
@@ -137,18 +140,16 @@ const Cabañas = () => {
           ):(
             <button onClick={showtrue}>Mostrar habilitadas</button>
           )
-          }
-          
-          
-          <div className={styles.title}>Crear Cabaña</div>
+}
           <form onSubmit={handleSubmit} className={styles.form}>
+             <div className={styles.title}>Crear Cabaña</div>
             <div>
               <input
                 type="number"
                 name="Number"
                 value={cabain.Number}
                 onChange={handleChange}
-                placeholder="Numero de Habitaciones"
+                placeholder="Numero de Cabaña"
                 className={styles.formInputs}
                 requiered
               />
@@ -198,7 +199,32 @@ const Cabañas = () => {
                 requiered
               />
             </div>
-            <div>
+            {/* <div>
+              <label>Cafe</label>
+              <input
+                type="checkbox"
+                name="Coffe"
+                value={cabain.Coffe}
+                onChange={handleCheckBox}
+                className={styles.formInputs}
+              />
+              <label>Microondas</label>
+              <input
+                type="checkbox"
+                name="Microondas"
+                value={cabain.Microondas}
+                onChange={handleCheckBox}
+                className={styles.formInputs}
+              />
+              <label>Calefaccion</label>
+              <input
+                type="checkbox"
+                name="Calefaccion"
+                value={cabain.Calefaccion}
+                onChange={handleCheckBox}
+                className={styles.formInputs}
+              />
+
               <label>Parrilla</label>
               <input
                 type="checkbox"
@@ -223,7 +249,7 @@ const Cabañas = () => {
                 onChange={handleCheckBox}
                 className={styles.formInputs}
               />
-            </div>
+            </div> */}
             <div className={styles.btns}>
               <button type="submit" className={styles.btn}>
                 Crear
@@ -252,7 +278,7 @@ const Cabañas = () => {
                 name="Number"
                 value={edit.Number}
                 onChange={handleChangeEdit}
-                placeholder="Numero de Habitaciones"
+                placeholder="Numero de Cabaña"
                 className={styles.formInputs}
               />
             </div>
@@ -287,7 +313,7 @@ const Cabañas = () => {
               />
             </div>
             <div>
-              <input
+              <textarea
                 type="text"
                 name="Description"
                 value={edit.Description}
@@ -296,7 +322,32 @@ const Cabañas = () => {
                 className={styles.formInputs}
               />
             </div>
-            <div>
+            {/* <div>
+              <label>Cafe</label> 
+              <input
+                type="checkbox"
+                name="Coffe"
+                value={edit.Coffe}
+                onChange={handleeditCheckBox}
+                placeholder="h"
+                className={styles.formInputs}
+              />
+              <label>Microondas</label>
+              <input
+                type="checkbox"
+                name="Microondas"
+                value={edit.Microondas}
+                onChange={handleeditCheckBox}
+                className={styles.formInputs}
+              />
+              <label>Calefaccion</label>
+              <input
+                type="checkbox"
+                name="Calefaccion"
+                value={edit.Calefaccion}
+                onChange={handleeditCheckBox}
+                className={styles.formInputs}
+              />
               <label>Parrilla</label>
               <input
                 type="checkbox"
@@ -321,7 +372,7 @@ const Cabañas = () => {
                 onChange={handleeditCheckBox}
                 className={styles.formInputs}
               />
-            </div>
+            </div> */}
             {/*  <div className={styles.btns}>
               <button type="submit" className={styles.btn}>
                 Guardar
@@ -360,6 +411,7 @@ const Cabañas = () => {
           );
         })}
       </div>
+    </div>
     </div>
   );
 };

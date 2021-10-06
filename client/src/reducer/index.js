@@ -62,29 +62,32 @@ export default function rootReducer(state = initialState, action) {
 
     case FILTER_CABINS:
       let cabinsFiltered = state.allCabins;
+      // Filter by availability:
+      let inDate = action.payload.inDate;
+      let outDate = action.payload.outDate;
+      cabinsFiltered = cabinsFiltered.filter(el => {
+        var hitDates = el.Available || {};
+        hitDates = Object.keys(hitDates);
+        var hitDateMatchExists = hitDates.some(date => {
+          var newDate = new Date(date);
+          return newDate >= inDate && newDate <= outDate
+        });
+        return hitDateMatchExists;
+      });
       // Filter by capacity:
       let capacity = action.payload.capacity;
       cabinsFiltered = capacity === 'all' ?
         cabinsFiltered :
         cabinsFiltered.filter(el => el.Capacity >= capacity);
-      // Filter by priceRange:
-
-      // con un solo select:
-      // let priceRange = action.payload.priceRange.split(' - ');
-      // cabinsFiltered = priceRange === 'all' ?
-      //   cabinsFiltered :
-      //   cabinsFiltered.filter(el => el.Price >= priceRange[0] && el.Price <= priceRange[1]);
-
-      // con dos select:
+      // Filter by priceMin and priceMax:
       let priceMin = action.payload.priceMin;
       let priceMax = action.payload.priceMax;
       cabinsFiltered = priceMin === 'all' ?
         cabinsFiltered :
-        cabinsFiltered.filter(el => el.Price >= priceMin);
+        cabinsFiltered.filter(el => el.Price >= parseInt(priceMin));
       cabinsFiltered = priceMax === 'al' ?
         cabinsFiltered :
-        cabinsFiltered.filter(el => el.Price <= priceMax);
-
+        cabinsFiltered.filter(el => el.Price <= parseInt(priceMax));
       // Filter by wifi:
       let wifi = action.payload.wifi;
       cabinsFiltered = wifi === '' || wifi === 'false' ?
@@ -95,11 +98,6 @@ export default function rootReducer(state = initialState, action) {
       cabinsFiltered = barbecue === '' || barbecue === 'false' ?
         cabinsFiltered :
         cabinsFiltered.filter(el => el.Barbecue);
-      // Filter by cleaning:
-      let cleaning = action.payload.cleaning;
-      cabinsFiltered = cleaning === '' || cleaning === 'false' ?
-        cabinsFiltered :
-        cabinsFiltered.filter(el => el.Cleaning);
       // Filter by parking:
       let parking = action.payload.parking;
       cabinsFiltered = parking === '' || parking === 'false' ?

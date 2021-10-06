@@ -6,7 +6,7 @@ import {removeUsers, restoreUsers}  from '../../../actions'
 export default function UsuariosDetail({
     ID,
     UserName,
-    UserPassword,
+    Admin,
     FirstName,
     LastName,
     Address,
@@ -16,7 +16,11 @@ export default function UsuariosDetail({
     handleSubmitEdit,
     restaurar
 }) {
-
+  if(Admin === true) {
+    Admin = "Si";
+  } else {
+    Admin = "No";
+  }
   const dispatch = useDispatch();
   const [mostrar, setMostrar] = useState(true);
   const handleSubmitDelete = (ID)=>{
@@ -35,20 +39,19 @@ export default function UsuariosDetail({
   }
   return (
     <div className={styles.container}>
-      <p><strong>Id:</strong> {ID}</p>
       <p><strong>UserName:</strong> {UserName}</p>
-      <p><strong>UserPassword:</strong> {UserPassword}</p>
       <p><strong>FirstName:</strong> {FirstName}</p>
       <p><strong>LastName:</strong> {LastName}</p>
       <p><strong>Address:</strong> {Address}</p>
       <p><strong>Phone:</strong> {Phone}</p>
       <p><strong>Email:</strong> {Email}</p> 
+      <p><strong>Admin:</strong> {Admin}</p> 
       <div>
       {!restaurar?(
-          <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
+          <button onClick={()=>handleSubmitDelete(ID)} className={styles.btn}>Eliminar</button>
 
         ):(
-          <button onClick={()=>handleSubmitrestore(ID)}>Restaurar</button>
+          <button onClick={()=>handleSubmitrestore(ID)} className={styles.btn}>Restaurar</button>
         )}
       </div>
       {mostrar 
