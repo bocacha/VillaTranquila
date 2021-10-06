@@ -14,6 +14,7 @@ import Fotos from "./components/Admin/Fotos/Fotos";
 import Usuarios from "./components/Admin/Usuarios/Usuarios";
 import Registro from "./components/Registrarse/Registro";
 import Gallery from './components/Gallery/Gallery';
+import UserCard from './components/UserCard/UserCard';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/contacto" component={Contacto} />
           <Route path="/reserva" component={Reserva} />
           <Route path="/galeria" component={Gallery} />
+          <Route path="/usercard" component={UserCard} />
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/admin/cabañas" component={Cabañas} />
           <Route exact path="/admin/reservaciones" component={Reservaciones} />
