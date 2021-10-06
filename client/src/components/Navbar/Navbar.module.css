@@ -1,38 +1,54 @@
 .navbar {
-    position: fixed;
-    overflow: hidden;
-    background-color: #7f7979;
-    width: 100%;
-    margin-top: 0;
-    z-index: 1;
-    display:flex;
-    justify-content: space-between;
-    font-size: large;
-  }
-  
-  .navbar li {
-    float: left;
-    display: block;
-    text-align: center;
-    padding: 0px 2px 10px;
-    text-decoration: none;
-  }
+  position: fixed;
+  overflow: hidden;
+  background-color: #7f7979;
+  width: 100%;
+  margin-top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  font-size: large;
+}
 
-  .navbar button{
-    height: 43px;
-    border: transparent;
-    background-color: transparent;
-    border-radius: 8px;
-    margin-top: 10px;
-    cursor: pointer;
-    color: #fff;
-    transition: all 0.2s ease;
-  }
-  .navbar button:hover{
-    background-color: #323031;
-  }
+.navbar2{
+  display: flex;
+}
 
-  .logins{
-    margin-right: 50px;
-    
+.list{
+  display: flex;
+  align-items: center;
+}
+
+.icons{
+  margin-left:3px;
+}
+
+.navbar li {
+  float: left;
+  display: block;
+  text-align: center;
+  padding: 0px 2px 10px;
+  text-decoration: none;
+}
+
+.navbar button {
+  height: 43px;
+  border: transparent;
+  background-color: transparent;
+  border-radius: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.2s ease;
+}
+.navbar button:hover {
+  background-color: #323031;
+}
+
+.logins {
+  margin-right: 50px;
+}
+
+  .span{
+    color:white;
   }
