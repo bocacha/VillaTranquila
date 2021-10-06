@@ -14,6 +14,7 @@ import Fotos from "./components/Admin/Fotos/Fotos";
 import Usuarios from "./components/Admin/Usuarios/Usuarios";
 import Registro from "./components/Registrarse/Registro";
 import LinkReserva from"./components/Reserva/Linkreserva/LinkReserva"
+import Gallery from './components/Gallery/Gallery';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/contacto" component={Contacto} />
           <Route exact path="/reserva" component={Reserva} />
           <Route path="/reserva/reservar" component={LinkReserva} />
+          <Route path="/galeria" component={Gallery} />
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/admin/cabañas" component={Cabañas} />
           <Route exact path="/admin/reservaciones" component={Reservaciones} />
@@ -32,8 +34,8 @@ function App() {
           <Route exact path="/admin/pagos" component={Pagos} />
           <Route exact path="/admin/fotos" component={Fotos} />
           <Route exact path="/admin/usuarios" component={Usuarios} />
-          <Route path='/login' component={Login} />
-          <Route path='/SingUp' component={Registro} />
+          <Route path='/iniciarsesion' component={Login} />
+          <Route path='/registrarse' component={Registro} />
         </Switch>
       </div>
     </BrowserRouter>

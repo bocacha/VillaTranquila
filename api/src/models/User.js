@@ -9,6 +9,10 @@ module.exports = (sequelize) => {
       defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
       allowNull: false,
+      validate:{
+        is:'^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$',
+        isUUID: 4, 
+      }
     },
     UserName:{
       type: DataTypes.STRING,
@@ -50,7 +54,7 @@ module.exports = (sequelize) => {
    Premium:{
     type: DataTypes.BOOLEAN ,
     defaultValue: false,
-    allowNull: false,
+    allowNull: true,
    }, 
    Admin:{ 
     type: DataTypes.BOOLEAN,
@@ -74,7 +78,7 @@ module.exports = (sequelize) => {
    Blocked:{
     type: DataTypes.BOOLEAN,
     defaultValue: false,
-    allowNull: false,
+    allowNull: true,
    },
   },{timestamps: false,});
 };
