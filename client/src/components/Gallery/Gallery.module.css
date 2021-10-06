@@ -1,4 +1,6 @@
 .slidershow{
+    display:flex;
+    justify-content:center;
     background-color: #293c4f;
     width:70%;
     margin-top:50px;

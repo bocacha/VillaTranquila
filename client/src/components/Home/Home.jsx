@@ -4,8 +4,9 @@ import ChatBot from 'react-simple-chatbot';
 import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 import Slider from "../Slider/Slider";
+import Upload from "../Reserva/Upload/Upload";
 import Searchbar from "../Searchbar/Searchbar";
-import Gallery from "../Gallery";
+import Gallery from "../Gallery/Gallery";
 import styles from "./Home.module.css";
 import{useEffect} from "react"
 import { useDispatch} from 'react-redux';
@@ -51,8 +52,8 @@ export default function Home() {
         </div> 
       </div>
       <div>
-        {/* <Searchbar/>
-        <Gallery/> */}
+        {/* <Searchbar/> */}
+        <Gallery/>
       </div>
       <div>
         <BannerIntro />

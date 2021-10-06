@@ -6,7 +6,7 @@ export default function Gallery() {
     const [imageIds, setImageIds] = useState();
     const loadImages = async () => {
         try {
-            const res = await fetch('http://localhost:3001/showImages/images');
+            const res = await fetch('http://localhost:3001/pictures');
             const data = await res.json();
             
             setImageIds(data);
@@ -21,14 +21,11 @@ return (
         <div className={styles.slidershow}>            
             <div className={styles.slides}>
                 {imageIds?.map((imageId, index) => (                    
-                        <Image className={styles.img}
-                            key={index}
-                            cloudName={'villatranquila'}
-                            publicId={imageId}
-                            width="225"
-                            height="150"
-                            crop="scale"
-                        />                    
+                        <img 
+                        className={styles.img}
+                        src={imageId.Url}
+                        width="200px"
+                        />                  
                     ))}
             </div> 
             
