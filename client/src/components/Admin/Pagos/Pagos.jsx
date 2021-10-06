@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { createPayment, readPayment, editPayments, Logeduser, readServicesocultados } from "../../../actions";
 import PagosDetail from "./PagosDetail";
 import DatePicker from "react-datepicker";
-import 'react-datepicker/dist/react-datepicker.css';
+import "react-datepicker/dist/react-datepicker.css";
+import { Link } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 export default function Pagos() {
@@ -96,27 +97,33 @@ export default function Pagos() {
   }
   return (
     <div className={styles.container}>
-      <div className={styles.formsCont}>
-      {!habilitar ?(
+      <div className={styles.btnVolver}>
+        <Link to="/admin">
+          <button className={styles.btn}>Volver</button>
+        </Link>
+      </div>
+      <div className={styles.container2}>
+        <div className={styles.formsCont}>
+            {!habilitar ?(
             <button onClick={ocultadas}>Mostrar ocultadas</button>
           ):(
             <button onClick={showtrue}>Mostrar habilitadas</button>
           )
           }
-        {/* CREAR */}
-        <div className={styles.crearCont}>
-          <div className={styles.title}>Crear un nuevo pago</div>
-          <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
-             <DatePicker
-          selected={selectedDate}
-          onChange={date=> setSelectedDate(date)}
-          dateFormat='dd/MM/yyyy'
-          minDate={new Date()}
-          className={styles.formInputs}
-          //isClearable
-          />
+          {/* CREAR */}
+          <div className={styles.crearCont}>
+            <div className={styles.title}>Crear un pago</div>
+            <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
+              <DatePicker
+                selected={selectedDate}
+                onChange={(date) => setSelectedDate(date)}
+                dateFormat="dd/MM/yyyy"
+                minDate={new Date()}
+                className={styles.formInputs}
+                //isClearable
+              />
 
-            {/* 
+              {/* 
           <input
             type="date"
             value={input.Date}
@@ -127,46 +134,59 @@ export default function Pagos() {
             className={styles.Date}
             required
           /> */}
-            <input
-              type="text"
-              value={input.idClient}
-              name="idClient"
-              onChange={(e) => handleChange(e)}
-              placeholder="Cliente id"
-              className={styles.formInputs}
-              //pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
-              required
-            />
-            <input
-              type="text"
-              value={input.TotalAmount}
-              name="TotalAmount"
-              onChange={(e) => handleChange(e)}
-              placeholder="Monto total"
-              className={styles.formInputs}
-              required
-            />
-            <input
-              type="text"
-              value={input.PaydAmount}
-              name="PaydAmount"
-              onChange={(e) => handleChange(e)}
-              placeholder="Monto a pagar"
-              className={styles.formInputs}
-              required
-            />
-            <div className={styles.btns}>
-              <button type="submit" className={styles.btn}>
-                Crear
-              </button>
-            </div>
-          </form>
-        </div>
+              <input
+                type="text"
+                value={input.idClient}
+                name="idClient"
+                onChange={(e) => handleChange(e)}
+                placeholder="Cliente id"
+                className={styles.formInputs}
+                // pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
+                required
+              />
+              <input
+                type="text"
+                value={input.TotalAmount}
+                name="TotalAmount"
+                onChange={(e) => handleChange(e)}
+                placeholder="Monto total"
+                className={styles.formInputs}
+                required
+              />
+              <input
+                type="text"
+                value={input.PaydAmount}
+                name="PaydAmount"
+                onChange={(e) => handleChange(e)}
+                placeholder="Monto a pagar"
+                className={styles.formInputs}
+                required
+              />
+              <div className={styles.btns}>
+                <button type="submit" className={styles.btn}>
+                  Crear
+                </button>
+              </div>
+            </form>
+          </div>
+          {/* EDITAR */}
+          <div className={styles.editarCont}>
+            <div className={styles.title}> Editar un pago</div>
+            <form onSubmit={(e) => handleSubmitEdit(e)} className={styles.form}>
+              <input
+                type="text"
+                value={edit.id}
+                name="id"
+                onChange={(e) => handleChangeEdit(e)}
+                placeholder="Id"
+                className={styles.formInputs}
+              />
         {/* EDITAR */}
         {mostrar ?
             <div className={styles.editarCont}>
             <div className={styles.title}> Editar un nuevo pago</div>
             <form className={styles.form}>
+
               <input
                 type="text"
                 value={edit.Date}
@@ -198,8 +218,7 @@ export default function Pagos() {
                 onChange={(e) => handleChangeEdit(e)}
                 placeholder="Monto a pagar"
                 className={styles.formInputs}
-              />
-             
+              />         
             </form>
           </div>
           :
@@ -208,7 +227,6 @@ export default function Pagos() {
         
 
       </div>
-
       {/* VER */}
       <div>
         {allPayments?.map((el) => {
@@ -226,7 +244,6 @@ export default function Pagos() {
               />
             </div>
           );
-        })}
       </div>
     </div>
   );

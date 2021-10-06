@@ -35,10 +35,10 @@ export default function FotosDetail({
       <p><strong>Url:</strong> {Url}</p>
       <div>
       {!restaurar?(
-          <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
+          <button onClick={()=>handleSubmitDelete(ID)} className={styles.btn}>Eliminar</button>
 
         ):(
-          <button onClick={()=>handleSubmitrestore(ID)}>Restaurar</button>
+          <button onClick={()=>handleSubmitrestore(ID)} className={styles.btn} >Restaurar</button>
         )}
       </div>
       {mostrar ?

@@ -8,7 +8,6 @@ import { Link } from "react-router-dom";
 const Cabañas = () => {
   const dispatch = useDispatch();
   const allCabains = useSelector((state) => state.cabañas);
-
   const logeduser = useSelector ((state) => state.user);
   const [habilitar, setHabilitar]= useState(false)
   const [cabain, setCabain] = useState({
@@ -52,11 +51,10 @@ const Cabañas = () => {
     dispatch(readCabains());
   }, [dispatch]);
 
-
   useEffect(() => {
     dispatch(Logeduser());
   }, [dispatch]);
-  
+
   const handleChange = (e) => {
     setCabain({
       ...cabain,
@@ -104,6 +102,7 @@ const Cabañas = () => {
     
   };
 
+
   const  handlePrueba = (e, ID) => {
     setEdit({...edit,
           id:ID  
@@ -130,6 +129,7 @@ const Cabañas = () => {
           <button className={styles.btn}>Volver</button>
         </Link>
       </div>
+      <div className={styles.container2}>
       <div className={styles.formsCont}>
         <div className={styles.crearCont}>
           {!habilitar ?(
@@ -137,11 +137,9 @@ const Cabañas = () => {
           ):(
             <button onClick={showtrue}>Mostrar habilitadas</button>
           )
-          }
           
-          
-          <div className={styles.title}>Crear Cabaña</div>
           <form onSubmit={handleSubmit} className={styles.form}>
+             <div className={styles.title}>Crear Cabaña</div>
             <div>
               <input
                 type="number"
@@ -330,7 +328,7 @@ const Cabañas = () => {
                 onChange={handleeditCheckBox}
                 placeholder="h"
                 className={styles.formInputs}
-              /> 
+              />
               <label>Microondas</label>
               <input
                 type="checkbox"

@@ -38,14 +38,14 @@ export default function Servicios() {
   useEffect(() => {
     dispatch(Logeduser());
   }, [dispatch]);
-  
+
   useEffect(() => {
     dispatch(readServices());
   }, [dispatch]);
-function handleSubmit(e) {
-    const {token} = logeduser
-     e.preventDefault();
-    dispatch(createServices(input, {token}));
+  function handleSubmit(e) {
+    const { token } = logeduser;
+    e.preventDefault();
+    dispatch(createServices(input, { token }));
     alert("Servicio creado con éxito");
     setInput({
       Name: "",
@@ -88,55 +88,56 @@ return (
           <button className={styles.btn}>Volver</button>
         </Link>
       </div>
-      {!habilitar ?(
+      <div className={styles.container2}>
+        <div className={styles.formsCont}>
+           {!habilitar ?(
             <button onClick={ocultadas}>Mostrar ocultadas</button>
           ):(
             <button onClick={showtrue}>Mostrar habilitadas</button>
           )
           }
-      <div className={styles.formsCont}>
-        {/* CREAR */}
-        <div className={styles.crearCont}>
-          <div className={styles.title}> Crear un nuevo servicio</div>
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <input
-              type="text"
-              value={input.Name}
-              name="Name"
-              onChange={(e) => handleChange(e)}
-              placeholder="Nombre"
-              className={styles.formInputs} 
-              required
-            />
-            <textarea
-              type="text"
-              value={input.Description}
-              name="Description"
-              onChange={(e) => handleChange(e)}
-              placeholder="Descripción"
-              className={styles.formInputs} 
-              required
-            />
-            <input
-              type="number"
-              value={input.Price}
-              name="Price" 
-              min='1000' 
-              max='20000'
-              onChange={(e) => handleChange(e)}
-              placeholder="Precio"
-              className={styles.formInputs} 
-              required
-            />
-            <div className={styles.btns}>
-              <button type="submit" className={styles.btn}>
-                Crear
-              </button>
-            </div>
-          </form>
-        </div>
-        {/* EDITAR */}
-        {mostrar ?
+          {/* CREAR */}
+          <div className={styles.crearCont}>
+            <div className={styles.title}> Crear un servicio</div>
+            <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
+              <input
+                type="text"
+                value={input.Name}
+                name="Name"
+                onChange={(e) => handleChange(e)}
+                placeholder="Nombre"
+                className={styles.formInputs}
+                required
+              />
+              <textarea
+                type="text"
+                value={input.Description}
+                name="Description"
+                onChange={(e) => handleChange(e)}
+                placeholder="Descripción"
+                className={styles.formInputs}
+                required
+              />
+              <input
+                type="number"
+                value={input.Price}
+                name="Price"
+                min="1000"
+                max="20000"
+                onChange={(e) => handleChange(e)}
+                placeholder="Precio"
+                className={styles.formInputs}
+                required
+              />
+              <div className={styles.btns}>
+                <button type="submit" className={styles.btn}>
+                  Crear
+                </button>
+              </div>
+            </form>
+          </div>
+          {/* EDITAR */}
+       {mostrar ?
           <div className={styles.editarCont}>
           <div className={styles.title}> Editar un nuevo servicio</div>
           <form >
@@ -166,13 +167,11 @@ return (
               className={styles.formInputs}
             />
             
-          </form>
-        </div>
+          </form> 
+         </div>
         :
           null
         }
-        
-
       </div>
    <div>
         {allServices?.map((el) => {

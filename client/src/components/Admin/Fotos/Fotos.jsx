@@ -24,7 +24,7 @@ export default function Fotos() {
   useEffect(() => {
     dispatch(Logeduser());
   }, [dispatch]);
-  
+
   useEffect(() => {
     dispatch(readPictures());
   }, [dispatch]);
@@ -88,45 +88,46 @@ const showtrue=()=>{
           <button className={styles.btn}>Volver</button>
         </Link>
       </div>
-      <div className={styles.formsCont}>
-      {!habilitar ?(
+      <div className={styles.container2}>
+        <div className={styles.formsCont}>
+          {!habilitar ?(
             <button onClick={ocultadas}>Mostrar ocultadas</button>
           ):(
             <button onClick={showtrue}>Mostrar habilitadas</button>
           )
           }
-        {/* CREAR */}
-        <div className={styles.crearCont}>
-          <div className={styles.title}> Crear una nueva foto</div>
-          <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
-            <input
-              type="text"
-              value={input.Description} 
-              maxLength="100"
-              name="Description"
-              onChange={(e) => handleChange(e)}
-              placeholder="Descripción"
-              className={styles.formInputs}
-              required
-            />
-            <input
-              type="text"
-              value={input.Url}
-              name="Url"
-              onChange={(e) => handleChange(e)}
-              placeholder="Url"
-              className={styles.formInputs}
-              required
-            />
-            <div className={styles.btns}>
-              <button type="submit" className={styles.btn}>
-                Crear
-              </button>
-            </div>
-          </form>
-        </div>
-        {/* EDITAR */}
-        {mostrar 
+          {/* CREAR */}
+          <div className={styles.crearCont}>
+            <div className={styles.title}> Crear una nueva foto</div>
+            <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
+              <input
+                type="text"
+                value={input.Description}
+                maxLength="100"
+                name="Description"
+                onChange={(e) => handleChange(e)}
+                placeholder="Descripción"
+                className={styles.formInputs}
+                required
+              />
+              <input
+                type="text"
+                value={input.Url}
+                name="Url"
+                onChange={(e) => handleChange(e)}
+                placeholder="Url"
+                className={styles.formInputs}
+                required
+              />
+              <div className={styles.btns}>
+                <button type="submit" className={styles.btn}>
+                  Crear
+                </button>
+              </div>
+            </form>
+          </div>
+          {/* EDITAR */}
+                 {mostrar 
         
         ?  
           <div className={styles.editarCont}>
@@ -161,25 +162,22 @@ const showtrue=()=>{
         </div>
         :
           null
-      
-      }
-        
-      </div>
-      <div>
-        {allPictures?.map((el) => {
-          return (
-            <div className={styles.detalles} key={el.ID}>
-              <FotosDetail
-                Description={el.Description}
-                Url={el.Url}
-                ID={el.ID}
-                handleSubmitEdit={handleSubmitEdit}
-                handlePrueba={handlePrueba}
-                restaurar={habilitar}
-              />
-            </div>
-          );
-        })}
+        }
+        <div>
+          {allPictures?.map((el) => {
+            return (
+              <div className={styles.detalles} key={el.ID}>
+                <FotosDetail
+                  Description={el.Description}
+                  Url={el.Url}
+                  handleSubmitEdit={handleSubmitEdit}
+                  handlePrueba={handlePrueba}
+                  restaurar={habilitar}
+                />
+              </div>
+            );
+          })}
+
       </div>
     </div>
   );

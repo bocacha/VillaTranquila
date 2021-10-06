@@ -28,9 +28,9 @@ export default function Usuarios() {
   useEffect(() => {
     dispatch(Logeduser());
   }, [dispatch]);
-  
+
   useEffect(() => {
-    dispatch(readUsers({token}));
+    dispatch(readUsers({ token }));
   }, [dispatch, token]);
   function handleChange(e) {
     setInput({
@@ -133,7 +133,7 @@ const showtrue=()=>{
             Al menos un dígito
             No espacios en blanco
             Al menos 1 caracter especial */}
-{/*
+      {/*
           <input
             type="text"
             value={input.FirstName}
@@ -201,19 +201,18 @@ const showtrue=()=>{
           </div>
         </form>
 */}
-     <div className={styles.btnVolver}>
+      <div className={styles.btnVolver}>
         <Link to="/admin">
           <button className={styles.btn}>Volver</button>
         </Link>
       </div>
+      <div className={styles.container2}>
       <div className={styles.formsCont}>
         {/* editar */}
         {mostrar ? 
-
             <div className={styles.crearCont}>
             <div className={styles.title}> Editar un nuevo usuario</div>
             <form className={styles.form}>
-              
               <input
                 type="text"
                 value={input.UserName}
@@ -280,28 +279,33 @@ const showtrue=()=>{
                 <option value="true">true</option>
                 <option value="false">false</option>
               </select>
-              <select
-                onChange={(e) => handleSelectPremium(e)}
-                value={input.Premium}
-                className={styles.formInputs}
-                required
-              >
-                <option value="">Premium:</option>
-                <option value="true">true</option>
-                <option value="false">false</option>
-              </select>
-              <select
-                onChange={(e) => handleSelectBlocked(e)}
-                value={input.Blocked}
-                className={styles.formInputs}
-                required
-              >
-                <option value="">Blocked:</option>
-                <option value="true">true</option>
-                <option value="false">false</option>
-              </select>
-            </form>   
-        </div>
+              {/* <select
+              onChange={(e) => handleSelectPremium(e)}
+              value={input.Premium}
+              className={styles.formInputs}
+              required
+            >
+              <option value="">Premium:</option>
+              <option value="true">true</option>
+              <option value="false">false</option>
+            </select> */}
+              {/* <select
+              onChange={(e) => handleSelectBlocked(e)}
+              value={input.Blocked}
+              className={styles.formInputs}
+              required
+            >
+              <option value="">Blocked:</option>
+              <option value="true">true</option>
+              <option value="false">false</option>
+            </select> */}
+              <div className={styles.btns}>
+                <button type="submit" className={styles.btn}>
+                  Editar
+                </button>
+              </div>
+            </form>
+          </div>
         : 
             null       
             }
@@ -313,7 +317,6 @@ const showtrue=()=>{
         {allUsers?.map((el)=>(           
             <div className={styles.detalles} key={el.ID}>
               <UsuariosDetail
-                ID={el.ID}
                 UserName={el.UserName}
                 FirstName={el.FirstName}
                 LastName={el.LastName}
@@ -326,7 +329,8 @@ const showtrue=()=>{
                 restaurar={habilitar}
               />
             </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

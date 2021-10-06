@@ -86,7 +86,7 @@ export default function Reserva() {
     return (
         <div>
             <Navbar className={styles.navbar} />
-            <ul className={styles.reserva}>
+          {/*   <ul className={styles.reserva}>
                 <li>
                     <button className={styles.reload} onClick={e => handleReload(e)}>Limpiar filtros <p><AiOutlineReload /></p></button>
                 </li>
@@ -190,7 +190,7 @@ export default function Reserva() {
                         onClick={(e) => handleFilters(e)}
                     ><span><ImSearch /> Iniciar búsqueda</span></button>
                 </li>
-            </ul >
+            </ul > */}
 
 
             <div className={styles.cabinPage}>

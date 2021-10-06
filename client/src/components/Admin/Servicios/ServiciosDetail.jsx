@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import styles from "./Servicios.module.css";
+import styles from "./ServiciosDetail.module.css";
 import { useDispatch } from "react-redux";
 import {removeServices, restoreServices}  from '../../../actions'
 
@@ -24,16 +24,15 @@ export default function ServiciosDetail({ ID, Name, Description, Price, handleSu
   }
   return (
     <div className={styles.container}>
-      <p><strong>Id:</strong> {ID}</p>
       <p><strong>Name:</strong> {Name}</p>
       <p><strong>Description:</strong> {Description}</p>
       <p><strong>Price:</strong> {Price}</p>  
       <div>
       {!restaurar?(
-          <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
+          <button onClick={()=>handleSubmitDelete(ID)}  className={styles.btn}>Eliminar</button>
 
         ):(
-          <button onClick={()=>handleSubmitrestore(ID)}>Restaurar</button>
+          <button onClick={()=>handleSubmitrestore(ID)}  className={styles.btn}>Restaurar</button>
         )}
       </div>
       {mostrar 
