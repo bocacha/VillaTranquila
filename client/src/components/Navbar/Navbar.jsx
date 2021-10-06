@@ -1,9 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
 import { RiTeamLine, RiMailLine, RiLoginBoxLine } from "react-icons/ri";
 import { GoSignIn, GoHome } from "react-icons/go";
 import { ImCalendar } from "react-icons/im";
 import { RiAdminFill } from "react-icons/ri";
+=======
+import { RiTeamLine, RiMailLine, RiLoginBoxLine } from 'react-icons/ri';
+import { GoSignIn, GoHome } from 'react-icons/go';
+import { ImCalendar } from 'react-icons/im';
+import { RiAdminFill } from 'react-icons/ri';
+import { GiPhotoCamera } from 'react-icons/gi';
+>>>>>>> 18ecf33ad3eeac9b4f4bbdd6742ff7ac0fbbd2c0
 import styles from "./Navbar.module.css";
 import axios from "axios";
 import { BiWindows } from "react-icons/bi";
@@ -62,6 +70,9 @@ export default function Navbar() {
               </button>
             </Link>
           </li>
+          <li>
+                        <Link to='/galeria' ><button><strong>Galeria <span className={styles.span}><GiPhotoCamera /></span></strong></button></Link>
+                    </li>
           <li>
             {logeduser.admin ? (
               <Link to="/admin">
