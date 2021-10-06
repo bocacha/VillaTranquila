@@ -5,7 +5,8 @@ import {
   createReservation,
   editReservation,
   readReservation,
-  Logeduser
+  Logeduser,
+  readReservationocultados
 } from "../../../actions";
 import ReservacionesDetail from "./ReservacionesDetail";
 import DatePicker from "react-datepicker";
@@ -16,9 +17,10 @@ export default function Reservaciones() {
 
   const [selectDateCI, setSelectDateCI] = useState(null);
   const [selectDateCO, setSelectDateCO] = useState(null);
-
+  const [mostrar, setMostrar] = useState(false);
   const dispatch = useDispatch();
   const allReservations = useSelector((state) => state.reservaciones);
+  const [habilitar, setHabilitar]= useState(false)
   const logeduser = useSelector((state) => state.user);
   const { token } = logeduser;
   const [input, setInput] = useState({
@@ -76,22 +78,34 @@ export default function Reservaciones() {
     });
     window.location.reload();
   }
-  function handleSubmitEdit(e) {
+  function handleSubmitEdit(e,ID) {
     e.preventDefault();
-    dispatch(editReservation(edit));
-    alert("Reserva editada con éxito");
-    setInput({
-      id: "",
-      Checkin: "",
-      Checkout: "",
-      UserId: "",
-      Paymentsid: "",
-      Cabinid: "",
-      ExtraServices: "",
-    });
-    window.location.reload();
+    
+    setMostrar(true);
+    dispatch(editReservation(edit, { token }));
+    setEdit({...edit,
+      id:ID  
+    })
+   
   }
 
+  function handlePrueba(e, ID) {
+    e.preventDefault();
+    
+    dispatch(editReservation(edit, { token }));
+    setEdit({...edit,
+      id:ID  
+    })
+    setMostrar(true);
+    
+    //window.location.reload();
+  }
+  const ocultadas= () => {
+   return dispatch(readReservationocultados())
+  }
+  const showtrue=()=>{
+    dispatch(readReservation())
+  }
   return (
     <div className={styles.container}>
       <div className={styles.btnVolver}>
@@ -99,6 +113,12 @@ export default function Reservaciones() {
           <button className={styles.btn}>Volver</button>
         </Link>
       </div>
+      {!habilitar ?(
+            <button onClick={ocultadas}>Mostrar ocultadas</button>
+          ):(
+            <button onClick={showtrue}>Mostrar habilitadas</button>
+          )
+          }
       <div className={styles.formsCont}>
         {/* CREAR */}
         <div className={styles.crearCont}>
@@ -144,7 +164,7 @@ export default function Reservaciones() {
               onChange={(e) => handleChange(e)}
               placeholder="Usuario Id"
               className={styles.formInputs} 
-              pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
+              //pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
               required
             />
             <input
@@ -154,7 +174,7 @@ export default function Reservaciones() {
               onChange={(e) => handleChange(e)}
               placeholder="Pagos id"
               className={styles.formInputs} 
-              pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
+              //pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
               required
             />
             <input
@@ -164,7 +184,7 @@ export default function Reservaciones() {
               onChange={(e) => handleChange(e)}
               placeholder="Cabaña id"
               className={styles.formInputs} 
-              pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
+              //pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
               required
             />
             <input
@@ -183,72 +203,70 @@ export default function Reservaciones() {
           </form>
         </div>
         {/* EDITAR */}
-        <div className={styles.editarCont}>
-          <div className={styles.title}> Editar reserva</div>
-          <form onSubmit={(e) => handleSubmitEdit(e)}>
-            <input
-              type="text"
-              value={edit.id}
-              name="id"
-              onChange={(e) => handleChangeEdit(e)}
-              placeholder="Id"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={edit.Checkin}
-              name="Checkin"
-              onChange={(e) => handleChangeEdit(e)}
-              placeholder="Check in"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={edit.Checkout}
-              name="Checkout"
-              onChange={(e) => handleChangeEdit(e)}
-              placeholder="Check out"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={edit.UserId}
-              name="UserId"
-              onChange={(e) => handleChangeEdit(e)}
-              placeholder="Usuario id"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={edit.Paymentsid}
-              name="Paymentsid"
-              onChange={(e) => handleChangeEdit(e)}
-              placeholder="Pagos id"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={edit.Cabinid}
-              name="Cabinid"
-              onChange={(e) => handleChangeEdit(e)}
-              placeholder="Cabaña id"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={edit.ExtraServices}
-              name="ExtraServices"
-              onChange={(e) => handleChangeEdit(e)}
-              placeholder="Servicios extra"
-              className={styles.formInputs}
-            />
-            <div className={styles.btns}>
-              <button type="submit" className={styles.btn}>
-                Editar
-              </button>
-            </div>
-          </form>
-        </div>
+        {mostrar
+         ? 
+            <div className={styles.editarCont}>
+            <div className={styles.title}> Editar reserva</div>
+            <form >
+              <input
+                type="text"
+                value={edit.Checkin}
+                name="Checkin"
+                onChange={(e) => handleChangeEdit(e)}
+                placeholder="Check in"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
+                value={edit.Checkout}
+                name="Checkout"
+                onChange={(e) => handleChangeEdit(e)}
+                placeholder="Check out"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
+                value={edit.UserId}
+                name="UserId"
+                onChange={(e) => handleChangeEdit(e)}
+                placeholder="Usuario id"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
+                value={edit.Paymentsid}
+                name="Paymentsid"
+                onChange={(e) => handleChangeEdit(e)}
+                placeholder="Pagos id"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
+                value={edit.Cabinid}
+                name="Cabinid"
+                onChange={(e) => handleChangeEdit(e)}
+                placeholder="Cabaña id"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
+                value={edit.ExtraServices}
+                name="ExtraServices"
+                onChange={(e) => handleChangeEdit(e)}
+                placeholder="Servicios extra"
+                className={styles.formInputs}
+              />
+             {/*  <div className={styles.btns}>
+                <button type="submit" className={styles.btn}>
+                  Editar
+                </button>
+              </div> */}
+            </form>
+          </div>
+          :
+          null
+      }
+        
       </div>
       {/* VER */}
       <div>
@@ -260,12 +278,13 @@ export default function Reservaciones() {
                 Checkin={el.Checkin}
                 Checkout={el.Checkout}
                 UserId={el.UserId}
-                Paymentsid={el.Paymentsid}
                 CostoFinal={el.CostoFinal}
                 Cabinid={el.Cabinid}
                 ExtraServices={el.ExtraServices}
-                />
-                {console.log(el.CostoFinal)}
+                handlePrueba={handlePrueba}
+                handleSubmitEdit={handleSubmitEdit}
+                restaurar={habilitar}
+              />
             </div>
           );
         })}

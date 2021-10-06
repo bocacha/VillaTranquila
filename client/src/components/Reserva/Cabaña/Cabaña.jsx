@@ -1,9 +1,11 @@
 import React from "react";
+import { useEffect, useState } from "react"
 import styles from './Cabaña.module.css';
 import { GiCoffeeCup, GiChickenOven, GiFireplace, GiCampCookingPot, GiVacuumCleaner, GiCookingPot } from 'react-icons/gi';
 import { RiFridgeLine } from 'react-icons/ri';
 import { FaWifi, FaCarAlt } from 'react-icons/fa';
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Cabaña({
     ID,
@@ -27,13 +29,8 @@ export default function Cabaña({
         const prices = price;
         const id_cabaña = () => {
             localStorage.setItem("id_cabaña", JSON.stringify(id));
-            console.log(ID);
-            const local = localStorage.getItem("id_cabaña");
-            console.log(JSON.parse(local));
             localStorage.setItem("costo", JSON.stringify(prices))
         }
-        
-        
 
     return (
         <div className={styles.cabaña}>
@@ -43,7 +40,7 @@ export default function Cabaña({
             <span> Disponible a partir del: {notAvailable}</span>
             <span> Precio por noche: {price}</span>
             <span> Descripción: {description}</span>
-            <span> Servicios disponibles: 
+            {/* <span> Servicios disponibles: 
                 {coffe && <GiCoffeeCup/>}
                 {microwaves && <GiChickenOven/>}
                 {heat && <GiFireplace/>}
@@ -53,7 +50,7 @@ export default function Cabaña({
                 {stove && <GiCookingPot/>}
                 {parking && <FaCarAlt/>}
                 {refrigerator && <RiFridgeLine/>}
-            </span>
+            </span> */}
             <Link to="/reserva/reservar">
                 <button onClick={id_cabaña}>Reserva ya</button>
             </Link>

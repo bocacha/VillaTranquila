@@ -1,5 +1,5 @@
 .slidershow{
-    background-color: #323031;
+    background-color: #293c4f;
     width:70%;
     margin-top:50px;
     margin-left: 200px;
@@ -19,3 +19,4 @@
     transform: translateY(-15px);
     box-shadow: 0 12px 16px rgba(0,0,0,0.4);
 }
+

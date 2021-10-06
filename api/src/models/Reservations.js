@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    Paymentsid:{
+    CostoFinal:{
       type: DataTypes.STRING,
       allowNull: true,
     },
@@ -29,12 +29,13 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     ExtraServices:{
-      type: DataTypes.STRING,
+      type: DataTypes.JSON,
       allowNull: true,
     },
-    CostoFinal:{
-      type: DataTypes.STRING,
-      allowNull: true,
-    }
+    Show:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue:true
+     }
   },{timestamps: false,});
 };

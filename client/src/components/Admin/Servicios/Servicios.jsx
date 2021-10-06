@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Servicios.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createServices, readServices, editServices, Logeduser} from "../../../actions";
+import { createServices, readServices, editServices, Logeduser, readServicesocultados} from "../../../actions";
 import ServiciosDetail from "./ServiciosDetail";
 import { Link } from "react-router-dom";
 
 export default function Servicios() {
   const dispatch = useDispatch();
   const allServices = useSelector((state) => state.servicios);
+  const [habilitar, setHabilitar]= useState(false)
   const logeduser = useSelector ((state) => state.user);
+  const [mostrar, setMostrar] = useState(false);
   const [input, setInput] = useState({
     Name: "",
     Description: "",
@@ -52,18 +54,33 @@ function handleSubmit(e) {
     });
     window.location.reload();
   }
-  function handleSubmitEdit(e) {
+  function handleSubmitEdit(e, ID) {
+    const {token} = logeduser
     e.preventDefault();
-    dispatch(editServices(edit));
-    alert("Servicio editado con éxito");
+    dispatch(editServices(edit, {token}));
+    setMostrar(true);
     setEdit({
-      id: "",
-      Name: "",
-      Description: "",
-      Price: "",
+        ...edit,
+        id:ID
     });
-    window.location.reload();
+    //window.location.reload();
  }
+ function handlePrueba(e,ID) {
+  const {token} = logeduser
+  e.preventDefault();
+  dispatch(editServices(edit, {token}));
+  setMostrar(true);
+  setEdit({
+    ...edit,
+    id:ID
+  });
+ //window.location.reload();
+ const ocultadas= () => {
+   dispatch(readServicesocultados())
+ }
+ const showtrue=()=>{
+  dispatch(readServices())
+}
 return (
     <div className={styles.container}>
       <div className={styles.btnVolver}>
@@ -71,6 +88,12 @@ return (
           <button className={styles.btn}>Volver</button>
         </Link>
       </div>
+      {!habilitar ?(
+            <button onClick={ocultadas}>Mostrar ocultadas</button>
+          ):(
+            <button onClick={showtrue}>Mostrar habilitadas</button>
+          )
+          }
       <div className={styles.formsCont}>
         {/* CREAR */}
         <div className={styles.crearCont}>
@@ -113,17 +136,11 @@ return (
           </form>
         </div>
         {/* EDITAR */}
-        <div className={styles.editarCont}>
+        {mostrar ?
+          <div className={styles.editarCont}>
           <div className={styles.title}> Editar un nuevo servicio</div>
-          <form onSubmit={(e) => handleSubmitEdit(e)}>
-            <input
-              type="text"
-              value={edit.id}
-              name="id"
-              onChange={(e) => handleChangeEdit(e)}
-              placeholder="Id"
-              className={styles.formInputs}
-            />
+          <form >
+          
             <input
               type="text"
               value={edit.Name}
@@ -148,13 +165,14 @@ return (
               placeholder="Precio"
               className={styles.formInputs}
             />
-            <div className={styles.btns}>
-              <button type="submit" className={styles.btn}>
-                Editar
-              </button>
-            </div>
+            
           </form>
         </div>
+        :
+          null
+        }
+        
+
       </div>
    <div>
         {allServices?.map((el) => {
@@ -165,6 +183,9 @@ return (
                 Name={el.Name}
                 Description={el.Description}
                 Price={el.Price}
+                handlePrueba={handlePrueba}
+                handleSubmitEdit={handleSubmitEdit}
+                restaurar={habilitar}
               />
             </div>
           );
