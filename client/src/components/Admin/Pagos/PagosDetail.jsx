@@ -24,13 +24,12 @@ export default function PagosDetail({
   
   return (
     <div className={styles.container}>
-      <p> <strong>Id:</strong>  {ID}</p>
       <p> <strong>Id cliente:</strong>  {idClient}</p>
       <p> <strong>Fecha:</strong>  {Date}</p>
       <p> <strong>Monto inicial:</strong>  ${PaydAmount}.00</p>
       <p> <strong>Monto total:</strong>  ${TotalAmount}.00</p>
       <div>
-        <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
+        <button onClick={()=>handleSubmitDelete(ID)} className={styles.btn}>Eliminar</button>
       </div>
     </div>
   );

@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Usuarios.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createUsers, readUsers, editUsers, Logeduser} from "../../../actions";
+import { createUsers, readUsers, editUsers, Logeduser } from "../../../actions";
 import UsuariosDetail from "./UsuariosDetail";
 import { Link } from "react-router-dom";
 
 export default function Usuarios() {
   const dispatch = useDispatch();
-  
-  const logeduser = useSelector ((state) => state.user)
-  const {token} = logeduser
+
+  const logeduser = useSelector((state) => state.user);
+  const { token } = logeduser;
   const [input, setInput] = useState({
     id: "",
     UserName: "",
@@ -20,15 +20,15 @@ export default function Usuarios() {
     Phone: "",
     Email: "",
     Admin: "",
-    Premium: "",
-    Blocked: "",
+    Premium: false,
+    Blocked: false,
   });
   useEffect(() => {
     dispatch(Logeduser());
   }, [dispatch]);
-  
+
   useEffect(() => {
-    dispatch(readUsers({token}));
+    dispatch(readUsers({ token }));
   }, [dispatch, token]);
   const allUsers = useSelector((state) => state.usuarios);
   function handleChange(e) {
@@ -72,8 +72,8 @@ export default function Usuarios() {
       Phone: "",
       Email: "",
       Admin: "",
-      Premium: "",
-      Blocked: "",
+      Premium: false,
+      Blocked: false,
     });
     dispatch(readUsers({ token }));
     window.location.reload();
@@ -113,7 +113,7 @@ export default function Usuarios() {
             Al menos un dígito
             No espacios en blanco
             Al menos 1 caracter especial */}
-{/*
+      {/*
           <input
             type="text"
             value={input.FirstName}
@@ -181,91 +181,92 @@ export default function Usuarios() {
           </div>
         </form>
 */}
-     <div className={styles.btnVolver}>
+      <div className={styles.btnVolver}>
         <Link to="/admin">
           <button className={styles.btn}>Volver</button>
         </Link>
       </div>
-      <div className={styles.formsCont}>
-        {/* editar */}
-        <div className={styles.crearCont}>
-          <div className={styles.title}> Editar un nuevo usuario</div>
-          <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
-            <input
-              type="text"
-              value={input.id}
-              name="id"
-              onChange={(e) => handleChange(e)}
-              placeholder="Id"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={input.UserName}
-              name="UserName"
-              onChange={(e) => handleChange(e)}
-              placeholder="Nombre de usuario"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={input.UserPassword}
-              name="UserPassword"
-              onChange={(e) => handleChange(e)}
-              placeholder="Contraseña del usuario"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={input.FirstName}
-              name="FirstName"
-              onChange={(e) => handleChange(e)}
-              placeholder="Nombre"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={input.LastName}
-              name="LastName"
-              onChange={(e) => handleChange(e)}
-              placeholder="Apellido"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={input.Address}
-              name="Address"
-              onChange={(e) => handleChange(e)}
-              placeholder="Dirección"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={input.Phone}
-              name="Phone"
-              onChange={(e) => handleChange(e)}
-              placeholder="Télefono"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={input.Email}
-              name="Email"
-              onChange={(e) => handleChange(e)}
-              placeholder="E-mail"
-              className={styles.formInputs}
-            />
-            <select
-              onChange={(e) => handleSelectAdmin(e)}
-              value={input.Admin}
-              className={styles.formInputs}
-              required
-            >
-              <option value="">Admin:</option>
-              <option value="true">true</option>
-              <option value="false">false</option>
-            </select>
-            <select
+      <div className={styles.container2}>
+        <div className={styles.formsCont}>
+          {/* editar */}
+          <div className={styles.editarCont}>
+            <div className={styles.title}> Editar un usuario</div>
+            <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
+              <input
+                type="text"
+                value={input.id}
+                name="id"
+                onChange={(e) => handleChange(e)}
+                placeholder="Id"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
+                value={input.UserName}
+                name="UserName"
+                onChange={(e) => handleChange(e)}
+                placeholder="Nombre de usuario"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
+                value={input.UserPassword}
+                name="UserPassword"
+                onChange={(e) => handleChange(e)}
+                placeholder="Contraseña del usuario"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
+                value={input.FirstName}
+                name="FirstName"
+                onChange={(e) => handleChange(e)}
+                placeholder="Nombre"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
+                value={input.LastName}
+                name="LastName"
+                onChange={(e) => handleChange(e)}
+                placeholder="Apellido"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
+                value={input.Address}
+                name="Address"
+                onChange={(e) => handleChange(e)}
+                placeholder="Dirección"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
+                value={input.Phone}
+                name="Phone"
+                onChange={(e) => handleChange(e)}
+                placeholder="Télefono"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
+                value={input.Email}
+                name="Email"
+                onChange={(e) => handleChange(e)}
+                placeholder="E-mail"
+                className={styles.formInputs}
+              />
+              <select
+                onChange={(e) => handleSelectAdmin(e)}
+                value={input.Admin}
+                className={styles.formInputs}
+                required
+              >
+                <option value="">Admin:</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+              </select>
+              {/* <select
               onChange={(e) => handleSelectPremium(e)}
               value={input.Premium}
               className={styles.formInputs}
@@ -274,8 +275,8 @@ export default function Usuarios() {
               <option value="">Premium:</option>
               <option value="true">true</option>
               <option value="false">false</option>
-            </select>
-            <select
+            </select> */}
+              {/* <select
               onChange={(e) => handleSelectBlocked(e)}
               value={input.Blocked}
               className={styles.formInputs}
@@ -284,31 +285,31 @@ export default function Usuarios() {
               <option value="">Blocked:</option>
               <option value="true">true</option>
               <option value="false">false</option>
-            </select>
-            <div className={styles.btns}>
-              <button type="submit" className={styles.btn}>
-                Editar
-              </button>
-            </div>
-          </form>
+            </select> */}
+              <div className={styles.btns}>
+                <button type="submit" className={styles.btn}>
+                  Editar
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-      {/* VER */}
-      <div>
-        {allUsers?.map((el)=>(           
+        {/* VER */}
+        <div>
+          {allUsers?.map((el) => (
             <div className={styles.detalles} key={el.ID}>
               <UsuariosDetail
-                ID={el.ID}
                 UserName={el.UserName}
-                UserPassword={el.UserPassword}
                 FirstName={el.FirstName}
                 LastName={el.LastName}
                 Address={el.Address}
                 Phone={el.Phone}
                 Email={el.Email}
+                Admin={el.Admin}
               />
             </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

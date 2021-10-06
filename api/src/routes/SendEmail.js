@@ -8,8 +8,8 @@ router.post("/", (req, res) => {
     host: 'smtp.ethereal.email',
     port: 587,
     auth: {
-        user: 'lucienne.will7@ethereal.email',
-        pass: 'sUm7qhjRzaY39ve7Kt'
+        user: 'glenda.bergstrom96@ethereal.email',
+        pass: 'p8v3X5zkFsdUBTFytw'
     }
 });
   var mailOptions = {

@@ -90,7 +90,7 @@ export default function Reserva() {
     return (
         <div>
             <Navbar className={styles.navbar} />
-            <ul className={styles.reserva}>
+          {/*   <ul className={styles.reserva}>
                 <li>
                     <button className={styles.reload} onClick={e => handleReload(e)}>Limpiar filtros <AiOutlineReload /></button>
                 </li>
@@ -125,7 +125,7 @@ export default function Reserva() {
                     </select>
                 </li>
                 <li>
-                    <label><MdAttachMoney /> Rango de precios por noche: </label>
+                    <label><MdAttachMoney /> Rango de precios por noche: </label> */}
                     {/*SLIDER<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/}
                     {/* <RangeSlider /> */}
                     {/* <Slider/> */}
@@ -138,7 +138,7 @@ export default function Reserva() {
                         <option value='6001 - 7500'>6001 - 7500</option>
                         <option value='7501 - 9000'>7501 - 9000</option>
                     </select> */}
-                    <div id={styles.priceRange}>
+                   {/*  <div id={styles.priceRange}>
                         <select onChange={e => handleChange(e)} name='priceMin' className={styles.prices}>
                             <option value='selected' hidden>Mínimo</option>
                             <option value='all'>Sin mínimo</option>
@@ -221,7 +221,7 @@ export default function Reserva() {
                         onClick={(e) => handleFilters(e)}
                     ><span><ImSearch /> Iniciar búsqueda</span></button>
                 </li>
-            </ul >
+            </ul > */}
 
 
             <div className={styles.cabinPage}>

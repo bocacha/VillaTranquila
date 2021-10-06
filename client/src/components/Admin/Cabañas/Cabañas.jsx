@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createCabains, readCabains,editCabains, Logeduser } from "../../../actions";
+import {
+  createCabains,
+  readCabains,
+  editCabains,
+  Logeduser,
+} from "../../../actions";
 import styles from "./Cabañas.module.css";
 import CabañasDetail from "../Cabañas/CabañasDetail";
 import { Link } from "react-router-dom";
@@ -8,7 +13,7 @@ import { Link } from "react-router-dom";
 const Cabañas = () => {
   const dispatch = useDispatch();
   const allCabains = useSelector((state) => state.cabañas);
-  const logeduser = useSelector ((state) => state.user);
+  const logeduser = useSelector((state) => state.user);
   const [cabain, setCabain] = useState({
     Number: "",
     Capacity: "",
@@ -47,11 +52,10 @@ const Cabañas = () => {
     dispatch(readCabains());
   }, [dispatch]);
 
-
   useEffect(() => {
     dispatch(Logeduser());
   }, [dispatch]);
-  
+
   const handleChange = (e) => {
     setCabain({
       ...cabain,
@@ -93,8 +97,6 @@ const Cabañas = () => {
     window.location.reload();
   };
 
-  
-
   return (
     <div className={styles.container}>
       <div className={styles.btnVolver}>
@@ -102,67 +104,68 @@ const Cabañas = () => {
           <button className={styles.btn}>Volver</button>
         </Link>
       </div>
-      <div className={styles.formsCont}>
-        <div className={styles.crearCont}>
-          <div className={styles.title}>Crear Cabaña</div>
-          <form onSubmit={handleSubmit} className={styles.form}>
-            <div>
-              <input
-                type="number"
-                name="Number"
-                value={cabain.Number}
-                onChange={handleChange}
-                placeholder="Numero de Habitaciones"
-                className={styles.formInputs}
-                requiered
-              />
-            </div>
-            <div>
-              <input
-                type="number"
-                name="Capacity"
-                value={cabain.Capacity}
-                onChange={handleChange}
-                placeholder="Numero de Camas"
-                className={styles.formInp}
-                requiered
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                name="Available"
-                value={cabain.Available}
-                onChange={handleChange}
-                placeholder="Disponibilidad"
-                className={styles.formInputs}
-                requiered
-              />
-            </div>
-            <div>
-              <input
-                type="number"
-                name="Price"
-                value={cabain.Price}
-                onChange={handleChange}
-                placeholder="Precio"
-                className={styles.formInputs}
-                max="50000"
-                requiered
-              />
-            </div>
-            <div>
-              <textarea
-                type="text"
-                name="Description"
-                value={cabain.Description}
-                onChange={handleChange}
-                placeholder="Descripción"
-                className={styles.formInputs}
-                requiered
-              />
-            </div>
-            <div>
+      <div className={styles.container2}>
+        <div className={styles.formsCont}>
+          <div className={styles.crearCont}>
+            <form onSubmit={handleSubmit} className={styles.form}>
+              <div className={styles.title}> Crear Cabaña</div>
+              <div>
+                <input
+                  type="number"
+                  name="Number"
+                  value={cabain.Number}
+                  onChange={handleChange}
+                  placeholder="Numero de Cabaña"
+                  className={styles.formInputs}
+                  requiered
+                />
+              </div>
+              <div>
+                <input
+                  type="number"
+                  name="Capacity"
+                  value={cabain.Capacity}
+                  onChange={handleChange}
+                  placeholder="Numero de Camas"
+                  requiered
+                  className={styles.formInputs}
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  name="Available"
+                  value={cabain.Available}
+                  onChange={handleChange}
+                  placeholder="Disponibilidad"
+                  className={styles.formInputs}
+                  requiered
+                />
+              </div>
+              <div>
+                <input
+                  type="number"
+                  name="Price"
+                  value={cabain.Price}
+                  onChange={handleChange}
+                  placeholder="Precio"
+                  className={styles.formInputs}
+                  max="50000"
+                  requiered
+                />
+              </div>
+              <div>
+                <textarea
+                  type="text"
+                  name="Description"
+                  value={cabain.Description}
+                  onChange={handleChange}
+                  placeholder="Descripción"
+                  className={styles.formInputs}
+                  requiered
+                />
+              </div>
+              {/* <div>
               <label>Cafe</label>
               <input
                 type="checkbox"
@@ -235,80 +238,70 @@ const Cabañas = () => {
                 onChange={handleCheckBox}
                 className={styles.formInputs}
               />
-            </div>
-            <div className={styles.btns}>
-              <button type="submit" className={styles.btn}>
-                Crear
-              </button>
-            </div>
-          </form>
-        </div>
-        {/* EDITAR */}
-        <div className={styles.editarCont}>
-          <div className={styles.title}>Editar Cabaña</div>
-          <form onSubmit={handleeditSubmit}>
-            <div>
-              <input
-                type="text"
-                name="id"
-                value={edit.id}
-                onChange={handleChangeEdit}
-                placeholder="Id"
-                className={styles.formInputs}
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                name="Number"
-                value={edit.Number}
-                onChange={handleChangeEdit}
-                placeholder="Numero de Habitaciones"
-                className={styles.formInputs}
-              />
-            </div>
-            <div>
-              <input
-                type="number"
-                name="Capacity"
-                value={edit.Capacity}
-                onChange={handleChangeEdit}
-                placeholder="Numero de Camas"
-                className={styles.formInputs}
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                name="Available"
-                value={edit.Available}
-                onChange={handleChangeEdit}
-                placeholder="Disponibilidad"
-                className={styles.formInputs}
-              />
-            </div>
-            <div>
-              <input
-                type="number"
-                name="Price"
-                value={edit.Price}
-                onChange={handleChangeEdit}
-                placeholder="Precio"
-                className={styles.formInputs}
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                name="Description"
-                value={edit.Description}
-                onChange={handleChangeEdit}
-                placeholder="Descripción"
-                className={styles.formInputs}
-              />
-            </div>
-            <div>
-              <label>Cafe</label> 
+            </div> */}
+              <div className={styles.btns}>
+                <button type="submit" className={styles.btn}>
+                  Crear
+                </button>
+              </div>
+            </form>
+          </div>
+          {/* EDITAR */}
+          <div className={styles.editarCont}>
+            <div className={styles.title}>Editar Cabaña</div>
+            <form onSubmit={handleeditSubmit} className={styles.form}>
+              <div>
+                <input
+                  type="text"
+                  name="Number"
+                  value={edit.Number}
+                  onChange={handleChangeEdit}
+                  placeholder="Numero de Cabaña"
+                  className={styles.formInputs}
+                />
+              </div>
+              <div>
+                <input
+                  type="number"
+                  name="Capacity"
+                  value={edit.Capacity}
+                  onChange={handleChangeEdit}
+                  placeholder="Numero de Camas"
+                  className={styles.formInputs}
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  name="Available"
+                  value={edit.Available}
+                  onChange={handleChangeEdit}
+                  placeholder="Disponibilidad"
+                  className={styles.formInputs}
+                />
+              </div>
+              <div>
+                <input
+                  type="number"
+                  name="Price"
+                  value={edit.Price}
+                  onChange={handleChangeEdit}
+                  placeholder="Precio"
+                  className={styles.formInputs}
+                />
+              </div>
+              <div>
+                <textarea
+                  type="text"
+                  name="Description"
+                  value={edit.Description}
+                  onChange={handleChangeEdit}
+                  placeholder="Descripción"
+                  className={styles.formInputs}
+                />
+              </div>
+              {/* <div>
+              <label>Cafe</label>
               <input
                 type="checkbox"
                 name="Coffe"
@@ -316,7 +309,7 @@ const Cabañas = () => {
                 onChange={handleeditCheckBox}
                 placeholder="h"
                 className={styles.formInputs}
-              /> 
+              />
               <label>Microondas</label>
               <input
                 type="checkbox"
@@ -381,41 +374,41 @@ const Cabañas = () => {
                 onChange={handleeditCheckBox}
                 className={styles.formInputs}
               />
-            </div>
-            <div className={styles.btns}>
-              <button type="submit" className={styles.btn}>
-                Editar
-              </button>
-            </div>
-          </form>
+            </div> */}
+              <div className={styles.btns}>
+                <button type="submit" className={styles.btn}>
+                  Editar
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-      {/* VER */}
-      <div>
-        {allCabains?.map((el) => {
-          return (
-            <div className={styles.detalles} key={el.ID}>
-              <CabañasDetail
-                ID={el.ID}
-                Number={el.Number}
-                Capacity={el.Capacity}
-                Available={el.Available}
-                Price={el.Price}
-                Description={el.Description}
-                Coffe={el.Coffe}
-                Microondas={el.Microondas}
-                Calefaccion={el.Calefaccion}
-                Barbecue={el.Barbecue}
-                Wifi={el.Wifi}
-                Cleaning={el.Cleaning}
-                Refrigerator={el.Refrigerator}
-                Stove={el.Stove}
-                Parking={el.Parking}
-              />
-              
-            </div>
-          );
-        })}
+        {/* VER */}
+        <div>
+          {allCabains?.map((el) => {
+            return (
+              <div className={styles.detalles} key={el.ID}>
+                <CabañasDetail
+                  ID={el.ID}
+                  Number={el.Number}
+                  Capacity={el.Capacity}
+                  Available={el.Available}
+                  Price={el.Price}
+                  Description={el.Description}
+                  Coffe={el.Coffe}
+                  Microondas={el.Microondas}
+                  Calefaccion={el.Calefaccion}
+                  Barbecue={el.Barbecue}
+                  Wifi={el.Wifi}
+                  Cleaning={el.Cleaning}
+                  Refrigerator={el.Refrigerator}
+                  Stove={el.Stove}
+                  Parking={el.Parking}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

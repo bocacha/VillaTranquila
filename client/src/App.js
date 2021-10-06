@@ -32,8 +32,8 @@ function App() {
           <Route exact path="/admin/pagos" component={Pagos} />
           <Route exact path="/admin/fotos" component={Fotos} />
           <Route exact path="/admin/usuarios" component={Usuarios} />
-          <Route path='/login' component={Login} />
-          <Route path='/SingUp' component={Registro} />
+          <Route path='/iniciarsesion' component={Login} />
+          <Route path='/registrarse' component={Registro} />
         </Switch>
       </div>
     </BrowserRouter>
