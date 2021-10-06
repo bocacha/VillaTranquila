@@ -4,10 +4,12 @@ import { RiTeamLine, RiMailLine, RiLoginBoxLine } from 'react-icons/ri';
 import { GoSignIn, GoHome } from 'react-icons/go';
 import { ImCalendar } from 'react-icons/im';
 import { RiAdminFill } from 'react-icons/ri';
+import { GiPhotoCamera } from 'react-icons/gi';
 import styles from "./Navbar.module.css";
 import axios from "axios"
 import { BiWindows } from "react-icons/bi";
 import {useSelector } from "react-redux";
+import styled from "styled-components";
 
 export default function Navbar() {
     let logeduser = useSelector ((state) => state.user);
@@ -37,6 +39,9 @@ export default function Navbar() {
                     </li>
                     <li>
                         <Link to='/nosotros' ><button><strong>Nosotros <RiTeamLine /></strong></button></Link>
+                    </li>
+                    <li>
+                        <Link to='/galeria' ><button><strong>Galeria <span className={styles.span}><GiPhotoCamera /></span></strong></button></Link>
                     </li>
                     <li>
                     {logeduser.admin ? (

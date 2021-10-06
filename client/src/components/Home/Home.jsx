@@ -53,7 +53,6 @@ export default function Home() {
       </div>
       <div>
         {/* <Searchbar/> */}
-        <Gallery/>
       </div>
       <div>
         <BannerIntro />
