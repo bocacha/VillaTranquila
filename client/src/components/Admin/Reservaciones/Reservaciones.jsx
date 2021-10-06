@@ -9,9 +9,11 @@ import {
   readReservationocultados
 } from "../../../actions";
 import ReservacionesDetail from "./ReservacionesDetail";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { Link } from "react-router-dom";
+import DatePicker,{registerLocale} from "react-datepicker";
+import 'react-datepicker/dist/react-datepicker.css';
+import es from 'date-fns/locale/es';
+import {Link} from "react-router-dom";
+registerLocale('es', es)
 
 export default function Reservaciones() {
   const [selectDateCI, setSelectDateCI] = useState(null);
@@ -30,6 +32,7 @@ export default function Reservaciones() {
     Paymentsid: "",
     Cabinid: "",
     ExtraServices: "",
+    CostoFinal: "",
   });
   const [edit, setEdit] = useState({
     id: "",
@@ -39,6 +42,7 @@ export default function Reservaciones() {
     Paymentsid: "",
     Cabinid: "",
     ExtraServices: "",
+    CostoFinal: "",
   });
   useEffect(() => {
     dispatch(Logeduser());
@@ -74,6 +78,7 @@ export default function Reservaciones() {
       Paymentsid: "",
       Cabinid: "",
       ExtraServices: "",
+      CostoFinal: "",
     });
     window.location.reload();
   }
@@ -88,22 +93,33 @@ export default function Reservaciones() {
    
   }
 
+  const mostrarFecha = selectDateCI =>{
+    const options = {year:'numeric', month:'numeric', day:'numeric'}
+    setInput({...input,  Checkin: selectDateCI.toLocaleDateString('es-ES', options)})
+  }
   function handlePrueba(e, ID) {
     e.preventDefault();
-    
-    dispatch(editReservation(edit, { token }));
-    setEdit({...edit,
+     setEdit({...edit,
       id:ID  
     })
     setMostrar(true);
-    
-    //window.location.reload();
+    pruebadispatch()
+  }
+  const pruebadispatch=() => {
+    const { token } = logeduser;
+    console.log(edit)
+    dispatch(editReservation(edit, { token }));
+    window.location.reload()
   }
   const ocultadas= () => {
-   return dispatch(readReservationocultados())
+   dispatch(readReservationocultados())
+   setHabilitar(true)
+
   }
   const showtrue=()=>{
     dispatch(readReservation())
+    setHabilitar(false)
+
   }
   return (
     <div className={styles.container}>
@@ -164,7 +180,8 @@ export default function Reservaciones() {
                 onChange={(e) => handleChange(e)}
                 placeholder="Usuario Id"
                 className={styles.formInputs}
-                // pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
+                title='Formato: UUID4'
+                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                 required
               />
               <input
@@ -174,7 +191,8 @@ export default function Reservaciones() {
                 onChange={(e) => handleChange(e)}
                 placeholder="Pagos id"
                 className={styles.formInputs}
-                // pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
+                 title='Formato: UUID4'
+                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                 required
               />
               <input
@@ -184,7 +202,8 @@ export default function Reservaciones() {
                 onChange={(e) => handleChange(e)}
                 placeholder="Cabaña id"
                 className={styles.formInputs}
-                // pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
+                title='Formato: UUID4'
+                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                 required
               />
               <input
@@ -226,11 +245,22 @@ export default function Reservaciones() {
               />
               <input
                 type="text"
+                value={edit.CostoFinal}
+                name="CostoFinal"
+                onChange={(e) => handleChangeEdit(e)}
+                placeholder="Costo Final"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
                 value={edit.UserId}
                 name="UserId"
                 onChange={(e) => handleChangeEdit(e)}
                 placeholder="Usuario id"
                 className={styles.formInputs}
+                title='Formato: UUID4'
+                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
+                required
               />
               <input
                 type="text"
@@ -239,6 +269,9 @@ export default function Reservaciones() {
                 onChange={(e) => handleChangeEdit(e)}
                 placeholder="Pagos id"
                 className={styles.formInputs}
+                title='Formato: UUID4'
+                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
+                required
               />
               <input
                 type="text"
@@ -247,6 +280,9 @@ export default function Reservaciones() {
                 onChange={(e) => handleChangeEdit(e)}
                 placeholder="Cabaña id"
                 className={styles.formInputs}
+                title='Formato: UUID4'
+                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
+                required
               />
               <input
                 type="text"
@@ -274,6 +310,7 @@ export default function Reservaciones() {
             return (
               <div className={styles.detalles} key={el.ID}>
                 <ReservacionesDetail
+                  ID={el.ID}
                   Checkin={el.Checkin}
                   Checkout={el.Checkout}
                   UserId={el.UserId}
@@ -284,7 +321,6 @@ export default function Reservaciones() {
                   handleSubmitEdit={handleSubmitEdit}
                   restaurar={habilitar}
                 />
-                {console.log(el.CostoFinal)}
               </div>
             );
           })}

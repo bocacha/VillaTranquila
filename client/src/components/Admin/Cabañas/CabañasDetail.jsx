@@ -25,10 +25,10 @@ export default function CabinsDetail({
     dispatch(removeCabains(obj));
     window.location.reload();
   };
-    }
+
   const handleSubmitrestore = (ID)=>{
     console.log('funcion', ID)
-    alert("su cabaña fue Eliminada con exito");
+    alert("su cabaña fue eliminada con exito");
     let obj = {id:ID}
     dispatch(restoreCabains(obj));
     window.location.reload();

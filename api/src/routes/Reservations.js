@@ -88,13 +88,14 @@ if(!token || !decodedToken.id){
 if(!decodedToken.Admin){
    return res.status(400).json({error:"Ops.. No tenes permisos"})
 }
-    const {Checkin, Checkout, UserId, Paymentsid, Cabinid, ExtraServices} = req.body;
+    const {Checkin, Checkout, UserId, Paymentsid, Cabinid, ExtraServices, CostoFinal} = req.body;
     const objecttoupdate={
         Checkin: Checkin,
         Checkout: Checkout,
         UserId: UserId,
         Paymentsid: Paymentsid,
         Cabinid: Cabinid,
+        CostoFinal: CostoFinal,
         ExtraServices: ExtraServices
     }
         Reservations.update(
