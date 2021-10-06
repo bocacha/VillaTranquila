@@ -10,21 +10,21 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 router.get("/", async (req, res)=>{
-    const authorizations = req.get("Authorization") 
-    let token = ""
-if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
-  token = authorizations.substring(7)
-  console.log(token)
-}
-const decodedToken= jwt.verify(token, config.JWT_SECRET)
-if(!token || !decodedToken.id){
-   return res.status(401).json({
-       error:"token missing or invalid"
-   })
-}
-if(!decodedToken.Admin){
-   return res.status(400).json({error:"Ops.. No tenes permisos"})
-}
+//     const authorizations = req.get("Authorization") 
+//     let token = ""
+// if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
+//   token = authorizations.substring(7)
+//   console.log(token)
+// }
+// const decodedToken= jwt.verify(token, config.JWT_SECRET)
+// if(!token || !decodedToken.id){
+//    return res.status(401).json({
+//        error:"token missing or invalid"
+//    })
+// }
+// if(!decodedToken.Admin){
+//    return res.status(400).json({error:"Ops.. No tenes permisos"})
+// }
     const dbReservations = await Reservations.findAll({where:{Show:true}})
     try{
         res.send(dbReservations)
@@ -33,21 +33,21 @@ if(!decodedToken.Admin){
     }
 });
 router.get("/ocultadas", async (req, res)=>{
-    const authorizations = req.get("Authorization") 
-    let token = ""
-if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
-  token = authorizations.substring(7)
-  console.log(token)
-}
-const decodedToken= jwt.verify(token, config.JWT_SECRET)
-if(!token || !decodedToken.id){
-   return res.status(401).json({
-       error:"token missing or invalid"
-   })
-}
-if(!decodedToken.Admin){
-   return res.status(400).json({error:"Ops.. No tenes permisos"})
-}
+//     const authorizations = req.get("Authorization") 
+//     let token = ""
+// if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
+//   token = authorizations.substring(7)
+//   console.log(token)
+// }
+// const decodedToken= jwt.verify(token, config.JWT_SECRET)
+// if(!token || !decodedToken.id){
+//    return res.status(401).json({
+//        error:"token missing or invalid"
+//    })
+// }
+// if(!decodedToken.Admin){
+//    return res.status(400).json({error:"Ops.. No tenes permisos"})
+// }
     const dbReservations = await Reservations.findAll({where:{Show:false}})
     try{
         res.send(dbReservations)

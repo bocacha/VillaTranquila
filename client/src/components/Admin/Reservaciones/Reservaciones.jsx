@@ -5,7 +5,8 @@ import {
   createReservation,
   editReservation,
   readReservation,
-  Logeduser
+  Logeduser,
+  readReservationocultados
 } from "../../../actions";
 import ReservacionesDetail from "./ReservacionesDetail";
 import DatePicker from "react-datepicker";
@@ -91,7 +92,12 @@ export default function Reservaciones() {
     });
     window.location.reload();
   }
-
+  const ocultadas= () => {
+   return dispatch(readReservationocultados())
+  }
+  const showtrue=()=>{
+    dispatch(readReservation())
+  }
   return (
     <div className={styles.container}>
       <div className={styles.btnVolver}>
@@ -99,6 +105,7 @@ export default function Reservaciones() {
           <button className={styles.btn}>Volver</button>
         </Link>
       </div>
+      <button onClick={ocultadas}>Mostrar ocultadas</button>
       <div className={styles.formsCont}>
         {/* CREAR */}
         <div className={styles.crearCont}>

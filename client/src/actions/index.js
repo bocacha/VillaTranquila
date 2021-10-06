@@ -143,15 +143,15 @@ export function readPayment({token}) {
   };
 }
 
-export function readReservation({token}) {
-  const config={
-    headers:{
-    Authorization: `Bearer ${token}`,
-  }
-  }
+export function readReservation() {
+  // const config={
+  //   headers:{
+  //   Authorization: `Bearer ${token}`,
+  // }
+  // }
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/reservations/", config);
+      var json = await axios.get("http://localhost:3001/reservations/");
       return dispatch({
         type: READ_RESERVATIONS,
         payload: json.data,
@@ -241,15 +241,15 @@ export function readPaymentocultados({token}) {
   };
 }
 
-export function readReservationocultados({token}) {
-  const config={
-    headers:{
-    Authorization: `Bearer ${token}`,
-  }
-  }
+export function readReservationocultados() {
+  // const config={
+  //   headers:{
+  //   Authorization: `Bearer ${token}`,
+  // }
+  // }
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/reservations/ocultadas", config);
+      var json = await axios.get("http://localhost:3001/reservations/ocultadas");
       return dispatch({
         type: READ_RESERVATIONS,
         payload: json.data,

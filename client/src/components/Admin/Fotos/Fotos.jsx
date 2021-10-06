@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Fotos.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createimage, readPictures, editPictures, Logeduser} from "../../../actions";
+import { createimage, readPictures, editPictures, Logeduser,readPicturesocultados} from "../../../actions";
 import FotosDetail from "./FotosDetail";
 import { Link } from "react-router-dom";
 
@@ -62,7 +62,12 @@ export default function Fotos() {
     });
     window.location.reload();
   }
-
+const ocultadas=() => {
+  dispatch(readPicturesocultados())
+}
+const showtrue=()=>{
+  dispatch(readPictures())
+}
   return (
     <div className={styles.container}>
       <div className={styles.btnVolver}>
@@ -71,6 +76,7 @@ export default function Fotos() {
         </Link>
       </div>
       <div className={styles.formsCont}>
+      <button onClick={ocultadas}>Mostrar ocultadas</button>
         {/* CREAR */}
         <div className={styles.crearCont}>
           <div className={styles.title}> Crear una nueva foto</div>

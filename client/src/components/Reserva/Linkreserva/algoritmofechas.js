@@ -14,8 +14,13 @@ if(mes1 - mes2 === 0){
     fecha.push(fecha1)
     for(let i=1; i<diferencia ;i++){
         let dia3 = parseFloat(dia1) + i
-        let fechaintermedia =""+ dia3 + mesyaño1
-        fecha.push(fechaintermedia)        
+        if(parseFloat(dia3)<10){
+         let fechaintermedia ="0"+ dia3 + mesyaño1
+         fecha.push(fechaintermedia)
+        }else{
+         let fechaintermedia =""+ dia3 + mesyaño1
+         fecha.push(fechaintermedia)        
+        }
     }
     fecha.push(fecha2)
     return fecha
@@ -26,13 +31,23 @@ if(mes1 - mes2 === 0){
        fecha.push(fecha1)
        for(let i=1; i<diasdemes ;i++){
            let dia3 = parseFloat(dia1) + i
-           let fechaintermedia =""+ dia3 + mesyaño1
-           fecha.push(fechaintermedia)        
+           if(parseFloat(dia3)<10){
+            let fechaintermedia ="0"+ dia3 + mesyaño1
+            fecha.push(fechaintermedia)
+           }else{
+            let fechaintermedia =""+ dia3 + mesyaño1
+            fecha.push(fechaintermedia)        
+           }
        }
         for(let j=parseFloat(dia2)-1; j>0 ;j--){
             let dia3 = parseFloat(dia2) - j
-            let fechaintermedia =""+ dia3 + mesyaño2
-            fecha.push(fechaintermedia)        
+            if(parseFloat(dia3)<10){
+                let fechaintermedia ="0"+ dia3 + mesyaño2
+                fecha.push(fechaintermedia)
+            }else{
+                let fechaintermedia =""+ dia3 + mesyaño2
+                fecha.push(fechaintermedia)        
+            }
         }
         fecha.push(fecha2)
    };
@@ -42,14 +57,24 @@ if(mes1 - mes2 === 0){
     fecha.push(fecha1)
     for(let i=1; i<diasdemes ;i++){
         let dia3 = parseFloat(dia1) + i
-        let fechaintermedia =""+ dia3 + mesyaño1
-        fecha.push(fechaintermedia)        
-    }
+        if(parseFloat(dia3)<10){
+            let fechaintermedia ="0"+ dia3 + mesyaño1
+            fecha.push(fechaintermedia)
+           }else{
+            let fechaintermedia =""+ dia3 + mesyaño1
+            fecha.push(fechaintermedia)        
+           }
+       }
      for(let j=parseFloat(dia2)-1; j>0 ;j--){
          let dia3 = parseFloat(dia2) - j
-         let fechaintermedia =""+ dia3 + mesyaño2
-         fecha.push(fechaintermedia)        
-     }
+         if(parseFloat(dia3)<10){
+            let fechaintermedia ="0"+ dia3 + mesyaño2
+            fecha.push(fechaintermedia)
+        }else{
+            let fechaintermedia =""+ dia3 + mesyaño2
+            fecha.push(fechaintermedia)        
+        }
+    }
      fecha.push(fecha2)
 };
 
@@ -58,18 +83,26 @@ if(parseFloat(mes1) === 4||parseFloat(mes1) === 6||parseFloat(mes1) === 9||parse
    fecha.push(fecha1)
    for(let i=1; i<diasdemes ;i++){
        let dia3 = parseFloat(dia1) + i
-       let fechaintermedia =""+ dia3 + mesyaño1
-       fecha.push(fechaintermedia)        
+       if(parseFloat(dia3)<10){
+        let fechaintermedia ="0"+ dia3 + mesyaño1
+        fecha.push(fechaintermedia)
+       }else{
+        let fechaintermedia =""+ dia3 + mesyaño1
+        fecha.push(fechaintermedia)        
+       }
    }
     for(let j=parseFloat(dia2)-1; j>0 ; j--){
         let dia3 = parseFloat(dia2) - j
-        let fechaintermedia =""+ dia3 + mesyaño2
-        fecha.push(fechaintermedia)        
+        if(parseFloat(dia3)<10){
+            let fechaintermedia ="0"+ dia3 + mesyaño2
+            fecha.push(fechaintermedia)
+        }else{
+            let fechaintermedia =""+ dia3 + mesyaño2
+            fecha.push(fechaintermedia)        
+        }
     }
     fecha.push(fecha2)
 };
-
-
    return fecha
 }
 }

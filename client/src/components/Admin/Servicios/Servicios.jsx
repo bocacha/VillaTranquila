@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Servicios.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createServices, readServices, editServices, Logeduser} from "../../../actions";
+import { createServices, readServices, editServices, Logeduser, readServicesocultados} from "../../../actions";
 import ServiciosDetail from "./ServiciosDetail";
 import { Link } from "react-router-dom";
 
@@ -64,6 +64,12 @@ function handleSubmit(e) {
     });
     window.location.reload();
  }
+ const ocultadas= () => {
+   dispatch(readServicesocultados())
+ }
+ const showtrue=()=>{
+  dispatch(readServices())
+}
 return (
     <div className={styles.container}>
       <div className={styles.btnVolver}>
@@ -71,6 +77,7 @@ return (
           <button className={styles.btn}>Volver</button>
         </Link>
       </div>
+      <button onClick={ocultadas}>Mostrar ocultadas</button>
       <div className={styles.formsCont}>
         {/* CREAR */}
         <div className={styles.crearCont}>

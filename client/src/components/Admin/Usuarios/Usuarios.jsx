@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Usuarios.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createUsers, readUsers, editUsers, Logeduser} from "../../../actions";
+import { createUsers, readUsers, editUsers, Logeduser, readUsersocultados} from "../../../actions";
 import UsuariosDetail from "./UsuariosDetail";
 import { Link } from "react-router-dom";
 
@@ -78,9 +78,18 @@ export default function Usuarios() {
     dispatch(readUsers({ token }));
     window.location.reload();
   }
+const ocultadas= () => {
+  const { token } = logeduser;
+  dispatch(readUsersocultados({ token}))
+}
+const showtrue=()=>{
+  const { token } = logeduser;
+  dispatch(readUsers({ token }))
+}
 
   return (
     <div className={styles.container}>
+      <button onClick={ocultadas}>Mostrar ocultadas</button>
       {/* CREAR 
       <div>
         Crear un nuevo usuario
@@ -265,7 +274,7 @@ export default function Usuarios() {
               <option value="true">true</option>
               <option value="false">false</option>
             </select>
-            <select
+            {/* <select
               onChange={(e) => handleSelectPremium(e)}
               value={input.Premium}
               className={styles.formInputs}
@@ -274,7 +283,7 @@ export default function Usuarios() {
               <option value="">Premium:</option>
               <option value="true">true</option>
               <option value="false">false</option>
-            </select>
+            </select> */}
             <select
               onChange={(e) => handleSelectBlocked(e)}
               value={input.Blocked}
