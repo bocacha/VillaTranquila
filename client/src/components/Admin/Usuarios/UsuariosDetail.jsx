@@ -29,7 +29,6 @@ export default function UsuariosDetail({
   }
   return (
     <div className={styles.container}>
-      <p><strong>Id:</strong> {ID}</p>
       <p><strong>UserName:</strong> {UserName}</p>
       <p><strong>FirstName:</strong> {FirstName}</p>
       <p><strong>LastName:</strong> {LastName}</p>
@@ -38,7 +37,7 @@ export default function UsuariosDetail({
       <p><strong>Email:</strong> {Email}</p> 
       <p><strong>Admin:</strong> {Admin}</p> 
       <div>
-        <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
+        <button onClick={()=>handleSubmitDelete(ID)} className={styles.btn}>Eliminar</button>
       </div>
     </div>
   );

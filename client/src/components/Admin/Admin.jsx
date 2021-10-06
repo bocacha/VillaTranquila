@@ -56,7 +56,7 @@ export default function Admin() {
             </div>
             <Link to="admin/servicios" className={styles.link}>Servicios</Link>
           </button>
-          {/* <button  className={styles.cardsContainer}>
+          <button  className={styles.cardsContainer}>
             <div>
               <Link to="admin/pagos">
                 <img
@@ -67,8 +67,8 @@ export default function Admin() {
               </Link>
             </div>
             <Link to="admin/pagos" className={styles.link}>Pagos</Link>
-          </button> */}
-          {/* <button  className={styles.cardsContainer}>
+          </button>
+          <button  className={styles.cardsContainer}>
             <div>
               <Link to="admin/fotos">
                 <img
@@ -79,7 +79,7 @@ export default function Admin() {
               </Link>
             </div>
             <Link to="admin/fotos" className={styles.link}>Fotos</Link>
-          </button> */}
+          </button>
           <button  className={styles.cardsContainer}>
             <div>
               <Link to="admin/usuarios">

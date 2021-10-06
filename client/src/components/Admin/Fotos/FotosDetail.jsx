@@ -16,11 +16,10 @@ export default function FotosDetail({ Description, Url, ID }) {
   }
   return (
     <div className={styles.container}>
-      <p><strong>Id:</strong> {ID}</p>
       <p><strong>Descripcion:</strong> {Description}</p>
       <p><strong>Url:</strong> {Url}</p>
       <div>
-        <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
+        <button onClick={()=>handleSubmitDelete(ID)} className={styles.btn}>Eliminar</button>
       </div>
     </div>
   );

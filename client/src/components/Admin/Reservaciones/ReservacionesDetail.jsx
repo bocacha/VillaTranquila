@@ -25,7 +25,6 @@ export default function ReservacionesDetail({
   } 
   return (
     <div className={styles.container}>
-      <p><strong>Id:</strong> {ID}</p>
       <p><strong>Checkin:</strong> {Checkin}</p>
       <p><strong>Checkout:</strong> {Checkout}</p>
       <p><strong>UserId:</strong> {UserId}</p>
@@ -33,7 +32,7 @@ export default function ReservacionesDetail({
       <p><strong>Cabinid:</strong> {Cabinid}</p>
       {/* <p><strong>ExtraServices:</strong> {ExtraServices}</p> */}
       <div>
-        <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
+        <button onClick={()=>handleSubmitDelete(ID)} className={styles.btn}>Eliminar</button>
       </div>
     </div>
   );

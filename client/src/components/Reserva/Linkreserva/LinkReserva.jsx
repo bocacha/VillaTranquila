@@ -8,7 +8,7 @@ import {
   readServices,
 } from "../../../actions";
 // import ReservacionesDetail from "./ReservacionesDetail";
- import DatePicker from "react-datepicker";
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
 import { RiCreativeCommonsZeroLine } from "react-icons/ri";
@@ -30,7 +30,6 @@ export default function Reservaciones() {
   const verificacion = (e) => {
     if (e.target.checked) console.log(e.target.value);
   };
-  
 
   const [selectDateCI, setSelectDateCI] = useState(null);
   const [selectDateCO, setSelectDateCO] = useState(null);
@@ -49,21 +48,27 @@ export default function Reservaciones() {
     ExtraServices: "",
   });
   const checkboxselected = (e) => {
-    e.preventDefault()
-      setInput({
-      ...input, CostoFinal:JSON.parse(costo),
-      Checkin:selectDateCI,Checkout:selectDateCO,
-    })
-    let costoplus = 0
-    console.log(costoplus)
+    e.preventDefault();
+    setInput({
+      ...input,
+      CostoFinal: JSON.parse(costo),
+      Checkin: selectDateCI,
+      Checkout: selectDateCO,
+    });
+    let costoplus = 0;
+    console.log(costoplus);
     lala = [];
     const checkbox = Array.from(document.getElementsByClassName("Servicios"));
     for (let i = 0; i < checkbox.length; i++) {
       if (checkbox[i].checked) {
-        costoplus = costoplus + parseFloat(checkbox[i].name)
-        console.log(costoplus)
+        costoplus = costoplus + parseFloat(checkbox[i].name);
+        console.log(costoplus);
         lala.push(checkbox[i].value);
-        setInput({...input, ExtraServices: [...lala],CostoFinal: parseFloat(input.CostoFinal)+ costoplus});
+        setInput({
+          ...input,
+          ExtraServices: [...lala],
+          CostoFinal: parseFloat(input.CostoFinal) + costoplus,
+        });
         console.log(checkbox[i].value);
       }
     }
@@ -84,23 +89,23 @@ export default function Reservaciones() {
 
   function handleSubmit(e) {
     e.preventDefault();
-   // console.log(input)
+    // console.log(input)
     // alert("Reserva creada con éxito");
     // window.location.reload();
   }
   return (
     <div className={styles.container}>
-      <div className={styles.btnVolver}>
-        <Link to="/reserva">
-          <button className={styles.btn}>Volver</button>
-        </Link>
-      </div>
       <div className={styles.formsCont}>
         {/* CREAR */}
         <div className={styles.crearCont}>
+          <div className={styles.btnVolver}>
+            <Link to="/reserva">
+              <button className={styles.btn}>Volver</button>
+            </Link>
+          </div>
           <div className={styles.title}>Crear una nueva reservación</div>
-          <form onSubmit={(e) => handleSubmit(e)}className={styles.form}>
-          <input
+          <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
+            <input
               type="number"
               value={input.CostoFinal}
               name="Checkin"
@@ -117,13 +122,14 @@ export default function Reservaciones() {
               className={styles.formInputs}
               required
             /> */}
-           <DatePicker
-          selected={selectDateCI}
-          onChange={date=> setSelectDateCI(date)}
-          dateFormat='dd/MM/yyyy'
-          minDate={new Date()}
-          //isClearable
-          />
+            <DatePicker
+              selected={selectDateCI}
+              onChange={(date) => setSelectDateCI(date)}
+              dateFormat="dd/MM/yyyy"
+              minDate={new Date()}
+              className={styles.formInputs}
+              //isClearable
+            />
             {/* <input
               type="text"
               value={input.Checkout}
@@ -133,14 +139,15 @@ export default function Reservaciones() {
               className={styles.formInputs}
               required
             /> */}
-         
-          <DatePicker
-          selected={selectDateCO}
-          onChange={date=> setSelectDateCO(date)}
-          dateFormat='dd/MM/yyyy'
-          minDate={new Date()}
-          //isClearable
-          />
+
+            <DatePicker
+              selected={selectDateCO}
+              onChange={(date) => setSelectDateCO(date)}
+              dateFormat="dd/MM/yyyy"
+              minDate={new Date()}
+              className={styles.formInputs}
+              //isClearable
+            />
             {/* <input
               type="text"
               value={input.UserId}
@@ -180,19 +187,19 @@ export default function Reservaciones() {
               className={styles.formInputs}
             /> */}
             <div>
-              <p>Servicios Adicionales:</p>
+              <div className={styles.p}>Servicios Adicionales:</div>
               <button onClick={checkboxselected}>Seleccionar Servicios</button>
               <div>
                 {servicios.map((el) => (
-                  <div>
-                    {el.Name +" " + el.Price }
+                  <div className={styles.servicios}>
+                    {el.Name + " $" + el.Price}
                     <input
-                      className="Servicios"
+                      className={styles.checkbox}
                       type="checkbox"
                       name={el.Price}
                       value={el.Name}
                       id={id1++}
-                      onChange={verificacion}
+                      onChange={verificacion}                      
                     />
                     <label htmlFor="temperament">{el.name}</label>
                   </div>
@@ -200,13 +207,14 @@ export default function Reservaciones() {
               </div>
             </div>
             <div className={styles.btns}>
-              <button onClick={createReservation(input)} className={styles.btn}>
-                Crear
+              <button onClick={createReservation(input)} className={styles.btnRes}>
+                Reservar
               </button>
             </div>
           </form>
         </div>
       </div>
+      <div className={styles.imagenFondo}></div>
     </div>
   );
 }
