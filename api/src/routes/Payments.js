@@ -10,7 +10,7 @@ const jwt= require('jsonwebtoken')
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 router.get("/", async (req, res)=>{
-    const authorizations = req.get("Authorization") 
+  {/* const authorizations = req.get("Authorization") 
     let token = ""
 if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
   token = authorizations.substring(7)
@@ -24,7 +24,7 @@ if(!token || !decodedToken.id){
 }
 if(!decodedToken.Admin){
    return res.status(400).json({error:"Ops.. No tenes permisos"})
-}
+} */}
     const dbPayments = await Payments.findAll({where:{Show:true}})
     try{
         res.send(dbPayments)
