@@ -9,9 +9,17 @@ const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-router.get("/", async (req, res) => {
-    const dbPictures = await Pictures.findAll()
-    try {
+router.get("/", async (req, res)=>{
+    const dbPictures = await Pictures.findAll({where:{Show:true}})
+    try{
+        res.send(dbPictures)
+    }catch(error){
+        console.log(error)
+    }
+});
+router.get("/ocultadas", async (req, res)=>{
+    const dbPictures = await Pictures.findAll({where:{Show:false}})
+    try{
         res.send(dbPictures)
     } catch (error) {
         console.log(error)
@@ -84,13 +92,27 @@ router.put('/RemovePicture', (req, res) => {
     if (!id) {
         return res.json({ status: 404 }, { message: "Picture not found" })
     }
-    Pictures.destroy(
-        { where: { ID: id } }
-    ).then(doneTemp => {
+    Pictures.update(
+        {Show:false},
+        {where:{ID: id}}
+    ).then (doneTemp=>{
         return res.status(200).json(doneTemp)
     })
-        .catch(error => { console.log(error) })
-
-});
-
+    .catch(error=>{console.log(error)})
+        
+});  
+router.put('/RestorePicture', (req,res) =>{
+    const {id}= req.body;
+    if(!id){
+        return res.json({status: 404},{message:"Picture not found"})
+    }
+    Pictures.update(
+        {Show:true},
+        {where:{ID: id}}
+    ).then (doneTemp=>{
+        return res.status(200).json(doneTemp)
+    })
+    .catch(error=>{console.log(error)})
+        
+}); 
 module.exports = router;
