@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Servicios.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  createServices,
-  readServices,
-  editServices,
-  Logeduser,
-} from "../../../actions";
+import { createServices, readServices, editServices, Logeduser, readServicesocultados} from "../../../actions";
 import ServiciosDetail from "./ServiciosDetail";
 import { Link } from "react-router-dom";
 
 export default function Servicios() {
   const dispatch = useDispatch();
   const allServices = useSelector((state) => state.servicios);
-  const logeduser = useSelector((state) => state.user);
+  const [habilitar, setHabilitar]= useState(false)
+  const logeduser = useSelector ((state) => state.user);
+  const [mostrar, setMostrar] = useState(false);
   const [input, setInput] = useState({
     Name: "",
     Description: "",
@@ -57,19 +54,34 @@ export default function Servicios() {
     });
     window.location.reload();
   }
-  function handleSubmitEdit(e) {
+  function handleSubmitEdit(e, ID) {
+    const {token} = logeduser
     e.preventDefault();
-    dispatch(editServices(edit));
-    alert("Servicio editado con éxito");
+    dispatch(editServices(edit, {token}));
+    setMostrar(true);
     setEdit({
-      id: "",
-      Name: "",
-      Description: "",
-      Price: "",
+        ...edit,
+        id:ID
     });
-    window.location.reload();
-  }
-  return (
+    //window.location.reload();
+ }
+ function handlePrueba(e,ID) {
+  const {token} = logeduser
+  e.preventDefault();
+  dispatch(editServices(edit, {token}));
+  setMostrar(true);
+  setEdit({
+    ...edit,
+    id:ID
+  });
+ //window.location.reload();
+ const ocultadas= () => {
+   dispatch(readServicesocultados())
+ }
+ const showtrue=()=>{
+  dispatch(readServices())
+}
+return (
     <div className={styles.container}>
       <div className={styles.btnVolver}>
         <Link to="/admin">
@@ -78,6 +90,12 @@ export default function Servicios() {
       </div>
       <div className={styles.container2}>
         <div className={styles.formsCont}>
+           {!habilitar ?(
+            <button onClick={ocultadas}>Mostrar ocultadas</button>
+          ):(
+            <button onClick={showtrue}>Mostrar habilitadas</button>
+          )
+          }
           {/* CREAR */}
           <div className={styles.crearCont}>
             <div className={styles.title}> Crear un servicio</div>
@@ -119,62 +137,58 @@ export default function Servicios() {
             </form>
           </div>
           {/* EDITAR */}
+       {mostrar ?
           <div className={styles.editarCont}>
-            <div className={styles.title}> Editar un servicio</div>
-            <form onSubmit={(e) => handleSubmitEdit(e)} className={styles.form}>
-              <input
-                type="text"
-                value={edit.id}
-                name="id"
-                onChange={(e) => handleChangeEdit(e)}
-                placeholder="Id"
-                className={styles.formInputs}
+          <div className={styles.title}> Editar un nuevo servicio</div>
+          <form >
+          
+            <input
+              type="text"
+              value={edit.Name}
+              name="Name"
+              onChange={(e) => handleChangeEdit(e)}
+              placeholder="Nombre"
+              className={styles.formInputs}
+            />
+            <input
+              type="text"
+              value={edit.Description}
+              name="Description"
+              onChange={(e) => handleChangeEdit(e)}
+              placeholder="Descripción"
+              className={styles.formInputs}
+            />
+            <input
+              type="text"
+              value={edit.Price}
+              name="Price"
+              onChange={(e) => handleChangeEdit(e)}
+              placeholder="Precio"
+              className={styles.formInputs}
+            />
+            
+          </form> 
+         </div>
+        :
+          null
+        }
+      </div>
+   <div>
+        {allServices?.map((el) => {
+          return (
+            <div className={styles.detalles} key={el.ID}>
+              <ServiciosDetail
+                ID={el.ID}
+                Name={el.Name}
+                Description={el.Description}
+                Price={el.Price}
+                handlePrueba={handlePrueba}
+                handleSubmitEdit={handleSubmitEdit}
+                restaurar={habilitar}
               />
-              <input
-                type="text"
-                value={edit.Name}
-                name="Name"
-                onChange={(e) => handleChangeEdit(e)}
-                placeholder="Nombre"
-                className={styles.formInputs}
-              />
-              <textarea
-                type="text"
-                value={edit.Description}
-                name="Description"
-                onChange={(e) => handleChangeEdit(e)}
-                placeholder="Descripción"
-                className={styles.formInputs}
-              />
-              <input
-                type="text"
-                value={edit.Price}
-                name="Price"
-                onChange={(e) => handleChangeEdit(e)}
-                placeholder="Precio"
-                className={styles.formInputs}
-              />
-              <div className={styles.btns}>
-                <button type="submit" className={styles.btn}>
-                  Editar
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div>
-          {allServices?.map((el) => {
-            return (
-              <div className={styles.detalles} key={el.ID}>
-                <ServiciosDetail
-                  Name={el.Name}
-                  Description={el.Description}
-                  Price={el.Price}
-                />
-              </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

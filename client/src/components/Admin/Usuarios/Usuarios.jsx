@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Usuarios.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createUsers, readUsers, editUsers, Logeduser } from "../../../actions";
+import { createUsers, readUsers, editUsers, Logeduser, readUsersocultados} from "../../../actions";
 import UsuariosDetail from "./UsuariosDetail";
 import { Link } from "react-router-dom";
 
 export default function Usuarios() {
   const dispatch = useDispatch();
-
-  const logeduser = useSelector((state) => state.user);
-  const { token } = logeduser;
+  const allUsers = useSelector((state) => state.usuarios);
+  const logeduser = useSelector ((state) => state.user);
+  const [mostrar, setMostrar] = useState(false);
+  const [habilitar, setHabilitar]= useState(false)
+  const {token} = logeduser
   const [input, setInput] = useState({
     id: "",
     UserName: "",
@@ -30,7 +32,6 @@ export default function Usuarios() {
   useEffect(() => {
     dispatch(readUsers({ token }));
   }, [dispatch, token]);
-  const allUsers = useSelector((state) => state.usuarios);
   function handleChange(e) {
     setInput({
       ...input,
@@ -57,30 +58,49 @@ export default function Usuarios() {
     });
   }
 
-  function handleSubmit(e) {
-    const { token } = logeduser;
+  function handleSubmitEdit(e, ID) {
+   // const { token } = logeduser;
     e.preventDefault();
     dispatch(editUsers(input));
-    alert("Usuario editado con éxito");
+    setMostrar(true);
+    //alert("Usuario editado con éxito");
     setInput({
-      id: "",
-      UserName: "",
-      UserPassword: "",
-      FirstName: "",
-      LastName: "",
-      Address: "",
-      Phone: "",
-      Email: "",
-      Admin: "",
-      Premium: false,
-      Blocked: false,
+      ...input,
+      id: ID,
     });
-    dispatch(readUsers({ token }));
-    window.location.reload();
+    //dispatch(readUsers({ token }));
+    //window.location.reload();
   }
+  function handlePrueba(e, ID) {
+    // const { token } = logeduser;
+     e.preventDefault();
+     dispatch(editUsers(input));
+     setMostrar(true);
+     //alert("Usuario editado con éxito");
+     setInput({
+       ...input,
+       id: ID,
+     });
+     //dispatch(readUsers({ token }));
+     window.location.reload();
+   }
+const ocultadas= () => {
+  const { token } = logeduser;
+  dispatch(readUsersocultados({ token}))
+}
+const showtrue=()=>{
+  const { token } = logeduser;
+  dispatch(readUsers({ token }))
+}
 
   return (
     <div className={styles.container}>
+       {!habilitar ?(
+            <button onClick={ocultadas}>Mostrar ocultadas</button>
+          ):(
+            <button onClick={showtrue}>Mostrar habilitadas</button>
+          )
+          }
       {/* CREAR 
       <div>
         Crear un nuevo usuario
@@ -187,19 +207,12 @@ export default function Usuarios() {
         </Link>
       </div>
       <div className={styles.container2}>
-        <div className={styles.formsCont}>
-          {/* editar */}
-          <div className={styles.editarCont}>
-            <div className={styles.title}> Editar un usuario</div>
-            <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
-              <input
-                type="text"
-                value={input.id}
-                name="id"
-                onChange={(e) => handleChange(e)}
-                placeholder="Id"
-                className={styles.formInputs}
-              />
+      <div className={styles.formsCont}>
+        {/* editar */}
+        {mostrar ? 
+            <div className={styles.crearCont}>
+            <div className={styles.title}> Editar un nuevo usuario</div>
+            <form className={styles.form}>
               <input
                 type="text"
                 value={input.UserName}
@@ -293,10 +306,15 @@ export default function Usuarios() {
               </div>
             </form>
           </div>
-        </div>
-        {/* VER */}
-        <div>
-          {allUsers?.map((el) => (
+        : 
+            null       
+            }
+        
+        
+      </div>
+      {/* VER */}
+      <div>
+        {allUsers?.map((el)=>(           
             <div className={styles.detalles} key={el.ID}>
               <UsuariosDetail
                 UserName={el.UserName}
@@ -306,6 +324,9 @@ export default function Usuarios() {
                 Phone={el.Phone}
                 Email={el.Email}
                 Admin={el.Admin}
+                handlePrueba={handlePrueba}
+                handleSubmitEdit={handleSubmitEdit}
+                restaurar={habilitar}
               />
             </div>
           ))}

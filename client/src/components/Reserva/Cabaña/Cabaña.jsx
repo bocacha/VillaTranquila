@@ -53,7 +53,7 @@ export default function Cabaña({
           <span>Capacidad: {capacity}</span>
           <span>Disponible a partir del: {notAvailable}</span>
           <span>Precio por noche: {price}</span>
-          <span>{description}</span>
+          <span> Descripción: {description}</span>
           {/* <span> Servicios disponibles: 
                 {coffe && <GiCoffeeCup/>}
                 {microwaves && <GiChickenOven/>}

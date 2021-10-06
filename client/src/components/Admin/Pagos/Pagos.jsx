@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Pagos.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  createPayment,
-  readPayment,
-  editPayments,
-  Logeduser,
-} from "../../../actions";
+import { createPayment, readPayment, editPayments, Logeduser, readServicesocultados } from "../../../actions";
 import PagosDetail from "./PagosDetail";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -15,16 +10,27 @@ import { Link } from "react-router-dom";
 
 export default function Pagos() {
   const dispatch = useDispatch();
-  const allPayments = useSelector((state) => state.pagos);
-  const [selectedDate, setSelectedDate] = useState(null);
+  useEffect(() => {
+    dispatch(Logeduser());
+  }, [dispatch]);
+  const [habilitar, setHabilitar]= useState(false)
   const logeduser = useSelector((state) => state.user);
   const { token } = logeduser;
+
+  useEffect(() => {
+    dispatch(readPayment({ token }));
+  }, [dispatch, token]);
+
+  const allPayments = useSelector((state) => state.pagos);
+  const [selectedDate, setSelectedDate] = useState(null);
+ 
   const [input, setInput] = useState({
     Date: "",
     idClient: "",
     TotalAmount: "",
     PaydAmount: "",
   });
+  const [mostrar, setMostrar] = useState(false);
 
   const [edit, setEdit] = useState({
     id: "",
@@ -33,13 +39,7 @@ export default function Pagos() {
     TotalAmount: "",
     PaydAmount: "",
   });
-  useEffect(() => {
-    dispatch(Logeduser());
-  }, [dispatch]);
-
-  useEffect(() => {
-    dispatch(readPayment({ token }));
-  }, [dispatch, token]);
+  
 
   function handleChange(e) {
     setInput({
@@ -65,23 +65,36 @@ export default function Pagos() {
       TotalAmount: "",
       PaydAmount: "",
     });
-    dispatch(readPayment({ token }));
+    
     window.location.reload();
   }
-  function handleSubmitEdit(e) {
+  function handleSubmitEdit(e, ID) {
     e.preventDefault();
-    dispatch(editPayments(edit));
-    alert("Pago editado con éxito");
-    setEdit({
-      id: "",
-      Date: "",
-      idClient: "",
-      TotalAmount: "",
-      PaydAmount: "",
-    });
-    window.location.reload();
+    setMostrar(true);
+    setEdit({...edit,
+      id:ID  
+    })
+    //dispatch(editPayments(edit, { token }));
+   
+    
   }
 
+  function handlePrueba(e,ID) {
+    e.preventDefault();
+    setMostrar(true);
+    setEdit({...edit,
+      id:ID  
+    })
+    dispatch(editPayments(edit, { token }));
+   
+   // window.location.reload();
+  }
+  const ocultadas= () => {
+    dispatch(readServicesocultados())
+  }
+  const showtrue=()=>{
+    dispatch(readPayment())
+  }
   return (
     <div className={styles.container}>
       <div className={styles.btnVolver}>
@@ -91,6 +104,12 @@ export default function Pagos() {
       </div>
       <div className={styles.container2}>
         <div className={styles.formsCont}>
+            {!habilitar ?(
+            <button onClick={ocultadas}>Mostrar ocultadas</button>
+          ):(
+            <button onClick={showtrue}>Mostrar habilitadas</button>
+          )
+          }
           {/* CREAR */}
           <div className={styles.crearCont}>
             <div className={styles.title}>Crear un pago</div>
@@ -162,6 +181,12 @@ export default function Pagos() {
                 placeholder="Id"
                 className={styles.formInputs}
               />
+        {/* EDITAR */}
+        {mostrar ?
+            <div className={styles.editarCont}>
+            <div className={styles.title}> Editar un nuevo pago</div>
+            <form className={styles.form}>
+
               <input
                 type="text"
                 value={edit.Date}
@@ -193,31 +218,32 @@ export default function Pagos() {
                 onChange={(e) => handleChangeEdit(e)}
                 placeholder="Monto a pagar"
                 className={styles.formInputs}
-              />
-              <div className={styles.btns}>
-                <button type="submit" className={styles.btn}>
-                  Editar
-                </button>
-              </div>
+              />         
             </form>
           </div>
-        </div>
+          :
+          null
+        }
+        
 
-        {/* VER */}
-        <div>
-          {allPayments?.map((el) => {
-            return (
-              <div className={styles.detalles} key={el.ID}>
-                <PagosDetail
-                  idClient={el.idClient}
-                  Date={el.Date}
-                  PaydAmount={el.PaydAmount}
-                  TotalAmount={el.TotalAmount}
-                />
-              </div>
-            );
-          })}
-        </div>
+      </div>
+      {/* VER */}
+      <div>
+        {allPayments?.map((el) => {
+          return (
+            <div className={styles.detalles} key={el.ID}>
+              <PagosDetail
+                ID={el.ID}
+                idClient={el.idClient}
+                Date={el.Date}
+                PaydAmount={el.PaydAmount}
+                TotalAmount={el.TotalAmount}
+                handlePrueba={handlePrueba}
+                handleSubmitEdit={handleSubmitEdit}
+                restaurar={habilitar}
+              />
+            </div>
+          );
       </div>
     </div>
   );

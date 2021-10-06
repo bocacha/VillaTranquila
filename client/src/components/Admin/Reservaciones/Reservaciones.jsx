@@ -6,6 +6,7 @@ import {
   editReservation,
   readReservation,
   Logeduser,
+  readReservationocultados
 } from "../../../actions";
 import ReservacionesDetail from "./ReservacionesDetail";
 import DatePicker from "react-datepicker";
@@ -15,9 +16,10 @@ import { Link } from "react-router-dom";
 export default function Reservaciones() {
   const [selectDateCI, setSelectDateCI] = useState(null);
   const [selectDateCO, setSelectDateCO] = useState(null);
-
+  const [mostrar, setMostrar] = useState(false);
   const dispatch = useDispatch();
   const allReservations = useSelector((state) => state.reservaciones);
+  const [habilitar, setHabilitar]= useState(false)
   const logeduser = useSelector((state) => state.user);
   const { token } = logeduser;
   const [input, setInput] = useState({
@@ -75,22 +77,34 @@ export default function Reservaciones() {
     });
     window.location.reload();
   }
-  function handleSubmitEdit(e) {
+  function handleSubmitEdit(e,ID) {
     e.preventDefault();
-    dispatch(editReservation(edit));
-    alert("Reserva editada con éxito");
-    setInput({
-      id: "",
-      Checkin: "",
-      Checkout: "",
-      UserId: "",
-      Paymentsid: "",
-      Cabinid: "",
-      ExtraServices: "",
-    });
-    window.location.reload();
+    
+    setMostrar(true);
+    dispatch(editReservation(edit, { token }));
+    setEdit({...edit,
+      id:ID  
+    })
+   
   }
 
+  function handlePrueba(e, ID) {
+    e.preventDefault();
+    
+    dispatch(editReservation(edit, { token }));
+    setEdit({...edit,
+      id:ID  
+    })
+    setMostrar(true);
+    
+    //window.location.reload();
+  }
+  const ocultadas= () => {
+   return dispatch(readReservationocultados())
+  }
+  const showtrue=()=>{
+    dispatch(readReservation())
+  }
   return (
     <div className={styles.container}>
       <div className={styles.btnVolver}>
@@ -99,7 +113,13 @@ export default function Reservaciones() {
         </Link>
       </div>
       <div className={styles.container2}>
-        <div className={styles.formsCont}>
+        {!habilitar ?(
+            <button onClick={ocultadas}>Mostrar ocultadas</button>
+          ):(
+            <button onClick={showtrue}>Mostrar habilitadas</button>
+          )
+          }
+      <div className={styles.formsCont}>
           {/* CREAR */}
           <div className={styles.crearCont}>
             <div className={styles.title}>Crear una  reservación</div>
@@ -183,17 +203,11 @@ export default function Reservaciones() {
             </form>
           </div>
           {/* EDITAR */}
-          <div className={styles.editarCont}>
+          {mostrar
+         ? 
+            <div className={styles.editarCont}>
             <div className={styles.title}> Editar reserva</div>
-            <form onSubmit={(e) => handleSubmitEdit(e)} className={styles.form}>
-              <input
-                type="text"
-                value={edit.id}
-                name="id"
-                onChange={(e) => handleChangeEdit(e)}
-                placeholder="Id"
-                className={styles.formInputs}
-              />
+            <form >
               <input
                 type="text"
                 value={edit.Checkin}
@@ -242,14 +256,18 @@ export default function Reservaciones() {
                 placeholder="Servicios extra"
                 className={styles.formInputs}
               />
-              <div className={styles.btns}>
+             {/*  <div className={styles.btns}>
                 <button type="submit" className={styles.btn}>
                   Editar
                 </button>
-              </div>
+              </div> */}
             </form>
           </div>
-        </div>
+          :
+          null
+      }
+        
+      </div>
         {/* VER */}
         <div>
           {allReservations?.map((el) => {
@@ -262,6 +280,9 @@ export default function Reservaciones() {
                   CostoFinal={el.CostoFinal}
                   Cabinid={el.Cabinid}
                   ExtraServices={el.ExtraServices}
+                  handlePrueba={handlePrueba}
+                  handleSubmitEdit={handleSubmitEdit}
+                  restaurar={habilitar}
                 />
                 {console.log(el.CostoFinal)}
               </div>

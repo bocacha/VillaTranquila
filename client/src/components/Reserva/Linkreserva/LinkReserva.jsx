@@ -6,12 +6,16 @@ import {
   readReservation,
   Logeduser,
   readServices,
+  readFechas,
 } from "../../../actions";
 // import ReservacionesDetail from "./ReservacionesDetail";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
 import { RiCreativeCommonsZeroLine } from "react-icons/ri";
+import DatePicker,{registerLocale} from "react-datepicker";
+import es from 'date-fns/locale/es';
+import axios from "axios"
+registerLocale('es', es)
 
 export default function Reservaciones() {
   const dispatch = useDispatch();
@@ -22,15 +26,11 @@ export default function Reservaciones() {
     dispatch(readServices());
   }, [dispatch]);
   const servicios = useSelector((state) => state.servicios);
-  const [selected, setSelected] = useState([]);
   let lala = [];
   let id1 = 0;
-  const id = localStorage.getItem("id_cabaña");
-  const price = localStorage.getItem("costo");
-  const verificacion = (e) => {
-    if (e.target.checked) console.log(e.target.value);
-  };
-
+  let suma = []
+  let costoadicional = 0
+  const ocupadas = useSelector((state) => state.fechasnodisponibles)
   const [selectDateCI, setSelectDateCI] = useState(null);
   const [selectDateCO, setSelectDateCO] = useState(null);
 
@@ -47,37 +47,47 @@ export default function Reservaciones() {
     Cabinid: JSON.parse(cabinId),
     ExtraServices: "",
   });
+  const consultarprecio=(e)=>{
+    suma = []
+    costoadicional = 0
+    // parseFloat(input.CostoFinal)
+    const checkbox = Array.from(document.getElementsByClassName("Servicios"));
+    for (let i = 0; i < checkbox.length; i++) {
+      if (checkbox[i].checked) {
+        suma.push(parseFloat(checkbox[i].name))
+      }
+    }
+    for(let j=0; j < suma.length; j++){
+     costoadicional = costoadicional + parseFloat(suma[j])
+      
+    }
+    costoadicional = costoadicional+ parseFloat(JSON.parse(costo))
+  console.log(costoadicional)
+    setInput({...input,CostoFinal:costoadicional})
+  }
   const checkboxselected = (e) => {
-    e.preventDefault();
-    setInput({
-      ...input,
-      CostoFinal: JSON.parse(costo),
-      Checkin: selectDateCI,
-      Checkout: selectDateCO,
-    });
-    let costoplus = 0;
-    console.log(costoplus);
+    e.preventDefault()
+      setInput({
+      ...input, CostoFinal:JSON.parse(costo),
+      Checkin:selectDateCI,Checkout:selectDateCO,
+    })
     lala = [];
     const checkbox = Array.from(document.getElementsByClassName("Servicios"));
     for (let i = 0; i < checkbox.length; i++) {
       if (checkbox[i].checked) {
-        costoplus = costoplus + parseFloat(checkbox[i].name);
-        console.log(costoplus);
         lala.push(checkbox[i].value);
-        setInput({
-          ...input,
-          ExtraServices: [...lala],
-          CostoFinal: parseFloat(input.CostoFinal) + costoplus,
-        });
+        setInput({...input, ExtraServices: [...lala]});
         console.log(checkbox[i].value);
       }
     }
-    console.log(selected);
   };
 
   useEffect(() => {
     dispatch(readReservation({ token }));
   }, [dispatch, token]);
+  useEffect(() => {
+    dispatch(readFechas());
+  }, [dispatch]);
 
   function handleChange(e) {
     setInput({
@@ -86,7 +96,14 @@ export default function Reservaciones() {
       [e.target.name]: e.target.value,
     });
   }
-
+const mostrarFecha =async selectDateCI =>{
+    const options = {year:'numeric', month:'numeric', day:'numeric'}
+    setInput({...input,  Checkin: selectDateCI.toLocaleDateString('es-ES', options)})
+}
+const mostrarFecha2 = selectDateCI =>{
+  const options = {year:'numeric', month:'numeric', day:'numeric'}
+  setInput({...input,  Checkout: selectDateCI.toLocaleDateString('es-ES', options)})
+}
   function handleSubmit(e) {
     e.preventDefault();
     // console.log(input)
@@ -104,8 +121,15 @@ export default function Reservaciones() {
             </Link>
           </div>
           <div className={styles.title}>Crear una nueva reservación</div>
-          <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
-            <input
+          <div>
+            Fechas disponibles no de la cabaña
+            <div>{ocupadas.map((e)=>(
+              <div>  Del   {e.Checkin} Al {e.Checkout}</div>
+            ))}</div>
+            <div>fin</div>
+          </div>
+          <form onSubmit={(e) => handleSubmit(e)}className={styles.form}>
+          <input
               type="number"
               value={input.CostoFinal}
               name="Checkin"
@@ -113,7 +137,7 @@ export default function Reservaciones() {
               className={styles.formInputs}
               required
             />
-            {/* <input
+            <input
               type="text"
               value={input.Checkin}
               name="Checkin"
@@ -121,16 +145,19 @@ export default function Reservaciones() {
               placeholder="Check in"
               className={styles.formInputs}
               required
-            /> */}
-            <DatePicker
-              selected={selectDateCI}
-              onChange={(date) => setSelectDateCI(date)}
-              dateFormat="dd/MM/yyyy"
-              minDate={new Date()}
-              className={styles.formInputs}
-              //isClearable
             />
-            {/* <input
+          <DatePicker
+            selected={selectDateCI}
+            onChange={date=> setSelectDateCI(date)}
+            className={styles.formInputs}
+            //onChange = {onChange}
+            dateFormat="dd 'de' MMMM 'de' yyyy"
+            minDate={new Date()}
+            locale='es'
+            //isClearable
+            />
+            <input type='button' onClick={()=> mostrarFecha(selectDateCI)} value="comprobar fecha"/>
+            <input
               type="text"
               value={input.Checkout}
               name="Checkout"
@@ -138,16 +165,18 @@ export default function Reservaciones() {
               placeholder="Check out"
               className={styles.formInputs}
               required
-            /> */}
-
-            <DatePicker
-              selected={selectDateCO}
-              onChange={(date) => setSelectDateCO(date)}
-              dateFormat="dd/MM/yyyy"
-              minDate={new Date()}
-              className={styles.formInputs}
-              //isClearable
             />
+        <DatePicker
+            selected={selectDateCO}
+            onChange={date=> setSelectDateCO(date)}
+            className={styles.formInputs}
+            //onChange = {onChange}
+            dateFormat="dd 'de' MMMM 'de' yyyy"
+            minDate={new Date()}
+            locale='es'
+            //isClearable
+            />
+            <input type='button' onClick={()=> mostrarFecha2(selectDateCO)} value="comprobar fecha"/>
             {/* <input
               type="text"
               value={input.UserId}
@@ -199,7 +228,7 @@ export default function Reservaciones() {
                       name={el.Price}
                       value={el.Name}
                       id={id1++}
-                      onChange={verificacion}                      
+                      onChange={consultarprecio}
                     />
                     <label htmlFor="temperament">{el.name}</label>
                   </div>
@@ -218,3 +247,7 @@ export default function Reservaciones() {
     </div>
   );
 }
+            // <input type='button' onClick={()=> mostrarFecha(selectDateCI)}/>
+            // <input type='button' onClick={()=> console}/>
+
+

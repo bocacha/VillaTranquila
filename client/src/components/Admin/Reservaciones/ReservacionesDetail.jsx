@@ -1,7 +1,7 @@
-import React from "react";
+import React,{useState} from "react";
 import styles from "./ReservacionesDetail.module.css";
 import { useDispatch } from "react-redux";
-import {removeReservations}  from '../../../actions'
+import {removeReservations, restoreReservations}  from '../../../actions'
 
 export default function ReservacionesDetail({
   ID,
@@ -12,10 +12,13 @@ export default function ReservacionesDetail({
   Cabinid,
   ExtraServices,
   CostoFinal,
+  handleSubmitEdit,
+  handlePrueba,
+  restaurar
 }) {
 
  const dispatch = useDispatch();
-
+ const [mostrar, setMostrar] = useState(true);
   const handleSubmitDelete = (ID)=>{
     console.log('funcion', ID)
     alert("su Reserva fue Eliminada con exito");
@@ -23,6 +26,13 @@ export default function ReservacionesDetail({
     dispatch(removeReservations(obj));
     window.location.reload();
   } 
+  const handleSubmitrestore = (ID)=>{
+    console.log('funcion', ID)
+    alert("su cabaña fue Eliminada con exito");
+    let obj = {id:ID}
+    dispatch(restoreReservations(obj));
+    window.location.reload();
+  }
   return (
     <div className={styles.container}>
       <p><strong>Checkin:</strong> {Checkin}</p>
@@ -32,8 +42,27 @@ export default function ReservacionesDetail({
       <p><strong>Cabinid:</strong> {Cabinid}</p>
       {/* <p><strong>ExtraServices:</strong> {ExtraServices}</p> */}
       <div>
-        <button onClick={()=>handleSubmitDelete(ID)} className={styles.btn}>Eliminar</button>
+      {!restaurar?(
+          <button onClick={()=>handleSubmitDelete(ID)} className={styles.btn}>Eliminar</button>
+
+        ):(
+          <button onClick={()=>handleSubmitrestore(ID)} className={styles.btn}>Restaurar</button>
+        )}
       </div>
+      {mostrar
+      
+      ?
+      <div>
+          <button onClick={(e)=> {handleSubmitEdit(e,ID);
+                                       setMostrar(false);
+                                       ;        } 
+         }>Editar</button>
+      </div>
+       :
+      <div>
+         <button onClick={(e)=>handlePrueba(e,ID)}>Guardar</button>
+      </div> 
+        }
     </div>
   );
 }
