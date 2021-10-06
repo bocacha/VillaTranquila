@@ -45,7 +45,7 @@ export default function Fotos() {
     }, { token }));
     alert("Foto creada con éxito");
     setTimeout(function(){ 
-      history.go(0); }, 1000)
+      history.go(0); }, 2000)
     // window.location.reload();
     // 
 

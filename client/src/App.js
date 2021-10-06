@@ -13,6 +13,7 @@ import Pagos from "./components/Admin/Pagos/Pagos";
 import Fotos from "./components/Admin/Fotos/Fotos";
 import Usuarios from "./components/Admin/Usuarios/Usuarios";
 import Registro from "./components/Registrarse/Registro";
+import Gallery from './components/Gallery/Gallery';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/nosotros" component={Nosotros} />
           <Route path="/contacto" component={Contacto} />
           <Route path="/reserva" component={Reserva} />
+          <Route path="/galeria" component={Gallery} />
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/admin/cabañas" component={Cabañas} />
           <Route exact path="/admin/reservaciones" component={Reservaciones} />
