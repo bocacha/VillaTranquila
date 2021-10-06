@@ -8,7 +8,6 @@ import Login from './components/Login/Login';
 import Admin from "./components/Admin/Admin";
 import Cabañas from "./components/Admin/Cabañas/Cabañas";
 import Reservaciones from "./components/Admin/Reservaciones/Reservaciones";
-import LinkReserva from "./components/LinkReserva/LinkReserva";
 import Servicios from "./components/Admin/Servicios/Servicios";
 import Pagos from "./components/Admin/Pagos/Pagos";
 import Fotos from "./components/Admin/Fotos/Fotos";

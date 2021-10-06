@@ -32,6 +32,7 @@ export default function Reservaciones() {
     Paymentsid: "",
     Cabinid: "",
     ExtraServices: "",
+    CostoFinal: "",
   });
   const [edit, setEdit] = useState({
     id: "",
@@ -41,6 +42,7 @@ export default function Reservaciones() {
     Paymentsid: "",
     Cabinid: "",
     ExtraServices: "",
+    CostoFinal: "",
   });
   useEffect(() => {
     dispatch(Logeduser());
@@ -76,6 +78,7 @@ export default function Reservaciones() {
       Paymentsid: "",
       Cabinid: "",
       ExtraServices: "",
+      CostoFinal: "",
     });
     window.location.reload();
   }
@@ -94,28 +97,29 @@ export default function Reservaciones() {
     const options = {year:'numeric', month:'numeric', day:'numeric'}
     setInput({...input,  Checkin: selectDateCI.toLocaleDateString('es-ES', options)})
   }
-
-  const console = ()=>{
-    
-    console.log(input.Checkin)
-  }
-
   function handlePrueba(e, ID) {
     e.preventDefault();
-    
-    dispatch(editReservation(edit, { token }));
-    setEdit({...edit,
+     setEdit({...edit,
       id:ID  
     })
     setMostrar(true);
-    
-    //window.location.reload();
+    pruebadispatch()
+  }
+  const pruebadispatch=() => {
+    const { token } = logeduser;
+    console.log(edit)
+    dispatch(editReservation(edit, { token }));
+    window.location.reload()
   }
   const ocultadas= () => {
-   return dispatch(readReservationocultados())
+   dispatch(readReservationocultados())
+   setHabilitar(true)
+
   }
   const showtrue=()=>{
     dispatch(readReservation())
+    setHabilitar(false)
+
   }
   return (
     <div className={styles.container}>
@@ -241,6 +245,14 @@ export default function Reservaciones() {
               />
               <input
                 type="text"
+                value={edit.CostoFinal}
+                name="CostoFinal"
+                onChange={(e) => handleChangeEdit(e)}
+                placeholder="Costo Final"
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
                 value={edit.UserId}
                 name="UserId"
                 onChange={(e) => handleChangeEdit(e)}
@@ -298,6 +310,7 @@ export default function Reservaciones() {
             return (
               <div className={styles.detalles} key={el.ID}>
                 <ReservacionesDetail
+                  ID={el.ID}
                   Checkin={el.Checkin}
                   Checkout={el.Checkout}
                   UserId={el.UserId}
@@ -308,7 +321,6 @@ export default function Reservaciones() {
                   handleSubmitEdit={handleSubmitEdit}
                   restaurar={habilitar}
                 />
-                {console.log(el.CostoFinal)}
               </div>
             );
           })}

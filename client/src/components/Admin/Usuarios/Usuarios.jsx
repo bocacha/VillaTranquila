@@ -87,10 +87,12 @@ export default function Usuarios() {
 const ocultadas= () => {
   const { token } = logeduser;
   dispatch(readUsersocultados({ token}))
+  setHabilitar(true)
 }
 const showtrue=()=>{
   const { token } = logeduser;
   dispatch(readUsers({ token }))
+  setHabilitar(false)
 }
 
   return (
@@ -338,6 +340,7 @@ const showtrue=()=>{
         {allUsers?.map((el)=>(           
             <div className={styles.detalles} key={el.ID}>
               <UsuariosDetail
+                ID={el.ID}
                 UserName={el.UserName}
                 FirstName={el.FirstName}
                 LastName={el.LastName}

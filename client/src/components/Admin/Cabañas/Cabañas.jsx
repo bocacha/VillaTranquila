@@ -109,10 +109,13 @@ const Cabañas = () => {
     })
     e.preventDefault();
     setMostrar(true);
-    const { token } = logeduser;
-    dispatch(editCabains(edit, { token }) );
-    window.location.reload();
+    pruebadispatch()
 };
+const pruebadispatch=() => {
+  const { token } = logeduser;
+  dispatch(editCabains(edit,{token}));
+  window.location.reload()
+}
   const ocultadas= () => {
     dispatch(readCabainsocultados())
     setHabilitar(true)
@@ -137,7 +140,7 @@ const Cabañas = () => {
           ):(
             <button onClick={showtrue}>Mostrar habilitadas</button>
           )
-          
+}
           <form onSubmit={handleSubmit} className={styles.form}>
              <div className={styles.title}>Crear Cabaña</div>
             <div>
@@ -408,6 +411,7 @@ const Cabañas = () => {
           );
         })}
       </div>
+    </div>
     </div>
   );
 };

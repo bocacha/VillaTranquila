@@ -15,24 +15,24 @@ module.exports = (sequelize) => {
     Checkin: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate:{
-        isDate: true,
-      }
+      // validate:{
+      //   isDate: true,
+      // }
     },
     Checkout:{
       type: DataTypes.STRING,
       allowNull: false,
-      validate:{
-        isDate: true,
-      }
+      // validate:{
+      //   isDate: true,
+      // }
     },
     UserId:{
       type: DataTypes.STRING,
       allowNull: false,
-      validate:{
-        is: '^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$',
-        isUUID: 4,
-      }
+      // validate:{
+      //   is: '^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$',
+      //   isUUID: 4,
+      // }
     },
     CostoFinal:{
       type: DataTypes.STRING,
@@ -44,18 +44,14 @@ module.exports = (sequelize) => {
     Cabinid:{
       type: DataTypes.STRING,
       allowNull: false,
-      validate:{
-        is: '^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$',
-        isUUID: 4,
-      }
+      // validate:{
+      //   is: '^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$',
+      //   isUUID: 4,
+      // }
     },
     ExtraServices:{
       type: DataTypes.JSON,
       allowNull: true,
-      validate:{
-        is: '^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$',
-        isUUID: 4,
-      }
     },
     Show:{
       type: DataTypes.BOOLEAN,

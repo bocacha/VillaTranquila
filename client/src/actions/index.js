@@ -413,10 +413,19 @@ export function editReservation(payload, { token }) {
     }
   }
   return async function (dispatch) {
-    const response = await axios.put("http://localhost:3001/reservations/NewReservation", payload, config);
-    return response;
-  };
+    try {
+    const response = await axios.put("http://localhost:3001/reservations/EditReservation", payload, config);
+    return dispatch({
+      type: EDIT_RESERVATIONS,
+      payload: response.data,
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
 }
+
+
 export function editCabains(payload, { token }) {
   const config = {
     headers: {

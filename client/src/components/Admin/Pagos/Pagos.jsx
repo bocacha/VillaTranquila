@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Pagos.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createPayment, readPayment, editPayments, Logeduser, readServicesocultados } from "../../../actions";
+import { createPayment, readPayment, editPayments, Logeduser, readPaymentocultados } from "../../../actions";
 import PagosDetail from "./PagosDetail";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -75,11 +75,12 @@ export default function Pagos() {
       id:ID  
     })
     //dispatch(editPayments(edit, { token }));
-   
+
     
   }
 
   function handlePrueba(e,ID) {
+    const { token } = logeduser;
     e.preventDefault();
     setMostrar(true);
     setEdit({...edit,
@@ -87,13 +88,17 @@ export default function Pagos() {
     })
     dispatch(editPayments(edit, { token }));
    
-   // window.location.reload();
+    window.location.reload();
   }
   const ocultadas= () => {
-    dispatch(readServicesocultados())
+    const { token } = logeduser;
+    dispatch(readPaymentocultados({ token }))
+    setHabilitar(true)
   }
   const showtrue=()=>{
-    dispatch(readPayment())
+    const { token } = logeduser;
+    dispatch(readPayment({ token }))
+    setHabilitar(false)
   }
   return (
     <div className={styles.container}>
@@ -169,18 +174,6 @@ export default function Pagos() {
               </div>
             </form>
           </div>
-          {/* EDITAR */}
-          <div className={styles.editarCont}>
-            <div className={styles.title}> Editar un pago</div>
-            <form onSubmit={(e) => handleSubmitEdit(e)} className={styles.form}>
-              <input
-                type="text"
-                value={edit.id}
-                name="id"
-                onChange={(e) => handleChangeEdit(e)}
-                placeholder="Id"
-                className={styles.formInputs}
-              />
         {/* EDITAR */}
         {mostrar ?
             <div className={styles.editarCont}>
@@ -224,9 +217,7 @@ export default function Pagos() {
           :
           null
         }
-        
-
-      </div>
+      
       {/* VER */}
       <div>
         {allPayments?.map((el) => {
@@ -243,7 +234,9 @@ export default function Pagos() {
                 restaurar={habilitar}
               />
             </div>
-          );
+          )})};
+      </div>
+      </div>
       </div>
     </div>
   );
