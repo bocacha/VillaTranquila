@@ -1,16 +1,16 @@
 import React, {useState} from "react";
 import styles from "./FotosDetail.module.css";
 import { useDispatch } from "react-redux";
-import {removePictures}  from '../../../actions'
+import {removePictures,restorePictures}  from '../../../actions'
 
 export default function FotosDetail({
     Description,
     Url,
     ID,
     handlePrueba,
-    handleSubmitEdit 
+    handleSubmitEdit,
+    restaurar
   }) {
-
   const dispatch = useDispatch();
 
   const [mostrar, setMostrar] = useState(true);
@@ -22,12 +22,24 @@ export default function FotosDetail({
     dispatch(removePictures(obj));
     window.location.reload();
   }
+  const handleSubmitrestore = (ID)=>{
+    console.log('funcion', ID)
+    alert("su cabaña fue Eliminada con exito");
+    let obj = {id:ID}
+    dispatch(restorePictures(obj));
+    window.location.reload();
+  }
   return (
     <div className={styles.container}>
       <p><strong>Descripcion:</strong> {Description}</p>
       <p><strong>Url:</strong> {Url}</p>
       <div>
-        <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
+      {!restaurar?(
+          <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
+
+        ):(
+          <button onClick={()=>handleSubmitrestore(ID)}>Restaurar</button>
+        )}
       </div>
       {mostrar ?
           <div>

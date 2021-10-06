@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createCabains, readCabains,editCabains, Logeduser } from "../../../actions";
+import { createCabains, readCabains,editCabains, Logeduser, readCabainsocultados } from "../../../actions";
 import styles from "./Cabañas.module.css";
 import CabañasDetail from "../Cabañas/CabañasDetail";
 import { Link } from "react-router-dom";
@@ -10,6 +10,7 @@ const Cabañas = () => {
   const allCabains = useSelector((state) => state.cabañas);
 
   const logeduser = useSelector ((state) => state.user);
+  const [habilitar, setHabilitar]= useState(false)
   const [cabain, setCabain] = useState({
     Number: "",
     Capacity: "",
@@ -113,8 +114,16 @@ const Cabañas = () => {
     dispatch(editCabains(edit, { token }) );
     window.location.reload();
 };
-   
-return (
+  const ocultadas= () => {
+    dispatch(readCabainsocultados())
+    setHabilitar(true)
+  }
+  const showtrue=()=>{
+    dispatch(readCabains())
+    setHabilitar(false)
+  }
+  
+  return (
     <div className={styles.container}>
       <div className={styles.btnVolver}>
         <Link to="/admin">
@@ -123,6 +132,14 @@ return (
       </div>
       <div className={styles.formsCont}>
         <div className={styles.crearCont}>
+          {!habilitar ?(
+            <button onClick={ocultadas}>Mostrar ocultadas</button>
+          ):(
+            <button onClick={showtrue}>Mostrar habilitadas</button>
+          )
+          }
+          
+          
           <div className={styles.title}>Crear Cabaña</div>
           <form onSubmit={handleSubmit} className={styles.form}>
             <div>
@@ -182,30 +199,6 @@ return (
               />
             </div>
             <div>
-              <label>Cafe</label>
-              <input
-                type="checkbox"
-                name="Coffe"
-                value={cabain.Coffe}
-                onChange={handleCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Microondas</label>
-              <input
-                type="checkbox"
-                name="Microondas"
-                value={cabain.Microondas}
-                onChange={handleCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Calefaccion</label>
-              <input
-                type="checkbox"
-                name="Calefaccion"
-                value={cabain.Calefaccion}
-                onChange={handleCheckBox}
-                className={styles.formInputs}
-              />
               <label>Parrilla</label>
               <input
                 type="checkbox"
@@ -219,30 +212,6 @@ return (
                 type="checkbox"
                 name="Wifi"
                 value={cabain.Wifi}
-                onChange={handleCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Limpieza</label>
-              <input
-                type="checkbox"
-                name="Cleaning"
-                value={cabain.Cleaning}
-                onChange={handleCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Heladera</label>
-              <input
-                type="checkbox"
-                name="Refrigerator"
-                value={cabain.Refrigerator}
-                onChange={handleCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Cocina</label>
-              <input
-                type="checkbox"
-                name="Stove"
-                value={cabain.Stove}
                 onChange={handleCheckBox}
                 className={styles.formInputs}
               />
@@ -328,31 +297,6 @@ return (
               />
             </div>
             <div>
-              <label>Cafe</label> 
-              <input
-                type="checkbox"
-                name="Coffe"
-                value={edit.Coffe}
-                onChange={handleeditCheckBox}
-                placeholder="h"
-                className={styles.formInputs}
-              /> 
-              <label>Microondas</label>
-              <input
-                type="checkbox"
-                name="Microondas"
-                value={edit.Microondas}
-                onChange={handleeditCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Calefaccion</label>
-              <input
-                type="checkbox"
-                name="Calefaccion"
-                value={edit.Calefaccion}
-                onChange={handleeditCheckBox}
-                className={styles.formInputs}
-              />
               <label>Parrilla</label>
               <input
                 type="checkbox"
@@ -366,30 +310,6 @@ return (
                 type="checkbox"
                 name="Wifi"
                 value={edit.Wifi}
-                onChange={handleeditCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Limpieza</label>
-              <input
-                type="checkbox"
-                name="Cleaning"
-                value={edit.Cleaning}
-                onChange={handleeditCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Heladera</label>
-              <input
-                type="checkbox"
-                name="Refrigerator"
-                value={edit.Refrigerator}
-                onChange={handleeditCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Cocina</label>
-              <input
-                type="checkbox"
-                name="Stove"
-                value={edit.Stove}
                 onChange={handleeditCheckBox}
                 className={styles.formInputs}
               />
@@ -434,9 +354,8 @@ return (
                 Parking={el.Parking}
                 handlePrueba={handlePrueba}
                 handleeditSubmit={handleeditSubmit}
-              
-              />
-              
+                restaurar={habilitar}
+              />              
             </div>
           );
         })}

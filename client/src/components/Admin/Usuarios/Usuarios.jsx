@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Usuarios.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createUsers, readUsers, editUsers, Logeduser} from "../../../actions";
+import { createUsers, readUsers, editUsers, Logeduser, readUsersocultados} from "../../../actions";
 import UsuariosDetail from "./UsuariosDetail";
 import { Link } from "react-router-dom";
 
@@ -10,6 +10,7 @@ export default function Usuarios() {
   const allUsers = useSelector((state) => state.usuarios);
   const logeduser = useSelector ((state) => state.user);
   const [mostrar, setMostrar] = useState(false);
+  const [habilitar, setHabilitar]= useState(false)
   const {token} = logeduser
   const [input, setInput] = useState({
     id: "",
@@ -31,7 +32,6 @@ export default function Usuarios() {
   useEffect(() => {
     dispatch(readUsers({token}));
   }, [dispatch, token]);
-
   function handleChange(e) {
     setInput({
       ...input,
@@ -84,9 +84,23 @@ export default function Usuarios() {
      //dispatch(readUsers({ token }));
      window.location.reload();
    }
+const ocultadas= () => {
+  const { token } = logeduser;
+  dispatch(readUsersocultados({ token}))
+}
+const showtrue=()=>{
+  const { token } = logeduser;
+  dispatch(readUsers({ token }))
+}
 
   return (
     <div className={styles.container}>
+       {!habilitar ?(
+            <button onClick={ocultadas}>Mostrar ocultadas</button>
+          ):(
+            <button onClick={showtrue}>Mostrar habilitadas</button>
+          )
+          }
       {/* CREAR 
       <div>
         Crear un nuevo usuario
@@ -286,7 +300,7 @@ export default function Usuarios() {
                 <option value="true">true</option>
                 <option value="false">false</option>
               </select>
-            </form>
+            </form>   
         </div>
         : 
             null       
@@ -296,8 +310,7 @@ export default function Usuarios() {
       </div>
       {/* VER */}
       <div>
-        {allUsers?.map((el) => {
-          return (
+        {allUsers?.map((el)=>(           
             <div className={styles.detalles} key={el.ID}>
               <UsuariosDetail
                 ID={el.ID}
@@ -310,10 +323,10 @@ export default function Usuarios() {
                 Email={el.Email}
                 handlePrueba={handlePrueba}
                 handleSubmitEdit={handleSubmitEdit}
+                restaurar={habilitar}
               />
             </div>
-          );
-        })}
+        ))}
       </div>
     </div>
   );

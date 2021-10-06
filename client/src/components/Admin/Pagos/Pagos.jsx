@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Pagos.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createPayment, readPayment, editPayments, Logeduser } from "../../../actions";
+import { createPayment, readPayment, editPayments, Logeduser, readServicesocultados } from "../../../actions";
 import PagosDetail from "./PagosDetail";
 import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
@@ -9,11 +9,10 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 export default function Pagos() {
   const dispatch = useDispatch();
-  
   useEffect(() => {
     dispatch(Logeduser());
   }, [dispatch]);
-
+  const [habilitar, setHabilitar]= useState(false)
   const logeduser = useSelector((state) => state.user);
   const { token } = logeduser;
 
@@ -89,10 +88,21 @@ export default function Pagos() {
    
    // window.location.reload();
   }
-
+  const ocultadas= () => {
+    dispatch(readServicesocultados())
+  }
+  const showtrue=()=>{
+    dispatch(readPayment())
+  }
   return (
     <div className={styles.container}>
       <div className={styles.formsCont}>
+      {!habilitar ?(
+            <button onClick={ocultadas}>Mostrar ocultadas</button>
+          ):(
+            <button onClick={showtrue}>Mostrar habilitadas</button>
+          )
+          }
         {/* CREAR */}
         <div className={styles.crearCont}>
           <div className={styles.title}>Crear un nuevo pago</div>
@@ -212,6 +222,7 @@ export default function Pagos() {
                 TotalAmount={el.TotalAmount}
                 handlePrueba={handlePrueba}
                 handleSubmitEdit={handleSubmitEdit}
+                restaurar={habilitar}
               />
             </div>
           );

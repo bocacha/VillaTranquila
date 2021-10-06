@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import styles from "./Servicios.module.css";
 import { useDispatch } from "react-redux";
-import {removeServices}  from '../../../actions'
+import {removeServices, restoreServices}  from '../../../actions'
 
-export default function ServiciosDetail({ ID, Name, Description, Price, handleSubmitEdit,handlePrueba }) {
+export default function ServiciosDetail({ ID, Name, Description, Price, handleSubmitEdit,handlePrueba,restaurar }) {
 
   const dispatch = useDispatch();
   const [mostrar, setMostrar] = useState(true);
@@ -15,6 +15,13 @@ export default function ServiciosDetail({ ID, Name, Description, Price, handleSu
     dispatch(removeServices(obj));
     window.location.reload();
   }
+  const handleSubmitrestore = (ID)=>{
+    console.log('funcion', ID)
+    alert("su cabaña fue Eliminada con exito");
+    let obj = {id:ID}
+    dispatch(restoreServices(obj));
+    window.location.reload();
+  }
   return (
     <div className={styles.container}>
       <p><strong>Id:</strong> {ID}</p>
@@ -22,7 +29,12 @@ export default function ServiciosDetail({ ID, Name, Description, Price, handleSu
       <p><strong>Description:</strong> {Description}</p>
       <p><strong>Price:</strong> {Price}</p>  
       <div>
-        <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
+      {!restaurar?(
+          <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
+
+        ):(
+          <button onClick={()=>handleSubmitrestore(ID)}>Restaurar</button>
+        )}
       </div>
       {mostrar 
       

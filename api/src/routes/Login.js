@@ -14,10 +14,11 @@ router.post("/", async (req, res)=>{
     ? false
     : await bcrypt.compare(UserPassword, user.UserPasswordHashed)
     if(!(user && passwordCorrect)){
-       return res.status(401).json({
+        return res.status(401).json({
             error: "invalid User or Password"
         })
     }
+    if(user.Blocked){return res.status(404).send("Error Usuario Blokeado")}
     const userForToken={
         name: user.FirstName,
         user: user.UserName,
@@ -26,7 +27,7 @@ router.post("/", async (req, res)=>{
         id: user.ID
 
     }
-    const token = jwt.sign(userForToken,config.JWT_SECRET)
+    const token = jwt.sign(userForToken,config.JWT_SECRET,{expiresIn:"15h"})
     res.send({
         userid: user.ID,
         user: user.UserName,

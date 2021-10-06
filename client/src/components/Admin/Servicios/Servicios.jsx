@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Servicios.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createServices, readServices, editServices, Logeduser} from "../../../actions";
+import { createServices, readServices, editServices, Logeduser, readServicesocultados} from "../../../actions";
 import ServiciosDetail from "./ServiciosDetail";
 import { Link } from "react-router-dom";
 
 export default function Servicios() {
   const dispatch = useDispatch();
   const allServices = useSelector((state) => state.servicios);
+  const [habilitar, setHabilitar]= useState(false)
   const logeduser = useSelector ((state) => state.user);
   const [mostrar, setMostrar] = useState(false);
   const [input, setInput] = useState({
@@ -64,7 +65,6 @@ function handleSubmit(e) {
     });
     //window.location.reload();
  }
-
  function handlePrueba(e,ID) {
   const {token} = logeduser
   e.preventDefault();
@@ -75,6 +75,11 @@ function handleSubmit(e) {
     id:ID
   });
  //window.location.reload();
+ const ocultadas= () => {
+   dispatch(readServicesocultados())
+ }
+ const showtrue=()=>{
+  dispatch(readServices())
 }
 return (
     <div className={styles.container}>
@@ -83,6 +88,12 @@ return (
           <button className={styles.btn}>Volver</button>
         </Link>
       </div>
+      {!habilitar ?(
+            <button onClick={ocultadas}>Mostrar ocultadas</button>
+          ):(
+            <button onClick={showtrue}>Mostrar habilitadas</button>
+          )
+          }
       <div className={styles.formsCont}>
         {/* CREAR */}
         <div className={styles.crearCont}>
@@ -174,6 +185,7 @@ return (
                 Price={el.Price}
                 handlePrueba={handlePrueba}
                 handleSubmitEdit={handleSubmitEdit}
+                restaurar={habilitar}
               />
             </div>
           );
