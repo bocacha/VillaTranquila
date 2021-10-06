@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createCabains, readCabains,editCabains, Logeduser } from "../../../actions";
+import { createCabains, readCabains,editCabains, Logeduser, readCabainsocultados } from "../../../actions";
 import styles from "./Cabañas.module.css";
 import CabañasDetail from "../Cabañas/CabañasDetail";
 import { Link } from "react-router-dom";
@@ -9,6 +9,7 @@ const Cabañas = () => {
   const dispatch = useDispatch();
   const allCabains = useSelector((state) => state.cabañas);
   const logeduser = useSelector ((state) => state.user);
+  const [habilitar, setHabilitar]= useState(false)
   const [cabain, setCabain] = useState({
     Number: "",
     Capacity: "",
@@ -26,7 +27,7 @@ const Cabañas = () => {
     Parking: false,
   });
   const [edit, setEdit] = useState({
-    id: "",
+    id: '',
     Number: "",
     Capacity: "",
     Available: "",
@@ -43,15 +44,17 @@ const Cabañas = () => {
     Parking: false,
   });
 
+  const [mostrar, setMostrar] = useState(false);
+  
+
   useEffect(() => {
     dispatch(readCabains());
   }, [dispatch]);
 
-
   useEffect(() => {
     dispatch(Logeduser());
   }, [dispatch]);
-  
+
   const handleChange = (e) => {
     setCabain({
       ...cabain,
@@ -65,6 +68,7 @@ const Cabañas = () => {
       [e.target.name]: e.target.value,
     });
   }
+  console.log('handle',edit)
 
   const handleCheckBox = (e) => {
     setCabain({
@@ -85,16 +89,39 @@ const Cabañas = () => {
     dispatch(createCabains(cabain, { token }));
     window.location.reload();
   };
-  const handleeditSubmit = (e) => {
-    const { token } = logeduser;
+ 
+  const  handleeditSubmit = (e, ID) => {
+    setEdit({...edit,
+          id:ID  
+    })
     e.preventDefault();
-    alert("su cabaña fue creada con exito");
-    dispatch(editCabains(edit, { token }));
-    window.location.reload();
+    setMostrar(true);
+    const { token } = logeduser;
+    dispatch(editCabains(edit, { token }) );
+    
+    
   };
 
-  
 
+  const  handlePrueba = (e, ID) => {
+    setEdit({...edit,
+          id:ID  
+    })
+    e.preventDefault();
+    setMostrar(true);
+    const { token } = logeduser;
+    dispatch(editCabains(edit, { token }) );
+    window.location.reload();
+};
+  const ocultadas= () => {
+    dispatch(readCabainsocultados())
+    setHabilitar(true)
+  }
+  const showtrue=()=>{
+    dispatch(readCabains())
+    setHabilitar(false)
+  }
+  
   return (
     <div className={styles.container}>
       <div className={styles.btnVolver}>
@@ -102,10 +129,17 @@ const Cabañas = () => {
           <button className={styles.btn}>Volver</button>
         </Link>
       </div>
+      <div className={styles.container2}>
       <div className={styles.formsCont}>
         <div className={styles.crearCont}>
-          <div className={styles.title}>Crear Cabaña</div>
+          {!habilitar ?(
+            <button onClick={ocultadas}>Mostrar ocultadas</button>
+          ):(
+            <button onClick={showtrue}>Mostrar habilitadas</button>
+          )
+          
           <form onSubmit={handleSubmit} className={styles.form}>
+             <div className={styles.title}>Crear Cabaña</div>
             <div>
               <input
                 type="number"
@@ -162,7 +196,7 @@ const Cabañas = () => {
                 requiered
               />
             </div>
-            <div>
+            {/* <div>
               <label>Cafe</label>
               <input
                 type="checkbox"
@@ -187,6 +221,7 @@ const Cabañas = () => {
                 onChange={handleCheckBox}
                 className={styles.formInputs}
               />
+
               <label>Parrilla</label>
               <input
                 type="checkbox"
@@ -203,30 +238,6 @@ const Cabañas = () => {
                 onChange={handleCheckBox}
                 className={styles.formInputs}
               />
-              <label>Limpieza</label>
-              <input
-                type="checkbox"
-                name="Cleaning"
-                value={cabain.Cleaning}
-                onChange={handleCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Heladera</label>
-              <input
-                type="checkbox"
-                name="Refrigerator"
-                value={cabain.Refrigerator}
-                onChange={handleCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Cocina</label>
-              <input
-                type="checkbox"
-                name="Stove"
-                value={cabain.Stove}
-                onChange={handleCheckBox}
-                className={styles.formInputs}
-              />
               <label>Estacionamiento</label>
               <input
                 type="checkbox"
@@ -235,7 +246,7 @@ const Cabañas = () => {
                 onChange={handleCheckBox}
                 className={styles.formInputs}
               />
-            </div>
+            </div> */}
             <div className={styles.btns}>
               <button type="submit" className={styles.btn}>
                 Crear
@@ -244,10 +255,11 @@ const Cabañas = () => {
           </form>
         </div>
         {/* EDITAR */}
+      {mostrar ?
         <div className={styles.editarCont}>
           <div className={styles.title}>Editar Cabaña</div>
-          <form onSubmit={handleeditSubmit}>
-            <div>
+          <form>
+            {/* <div>
               <input
                 type="text"
                 name="id"
@@ -256,14 +268,14 @@ const Cabañas = () => {
                 placeholder="Id"
                 className={styles.formInputs}
               />
-            </div>
+            </div> */}
             <div>
               <input
                 type="text"
                 name="Number"
                 value={edit.Number}
                 onChange={handleChangeEdit}
-                placeholder="Numero de Habitaciones"
+                placeholder="Numero de Cabaña"
                 className={styles.formInputs}
               />
             </div>
@@ -298,7 +310,7 @@ const Cabañas = () => {
               />
             </div>
             <div>
-              <input
+              <textarea
                 type="text"
                 name="Description"
                 value={edit.Description}
@@ -307,7 +319,7 @@ const Cabañas = () => {
                 className={styles.formInputs}
               />
             </div>
-            <div>
+            {/* <div>
               <label>Cafe</label> 
               <input
                 type="checkbox"
@@ -316,7 +328,7 @@ const Cabañas = () => {
                 onChange={handleeditCheckBox}
                 placeholder="h"
                 className={styles.formInputs}
-              /> 
+              />
               <label>Microondas</label>
               <input
                 type="checkbox"
@@ -349,30 +361,6 @@ const Cabañas = () => {
                 onChange={handleeditCheckBox}
                 className={styles.formInputs}
               />
-              <label>Limpieza</label>
-              <input
-                type="checkbox"
-                name="Cleaning"
-                value={edit.Cleaning}
-                onChange={handleeditCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Heladera</label>
-              <input
-                type="checkbox"
-                name="Refrigerator"
-                value={edit.Refrigerator}
-                onChange={handleeditCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Cocina</label>
-              <input
-                type="checkbox"
-                name="Stove"
-                value={edit.Stove}
-                onChange={handleeditCheckBox}
-                className={styles.formInputs}
-              />
               <label>Estacionamiento</label>
               <input
                 type="checkbox"
@@ -381,14 +369,15 @@ const Cabañas = () => {
                 onChange={handleeditCheckBox}
                 className={styles.formInputs}
               />
-            </div>
-            <div className={styles.btns}>
+            </div> */}
+            {/*  <div className={styles.btns}>
               <button type="submit" className={styles.btn}>
-                Editar
+                Guardar
               </button>
-            </div>
+            </div>  */}
           </form>
         </div>
+       : null }
       </div>
       {/* VER */}
       <div>
@@ -411,8 +400,10 @@ const Cabañas = () => {
                 Refrigerator={el.Refrigerator}
                 Stove={el.Stove}
                 Parking={el.Parking}
-              />
-              
+                handlePrueba={handlePrueba}
+                handleeditSubmit={handleeditSubmit}
+                restaurar={habilitar}
+              />              
             </div>
           );
         })}

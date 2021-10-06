@@ -30,50 +30,25 @@ module.exports = (sequelize) => {
     type: DataTypes.STRING,
     allowNull: false,
    },
-   Coffe:{
+   Wifi:{
      type: DataTypes.BOOLEAN,
-     allowNull: false,
-     defaultValue: false
+     allowNull:false,
+     defaultValue:false,
+   },
+   Parking:{
+    type: DataTypes.BOOLEAN,
+    allowNull:false,
+    defaultValue:false,
   },
-  Microwaves:{
+  Parrilla:{
+    type: DataTypes.BOOLEAN,
+    allowNull:false,
+    defaultValue:false,
+  },
+   Show:{
     type: DataTypes.BOOLEAN,
     allowNull: false,
-    defaultValue: false
-  },
-  Heat:{
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    defaultValue: false
-  },
-  Barbecue:{
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    defaultValue: false
-  },
-  Wifi:{
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    defaultValue: false
-  },
-  Cleaning:{
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    defaultValue: false
-  },
-  Refrigerator:{
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    defaultValue: false
-  },
-  Stove:{
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    defaultValue: false
-  },
-  Parking:{
-    type: DataTypes.BOOLEAN,
-    allowNull: false,
-    defaultValue: false
-  }
+    defaultValue:true
+   }
   },{timestamps: false,});
 };

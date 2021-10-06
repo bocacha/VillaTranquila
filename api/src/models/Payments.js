@@ -22,6 +22,11 @@ module.exports = (sequelize) => {
     idClient:{
       type: DataTypes.JSON, 
       allowNull: false,
-    }
+    },
+    Show:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue:true
+     }
   },{timestamps: false,});
 };
