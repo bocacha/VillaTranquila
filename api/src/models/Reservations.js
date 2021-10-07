@@ -53,6 +53,11 @@ module.exports = (sequelize) => {
       type: DataTypes.JSON,
       allowNull: true,
     },
+    Anombrede:{
+      type: DataTypes.STRING,
+      allownull: false
+
+    },
     Show:{
       type: DataTypes.BOOLEAN,
       allowNull: false,

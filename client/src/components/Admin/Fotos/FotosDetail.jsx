@@ -44,9 +44,10 @@ export default function FotosDetail({
       </div>
       {mostrar ?
           <div>
-              <button onClick={(e)=>{{handleSubmitEdit(e, ID);
+                  <button onClick={(e)=> {handleSubmitEdit(e,ID);
                                       setMostrar(false);
-              } }}>Editar</button>
+                                      ;        } 
+        } className={styles.btn} >Editar</button>
           </div> 
           :
           <div>
