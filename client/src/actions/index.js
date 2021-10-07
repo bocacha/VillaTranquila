@@ -66,7 +66,6 @@ export function sendEmail(payload) {
   };
 }
 export function createReservation(payload) {
-  console.log(payload);
   return async function (dispatch) {
     const response = await axios.post("http://localhost:3001/reservations/NewReservation", payload);
     return response;
@@ -435,6 +434,12 @@ export function editCabains(payload, { token }) {
   }
   return async function (dispatch) {
     const response = await axios.put("http://localhost:3001/cabins/EditCabin", payload, config);
+    return response;
+  };
+}
+export function editAvailible(payload) {
+  return async function (dispatch) {
+    const response = await axios.put("http://localhost:3001/cabins/EditCabin/available", payload);
     return response;
   };
 }
