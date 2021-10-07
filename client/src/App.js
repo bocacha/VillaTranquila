@@ -16,7 +16,6 @@ import Registro from "./components/Registrarse/Registro";
 import LinkReserva from"./components/Reserva/Linkreserva/LinkReserva"
 import Gallery from './components/Gallery/Gallery';
 import Profile from './components/Profile/Profile';
-import EditProfile from './components/Profile/EditProfile/EditProfile';
 
 function App() {
   return (
@@ -39,7 +38,6 @@ function App() {
           <Route path='/iniciarsesion' component={Login} />
           <Route path='/registrarse' component={Registro} />
           <Route path='/perfil' component={Profile} />
-          <Route path='/editarPerfil' component={EditProfile} />
         </Switch>
       </div>
     </BrowserRouter>

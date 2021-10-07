@@ -349,6 +349,23 @@ export function editUsers(payload) {
   };
 }
 
+export function editProfile(payload, ID) {
+  console.log("ID", ID);
+  console.log("pay", payload);
+  return async function (dispatch) {
+    try {
+      var json = await axios.put("http://localhost:3001/users/EditProfile/" + ID, payload);
+      return dispatch({
+        type: EDIT_USER,
+        payload: json.data,
+      });
+    } catch (err) {
+      window.alert("Contraseña incorrecta")
+      console.error(err);
+    }
+  };
+}
+
 export function editServices(payload, { token }) {
   const config = {
     headers: {
