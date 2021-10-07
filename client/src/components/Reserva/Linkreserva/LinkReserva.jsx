@@ -14,11 +14,12 @@ import {
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
 import { RiCreativeCommonsZeroLine } from "react-icons/ri";
-import DatePicker, { registerLocale } from "react-datepicker";
-import es from "date-fns/locale/es";
-import axios from "axios";
-import fechas from "./algoritmofechas.js";
-registerLocale("es", es);
+import DatePicker,{registerLocale} from "react-datepicker";
+import es from 'date-fns/locale/es';
+import axios from "axios"
+import fechas from "./algoritmofechas.js"
+registerLocale('es', es)
+
 
 export default function Reservaciones() {
   const dispatch = useDispatch();
@@ -65,26 +66,25 @@ export default function Reservaciones() {
         console.log(checkbox[i].name)
       }
     }
-    for (let j = 0; j < suma.length; j++) {
-      costoadicional = costoadicional + parseFloat(suma[j]);
+    for(let j=0; j < suma.length; j++){
+     costoadicional = costoadicional + parseFloat(suma[j])
+      
     }
     costoadicional = costoadicional+ parseFloat(JSON.parse(costo))
     setInput({...input,CostoFinal:costoadicional})
   }
   const checkboxselected = (e) => {
-    e.preventDefault();
-    setInput({
-      ...input,
-      CostoFinal: JSON.parse(costo),
-      Checkin: selectDateCI,
-      Checkout: selectDateCO,
-    });
+    e.preventDefault()
+      setInput({
+      ...input, CostoFinal:JSON.parse(costo),
+      Checkin:selectDateCI,Checkout:selectDateCO,
+    })
     lala = [];
     const checkbox = Array.from(document.getElementsByClassName("Servicios"));
     for (let i = 0; i < checkbox.length; i++) {
       if (checkbox[i].checked) {
         lala.push(checkbox[i].value);
-        setInput({ ...input, ExtraServices: [...lala] });
+        setInput({...input, ExtraServices: [...lala]});
         console.log(checkbox[i].value);
       }
     }
@@ -118,7 +118,6 @@ const changeFechas2=async(e)=>{
   }
   setSelectDateCO(e)
   mostrarFecha2(e);
-  // setTimeout(calculofechas,10000)
 }
 const mostrarFecha = selectDateCI =>{
     const options = {year:'numeric', month:'numeric', day:'2-digit'}
@@ -142,21 +141,42 @@ const calculofechas=()=> {
 useEffect(()=>{
   calculofechas()
   },[reserva]);
-//useEffect(() => {
- // console.log(reserva.Checkout)
- // calculofechas();
-//}, [calculofechas,reserva.Checkout]);
+
+  useEffect(()=>{
+    date(ocupadas)
+    });
 const handlePrueba=()=>{
 console.log(edit)
 dispatch(createReservation(input))
 dispatch(editAvailible(edit))
+alert("Reserva creada")
 }
   function handleSubmit(e) {
     e.preventDefault();
     // console.log(input)
-    // alert("Reserva creada con éxito");
-    // window.location.reload();
+     alert("Reserva creada con éxito");
   }
+
+  const parapiker2=[] 
+  const parapiker =[]
+  function date(array){
+    array.map(e=>{
+        e.map(i=>{
+    parapiker.push(i)
+        })
+    })
+    parapiker.map(e=>{
+        let dia = e.slice(0,2)
+        let mes = e.slice(3,5)
+        let anio = e.slice(6)
+      if(mes === '01' || mes === '02' || mes === '03' || mes === '04' || mes === '05' || mes === '06' || mes === '07' || mes === '08' || mes === '09' ){
+        mes = mes - 0;
+      }
+      parapiker2.push(new Date(anio, mes-1, dia))
+    })
+
+    }
+
   return (
     <div className={styles.container}>
       <div className={styles.formsCont}>
@@ -168,22 +188,7 @@ dispatch(editAvailible(edit))
             </Link>
           </div>
           <div className={styles.title}>Crear una nueva reservación</div>
-          <div>
-            Fechas no disponibles de la cabaña
-            <div>{ocupadas.map(e=>
-                  <div>
-                    del
-                    <div>({e[0]})</div>  
-                    al
-                    <div>({e[e.length-1]})</div>
-                     <div>fin</div>
-                  </div>
-            )}
-            </div>
-           
-          </div>
-          <form onSubmit={(e) => handleSubmit(e)}className={styles.form}>
-           
+          <form onSubmit={(e) => handleSubmit(e)}className={styles.form}>          
           <input
               type="text"
               name="Anombrede"
@@ -201,7 +206,8 @@ dispatch(editAvailible(edit))
               className={styles.formInputs}
               required
             />
-            {/*          
+         
+{/*          
             <input
               type="text"
               value={input.Checkin}
@@ -215,75 +221,25 @@ dispatch(editAvailible(edit))
             selected={selectDateCI}
             onChange={e=>changeFechas(e)}
             placeholderText="Fecha de Check in"
-            //onChange={date=> setSelectDateCI(date)}
             className={styles.formInputs}
-            //onChange = {onChange}
             defaultDate={new Date()}
             dateFormat="dd 'de' MMMM 'de' yyyy"
             minDate={new Date()}
             locale='es'
-            //isClearable
+            excludeDates={parapiker2}
             />
-            {/* <input
-              type="text"
-              value={input.Checkout}
-              name="Checkout"
-              onChange={(e) => handleChange(e)}
-              placeholder="Check out"
-              className={styles.formInputs}
-              required
-            /> */}
         <DatePicker
             selected={selectDateCO}
             onChange={e=>changeFechas2(e)}
             placeholderText="Fecha de Check out"
             onFocus={calculofechas}
             className={styles.formInputs}
-            //onChange = {onChange}
             dateFormat="dd 'de' MMMM 'de' yyyy"
             minDate={new Date()}
             locale='es'
-            //isClearable
+            excludeDates={parapiker2}
             />
-            <button className={styles.btn}onClick={calculofechas}>Fechas</button>
-            {/* <input
-              type="text"
-              value={input.UserId}
-              name="UserId"
-              onChange={(e) => handleChange(e)}
-              placeholder="Usuario Id"
-              className={styles.formInputs} 
-              pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
-              required
-            /> */}
-            {/* <input
-              type="text"
-              value={input.Paymentsid}
-              name="Paymentsid"
-              onChange={(e) => handleChange(e)}
-              placeholder="Pagos id"
-              className={styles.formInputs} 
-              // pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$' 
-              required
-            /> */}
-            {/* <input
-              type="text"
-              value={input.Cabinid}
-              name="Cabinid"
-              onChange={(e) => handleChange(e)}
-              placeholder="Cabaña id"
-              className={styles.formInputs} 
-              pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
-              required
-            /> */}
-            {/* <input
-              type="text"
-              value={input.ExtraServices}
-              name="ExtraServices"
-              onChange={(e) => handleChange(e)}
-              placeholder="Servicios extra"
-              className={styles.formInputs}
-            /> */}
+
             <div>
               <div className={styles.p}>Servicios Adicionales:</div>
               <button onClick={checkboxselected}>Seleccionar Servicios</button>
@@ -305,9 +261,11 @@ dispatch(editAvailible(edit))
               </div>
             </div>
             <div className={styles.btns}>
-              <button onClick={handlePrueba} className={styles.btnRes}>
-                Reservar
-              </button>
+              <Link to="/reserva/pago">
+                <button onClick={handlePrueba} className={styles.btnRes}>
+                  Reservar
+                </button>
+              </Link>
             </div>
           </form>
         </div>
