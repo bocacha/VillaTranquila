@@ -256,7 +256,7 @@ export default function rootReducer(state = initialState, action) {
     case READ_FECHASNODISPONIBLES:
       return {
         ...state,
-        fechasnodisponibles: action.payload,
+        fechasnodisponibles:action.payload,
       };
     case GET_USER_DATA:
       return {
