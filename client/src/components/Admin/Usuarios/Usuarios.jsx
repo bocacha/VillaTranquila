@@ -97,12 +97,12 @@ const showtrue=()=>{
 
   return (
     <div className={styles.container}>
-       {!habilitar ?(
+       {/* {!habilitar ?(
             <button onClick={ocultadas}>Mostrar ocultadas</button>
           ):(
             <button onClick={showtrue}>Mostrar habilitadas</button>
           )
-          }
+          } */}
       {/* CREAR 
       <div>
         Crear un nuevo usuario
@@ -203,10 +203,16 @@ const showtrue=()=>{
           </div>
         </form>
 */}
-      <div className={styles.btnVolver}>
+      <div className={styles.btnsContainer}>
         <Link to="/admin">
-          <button className={styles.btn}>Volver</button>
+          <button className={styles.btnVolver}>Volver</button>
         </Link>
+        {!habilitar ?(
+            <button onClick={ocultadas} className={styles.btnSup}>Mostrar ocultadas</button>
+          ):(
+            <button onClick={showtrue} className={styles.btnSup}>Mostrar habilitadas</button>
+          )
+          }
       </div>
       <div className={styles.container2}>
       <div className={styles.formsCont}>

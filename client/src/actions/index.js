@@ -35,7 +35,8 @@ export const REMOVE_SERVICES= "REMOVE_SERVICES";
 export const REMOVE_PICTURES= "REMOVE_PICTURES";
 export const REMOVE_PAYMENTS= "REMOVE_PAYMENTS";
 export const REMOVE_USERS= "REMOVE_USERS";
-export const READ_FECHASNODISPONIBLES = "READ_FECHASNODISPONIBLES"
+export const READ_FECHASNODISPONIBLES = "READ_FECHASNODISPONIBLES";
+export const GET_USER_DATA = "GET_USER_DATA";
 
 export function getCabins() {
   return async function (dispatch) {
@@ -348,6 +349,23 @@ export function editUsers(payload) {
   };
 }
 
+export function editProfile(payload, ID) {
+  console.log("ID", ID);
+  console.log("pay", payload);
+  return async function (dispatch) {
+    try {
+      var json = await axios.put("http://localhost:3001/users/EditProfile/" + ID, payload);
+      return dispatch({
+        type: EDIT_USER,
+        payload: json.data,
+      });
+    } catch (err) {
+      window.alert("Contraseña incorrecta")
+      console.error(err);
+    }
+  };
+}
+
 export function editServices(payload, { token }) {
   const config = {
     headers: {
@@ -645,5 +663,19 @@ export function readFechas(){
        
        })
        
+  };
+}
+
+export function getUserData(username){
+  return async function (dispatch) {
+    try {
+      let json = await axios.get("http://localhost:3001/users/" + username);
+      return dispatch({
+        type: GET_USER_DATA,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
 }

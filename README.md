@@ -4,35 +4,11 @@
 
 
 ## Descripcion:
-
+<hr/>
 
 Villa Tranquila es una Single Page Application (SPA), desarrollada para administrar online la estructura administrativa y comercial de un complejo de alquiler de Cabañas mediante una interfaaz de usuario intuitiva y amigable.
-La aplicación posee funcionalidades específicas dependiendo de las credenciales ingresadas al sistema, las cuales diferencian al operador en tres categorías: Usuario visitante; Usuario registrado y Administrador.
 
- ________________________________________________________________________________
-|___ Permisos ____ |_Administrador_|____Premium____|__Registrado__|___Visitante____|\
-| --------------------------------------------------------------------------------
-|_Navegar sitio__|      X        |       X       |      X        |      X        | 
-|---------------------------------------------------------------------------------
-| Chat bot
-|---------------------------------------------------------------------------------
-|
-|
-|
-|
-|
-|
-|
-|
-|
-|
-|
-|
-|
-|
-|
-|
-|
+La aplicación posee funcionalidades específicas dependiendo de las credenciales ingresadas al sistema, las cuales diferencian al operador en tres categorías: Usuario visitante; Usuario registrado y Administrador.
 
 
 El Usuario visitante, posee permisos que le permiten visualizar las imágenes del complejo, los servicios ofrecidos, la ubicación del mismo en un mapa interactivo, chatear con un bot interactivo, subscribirse al Newsletter del complejo, enviar consultas específicas via e-mail, y consultar la disponibilidad de las Cabañas en determinadas fechas pudiendo aplicar filtros de búsqueda tales como fechas, rango de precios, capacidad de las Cabañas o servicios.
@@ -42,58 +18,60 @@ Los Usuarios que posean credenciales de Administrador, tienen la capacidad para 
 
 
 
-
-
-
-
-
-
-
 ### Technical Description:
+<hr/>
 
-Dogs Parade was build developing a Server in Express, wich mount and configure a Data base through Sequelize. The stored data is then renderized on the Client side of Dogs Parade making use of React to build the necessary functional components; Then use Redux to set your data ready in your components Global State, and CSS Styled components to bring you a pleasant view.
+La aplicación fué construída mediante una arquitectura Cliente (Frontend) - Servidor (Backend) utilizando ExpressJS en la creación del Servidor, Sequelize en la creación de la Base de Datos y sus respectivas tablas, y
+Jason Web Tokens en la administración de credenciales del Backend.
+En el Frontend se utilizaron componentes funcionales de React para el renderizado de las distintas Interfases, 
+Redux en la configuración del estado global de los componentes, que a su vez fueron optimizados mediante el uso de Hooks. Los estilos fueron implementados en su mayoría a través de CSS Styled Components, utilizando React Bootstrap en casos específicos.
+Villa Tranquila utiliza además librerías externas: NodeMailer para la funcionalidad con correos electrónicos, Cloudinary en el almacenamiento de Imágenes en la nube, Axios en la comunicación Cliente - Servidor, React Icons para el renderizado de Iconos, DayPicker para la representación de calendarios y Checkout de Mercado Pago.
+
+
 
 
 ### API Data Management:
+<hr/>
+El servidor, comunmente conocido como API ( Interfaz de Programación de Aplicaciones ) administra el flujo de datos de la aplicación, a través de la siguiente estructura :
 
-The Server ( or commonly known as Application Programming Interface - API ) contains:
 
-- Models folder:
-  Raza & Temperamento .js files to allow Sequelize build Data tables.
+- Carpeta Models :
+  Cabins, Payments, Pictures, Reservations, Services y Users son archivos .js que contienen los modelos de cada entidad utilizada en la aplicación, desde donde Sequelize adquiere los tipos específicos de datos para crear las Tablas de la Base de Datos.
+ 
   
-- Routes folder:
-  An index.js file containing paths where the API will listen Client asynchronous requests like GET / POST utilizing axios.
+- Carpeta Routes:
+  Un archivo Index.js es el encargado de integrar las diferentes rutas contenidas en los archivos Cabins, Index,Login, Payments, Pictures, Reservations, SendEmails, Services, ShowGallery y Users. Estas rutas son las encargadas de escuchar  los requerimientos asincronos del cliente: GET / POST y PUT mediante el uso de Axios.
   
-- Middlewares folder:
-  errorHandlers & setHeaders .js files to allow the API run smoothly.
+- Carpeta Utils:
+  Contiene el archivo cloudinary.js encargado de conectar la Galería de imágenes almacenada remotamente en la nube con la aplicación.
+
   
-- App & BD .js files where middlewares are set, and load Data base Tables relationship. 
+- Los archivos App y BD.js encargados de configurar los Middlewares que Express utiliza en la construcción de   
+  la aplicación, además de la conexión con el host remoto Heroku donde esta montada la aplicación. 
 
-- An .env file store Data base variables for later connection.
-
-- An Index.js file is in charge of start the Data base, forcing it to erase all records before every run.
+- Un archivo Index.js es el encargado de inicializar la Base de Datos.
 
 
-### Client User Interface
 
-The Client side of Dogs Parade has the following structure:
 
-- Actions folder:
- An index.js file that describe Action creators, instructions that will be send to Reducer. Mandatory steps to Redux store can work.
+### Interfaz de Usuario
+
+El cliente o Frontend de Villa Tranquila posee la siguiente estructura:
+
+- Carpeta Actions:
+ Un archivo index.js configura cada una de las 35 Acciones encargadas de comunicarle al Reducer los cambios necesarios que debe tomar el estado global de Redux.
  
 - Reducer folder:
-  An index.js file that manage every action request to the Redux store, declaring its initial state and updating it.
+  Un archivo index.js que administra las mencionadas Acciones, además de configurar el estado inicial de Redux y actualizarlo según corresponda. 
+ 
   
 - Store folder:
- An index.js file that contains Store configuration. Besides Redux dev tools middleware.
+  Un archivo index.js que contiene la configuración del Store de Redux, referente al estado global de la aplicación, además de los datos necesarios para conectar Redux DevTools al Navegador utilizado.
+ 
  
 - Components folder:
-  Every UI component has its place in this folder: Page, Home, Nav, Form, DogDetails & Cards. Most of the logic it's implemented here.
+  Cada componente relativo a la interfaz del Usuario tienen lugar en esta carpeta: Admin, BannerIntro, Contacto, Footer, Home, Login, NavBar, Nosotros, Registrarse, Reserva, SearchBar, Slider y Gallery. Muchos de estos componentes contienen la lógica relativa a la funcionalidad de la aplicación.
+ 
   
-- Images folder:
-  Storage of the Dog.png, the main logo of Dogs Parade. Was designed using PIXLR site, same as the background and the icon.
-  
-- App.js :  This file set up the url's to communicate with API, rendering each respective component according to the received path.
 
-- Index.js : Is the file in charge of App.js render inside root tag of Index.Html; wrapping it between Provider & BrowserRouter for the Store & Links to be available in every     React component.
   
