@@ -18,6 +18,8 @@
   width: 50px;
   height: auto;
   word-wrap: break-word;
+  white-space: nowrap;
+
 }
 
 .btnsContainer {

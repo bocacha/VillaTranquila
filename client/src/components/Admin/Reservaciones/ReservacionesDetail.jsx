@@ -1,7 +1,7 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import styles from "./ReservacionesDetail.module.css";
 import { useDispatch } from "react-redux";
-import {removeReservations, restoreReservations}  from '../../../actions'
+import { removeReservations, restoreReservations } from "../../../actions";
 
 export default function ReservacionesDetail({
   ID,
@@ -14,57 +14,80 @@ export default function ReservacionesDetail({
   CostoFinal,
   handleSubmitEdit,
   handlePrueba,
-  restaurar
+  restaurar,
 }) {
-
- const dispatch = useDispatch();
- const [mostrar, setMostrar] = useState(true);
-  const handleSubmitDelete = (ID)=>{
-    console.log('funcion', ID)
+  const dispatch = useDispatch();
+  const [mostrar, setMostrar] = useState(true);
+  const handleSubmitDelete = (ID) => {
+    console.log("funcion", ID);
     alert("su Reserva fue Eliminada con exito");
-    let obj = {id:ID};
+    let obj = { id: ID };
     dispatch(removeReservations(obj));
     window.location.reload();
-  } 
-  const handleSubmitrestore = (ID)=>{
-    console.log('funcion', ID)
+  };
+  const handleSubmitrestore = (ID) => {
+    console.log("funcion", ID);
     alert("su cabaña fue Eliminada con exito");
-    let obj = {id:ID}
+    let obj = { id: ID };
     dispatch(restoreReservations(obj));
     window.location.reload();
-  }
+  };
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
-        <p><strong>Checkin:</strong> {Checkin}</p>
-        <p><strong>Checkout:</strong> {Checkout}</p>
-        <p><strong>UserId:</strong> {UserId}</p>
-        <p><strong>Costo final:</strong> {CostoFinal}</p>
-        <p><strong>Cabinid:</strong> {Cabinid}</p>
+        <p className={styles.p}>
+          <strong>Checkin:</strong> {Checkin}
+        </p>
+        <p className={styles.p}>
+          <strong>Checkout:</strong> {Checkout}
+        </p>
+        <p className={styles.p}>
+          <strong>UserId:</strong> {UserId}
+        </p>
+        <p className={styles.p}>
+          <strong>Costo final:</strong> {CostoFinal}
+        </p>
+        <p className={styles.p}>
+          <strong>Cabinid:</strong> {Cabinid}
+        </p>
         {/* <p><strong>ExtraServices:</strong> {ExtraServices}</p> */}
       </div>
-      <div>
-      {!restaurar?(
-          <button onClick={()=>handleSubmitDelete(ID)} className={styles.btn}>Eliminar</button>
-
-        ):(
-          <button onClick={()=>handleSubmitrestore(ID)} className={styles.btn}>Restaurar</button>
+      <div className={styles.btnsContainer}>
+        <div>
+          {!restaurar ? (
+            <button
+              onClick={() => handleSubmitDelete(ID)}
+              className={styles.btn}
+            >
+              Eliminar
+            </button>
+          ) : (
+            <button
+              onClick={() => handleSubmitrestore(ID)}
+              className={styles.btn}
+            >
+              Restaurar
+            </button>
+          )}
+        </div>
+        {mostrar ? (
+          <div>
+            <button
+              onClick={(e) => {
+                handleSubmitEdit(e, ID);
+                setMostrar(false);
+              }}
+              className={styles.btnPlus}
+            >
+              Editar
+            </button>
+          </div>
+        ) : (
+          <div>
+            <button onClick={(e) => handlePrueba(e, ID)} className={styles.btnPlus}>Guardar</button>
+          </div>
         )}
       </div>
-      {mostrar
-      
-      ?
-      <div>
-          <button onClick={(e)=> {handleSubmitEdit(e,ID);
-                                       setMostrar(false);
-                                       ;        } 
-         }className={styles.btn} >Editar</button>
-      </div>
-       :
-      <div>
-         <button onClick={(e)=>handlePrueba(e,ID)}>Guardar</button>
-      </div> 
-        }
     </div>
   );
 }

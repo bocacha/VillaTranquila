@@ -104,12 +104,6 @@ export default function Fotos() {
       </div>
       <div className={styles.container2}>
         <div className={styles.formsCont}>
-          {!habilitar ? (
-            <button onClick={ocultadas}>Mostrar ocultadas</button>
-          ) : (
-            <button onClick={showtrue}>Mostrar habilitadas</button>
-          )
-          }
           {/* CREAR */}
           <div className={styles.crearCont}>
             <div className={styles.title}> Crear una nueva foto</div>
