@@ -16,7 +16,17 @@ router.get('/images',async (req, res) => {
     catch(error){
         console.log(error);
     }
-})
+});
+
+router.post('/upload', async (req, res) => {
+    try {
+        const fileStr = req.body.data;
+        console.log(fileStr);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ err: 'Something went wrong' });
+    }
+});
 
 module.exports = router;
 

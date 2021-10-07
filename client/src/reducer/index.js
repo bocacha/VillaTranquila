@@ -14,6 +14,13 @@ import {
   READ_USERS,
   READ_SERVICES,
   READ_CABINS,
+  READ_PAYMENT_OCULTADOS,
+  READ_RESERVATIONS_OCULTADOS,
+  READ_PICTURES_OCULTADOS,
+  READ_USERS_OCULTADOS,
+  READ_SERVICES_OCULTADOS,
+  READ_CABINS_OCULTADOS,
+  READ_FECHASNODISPONIBLES,
   EDIT_USER,
   EDIT_RESERVATIONS,
   EDIT_SERVICES,
@@ -25,7 +32,8 @@ import {
   REMOVE_SERVICES,
   REMOVE_PICTURES,
   REMOVE_PAYMENTS,
-  REMOVE_USERS
+  REMOVE_USERS,
+  GET_USER_DATA
 
 } from "../actions";
 
@@ -40,6 +48,8 @@ const initialState = {
   cabañas: [],
   user: {},
   reservaciones: [],
+  fechasnodisponibles:[],
+  userData: {}
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -54,29 +64,32 @@ export default function rootReducer(state = initialState, action) {
 
     case FILTER_CABINS:
       let cabinsFiltered = state.allCabins;
+      // Filter by availability:
+      let inDate = action.payload.inDate;
+      let outDate = action.payload.outDate;
+      cabinsFiltered = cabinsFiltered.filter(el => {
+        var hitDates = el.Available || {};
+        hitDates = Object.keys(hitDates);
+        var hitDateMatchExists = hitDates.some(date => {
+          var newDate = new Date(date);
+          return newDate >= inDate && newDate <= outDate
+        });
+        return hitDateMatchExists;
+      });
       // Filter by capacity:
       let capacity = action.payload.capacity;
       cabinsFiltered = capacity === 'all' ?
         cabinsFiltered :
         cabinsFiltered.filter(el => el.Capacity >= capacity);
-      // Filter by priceRange:
-
-      // con un solo select:
-      // let priceRange = action.payload.priceRange.split(' - ');
-      // cabinsFiltered = priceRange === 'all' ?
-      //   cabinsFiltered :
-      //   cabinsFiltered.filter(el => el.Price >= priceRange[0] && el.Price <= priceRange[1]);
-
-      // con dos select:
+      // Filter by priceMin and priceMax:
       let priceMin = action.payload.priceMin;
       let priceMax = action.payload.priceMax;
       cabinsFiltered = priceMin === 'all' ?
         cabinsFiltered :
-        cabinsFiltered.filter(el => el.Price >= priceMin);
+        cabinsFiltered.filter(el => el.Price >= parseInt(priceMin));
       cabinsFiltered = priceMax === 'al' ?
         cabinsFiltered :
-        cabinsFiltered.filter(el => el.Price <= priceMax);
-
+        cabinsFiltered.filter(el => el.Price <= parseInt(priceMax));
       // Filter by wifi:
       let wifi = action.payload.wifi;
       cabinsFiltered = wifi === '' || wifi === 'false' ?
@@ -87,11 +100,6 @@ export default function rootReducer(state = initialState, action) {
       cabinsFiltered = barbecue === '' || barbecue === 'false' ?
         cabinsFiltered :
         cabinsFiltered.filter(el => el.Barbecue);
-      // Filter by cleaning:
-      let cleaning = action.payload.cleaning;
-      cabinsFiltered = cleaning === '' || cleaning === 'false' ?
-        cabinsFiltered :
-        cabinsFiltered.filter(el => el.Cleaning);
       // Filter by parking:
       let parking = action.payload.parking;
       cabinsFiltered = parking === '' || parking === 'false' ?
@@ -163,7 +171,38 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         cabañas: action.payload,
+        
       };
+      case READ_PAYMENT_OCULTADOS:
+        return {
+          ...state,
+          pagos: action.payload,
+        };
+      case READ_RESERVATIONS_OCULTADOS:
+        return {
+          ...state,
+          reservaciones: action.payload,
+        };
+      case READ_PICTURES_OCULTADOS:
+        return {
+          ...state,
+          fotos: action.payload,
+        };
+      case READ_USERS_OCULTADOS:
+        return {
+          ...state,
+          usuarios: action.payload,
+        };
+      case READ_SERVICES_OCULTADOS:
+        return {
+          ...state,
+          servicios: action.payload,
+        };
+      case READ_CABINS_OCULTADOS:
+        return {
+          ...state,
+          cabañas: action.payload,
+        };
     case EDIT_USER:
       return {
         ...state,
@@ -214,6 +253,16 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         usuarios: state.usuarios.filter((usuario) => usuario.id !== action.payload)
       };
+    case READ_FECHASNODISPONIBLES:
+      return {
+        ...state,
+        fechasnodisponibles:action.payload,
+      };
+    case GET_USER_DATA:
+      return {
+        ...state,
+        userData: action.payload
+      }
     default:
       return state;
   }

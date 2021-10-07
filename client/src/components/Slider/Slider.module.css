@@ -31,6 +31,26 @@
   padding:.5em;
 }
 
+.newsletter{
+  display:block;
+  width: 40%;
+  text-decoration:none;
+  color:white;
+  background-color:#355978;
+  border-radius:5px;
+  padding:.5em;
+}
+
+.chatea{
+  display:block;
+  width: 30%;
+  text-decoration:none;
+  color:white;
+  background-color:#355978;
+  border-radius:5px;
+  padding:.5em;
+}
+
 .wrapper{
   display:flex;
   justify-content: center;

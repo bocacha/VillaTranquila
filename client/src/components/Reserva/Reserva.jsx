@@ -6,13 +6,36 @@ import Navbar from "../Navbar/Navbar";
 import Cabaña from "./Cabaña/Cabaña";
 import styles from "./Reserva.module.css";
 import { FaWifi, FaCarAlt } from 'react-icons/fa';
-import { GiVacuumCleaner, GiCampCookingPot } from 'react-icons/gi';
+import { GiCampCookingPot } from 'react-icons/gi';
 import { IoMdPeople } from 'react-icons/io';
 import { MdAttachMoney, MdRoomService } from 'react-icons/md';
 import { ImCalendar, ImSearch } from 'react-icons/im';
 import { AiOutlineReload } from 'react-icons/ai';
 import { Logeduser } from "../../actions";
-import RangeSlider from "./Slider/Slider.jsx";
+
+function validate(filters) {
+    let errors = {};
+
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd;
+
+    if((filters.inDate < today && filters.inDate !== '') || (filters.outDate < today && filters.outDate !== '')){
+        errors.today = 'Fechas inválidas';
+        console.log(today)
+    }
+    if (filters.inDate > filters.outDate && filters.outDate !== '') {
+        errors.inDate = 'La fecha de llegada debe ser anterior a la de salida';
+    }
+    if (parseInt(filters.priceMin) > parseInt(filters.priceMax) && filters.priceMin !== 'all' && filters.priceMax !== 'all') {
+        errors.priceMin = 'El precio mínimo debe ser menor que el máximo';
+    }
+
+    return errors;
+}
+
 
 export default function Reserva() {
     const dispatch = useDispatch();
@@ -20,7 +43,7 @@ export default function Reserva() {
         dispatch(Logeduser())
     }, [dispatch]);
     const allCabins = useSelector(state => state.cabins);
-
+    const [errors, setErrors] = useState({})
 
     // Paginado---------------------------------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
@@ -39,6 +62,16 @@ export default function Reserva() {
     }, [dispatch]);
 
 
+    const [filters, setFilters] = useState({
+        inDate: '',
+        outDate: '',
+        capacity: '',
+        priceMin: '',
+        priceMax: '',
+        wifi: '',
+        barbecue: '',
+        parking: '',
+    });
 
     function handleReload(e) {
         e.preventDefault();
@@ -46,29 +79,15 @@ export default function Reserva() {
             inDate: '',
             outDate: '',
             capacity: '',
-            // priceRange: '',
             priceMin: '',
             priceMax: '',
             wifi: '',
             barbecue: '',
-            cleaning: '',
             parking: '',
         })
         window.location.reload();
     }
 
-    const [filters, setFilters] = useState({
-        inDate: '',
-        outDate: '',
-        capacity: '',
-        // priceRange: '',
-        priceMin: '',
-        priceMax: '',
-        wifi: '',
-        barbecue: '',
-        cleaning: '',
-        parking: '',
-    });
     function handleCheck(e) {
         let evt = filters[e.target.name];
         e.target.value = evt === 'true' ? false : true;
@@ -78,13 +97,26 @@ export default function Reserva() {
             ...filters,
             [e.target.name]: e.target.value
         });
+        setErrors(validate({
+            ...filters,
+            [e.target.name]: e.target.value
+        }))
         console.log(filters);
     }
 
+
     function handleFilters(e) {
         e.preventDefault();
-        console.log('Filters submited');
-        dispatch(filterCabins(filters));
+        console.log(errors);
+        if (!Object.getOwnPropertyNames(errors).length) {
+            console.log('Filters submited');
+            dispatch(filterCabins(filters));
+        }
+        else {
+            if(errors.today) alert(errors.today);
+            if (errors.inDate && !errors.today) alert(errors.inDate);
+            if (errors.priceMin) alert(errors.priceMin);
+        }
     }
 
     return (
@@ -92,11 +124,11 @@ export default function Reserva() {
             <Navbar className={styles.navbar} />
             <ul className={styles.reserva}>
                 <li>
-                    <button className={styles.reload} onClick={e => handleReload(e)}>Limpiar filtros <AiOutlineReload /></button>
+                    <button className={styles.reload} onClick={e => handleReload(e)}>Limpiar filtros <p><AiOutlineReload /></p></button>
                 </li>
                 <hr />
                 <li>
-                    <label><ImCalendar /> Fecha de llegada: </label>
+                    <label><p><ImCalendar /></p> Fecha de llegada: </label>
                     <input
                         type="date"
                         className={styles.fechas}
@@ -105,7 +137,7 @@ export default function Reserva() {
                     />
                 </li>
                 <li>
-                    <label><ImCalendar /> Fecha de salida: </label>
+                    <label><p><ImCalendar /></p> Fecha de salida: </label>
                     <input
                         type="date"
                         className={styles.fechas}
@@ -114,7 +146,7 @@ export default function Reserva() {
                     />
                 </li>
                 <li>
-                    <label><IoMdPeople /> Cantidad de personas </label>
+                    <label><p><IoMdPeople /></p> Cantidad de personas </label>
                     <select onChange={e => handleChange(e)} name='capacity'>
                         <option value='selected' hidden>Personas</option>
                         <option value='all'>Todavía no sé</option>
@@ -125,19 +157,7 @@ export default function Reserva() {
                     </select>
                 </li>
                 <li>
-                    <label><MdAttachMoney /> Rango de precios por noche: </label>
-                    {/*SLIDER<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/}
-                    {/* <RangeSlider /> */}
-                    {/* <Slider/> */}
-                    {/* <select onChange={e => handleChange(e)} name='priceRange'>
-                        <option value='selected' hidden>$</option>
-                        <option value='all'>No tengo precio definido</option>
-                        <option value='1500 - 3000' >1500 - 3000</option>
-                        <option value='3001 - 4500'>3001 - 4500</option>
-                        <option value='4501 - 6000'>4501 - 6000</option>
-                        <option value='6001 - 7500'>6001 - 7500</option>
-                        <option value='7501 - 9000'>7501 - 9000</option>
-                    </select> */}
+                    <label><p><MdAttachMoney /></p> Rango de precios por noche: </label>
                     <div id={styles.priceRange}>
                         <select onChange={e => handleChange(e)} name='priceMin' className={styles.prices}>
                             <option value='selected' hidden>Mínimo</option>
@@ -161,10 +181,10 @@ export default function Reserva() {
                 </li>
                 <li>
                     <hr />
-                    <label className={styles.serviceTitle}><MdRoomService /> Que cuente con:</label>
+                    <label className={styles.serviceTitle}><p><MdRoomService /></p> Que cuente con:</label>
                     <ul className={styles.serviceCont}>
                         <li>
-                            <label>Wifi <FaWifi /></label>
+                            <label>Wifi <p className={styles.services}><FaWifi /></p></label>
                             <input
                                 type='checkbox'
                                 name='wifi'
@@ -172,11 +192,10 @@ export default function Reserva() {
                                     handleCheck(e);
                                     return handleChange(e);
                                 }}
-                                className={styles.service}
                             />
                         </li>
                         <li>
-                            <label>Parrilla <GiCampCookingPot /></label>
+                            <label>Parrilla <p className={styles.services}><GiCampCookingPot /></p></label>
                             <input
                                 type='checkbox'
                                 name='barbecue'
@@ -184,23 +203,10 @@ export default function Reserva() {
                                     handleCheck(e);
                                     return handleChange(e);
                                 }}
-                                className={styles.service}
                             />
                         </li>
                         <li>
-                            <label>Limpieza incluida <GiVacuumCleaner /></label>
-                            <input
-                                type='checkbox'
-                                name='cleaning'
-                                onChange={e => {
-                                    handleCheck(e);
-                                    return handleChange(e);
-                                }}
-                                className={styles.service}
-                            />
-                        </li>
-                        <li>
-                            <label>Estacionamiento techado <FaCarAlt /></label>
+                            <label>Estacionamiento techado <p className={styles.services}><FaCarAlt /></p></label>
                             <input
                                 type='checkbox'
                                 name='parking'
@@ -208,7 +214,6 @@ export default function Reserva() {
                                     handleCheck(e);
                                     return handleChange(e);
                                 }}
-                                className={styles.service}
                             />
                         </li>
                     </ul>
@@ -231,6 +236,7 @@ export default function Reserva() {
                             return (
                                 <div key={el.number} >
                                     <Cabaña
+                                        ID={el.ID}
                                         number={el.Number}
                                         capacity={el.Capacity}
                                         notAvailable={el.NotAvailable}
