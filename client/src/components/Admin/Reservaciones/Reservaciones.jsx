@@ -85,6 +85,10 @@ export default function Reservaciones() {
   function handleSubmitEdit(e,ID) {
     e.preventDefault();
     
+
+    
+
+
     setMostrar(true);
     dispatch(editReservation(edit, { token }));
     setEdit({...edit,
@@ -94,7 +98,7 @@ export default function Reservaciones() {
   }
 
   const mostrarFecha = selectDateCI =>{
-    const options = {year:'numeric', month:'numeric', day:'numeric'}
+    const options = {weekday :'long', year:'yyyy', month:'MM', day:'dd'}
     setInput({...input,  Checkin: selectDateCI.toLocaleDateString('es-ES', options)})
   }
   function handlePrueba(e, ID) {
@@ -140,39 +144,22 @@ export default function Reservaciones() {
           <div className={styles.crearCont}>
             <div className={styles.title}>Crear una  reservación</div>
             <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
-              <input
-                type="text"
-                value={input.Checkin}
-                name="Checkin"
-                onChange={(e) => handleChange(e)}
-                placeholder="Check in"
-                className={styles.formInputs}
-                required
-              />
-              {/* <DatePicker
+              
+              <DatePicker
           selected={selectDateCI}
           onChange={date=> setSelectDateCI(date)}
           dateFormat='dd/MM/yyyy'
           minDate={new Date()}
           //isClearable
-          /> */}
-              <input
-                type="text"
-                value={input.Checkout}
-                name="Checkout"
-                onChange={(e) => handleChange(e)}
-                placeholder="Check out"
-                className={styles.formInputs}
-                required
-              />
-              {/* 
+          /> 
+              
           <DatePicker
           selected={selectDateCO}
           onChange={date=> setSelectDateCO(date)}
           dateFormat='dd/MM/yyyy'
           minDate={new Date()}
           //isClearable
-          /> */}
+          />
               <input
                 type="text"
                 value={input.UserId}
