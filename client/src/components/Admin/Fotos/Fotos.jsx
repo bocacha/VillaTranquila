@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Fotos.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  createimage,
-  readPictures,
-  editPictures,
-  Logeduser,
-  readPicturesocultados,
-} from "../../../actions";
+import { createimage, readPictures, editPictures, Logeduser, readPicturesocultados } from "../../../actions";
 import FotosDetail from "./FotosDetail";
 import Upload from "../../Reserva/Upload/Upload";
 import { Link } from "react-router-dom";
@@ -16,11 +10,9 @@ import { useHistory } from "react-router";
 export default function Fotos() {
   const dispatch = useDispatch();
   const history = useHistory();
-
   const allPictures = useSelector((state) => state.fotos);
   const logeduser = useSelector((state) => state.user);
   const [habilitar, setHabilitar] = useState(false);
-
   const [description, setDescription] = useState("");
   const [file, setFile] = useState({});
   const [edit, setEdit] = useState({
@@ -57,34 +49,38 @@ export default function Fotos() {
       )
     );
     alert("Foto creada con éxito");
-    setTimeout(function() {
+    setTimeout(function () {
       history.go(0);
-    }, 2000);
+    }, 2000)
     // window.location.reload();
     //
   }
   function handleSubmitEdit(e, ID) {
     e.preventDefault();
     setMostrar(true);
-    const { token } = logeduser;
-    dispatch(editPictures(edit, { token }));
     setEdit({
       ...edit,
-      id: ID,
-    });
+      id: ID
+    })
+    handledispatch()
   }
-  function handlePrueba(e, ID) {
+  const handledispatch=()=>{
+    const { token } = logeduser;
+    dispatch(editPictures(edit, { token }));
+  }
+
+  
+ function handlePrueba(e, ID) {
     e.preventDefault();
     const { token } = logeduser;
     dispatch(editPictures(edit, { token }));
     alert("Foto editada con éxito");
     setEdit({
       ...edit,
-      id: ID,
-    });
+      id: ID
+    })
     window.location.reload();
   }
-
   const ocultadas = () => {
     dispatch(readPicturesocultados());
     setHabilitar(true);
@@ -93,6 +89,7 @@ export default function Fotos() {
     dispatch(readPictures());
     setHabilitar(false);
   };
+  
   return (
     <div className={styles.container}>
       <div className={styles.btnsContainer}>
@@ -107,6 +104,12 @@ export default function Fotos() {
       </div>
       <div className={styles.container2}>
         <div className={styles.formsCont}>
+          {!habilitar ? (
+            <button onClick={ocultadas}>Mostrar ocultadas</button>
+          ) : (
+            <button onClick={showtrue}>Mostrar habilitadas</button>
+          )
+          }
           {/* CREAR */}
           <div className={styles.crearCont}>
             <div className={styles.title}> Crear una nueva foto</div>
@@ -126,7 +129,7 @@ export default function Fotos() {
                 type="file"
                 name="File"
                 onChange={(e) => {
-                  setFile(e.target.files[0]);
+                  setFile(e.target.files[0])
                 }}
                 className={styles.formInputs}
                 required
@@ -180,6 +183,7 @@ export default function Fotos() {
               return (
                 <div className={styles.detalles} key={el.ID}>
                   <FotosDetail
+                    ID={el.ID}
                     Description={el.Description}
                     Url={el.Url}
                     handleSubmitEdit={handleSubmitEdit}
