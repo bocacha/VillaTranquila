@@ -48,7 +48,8 @@ const initialState = {
   cabañas: [],
   user: {},
   reservaciones: [],
-  fechasnodisponibles:[]
+  fechasnodisponibles:[],
+  userData: {}
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -260,7 +261,7 @@ export default function rootReducer(state = initialState, action) {
     case GET_USER_DATA:
       return {
         ...state,
-        user: action.payload
+        userData: action.payload
       }
     default:
       return state;

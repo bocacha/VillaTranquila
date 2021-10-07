@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getUserData } from "../../actions";
+import { getUserData, Logeduser } from "../../actions";
 import styles from './Profile.module.css';
 import Navbar from "../Navbar/Navbar";
 import { FaLongArrowAltRight } from 'react-icons/fa';
@@ -10,37 +10,43 @@ import { IoDiamond } from 'react-icons/io5';
 
 export default function Profile(props) {
     const dispatch = useDispatch();
-    const username = props.match.params.username;
+    useEffect(() => {
+        dispatch(Logeduser())
+    }, [dispatch]);
+    const user = useSelector((state) => state.user);
+    const username = user.user;
 
     useEffect(() => {
         dispatch(getUserData(username))
     }, [dispatch, username]);
 
-    const user = useSelector((state) => state.user);
 
     return (
         <div className={styles.perfil}>
             <Navbar />
             <Link to='/editarPerfil'>
-                <button>
+                <button className={styles.editarPerfil}>
                     Editar datos <BsPen />
                 </button>
             </Link>
-            <ul>
+            <ul className={styles.datos}>
                 <li>
-                    <span>{user.FirstName}</span>
+                    <span>{username}</span>
                 </li>
                 <li>
-                    <span>{user.LastName}</span>
+                    <span>Nombre: {}</span>
                 </li>
                 <li>
-                    <span>{user.Adress}</span>
+                    <span>Apellido: {}</span>
                 </li>
                 <li>
-                    <span>{user.Phone}</span>
+                    <span>Dirección: {}</span>
                 </li>
                 <li>
-                    <span>{user.Email}</span>
+                    <span>Teléfono: {}</span>
+                </li>
+                <li>
+                    <span>E-mail: {}</span>
                 </li>
                 <li>
                     <details>
