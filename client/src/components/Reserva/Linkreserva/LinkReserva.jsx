@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styles from "./LinkReserva.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -112,26 +112,40 @@ export default function Reservaciones() {
     setSelectDateCI(e)
     mostrarFecha(e);
   }
-const changeFechas2=(e)=>{
+const changeFechas2=async(e)=>{
+  if(e === null){
+    return
+  }
   setSelectDateCO(e)
   mostrarFecha2(e);
-  calculofechas()
+  // setTimeout(calculofechas,10000)
 }
 const mostrarFecha = selectDateCI =>{
     const options = {year:'numeric', month:'numeric', day:'2-digit'}
     setInput({...input,  Checkin: selectDateCI.toLocaleDateString('es-ES', options)})
     setReserva({...reserva, Checkin:selectDateCI.toLocaleDateString('es-ES', options)})
 }
-const mostrarFecha2 = selectDateCI =>{
+const mostrarFecha2 = selectDateCO =>{
   const options = {year:'numeric', month:'numeric', day:'2-digit'}
-  setInput({...input,  Checkout: selectDateCI.toLocaleDateString('es-ES', options)})
-  setReserva({...reserva, Checkout:selectDateCI.toLocaleDateString('es-ES', options)})
+  setInput({...input,  Checkout: selectDateCO.toLocaleDateString('es-ES', options)})
+  setReserva({...reserva, Checkout:selectDateCO.toLocaleDateString('es-ES', options)})
 }
 const calculofechas=()=> {
-  fechasintermedias.push(ocupadas)
-  fechasintermedias.push(fechas(reserva))
- setEdit({...edit,Available:fechasintermedias})
+ let fechasintermedias=[]
+  if(ocupadas.length>=1){
+    fechasintermedias = [...ocupadas]
+    fechasintermedias.push(fechas(reserva))
+    console.log(fechasintermedias)
+    setEdit({...edit,Available:fechasintermedias})
+  }
 }
+useEffect(()=>{
+  calculofechas()
+  },[reserva]);
+//useEffect(() => {
+ // console.log(reserva.Checkout)
+ // calculofechas();
+//}, [calculofechas,reserva.Checkout]);
 const handlePrueba=()=>{
 console.log(edit)
 dispatch(createReservation(input))
@@ -155,15 +169,18 @@ dispatch(editAvailible(edit))
           </div>
           <div className={styles.title}>Crear una nueva reservación</div>
           <div>
-            Fechas disponibles no de la cabaña
-            <div>{ocupadas.map((e)=>(
-            (e.map(e=>(
-                <div>({e})</div>
-                  ))
-              ))
+            Fechas no disponibles de la cabaña
+            <div>{ocupadas.map(e=>
+                  <div>
+                    del
+                    <div>({e[0]})</div>  
+                    al
+                    <div>({e[e.length-1]})</div>
+                     <div>fin</div>
+                  </div>
             )}
             </div>
-            <div>fin</div>
+           
           </div>
           <form onSubmit={(e) => handleSubmit(e)}className={styles.form}>
            
@@ -198,6 +215,7 @@ dispatch(editAvailible(edit))
           <DatePicker
             selected={selectDateCI}
             onChange={e=>changeFechas(e)}
+            placeholderText="Fecha de Check in"
             //onChange={date=> setSelectDateCI(date)}
             className={styles.formInputs}
             //onChange = {onChange}
@@ -219,6 +237,8 @@ dispatch(editAvailible(edit))
         <DatePicker
             selected={selectDateCO}
             onChange={e=>changeFechas2(e)}
+            placeholderText="Fecha de Check out"
+            onFocus={calculofechas}
             className={styles.formInputs}
             //onChange = {onChange}
             dateFormat="dd 'de' MMMM 'de' yyyy"
@@ -226,6 +246,7 @@ dispatch(editAvailible(edit))
             locale='es'
             //isClearable
             />
+            <button className={styles.btn}onClick={calculofechas}>Fechas</button>
             {/* <input
               type="text"
               value={input.UserId}

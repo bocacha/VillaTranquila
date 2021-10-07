@@ -10,7 +10,7 @@ const mesyaño1= fecha1.slice(2)
 const mesyaño2= fecha2.slice(2)
 if(mes1 - mes2 === 0){
     const diferencia= parseFloat(dia2) - parseFloat(dia1)
-    
+    console.log(dia1, dia2)
     fecha.push(fecha1)
     for(let i=1; i<diferencia ;i++){
         let dia3 = parseFloat(dia1) + i
