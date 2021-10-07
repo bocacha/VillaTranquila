@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Fotos.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createimage, readPictures, editPictures, Logeduser,readPicturesocultados} from "../../../actions";
+import { createimage, readPictures, editPictures, Logeduser, readPicturesocultados } from "../../../actions";
 import FotosDetail from "./FotosDetail";
 import Upload from "../../Reserva/Upload/Upload";
 import { Link } from "react-router-dom";
@@ -13,12 +13,8 @@ export default function Fotos() {
 
   const allPictures = useSelector((state) => state.fotos);
   const logeduser = useSelector((state) => state.user);
-  const [habilitar, setHabilitar]= useState(false)
-  console.log(allPictures);
-  const [input, setInput] = useState({
-    Description: "",
-    Url: "",
-  });
+  const [habilitar, setHabilitar] = useState(false)
+  
 
   const [description, setDescription] = useState('')
   const [file, setFile] = useState({})
@@ -51,8 +47,9 @@ export default function Fotos() {
       file
     }, { token }));
     alert("Foto creada con éxito");
-    setTimeout(function(){ 
-      history.go(0); }, 2000)
+    setTimeout(function () {
+      history.go(0);
+    }, 2000)
     // window.location.reload();
     // 
 
@@ -60,31 +57,39 @@ export default function Fotos() {
   function handleSubmitEdit(e, ID) {
     e.preventDefault();
     setMostrar(true);
+    setEdit({
+      ...edit,
+      id: ID
+    })
+    handledispatch()
+  }
+  const handledispatch=()=>{
     const { token } = logeduser;
     dispatch(editPictures(edit, { token }));
-    setEdit({...edit,
-      id:ID  
-    })
-    
   }
+
+  
   function handlePrueba(e, ID) {
     e.preventDefault();
     const { token } = logeduser;
     dispatch(editPictures(edit, { token }));
     alert("Foto editada con éxito");
-    setEdit({...edit,
-      id:ID  
+    setEdit({
+      ...edit,
+      id: ID
     })
     window.location.reload();
   }
-const ocultadas=() => {
-  dispatch(readPicturesocultados())
-  setHabilitar(true)
-}
-const showtrue=()=>{
-  dispatch(readPictures())
-  setHabilitar(false)
-}
+
+
+  const ocultadas = () => {
+    dispatch(readPicturesocultados())
+    setHabilitar(true)
+  }
+  const showtrue = () => {
+    dispatch(readPictures())
+    setHabilitar(false)
+  }
   return (
     <div className={styles.container}>
       <div className={styles.btnVolver}>
@@ -94,9 +99,9 @@ const showtrue=()=>{
       </div>
       <div className={styles.container2}>
         <div className={styles.formsCont}>
-          {!habilitar ?(
+          {!habilitar ? (
             <button onClick={ocultadas}>Mostrar ocultadas</button>
-          ):(
+          ) : (
             <button onClick={showtrue}>Mostrar habilitadas</button>
           )
           }
@@ -106,7 +111,6 @@ const showtrue=()=>{
             <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
               <input
                 type="text"
-                value={input.Description}
                 maxLength="100"
                 name="Description"
                 onChange={(e) => {
@@ -117,19 +121,19 @@ const showtrue=()=>{
                 required
               />
               <input
-                 type="file"
-                 name="File"
-                 onChange={(e) => {
-                   setFile(e.target.files[0])
-   
-                 }}
+                type="file"
+                name="File"
+                onChange={(e) => {
+                  setFile(e.target.files[0])
+
+                }}
                 className={styles.formInputs}
                 required
               />
-              
-            {/* Subir Imagen */}
 
-            {/* <Upload /> */}
+              {/* Subir Imagen */}
+
+              {/* <Upload /> */}
 
               <div className={styles.btns}>
                 <button type="submit" className={styles.btn}>
@@ -139,13 +143,13 @@ const showtrue=()=>{
             </form>
           </div>
           {/* EDITAR */}
-                 {mostrar 
-        
-        ?  
-          <div className={styles.editarCont}>
-          <div className={styles.title}> Editar una nueva foto</div>
-          <form  className={styles.form}>
-           {/*  <input
+          {mostrar
+
+            ?
+            <div className={styles.editarCont}>
+              <div className={styles.title}> Editar una nueva foto</div>
+              <form className={styles.form}>
+                {/*  <input
               type="text"
               value={edit.id}
               name="id"
@@ -153,46 +157,47 @@ const showtrue=()=>{
               placeholder="Id"
               className={styles.formInputs}
             /> */}
-            <input
-              type="text"
-              value={edit.Description}
-              name="Description"
-              onChange={(e) => handleChangeEdit(e)}
-              placeholder="Descripción"
-              className={styles.formInputs}
-            />
-            <input
-              type="text"
-              value={edit.Url}
-              name="Url"
-              onChange={(e) => handleChangeEdit(e)}
-              placeholder="Url"
-              className={styles.formInputs}
-            />
-            
-          </form>
-        </div>
-        :
-          null
-        }
-        <div>
-          {allPictures?.map((el) => {
-            return (
-              <div className={styles.detalles} key={el.ID}>
-                <FotosDetail
-                  Description={el.Description}
-                  Url={el.Url}
-                  handleSubmitEdit={handleSubmitEdit}
-                  handlePrueba={handlePrueba}
-                  restaurar={habilitar}
+                <input
+                  type="text"
+                  defaultValue={edit.Description}
+                  name="Description"
+                  onChange={(e) => handleChangeEdit(e)}
+                  placeholder="Descripción"
+                  className={styles.formInputs}
                 />
-              </div>
-            );
-          })}
+                <input
+                  type="text"
+                  value={edit.Url}
+                  name="Url"
+                  onChange={(e) => handleChangeEdit(e)}
+                  placeholder="Url"
+                  className={styles.formInputs}
+                />
 
+              </form>
+            </div>
+            :
+            null
+          }
+          <div>
+            {allPictures?.map((el) => {
+              return (
+                <div className={styles.detalles} key={el.ID}>
+                  <FotosDetail
+                    ID={el.ID}
+                    Description={el.Description}
+                    Url={el.Url}
+                    handleSubmitEdit={handleSubmitEdit}
+                    handlePrueba={handlePrueba}
+                    restaurar={habilitar}
+                  />
+                </div>
+              );
+            })}
+
+          </div>
+        </div>
       </div>
     </div>
-    </div> 
-    </div> 
   );
 }
