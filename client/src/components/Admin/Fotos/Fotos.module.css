@@ -9,6 +9,7 @@
 }
 
 .container2 {
+  margin-top: 20px;
   display: flex;
   flex-direction: row;
   align-items: start;
@@ -128,13 +129,13 @@
 }
 
 .detalles {
-  margin-left: 30px;
+  margin-left: 120px;
   background: #293c4f;
   color: #fff;
   border-radius: 7px;
   padding: 10px 25px;
   margin-bottom: 10px;
-  width: 400px;
+  width: 320px;
 }
 
 @media (max-width: 700px) {
