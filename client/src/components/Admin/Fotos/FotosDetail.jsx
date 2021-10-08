@@ -72,7 +72,6 @@ export default function FotosDetail({
         } className={styles.btnPlus} >Editar</button>
           </div> 
           :
-        
           <div>
             <button onClick={(e) => handlePrueba(e, ID)} className={styles.btnPlus}>Guardar</button>
           </div>
