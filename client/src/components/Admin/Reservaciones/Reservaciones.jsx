@@ -123,18 +123,18 @@ export default function Reservaciones() {
   }
   return (
     <div className={styles.container}>
-      <div className={styles.btnVolver}>
+      <div className={styles.btnsContainer}>
         <Link to="/admin">
-          <button className={styles.btn}>Volver</button>
+          <button className={styles.btnVolver}>Volver</button>
         </Link>
-      </div>
-      <div className={styles.container2}>
         {!habilitar ?(
-            <button onClick={ocultadas}>Mostrar ocultadas</button>
+            <button onClick={ocultadas} className={styles.btnSup}>Mostrar ocultadas</button>
           ):(
-            <button onClick={showtrue}>Mostrar habilitadas</button>
+            <button onClick={showtrue} className={styles.btnSup}>Mostrar habilitadas</button>
           )
           }
+      </div>
+      <div className={styles.container2}>
       <div className={styles.formsCont}>
           {/* CREAR */}
           <div className={styles.crearCont}>
@@ -181,7 +181,7 @@ export default function Reservaciones() {
                 placeholder="Usuario Id"
                 className={styles.formInputs}
                 title='Formato: UUID4'
-                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
+               // pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                 required
               />
               <input
@@ -192,7 +192,7 @@ export default function Reservaciones() {
                 placeholder="Pagos id"
                 className={styles.formInputs}
                  title='Formato: UUID4'
-                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
+               // pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                 required
               />
               <input
@@ -203,7 +203,7 @@ export default function Reservaciones() {
                 placeholder="Cabaña id"
                 className={styles.formInputs}
                 title='Formato: UUID4'
-                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
+               // pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                 required
               />
               <input

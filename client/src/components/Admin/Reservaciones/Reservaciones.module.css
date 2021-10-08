@@ -1,25 +1,67 @@
 .container {
   width: 100%;
   min-height: 100vh;
-  margin-left: auto;
-  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background-color: #94adbc;
 }
 
 .container2 {
+  margin-top: 20px;
   display: flex;
   flex-direction: row;
+  align-items: start;
+  justify-content: center;
   width: 50%;
-  margin-left: auto;
-  margin-right: auto;
+  height: 100vh;
+}
+
+.btnsContainer {
+  width: 100%;
+  margin-bottom: 35px;
+  display: flex;
+  align-items: start;
+  /* margin-left: 290px; */
+  padding-top: 10px;
 }
 
 .btnVolver {
-  margin-bottom: 20px;
-  display: flex;
-  align-items: start;
-  margin-left: 290px;
-  padding-top: 10px;
+  margin-left: 40px;
+  padding: 4px 7px;
+  background: #293c4f;
+  color: #fff;
+  border: none;
+  border: 1px solid #293c4f;
+  border-radius: 5px;
+  font-family: Lato, Arial, sans-serif;
+  font-weight: bold;
+  transition-duration: 0.4s;
+}
+.btnVolver:hover {
+  background: none;
+  border: 1px solid #293c4f;
+  color: #000;
+}
+
+.btnSup {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 4px 7px;
+  background: #293c4f;
+  color: #fff;
+  border: none;
+  border: 1px solid #293c4f;
+  border-radius: 5px;
+  font-family: Lato, Arial, sans-serif;
+  font-weight: bold;
+  transition-duration: 0.4s;
+}
+.btnSup:hover {
+  background: none;
+  border: 1px solid #293c4f;
+  color: #000;
 }
 
 .btn {
@@ -39,18 +81,24 @@
   color: #000;
 }
 
-.formsCont {
-  display: flex;
-}
-
 .form {
   width: fit-content;
+}
+
+.formsCont {
+  display: flex;
+  align-items: start;
+  justify-content: space-around;
+  height: 100%;
 }
 
 .crearCont {
   display: flex;
   flex-direction: column;
+  align-items: start;
+  justify-content: start;
   width: 33%;
+  height: max-content;
   padding: 3px;
 }
 
@@ -67,22 +115,31 @@
   font-family: Lato, Arial, sans-serif;
   font-weight: 300;
   font-size: 17px;
-  white-space: nowrap;
   font-weight: bold;
+  white-space: nowrap;
 }
 
 .formInputs {
   margin-bottom: 8px;
   padding: 3px;
   border: solid 1.5px #293c4f;
+  width: 200px;
+  display: flex;
+  align-items: start;
 }
 
 .detalles {
-  margin-left: 30px;
+  margin-left: 120px;
   background: #293c4f;
   color: #fff;
   border-radius: 7px;
   padding: 10px 25px;
   margin-bottom: 10px;
   width: 400px;
+}
+
+@media (max-width: 700px) {
+  .formsCont {
+    flex-direction: column;
+  }
 }
