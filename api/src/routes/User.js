@@ -137,7 +137,7 @@ router.put("/EditProfile/:ID", async (req,res) =>{
             .catch(error=>{console.log(error)})
     
     }
-    res.send.status(404);
+    res.status(404);
 });
 
 router.put("/EditUser", async (req,res) =>{
