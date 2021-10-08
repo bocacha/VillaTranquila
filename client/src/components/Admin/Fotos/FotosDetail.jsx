@@ -36,7 +36,7 @@ export default function FotosDetail({
           <strong>Descripcion: </strong> {Description}
         </p>
         <p className={styles.p}>
-          <strong>Url:</strong> {Url}
+          {Url}
         </p>
       </div>
       
@@ -53,7 +53,7 @@ export default function FotosDetail({
               onClick={() => handleSubmitDelete(ID)}
               className={styles.btn}
             >
-              Eliminar
+              Ocultar
             </button>
           ) : (
             <button
@@ -69,10 +69,9 @@ export default function FotosDetail({
                   <button onClick={(e)=> {handleSubmitEdit(e,ID);
                                       setMostrar(false);
                                       ;        } 
-        } className={styles.btn} >Editar</button>
+        } className={styles.btnPlus} >Editar</button>
           </div> 
           :
-
           <div>
             <button onClick={(e) => handlePrueba(e, ID)} className={styles.btnPlus}>Guardar</button>
           </div>
