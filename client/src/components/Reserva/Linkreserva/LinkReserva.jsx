@@ -118,6 +118,7 @@ const changeFechas2=async(e)=>{
   }
   setSelectDateCO(e)
   mostrarFecha2(e);
+  fechasafiltrar()
 }
 const mostrarFecha = selectDateCI =>{
     const options = {year:'numeric', month:'numeric', day:'2-digit'}
@@ -148,7 +149,7 @@ useEffect(()=>{
 const handlePrueba=()=>{
 console.log(edit)
 dispatch(createReservation(input))
-dispatch(editAvailible(edit))
+//dispatch(editAvailible(edit))
 alert("Reserva creada")
 }
   function handleSubmit(e) {
@@ -176,7 +177,18 @@ alert("Reserva creada")
     })
 
     }
-
+    const fechasafiltrar=()=>{
+     const intermedias = fechas(reserva)
+     const ocup = parapiker
+     for(let i= 0; i<intermedias.length; i++){
+      for(let j =0;j<ocup.length; j++){
+        if(intermedias[i] === ocup[j]){
+          setSelectDateCO(null)
+          throw alert("error no podes elegir esas fechas, porlomenos una esta reservada")
+        }
+      }
+     }
+    }
   return (
     <div className={styles.container}>
       <div className={styles.formsCont}>
@@ -238,6 +250,9 @@ alert("Reserva creada")
             minDate={new Date()}
             locale='es'
             excludeDates={parapiker2}
+            filterDate={d => {
+              return selectDateCI < d;
+            }}
             />
 
             <div>
@@ -255,7 +270,7 @@ alert("Reserva creada")
                       id={id1++}
                       onChange={consultarprecio}
                     />
-                    <label htmlFor="temperament">{el.name}</label>
+                    <label >{el.name}</label>
                   </div>
                 ))}
               </div>

@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
 const cors = require('cors');
+const Errormiddelware = require('./Errormiddelware.js');
 require('dotenv').config()
 require('./db.js');
 const server = express();
@@ -32,5 +33,5 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   console.error(err);
   res.status(status).send(message);
 });
-
+app.use(Errormiddelware)
 module.exports = server;
