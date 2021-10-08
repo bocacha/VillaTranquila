@@ -18,6 +18,8 @@ import DatePicker,{registerLocale} from "react-datepicker";
 import es from 'date-fns/locale/es';
 import axios from "axios"
 import fechas from "./algoritmofechas.js"
+import DayPicker from 'react-day-picker';
+import 'react-day-picker/lib/style.css';
 registerLocale('es', es)
 
 
@@ -36,6 +38,7 @@ export default function Reservaciones() {
   let costoadicional = 0
   let fechasintermedias=[]
   const ocupadas = useSelector((state) => state.fechasnodisponibles)
+  //console.log(ocupadas)
   const [selectDateCI, setSelectDateCI] = useState(null);
   const [selectDateCO, setSelectDateCO] = useState(null);
   const [reserva, setReserva] = useState({Checkin:"",Checkout:""});
@@ -142,6 +145,10 @@ const calculofechas=()=> {
 useEffect(()=>{
   calculofechas()
   },[reserva]);
+
+  useEffect(()=>{
+    date(ocupadas)
+    });
 //useEffect(() => {
  // console.log(reserva.Checkout)
  // calculofechas();
@@ -157,6 +164,31 @@ dispatch(editAvailible(edit))
     // alert("Reserva creada con éxito");
     // window.location.reload();
   }
+
+  const parapiker2=[] 
+  const parapiker =[]
+  function date(array){
+    array.map(e=>{
+        e.map(i=>{
+    parapiker.push(i)
+        })
+    })
+    parapiker.map(e=>{
+        let dia = e.slice(0,2)
+        let mes = e.slice(3,5)
+        let anio = e.slice(6)
+      if(mes === '01' || mes === '02' || mes === '03' || mes === '04' || mes === '05' || mes === '06' || mes === '07' || mes === '08' || mes === '09' ){
+        mes = mes - 0;
+      }
+      parapiker2.push(new Date(anio, mes-1, dia))  
+    })
+
+    }
+
+    const isWeekday = (date) => {
+      return  date !== new Date(2021,10,21)
+    };
+
   return (
     <div className={styles.container}>
       <div className={styles.formsCont}>
@@ -223,7 +255,9 @@ dispatch(editAvailible(edit))
             dateFormat="dd 'de' MMMM 'de' yyyy"
             minDate={new Date()}
             locale='es'
-            //isClearable
+
+            excludeDates={parapiker2}
+            
             />
             {/* <input
               type="text"
@@ -234,7 +268,7 @@ dispatch(editAvailible(edit))
               className={styles.formInputs}
               required
             /> */}
-        <DatePicker
+            <DatePicker
             selected={selectDateCO}
             onChange={e=>changeFechas2(e)}
             placeholderText="Fecha de Check out"
@@ -309,6 +343,7 @@ dispatch(editAvailible(edit))
               <button onClick={handlePrueba} className={styles.btnRes}>
                 Reservar
               </button>
+              
             </div>
           </form>
         </div>
