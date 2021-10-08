@@ -18,7 +18,7 @@ Los Usuarios que posean credenciales de Administrador, tienen la capacidad para 
 ![tabla permisos](https://user-images.githubusercontent.com/82456534/136569838-c91a4462-d694-4eff-9fa8-a7f1e93ad7f5.png)
 
 
-### Technical Description:
+### Descripción Técnica:
 <hr/>
 
 La aplicación fué construída mediante una arquitectura Cliente (Frontend) - Servidor (Backend) utilizando ExpressJS en la creación del Servidor, Sequelize en la creación de la Base de Datos y sus respectivas tablas, y
@@ -31,7 +31,7 @@ Villa Tranquila utiliza además librerías externas: NodeMailer para la funciona
 
 
 
-### API Data Management:
+### Estructura del Servidor /  API:
 <hr/>
 El servidor, comunmente conocido como API ( Interfaz de Programación de Aplicaciones ) administra el flujo de datos de la aplicación, a través de la siguiente estructura :
 
@@ -70,3 +70,15 @@ El cliente o Frontend de Villa Tranquila posee la siguiente estructura:
  
 - Components folder:
   Cada componente relativo a la interfaz del Usuario tienen lugar en esta carpeta: Admin, BannerIntro, Contacto, Footer, Home, Login, NavBar, Nosotros, Registrarse, Reserva, SearchBar, Slider y Gallery. Muchos de estos componentes contienen la lógica relativa a la funcionalidad de la aplicación.
+  
+  
+### Flujo de Datos
+
+  El Backend se encuentra montado en Heroku, donde fue instalada una dependencia de Postgress la cual permite enlazar los datos configurados mediante Sequelize.
+  Una vez montado el Backend, este recibe peticiones en el puerto configurado para tal fin, desde donde distibuyen los requerimientos recibidos a cada uno de los 11 componentes 
+  contenedores de las rutas receptoras. Dependiendo de la existencia de un token de autorización en el header de la estructura de datos recibida, el requerimiento es derivado 
+  hacia rutas públicas o privadas.
+  Cuando el usuario interactúa con la aplicación desde el Frontend (montada en un servidor de Vercel y configurada para comunicarse con la API en Heroku ), es disparada una 
+  acción que a través de Axios impacta en las rutas de escucha del Backend, es derivada a la base de datos desde donde recopila los datos necesarios, y devuelta en una respuesta 
+  que contiene la información solicitada. Dicha información será interpretada por el Reductor para posteriormente configurar el estado global de la aplicación. Dicho estado es 
+  utilizado para almacenar los datos requeridos por la lógica de la aplicación, la cual procesa el requerimiento y entrega los datos ya procesados a la Interfaz del Usuario.
