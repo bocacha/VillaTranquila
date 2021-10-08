@@ -262,7 +262,6 @@ alert("Reserva creada")
               return selectDateCI < d;
             }}
             />
-
             <div>
               <div className={styles.p}>Servicios Adicionales:</div>
               <button onClick={checkboxselected}>Seleccionar Servicios</button>
@@ -284,9 +283,11 @@ alert("Reserva creada")
               </div>
             </div>
             <div className={styles.btns}>
-              <button onClick={handlePrueba} className={styles.btnRes}>
-                Reservar
-              </button>
+              <Link to="/reserva/pago">
+                <button onClick={handlePrueba} className={styles.btnRes}>
+                  Reservar
+                </button>
+              </Link>
             </div>
           </form>
         </div>
@@ -295,5 +296,3 @@ alert("Reserva creada")
     </div>
   );
 }
-
-

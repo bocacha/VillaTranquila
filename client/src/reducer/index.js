@@ -33,7 +33,8 @@ import {
   REMOVE_SERVICES,
   REMOVE_PICTURES,
   REMOVE_PAYMENTS,
-  REMOVE_USERS
+  REMOVE_USERS,
+  GET_USER_DATA
 
 } from "../actions";
 
@@ -48,7 +49,8 @@ const initialState = {
   cabañas: [],
   user: {},
   reservaciones: [],
-  fechasnodisponibles:[]
+  fechasnodisponibles:[],
+  userData: {}
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -256,11 +258,16 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         usuarios: state.usuarios.filter((usuario) => usuario.id !== action.payload)
       };
-      case READ_FECHASNODISPONIBLES:
+    case READ_FECHASNODISPONIBLES:
       return {
         ...state,
         fechasnodisponibles:action.payload,
       };
+    case GET_USER_DATA:
+      return {
+        ...state,
+        userData: action.payload
+      }
     default:
       return state;
   }
