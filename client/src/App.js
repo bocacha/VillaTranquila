@@ -15,6 +15,8 @@ import Usuarios from "./components/Admin/Usuarios/Usuarios";
 import Registro from "./components/Registrarse/Registro";
 import LinkReserva from"./components/Reserva/Linkreserva/LinkReserva"
 import Gallery from './components/Gallery/Gallery';
+import Profile from './components/Profile/Profile';
+import PagosReserva from './components/PagoReserva/PagoReserva';
 
 function App() {
   return (
@@ -26,6 +28,7 @@ function App() {
           <Route path="/contacto" component={Contacto} />
           <Route exact path="/reserva" component={Reserva} />
           <Route path="/reserva/reservar" component={LinkReserva} />
+          <Route path='/reserva/pago' component={PagosReserva} />
           <Route path="/galeria" component={Gallery} />
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/admin/cabañas" component={Cabañas} />
@@ -36,6 +39,7 @@ function App() {
           <Route exact path="/admin/usuarios" component={Usuarios} />
           <Route path='/iniciarsesion' component={Login} />
           <Route path='/registrarse' component={Registro} />
+          <Route path='/perfil' component={Profile} />
         </Switch>
       </div>
     </BrowserRouter>

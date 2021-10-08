@@ -163,6 +163,7 @@ alert("Reserva creada")
     e.preventDefault();
     // console.log(input)
   //   alert("Reserva creada con éxito");
+
   }
 
   const parapiker2=[] 
@@ -284,9 +285,11 @@ alert("Reserva creada")
               </div>
             </div>
             <div className={styles.btns}>
-              <button onClick={handlePrueba} className={styles.btnRes}>
-                Reservar
-              </button>
+              <Link to="/reserva/pago">
+                <button onClick={handlePrueba} className={styles.btnRes}>
+                  Reservar
+                </button>
+              </Link>
             </div>
           </form>
         </div>
@@ -295,5 +298,3 @@ alert("Reserva creada")
     </div>
   );
 }
-
-
