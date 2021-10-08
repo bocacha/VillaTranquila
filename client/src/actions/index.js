@@ -38,6 +38,7 @@ export const REMOVE_PAYMENTS= "REMOVE_PAYMENTS";
 export const REMOVE_USERS= "REMOVE_USERS";
 export const READ_FECHASNODISPONIBLES = "READ_FECHASNODISPONIBLES";
 export const GET_USER_DATA = "GET_USER_DATA";
+export const SELECTED_CABIN = "SELECTED_CABIN";
 
 export function getCabins() {
   return async function (dispatch) {
@@ -685,6 +686,19 @@ export function getUserData(username){
       let json = await axios.get("http://localhost:3001/users/" + username);
       return dispatch({
         type: GET_USER_DATA,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+export function selectcabin(id){
+  return async function (dispatch) {
+    try {
+      let json = await axios.get("http://localhost:3001/cabins/"+id);
+      return dispatch({
+        type: SELECTED_CABIN,
         payload: json.data,
       });
     } catch (err) {
