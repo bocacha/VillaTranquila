@@ -113,13 +113,16 @@ export default function Reservaciones() {
     setSelectDateCI(e)
     mostrarFecha(e);
   }
+  useEffect(()=>{
+    fechasafiltrar()
+    console.log(fechasintermedias)
+    },[selectDateCO]);
 const changeFechas2=async(e)=>{
   if(e === null){
     return
   }
   setSelectDateCO(e)
   mostrarFecha2(e);
-  fechasafiltrar()
 }
 const mostrarFecha = selectDateCI =>{
     const options = {year:'numeric', month:'numeric', day:'2-digit'}
@@ -150,7 +153,9 @@ useEffect(()=>{
 const handlePrueba=()=>{
 console.log(input.Anombrede, logeduser.email, input.Checkin)
 dispatch(createReservation(input))
-
+const options = {year:'numeric', month:'numeric', day:'2-digit'}
+    const data = { username:logeduser.user ,name: input.Anombrede, email: logeduser.email, date: selectDateCI.toLocaleDateString('es-ES', options)}
+   dispatch(sendNotification(data))
 dispatch(editAvailible(edit))
 alert("Reserva creada")
 }
@@ -180,6 +185,7 @@ alert("Reserva creada")
 
     }
     const fechasafiltrar=()=>{
+      console.log("entre")
      const intermedias = fechas(reserva)
      const ocup = parapiker
      for(let i= 0; i<intermedias.length; i++){
@@ -191,14 +197,9 @@ alert("Reserva creada")
       }
      }
     }
-   const caca =async()=> {
-    const options = {year:'numeric', month:'numeric', day:'2-digit'}
-    const cacona = { name: input.Anombrede, email: logeduser.email, date: selectDateCI.toLocaleDateString('es-ES', options)}
-   dispatch(sendNotification(cacona))}
   return (
     <div className={styles.container}>
       <div className={styles.formsCont}>
-      <button className={styles.btn}onClick={caca}>Volver</button>
         {/* CREAR */}
         <div className={styles.crearCont}>
           <div className={styles.btnVolver}>
