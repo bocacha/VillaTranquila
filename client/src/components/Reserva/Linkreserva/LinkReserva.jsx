@@ -9,6 +9,7 @@ import {
   readFechas,
   editCabains,
   editAvailible,
+  sendNotification,
 } from "../../../actions";
 // import ReservacionesDetail from "./ReservacionesDetail";
 import "react-datepicker/dist/react-datepicker.css";
@@ -112,6 +113,10 @@ export default function Reservaciones() {
     setSelectDateCI(e)
     mostrarFecha(e);
   }
+  useEffect(()=>{
+    fechasafiltrar()
+    console.log(fechasintermedias)
+    },[selectDateCO]);
 const changeFechas2=async(e)=>{
   if(e === null){
     return
@@ -146,15 +151,19 @@ useEffect(()=>{
     date(ocupadas)
     });
 const handlePrueba=()=>{
-console.log(edit)
+console.log(input.Anombrede, logeduser.email, input.Checkin)
 dispatch(createReservation(input))
+const options = {year:'numeric', month:'numeric', day:'2-digit'}
+    const data = { username:logeduser.user ,name: input.Anombrede, email: logeduser.email, date: selectDateCI.toLocaleDateString('es-ES', options)}
+   dispatch(sendNotification(data))
 dispatch(editAvailible(edit))
 alert("Reserva creada")
 }
   function handleSubmit(e) {
     e.preventDefault();
     // console.log(input)
-     alert("Reserva creada con éxito");
+  //   alert("Reserva creada con éxito");
+
   }
 
   const parapiker2=[] 
@@ -176,7 +185,19 @@ alert("Reserva creada")
     })
 
     }
-
+    const fechasafiltrar=()=>{
+      console.log("entre")
+     const intermedias = fechas(reserva)
+     const ocup = parapiker
+     for(let i= 0; i<intermedias.length; i++){
+      for(let j =0;j<ocup.length; j++){
+        if(intermedias[i] === ocup[j]){
+          setSelectDateCO(null)
+          throw alert("error no podes elegir esas fechas, porlomenos una esta reservada")
+        }
+      }
+     }
+    }
   return (
     <div className={styles.container}>
       <div className={styles.formsCont}>
@@ -238,6 +259,9 @@ alert("Reserva creada")
             minDate={new Date()}
             locale='es'
             excludeDates={parapiker2}
+            filterDate={d => {
+              return selectDateCI < d;
+            }}
             />
 
             <div>
@@ -255,7 +279,7 @@ alert("Reserva creada")
                       id={id1++}
                       onChange={consultarprecio}
                     />
-                    <label htmlFor="temperament">{el.name}</label>
+                    <label >{el.name}</label>
                   </div>
                 ))}
               </div>
@@ -274,5 +298,3 @@ alert("Reserva creada")
     </div>
   );
 }
-// <input type='button' onClick={()=> mostrarFecha(selectDateCI)}/>
-// <input type='button' onClick={()=> console}/>

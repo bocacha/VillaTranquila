@@ -10,6 +10,7 @@ const usersrouter = require('./User')
 const loginrouter=require('./Login')
 const sendEmail = require('./SendEmail')
 const showGallery = require('./ShowGallery')
+const sendNotification= require('./sendNotification')
 
 const router = Router();
 router.use("/cabins" , cabinsrouter)
@@ -21,6 +22,7 @@ router.use("/users", usersrouter)
 router.use("/sendEmail", sendEmail)
 router.use("/login", loginrouter)
 router.use("/showImages", showGallery)
+router.use("/sendNotification", sendNotification)
 
 
 // Configurar los routers
