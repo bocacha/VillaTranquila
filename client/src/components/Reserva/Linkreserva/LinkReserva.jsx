@@ -9,6 +9,7 @@ import {
   readFechas,
   editCabains,
   editAvailible,
+  sendNotification,
 } from "../../../actions";
 // import ReservacionesDetail from "./ReservacionesDetail";
 import "react-datepicker/dist/react-datepicker.css";
@@ -115,13 +116,16 @@ export default function Reservaciones() {
     setSelectDateCI(e)
     mostrarFecha(e);
   }
+  useEffect(()=>{
+    fechasafiltrar()
+    console.log(fechasintermedias)
+    },[selectDateCO]);
 const changeFechas2=async(e)=>{
   if(e === null){
     return
   }
   setSelectDateCO(e)
   mostrarFecha2(e);
-  // setTimeout(calculofechas,10000)
 }
 const mostrarFecha = selectDateCI =>{
     const options = {year:'numeric', month:'numeric', day:'2-digit'}
@@ -149,20 +153,26 @@ useEffect(()=>{
   useEffect(()=>{
     date(ocupadas)
     });
+<<<<<<< HEAD
 //useEffect(() => {
  // console.log(reserva.Checkout)
  // calculofechas();
 //}, [calculofechas,reserva.Checkout]);
+=======
+>>>>>>> 20220c091e7c9bbf27a8bd12f83b936bd584c706
 const handlePrueba=()=>{
-console.log(edit)
+console.log(input.Anombrede, logeduser.email, input.Checkin)
 dispatch(createReservation(input))
+const options = {year:'numeric', month:'numeric', day:'2-digit'}
+    const data = { username:logeduser.user ,name: input.Anombrede, email: logeduser.email, date: selectDateCI.toLocaleDateString('es-ES', options)}
+   dispatch(sendNotification(data))
 dispatch(editAvailible(edit))
+alert("Reserva creada")
 }
   function handleSubmit(e) {
     e.preventDefault();
     // console.log(input)
-    // alert("Reserva creada con éxito");
-    // window.location.reload();
+  //   alert("Reserva creada con éxito");
   }
 
   const parapiker2=[] 
@@ -180,6 +190,7 @@ dispatch(editAvailible(edit))
       if(mes === '01' || mes === '02' || mes === '03' || mes === '04' || mes === '05' || mes === '06' || mes === '07' || mes === '08' || mes === '09' ){
         mes = mes - 0;
       }
+<<<<<<< HEAD
       parapiker2.push(new Date(anio, mes-1, dia))  
     })
 
@@ -189,6 +200,25 @@ dispatch(editAvailible(edit))
       return  date !== new Date(2021,10,21)
     };
 
+=======
+      parapiker2.push(new Date(anio, mes-1, dia))
+    })
+
+    }
+    const fechasafiltrar=()=>{
+      console.log("entre")
+     const intermedias = fechas(reserva)
+     const ocup = parapiker
+     for(let i= 0; i<intermedias.length; i++){
+      for(let j =0;j<ocup.length; j++){
+        if(intermedias[i] === ocup[j]){
+          setSelectDateCO(null)
+          throw alert("error no podes elegir esas fechas, porlomenos una esta reservada")
+        }
+      }
+     }
+    }
+>>>>>>> 20220c091e7c9bbf27a8bd12f83b936bd584c706
   return (
     <div className={styles.container}>
       <div className={styles.formsCont}>
@@ -200,22 +230,7 @@ dispatch(editAvailible(edit))
             </Link>
           </div>
           <div className={styles.title}>Crear una nueva reservación</div>
-          <div>
-            Fechas no disponibles de la cabaña
-            <div>{ocupadas.map(e=>
-                  <div>
-                    del
-                    <div>({e[0]})</div>  
-                    al
-                    <div>({e[e.length-1]})</div>
-                     <div>fin</div>
-                  </div>
-            )}
-            </div>
-           
-          </div>
-          <form onSubmit={(e) => handleSubmit(e)}className={styles.form}>
-           
+          <form onSubmit={(e) => handleSubmit(e)}className={styles.form}>          
           <input
               type="text"
               name="Anombrede"
@@ -248,13 +263,12 @@ dispatch(editAvailible(edit))
             selected={selectDateCI}
             onChange={e=>changeFechas(e)}
             placeholderText="Fecha de Check in"
-            //onChange={date=> setSelectDateCI(date)}
             className={styles.formInputs}
-            //onChange = {onChange}
             defaultDate={new Date()}
             dateFormat="dd 'de' MMMM 'de' yyyy"
             minDate={new Date()}
             locale='es'
+<<<<<<< HEAD
 
             excludeDates={parapiker2}
             
@@ -269,56 +283,24 @@ dispatch(editAvailible(edit))
               required
             /> */}
             <DatePicker
+=======
+            excludeDates={parapiker2}
+            />
+        <DatePicker
+>>>>>>> 20220c091e7c9bbf27a8bd12f83b936bd584c706
             selected={selectDateCO}
             onChange={e=>changeFechas2(e)}
             placeholderText="Fecha de Check out"
             onFocus={calculofechas}
             className={styles.formInputs}
-            //onChange = {onChange}
             dateFormat="dd 'de' MMMM 'de' yyyy"
             minDate={new Date()}
             locale='es'
-            //isClearable
+            excludeDates={parapiker2}
+            filterDate={d => {
+              return selectDateCI < d;
+            }}
             />
-            <button className={styles.btn}onClick={calculofechas}>Fechas</button>
-            {/* <input
-              type="text"
-              value={input.UserId}
-              name="UserId"
-              onChange={(e) => handleChange(e)}
-              placeholder="Usuario Id"
-              className={styles.formInputs} 
-              pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
-              required
-            /> */}
-            {/* <input
-              type="text"
-              value={input.Paymentsid}
-              name="Paymentsid"
-              onChange={(e) => handleChange(e)}
-              placeholder="Pagos id"
-              className={styles.formInputs} 
-              // pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$' 
-              required
-            /> */}
-            {/* <input
-              type="text"
-              value={input.Cabinid}
-              name="Cabinid"
-              onChange={(e) => handleChange(e)}
-              placeholder="Cabaña id"
-              className={styles.formInputs} 
-              pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
-              required
-            /> */}
-            {/* <input
-              type="text"
-              value={input.ExtraServices}
-              name="ExtraServices"
-              onChange={(e) => handleChange(e)}
-              placeholder="Servicios extra"
-              className={styles.formInputs}
-            /> */}
             <div>
               <div className={styles.p}>Servicios Adicionales:</div>
               <button onClick={checkboxselected}>Seleccionar Servicios</button>
@@ -334,16 +316,24 @@ dispatch(editAvailible(edit))
                       id={id1++}
                       onChange={consultarprecio}
                     />
-                    <label htmlFor="temperament">{el.name}</label>
+                    <label >{el.name}</label>
                   </div>
                 ))}
               </div>
             </div>
             <div className={styles.btns}>
+<<<<<<< HEAD
               <button onClick={handlePrueba} className={styles.btnRes}>
                 Reservar
               </button>
               
+=======
+              <Link to="/reserva/pago">
+                <button onClick={handlePrueba} className={styles.btnRes}>
+                  Reservar
+                </button>
+              </Link>
+>>>>>>> 20220c091e7c9bbf27a8bd12f83b936bd584c706
             </div>
           </form>
         </div>
@@ -352,7 +342,3 @@ dispatch(editAvailible(edit))
     </div>
   );
 }
-            // <input type='button' onClick={()=> mostrarFecha(selectDateCI)}/>
-            // <input type='button' onClick={()=> console}/>
-
-
