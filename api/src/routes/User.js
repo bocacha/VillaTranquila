@@ -27,7 +27,7 @@ try {
     //     return res.status(400).json({error:"Ops.. No tenes permisos"})
     // }
 
-    const dbUser = await User.findAll()
+    const dbUser = await User.findAll({where:{Blocked:false}})
     res.send(dbUser)
 }catch(error){
     res.send({error : error})
@@ -35,9 +35,45 @@ try {
 
     const dbUser = await User.findAll() 
 });
+router.get("/ocultados", async (req, res)=>{
+    try {    
+        // const authorizations = req.get("Authorization") 
+        //      let token = ""
+        // if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
+        //    token = authorizations.substring(7)
+        //    console.log(token)
+        // }
+        // const decodedToken= jwt.verify(token, config.JWT_SECRET)
+        // if(!token || !decodedToken.id){
+        //     return res.status(401).json({
+        //         error:"token missing or invalid"
+        //     })
+        // }
+        // if(!decodedToken.Admin){
+        //     return res.status(400).json({error:"Ops.. No tenes permisos"})
+        // }
+    
+        const dbUser = await User.findAll({where:{Blocked:true}})
+        res.send(dbUser)
+    }catch(error){
+        res.send({error : error})
+    }
+    
+        const dbUser = await User.findAll() 
+    });
+router.get('/:username', async (req, res) => {
+    const {username} = req.params;
+    try{
+        const user = await User.findOne({where:{UserName:username}});
+        res.send(user);
+    } catch(error){
+        res.send({error: error});
+    }
+})
 
 router.post("/Singup" , async (req, res)=>{
     const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email} = req.body;
+    console.log('asdasd');
     const UserPasswordHashed = await bcrypt.hash(UserPassword,10)
     const dbUser = await User.findOne({ where:{UserName: UserName}})
     if(dbUser){
@@ -64,8 +100,48 @@ router.post("/Singup" , async (req, res)=>{
     }
     
 })
+router.put("/EditProfile/:ID", async (req,res) =>{
+    const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email,} = req.body;
+    const ID = req.params.ID;
+    const user = await User.findOne({ where: { ID: ID } });
+    const passwordCorrect = user === null
+    ? false
+    : await bcrypt.compare(UserPassword, user.UserPasswordHashed)
+    if(!(user && passwordCorrect)){
+        alert("Contraseña incorrecta")
+        return res.status(401).json({
+            error: "invalid User or Password"
+        })
+    }
+    if(ID){
+        const UserPasswordHashed = await bcrypt.hash(UserPassword,10)
+        const objecttoupdate={
+            UserName: UserName,
+            UserPasswordHashed: UserPasswordHashed,
+            FirstName: FirstName,
+            LastName: LastName,
+            Address: Address,
+            Phone: Phone,
+            Email: Email,
+        }
+            User.update(
+              objecttoupdate
+            ,
+            {
+                where: {ID: ID}
+    
+            })
+            .then(doneTemp=>{
+                return res.status(200).json(doneTemp)
+            })
+            .catch(error=>{console.log(error)})
+    
+    }
+    res.send.status(404);
+});
+
 router.put("/EditUser", async (req,res) =>{
-    const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email, Admin,Premium, Blocked} = req.body;
+    const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email, Admin,Premium} = req.body;
     // const authorizations = req.get("Authorization") 
     //      let token = ""
     // if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
@@ -92,7 +168,7 @@ router.put("/EditUser", async (req,res) =>{
         Email: Email,
         Admin: Admin,
         Premium: Premium,
-        Blocked: Blocked,
+
     }
         User.update(
           objecttoupdate
@@ -106,12 +182,14 @@ router.put("/EditUser", async (req,res) =>{
         })
         .catch(error=>{console.log(error)})
 });
+
 router.put('/RemoveUser', (req,res) =>{
     const {id}= req.body;
     if(!id){
         return res.json({status: 404},{message:"User not found"})
     }
-    User.destroy(
+    User.update(
+        {Blocked:true},
         {where:{ID: id}}
     ).then (doneTemp=>{
         return res.status(200).json(doneTemp)
@@ -119,6 +197,19 @@ router.put('/RemoveUser', (req,res) =>{
     .catch(error=>{console.log(error)})
         
 });  
-
+router.put('/RestoreUser', (req,res) =>{
+    const {id}= req.body;
+    if(!id){
+        return res.json({status: 404},{message:"User not found"})
+    }
+    User.update(
+        {Blocked:false},
+        {where:{ID: id}}
+    ).then (doneTemp=>{
+        return res.status(200).json(doneTemp)
+    })
+    .catch(error=>{console.log(error)})
+        
+});  
 
 module.exports = router;
