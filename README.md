@@ -15,6 +15,7 @@ Si este Usuario utiliza la opción de registrarse, puede acceder a los permisos 
 
 Los Usuarios que posean credenciales de Administrador, tienen la capacidad para crear/modificar Cabañas, Usuarios, Tarifas,etc.
 
+![tabla permisos](https://user-images.githubusercontent.com/82456534/136569838-c91a4462-d694-4eff-9fa8-a7f1e93ad7f5.png)
 
 
 ### Technical Description:
@@ -26,6 +27,7 @@ En el Frontend se utilizaron componentes funcionales de React para el renderizad
 Redux en la configuración del estado global de los componentes, que a su vez fueron optimizados mediante el uso de Hooks. Los estilos fueron implementados en su mayoría a través de CSS Styled Components, utilizando React Bootstrap en casos específicos.
 Villa Tranquila utiliza además librerías externas: NodeMailer para la funcionalidad con correos electrónicos, Cloudinary en el almacenamiento de Imágenes en la nube, Axios en la comunicación Cliente - Servidor, React Icons para el renderizado de Iconos, DatePicker para la representación de calendarios y Checkout de Mercado Pago.
 
+![tecnologias](https://user-images.githubusercontent.com/82456534/136573752-9ca59c16-e3c3-472b-b6d3-dd585095e1fb.png)
 
 
 
