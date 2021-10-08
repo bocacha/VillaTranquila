@@ -20,6 +20,8 @@ import DatePicker,{registerLocale} from "react-datepicker";
 import es from 'date-fns/locale/es';
 import axios from "axios"
 import fechas from "./algoritmofechas.js"
+import DayPicker from 'react-day-picker';
+import 'react-day-picker/lib/style.css';
 registerLocale('es', es)
 
 
@@ -39,6 +41,7 @@ export default function Reservaciones() {
   let costoadicional = 0
   let fechasintermedias=[]
   const ocupadas = useSelector((state) => state.fechasnodisponibles)
+  //console.log(ocupadas)
   const [selectDateCI, setSelectDateCI] = useState(null);
   const [selectDateCO, setSelectDateCO] = useState(null);
   const [reserva, setReserva] = useState({Checkin:"",Checkout:""});

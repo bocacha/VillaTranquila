@@ -30,9 +30,15 @@ export default function PagosReserva(ID) {
               <li>Servicios extra:{reservacion.ExtraServices}</li>
               <li>Costo final:{costoFINAL}</li>
             </ul>
+            <form action="http://localhost:3001/checkout" method="POST">
+              <input type="hidden" name="title" value={reservacion.Anombrede}/>
+              <input type="hidden" name="price" value={reservacion.CostoFinal}/>                                
+              <input type="submit" value="Pagar" target="_blank" class="btn btn-primary btn-block"/>
+            </form> 
           </div>
         );
       })}
+      
     </div>
   );
 }
