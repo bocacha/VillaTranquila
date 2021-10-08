@@ -17,6 +17,15 @@ export default function Profile(props) {
     dispatch(Logeduser());
   }, [dispatch]);
 
+  const user = useSelector((state) => state.user);
+  const userData = useSelector((state) => state.userData);
+  const username = !userData ?
+    user.user :
+    userData.UserName;
+  useEffect(() => {
+    dispatch(getUserData(username));
+  }, [dispatch, username]);
+
   const dataUser = useSelector((state) => state.userData);
 
   const [edit, setEdit] = useState({
@@ -28,12 +37,6 @@ export default function Profile(props) {
     Email: dataUser.Email,
     UserPassword: "",
   });
-
-  const user = useSelector((state) => state.user);
-  const username = user.user;
-  useEffect(() => {
-    dispatch(getUserData(username));
-  }, [dispatch, username]);
 
   const [mostrar, setMostrar] = useState(false);
 
@@ -55,7 +58,7 @@ export default function Profile(props) {
       const ID = user.userid;
       alert("Perfil editado con éxito");
       dispatch(editProfile(edit, ID));
-      dispatch(Loguser(edit.UserName));
+      dispatch(Logeduser());
       setMostrar(false);
       window.location.reload();
     }
@@ -152,30 +155,32 @@ export default function Profile(props) {
       </div> */}
 
           <table>
-            <tr>
-              <td className={styles.izqu}>Nombre de usuario:</td>
-              <td className={styles.der}>{dataUser.UserName}</td>
-            </tr>
-            <tr>
-              <td className={styles.izqu}>Nombre:</td>
-              <td className={styles.der}>{dataUser.FirstName}</td>
-            </tr>
-            <tr>
-              <td className={styles.izqu}>Apellido:</td>
-              <td className={styles.der}>{dataUser.LastName}</td>
-            </tr>
-            <tr>
-              <td className={styles.izqu}>Dirección:</td>
-              <td className={styles.der}>{dataUser.Address}</td>
-            </tr>
-            <tr>
-              <td className={styles.izqu}>Teléfono:</td>
-              <td className={styles.der}>{dataUser.Phone}</td>
-            </tr>
-            <tr>
-              <td className={styles.izqu}>E-mail:</td>
-              <td className={styles.der}>{dataUser.Email}</td>
-            </tr>
+            <tbody>
+              <tr>
+                <td className={styles.izqu}>Nombre de usuario:</td>
+                <td className={styles.der}>{dataUser.UserName}</td>
+              </tr>
+              <tr>
+                <td className={styles.izqu}>Nombre:</td>
+                <td className={styles.der}>{dataUser.FirstName}</td>
+              </tr>
+              <tr>
+                <td className={styles.izqu}>Apellido:</td>
+                <td className={styles.der}>{dataUser.LastName}</td>
+              </tr>
+              <tr>
+                <td className={styles.izqu}>Dirección:</td>
+                <td className={styles.der}>{dataUser.Address}</td>
+              </tr>
+              <tr>
+                <td className={styles.izqu}>Teléfono:</td>
+                <td className={styles.der}>{dataUser.Phone}</td>
+              </tr>
+              <tr>
+                <td className={styles.izqu}>E-mail:</td>
+                <td className={styles.der}>{dataUser.Email}</td>
+              </tr>
+            </tbody>
           </table>
           <details>
             <summary>Historial de reservas</summary>

@@ -61,6 +61,7 @@ router.get("/ocultados", async (req, res)=>{
     
         const dbUser = await User.findAll() 
     });
+    
 router.get('/:username', async (req, res) => {
     const {username} = req.params;
     try{
@@ -114,6 +115,7 @@ router.put("/EditProfile/:ID", async (req,res) =>{
         })
     }
     if(ID){
+        console.log('modificando usuario')
         const UserPasswordHashed = await bcrypt.hash(UserPassword,10)
         const objecttoupdate={
             UserName: UserName,
