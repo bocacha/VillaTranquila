@@ -67,26 +67,25 @@ export default function Reservaciones() {
         console.log(checkbox[i].name)
       }
     }
-    for (let j = 0; j < suma.length; j++) {
-      costoadicional = costoadicional + parseFloat(suma[j]);
+    for(let j=0; j < suma.length; j++){
+     costoadicional = costoadicional + parseFloat(suma[j])
+      
     }
     costoadicional = costoadicional+ parseFloat(JSON.parse(costo))
     setInput({...input,CostoFinal:costoadicional})
   }
   const checkboxselected = (e) => {
-    e.preventDefault();
-    setInput({
-      ...input,
-      CostoFinal: JSON.parse(costo),
-      Checkin: selectDateCI,
-      Checkout: selectDateCO,
-    });
+    e.preventDefault()
+      setInput({
+      ...input, CostoFinal:JSON.parse(costo),
+      Checkin:selectDateCI,Checkout:selectDateCO,
+    })
     lala = [];
     const checkbox = Array.from(document.getElementsByClassName("Servicios"));
     for (let i = 0; i < checkbox.length; i++) {
       if (checkbox[i].checked) {
         lala.push(checkbox[i].value);
-        setInput({ ...input, ExtraServices: [...lala] });
+        setInput({...input, ExtraServices: [...lala]});
         console.log(checkbox[i].value);
       }
     }
@@ -284,9 +283,11 @@ alert("Reserva creada")
               </div>
             </div>
             <div className={styles.btns}>
-              <button onClick={handlePrueba} className={styles.btnRes}>
-                Reservar
-              </button>
+              <Link to="/reserva/pago">
+                <button onClick={handlePrueba} className={styles.btnRes}>
+                  Reservar
+                </button>
+              </Link>
             </div>
           </form>
         </div>
