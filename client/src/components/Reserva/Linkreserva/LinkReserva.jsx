@@ -9,6 +9,7 @@ import {
   readFechas,
   editCabains,
   editAvailible,
+  sendNotification,
 } from "../../../actions";
 // import ReservacionesDetail from "./ReservacionesDetail";
 import "react-datepicker/dist/react-datepicker.css";
@@ -147,15 +148,16 @@ useEffect(()=>{
     date(ocupadas)
     });
 const handlePrueba=()=>{
-console.log(edit)
+console.log(input.Anombrede, logeduser.email, input.Checkin)
 dispatch(createReservation(input))
-//dispatch(editAvailible(edit))
+
+dispatch(editAvailible(edit))
 alert("Reserva creada")
 }
   function handleSubmit(e) {
     e.preventDefault();
     // console.log(input)
-     alert("Reserva creada con éxito");
+  //   alert("Reserva creada con éxito");
   }
 
   const parapiker2=[] 
@@ -189,9 +191,14 @@ alert("Reserva creada")
       }
      }
     }
+   const caca =async()=> {
+    const options = {year:'numeric', month:'numeric', day:'2-digit'}
+    const cacona = { name: input.Anombrede, email: logeduser.email, date: selectDateCI.toLocaleDateString('es-ES', options)}
+   dispatch(sendNotification(cacona))}
   return (
     <div className={styles.container}>
       <div className={styles.formsCont}>
+      <button className={styles.btn}onClick={caca}>Volver</button>
         {/* CREAR */}
         <div className={styles.crearCont}>
           <div className={styles.btnVolver}>
