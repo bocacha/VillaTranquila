@@ -19,7 +19,7 @@ const Cabañas = () => {
   const [cabain, setCabain] = useState({
     Number: "",
     Capacity: "",
-    Available: "",
+    Available: [],
     Price: "",
     Description: "",
     Coffe: false,
@@ -36,7 +36,7 @@ const Cabañas = () => {
     id: "",
     Number: "",
     Capacity: "",
-    Available: "",
+    Available: [],
     Price: "",
     Description: "",
     Coffe: false,
@@ -162,7 +162,7 @@ const Cabañas = () => {
                   requiered
                 />
               </div>
-              <div>
+              {/* <div>
                 <input
                   type="text"
                   name="Available"
@@ -172,7 +172,7 @@ const Cabañas = () => {
                   className={styles.formInputs}
                   requiered
                 />
-              </div>
+              </div> */}
               <div>
                 <input
                   type="number"
