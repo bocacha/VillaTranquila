@@ -163,7 +163,6 @@ alert("Reserva creada")
     e.preventDefault();
     // console.log(input)
   //   alert("Reserva creada con éxito");
-
   }
 
   const parapiker2=[] 
@@ -263,7 +262,6 @@ alert("Reserva creada")
               return selectDateCI < d;
             }}
             />
-
             <div>
               <div className={styles.p}>Servicios Adicionales:</div>
               <button onClick={checkboxselected}>Seleccionar Servicios</button>
