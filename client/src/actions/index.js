@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const GET_CABINS = "GET_CABINS";
 export const SEND_EMAIL = "SEND_EMAIL";
+export const SEND_NOTIFICATION = "SEND_NOTIFICATION";
 export const FILTER_CABINS = 'FILTER_CABINS';
 export const FILTER_BY_CAPACITY = "FILTER_BY_CAPACITY";
 export const FILTER_BY_PRICE = "FILTER_BY_PRICE";
@@ -665,6 +666,18 @@ export function readFechas(){
        
   };
 }
+export function sendNotification(payload) {
+
+return async function (dispatch) {
+  console.log(payload)
+      const json = await axios.post("/sendNotification", payload)
+
+      return dispatch({
+          type: 'SEND_NOTIFICATION',
+          payload: json.data
+      })
+ }
+
 
 export function getUserData(username){
   return async function (dispatch) {
