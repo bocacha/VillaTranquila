@@ -81,7 +81,7 @@ if(!decodedToken.Admin){
         })
         .catch(error=>{console.log(error)})
 });
-router.delete('/RemovePayment', (req,res) =>{
+router.put('/RemovePayment', (req,res) =>{
     const {id}= req.body;
     if(!id){
         return res.json({status: 404},{message:"Payment not found"})

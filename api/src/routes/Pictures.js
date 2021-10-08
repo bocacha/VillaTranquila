@@ -77,7 +77,7 @@ if(!decodedToken.Admin){
         })
         .catch(error=>{console.log(error)})
 });
-router.delete('/RemovePicture', (req,res) =>{
+router.put('/RemovePicture', (req,res) =>{
     const {id}= req.body;
     if(!id){
         return res.json({status: 404},{message:"Picture not found"})
