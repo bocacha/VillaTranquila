@@ -1,7 +1,6 @@
-<p align='left'>
-    <img src='https://github.com/IgnaC02/VillaTranquila/blob/main/logo.png' </img>
-</p>
 
+
+![home](https://user-images.githubusercontent.com/82456534/136569315-68a61ebf-dbdf-4899-b398-b746e40b9dec.png)
 
 ## Descripcion:
 <hr/>
