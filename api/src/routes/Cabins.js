@@ -54,7 +54,7 @@ if(!token || !decodedToken.id){
 if(!decodedToken.Admin){
    return res.status(400).json({error:"Ops.. No tenes permisos"})
 }
-    const {Number, Capacity, Available, Price, Description, Show, Servicios} = req.body;
+    const {Number, Capacity, Available, Price, Description, Show, Wifi, Parking,Parrilla} = req.body;
     Cabins.create({
         Number, 
         Capacity, 
@@ -62,7 +62,9 @@ if(!decodedToken.Admin){
         Price, 
         Description,
         Show,
-        Servicios,
+        Wifi, 
+        Parking,
+        Parrilla
     })
     .then(doneTemp=>{
         console.log(doneTemp)
@@ -86,14 +88,14 @@ if(!token || !decodedToken.id){
 if(!decodedToken.Admin){
    return res.status(400).json({error:"Ops.. No tenes permisos"})
 }
-    const {Number, Capacity, Available, Price, Description, Barbecue, Wifi, Parking} = req.body;
+    const {Number, Capacity, Available, Price, Description, Parrilla, Wifi, Parking} = req.body;
     const objecttoupdate={
         Number: Number,
         Capacity: Capacity,
         Available: Available,
         Price: Price,
         Description: Description,
-        Barbecue: Barbecue,
+        Parrilla: Parrilla,
         Wifi: Wifi, 
         Parking: Parking,
     }
@@ -109,7 +111,20 @@ if(!decodedToken.Admin){
         })
         .catch(error=>{console.log(error)})
 });
+router.put("/EditCabin/available", (req,res) =>{
+    const {Available} = req.body;
+        Cabins.update(
+          {Available:Available}
+        ,
+        {
+            where: {ID: req.body.id}
 
+        })
+        .then(doneTemp=>{
+            return res.status(200).json(doneTemp)
+        })
+        .catch(error=>{console.log(error)})
+});
 router.put('/RemoveCabin', (req,res) =>{
     const {id}= req.body;
     console.log(id);

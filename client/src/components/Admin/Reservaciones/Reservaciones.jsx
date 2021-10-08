@@ -181,7 +181,7 @@ export default function Reservaciones() {
                 placeholder="Usuario Id"
                 className={styles.formInputs}
                 title='Formato: UUID4'
-                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
+               // pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                 required
               />
               <input
@@ -192,7 +192,7 @@ export default function Reservaciones() {
                 placeholder="Pagos id"
                 className={styles.formInputs}
                  title='Formato: UUID4'
-                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
+               // pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                 required
               />
               <input
@@ -203,7 +203,7 @@ export default function Reservaciones() {
                 placeholder="Cabaña id"
                 className={styles.formInputs}
                 title='Formato: UUID4'
-                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
+               // pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                 required
               />
               <input

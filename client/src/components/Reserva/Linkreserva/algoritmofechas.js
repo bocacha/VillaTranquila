@@ -1,4 +1,4 @@
-function fechas(obj){
+export default function fechas(obj){
 const fecha1 = obj.Checkin;
 const fecha2 = obj.Checkout;
 const dia1 =fecha1.slice(0,2);
@@ -10,7 +10,7 @@ const mesyaño1= fecha1.slice(2)
 const mesyaño2= fecha2.slice(2)
 if(mes1 - mes2 === 0){
     const diferencia= parseFloat(dia2) - parseFloat(dia1)
-    
+    console.log(dia1, dia2)
     fecha.push(fecha1)
     for(let i=1; i<diferencia ;i++){
         let dia3 = parseFloat(dia1) + i
@@ -106,23 +106,23 @@ if(parseFloat(mes1) === 4||parseFloat(mes1) === 6||parseFloat(mes1) === 9||parse
    return fecha
 }
 }
-const reserva1={
-    Checkin:"05/01/2021",
-    Checkout:"07/01/2021"
-}
-const reserva2={
-    Checkin:"10/02/2021",
-    Checkout:"25/03/2021"
-}
-const reserva3 = {
-    Checkin:"10/10/2021",
-    Checkout:"25/11/2021"
-}
-const reserva4 = {
-    Checkin:"10/05/2021",
-    Checkout:"05/06/2021"
-}
-const reserva6={
-    Checkin:"29/12/2021",
-    Checkout:"05/01/2022"
-}
+// const reserva1={
+//     Checkin:"05/01/2021",
+//     Checkout:"07/01/2021"
+// }
+// const reserva2={
+//     Checkin:"10/02/2021",
+//     Checkout:"25/03/2021"
+// }
+// const reserva3 = {
+//     Checkin:"10/10/2021",
+//     Checkout:"25/11/2021"
+// }
+// const reserva4 = {
+//     Checkin:"10/05/2021",
+//     Checkout:"05/06/2021"
+// }
+// const reserva6={
+//     Checkin:"29/12/2021",
+//     Checkout:"05/01/2022"
+// }
