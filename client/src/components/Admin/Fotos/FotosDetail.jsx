@@ -64,7 +64,7 @@ export default function FotosDetail({
             </button>
           )}
         </div>
-        {mostrar ? (
+        {mostrar ? 
           <div>
                   <button onClick={(e)=> {handleSubmitEdit(e,ID);
                                       setMostrar(false);
@@ -76,7 +76,7 @@ export default function FotosDetail({
           <div>
             <button onClick={(e) => handlePrueba(e, ID)} className={styles.btnPlus}>Guardar</button>
           </div>
-        )}
+        }
       </div>
     </div>
   );
