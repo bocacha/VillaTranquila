@@ -6,7 +6,6 @@
 ## Descripcion:
 <hr/>
 
-
 Villa Tranquila es una Single Page Application (SPA), desarrollada para administrar online la estructura administrativa y comercial de un complejo de alquiler de Cabañas mediante una interfaz de usuario intuitiva y amigable.
 
 La aplicación posee funcionalidades específicas dependiendo de las credenciales ingresadas al sistema, las cuales diferencian al operador en tres categorías: Usuario visitante; Usuario registrado y Administrador.

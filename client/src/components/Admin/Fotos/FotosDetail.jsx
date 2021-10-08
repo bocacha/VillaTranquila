@@ -66,19 +66,13 @@ export default function FotosDetail({
         </div>
         {mostrar ? (
           <div>
-            <button
-              onClick={(e) => {
-                {
-                  handleSubmitEdit(e, ID);
-                  setMostrar(false);
-                }
-              }}
-              className={styles.btnPlus}
-            >
-              Editar
-            </button>
-          </div>
-        ) : (
+                  <button onClick={(e)=> {handleSubmitEdit(e,ID);
+                                      setMostrar(false);
+                                      ;        } 
+        } className={styles.btn} >Editar</button>
+          </div> 
+          :
+
           <div>
             <button onClick={(e) => handlePrueba(e, ID)} className={styles.btnPlus}>Guardar</button>
           </div>
