@@ -10,6 +10,7 @@ import {
   editCabains,
   editAvailible,
   sendNotification,
+  selectcabin,
 } from "../../../actions";
 // import ReservacionesDetail from "./ReservacionesDetail";
 import "react-datepicker/dist/react-datepicker.css";
@@ -31,6 +32,7 @@ export default function Reservaciones() {
     dispatch(readServices());
   }, [dispatch]);
   const servicios = useSelector((state) => state.servicios);
+  const seleccionada = useSelector((state) => state.selectedcabin)
   let lala = [];
   let id1 = 0;
   let suma = []
@@ -97,7 +99,9 @@ export default function Reservaciones() {
   useEffect(() => {
     dispatch(readFechas());
   }, [dispatch]);
-
+  useEffect(() => {
+    dispatch(selectcabin(localStorage.getItem("id_cabaña")))
+  }, [dispatch,cabinId]);
   function handleChange(e) {
     setInput({
       ...input,
@@ -263,6 +267,11 @@ alert("Reserva creada")
             }}
             />
             <div>
+              <div className={styles.p}>Servicios Basicos:
+              <p className={styles.p}><strong>Parrilla:</strong>  {seleccionada.Parrilla?<span>si</span>:<span>no</span>}</p>
+               <p className={styles.p}><strong> Wifi:</strong> {seleccionada.Wifi?<span>si</span>:<span>no</span>}</p>
+               <p className={styles.p}><strong>Parking:</strong>  {seleccionada.Parking?<span>si</span>:<span>no</span>}</p>
+              </div>
               <div className={styles.p}>Servicios Adicionales:</div>
               <button onClick={checkboxselected}>Seleccionar Servicios</button>
               <div>

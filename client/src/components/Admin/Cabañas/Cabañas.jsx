@@ -25,7 +25,7 @@ const Cabañas = () => {
     Coffe: false,
     Microondas: false,
     Calefaccion: false,
-    Barbecue: false,
+    Parrilla: false,
     Wifi: false,
     Cleaning: false,
     Refrigerator: false,
@@ -42,7 +42,7 @@ const Cabañas = () => {
     Coffe: false,
     Microondas: false,
     Calefaccion: false,
-    Barbecue: false,
+    Parrilla: false,
     Wifi: false,
     Cleaning: false,
     Refrigerator: false,
@@ -75,18 +75,18 @@ const Cabañas = () => {
   }
   console.log("handle", edit);
 
-  const handleCheckBox = (e) => {
-    setCabain({
-      ...cabain,
-      [e.target.name]: true,
-    });
-  };
-  const handleeditCheckBox = (e) => {
-    setEdit({
-      ...cabain,
-      [e.target.name]: true,
-    });
-  };
+  // const handleCheckBox = (e) => {
+  //   setCabain({
+  //     ...cabain,
+  //     [e.target.name]: true,
+  //   });
+  // };
+  // const handleeditCheckBox = (e) => {
+  //   setEdit({
+  //     ...cabain,
+  //     [e.target.name]: true,
+  //   });
+  // };
   const handleSubmit = (e) => {
     const { token } = logeduser;
     e.preventDefault();
@@ -102,7 +102,18 @@ const Cabañas = () => {
     const { token } = logeduser;
     dispatch(editCabains(edit, { token }));
   };
-
+  function handleSelect(e) {
+    setCabain({
+      ...cabain,
+      [e.target.name] : e.target.value,
+    });
+  }
+  function handleSelectedit(e) {
+    setEdit({
+      ...edit,
+      [e.target.name] : e.target.value,
+    });
+  }
   const handlePrueba = (e, ID) => {
     setEdit({ ...edit, id: ID });
     e.preventDefault();
@@ -196,6 +207,41 @@ const Cabañas = () => {
                   requiered
                 />
               </div>
+              <select
+                onChange={(e) => handleSelect(e)}
+               // value={cabain.Parking}
+                className={styles.formInputs}
+                name="Parking"
+                required
+              >
+                <option>Estacionamiento:</option>
+                <option  name="Parking"  value="true">true</option>
+                <option  name="Parking" value="false">false</option>
+              </select>
+
+              <select
+                onChange={(e) => handleSelect(e)}
+               // value={cabain.Parrilla}
+                className={styles.formInputs}
+                name="Parrilla"
+                required
+              >
+                <option>Parrilla:</option>
+                <option name="Parrilla" value="true">true</option>
+                <option name="Parrilla"  value="false">false</option>
+              </select>
+
+              <select
+                onChange={(e) => handleSelect(e)}
+                name="Wifi"
+               // value={cabain.Wifi}
+                className={styles.formInputs}
+                required
+              >
+                <option>Wifi:</option>
+                <option name="Wifi"  value="true">true</option>
+                <option name="Wifi"  value="false">false</option>
+              </select>
               {/* <div>
               <label>Cafe</label>
               <input
@@ -319,6 +365,39 @@ const Cabañas = () => {
                     className={styles.formInputs}
                   />
                 </div>
+                <select
+                onChange={(e) => handleSelectedit(e)}
+               // value={edit.Parking}
+                className={styles.formInputs}
+                name="Parking"
+                required
+              >
+                <option>Estacionamiento:</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+              </select>
+              <select
+                onChange={(e) => handleSelectedit(e)}
+               // value={edit.Parrilla}
+                className={styles.formInputs}
+                name="Parrilla"
+                required
+              >
+                <option>Parrilla:</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+              </select>
+              <select
+                onChange={(e) => handleSelectedit(e)}
+               // value={edit.Wifi}
+                className={styles.formInputs}
+                name="Wifi"
+                required
+              >
+                <option>Wifi:</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+              </select>
                 {/* <div>
               <label>Cafe</label> 
               <input
@@ -394,7 +473,7 @@ const Cabañas = () => {
                   Coffe={el.Coffe}
                   Microondas={el.Microondas}
                   Calefaccion={el.Calefaccion}
-                  Barbecue={el.Barbecue}
+                  Parrilla={el.Parrilla}
                   Wifi={el.Wifi}
                   Cleaning={el.Cleaning}
                   Refrigerator={el.Refrigerator}
