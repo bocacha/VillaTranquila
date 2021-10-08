@@ -677,7 +677,7 @@ return async function (dispatch) {
           payload: json.data
       })
  }
-
+}
 
 export function getUserData(username){
   return async function (dispatch) {
