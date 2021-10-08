@@ -153,13 +153,6 @@ useEffect(()=>{
   useEffect(()=>{
     date(ocupadas)
     });
-<<<<<<< HEAD
-//useEffect(() => {
- // console.log(reserva.Checkout)
- // calculofechas();
-//}, [calculofechas,reserva.Checkout]);
-=======
->>>>>>> 20220c091e7c9bbf27a8bd12f83b936bd584c706
 const handlePrueba=()=>{
 console.log(input.Anombrede, logeduser.email, input.Checkin)
 dispatch(createReservation(input))
@@ -190,17 +183,6 @@ alert("Reserva creada")
       if(mes === '01' || mes === '02' || mes === '03' || mes === '04' || mes === '05' || mes === '06' || mes === '07' || mes === '08' || mes === '09' ){
         mes = mes - 0;
       }
-<<<<<<< HEAD
-      parapiker2.push(new Date(anio, mes-1, dia))  
-    })
-
-    }
-
-    const isWeekday = (date) => {
-      return  date !== new Date(2021,10,21)
-    };
-
-=======
       parapiker2.push(new Date(anio, mes-1, dia))
     })
 
@@ -218,7 +200,6 @@ alert("Reserva creada")
       }
      }
     }
->>>>>>> 20220c091e7c9bbf27a8bd12f83b936bd584c706
   return (
     <div className={styles.container}>
       <div className={styles.formsCont}>
@@ -268,26 +249,9 @@ alert("Reserva creada")
             dateFormat="dd 'de' MMMM 'de' yyyy"
             minDate={new Date()}
             locale='es'
-<<<<<<< HEAD
-
-            excludeDates={parapiker2}
-            
-            />
-            {/* <input
-              type="text"
-              value={input.Checkout}
-              name="Checkout"
-              onChange={(e) => handleChange(e)}
-              placeholder="Check out"
-              className={styles.formInputs}
-              required
-            /> */}
-            <DatePicker
-=======
             excludeDates={parapiker2}
             />
         <DatePicker
->>>>>>> 20220c091e7c9bbf27a8bd12f83b936bd584c706
             selected={selectDateCO}
             onChange={e=>changeFechas2(e)}
             placeholderText="Fecha de Check out"
@@ -322,18 +286,11 @@ alert("Reserva creada")
               </div>
             </div>
             <div className={styles.btns}>
-<<<<<<< HEAD
-              <button onClick={handlePrueba} className={styles.btnRes}>
-                Reservar
-              </button>
-              
-=======
               <Link to="/reserva/pago">
                 <button onClick={handlePrueba} className={styles.btnRes}>
                   Reservar
                 </button>
               </Link>
->>>>>>> 20220c091e7c9bbf27a8bd12f83b936bd584c706
             </div>
           </form>
         </div>
