@@ -13,6 +13,29 @@ import { ImCalendar, ImSearch } from 'react-icons/im';
 import { AiOutlineReload } from 'react-icons/ai';
 import { Logeduser } from "../../actions";
 
+function validate(filters) {
+    let errors = {};
+
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd;
+
+    if((filters.inDate < today && filters.inDate !== '') || (filters.outDate < today && filters.outDate !== '')){
+        errors.today = 'Fechas inválidas';
+        console.log(today)
+    }
+    if (filters.inDate > filters.outDate && filters.outDate !== '') {
+        errors.inDate = 'La fecha de llegada debe ser anterior a la de salida';
+    }
+    if (parseInt(filters.priceMin) > parseInt(filters.priceMax) && filters.priceMin !== 'all' && filters.priceMax !== 'all') {
+        errors.priceMin = 'El precio mínimo debe ser menor que el máximo';
+    }
+
+    return errors;
+}
+
 
 export default function Reserva() {
     const dispatch = useDispatch();
@@ -20,6 +43,7 @@ export default function Reserva() {
         dispatch(Logeduser())
     }, [dispatch]);
     const allCabins = useSelector(state => state.cabins);
+    const [errors, setErrors] = useState({})
 
     // Paginado---------------------------------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
@@ -38,6 +62,16 @@ export default function Reserva() {
     }, [dispatch]);
 
 
+    const [filters, setFilters] = useState({
+        inDate: '',
+        outDate: '',
+        capacity: '',
+        priceMin: '',
+        priceMax: '',
+        wifi: '',
+        barbecue: '',
+        parking: '',
+    });
 
     function handleReload(e) {
         e.preventDefault();
@@ -54,17 +88,6 @@ export default function Reserva() {
         window.location.reload();
     }
 
-    const [filters, setFilters] = useState({
-        inDate: '',
-        outDate: '',
-        capacity: '',
-        price: '5000',
-        priceMin: '',
-        priceMax: '',
-        wifi: '',
-        barbecue: '',
-        parking: '',
-    });
     function handleCheck(e) {
         let evt = filters[e.target.name];
         e.target.value = evt === 'true' ? false : true;
@@ -74,13 +97,26 @@ export default function Reserva() {
             ...filters,
             [e.target.name]: e.target.value
         });
+        setErrors(validate({
+            ...filters,
+            [e.target.name]: e.target.value
+        }))
         console.log(filters);
     }
 
+
     function handleFilters(e) {
         e.preventDefault();
-        console.log('Filters submited');
-        dispatch(filterCabins(filters));
+        console.log(errors);
+        if (!Object.getOwnPropertyNames(errors).length) {
+            console.log('Filters submited');
+            dispatch(filterCabins(filters));
+        }
+        else {
+            if(errors.today) alert(errors.today);
+            if (errors.inDate && !errors.today) alert(errors.inDate);
+            if (errors.priceMin) alert(errors.priceMin);
+        }
     }
 
     return (
