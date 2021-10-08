@@ -13,6 +13,7 @@ import { RiFridgeLine } from "react-icons/ri";
 import { FaWifi, FaCarAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { selectcabin } from "../../../actions";
 
 export default function Cabaña({
   ID,
@@ -32,11 +33,13 @@ export default function Cabaña({
   parking,
   image,
 }) {
+  const dispatch = useDispatch();
   const id = ID;
   const prices = price;
   const id_cabaña = () => {
     localStorage.setItem("id_cabaña", JSON.stringify(id));
     localStorage.setItem("costo", JSON.stringify(prices));
+    dispatch(selectcabin(id))
   };
 
   return (
