@@ -6,13 +6,13 @@ import Navbar from "../Navbar/Navbar";
 import Cabaña from "./Cabaña/Cabaña";
 import styles from "./Reserva.module.css";
 import { FaWifi, FaCarAlt } from 'react-icons/fa';
-import { GiVacuumCleaner, GiCampCookingPot } from 'react-icons/gi';
+import { GiCampCookingPot } from 'react-icons/gi';
 import { IoMdPeople } from 'react-icons/io';
 import { MdAttachMoney, MdRoomService } from 'react-icons/md';
 import { ImCalendar, ImSearch } from 'react-icons/im';
 import { AiOutlineReload } from 'react-icons/ai';
 import { Logeduser } from "../../actions";
-import RangeSlider from "./Slider/Slider.jsx";
+
 
 export default function Reserva() {
     const dispatch = useDispatch();
@@ -20,7 +20,6 @@ export default function Reserva() {
         dispatch(Logeduser())
     }, [dispatch]);
     const allCabins = useSelector(state => state.cabins);
-
 
     // Paginado---------------------------------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
@@ -46,10 +45,10 @@ export default function Reserva() {
             inDate: '',
             outDate: '',
             capacity: '',
-            priceRange: '',
+            priceMin: '',
+            priceMax: '',
             wifi: '',
             barbecue: '',
-            cleaning: '',
             parking: '',
         })
         window.location.reload();
@@ -59,10 +58,11 @@ export default function Reserva() {
         inDate: '',
         outDate: '',
         capacity: '',
-        priceRange: '',
+        price: '5000',
+        priceMin: '',
+        priceMax: '',
         wifi: '',
         barbecue: '',
-        cleaning: '',
         parking: '',
     });
     function handleCheck(e) {
@@ -88,11 +88,11 @@ export default function Reserva() {
             <Navbar className={styles.navbar} />
             <ul className={styles.reserva}>
                 <li>
-                    <button className={styles.reload} onClick={e => handleReload(e)}>Limpiar filtros <AiOutlineReload /></button>
+                    <button className={styles.reload} onClick={e => handleReload(e)}>Limpiar filtros <p><AiOutlineReload /></p></button>
                 </li>
                 <hr />
                 <li>
-                    <label><ImCalendar /> Fecha de llegada: </label>
+                    <label><p><ImCalendar /></p> Fecha de llegada: </label>
                     <input
                         type="date"
                         className={styles.fechas}
@@ -101,7 +101,7 @@ export default function Reserva() {
                     />
                 </li>
                 <li>
-                    <label><ImCalendar /> Fecha de salida: </label>
+                    <label><p><ImCalendar /></p> Fecha de salida: </label>
                     <input
                         type="date"
                         className={styles.fechas}
@@ -110,7 +110,7 @@ export default function Reserva() {
                     />
                 </li>
                 <li>
-                    <label><IoMdPeople /> Cantidad de personas </label>
+                    <label><p><IoMdPeople /></p> Cantidad de personas </label>
                     <select onChange={e => handleChange(e)} name='capacity'>
                         <option value='selected' hidden>Personas</option>
                         <option value='all'>Todavía no sé</option>
@@ -121,17 +121,34 @@ export default function Reserva() {
                     </select>
                 </li>
                 <li>
-                    <label><MdAttachMoney /> Precio por noche en pesos </label>
-                    {/*SLIDER<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<*/}
-                    <RangeSlider />
-                    {/* <Slider/> */}
+                    <label><p><MdAttachMoney /></p> Rango de precios por noche: </label>
+                    <div id={styles.priceRange}>
+                        <select onChange={e => handleChange(e)} name='priceMin' className={styles.prices}>
+                            <option value='selected' hidden>Mínimo</option>
+                            <option value='all'>Sin mínimo</option>
+                            <option value='1500'>$1500</option>
+                            <option value='3000'>$3000</option>
+                            <option value='4500'>$4500</option>
+                            <option value='6000'>$6000</option>
+                            <option value='7500'>$7500</option>
+                        </select>
+                        <select onChange={e => handleChange(e)} name='priceMax' className={styles.prices}>
+                            <option value='selected' hidden>Máximo</option>
+                            <option value='all'>Sin máximo</option>
+                            <option value='3000'>$3000</option>
+                            <option value='4500'>$4500</option>
+                            <option value='6000'>$6000</option>
+                            <option value='7500'>$7500</option>
+                            <option value='9000'>$9000</option>
+                        </select>
+                    </div>
                 </li>
                 <li>
                     <hr />
-                    <label className={styles.serviceTitle}><MdRoomService /> Que cuente con:</label>
+                    <label className={styles.serviceTitle}><p><MdRoomService /></p> Que cuente con:</label>
                     <ul className={styles.serviceCont}>
                         <li>
-                            <label>Wifi <FaWifi /></label>
+                            <label>Wifi <p className={styles.services}><FaWifi /></p></label>
                             <input
                                 type='checkbox'
                                 name='wifi'
@@ -139,11 +156,10 @@ export default function Reserva() {
                                     handleCheck(e);
                                     return handleChange(e);
                                 }}
-                                className={styles.service}
                             />
                         </li>
                         <li>
-                            <label>Parrilla <GiCampCookingPot /></label>
+                            <label>Parrilla <p className={styles.services}><GiCampCookingPot /></p></label>
                             <input
                                 type='checkbox'
                                 name='barbecue'
@@ -151,23 +167,10 @@ export default function Reserva() {
                                     handleCheck(e);
                                     return handleChange(e);
                                 }}
-                                className={styles.service}
                             />
                         </li>
                         <li>
-                            <label>Limpieza incluida <GiVacuumCleaner /></label>
-                            <input
-                                type='checkbox'
-                                name='cleaning'
-                                onChange={e => {
-                                    handleCheck(e);
-                                    return handleChange(e);
-                                }}
-                                className={styles.service}
-                            />
-                        </li>
-                        <li>
-                            <label>Estacionamiento techado <FaCarAlt /></label>
+                            <label>Estacionamiento techado <p className={styles.services}><FaCarAlt /></p></label>
                             <input
                                 type='checkbox'
                                 name='parking'
@@ -175,12 +178,11 @@ export default function Reserva() {
                                     handleCheck(e);
                                     return handleChange(e);
                                 }}
-                                className={styles.service}
                             />
                         </li>
                     </ul>
                 </li>
-                <hr/>
+                <hr />
                 <li>
                     <button
                         className={styles.reload}
@@ -198,6 +200,7 @@ export default function Reserva() {
                             return (
                                 <div key={el.number} >
                                     <Cabaña
+                                        ID={el.ID}
                                         number={el.Number}
                                         capacity={el.Capacity}
                                         notAvailable={el.NotAvailable}

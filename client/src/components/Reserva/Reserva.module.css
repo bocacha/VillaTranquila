@@ -9,6 +9,21 @@
     list-style-type: none;
     font-size: large;
   }
+  .reserva::-webkit-scrollbar {
+    width: 12px;
+    background-color: #eff1f5;
+  }
+  
+  .reserva::-webkit-scrollbar-track{
+    border-radius: 3px;
+    background-color: transparent;
+  }
+  
+  .reserva::-webkit-scrollbar-thumb{
+    border-radius:5px;
+    background-color:#515769;
+    border:2px solid #eff1f5
+  }
   
   .reserva li {
     display: block;
@@ -38,15 +53,28 @@
     font-size: 1em;
     background-color: #355978 ;
     color: #fff;
-    border: solid #355978;
+    border: transparent;
     border-radius: 8px;
     transition: all 0.25s ease;
   }
   .reserva select:hover{
     background-color: #8bafbf ;
     color: #1c2531;
-    border:2px solid #8bafbf;
   }
+  .reserva select .prices{
+    width: 50% !important;
+  }
+  #priceRange{
+    display: flex;
+    justify-content: space-between;
+  }
+.reserva li label{
+  display: inline-flex;
+}
+.reserva li label p{
+  line-height: 22px;
+  padding-right: 5px;
+}
   
   
   .navbar div button:hover{
@@ -78,16 +106,20 @@
     color: #fff;
     text-align: center;
     font-size: large;
-    transition: all 0.2s ease;
+    transition: all 0.5s ease;
     cursor: pointer;
     padding: 5px 20px;
-    margin-top: 85px;;
+    margin-top: 85px;
+    display: inline-flex;
+    height: auto;
+    line-height: 35px;
   }
-  .reload span {
+  .reload p {
     cursor: pointer;
     display: inline-block;
     position: relative;
-    transition: all 0.2s ease;
+    line-height: 25px;
+    padding-left: 5px;
   }
   .reload span:after {
     opacity: 0;
@@ -110,15 +142,15 @@
   margin-left:0;
   margin-bottom: 10px;
 }
-.service{
-  background-color: #7f7979;
-  height: 25px;
-}
 .serviceCont{
   margin: 0;
 }
 .serviceCont li{
   margin: 0px;
+}
+
+.services{
+  padding-left: 5px;
 }
 
 #search{
@@ -147,6 +179,21 @@
   overflow: auto;
   background-color: #94adbc  ;
   margin-left: 25%;
+}
+.cabinPage::-webkit-scrollbar {
+  width: 12px;
+  background-color: #eff1f5;
+}
+
+.cabinPage::-webkit-scrollbar-track{
+  border-radius: 3px;
+  background-color: transparent;
+}
+
+.cabinPage::-webkit-scrollbar-thumb{
+  border-radius:5px;
+  background-color:#515769;
+  border:2px solid #eff1f5
 }
 
 .cabinCont{

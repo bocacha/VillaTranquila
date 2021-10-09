@@ -46,7 +46,7 @@ export default function Footer() {
           <FaMapPin /> Ubicacion
         </div>
         <div className={styles.links}>
-          <span className={styles.title}> Links útiles </span> <br />
+          <span className={styles.title}> Links útiles </span>  <br />
           <Link to="/nosotros" className={styles.link}>
             Nosotros
           </Link>{" "}
@@ -84,12 +84,13 @@ export default function Footer() {
             <br />
             <div>
               <input
-                type="text"
-                placeholder="E-mail"
-                name="email"
-                value={footer.email}
-                onChange={handleChange}
-                className={styles.input}
+               type="email"
+               name="email"
+               value={footer.email}
+               placeholder='usuario@ejemplo.com'
+               onChange={handleChange}
+               className={styles.input}
+               required
               />
             </div>
             <div>

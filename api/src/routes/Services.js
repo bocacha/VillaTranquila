@@ -10,7 +10,15 @@ const router = Router();
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 router.get("/", async (req, res)=>{
-    const dbServices = await Services.findAll()
+    const dbServices = await Services.findAll({where:{Show:true}})
+    try{
+        res.send(dbServices)
+    }catch(error){
+        console.log(error)
+    }
+});
+router.get("/ocultados", async (req, res)=>{
+    const dbServices = await Services.findAll({where:{Show:false}})
     try{
         res.send(dbServices)
     }catch(error){
@@ -84,7 +92,8 @@ router.put('/RemoveService', (req,res) =>{
     if(!id){
         return res.json({status: 404},{message:"Service not found"})
     }
-    Services.destroy(
+    Services.update(
+        {Show:false},
         {where:{ID: id}}
     ).then (doneTemp=>{
         return res.status(200).json(doneTemp)
@@ -92,5 +101,18 @@ router.put('/RemoveService', (req,res) =>{
     .catch(error=>{console.log(error)})
         
 });  
-
+router.put('/RestoreService', (req,res) =>{
+    const {id}= req.body;
+    if(!id){
+        return res.json({status: 404},{message:"Service not found"})
+    }
+    Services.update(
+        {Show:true},
+        {where:{ID: id}}
+    ).then (doneTemp=>{
+        return res.status(200).json(doneTemp)
+    })
+    .catch(error=>{console.log(error)})
+        
+}); 
 module.exports = router;
