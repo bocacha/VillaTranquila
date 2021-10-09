@@ -5,12 +5,14 @@ import { GoSignIn, GoHome } from "react-icons/go";
 import { ImCalendar } from "react-icons/im";
 import { RiAdminFill } from "react-icons/ri";
 import { GiPhotoCamera } from 'react-icons/gi';
+import { CgProfile } from 'react-icons/cg';
 import styles from "./Navbar.module.css";
 import axios from "axios";
 import { BiWindows } from "react-icons/bi";
 import { useSelector } from "react-redux";
 
 export default function Navbar() {
+
   let logeduser = useSelector((state) => state.user);
   if (logeduser === null) {
     logeduser = {};
@@ -64,8 +66,8 @@ export default function Navbar() {
             </Link>
           </li>
           <li>
-                        <Link to='/galeria' ><button><strong>Galeria <span className={styles.span}><GiPhotoCamera /></span></strong></button></Link>
-                    </li>
+            <Link to='/galeria' ><button><strong>Galeria <span className={styles.span}><GiPhotoCamera /></span></strong></button></Link>
+          </li>
           <li>
             {logeduser.admin ? (
               <Link to="/admin">
@@ -104,15 +106,26 @@ export default function Navbar() {
               </Link>
             </div>
           ) : (
-            <Link to="/">
-              <li>
-                <button className={styles.signlog} onClick={() => Logout()}>
-                  <strong className={styles.list}>
-                    Cerrar Sesion <RiLoginBoxLine className={styles.icons} />
-                  </strong>
-                </button>
-              </li>
-            </Link>
+            <div>
+              <Link to='/perfil'>
+                <li>
+                  <button className={styles.signlog} >
+                    <strong className={styles.list} >
+                      Perfil <CgProfile className={styles.icons} />
+                    </strong>
+                  </button>
+                </li>
+              </Link>
+              <Link to="/">
+                <li>
+                  <button className={styles.signlog} onClick={() => Logout()}>
+                    <strong className={styles.list}>
+                      Cerrar Sesion <RiLoginBoxLine className={styles.icons} />
+                    </strong>
+                  </button>
+                </li>
+              </Link>
+            </div>
           )}
         </div>
       </ul>

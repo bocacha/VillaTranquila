@@ -85,6 +85,10 @@ export default function Reservaciones() {
   function handleSubmitEdit(e,ID) {
     e.preventDefault();
     
+
+    
+
+
     setMostrar(true);
     dispatch(editReservation(edit, { token }));
     setEdit({...edit,
@@ -94,7 +98,7 @@ export default function Reservaciones() {
   }
 
   const mostrarFecha = selectDateCI =>{
-    const options = {year:'numeric', month:'numeric', day:'numeric'}
+    const options = {weekday :'long', year:'yyyy', month:'MM', day:'dd'}
     setInput({...input,  Checkin: selectDateCI.toLocaleDateString('es-ES', options)})
   }
   function handlePrueba(e, ID) {
@@ -123,56 +127,39 @@ export default function Reservaciones() {
   }
   return (
     <div className={styles.container}>
-      <div className={styles.btnVolver}>
+      <div className={styles.btnsContainer}>
         <Link to="/admin">
-          <button className={styles.btn}>Volver</button>
+          <button className={styles.btnVolver}>Volver</button>
         </Link>
-      </div>
-      <div className={styles.container2}>
         {!habilitar ?(
-            <button onClick={ocultadas}>Mostrar ocultadas</button>
+            <button onClick={ocultadas} className={styles.btnSup}>Mostrar ocultadas</button>
           ):(
-            <button onClick={showtrue}>Mostrar habilitadas</button>
+            <button onClick={showtrue} className={styles.btnSup}>Mostrar habilitadas</button>
           )
           }
+      </div>
+      <div className={styles.container2}>
       <div className={styles.formsCont}>
           {/* CREAR */}
           <div className={styles.crearCont}>
             <div className={styles.title}>Crear una  reservación</div>
             <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
-              <input
-                type="text"
-                value={input.Checkin}
-                name="Checkin"
-                onChange={(e) => handleChange(e)}
-                placeholder="Check in"
-                className={styles.formInputs}
-                required
-              />
-              {/* <DatePicker
+              
+              <DatePicker
           selected={selectDateCI}
           onChange={date=> setSelectDateCI(date)}
           dateFormat='dd/MM/yyyy'
           minDate={new Date()}
           //isClearable
-          /> */}
-              <input
-                type="text"
-                value={input.Checkout}
-                name="Checkout"
-                onChange={(e) => handleChange(e)}
-                placeholder="Check out"
-                className={styles.formInputs}
-                required
-              />
-              {/* 
+          /> 
+              
           <DatePicker
           selected={selectDateCO}
           onChange={date=> setSelectDateCO(date)}
           dateFormat='dd/MM/yyyy'
           minDate={new Date()}
           //isClearable
-          /> */}
+          />
               <input
                 type="text"
                 value={input.UserId}
@@ -181,7 +168,7 @@ export default function Reservaciones() {
                 placeholder="Usuario Id"
                 className={styles.formInputs}
                 title='Formato: UUID4'
-                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
+               // pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                 required
               />
               <input
@@ -192,7 +179,7 @@ export default function Reservaciones() {
                 placeholder="Pagos id"
                 className={styles.formInputs}
                  title='Formato: UUID4'
-                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
+               // pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                 required
               />
               <input
@@ -203,7 +190,7 @@ export default function Reservaciones() {
                 placeholder="Cabaña id"
                 className={styles.formInputs}
                 title='Formato: UUID4'
-                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
+               // pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                 required
               />
               <input

@@ -3,6 +3,7 @@ import { Image } from 'cloudinary-react';
 import styles from "./Gallery.module.css";
 import { Link } from 'react-router-dom';
 import Modall from './Modal';
+import Navbar from "../Navbar/Navbar";
 
 export default function Gallery() {
     const [imageIds, setImageIds] = useState();
@@ -21,6 +22,7 @@ export default function Gallery() {
     }, []);
     return (
         <div className={styles.slidershow}>
+            <Navbar />
             <div className={styles.slides}>
                 {imageIds?.map((imageId, index) => (
                     <div className={styles.wrapper}>
@@ -28,19 +30,12 @@ export default function Gallery() {
                             className={styles.img}
                             src={imageId.Url}
                             width="200px"
-                            value={imageId.Description}
+                            value={imageId.Description} alt=""
                         />
                         <Modall className={styles.modal} url={imageId.Url} description={imageId.Description}/>
                     </div>
                 ))}
-            </div>
-            <div className={styles.btnVolver}>
-                <Link to="/">
-                    <button className={styles.btn}>Volver</button>
-                </Link>
-            </div>
-
-            
+            </div>        
         </div>
     );
 }

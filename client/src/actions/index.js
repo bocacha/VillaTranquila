@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const GET_CABINS = "GET_CABINS";
+export const SEND_PASSWORD_EMAIL ="SEND_PASSWORD_EMAIL"
 export const SEND_EMAIL = "SEND_EMAIL";
 export const SEND_NOTIFICATION = "SEND_NOTIFICATION";
 export const FILTER_CABINS = 'FILTER_CABINS';
@@ -36,7 +37,9 @@ export const REMOVE_SERVICES= "REMOVE_SERVICES";
 export const REMOVE_PICTURES= "REMOVE_PICTURES";
 export const REMOVE_PAYMENTS= "REMOVE_PAYMENTS";
 export const REMOVE_USERS= "REMOVE_USERS";
-export const READ_FECHASNODISPONIBLES = "READ_FECHASNODISPONIBLES"
+export const READ_FECHASNODISPONIBLES = "READ_FECHASNODISPONIBLES";
+export const GET_USER_DATA = "GET_USER_DATA";
+export const SELECTED_CABIN = "SELECTED_CABIN";
 
 export function getCabins() {
   return async function (dispatch) {
@@ -80,7 +83,6 @@ export function sendNotification(payload) {
 
 
 export function createReservation(payload) {
-  console.log(payload);
   return async function (dispatch) {
     const response = await axios.post("http://localhost:3001/reservations/NewReservation", payload);
     return response;
@@ -364,6 +366,23 @@ export function editUsers(payload) {
   };
 }
 
+export function editProfile(payload, ID) {
+  console.log("ID", ID);
+  console.log("pay", payload);
+  return async function (dispatch) {
+    try {
+      var json = await axios.put("http://localhost:3001/users/EditProfile/" + ID, payload);
+      return dispatch({
+        type: EDIT_USER,
+        payload: json.data,
+      });
+    } catch (err) {
+      window.alert("Contraseña incorrecta")
+      console.error(err);
+    }
+  };
+}
+
 export function editServices(payload, { token }) {
   const config = {
     headers: {
@@ -452,14 +471,12 @@ export function editCabains(payload, { token }) {
     return response;
   };
 }
-
 export function editAvailible(payload) {
   return async function (dispatch) {
     const response = await axios.put("http://localhost:3001/cabins/EditCabin/available", payload);
     return response;
   };
 }
-
 export function Loguser(payload) {
   return async function (dispatch) {
     try {
@@ -663,5 +680,63 @@ export function readFechas(){
        
        })
        
+  };
+}
+export function sendNotification(payload) {
+
+return async function (dispatch) {
+  console.log(payload)
+      const json = await axios.post("/sendNotification", payload)
+
+      return dispatch({
+          type: 'SEND_NOTIFICATION',
+          payload: json.data
+      })
+ }
+}
+
+export function getUserData(userid){
+  return async function (dispatch) {
+    try {
+      let json = await axios.get("http://localhost:3001/users/" + userid);
+      console.log('getUserData --->',json.data)
+      return dispatch({
+        type: GET_USER_DATA,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+export function selectcabin(id){
+  return async function (dispatch) {
+    try {
+      let json = await axios.get("http://localhost:3001/cabins/"+id);
+      return dispatch({
+        type: SELECTED_CABIN,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+export function mailpassword(Email) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("http://localhost:3001/users/");
+      var useremail = json.data.filter((e)=> e.Email === Email)
+      const cambiar={
+        id: useremail[0].ID,
+        UserPassword: "ax54sa5s4a"
+      }
+      return (dispatch({
+        type: SEND_PASSWORD_EMAIL,
+        payload: useremail,
+      }),dispatch(editUsers(cambiar)));
+    } catch (err) {
+      console.error(err);
+    }
   };
 }

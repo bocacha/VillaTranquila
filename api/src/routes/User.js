@@ -61,9 +61,20 @@ router.get("/ocultados", async (req, res)=>{
     
         const dbUser = await User.findAll() 
     });
+    
+router.get('/:ID', async (req, res) => {
+    const {ID} = req.params;
+    try{
+        const user = await User.findOne({where:{ID:ID}});
+        res.send(user);
+    } catch(error){
+        res.send({error: error});
+    }
+})
 
 router.post("/Singup" , async (req, res)=>{
     const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email} = req.body;
+    console.log('asdasd');
     const UserPasswordHashed = await bcrypt.hash(UserPassword,10)
     const dbUser = await User.findOne({ where:{UserName: UserName}})
     if(dbUser){
@@ -90,6 +101,47 @@ router.post("/Singup" , async (req, res)=>{
     }
     
 })
+router.put("/EditProfile/:ID", async (req,res) =>{
+    const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email,} = req.body;
+    const ID = req.params.ID;
+    const user = await User.findOne({ where: { ID: ID } });
+    const passwordCorrect = user === null
+    ? false
+    : await bcrypt.compare(UserPassword, user.UserPasswordHashed)
+    if(!(user && passwordCorrect)){
+        alert("Contraseña incorrecta")
+        return res.status(401).json({
+            error: "invalid User or Password"
+        })
+    }
+    if(ID){
+        console.log('modificando usuario')
+        const UserPasswordHashed = await bcrypt.hash(UserPassword,10)
+        const objecttoupdate={
+            UserName: UserName,
+            UserPasswordHashed: UserPasswordHashed,
+            FirstName: FirstName,
+            LastName: LastName,
+            Address: Address,
+            Phone: Phone,
+            Email: Email,
+        }
+            User.update(
+              objecttoupdate
+            ,
+            {
+                where: {ID: ID}
+    
+            })
+            .then(doneTemp=>{
+                return res.status(200).json(doneTemp)
+            })
+            .catch(error=>{console.log(error)})
+    
+    }
+    res.status(404);
+});
+
 router.put("/EditUser", async (req,res) =>{
     const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email, Admin,Premium} = req.body;
     // const authorizations = req.get("Authorization") 
@@ -118,7 +170,7 @@ router.put("/EditUser", async (req,res) =>{
         Email: Email,
         Admin: Admin,
         Premium: Premium,
-       
+
     }
         User.update(
           objecttoupdate
@@ -132,6 +184,7 @@ router.put("/EditUser", async (req,res) =>{
         })
         .catch(error=>{console.log(error)})
 });
+
 router.put('/RemoveUser', (req,res) =>{
     const {id}= req.body;
     if(!id){
