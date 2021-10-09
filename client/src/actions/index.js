@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const GET_CABINS = "GET_CABINS";
+export const SEND_PASSWORD_EMAIL ="SEND_PASSWORD_EMAIL"
 export const SEND_EMAIL = "SEND_EMAIL";
 export const SEND_NOTIFICATION = "SEND_NOTIFICATION";
 export const FILTER_CABINS = 'FILTER_CABINS';
@@ -704,6 +705,24 @@ export function selectcabin(id){
       });
     } catch (err) {
       console.log(err);
+    }
+  };
+}
+export function mailpassword(Email) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("http://localhost:3001/users/");
+      var useremail = json.data.filter((e)=> e.Email === Email)
+      const cambiar={
+        id: useremail[0].ID,
+        UserPassword: "ax54sa5s4a"
+      }
+      return (dispatch({
+        type: SEND_PASSWORD_EMAIL,
+        payload: useremail,
+      }),dispatch(editUsers(cambiar)));
+    } catch (err) {
+      console.error(err);
     }
   };
 }

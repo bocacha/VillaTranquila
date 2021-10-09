@@ -39,7 +39,13 @@ export default function CabinsDetail({
       <div className={styles.infoContainer}>
         <p className={styles.p}><strong>Cabaña N°:</strong> {Number}</p>
         <p className={styles.p}><strong>Camas:</strong>  {Capacity}</p>
-        <p className={styles.p}><strong>Available:</strong>  {Available}</p>
+        <div ><strong>Fechas No disponible:</strong>  {Available.map((e)=>{
+          return(  
+              <ul>
+                <li>Del {e[0]} Al {e[e.length -1]}</li>
+              </ul>)
+              
+          })}</div>
         <p className={styles.p}><strong>Price:</strong>  {Price}</p>
         <p className={styles.p}><strong>Descripcion:</strong>  {Description}</p>
         <p className={styles.p}><strong>Parrilla:</strong>  {Parrilla?<span>si</span>:<span>no</span>}</p>
@@ -58,7 +64,14 @@ export default function CabinsDetail({
         {mostrar      
         ?  
         <div>
-          <button onClick={(e)=> {handleeditSubmit(e,ID);
+          <button onClick={(e)=> {handleeditSubmit(e,ID, Number,
+    Capacity,
+    Available,
+    Price,
+    Description,
+    Parrilla,
+    Wifi,
+    Parking);
                                         setMostrar(false);
                                         ;        } 
           } className={styles.btnPlus} >Editar</button>
@@ -66,7 +79,7 @@ export default function CabinsDetail({
           
         :
         <div>
-            <button onClick={(e)=>handlePrueba(e,ID)} className={styles.btnPlus}>Guardar</button>
+            <button onClick={(e)=>handlePrueba(e,ID,)} className={styles.btnPlus}>Guardar</button>
         </div> 
         
         }

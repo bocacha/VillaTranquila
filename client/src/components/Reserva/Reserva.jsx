@@ -239,18 +239,12 @@ export default function Reserva() {
                                         ID={el.ID}
                                         number={el.Number}
                                         capacity={el.Capacity}
-                                        notAvailable={el.NotAvailable}
+                                        Available={el.Available}
                                         price={el.Price}
                                         description={el.Description}
                                         image={el.Image}
-                                        coffe={el.Coffe}
-                                        microwaves={el.Microwaves}
-                                        heat={el.Heat}
-                                        barbecue={el.Barbecue}
+                                        parrilla={el.Parrilla}
                                         wifi={el.Wifi}
-                                        cleaning={el.Cleaning}
-                                        refrigerator={el.Refrigerator}
-                                        stove={el.Stove}
                                         parking={el.Parking}
                                     />
                                 </div>

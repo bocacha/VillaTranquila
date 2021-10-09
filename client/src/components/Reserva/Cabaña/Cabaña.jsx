@@ -19,17 +19,11 @@ export default function Cabaña({
   ID,
   number,
   capacity,
-  notAvailable,
+  Available,
   price,
   description,
-  coffe,
-  microwaves,
-  heat,
-  barbecue,
+  parrilla,
   wifi,
-  cleaning,
-  refrigerator,
-  stove,
   parking,
   image,
 }) {
@@ -54,7 +48,13 @@ export default function Cabaña({
         />
         <div className={styles.info}>
           <span>Capacidad: {capacity}</span>
-          <span>Disponible a partir del: {notAvailable}</span>
+          <div>Fechas NO Disponibles: {Available.map((e)=>{
+          return(  
+              <ul>
+                <li>Del {e[0]} Al {e[e.length -1]}</li>
+              </ul>)
+              
+          })}</div>
           <span>Precio por noche: {price}</span>
           <span> Descripción: {description}</span>
           {/* <span> Servicios disponibles: 
