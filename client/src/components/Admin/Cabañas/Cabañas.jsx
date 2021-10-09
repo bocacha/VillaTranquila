@@ -49,7 +49,7 @@ const Cabañas = () => {
     Stove: false,
     Parking: false,
   });
-
+console.log(edit.Available)
   const [mostrar, setMostrar] = useState(false);
 
   useEffect(() => {
@@ -95,8 +95,22 @@ const Cabañas = () => {
     window.location.reload();
   };
 
-  const handleeditSubmit = (e, ID) => {
-    setEdit({ ...edit, id: ID });
+  const handleeditSubmit = (e, ID, Number,
+    Capacity,
+    Available,
+    Price,
+    Description,
+    Parrilla,
+    Wifi,
+    Parking) => {
+    setEdit({ ...edit, id: ID, Number:Number,
+      Capacity:Capacity,
+      Available:Available,
+      Price:Price,
+      Description:Description,
+      Parrilla:Parrilla,
+      Wifi:Wifi,
+      Parking:Parking});
     e.preventDefault();
     setMostrar(true);
     const { token } = logeduser;
@@ -173,13 +187,13 @@ const Cabañas = () => {
                   requiered
                 />
               </div>
-              {/* <div>
-                <input
+              {/* <div> */}
+                {/* <textarea
                   type="text"
                   name="Available"
                   value={cabain.Available}
                   onChange={handleChange}
-                  placeholder="Disponibilidad"
+                  placeholder={cabain.Available}
                   className={styles.formInputs}
                   requiered
                 />
@@ -316,6 +330,7 @@ const Cabañas = () => {
               />
             </div> */}
                 <div>
+                  Nº De Cabaña
                   <input
                     type="text"
                     name="Number"
@@ -326,6 +341,7 @@ const Cabañas = () => {
                   />
                 </div>
                 <div>
+                  Cantidad de Camas
                   <input
                     type="number"
                     name="Capacity"
@@ -341,11 +357,12 @@ const Cabañas = () => {
                     name="Available"
                     value={edit.Available}
                     onChange={handleChangeEdit}
-                    placeholder="Disponibilidad"
+                    placeholder={edit.Available}
                     className={styles.formInputs}
                   />
                 </div> */}
                 <div>
+                  Costo por Noche
                   <input
                     type="number"
                     name="Price"
@@ -356,6 +373,7 @@ const Cabañas = () => {
                   />
                 </div>
                 <div>
+                  Description
                   <textarea
                     type="text"
                     name="Description"
@@ -365,6 +383,7 @@ const Cabañas = () => {
                     className={styles.formInputs}
                   />
                 </div>
+                Servicios Basicos
                 <select
                 onChange={(e) => handleSelectedit(e)}
                // value={edit.Parking}
