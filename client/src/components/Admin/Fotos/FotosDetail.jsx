@@ -71,12 +71,12 @@ export default function FotosDetail({
                                       ;        } 
         } className={styles.btn} >Editar</button>
           </div> 
-          :
+         ) :
 
           <div>
             <button onClick={(e) => handlePrueba(e, ID)} className={styles.btnPlus}>Guardar</button>
           </div>
-        )}
+        }
       </div>
     </div>
   );
