@@ -31,11 +31,11 @@ export default function Home() {
         </div> 
       </div>
       <div>
-        {/* <Searchbar/> */}
         {/* <Gallery/> */}
       </div>
       <div>
         <BannerIntro />
+        {/* <Searchbar/> */}
         <Slider />
       </div>
       <div className={styles.mapaContainer}>
