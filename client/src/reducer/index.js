@@ -2,6 +2,7 @@ import {
   GET_CABINS,
   FILTER_CABINS,
   SEND_EMAIL,
+  SEND_NOTIFICATION,
   CREATE_RESERVATION,
   CREATE_SERVICES,
   CREATE_USERS,
@@ -33,11 +34,13 @@ import {
   REMOVE_PICTURES,
   REMOVE_PAYMENTS,
   REMOVE_USERS,
-  GET_USER_DATA
+  GET_USER_DATA,
+  SELECTED_CABIN
 
 } from "../actions";
 
 const initialState = {
+  selectedcabin:[],
   cabins: [],
   allCabins: [],
   pagos: [],
@@ -59,7 +62,6 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         cabins: action.payload,
-        allCabins: action.payload,
       };
 
     case FILTER_CABINS:
@@ -115,6 +117,10 @@ export default function rootReducer(state = initialState, action) {
         user: action.payload
       };
     case SEND_EMAIL:
+      return {
+        ...state,
+      };
+      case SEND_NOTIFICATION:
       return {
         ...state,
       };
@@ -263,6 +269,11 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         userData: action.payload
       }
+      case SELECTED_CABIN:
+        return{
+          ...state,
+          selectedcabin: action.payload,
+        }
     default:
       return state;
   }

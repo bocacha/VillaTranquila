@@ -10,6 +10,8 @@ const usersrouter = require('./User')
 const loginrouter=require('./Login')
 const sendEmail = require('./SendEmail')
 const showGallery = require('./ShowGallery')
+const sendNotification= require('./sendNotification')
+const MercadoPago= require('./MercadoPago')
 
 const router = Router();
 router.use("/cabins" , cabinsrouter)
@@ -21,6 +23,8 @@ router.use("/users", usersrouter)
 router.use("/sendEmail", sendEmail)
 router.use("/login", loginrouter)
 router.use("/showImages", showGallery)
+router.use("/sendNotification", sendNotification)
+router.use("/checkout", MercadoPago )
 
 
 // Configurar los routers

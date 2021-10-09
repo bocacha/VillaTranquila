@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const GET_CABINS = "GET_CABINS";
 export const SEND_EMAIL = "SEND_EMAIL";
+export const SEND_NOTIFICATION = "SEND_NOTIFICATION";
 export const FILTER_CABINS = 'FILTER_CABINS';
 export const FILTER_BY_CAPACITY = "FILTER_BY_CAPACITY";
 export const FILTER_BY_PRICE = "FILTER_BY_PRICE";
@@ -37,6 +38,7 @@ export const REMOVE_PAYMENTS= "REMOVE_PAYMENTS";
 export const REMOVE_USERS= "REMOVE_USERS";
 export const READ_FECHASNODISPONIBLES = "READ_FECHASNODISPONIBLES";
 export const GET_USER_DATA = "GET_USER_DATA";
+export const SELECTED_CABIN = "SELECTED_CABIN";
 
 export function getCabins() {
   return async function (dispatch) {
@@ -665,6 +667,18 @@ export function readFechas(){
        
   };
 }
+export function sendNotification(payload) {
+
+return async function (dispatch) {
+  console.log(payload)
+      const json = await axios.post("/sendNotification", payload)
+
+      return dispatch({
+          type: 'SEND_NOTIFICATION',
+          payload: json.data
+      })
+ }
+}
 
 export function getUserData(userid){
   return async function (dispatch) {
@@ -673,6 +687,19 @@ export function getUserData(userid){
       console.log('getUserData --->',json.data)
       return dispatch({
         type: GET_USER_DATA,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+export function selectcabin(id){
+  return async function (dispatch) {
+    try {
+      let json = await axios.get("http://localhost:3001/cabins/"+id);
+      return dispatch({
+        type: SELECTED_CABIN,
         payload: json.data,
       });
     } catch (err) {

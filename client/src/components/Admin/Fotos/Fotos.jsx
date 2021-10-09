@@ -68,7 +68,6 @@ export default function Fotos() {
     const { token } = logeduser;
     dispatch(editPictures(edit, { token }));
   }
-
  function handlePrueba(e, ID) {
     e.preventDefault();
     const { token } = logeduser;
@@ -88,6 +87,7 @@ export default function Fotos() {
     dispatch(readPictures());
     setHabilitar(false);
   };
+  
   return (
     <div className={styles.container}>
       <div className={styles.btnsContainer}>
