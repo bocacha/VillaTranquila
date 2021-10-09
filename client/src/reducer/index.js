@@ -35,6 +35,7 @@ import {
   REMOVE_PAYMENTS,
   REMOVE_USERS,
   GET_USER_DATA,
+  SEND_PASSWORD_EMAIL,
   SELECTED_CABIN
 
 } from "../actions";
@@ -274,6 +275,10 @@ export default function rootReducer(state = initialState, action) {
           ...state,
           selectedcabin: action.payload,
         }
+        case SEND_PASSWORD_EMAIL:
+          return {
+            ...state,
+          };
     default:
       return state;
   }
