@@ -112,7 +112,7 @@ export default function rootReducer(state = initialState, action) {
     case LOG_USER:
       return {
         ...state,
-        user: action.payload,
+        user: action.payload
       };
     case SEND_EMAIL:
       return {
@@ -256,7 +256,7 @@ export default function rootReducer(state = initialState, action) {
     case READ_FECHASNODISPONIBLES:
       return {
         ...state,
-        fechasnodisponibles: action.payload,
+        fechasnodisponibles:action.payload,
       };
     case GET_USER_DATA:
       return {

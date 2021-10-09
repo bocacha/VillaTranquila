@@ -349,6 +349,23 @@ export function editUsers(payload) {
   };
 }
 
+export function editProfile(payload, ID) {
+  console.log("ID", ID);
+  console.log("pay", payload);
+  return async function (dispatch) {
+    try {
+      var json = await axios.put("http://localhost:3001/users/EditProfile/" + ID, payload);
+      return dispatch({
+        type: EDIT_USER,
+        payload: json.data,
+      });
+    } catch (err) {
+      window.alert("Contraseña incorrecta")
+      console.error(err);
+    }
+  };
+}
+
 export function editServices(payload, { token }) {
   const config = {
     headers: {
@@ -649,10 +666,11 @@ export function readFechas(){
   };
 }
 
-export function getUserData(username){
+export function getUserData(userid){
   return async function (dispatch) {
     try {
-      let json = await axios.get("http://localhost:3001/users/" + username);
+      let json = await axios.get("http://localhost:3001/users/" + userid);
+      console.log('getUserData --->',json.data)
       return dispatch({
         type: GET_USER_DATA,
         payload: json.data,

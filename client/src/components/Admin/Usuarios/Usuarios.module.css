@@ -135,7 +135,8 @@
   border-radius: 7px;
   padding: 10px 25px;
   margin-bottom: 10px;
-  width: 320px;
+  width: 400px;
+  white-space: nowrap;
 }
 
 @media (max-width: 700px) {
