@@ -16,9 +16,12 @@ import Registro from "./components/Registrarse/Registro";
 import LinkReserva from"./components/Reserva/Linkreserva/LinkReserva"
 import Gallery from './components/Gallery/Gallery';
 import Profile from './components/Profile/Profile';
+import { useSelector } from 'react-redux';
 import PagosReserva from './components/PagoReserva/PagoReserva';
 
+
 function App() {
+
   return (
     <BrowserRouter>
       <div className="App">
