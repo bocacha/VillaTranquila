@@ -71,8 +71,38 @@ export function sendEmail(payload) {
 export function createReservation(payload) {
   return async function (dispatch) {
     const response = await axios.post("http://localhost:3001/reservations/NewReservation", payload);
-    return response;
-  };
+    const reserva = response.data
+    const users= await axios.get("http://localhost:3001/users/")
+    const user = users.data.filter(e=> e.ID === payload.id)
+    let reservas = []
+    if(user[0].ReservationsHistory){
+      reservas.push(...user[0].ReservationsHistory)
+      reservas.push(reserva)
+    const cambiar={
+      id: payload.id,
+      ReservationsHistory: reservas
+    }
+    console.log(cambiar)
+    return (dispatch({
+      type: CREATE_RESERVATION,
+      payload: response.data
+     
+     }),dispatch(editUsers(cambiar)));
+
+    }else{
+       reservas.push(reserva)
+    const cambiar={
+      id: payload.id,
+      ReservationsHistory: reservas
+    }
+    console.log(cambiar)
+    return (dispatch({
+      type: CREATE_RESERVATION,
+      payload: response.data
+     
+     }),dispatch(editUsers(cambiar))); 
+    }    
+}
 }
 
 export function createServices(payload, { token }) {

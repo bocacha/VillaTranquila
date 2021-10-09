@@ -104,7 +104,7 @@ export default function Profile(props) {
             {dataUser.ReservationsHistory &&
             dataUser.ReservationsHistory.length ? (
               dataUser.ReservationsHistory.map((el) => {
-                return <p>{el}</p>;
+                return <p key={el.id}>{el}</p>;
               })
             ) : (
               <div>
