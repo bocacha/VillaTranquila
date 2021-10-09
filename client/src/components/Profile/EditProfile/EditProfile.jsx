@@ -6,7 +6,7 @@ export default function EditProfile(){
     return (
         <div>
             <Navbar/>
-            <div>
+            <div className={styles.editar}>
                 <form>
                     
                 </form>

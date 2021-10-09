@@ -20,6 +20,9 @@ export default function Profile(props) {
         dispatch(getUserData(username))
     }, [dispatch, username]);
 
+    const dataUser = useSelector((state) => state.userData);
+
+
 
     return (
         <div className={styles.perfil}>
@@ -31,29 +34,29 @@ export default function Profile(props) {
             </Link>
             <ul className={styles.datos}>
                 <li>
-                    <span>{username}</span>
+                    <span>Nombre de usuario: {dataUser.UserName}</span>
                 </li>
                 <li>
-                    <span>Nombre: {}</span>
+                    <span>Nombre: {dataUser.FirstName}</span>
                 </li>
                 <li>
-                    <span>Apellido: {}</span>
+                    <span>Apellido: {dataUser.LastName}</span>
                 </li>
                 <li>
-                    <span>Dirección: {}</span>
+                    <span>Dirección: {dataUser.Adress}</span>
                 </li>
                 <li>
-                    <span>Teléfono: {}</span>
+                    <span>Teléfono: {dataUser.Phone}</span>
                 </li>
                 <li>
-                    <span>E-mail: {}</span>
+                    <span>E-mail: {dataUser.Email}</span>
                 </li>
                 <li>
                     <details>
                         <summary>Historial de reservas</summary>
                         {
-                            user.ReservationsHistory ?
-                                user.ReservationsHistory.map(el => {
+                            dataUser.ReservationsHistory.length ?
+                                dataUser.ReservationsHistory.map(el => {
                                     return <p>{el}</p>
                                 }) :
                                 <div>
@@ -65,7 +68,7 @@ export default function Profile(props) {
                 </li>
                 <li>
                     {
-                        user.Premium ?
+                        dataUser.Premium ?
                             <span>Usuario Premium <IoDiamond /></span> :
                             <div>
                                 <span>Conviertete en cliente Premium completando tu primer reserva <FaLongArrowAltRight /></span>
