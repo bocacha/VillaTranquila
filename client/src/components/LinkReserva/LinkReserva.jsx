@@ -5,7 +5,8 @@ import {
   createReservation,
   editReservation,
   readReservation,
-  Logeduser
+  Logeduser,
+  sendNotification
 } from "../../actions";
 // import ReservacionesDetail from "./ReservacionesDetail";
 // import DatePicker from "react-datepicker";
@@ -19,6 +20,7 @@ export default function Reservaciones(id) {
   const cabaña = id;
   const dispatch = useDispatch();
   const allReservations = useSelector((state) => state.reservaciones);
+
   const costo = localStorage.getItem("costo")
   console.log("COSTO", JSON.parse(costo));
   const cabinId = localStorage.getItem("id_cabaña")

@@ -2,6 +2,7 @@ import {
   GET_CABINS,
   FILTER_CABINS,
   SEND_EMAIL,
+  SEND_NOTIFICATION,
   CREATE_RESERVATION,
   CREATE_SERVICES,
   CREATE_USERS,
@@ -116,6 +117,10 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
+    case SEND_NOTIFICATION:
+      return {
+        ...state,
+      };  
     case CREATE_RESERVATION:
       return {
         ...state,

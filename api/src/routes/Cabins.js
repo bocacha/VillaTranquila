@@ -110,6 +110,21 @@ if(!decodedToken.Admin){
         .catch(error=>{console.log(error)})
 });
 
+router.put("/EditCabin/available", (req,res) =>{
+    const {Available} = req.body;
+        Cabins.update(
+          {Available:Available}
+        ,
+        {
+            where: {ID: req.body.id}
+
+        })
+        .then(doneTemp=>{
+            return res.status(200).json(doneTemp)
+        })
+        .catch(error=>{console.log(error)})
+});
+
 router.put('/RemoveCabin', (req,res) =>{
     const {id}= req.body;
     console.log(id);

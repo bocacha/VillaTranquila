@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const GET_CABINS = "GET_CABINS";
 export const SEND_EMAIL = "SEND_EMAIL";
+export const SEND_NOTIFICATION = "SEND_NOTIFICATION";
 export const FILTER_CABINS = 'FILTER_CABINS';
 export const FILTER_BY_CAPACITY = "FILTER_BY_CAPACITY";
 export const FILTER_BY_PRICE = "FILTER_BY_PRICE";
@@ -64,6 +65,20 @@ export function sendEmail(payload) {
     return json;
   };
 }
+
+
+export function sendNotification(payload) {
+  return async function (dispatch) {
+      const json = await axios.post("/sendNotification", payload)
+
+      return dispatch({
+          type: 'SEND_NOTIFICATION',
+          payload: json.data
+      })
+  }
+}
+
+
 export function createReservation(payload) {
   console.log(payload);
   return async function (dispatch) {
@@ -437,6 +452,14 @@ export function editCabains(payload, { token }) {
     return response;
   };
 }
+
+export function editAvailible(payload) {
+  return async function (dispatch) {
+    const response = await axios.put("http://localhost:3001/cabins/EditCabin/available", payload);
+    return response;
+  };
+}
+
 export function Loguser(payload) {
   return async function (dispatch) {
     try {

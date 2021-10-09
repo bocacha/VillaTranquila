@@ -9,7 +9,8 @@ const servicesrouter = require('./Services')
 const usersrouter = require('./User')
 const loginrouter=require('./Login')
 const sendEmail = require('./SendEmail')
-const showGallery = require('./ShowGallery')
+const showGallery = require('./ShowGallery');
+const sendNotification = require('./SendNotification');
 
 const router = Router();
 router.use("/cabins" , cabinsrouter)
@@ -19,6 +20,7 @@ router.use("/reservations", reservationsrouter)
 router.use("/services", servicesrouter)
 router.use("/users", usersrouter)
 router.use("/sendEmail", sendEmail)
+router.use("/sendNotification", sendNotification )
 router.use("/login", loginrouter)
 router.use("/showImages", showGallery)
 

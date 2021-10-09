@@ -14,11 +14,7 @@ export default function Fotos() {
   const allPictures = useSelector((state) => state.fotos);
   const logeduser = useSelector((state) => state.user);
   const [habilitar, setHabilitar] = useState(false)
-  console.log(allPictures);
-  const [input, setInput] = useState({
-    Description: "",
-    Url: "",
-  });
+  
 
   const [description, setDescription] = useState('')
   const [file, setFile] = useState({})
@@ -81,12 +77,6 @@ export default function Fotos() {
     window.location.reload();
   }
 
-  const handleChangeDescription = (e) => {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value
-    })
-  }
 
   const ocultadas = () => {
     dispatch(readPicturesocultados())
@@ -117,7 +107,6 @@ export default function Fotos() {
             <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
               <input
                 type="text"
-                value={input.Description}
                 maxLength="100"
                 name="Description"
                 onChange={(e) => {
