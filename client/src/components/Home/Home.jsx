@@ -9,8 +9,8 @@ import Searchbar from "../Searchbar/Searchbar";
 import Gallery from "../Gallery/Gallery";
 import styles from "./Home.module.css";
 import{useEffect} from "react"
-import { useDispatch} from 'react-redux';
-import { Logeduser } from "../../actions";
+import { useDispatch, useSelector} from 'react-redux';
+import { Logeduser, getUserData } from "../../actions";
 import {steps} from "./Steps.js"
 
 export default function Home() {
@@ -18,6 +18,13 @@ export default function Home() {
   useEffect(() => {
     dispatch(Logeduser());
   }, [dispatch]);
+
+
+  const user = useSelector((state) => state.user);
+  const ID = user && user.userid;
+  useEffect(() => {
+    dispatch(getUserData(ID))
+  },[dispatch]);
   
   return (
     <div className={styles.container}>

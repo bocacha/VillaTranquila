@@ -16,11 +16,14 @@ import Registro from "./components/Registrarse/Registro";
 import LinkReserva from"./components/Reserva/Linkreserva/LinkReserva"
 import Gallery from './components/Gallery/Gallery';
 import Profile from './components/Profile/Profile';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import PagosReserva from './components/PagoReserva/PagoReserva';
+import { useEffect } from 'react';
+import { getUserData } from './actions';
 
 
 function App() {
+  
 
   return (
     <BrowserRouter>
@@ -42,7 +45,7 @@ function App() {
           <Route exact path="/admin/usuarios" component={Usuarios} />
           <Route path='/iniciarsesion' component={Login} />
           <Route path='/registrarse' component={Registro} />
-          <Route path='/perfil' component={Profile} />
+          <Route path='/:username' component={Profile} />
         </Switch>
       </div>
     </BrowserRouter>

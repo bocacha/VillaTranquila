@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { editProfile, getUserData, Logeduser, Loguser } from "../../actions";
+import { editProfile, editUsers, getUserData, Logeduser, Loguser } from "../../actions";
 import styles from "./Profile.module.css";
 import Navbar from "../Navbar/Navbar";
-import { FaLongArrowAltRight } from "react-icons/fa";
-import { BsBook, BsPen } from "react-icons/bs";
+import { FaLongArrowAltRight, FaLock, FaUnlockAlt } from "react-icons/fa";
+import { BsBook, BsPen, BsFillShieldLockFill } from "react-icons/bs";
 import { ImCancelCircle } from 'react-icons/im';
 import { GiCutDiamond } from 'react-icons/gi';
 import { BiSave } from 'react-icons/bi';
 
-export default function Profile(props) {
+export default function Profile() {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -18,8 +18,8 @@ export default function Profile(props) {
     }, [dispatch]);
 
 
-      const user = useSelector((state) => state.user);
-      const userid = user.userid;
+    const user = useSelector((state) => state.user);
+    const userid = user.userid;
     useEffect(() => {
         dispatch(getUserData(userid));
     }, [dispatch, userid]);
@@ -75,83 +75,91 @@ export default function Profile(props) {
         });
     }
 
+    const [nuevaCont, setNuevaCont] = useState('');
+
+    function handleChangeContraseña(e) {
+        e.preventDefault();
+        setNuevaCont(e.target.value);
+    }
+
+    const [repetida, setRepetida] = useState('');
+
+    function handleChangeRepetida(e) {
+        e.preventDefault();
+        setRepetida(e.target.value)
+    }
+
+    // function handleConfirmarNuevaContraseña(e){
+    //     if(nuevaCont === repetida){
+    //         const cambios = {
+    //             passwordNueva: nuevaCont,
+    //             id: dataUser.ID,
+    //         }
+    //         dispatch(editUsers(cambios));
+    //     }
+    //     else{
+    //         e.preventDefault();
+
+    //         alert('Error de tipeo, vuelva a introducir su nueva contraseña');
+    //     }
+    // }
+
+    const [mostrarContraseña, setMostrarContraseña] = useState(false);
+
+    function handleMostrarContraseña(e) {
+        e.preventDefault();
+        if (mostrarContraseña) {
+            setMostrarContraseña(false);
+        } else {
+            setMostrarContraseña(true);
+        }
+    }
+
+    function handleConfirmarNuevaContraseña(e) {
+        const cambios = {
+            UserPassword: nuevaCont,
+            id: dataUser.ID,
+        }
+        if (nuevaCont === repetida) {
+            if (nuevaCont.length < 1) {
+                return alert("Debe ingresar su contraseña para guardar la nueva contraseña");
+            } else {
+                alert("Contraseña modificada con éxito");
+                dispatch(editUsers(cambios));
+                // dispatch(Logeduser());
+                setMostrar(false);
+                window.location.reload();
+            }
+        }
+        else {
+            e.preventDefault();
+            alert('Error de tipeo, vuelva a introducir su nueva contraseña');
+        }
+    };
 
     return (
         <div className={styles.perfil}>
             <Navbar />
             <div className={styles.container}>
                 <div className={styles.containerDatos}>
-                    <button className={styles.editarPerfil} onClick={handleMostrar}>
-                        {mostrar ? (
-                            <div><strong>Cancelar <p><ImCancelCircle /></p></strong></div>
-                        ) : (
-                            <div>
-                                <strong>Editar datos <p><BsPen /></p></strong>
-                            </div>
-                        )}
-                    </button>
-                    {/* <ul className={styles.datos}>
-          <li className={styles.dato}>
-            <span>Nombre de usuario: </span><p>{dataUser.UserName}</p>
-          </li>
-          <li className={styles.dato}>
-            <span>Nombre: </span><p>{dataUser.FirstName}</p>
-          </li>
-          <li className={styles.dato}>
-            <span>Apellido: </span><p>{dataUser.LastName}</p>
-          </li>
-          <li className={styles.dato}>
-            <span>Dirección: </span><p>{dataUser.Address}</p>
-          </li>
-          <li className={styles.dato}>
-            <span>Teléfono: </span><p>{dataUser.Phone}</p>
-          </li>
-          <li className={styles.dato}>
-            <span>E-mail: </span><p>{dataUser.Email}</p>
-          </li>
-          <li className={styles.dato}>
-            <details>
-              <summary>Historial de reservas</summary>
-              {dataUser.ReservationsHistory &&
-                dataUser.ReservationsHistory.length ? (
-                dataUser.ReservationsHistory.map((el) => {
-                  return <p>{el}</p>;
-                })
-              ) : (
-                <div>
-                  <p>
-                    Haz tu primer reserva aquí <FaLongArrowAltRight />
-                  </p>
-                  <Link to="/reserva">
-                    <button>
-                      <BsBook />
-                    </button>
-                  </Link>
-                </div>
-              )}
-            </details>
-          </li>
-          <li className={styles.dato}>
-            {dataUser.Premium ? (
-              <span>Usuario Premium </span>
-            ) : (
-              <div>
-                <span>
-                  Conviertete en cliente Premium completando tu primer reserva{" "}
-                  <FaLongArrowAltRight />
-                </span>
-                <Link to="/reserva">
-                  <button>
-                    {" "}
-                    <BsBook />{" "}
-                  </button>
-                </Link>
-              </div>
-            )}
-          </li>
-        </ul>
-      </div> */}
-
+                    <div className={styles.botones}>
+                        <button className={styles.editarPerfil} onClick={handleMostrar}>
+                            {mostrar ? (
+                                <div><strong>Cancelar <p><ImCancelCircle /></p></strong></div>
+                            ) : (
+                                <div>
+                                    <strong>Editar datos <p><BsPen /></p></strong>
+                                </div>
+                            )}
+                        </button>
+                        <button className={styles.editarPerfil} onClick={handleMostrarContraseña}>
+                            {mostrarContraseña ? (
+                                <div><strong>Cancelar <p><FaUnlockAlt/></p></strong></div>
+                            ) : (
+                                <div><strong>Cambiar contraseña <p><FaLock /></p></strong></div>
+                            )}
+                        </button>
+                    </div>
                     <table>
                         <tbody>
                             <tr>
@@ -227,7 +235,7 @@ export default function Profile(props) {
                                 defaultValue={dataUser.UserName}
                                 name="UserName"
                                 onChange={(e) => handleChangeEdit(e)}
-                                placeholder="Nuevo nombre de usuario"
+                                placeholder="Nuevo nombre de usuario..."
                                 className={styles.formInputs}
                             />
                             <input
@@ -235,7 +243,7 @@ export default function Profile(props) {
                                 defaultValue={dataUser.FirstName}
                                 name="FirstName"
                                 onChange={(e) => handleChangeEdit(e)}
-                                placeholder="Nuevo nombre"
+                                placeholder="Nuevo nombre..."
                                 className={styles.formInputs}
                             />
                             <input
@@ -243,7 +251,7 @@ export default function Profile(props) {
                                 defaultValue={dataUser.LastName}
                                 name="LastName"
                                 onChange={(e) => handleChangeEdit(e)}
-                                placeholder="Nuevo apellido"
+                                placeholder="Nuevo apellido..."
                                 className={styles.formInputs}
                             />
                             <input
@@ -251,7 +259,7 @@ export default function Profile(props) {
                                 defaultValue={dataUser.Address}
                                 name="Address"
                                 onChange={(e) => handleChangeEdit(e)}
-                                placeholder="Nueva dirección"
+                                placeholder="Nueva dirección..."
                                 className={styles.formInputs}
                             />
                             <input
@@ -259,7 +267,7 @@ export default function Profile(props) {
                                 defaultValue={dataUser.Phone}
                                 name="Phone"
                                 onChange={(e) => handleChangeEdit(e)}
-                                placeholder="Nuevo teléfono"
+                                placeholder="Nuevo teléfono..."
                                 className={styles.formInputs}
                             />
                             <input
@@ -267,7 +275,7 @@ export default function Profile(props) {
                                 defaultValue={dataUser.Email}
                                 name="Email"
                                 onChange={(e) => handleChangeEdit(e)}
-                                placeholder="Nuevo email "
+                                placeholder="Nuevo email..."
                                 className={styles.formInputs}
                             />
                             <input
@@ -275,15 +283,49 @@ export default function Profile(props) {
                                 defaultValue={edit.UserPassword}
                                 name="UserPassword"
                                 onChange={(e) => handleChangeEdit(e)}
-                                placeholder="Introduzca su contraseña"
+                                placeholder="Introduzca su contraseña actual"
                                 className={styles.formInputs}
                             />
-                            <button type="submit" onSubmit={(e) => handleSubmitEdit(e)} className={styles.editarPerfil} id={styles.guardar}>
+                            <button
+                                type="submit"
+                                onSubmit={(e) => handleSubmitEdit(e)}
+                                className={styles.editarPerfil}
+                                id={styles.guardar}
+                            >
                                 Guardar cambios <p><BiSave /></p>
                             </button>
                         </form>
                     </div>
                 ) : null}
+                {mostrarContraseña ?
+                    (<div className={styles.editarCont}>
+                        <form onSubmit={handleConfirmarNuevaContraseña}>
+                            <label className={styles.title}><strong>Cambiar contraseña:</strong></label>
+                            <input
+                                type="password"
+                                defaultValue={edit.UserPassword}
+                                onChange={(e) => handleChangeEdit(e)}
+                                placeholder="Introduzca su contraseña actual"
+                                className={styles.formInputs}
+                            />
+                            <input
+                                type='password'
+                                className={styles.formInputs}
+                                placeholder='Nueva contraseña...'
+                                onChange={handleChangeContraseña}
+                            />
+                            <input
+                                type='password'
+                                className={styles.formInputs}
+                                placeholder='Repetir nueva contraseña...'
+                                onChange={handleChangeRepetida}
+                            />
+                            <button type='submit' className={styles.editarPerfil} id={styles.contra}>
+                                Guardar nueva contraseña <p><BsFillShieldLockFill /></p>
+                            </button>
+                        </form>
+                    </div>
+                    ) : null}
             </div>
         </div>
     );
