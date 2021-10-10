@@ -11,6 +11,7 @@ import styles from "./Cabañas.module.css";
 import CabañasDetail from "../Cabañas/CabañasDetail";
 import { Link } from "react-router-dom";
 
+
 const Cabañas = () => {
   const dispatch = useDispatch();
   const allCabains = useSelector((state) => state.cabañas);
