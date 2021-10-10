@@ -739,7 +739,7 @@ export function selectcabin(id){
       let json = await axios.get("http://localhost:3001/cabins/"+id);
       return dispatch({
         type: SELECTED_CABIN,
-        payload: json.data,
+        payload: json.data[0],
       });
     } catch (err) {
       console.log(err);

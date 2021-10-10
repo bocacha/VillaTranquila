@@ -33,6 +33,12 @@ export default function Reservaciones() {
   useEffect(() => {
     dispatch(readServices());
   }, [dispatch]);
+  const id = JSON.parse(localStorage.getItem("id_cabaña"))
+  useEffect(() => {
+    dispatch(selectcabin(id))
+  },[dispatch])
+ 
+
   const servicios = useSelector((state) => state.servicios);
   const seleccionada = useSelector((state) => state.selectedcabin)
   let lala = [];
@@ -112,7 +118,7 @@ export default function Reservaciones() {
       [e.target.name]: e.target.value,
     });
   }
-
+//console.log(seleccionada[0].Parrilla)
   const changeFechas=(e)=>{
     if(e === null){
       return
@@ -270,9 +276,10 @@ alert("Reserva creada")
             />
             <div>
               <div className={styles.p}>Servicios Basicos:
-              <p className={styles.p}><strong>Parrilla:</strong>  {seleccionada.Parrilla?<span>si</span>:<span>no</span>}</p>
-               <p className={styles.p}><strong> Wifi:</strong> {seleccionada.Wifi?<span>si</span>:<span>no</span>}</p>
-               <p className={styles.p}><strong>Parking:</strong>  {seleccionada.Parking?<span>si</span>:<span>no</span>}</p>
+              <p className={styles.p}><strong>Descripcion:</strong>  {seleccionada.Description}</p>
+        <p className={styles.p}><strong>Parrilla:</strong>  {seleccionada.Parrilla?(<span>si</span>):(<span>no</span>)}</p>
+        <p className={styles.p}><strong> Wifi:</strong> {seleccionada.Wifi?(<span>si</span>):(<span>no</span>)}</p>
+        <p className={styles.p}><strong>Parking:</strong>  {seleccionada.Parking?(<p>si</p>):(<span>no</span>)}</p>
               </div>
               <div className={styles.p}>Servicios Adicionales:</div>
               <button onClick={checkboxselected}>Seleccionar Servicios</button>
