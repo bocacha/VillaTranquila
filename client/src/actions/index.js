@@ -714,10 +714,11 @@ return async function (dispatch) {
  }
 }
 
-export function getUserData(username){
+export function getUserData(userid){
   return async function (dispatch) {
     try {
-      let json = await axios.get("http://localhost:3001/users/" + username);
+      let json = await axios.get("http://localhost:3001/users/" + userid);
+      console.log('getUserData --->',json.data)
       return dispatch({
         type: GET_USER_DATA,
         payload: json.data,

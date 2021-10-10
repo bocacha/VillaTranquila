@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { RiTeamLine, RiMailLine, RiLoginBoxLine } from "react-icons/ri";
 import { GoSignIn, GoHome } from "react-icons/go";
@@ -9,9 +9,19 @@ import { CgProfile } from 'react-icons/cg';
 import styles from "./Navbar.module.css";
 import axios from "axios";
 import { BiWindows } from "react-icons/bi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserData } from "../../actions";
 
 export default function Navbar() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const userData = useSelector((state) => state.userData);
+  const username = userData && userData.UserName;
+  const ID = user && user.userid;
+  useEffect(() => {
+    dispatch(getUserData(ID))
+  },[dispatch])
+
   let logeduser = useSelector((state) => state.user);
   if (logeduser === null) {
     logeduser = {};
@@ -106,7 +116,7 @@ export default function Navbar() {
             </div>
           ) : (
             <div>
-              <Link to="/perfil">
+              <Link to={`/${user.user}`}>
                 <li>
                   <button className={styles.signlog} >
                     <strong className={styles.list} >
