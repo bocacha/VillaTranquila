@@ -4,11 +4,12 @@ const router = Router();
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
 
+
 router.post('/', (req, res) => {
     const {username ,name, email, date}  = req.body;
 
     let pdfDoc = new PDFDocument;
-    pdfDoc.pipe(fs.createWriteStream('SampleDocument.pdf'));
+    pdfDoc.pipe(fs.createWriteStream(`reserva${name}.pdf`));
     
 
     const transporter = nodemailer.createTransport({
@@ -19,26 +20,41 @@ router.post('/', (req, res) => {
         auth: {
             user: 'tranquilavilla79@gmail.com',
             pass: 'aypeadipxrbkkwdd'
-        }
+        },
+        
+
     });
   
       transporter.verify().then(()=>{
           console.log('listo para mandar email')
       })
 
+     
+
     var mailOptions = {
         from: 'VILLA TRANQUILA',
         to: email,
         subject: 'Reserva',
-        text:`Hola ${username}! Tienes una reserva a nombre de ${name} en Villa Tranquila para el día ${date},haz un pago para reservar tu fecha, Te esperamos`
+        text:`Hola ${username}! Tienes una reserva a nombre de ${name} en Villa Tranquila para el día ${date}, haz un pago para reservar tu fecha`,
+        attachments: [
+            {
+                filename: `reserva${name}.pdf`, 
+                //path:`../../reserva${name}.pdf`,                                       
+                contentType: 'application/pdf',
+            }]
     };
+
+    pdfDoc.image('Villa logo.jpg');
+    pdfDoc.text('-------------------------------------------------------------------------------------------------',{lineGap:10})
     pdfDoc
-    .fillColor('blue')
-    .text(`${mailOptions.from}`, { link: 'https://pdfkit.org/docs/guide.pdf', underline: true });
-    pdfDoc.text(`${mailOptions.to}`);
-    pdfDoc.text(`${mailOptions.subject}`);
-    pdfDoc.text(`${mailOptions.text}`);
+    .fillColor('Black')
+    .text(`${mailOptions.text}`,{lineGap:10});
+    pdfDoc.text('-------------------------------------------------------------------------------------------------',{lineGap:10})
+    pdfDoc.text(`Ante cualquier duda puedes enviar un corre electronico a tranquilavilla79@gmail.com o bien puede comunicarte via telefonica al 358-154123456 `,{lineGap:10});
+    pdfDoc.text('No olvides traer abrigo!!! Te esperamos ',{lineGap:10})
     pdfDoc.end();
+    
+   
 
     transporter.sendMail(mailOptions, (error, info) => {
         if(error) {
