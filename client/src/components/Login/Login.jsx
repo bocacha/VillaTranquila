@@ -89,8 +89,8 @@ export default function Login() {
        ) : (
          <div className={styles.container}> 
            <div className={styles.containerForm}>
-         <h4> Bienvenido/a    {logeduser.user} </h4>
-            <button className={styles.btn1}onClick={goHome} ><strong>Home</strong></button>                 
+         <h4> Bienvenido/a  {logeduser.user}, vamos a   </h4>
+            <button className={styles.btn1}onClick={goHome} ><strong>Comenzar reserva</strong></button>                 
          </div>
            </div>
            
