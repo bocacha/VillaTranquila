@@ -36,6 +36,7 @@ export default function Home() {
       </div>
       <div>
         <BannerIntro />
+        {/* <Searchbar/> */}
         <Slider />
       </div>
       <div className={styles.mapaContainer}>

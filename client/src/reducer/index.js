@@ -35,9 +35,11 @@ import {
   REMOVE_PAYMENTS,
   REMOVE_USERS,
   GET_USER_DATA,
+  SEND_PASSWORD_EMAIL,
   SELECTED_CABIN
 
 } from "../actions";
+import fechas from "../components/Reserva/Linkreserva/algoritmofechas"
 
 const initialState = {
   selectedcabin:[],
@@ -62,22 +64,50 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         cabins: action.payload,
+        allCabins:action.payload,
       };
 
     case FILTER_CABINS:
       let cabinsFiltered = state.allCabins;
       // Filter by availability:
-      let inDate = action.payload.inDate;
-      let outDate = action.payload.outDate;
-      cabinsFiltered = cabinsFiltered.filter(el => {
-        var hitDates = el.Available || {};
-        hitDates = Object.keys(hitDates);
-        var hitDateMatchExists = hitDates.some(date => {
-          var newDate = new Date(date);
-          return newDate >= inDate && newDate <= outDate
-        });
-        return hitDateMatchExists;
-      });
+      let inDate = action.payload.inDate.split('-').reverse().join('/');
+      let outDate = action.payload.outDate.split('-').reverse().join('/');
+      const obj ={
+        Checkin: inDate,
+        Checkout: outDate
+      }
+      console.log(obj)
+      const fechasintermedias = fechas(obj)
+      console.log(fechasintermedias)
+      var nomostrar = []
+      cabinsFiltered.map(el => {
+        el.Available.map(e=>{
+          for(let i=0;i<e.length;i++){
+            for(let j=0;j<fechasintermedias.length;j++){
+              if(
+                e[i] === fechasintermedias[j]
+              ){
+                nomostrar.push(el)
+              }
+            }
+          }
+        })
+        })
+         cabinsFiltered = cabinsFiltered.filter(el=> {
+          return !nomostrar.includes(el)
+
+        })
+        console.log(cabinsFiltered)
+
+      // cabinsFiltered = cabinsFiltered.filter(el => {
+      //   var hitDates = el.Available || [];
+      //   hitDates = Object.keys(hitDates);
+      //   var hitDateMatchExists = hitDates.some(date => {
+      //     var newDate = new Date(date);
+      //     return newDate >= inDate && newDate <= outDate
+      //   });
+      //   return hitDateMatchExists;
+      // });
       // Filter by capacity:
       let capacity = action.payload.capacity;
       cabinsFiltered = capacity === 'all' ?
@@ -86,27 +116,27 @@ export default function rootReducer(state = initialState, action) {
       // Filter by priceMin and priceMax:
       let priceMin = action.payload.priceMin;
       let priceMax = action.payload.priceMax;
-      cabinsFiltered = priceMin === 'all' ?
+      cabinsFiltered = priceMin === 'all'  ||priceMin === "" ?
         cabinsFiltered :
         cabinsFiltered.filter(el => el.Price >= parseInt(priceMin));
-      cabinsFiltered = priceMax === 'al' ?
+      cabinsFiltered = priceMax === 'all'||priceMax ===  "" ?
         cabinsFiltered :
         cabinsFiltered.filter(el => el.Price <= parseInt(priceMax));
-      // Filter by wifi:
-      let wifi = action.payload.wifi;
-      cabinsFiltered = wifi === '' || wifi === 'false' ?
-        cabinsFiltered :
-        cabinsFiltered.filter(el => el.Wifi);
-      // Filter by barbecue:
-      let barbecue = action.payload.barbecue;
-      cabinsFiltered = barbecue === '' || barbecue === 'false' ?
-        cabinsFiltered :
-        cabinsFiltered.filter(el => el.Barbecue);
-      // Filter by parking:
-      let parking = action.payload.parking;
-      cabinsFiltered = parking === '' || parking === 'false' ?
-        cabinsFiltered :
-        cabinsFiltered.filter(el => el.Parking);
+      // // Filter by wifi:
+      // let wifi = action.payload.wifi;
+      // cabinsFiltered = wifi === '' || wifi === 'false' ?
+      //   cabinsFiltered :
+      //   cabinsFiltered.filter(el => el.Wifi);
+      // // Filter by barbecue:
+      // let barbecue = action.payload.barbecue;
+      // cabinsFiltered = barbecue === '' || barbecue === 'false' ?
+      //   cabinsFiltered :
+      //   cabinsFiltered.filter(el => el.Barbecue);
+      // // Filter by parking:
+      // let parking = action.payload.parking;
+      // cabinsFiltered = parking === '' || parking === 'false' ?
+      //   cabinsFiltered :
+      //   cabinsFiltered.filter(el => el.Parking);
       return {
         ...state,
         cabins: cabinsFiltered
@@ -274,6 +304,10 @@ export default function rootReducer(state = initialState, action) {
           ...state,
           selectedcabin: action.payload,
         }
+        case SEND_PASSWORD_EMAIL:
+          return {
+            ...state,
+          };
     default:
       return state;
   }

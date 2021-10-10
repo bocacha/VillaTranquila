@@ -18,6 +18,7 @@ import Gallery from './components/Gallery/Gallery';
 import Profile from './components/Profile/Profile';
 import PagosReserva from './components/PagoReserva/PagoReserva';
 
+
 function App() {
   return (
     <BrowserRouter>
