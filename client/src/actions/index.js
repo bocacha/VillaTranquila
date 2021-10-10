@@ -76,7 +76,9 @@ export function createReservation(payload) {
     const user = users.data.filter(e=> e.ID === payload.id)
     let reservas = []
     if(user[0].ReservationsHistory){
-      reservas.push(...user[0].ReservationsHistory)
+user[0].ReservationsHistory.map(e=>{
+        reservas.push(e)
+      })
       reservas.push(reserva)
     const cambiar={
       id: payload.id,
