@@ -33,11 +33,15 @@ import {
   REMOVE_SERVICES,
   REMOVE_PICTURES,
   REMOVE_PAYMENTS,
-  REMOVE_USERS
+  REMOVE_USERS,
+  GET_USER_DATA,
+  SEND_PASSWORD_EMAIL,
+  SELECTED_CABIN
 
 } from "../actions";
 
 const initialState = {
+  selectedcabin:[],
   cabins: [],
   allCabins: [],
   pagos: [],
@@ -48,7 +52,8 @@ const initialState = {
   cabañas: [],
   user: {},
   reservaciones: [],
-  fechasnodisponibles:[]
+  fechasnodisponibles:[],
+  userData: {}
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -58,7 +63,6 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         cabins: action.payload,
-        allCabins: action.payload,
       };
 
     case FILTER_CABINS:
@@ -256,11 +260,25 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         usuarios: state.usuarios.filter((usuario) => usuario.id !== action.payload)
       };
-      case READ_FECHASNODISPONIBLES:
+    case READ_FECHASNODISPONIBLES:
       return {
         ...state,
         fechasnodisponibles:action.payload,
       };
+    case GET_USER_DATA:
+      return {
+        ...state,
+        userData: action.payload
+      }
+      case SELECTED_CABIN:
+        return{
+          ...state,
+          selectedcabin: action.payload,
+        }
+        case SEND_PASSWORD_EMAIL:
+          return {
+            ...state,
+          };
     default:
       return state;
   }

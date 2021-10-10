@@ -82,7 +82,7 @@ export default function Usuarios() {
        id: ID,
      });
      //dispatch(readUsers({ token }));
-     window.location.reload();
+    // window.location.reload();
    }
 const ocultadas= () => {
   const { token } = logeduser;
@@ -94,15 +94,17 @@ const showtrue=()=>{
   dispatch(readUsers({ token }))
   setHabilitar(false)
 }
-
+const caca= (e) => {
+e.preventDefault()
+}
   return (
     <div className={styles.container}>
-       {!habilitar ?(
+       {/* {!habilitar ?(
             <button onClick={ocultadas}>Mostrar ocultadas</button>
           ):(
             <button onClick={showtrue}>Mostrar habilitadas</button>
           )
-          }
+          } */}
       {/* CREAR 
       <div>
         Crear un nuevo usuario
@@ -203,10 +205,16 @@ const showtrue=()=>{
           </div>
         </form>
 */}
-      <div className={styles.btnVolver}>
+      <div className={styles.btnsContainer}>
         <Link to="/admin">
-          <button className={styles.btn}>Volver</button>
+          <button className={styles.btnVolver}>Volver</button>
         </Link>
+        {!habilitar ?(
+            <button onClick={ocultadas} className={styles.btnSup}>Mostrar ocultadas</button>
+          ):(
+            <button onClick={showtrue} className={styles.btnSup}>Mostrar habilitadas</button>
+          )
+          }
       </div>
       <div className={styles.container2}>
       <div className={styles.formsCont}>
@@ -214,7 +222,7 @@ const showtrue=()=>{
         {mostrar ? 
             <div className={styles.crearCont}>
             <div className={styles.title}> Editar un nuevo usuario</div>
-            <form className={styles.form}>
+            <form className={styles.form} onSubmit={(e) =>caca(e)}>
               <input
                 type="text"
                 value={input.UserName}
@@ -234,7 +242,7 @@ const showtrue=()=>{
                 placeholder="Contraseña del usuario"
                 className={styles.formInputs}
                 title='Debe contener mayusculas, minusculas, numeros y caracter especial'
-                pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$'
+                //pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$'
                 required
               />
               <input
@@ -278,7 +286,7 @@ const showtrue=()=>{
                 className={styles.formInputs}
                 maxLength="17" 
                 minLength="10" 
-                pattern="[+]{2}[0-9]{10-14}" 
+                 pattern="[+]{2}[0-9]{10-14}" 
                 placeholder="+54 9 11 12345678" 
                 required
               />
@@ -322,11 +330,11 @@ const showtrue=()=>{
               <option value="true">true</option>
               <option value="false">false</option>
             </select> */}
-              <div className={styles.btns}>
+              {/* <div className={styles.btns}>
                 <button type="submit" className={styles.btn}>
                   Editar
                 </button>
-              </div>
+              </div> */}
             </form>
           </div>
         : 

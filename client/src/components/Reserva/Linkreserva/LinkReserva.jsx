@@ -10,6 +10,7 @@ import {
   editCabains,
   editAvailible,
   sendNotification,
+  selectcabin,
 } from "../../../actions";
 // import ReservacionesDetail from "./ReservacionesDetail";
 import "react-datepicker/dist/react-datepicker.css";
@@ -19,6 +20,8 @@ import DatePicker,{registerLocale} from "react-datepicker";
 import es from 'date-fns/locale/es';
 import axios from "axios"
 import fechas from "./algoritmofechas.js"
+import DayPicker from 'react-day-picker';
+import 'react-day-picker/lib/style.css';
 registerLocale('es', es)
 
 
@@ -31,12 +34,14 @@ export default function Reservaciones() {
     dispatch(readServices());
   }, [dispatch]);
   const servicios = useSelector((state) => state.servicios);
+  const seleccionada = useSelector((state) => state.selectedcabin)
   let lala = [];
   let id1 = 0;
   let suma = []
   let costoadicional = 0
   let fechasintermedias=[]
   const ocupadas = useSelector((state) => state.fechasnodisponibles)
+  //console.log(ocupadas)
   const [selectDateCI, setSelectDateCI] = useState(null);
   const [selectDateCO, setSelectDateCO] = useState(null);
   const [reserva, setReserva] = useState({Checkin:"",Checkout:""});
@@ -97,7 +102,9 @@ export default function Reservaciones() {
   useEffect(() => {
     dispatch(readFechas());
   }, [dispatch]);
-
+  useEffect(() => {
+    dispatch(selectcabin(localStorage.getItem("id_cabaña")))
+  }, [dispatch,cabinId]);
   function handleChange(e) {
     setInput({
       ...input,
@@ -113,13 +120,16 @@ export default function Reservaciones() {
     setSelectDateCI(e)
     mostrarFecha(e);
   }
+  useEffect(()=>{
+    fechasafiltrar()
+    console.log(fechasintermedias)
+    },[selectDateCO]);
 const changeFechas2=async(e)=>{
   if(e === null){
     return
   }
   setSelectDateCO(e)
   mostrarFecha2(e);
-  fechasafiltrar()
 }
 const mostrarFecha = selectDateCI =>{
     const options = {year:'numeric', month:'numeric', day:'2-digit'}
@@ -149,15 +159,16 @@ useEffect(()=>{
     });
 const handlePrueba=()=>{
 console.log(input.Anombrede, logeduser.email, input.Checkin)
-dispatch(createReservation(input))
-
+dispatch(createReservation({...input, id:logeduser.userid},dispatch))
+const options = {year:'numeric', month:'numeric', day:'2-digit'}
+    const data = { username:logeduser.user ,name: input.Anombrede, email: logeduser.email, date: selectDateCI.toLocaleDateString('es-ES', options)}
+ dispatch(sendNotification(data))
 dispatch(editAvailible(edit))
 alert("Reserva creada")
 }
   function handleSubmit(e) {
     e.preventDefault();
-    // console.log(input)
-  //   alert("Reserva creada con éxito");
+  alert("Reserva creada con éxito");
   }
 
   const parapiker2=[] 
@@ -180,6 +191,7 @@ alert("Reserva creada")
 
     }
     const fechasafiltrar=()=>{
+      console.log("entre")
      const intermedias = fechas(reserva)
      const ocup = parapiker
      for(let i= 0; i<intermedias.length; i++){
@@ -191,14 +203,9 @@ alert("Reserva creada")
       }
      }
     }
-   const caca =async()=> {
-    const options = {year:'numeric', month:'numeric', day:'2-digit'}
-    const cacona = { name: input.Anombrede, email: logeduser.email, date: selectDateCI.toLocaleDateString('es-ES', options)}
-   dispatch(sendNotification(cacona))}
   return (
     <div className={styles.container}>
       <div className={styles.formsCont}>
-      <button className={styles.btn}onClick={caca}>Volver</button>
         {/* CREAR */}
         <div className={styles.crearCont}>
           <div className={styles.btnVolver}>
@@ -261,8 +268,12 @@ alert("Reserva creada")
               return selectDateCI < d;
             }}
             />
-
             <div>
+              <div className={styles.p}>Servicios Basicos:
+              <p className={styles.p}><strong>Parrilla:</strong>  {seleccionada.Parrilla?<span>si</span>:<span>no</span>}</p>
+               <p className={styles.p}><strong> Wifi:</strong> {seleccionada.Wifi?<span>si</span>:<span>no</span>}</p>
+               <p className={styles.p}><strong>Parking:</strong>  {seleccionada.Parking?<span>si</span>:<span>no</span>}</p>
+              </div>
               <div className={styles.p}>Servicios Adicionales:</div>
               <button onClick={checkboxselected}>Seleccionar Servicios</button>
               <div>
@@ -283,9 +294,11 @@ alert("Reserva creada")
               </div>
             </div>
             <div className={styles.btns}>
-              <button onClick={handlePrueba} className={styles.btnRes}>
-                Reservar
-              </button>
+              <Link to="/reserva/pago">
+                <button onClick={handlePrueba} className={styles.btnRes}>
+                  Reservar
+                </button>
+              </Link>
             </div>
           </form>
         </div>
@@ -294,5 +307,3 @@ alert("Reserva creada")
     </div>
   );
 }
-
-
