@@ -107,102 +107,8 @@ const showtrue=()=>{
       <div>
         Crear un nuevo usuario
         <form onSubmit={(e) => handleSubmit(e)}>
-          <input
-            type="text"
-            value={input.UserName}
-            name="UserName"
-            onChange={(e) => handleChange(e)}
-            placeholder="Nombre de usuario" 
-            pattern='^[0-9a-zA-Z]+$'
-            className={styles.UserName}
-            required
-          />
-
-          <input
-            type="text"
-            value={input.UserPassword}
-            name="UserPassword"
-            onChange={(e) => handleChange(e)}
-            placeholder="Contraseña"
-            className={styles.UserPassword}
-            pattern= '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$'
-            required
-          />
-            {/* Minimo 8 caracteres
-            Maximo 15
-            Al menos una letra mayúscula
-            Al menos una letra minucula
-            Al menos un dígito
-            No espacios en blanco
-            Al menos 1 caracter especial */}
-      {/*
-          <input
-            type="text"
-            value={input.FirstName}
-            name="FirstName"
-            onChange={(e) => handleChange(e)}
-            placeholder="Nombre"
-            className={styles.FirstName}
-            pattern='[a-zA-Z ]{2,254}'
-            required
-          />
-
-          <input
-            type="text"
-            value={input.LastName}
-            name="LastName"
-            onChange={(e) => handleChange(e)}
-            placeholder="Apellido"
-            className={styles.LastName}
-            pattern='[a-zA-Z ]{2,254}'
-            required
-          />
-
-          <input
-            type="text"
-            value={input.Address}
-            name="Address"
-            onChange={(e) => handleChange(e)}
-            placeholder="Direccion"
-            pattern='^[0-9a-zA-Z]+$'
-            className={styles.Address}
-            required
-          />
-
-          <input
-            type="text"
-            value={input.Phone}
-            name="Phone"
-            onChange={(e) => handleChange(e)}
-            placeholder="Teléfono"
-            className={styles.Phone}
-            maxLength="17" 
-            minLength="10" 
-            pattern="[+]{2}[0-9]{10-14}" 
-            placeholder="+54 9 11 12345678" 
-            required
-          />
-
-          <small>Ej: +54 9 11 12345678 </small>
-
-          <input
-            type="email"
-            value={input.Email}
-            name="Email"
-            onChange={(e) => handleChange(e)}
-            placeholder="Email"
-            pattern='^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$'
-            className={styles.Email}
-            required
-          />
-
-          <div className={styles.btns}>
-            <button type="submit" className={styles.submit_btn}>
-              Crear
-            </button>
-          </div>
-        </form>
-*/}
+       */}
+     
       <div className={styles.btnsContainer}>
         <Link to="/admin">
           <button className={styles.btnVolver}>Volver</button>
@@ -229,7 +135,7 @@ const showtrue=()=>{
                 placeholder="Nombre de usuario"
                 className={styles.formInputs}
                 pattern='^[0-9a-zA-Z\s]+$'
-                title='debe contener letras y numeros'
+                title='Debe contener letras y numeros'
                 required
               />
               <input
@@ -239,8 +145,8 @@ const showtrue=()=>{
                 onChange={(e) => handleChange(e)}
                 placeholder="Contraseña del usuario"
                 className={styles.formInputs}
-                title='Debe contener mayusculas, minusculas, numeros y caracter especial'
-                //pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$'
+                title='Debe contener mayusculas, minusculas y numeros '
+                pattern='^[0-9a-zA-Z\s]+$'
                 required
               />
               <input
@@ -283,8 +189,8 @@ const showtrue=()=>{
                 placeholder="Télefono"
                 className={styles.formInputs}
                 maxLength="17" 
-                minLength="10" 
-                pattern="[+]{2}[0-9]{10-14}" 
+                minLength="8" 
+                pattern="[+]{2}[0-9]{10-14}"
                 placeholder="+54 9 11 12345678" 
                 required
               />

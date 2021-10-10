@@ -65,6 +65,8 @@ export default function Usuarios() {
               onChange={(e) => handleChange(e)}
               placeholder="UserName"
               className={styles.formInputs}
+              title='Debe contener mayusculas minusculas y numeros '
+              pattern='^[0-9a-zA-Z\s]+$'
               required
             />
             <input
@@ -83,6 +85,8 @@ export default function Usuarios() {
               onChange={(e) => handleChange(e)}
               placeholder="FirstName"
               className={styles.formInputs}
+              title='Solo letras'
+              pattern='[a-zA-Z ]{2,254}'
               required
             />
             <input
@@ -92,6 +96,8 @@ export default function Usuarios() {
               onChange={(e) => handleChange(e)}
               placeholder="LastName"
               className={styles.formInputs}
+              title='Solo letras'
+              pattern='[a-zA-Z ]{2,254}'
               required
             />
             <input
@@ -101,6 +107,8 @@ export default function Usuarios() {
               onChange={(e) => handleChange(e)}
               placeholder="Address"
               className={styles.formInputs}
+              title='Debe contener mayusculas minusculas y numeros '
+              pattern='^[0-9a-zA-Z\s]+$'
               required
             />
             <input
@@ -110,15 +118,20 @@ export default function Usuarios() {
               onChange={(e) => handleChange(e)}
               placeholder="Phone"
               className={styles.formInputs}
+              maxLength="17" 
+              minLength="8" 
+              pattern="[+]{2}[0-9]{10-14}"
+              placeholder="+54 9 11 12345678" 
               required
             />
             <input
-              type="text"
+              type="email"
               value={input.Email}
               name="Email"
               onChange={(e) => handleChange(e)}
               placeholder="Email"
               className={styles.formInputs}
+              pattern='^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$'
               required
             />
             <div className={styles.btns}>

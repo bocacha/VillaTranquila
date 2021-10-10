@@ -150,6 +150,9 @@ export default function Profile(props) {
               onChange={(e) => handleChangeEdit(e)}
               placeholder="Nuevo nombre de usuario"
               className={styles.formInputs}
+              title='Debe contener mayusculas minusculas y numeros '
+              pattern='^[0-9a-zA-Z\s]+$'
+              required
             />
             <input
               type="text"
@@ -158,6 +161,9 @@ export default function Profile(props) {
               onChange={(e) => handleChangeEdit(e)}
               placeholder="Nuevo nombre"
               className={styles.formInputs}
+              title='Solo letras'
+              pattern='[a-zA-Z ]{2,254}'
+              required
             />
             <input
               type="text"
@@ -166,6 +172,9 @@ export default function Profile(props) {
               onChange={(e) => handleChangeEdit(e)}
               placeholder="Nuevo apellido"
               className={styles.formInputs}
+              title='Solo letras'
+              pattern='[a-zA-Z ]{2,254}'
+              required
             />
             <input
               type="text"
@@ -174,6 +183,9 @@ export default function Profile(props) {
               onChange={(e) => handleChangeEdit(e)}
               placeholder="Nueva dirección"
               className={styles.formInputs}
+              title='Debe contener mayusculas minusculas y numeros '
+              pattern='^[0-9a-zA-Z\s]+$'
+              required
             />
             <input
               type="text"
@@ -182,14 +194,21 @@ export default function Profile(props) {
               onChange={(e) => handleChangeEdit(e)}
               placeholder="Nuevo teléfono"
               className={styles.formInputs}
+              maxLength="17" 
+              minLength="8" 
+              pattern="[+]{2}[0-9]{10-14}"
+              placeholder="+54 9 11 12345678" 
+              required
             />
             <input
-              type="text"
+              type="email"
               defaultValue={dataUser.Email}
               name="Email"
               onChange={(e) => handleChangeEdit(e)}
               placeholder="Nuevo email "
               className={styles.formInputs}
+              pattern='^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$'
+              required
             />
             <input
               type="password"
@@ -198,6 +217,7 @@ export default function Profile(props) {
               onChange={(e) => handleChangeEdit(e)}
               placeholder="Introduzca su contraseña"
               className={styles.formInputs}
+              required
             />
             <button type="submit" onSubmit={(e) => handleSubmitEdit(e)}>
               Guardar cambios

@@ -147,8 +147,9 @@ const Cabañas = () => {
                   value={cabain.Number}
                   onChange={handleChange}
                   placeholder="Numero de Cabaña"
+                  max="20"
                   className={styles.formInputs}
-                  requiered
+                  required
                 />
               </div>
               <div>
@@ -158,8 +159,9 @@ const Cabañas = () => {
                   value={cabain.Capacity}
                   onChange={handleChange}
                   placeholder="Numero de Camas"
+                  max="10"
                   className={styles.formInputs}
-                  requiered
+                  required
                 />
               </div>
               {/* <div>
@@ -182,7 +184,7 @@ const Cabañas = () => {
                   placeholder="Precio"
                   className={styles.formInputs}
                   max="50000"
-                  requiered
+                  required
                 />
               </div>
               <div>
@@ -193,60 +195,11 @@ const Cabañas = () => {
                   onChange={handleChange}
                   placeholder="Descripción"
                   className={styles.formInputs}
-                  requiered
+                  maxLength="100"
+                  required
                 />
               </div>
-              {/* <div>
-              <label>Cafe</label>
-              <input
-                type="checkbox"
-                name="Coffe"
-                value={cabain.Coffe}
-                onChange={handleCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Microondas</label>
-              <input
-                type="checkbox"
-                name="Microondas"
-                value={cabain.Microondas}
-                onChange={handleCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Calefaccion</label>
-              <input
-                type="checkbox"
-                name="Calefaccion"
-                value={cabain.Calefaccion}
-                onChange={handleCheckBox}
-                className={styles.formInputs}
-              />
-
-              <label>Parrilla</label>
-              <input
-                type="checkbox"
-                name="Barbecue"
-                value={cabain.Barbecue}
-                onChange={handleCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Wifi</label>
-              <input
-                type="checkbox"
-                name="Wifi"
-                value={cabain.Wifi}
-                onChange={handleCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Estacionamiento</label>
-              <input
-                type="checkbox"
-                name="Parking"
-                value={cabain.Parking}
-                onChange={handleCheckBox}
-                className={styles.formInputs}
-              />
-            </div> */}
+           
               <div className={styles.btns}>
                 <button type="submit" className={styles.btn}>
                   Crear
@@ -276,7 +229,9 @@ const Cabañas = () => {
                     value={edit.Number}
                     onChange={handleChangeEdit}
                     placeholder="Numero de Cabaña"
+                    max="20"
                     className={styles.formInputs}
+                    required
                   />
                 </div>
                 <div>
@@ -286,7 +241,9 @@ const Cabañas = () => {
                     value={edit.Capacity}
                     onChange={handleChangeEdit}
                     placeholder="Numero de Camas"
+                    max="10"
                     className={styles.formInputs}
+                    required
                   />
                 </div>
                 {/* <div>
@@ -307,6 +264,8 @@ const Cabañas = () => {
                     onChange={handleChangeEdit}
                     placeholder="Precio"
                     className={styles.formInputs}
+                    max="50000"
+                    required
                   />
                 </div>
                 <div>
@@ -316,65 +275,12 @@ const Cabañas = () => {
                     value={edit.Description}
                     onChange={handleChangeEdit}
                     placeholder="Descripción"
+                    maxLength="100"
                     className={styles.formInputs}
+                    required
                   />
                 </div>
-                {/* <div>
-              <label>Cafe</label> 
-              <input
-                type="checkbox"
-                name="Coffe"
-                value={edit.Coffe}
-                onChange={handleeditCheckBox}
-                placeholder="h"
-                className={styles.formInputs}
-              />
-              <label>Microondas</label>
-              <input
-                type="checkbox"
-                name="Microondas"
-                value={edit.Microondas}
-                onChange={handleeditCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Calefaccion</label>
-              <input
-                type="checkbox"
-                name="Calefaccion"
-                value={edit.Calefaccion}
-                onChange={handleeditCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Parrilla</label>
-              <input
-                type="checkbox"
-                name="Barbecue"
-                value={edit.Barbecue}
-                onChange={handleeditCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Wifi</label>
-              <input
-                type="checkbox"
-                name="Wifi"
-                value={edit.Wifi}
-                onChange={handleeditCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Estacionamiento</label>
-              <input
-                type="checkbox"
-                name="Parking"
-                value={edit.Parking}
-                onChange={handleeditCheckBox}
-                className={styles.formInputs}
-              />
-            </div> */}
-                {/*  <div className={styles.btns}>
-              <button type="submit" className={styles.btn}>
-                Guardar
-              </button>
-            </div>  */}
+               
               </form>
             </div>
           ) : null}

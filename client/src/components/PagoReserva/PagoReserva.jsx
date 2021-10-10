@@ -28,7 +28,7 @@ export default function PagosReserva(ID) {
               <li>Costo final:{reservacion.CostoFinal}</li>
             </ul>
             <form action="http://localhost:3001/checkout" method="POST">
-              <input type="hidden" name="title" value={reservacion.Anombrede}/>
+              <input type="hidden" name="title" value='Villa Tranquila'/>
               <input type="hidden" name="price" value={reservacion.CostoFinal}/>                                
               <input type="submit" value="Pagar" target="_blank" class="btn btn-primary btn-block"/>
             </form> 
