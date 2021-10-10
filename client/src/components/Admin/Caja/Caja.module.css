@@ -2,6 +2,7 @@
 .general{
     background-color: #355978;
     min-height: 100vh;
+    
 }
 
 
@@ -14,14 +15,16 @@
     justify-content:space-between;
     background: #293c4f;
     color:#fff;
-    margin-top: 40px;
-    padding:20px;    
+    margin-top: 140px;
+    padding:40px;    
+ 
 }
 .detalle{
     display:grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     color:#fff;
 }
+
 
 .total{
     display:flex;

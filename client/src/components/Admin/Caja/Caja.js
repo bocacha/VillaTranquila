@@ -1,16 +1,38 @@
 
 import Navbar from '../../Navbar/Navbar';
 import styles from './Caja.module.css';
+import { useSelector } from "react-redux";
 
 
 export default function Caja(){
+    const pago= useSelector((state) => state.pagos);
+    const datosUsuario = useSelector((state)=> state.usuarios);
+    // const uno=datosUsuario[1].FirstName;
     
+    // const dos=datosUsuario[1].LastName;
+    // const tres= uno + " " + dos;
+    // const indice=datosUsuario[1].ID;
+
+    // for(var i=0;i< pago.length;i++){
+    //     if(pago.idClient===indice){
+    //         console.log("ENTREEEEEEEEEE")
+    //     }
+
+    // }
+
     return(
         
         <>
                
         <div className={styles.general}>  
-            <Navbar />  
+            <div className={styles.barra}>
+                <Navbar />  
+            </div>
+            {/* <div className={styles.detalle}>
+                <p>{tres}</p>
+
+            </div> */}
+            
             <h3>Comprobantes emitidos para el día Sábado, 9 de Octubre 2021</h3>                     
             <div className={styles.container}>
                 <label>Comprobante</label>

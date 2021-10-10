@@ -31,8 +31,7 @@ function App() {
           <Route exact path="/reserva" component={Reserva} />
           <Route path="/reserva/reservar" component={LinkReserva} />
           <Route path='/reserva/pago' component={PagosReserva} />
-          <Route path="/galeria" component={Gallery} />
-          <Route path="/caja" component={Caja} />
+          <Route path="/galeria" component={Gallery} />          
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/admin/cabañas" component={Cabañas} />
           <Route exact path="/admin/reservaciones" component={Reservaciones} />
@@ -40,6 +39,7 @@ function App() {
           <Route exact path="/admin/pagos" component={Pagos} />
           <Route exact path="/admin/fotos" component={Fotos} />
           <Route exact path="/admin/usuarios" component={Usuarios} />
+          <Route path="/admin/caja" component={Caja} />
           <Route path='/iniciarsesion' component={Login} />
           <Route path='/registrarse' component={Registro} />
           <Route path='/perfil' component={Profile} />
