@@ -371,6 +371,7 @@ export function readCabainsocultados(id) {
 }
 
 export function editUsers(payload) {
+  console.log("action",payload)
   return async function (dispatch) {
     try {
       var json = await axios.put("http://localhost:3001/users/EditUser", payload);
