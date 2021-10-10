@@ -33,7 +33,7 @@ export default function PagosReserva(ID) {
             <hr />
             <form action="http://localhost:3001/checkout" method="POST">
               <input type="hidden" name="title" value={reservacion.Anombrede}/>
-              <input type="hidden" name="price" value={reservacion.CostoFinal}/>                                
+              <input type="hidden" name="price" value={costoFINAL}/>                                
               <input type="submit" value="Pagar" target="_blank" class={styles.btnPlus}/>
             </form> 
           </div>
