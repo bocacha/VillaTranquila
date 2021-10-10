@@ -19,13 +19,13 @@ const Cabañas = () => {
   const [cabain, setCabain] = useState({
     Number: "",
     Capacity: "",
-    Available: "",
+    Available: [],
     Price: "",
     Description: "",
     Coffe: false,
     Microondas: false,
     Calefaccion: false,
-    Barbecue: false,
+    Parrilla: false,
     Wifi: false,
     Cleaning: false,
     Refrigerator: false,
@@ -36,20 +36,20 @@ const Cabañas = () => {
     id: "",
     Number: "",
     Capacity: "",
-    Available: "",
+    Available: [],
     Price: "",
     Description: "",
     Coffe: false,
     Microondas: false,
     Calefaccion: false,
-    Barbecue: false,
+    Parrilla: false,
     Wifi: false,
     Cleaning: false,
     Refrigerator: false,
     Stove: false,
     Parking: false,
   });
-
+console.log(edit.Available)
   const [mostrar, setMostrar] = useState(false);
 
   useEffect(() => {
@@ -75,18 +75,18 @@ const Cabañas = () => {
   }
   console.log("handle", edit);
 
-  const handleCheckBox = (e) => {
-    setCabain({
-      ...cabain,
-      [e.target.name]: true,
-    });
-  };
-  const handleeditCheckBox = (e) => {
-    setEdit({
-      ...cabain,
-      [e.target.name]: true,
-    });
-  };
+  // const handleCheckBox = (e) => {
+  //   setCabain({
+  //     ...cabain,
+  //     [e.target.name]: true,
+  //   });
+  // };
+  // const handleeditCheckBox = (e) => {
+  //   setEdit({
+  //     ...cabain,
+  //     [e.target.name]: true,
+  //   });
+  // };
   const handleSubmit = (e) => {
     const { token } = logeduser;
     e.preventDefault();
@@ -95,14 +95,39 @@ const Cabañas = () => {
     window.location.reload();
   };
 
-  const handleeditSubmit = (e, ID) => {
-    setEdit({ ...edit, id: ID });
+  const handleeditSubmit = (e, ID, Number,
+    Capacity,
+    Available,
+    Price,
+    Description,
+    Parrilla,
+    Wifi,
+    Parking) => {
+    setEdit({ ...edit, id: ID, Number:Number,
+      Capacity:Capacity,
+      Available:Available,
+      Price:Price,
+      Description:Description,
+      Parrilla:Parrilla,
+      Wifi:Wifi,
+      Parking:Parking});
     e.preventDefault();
     setMostrar(true);
     const { token } = logeduser;
     dispatch(editCabains(edit, { token }));
   };
-
+  function handleSelect(e) {
+    setCabain({
+      ...cabain,
+      [e.target.name] : e.target.value,
+    });
+  }
+  function handleSelectedit(e) {
+    setEdit({
+      ...edit,
+      [e.target.name] : e.target.value,
+    });
+  }
   const handlePrueba = (e, ID) => {
     setEdit({ ...edit, id: ID });
     e.preventDefault();
@@ -162,17 +187,17 @@ const Cabañas = () => {
                   requiered
                 />
               </div>
-              <div>
-                <input
+              {/* <div> */}
+                {/* <textarea
                   type="text"
                   name="Available"
                   value={cabain.Available}
                   onChange={handleChange}
-                  placeholder="Disponibilidad"
+                  placeholder={cabain.Available}
                   className={styles.formInputs}
                   requiered
                 />
-              </div>
+              </div> */}
               <div>
                 <input
                   type="number"
@@ -196,6 +221,41 @@ const Cabañas = () => {
                   requiered
                 />
               </div>
+              <select
+                onChange={(e) => handleSelect(e)}
+               // value={cabain.Parking}
+                className={styles.formInputs}
+                name="Parking"
+                required
+              >
+                <option>Estacionamiento:</option>
+                <option  name="Parking"  value="true">true</option>
+                <option  name="Parking" value="false">false</option>
+              </select>
+
+              <select
+                onChange={(e) => handleSelect(e)}
+               // value={cabain.Parrilla}
+                className={styles.formInputs}
+                name="Parrilla"
+                required
+              >
+                <option>Parrilla:</option>
+                <option name="Parrilla" value="true">true</option>
+                <option name="Parrilla"  value="false">false</option>
+              </select>
+
+              <select
+                onChange={(e) => handleSelect(e)}
+                name="Wifi"
+               // value={cabain.Wifi}
+                className={styles.formInputs}
+                required
+              >
+                <option>Wifi:</option>
+                <option name="Wifi"  value="true">true</option>
+                <option name="Wifi"  value="false">false</option>
+              </select>
               {/* <div>
               <label>Cafe</label>
               <input
@@ -270,6 +330,7 @@ const Cabañas = () => {
               />
             </div> */}
                 <div>
+                  Nº De Cabaña
                   <input
                     type="text"
                     name="Number"
@@ -280,6 +341,7 @@ const Cabañas = () => {
                   />
                 </div>
                 <div>
+                  Cantidad de Camas
                   <input
                     type="number"
                     name="Capacity"
@@ -289,17 +351,18 @@ const Cabañas = () => {
                     className={styles.formInputs}
                   />
                 </div>
-                <div>
+                {/* <div>
                   <input
                     type="text"
                     name="Available"
                     value={edit.Available}
                     onChange={handleChangeEdit}
-                    placeholder="Disponibilidad"
+                    placeholder={edit.Available}
                     className={styles.formInputs}
                   />
-                </div>
+                </div> */}
                 <div>
+                  Costo por Noche
                   <input
                     type="number"
                     name="Price"
@@ -310,6 +373,7 @@ const Cabañas = () => {
                   />
                 </div>
                 <div>
+                  Description
                   <textarea
                     type="text"
                     name="Description"
@@ -319,6 +383,40 @@ const Cabañas = () => {
                     className={styles.formInputs}
                   />
                 </div>
+                Servicios Basicos
+                <select
+                onChange={(e) => handleSelectedit(e)}
+               // value={edit.Parking}
+                className={styles.formInputs}
+                name="Parking"
+                required
+              >
+                <option>Estacionamiento:</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+              </select>
+              <select
+                onChange={(e) => handleSelectedit(e)}
+               // value={edit.Parrilla}
+                className={styles.formInputs}
+                name="Parrilla"
+                required
+              >
+                <option>Parrilla:</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+              </select>
+              <select
+                onChange={(e) => handleSelectedit(e)}
+               // value={edit.Wifi}
+                className={styles.formInputs}
+                name="Wifi"
+                required
+              >
+                <option>Wifi:</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+              </select>
                 {/* <div>
               <label>Cafe</label> 
               <input
@@ -394,7 +492,7 @@ const Cabañas = () => {
                   Coffe={el.Coffe}
                   Microondas={el.Microondas}
                   Calefaccion={el.Calefaccion}
-                  Barbecue={el.Barbecue}
+                  Parrilla={el.Parrilla}
                   Wifi={el.Wifi}
                   Cleaning={el.Cleaning}
                   Refrigerator={el.Refrigerator}
