@@ -65,6 +65,7 @@ export default function Usuarios() {
               onChange={(e) => handleChange(e)}
               placeholder="UserName"
               className={styles.formInputs}
+              required
             />
             <input
               type="password"
@@ -73,6 +74,7 @@ export default function Usuarios() {
               onChange={(e) => handleChange(e)}
               placeholder="UserPassword"
               className={styles.formInputs}
+              required
             />
             <input
               type="text"
@@ -81,6 +83,7 @@ export default function Usuarios() {
               onChange={(e) => handleChange(e)}
               placeholder="FirstName"
               className={styles.formInputs}
+              required
             />
             <input
               type="text"
@@ -89,6 +92,7 @@ export default function Usuarios() {
               onChange={(e) => handleChange(e)}
               placeholder="LastName"
               className={styles.formInputs}
+              required
             />
             <input
               type="text"
@@ -97,6 +101,7 @@ export default function Usuarios() {
               onChange={(e) => handleChange(e)}
               placeholder="Address"
               className={styles.formInputs}
+              required
             />
             <input
               type="text"
@@ -105,6 +110,7 @@ export default function Usuarios() {
               onChange={(e) => handleChange(e)}
               placeholder="Phone"
               className={styles.formInputs}
+              required
             />
             <input
               type="text"
@@ -113,6 +119,7 @@ export default function Usuarios() {
               onChange={(e) => handleChange(e)}
               placeholder="Email"
               className={styles.formInputs}
+              required
             />
             <div className={styles.btns}>
               <button
