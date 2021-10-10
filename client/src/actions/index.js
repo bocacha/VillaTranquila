@@ -120,10 +120,12 @@ export function createServices(payload, { token }) {
 }
 
 export function createUsers(payload) {
-
-  return async function (dispatch) {
-    const response = await axios.post("http://localhost:3001/users/Singup", payload);
+    return async function (dispatch) {
+   try{ const response = await axios.post("http://localhost:3001/users/Singup", payload);
     return response;
+    }catch (err) {
+      alert("Error Nombre de usuario no disponible")
+    }
   };
 }
 
@@ -501,12 +503,14 @@ export function Loguser(payload) {
     try {
       let json = await axios.post("http://localhost:3001/login", payload);
       localStorage.setItem("LogedUser", JSON.stringify(json.data));
+      console.log(json)
       return dispatch({
         type: LOG_USER,
         payload: json.data,
       });
     } catch (err) {
-      console.log(err);
+      console.log(err)
+      alert("Error Usuario o Contraseña mal ingresados/inexistentes");
     }
   };
 }
