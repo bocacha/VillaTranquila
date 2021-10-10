@@ -31,7 +31,8 @@ export default function Home() {
         </div> 
       </div>
       <div>
-        {/* <Gallery/> */}
+        {/* <Searchbar/> */}
+        <Gallery/>
       </div>
       <div>
         <BannerIntro />
