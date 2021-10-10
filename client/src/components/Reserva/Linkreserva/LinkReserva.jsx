@@ -162,14 +162,13 @@ console.log(input.Anombrede, logeduser.email, input.Checkin)
 dispatch(createReservation({...input, id:logeduser.userid},dispatch))
 const options = {year:'numeric', month:'numeric', day:'2-digit'}
     const data = { username:logeduser.user ,name: input.Anombrede, email: logeduser.email, date: selectDateCI.toLocaleDateString('es-ES', options)}
-   dispatch(sendNotification(data))
+ dispatch(sendNotification(data))
 dispatch(editAvailible(edit))
 alert("Reserva creada")
 }
   function handleSubmit(e) {
     e.preventDefault();
-    // console.log(input)
-  //   alert("Reserva creada con éxito");
+  alert("Reserva creada con éxito");
   }
 
   const parapiker2=[] 
@@ -295,11 +294,11 @@ alert("Reserva creada")
               </div>
             </div>
             <div className={styles.btns}>
-              {/* <Link to="/reserva/pago"> */}
+              <Link to="/reserva/pago">
                 <button onClick={handlePrueba} className={styles.btnRes}>
                   Reservar
                 </button>
-              {/* </Link> */}
+              </Link>
             </div>
           </form>
         </div>
