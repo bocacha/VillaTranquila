@@ -150,6 +150,7 @@ export default function Reservaciones() {
           onChange={date=> setSelectDateCI(date)}
           dateFormat='dd/MM/yyyy'
           minDate={new Date()}
+          className={styles.formInputs}
           //isClearable
           /> 
               
@@ -158,6 +159,7 @@ export default function Reservaciones() {
           onChange={date=> setSelectDateCO(date)}
           dateFormat='dd/MM/yyyy'
           minDate={new Date()}
+          className={styles.formInputs}
           //isClearable
           />
               <input
