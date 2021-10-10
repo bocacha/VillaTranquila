@@ -240,7 +240,7 @@ const showtrue=()=>{
                 placeholder="Contraseña del usuario"
                 className={styles.formInputs}
                 title='Debe contener mayusculas, minusculas, numeros y caracter especial'
-                pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$'
+                //pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$'
                 required
               />
               <input
