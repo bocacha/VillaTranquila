@@ -715,9 +715,11 @@ return async function (dispatch) {
 }
 
 export function getUserData(username){
+  console.log(username)
   return async function (dispatch) {
     try {
       let json = await axios.get("http://localhost:3001/users/" + username);
+      console.log(json.data)
       return dispatch({
         type: GET_USER_DATA,
         payload: json.data,
