@@ -34,11 +34,14 @@ import {
   REMOVE_PICTURES,
   REMOVE_PAYMENTS,
   REMOVE_USERS,
-  GET_USER_DATA
+  GET_USER_DATA,
+  SEND_PASSWORD_EMAIL,
+  SELECTED_CABIN
 
 } from "../actions";
 
 const initialState = {
+  selectedcabin:[],
   cabins: [],
   allCabins: [],
   pagos: [],
@@ -60,7 +63,6 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         cabins: action.payload,
-        allCabins: action.payload,
       };
 
     case FILTER_CABINS:
@@ -268,6 +270,15 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         userData: action.payload
       }
+      case SELECTED_CABIN:
+        return{
+          ...state,
+          selectedcabin: action.payload,
+        }
+        case SEND_PASSWORD_EMAIL:
+          return {
+            ...state,
+          };
     default:
       return state;
   }

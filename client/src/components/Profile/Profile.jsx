@@ -15,6 +15,9 @@ export default function Profile(props) {
   }, [dispatch]);
   const user = useSelector((state) => state.user);
   const username = user.user;
+  useEffect(() => {
+    dispatch(getUserData(username));
+  }, [dispatch, username]);
   const dataUser = useSelector((state) => state.userData);
   const [mostrar, setMostrar] = useState(false);
   const [edit, setEdit] = useState({
@@ -26,7 +29,7 @@ export default function Profile(props) {
     Email: dataUser.Email,
     UserPassword: "",
   });
-
+ 
   function handleMostrar(e) {
     e.preventDefault();
     if (mostrar) {
@@ -62,11 +65,15 @@ export default function Profile(props) {
       [e.target.name]: e.target.value,
     });
   }
-
-  useEffect(() => {
-    dispatch(getUserData(username));
-  }, [dispatch, username]);
-
+let objetosaArray =[]
+if(dataUser.ReservationsHistory){
+ const reservas = dataUser.ReservationsHistory.map(e=>{
+   const {Show, ID, UserId, ...history} = e
+   console.log(history)
+   objetosaArray.push(Object.entries(history))
+ })
+}
+ 
   return (
     <div className={styles.perfil}>
       <Navbar />
@@ -103,9 +110,15 @@ export default function Profile(props) {
             <summary>Historial de reservas</summary>
             {dataUser.ReservationsHistory &&
             dataUser.ReservationsHistory.length ? (
-              dataUser.ReservationsHistory.map((el) => {
-                return <p>{el}</p>;
+              <ul>
+                {objetosaArray.map((el) => {
+                return <ul>{el.map(e=>{
+                  return <li>{e[0]}:{e[1]}</li>
+                })}</ul>;
               })
+}
+              </ul>
+              
             ) : (
               <div>
                 <span>

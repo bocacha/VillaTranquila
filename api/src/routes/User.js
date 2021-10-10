@@ -141,7 +141,8 @@ router.put("/EditProfile/:ID", async (req,res) =>{
 });
 
 router.put("/EditUser", async (req,res) =>{
-    const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email, Admin,Premium} = req.body;
+    const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email, Admin,Premium,ReservationsHistory} = req.body;
+    console.log("reserva",ReservationsHistory)
     // const authorizations = req.get("Authorization") 
     //      let token = ""
     // if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
@@ -157,10 +158,35 @@ router.put("/EditUser", async (req,res) =>{
     // if(!decodedToken.Admin){
     //     return res.status(400).json({error:"Ops.. No tenes permisos"})
     // }
-    const UserPasswordHashed = await bcrypt.hash(UserPassword,10)
-    const objecttoupdate={
+    if(UserPassword){
+        const UserPasswordHashed = await bcrypt.hash(UserPassword,10)
+        const objecttoupdate={
+            UserName: UserName,
+            UserPasswordHashed: UserPasswordHashed,
+            FirstName: FirstName,
+            LastName: LastName,
+            Address: Address,
+            Phone: Phone,
+            Email: Email,
+            Admin: Admin,
+            Premium: Premium,
+            ReservationsHistory: ReservationsHistory
+        }
+        User.update(
+            objecttoupdate
+          ,
+          {
+              where: {ID: req.body.id}
+  
+          })
+          .then(doneTemp=>{
+              return res.status(200).json(doneTemp)
+          })
+          .catch(error=>{console.log(error)})
+    }
+    if(!UserPassword){
+        const objecttoupdate={
         UserName: UserName,
-        UserPasswordHashed: UserPasswordHashed,
         FirstName: FirstName,
         LastName: LastName,
         Address: Address,
@@ -168,19 +194,21 @@ router.put("/EditUser", async (req,res) =>{
         Email: Email,
         Admin: Admin,
         Premium: Premium,
+        ReservationsHistory: ReservationsHistory
 
     }
-        User.update(
-          objecttoupdate
-        ,
-        {
-            where: {ID: req.body.id}
+    User.update(
+        objecttoupdate
+      ,
+      {
+          where: {ID: req.body.id}
 
-        })
-        .then(doneTemp=>{
-            return res.status(200).json(doneTemp)
-        })
-        .catch(error=>{console.log(error)})
+      })
+      .then(doneTemp=>{
+          return res.status(200).json(doneTemp)
+      })
+      .catch(error=>{console.log(error)})
+    }
 });
 
 router.put('/RemoveUser', (req,res) =>{
