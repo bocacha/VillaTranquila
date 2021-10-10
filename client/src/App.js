@@ -17,6 +17,7 @@ import LinkReserva from"./components/Reserva/Linkreserva/LinkReserva"
 import Gallery from './components/Gallery/Gallery';
 import Profile from './components/Profile/Profile';
 import PagosReserva from './components/PagoReserva/PagoReserva';
+import Caja from './components/Admin/Caja/Caja';
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Route path="/reserva/reservar" component={LinkReserva} />
           <Route path='/reserva/pago' component={PagosReserva} />
           <Route path="/galeria" component={Gallery} />
+          <Route path="/caja" component={Caja} />
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/admin/cabañas" component={Cabañas} />
           <Route exact path="/admin/reservaciones" component={Reservaciones} />

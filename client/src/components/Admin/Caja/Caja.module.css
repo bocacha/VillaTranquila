@@ -1,0 +1,35 @@
+
+.general{
+    background-color: #355978;
+    min-height: 100vh;
+}
+
+
+.container{       
+    border: 1px solid #fff;
+    border-radius: 10px;
+    margin: 5px;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;   
+    justify-content:space-between;
+    background: #293c4f;
+    color:#fff;
+    margin-top: 40px;
+    padding:20px;    
+}
+.detalle{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    color:#fff;
+}
+
+.total{
+    display:flex;
+    color:#fff;
+    justify-content:flex-end;
+    margin-right: 50px;   
+}
+hr{
+    background-color: #fff;
+    border: 1px solid #fff;
+}

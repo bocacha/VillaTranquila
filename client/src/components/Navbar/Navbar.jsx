@@ -6,6 +6,7 @@ import { ImCalendar } from "react-icons/im";
 import { RiAdminFill } from "react-icons/ri";
 import { GiPhotoCamera } from 'react-icons/gi';
 import { CgProfile } from 'react-icons/cg';
+import { SiCashapp } from 'react-icons/si';
 import styles from "./Navbar.module.css";
 import axios from "axios";
 import { BiWindows } from "react-icons/bi";
@@ -60,6 +61,15 @@ export default function Navbar() {
               <button>
                 <strong className={styles.list}>
                   Nosotros <RiTeamLine className={styles.icons} />
+                </strong>
+              </button>
+            </Link>
+          </li>
+          <li>
+            <Link to="/caja">
+              <button>
+                <strong className={styles.list}> 
+                  Caja <SiCashapp className={styles.icons} />
                 </strong>
               </button>
             </Link>
