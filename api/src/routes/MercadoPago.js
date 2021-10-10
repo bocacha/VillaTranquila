@@ -23,7 +23,7 @@ let preference = {
     back_urls:{
       "success": "http://localhost:3000",
       "failure": "http://localhost:3000/reserva/pago",
-      "pending": "http://localhost:3000",
+      "pending": "http://localhost:3000/reserva/pago",
     },
     auto_return: "approved",
     // payer = {
@@ -34,11 +34,6 @@ let preference = {
     //   phone: {
     //     area_code: "",
     //     number: "949 128 866"
-    //   },
-       
-    //   identification: {
-    //     type: "DNI",
-    //     number: "12345678"
     //   },
       
     //   address: {
