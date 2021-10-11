@@ -13,30 +13,28 @@ import { RiFridgeLine } from "react-icons/ri";
 import { FaWifi, FaCarAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { selectcabin } from "../../../actions";
 
 export default function Cabaña({
   ID,
   number,
   capacity,
-  notAvailable,
+  Available,
   price,
   description,
-  coffe,
-  microwaves,
-  heat,
-  barbecue,
+  Picture,
+  parrilla,
   wifi,
-  cleaning,
-  refrigerator,
-  stove,
   parking,
   image,
 }) {
+  const dispatch = useDispatch();
   const id = ID;
   const prices = price;
   const id_cabaña = () => {
     localStorage.setItem("id_cabaña", JSON.stringify(id));
     localStorage.setItem("costo", JSON.stringify(prices));
+    dispatch(selectcabin(id))
   };
 
   return (
@@ -45,13 +43,19 @@ export default function Cabaña({
       {/* <img src={image} alt={`Cabaña número ${number}`} /> */}
       <div className={styles.infoContainer}>
         <img
-          src="https://res.cloudinary.com/villatranquila/image/upload/v1633134844/Cabins/5_vxhhvy.jpg"
+          src={Picture}
           alt={`Cabaña número ${number}`}
           className={styles.img}
         />
         <div className={styles.info}>
           <span>Capacidad: {capacity}</span>
-          <span>Disponible a partir del: {notAvailable}</span>
+          <div>Fechas NO Disponibles: {Available.map((e)=>{
+          return(  
+              <ul>
+                <li>Del {e[0]} Al {e[e.length -1]}</li>
+              </ul>)
+              
+          })}</div>
           <span>Precio por noche: {price}</span>
           <span> Descripción: {description}</span>
           {/* <span> Servicios disponibles: 

@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const GET_CABINS = "GET_CABINS";
+export const SEND_PASSWORD_EMAIL ="SEND_PASSWORD_EMAIL"
 export const SEND_EMAIL = "SEND_EMAIL";
 export const SEND_NOTIFICATION = "SEND_NOTIFICATION";
 export const FILTER_CABINS = 'FILTER_CABINS';
@@ -36,7 +37,9 @@ export const REMOVE_SERVICES= "REMOVE_SERVICES";
 export const REMOVE_PICTURES= "REMOVE_PICTURES";
 export const REMOVE_PAYMENTS= "REMOVE_PAYMENTS";
 export const REMOVE_USERS= "REMOVE_USERS";
-export const READ_FECHASNODISPONIBLES = "READ_FECHASNODISPONIBLES"
+export const READ_FECHASNODISPONIBLES = "READ_FECHASNODISPONIBLES";
+export const GET_USER_DATA = "GET_USER_DATA";
+export const SELECTED_CABIN = "SELECTED_CABIN";
 
 export function getCabins() {
   return async function (dispatch) {
@@ -65,11 +68,57 @@ export function sendEmail(payload) {
     return json;
   };
 }
+
+
+// export function sendNotification(payload) {
+//   return async function (dispatch) {
+//       const json = await axios.post("/sendNotification", payload)
+
+//       return dispatch({
+//           type: 'SEND_NOTIFICATION',
+//           payload: json.data
+//       })
+//   }
+// }
+
+
 export function createReservation(payload) {
   return async function (dispatch) {
     const response = await axios.post("http://localhost:3001/reservations/NewReservation", payload);
-    return response;
-  };
+    const reserva = response.data
+    const users= await axios.get("http://localhost:3001/users/")
+    const user = users.data.filter(e=> e.ID === payload.id)
+    let reservas = []
+    if(user[0].ReservationsHistory){
+user[0].ReservationsHistory.map(e=>{
+        reservas.push(e)
+      })
+      reservas.push(reserva)
+    const cambiar={
+      id: payload.id,
+      ReservationsHistory: reservas
+    }
+    console.log(cambiar)
+    return (dispatch({
+      type: CREATE_RESERVATION,
+      payload: response.data
+     
+     }),dispatch(editUsers(cambiar)));
+
+    }else{
+       reservas.push(reserva)
+    const cambiar={
+      id: payload.id,
+      ReservationsHistory: reservas
+    }
+    console.log(cambiar)
+    return (dispatch({
+      type: CREATE_RESERVATION,
+      payload: response.data
+     
+     }),dispatch(editUsers(cambiar))); 
+    }    
+}
 }
 
 export function createServices(payload, { token }) {
@@ -85,10 +134,12 @@ export function createServices(payload, { token }) {
 }
 
 export function createUsers(payload) {
-
-  return async function (dispatch) {
-    const response = await axios.post("http://localhost:3001/users/Singup", payload);
+    return async function (dispatch) {
+   try{ const response = await axios.post("http://localhost:3001/users/Singup", payload);
     return response;
+    }catch (err) {
+      alert("Error Nombre de usuario no disponible")
+    }
   };
 }
 
@@ -336,6 +387,7 @@ export function readCabainsocultados(id) {
 }
 
 export function editUsers(payload) {
+  console.log("action",payload)
   return async function (dispatch) {
     try {
       var json = await axios.put("http://localhost:3001/users/EditUser", payload);
@@ -344,6 +396,23 @@ export function editUsers(payload) {
         payload: json.data,
       });
     } catch (err) {
+      console.error(err);
+    }
+  };
+}
+
+export function editProfile(payload, ID) {
+  console.log("ID", ID);
+  console.log("pay", payload);
+  return async function (dispatch) {
+    try {
+      var json = await axios.put("http://localhost:3001/users/EditProfile/" + ID, payload);
+      return dispatch({
+        type: EDIT_USER,
+        payload: json.data,
+      });
+    } catch (err) {
+      window.alert("Contraseña incorrecta")
       console.error(err);
     }
   };
@@ -438,6 +507,7 @@ export function editCabains(payload, { token }) {
   };
 }
 export function editAvailible(payload) {
+  console.log(payload)
   return async function (dispatch) {
     const response = await axios.put("http://localhost:3001/cabins/EditCabin/available", payload);
     return response;
@@ -448,12 +518,14 @@ export function Loguser(payload) {
     try {
       let json = await axios.post("http://localhost:3001/login", payload);
       localStorage.setItem("LogedUser", JSON.stringify(json.data));
+      console.log(json)
       return dispatch({
         type: LOG_USER,
         payload: json.data,
       });
     } catch (err) {
-      console.log(err);
+      console.log(err)
+      alert("Error Usuario o Contraseña mal ingresados/inexistentes");
     }
   };
 }
@@ -648,6 +720,7 @@ export function readFechas(){
        
   };
 }
+
 export function sendNotification(payload) {
 
 return async function (dispatch) {
@@ -659,4 +732,51 @@ return async function (dispatch) {
           payload: json.data
       })
  }
+}
+
+export function getUserData(username){
+  console.log(username)
+  return async function (dispatch) {
+    try {
+      let json = await axios.get("http://localhost:3001/users/" + username);
+      console.log(json.data)
+      return dispatch({
+        type: GET_USER_DATA,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+export function selectcabin(id){
+  return async function (dispatch) {
+    try {
+      let json = await axios.get("http://localhost:3001/cabins/"+id);
+      return dispatch({
+        type: SELECTED_CABIN,
+        payload: json.data[0],
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+export function mailpassword(Email) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("http://localhost:3001/users/");
+      var useremail = json.data.filter((e)=> e.Email === Email)
+      const cambiar={
+        id: useremail[0].ID,
+        UserPassword: "ax54sa5s4a"
+      }
+      return (dispatch({
+        type: SEND_PASSWORD_EMAIL,
+        payload: useremail,
+      }),dispatch(editUsers(cambiar)));
+    } catch (err) {
+      console.error(err);
+    }
+  };
 }

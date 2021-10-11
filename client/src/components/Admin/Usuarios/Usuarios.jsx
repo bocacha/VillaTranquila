@@ -4,10 +4,44 @@ import { useDispatch, useSelector } from "react-redux";
 import { createUsers, readUsers, editUsers, Logeduser, readUsersocultados} from "../../../actions";
 import UsuariosDetail from "./UsuariosDetail";
 import { Link } from "react-router-dom";
+import NavAdmin from '../NavAdmin/NavAdmin';
+
+function validation(input){
+  var letras="abcdefghyjklmnñopqrstuvwxyz";
+  var letras_m="ABCDEFGHYJKLMNÑOPQRSTUVWXYZ";
+  var num = "0123456789";
+
+  let errors={}
+  
+
+  if (!/[0-9]/.test(input.UserName)) {
+    errors.UserName= "Debe contener un número";
+  }else if  (!/[a-z]/.test(input.UserName)) {
+    errors.UserName= "Debe contener letras minusculas";
+  }else if  (!/[A-Z]/.test(input.UserName)) {
+    errors.UserName= "Debe contener letras mayusculas ";
+  }else if (!/[0-9]/.test(input.UserPasssword)) {
+    errors.UserPasssword= "Debe contener un número";
+  }else if  (!/[a-z]/.test(input.UserPasssword)) {
+    errors.UserPasssword= "Debe contener letras minusculas";
+  }else if  (!/[A-Z]/.test(input.UserPasssword)) {
+    errors.UserPasssword= "Debe contener letras mayusculas ";
+  }else if (!/[a-zA-Z]/.test(input.FirstName)){
+    errors.FirstName= "Debe contener solo letras";
+  }else if (!/[a-zA-Z]/.test(input.LastName)){
+    errors.LastName= "Debe contener solo letras";
+  }else if (!/^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/.test(input.Email)){
+    errors.Email= "Debe ser un email valido";
+  }
+
+
+  return errors;
+}
 
 export default function Usuarios() {
   const dispatch = useDispatch();
   const allUsers = useSelector((state) => state.usuarios);
+  const [errors, setErrors] = useState({});
   const logeduser = useSelector ((state) => state.user);
   const [mostrar, setMostrar] = useState(false);
   const [habilitar, setHabilitar]= useState(false)
@@ -32,11 +66,15 @@ export default function Usuarios() {
   useEffect(() => {
     dispatch(readUsers({ token }));
   }, [dispatch, token]);
+
   function handleChange(e) {
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     });
+    setErrors(validation({
+      ...input, [e.target.name] : e.target.value
+  }));
   }
 
   function handleSelectAdmin(e) {
@@ -61,6 +99,14 @@ export default function Usuarios() {
   function handleSubmitEdit(e, ID) {
    // const { token } = logeduser;
     e.preventDefault();
+
+    if (errors.UserName !== undefined || errors.Email!== undefined || errors.FirstName!== undefined || errors.LastName!== undefined  || errors.UserPassword!== undefined){
+      document.getElementById('form');
+      return alert('No se puede crear el registro porque contiene errores');
+  }
+
+
+
     dispatch(editUsers(input));
     setMostrar(true);
     //alert("Usuario editado con éxito");
@@ -82,7 +128,7 @@ export default function Usuarios() {
        id: ID,
      });
      //dispatch(readUsers({ token }));
-     window.location.reload();
+    // window.location.reload();
    }
 const ocultadas= () => {
   const { token } = logeduser;
@@ -94,119 +140,27 @@ const showtrue=()=>{
   dispatch(readUsers({ token }))
   setHabilitar(false)
 }
-
   return (
     <div className={styles.container}>
-       {!habilitar ?(
+       {/* {!habilitar ?(
             <button onClick={ocultadas}>Mostrar ocultadas</button>
           ):(
             <button onClick={showtrue}>Mostrar habilitadas</button>
           )
-          }
+          } */}
       {/* CREAR 
       <div>
         Crear un nuevo usuario
         <form onSubmit={(e) => handleSubmit(e)}>
-          <input
-            type="text"
-            value={input.UserName}
-            name="UserName"
-            onChange={(e) => handleChange(e)}
-            placeholder="Nombre de usuario" 
-            pattern='^[0-9a-zA-Z]+$'
-            className={styles.UserName}
-            required
-          />
-
-          <input
-            type="text"
-            value={input.UserPassword}
-            name="UserPassword"
-            onChange={(e) => handleChange(e)}
-            placeholder="Contraseña"
-            className={styles.UserPassword}
-            pattern= '^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$'
-            required
-          />
-            {/* Minimo 8 caracteres
-            Maximo 15
-            Al menos una letra mayúscula
-            Al menos una letra minucula
-            Al menos un dígito
-            No espacios en blanco
-            Al menos 1 caracter especial */}
-      {/*
-          <input
-            type="text"
-            value={input.FirstName}
-            name="FirstName"
-            onChange={(e) => handleChange(e)}
-            placeholder="Nombre"
-            className={styles.FirstName}
-            pattern='[a-zA-Z ]{2,254}'
-            required
-          />
-
-          <input
-            type="text"
-            value={input.LastName}
-            name="LastName"
-            onChange={(e) => handleChange(e)}
-            placeholder="Apellido"
-            className={styles.LastName}
-            pattern='[a-zA-Z ]{2,254}'
-            required
-          />
-
-          <input
-            type="text"
-            value={input.Address}
-            name="Address"
-            onChange={(e) => handleChange(e)}
-            placeholder="Direccion"
-            pattern='^[0-9a-zA-Z]+$'
-            className={styles.Address}
-            required
-          />
-
-          <input
-            type="text"
-            value={input.Phone}
-            name="Phone"
-            onChange={(e) => handleChange(e)}
-            placeholder="Teléfono"
-            className={styles.Phone}
-            maxLength="17" 
-            minLength="10" 
-            pattern="[+]{2}[0-9]{10-14}" 
-            placeholder="+54 9 11 12345678" 
-            required
-          />
-
-          <small>Ej: +54 9 11 12345678 </small>
-
-          <input
-            type="email"
-            value={input.Email}
-            name="Email"
-            onChange={(e) => handleChange(e)}
-            placeholder="Email"
-            pattern='^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$'
-            className={styles.Email}
-            required
-          />
-
-          <div className={styles.btns}>
-            <button type="submit" className={styles.submit_btn}>
-              Crear
-            </button>
-          </div>
-        </form>
-*/}
-      <div className={styles.btnVolver}>
-        <Link to="/admin">
-          <button className={styles.btn}>Volver</button>
-        </Link>
+       */}
+     
+      <div className={styles.btnsContainer}>
+        {!habilitar ?(
+            <button onClick={ocultadas} className={styles.btnSup}>Mostrar ocultadas</button>
+          ):(
+            <button onClick={showtrue} className={styles.btnSup}>Mostrar habilitadas</button>
+          )
+          }
       </div>
       <div className={styles.container2}>
       <div className={styles.formsCont}>
@@ -214,7 +168,7 @@ const showtrue=()=>{
         {mostrar ? 
             <div className={styles.crearCont}>
             <div className={styles.title}> Editar un nuevo usuario</div>
-            <form className={styles.form}>
+            <form  id='form'  className={styles.form}>
               <input
                 type="text"
                 value={input.UserName}
@@ -222,21 +176,21 @@ const showtrue=()=>{
                 onChange={(e) => handleChange(e)}
                 placeholder="Nombre de usuario"
                 className={styles.formInputs}
-                pattern='^[0-9a-zA-Z\s]+$'
-                title='debe contener letras y numeros'
                 required
-              />
+              />{errors.UserName && (<p>{errors.UserName}</p>)}  
+
               <input
                 type="text"
                 value={input.UserPassword}
                 name="UserPassword"
                 onChange={(e) => handleChange(e)}
-                placeholder="Contraseña del usuario"
+                placeholder="Contraseña"
                 className={styles.formInputs}
-                title='Debe contener mayusculas, minusculas, numeros y caracter especial'
-                pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$'
+                title='Debe contener mayusculas, minusculas, numeros'
+                //pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$'
                 required
-              />
+              />{errors.UserPassword && (<p>{errors.UserPassword}</p>)} 
+
               <input
                 type="text"
                 value={input.FirstName}
@@ -244,10 +198,9 @@ const showtrue=()=>{
                 onChange={(e) => handleChange(e)}
                 placeholder="Nombre"
                 className={styles.formInputs}
-                title='Solo letras'
-                pattern='[a-zA-Z ]{2,254}'
                 required
-              />
+              />{errors.FirstName && (<p>{errors.FirstName}</p>)} 
+
               <input
                 type="text"
                 value={input.LastName}
@@ -255,10 +208,9 @@ const showtrue=()=>{
                 onChange={(e) => handleChange(e)}
                 placeholder="Apellido"
                 className={styles.formInputs}
-                title='Solo letras'
-                pattern='[a-zA-Z ]{2,254}'
                 required
-              />
+              />{errors.LastName && (<p>{errors.LastName}</p>)} 
+
               <input
                 type="text"
                 value={input.Address}
@@ -269,6 +221,7 @@ const showtrue=()=>{
                 pattern='^[0-9a-zA-Z\s]+$'
                 required
               />
+
               <input
                 type="text"
                 value={input.Phone}
@@ -278,7 +231,7 @@ const showtrue=()=>{
                 className={styles.formInputs}
                 maxLength="17" 
                 minLength="10" 
-                pattern="[+]{2}[0-9]{10-14}" 
+                 pattern="[+]{2}[0-9]{10-14}" 
                 placeholder="+54 9 11 12345678" 
                 required
               />
@@ -287,11 +240,11 @@ const showtrue=()=>{
                 value={input.Email}
                 name="Email"
                 onChange={(e) => handleChange(e)}
-                placeholder="E-mail"
+                placeholder="Email"
                 className={styles.formInputs}
-                pattern='^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$'
                 required
-              />
+              />{errors.Email && (<p>{errors.Email}</p>)}  
+
               <select
                 onChange={(e) => handleSelectAdmin(e)}
                 value={input.Admin}
@@ -322,11 +275,11 @@ const showtrue=()=>{
               <option value="true">true</option>
               <option value="false">false</option>
             </select> */}
-              <div className={styles.btns}>
+              {/* <div className={styles.btns}>
                 <button type="submit" className={styles.btn}>
                   Editar
                 </button>
-              </div>
+              </div> */}
             </form>
           </div>
         : 

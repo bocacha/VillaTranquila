@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { RiTeamLine, RiMailLine, RiLoginBoxLine } from "react-icons/ri";
 import { GoSignIn, GoHome } from "react-icons/go";
 import { ImCalendar } from "react-icons/im";
 import { RiAdminFill } from "react-icons/ri";
 import { GiPhotoCamera } from 'react-icons/gi';
+import { CgProfile } from 'react-icons/cg';
+import { SiCashapp } from 'react-icons/si';
 import styles from "./Navbar.module.css";
 import axios from "axios";
 import { BiWindows } from "react-icons/bi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getUserData } from "../../actions";
 
 export default function Navbar() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const userData = useSelector((state) => state.userData);
+  const username = userData && userData.UserName;
+  const ID = user && user.userid;
+  useEffect(() => {
+    dispatch(getUserData(ID))
+  },[dispatch])
+
   let logeduser = useSelector((state) => state.user);
   if (logeduser === null) {
     logeduser = {};
@@ -62,12 +74,13 @@ export default function Navbar() {
                 </strong>
               </button>
             </Link>
+          </li>          
+          <li>
+            <Link to='/galeria' ><button><strong>Galeria <span className={styles.span}><GiPhotoCamera /></span></strong></button></Link>
           </li>
           <li>
-                        <Link to='/galeria' ><button><strong>Galeria <span className={styles.span}><GiPhotoCamera /></span></strong></button></Link>
-                    </li>
-          <li>
             {logeduser.admin ? (
+              <>
               <Link to="/admin">
                 <button>
                   <strong className={styles.list}>
@@ -75,6 +88,15 @@ export default function Navbar() {
                   </strong>
                 </button>
               </Link>
+              
+              <Link to="/admin/caja">
+                <button>
+                  <strong className={styles.list}> 
+                    Caja <SiCashapp className={styles.icons} />
+                  </strong>
+                </button>
+              </Link>
+            </>
             ) : (
               <div></div>
             )}
@@ -104,15 +126,26 @@ export default function Navbar() {
               </Link>
             </div>
           ) : (
-            <Link to="/">
-              <li>
-                <button className={styles.signlog} onClick={() => Logout()}>
-                  <strong className={styles.list}>
-                    Cerrar Sesion <RiLoginBoxLine className={styles.icons} />
-                  </strong>
-                </button>
-              </li>
-            </Link>
+            <div>
+              <Link to={`/${user.user}`}>
+                <li>
+                  <button className={styles.signlog} >
+                    <strong className={styles.list} >
+                      Perfil <CgProfile className={styles.icons} />
+                    </strong>
+                  </button>
+                </li>
+              </Link>
+              <Link to="/">
+                <li>
+                  <button className={styles.signlog} onClick={() => Logout()}>
+                    <strong className={styles.list}>
+                      Cerrar Sesion <RiLoginBoxLine className={styles.icons} />
+                    </strong>
+                  </button>
+                </li>
+              </Link>
+            </div>
           )}
         </div>
       </ul>

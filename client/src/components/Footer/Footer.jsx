@@ -42,7 +42,7 @@ export default function Footer() {
         <div className={styles.contacto}>
           <span className={styles.title}> Contacto </span> <br />
           <BiMailSend />
-          VillaTranquila@gmail.com <br />
+          tranquilavilla79@gmail.com <br />
           <FaMapPin /> Ubicacion
         </div>
         <div className={styles.links}>
@@ -57,6 +57,10 @@ export default function Footer() {
           <br />
           <Link to="/reserva" className={styles.link}>
             Reservar
+          </Link>
+          <br />
+          <Link to="/galeria" className={styles.link}>
+            Galería
           </Link>
         </div>
         <div className={styles.redes}>

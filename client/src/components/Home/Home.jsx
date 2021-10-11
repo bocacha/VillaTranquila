@@ -5,41 +5,28 @@ import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 import Slider from "../Slider/Slider";
 import Upload from "../Reserva/Upload/Upload";
-import Searchbar from "../Searchbar/Searchbar";
-import Gallery from "../Gallery/Gallery";
+// import Searchbar from "../Searchbar/Searchbar";
+// import Gallery from "../Gallery/Gallery";
 import styles from "./Home.module.css";
 import{useEffect} from "react"
-import { useDispatch} from 'react-redux';
-import { Logeduser } from "../../actions";
+import { useDispatch, useSelector} from 'react-redux';
+import { Logeduser, getUserData } from "../../actions";
+import {steps} from "./Steps.js"
+import ServiciosBanner from "../ServiciosBanner/ServiciosBanner";
 
 export default function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(Logeduser());
   }, [dispatch]);
-  const steps = [
-    {
-      id: '1',
-      message: 'Hola bienvenido a villa tranquila en que  puedo ayudarte',
-      trigger: '2',
-    },
-    {
-      id: '2',
-      user: true,
-      trigger: '3',
-    },
-    {
-      id: '3',
-      message: 'Hola bienvenido a villa tranquila en que  puedo ayudarte',
-      trigger: '4',
-    },
-    {
-      id: '4',
-      message: '  {previousValue} hola',
-      end: true,
-    },
-    
-  ];
+
+
+  const user = useSelector((state) => state.user);
+  const ID = user && user.userid;
+  useEffect(() => {
+    dispatch(getUserData(ID))
+  },[dispatch]);
+  
   return (
     <div className={styles.container}>
       <div>
@@ -57,7 +44,9 @@ export default function Home() {
       </div>
       <div>
         <BannerIntro />
+        {/* <Searchbar/> */}
         <Slider />
+        <ServiciosBanner />
       </div>
       <div className={styles.mapaContainer}>
         <iframe
@@ -66,14 +55,11 @@ export default function Home() {
           className={styles.mapa}
         ></iframe>
       </div>
-      <div>
-         <ChatBot
-             headerTitle="Habla Conmigo"
-             floating={true}
-             steps={steps}
-               />
-       </div>,
-        
+      <ChatBot
+        floating={true}
+        customDelay={2000}
+        steps={steps}
+      />
         <Footer />
 
     </div>

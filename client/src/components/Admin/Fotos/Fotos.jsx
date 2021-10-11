@@ -5,19 +5,17 @@ import { createimage, readPictures, editPictures, Logeduser, readPicturesocultad
 import FotosDetail from "./FotosDetail";
 import Upload from "../../Reserva/Upload/Upload";
 import { Link } from "react-router-dom";
-import { useHistory } from 'react-router'
+import { useHistory } from "react-router";
+import NavAdmin from '../NavAdmin/NavAdmin';
 
 export default function Fotos() {
   const dispatch = useDispatch();
-  const history = useHistory()
-
+  const history = useHistory();
   const allPictures = useSelector((state) => state.fotos);
   const logeduser = useSelector((state) => state.user);
-  const [habilitar, setHabilitar] = useState(false)
-  
-
-  const [description, setDescription] = useState('')
-  const [file, setFile] = useState({})
+  const [habilitar, setHabilitar] = useState(false);
+  const [description, setDescription] = useState("");
+  const [file, setFile] = useState({});
   const [edit, setEdit] = useState({
     id: "",
     Description: "",
@@ -42,17 +40,21 @@ export default function Fotos() {
   function handleSubmit(e) {
     const { token } = logeduser;
     e.preventDefault();
-    dispatch(createimage({
-      description,
-      file
-    }, { token }));
+    dispatch(
+      createimage(
+        {
+          description,
+          file,
+        },
+        { token }
+      )
+    );
     alert("Foto creada con éxito");
     setTimeout(function () {
       history.go(0);
     }, 2000)
     // window.location.reload();
-    // 
-
+    //
   }
   function handleSubmitEdit(e, ID) {
     e.preventDefault();
@@ -67,9 +69,7 @@ export default function Fotos() {
     const { token } = logeduser;
     dispatch(editPictures(edit, { token }));
   }
-
-  
-  function handlePrueba(e, ID) {
+ function handlePrueba(e, ID) {
     e.preventDefault();
     const { token } = logeduser;
     dispatch(editPictures(edit, { token }));
@@ -80,31 +80,27 @@ export default function Fotos() {
     })
     window.location.reload();
   }
-
-
   const ocultadas = () => {
-    dispatch(readPicturesocultados())
-    setHabilitar(true)
-  }
+    dispatch(readPicturesocultados());
+    setHabilitar(true);
+  };
   const showtrue = () => {
-    dispatch(readPictures())
-    setHabilitar(false)
-  }
+    dispatch(readPictures());
+    setHabilitar(false);
+  };
+  
   return (
     <div className={styles.container}>
-      <div className={styles.btnVolver}>
-        <Link to="/admin">
-          <button className={styles.btn}>Volver</button>
-        </Link>
+      <NavAdmin />
+      <div className={styles.btnsContainer}>
+        {!habilitar ? (
+          <button onClick={ocultadas} className={styles.btnSup}>Mostrar ocultadas</button>
+        ) : (
+          <button onClick={showtrue} className={styles.btnSup}>Mostrar habilitadas</button>
+        )}
       </div>
       <div className={styles.container2}>
         <div className={styles.formsCont}>
-          {!habilitar ? (
-            <button onClick={ocultadas}>Mostrar ocultadas</button>
-          ) : (
-            <button onClick={showtrue}>Mostrar habilitadas</button>
-          )
-          }
           {/* CREAR */}
           <div className={styles.crearCont}>
             <div className={styles.title}> Crear una nueva foto</div>
@@ -114,7 +110,7 @@ export default function Fotos() {
                 maxLength="100"
                 name="Description"
                 onChange={(e) => {
-                  setDescription(e.target.value)
+                  setDescription(e.target.value);
                 }}
                 placeholder="Descripción"
                 className={styles.formInputs}
@@ -125,7 +121,6 @@ export default function Fotos() {
                 name="File"
                 onChange={(e) => {
                   setFile(e.target.files[0])
-
                 }}
                 className={styles.formInputs}
                 required
@@ -143,9 +138,7 @@ export default function Fotos() {
             </form>
           </div>
           {/* EDITAR */}
-          {mostrar
-
-            ?
+          {mostrar ? (
             <div className={styles.editarCont}>
               <div className={styles.title}> Editar una nueva foto</div>
               <form className={styles.form}>
@@ -173,12 +166,9 @@ export default function Fotos() {
                   placeholder="Url"
                   className={styles.formInputs}
                 />
-
               </form>
             </div>
-            :
-            null
-          }
+          ) : null}
           <div>
             {allPictures?.map((el) => {
               return (
@@ -194,7 +184,6 @@ export default function Fotos() {
                 </div>
               );
             })}
-
           </div>
         </div>
       </div>

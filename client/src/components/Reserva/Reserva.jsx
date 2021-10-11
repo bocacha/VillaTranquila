@@ -13,6 +13,33 @@ import { ImCalendar, ImSearch } from 'react-icons/im';
 import { AiOutlineReload } from 'react-icons/ai';
 import { Logeduser } from "../../actions";
 
+function validate(filters) {
+    let errors = {};
+
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+    today = dd + '/' + mm + '/' + yyyy;
+
+    var inDate = filters.inDate.split('-').reverse().join('/');
+    var outDate = filters.outDate.split('-').reverse().join('/');
+    console.log('inDate', inDate, 'today', today, inDate > today);
+    console.log('outDate', outDate, 'today', today, outDate > today);
+
+    if((inDate < today && inDate !== '') || (outDate < today && outDate !== '')){
+        errors.today = 'Fechas inválidas';
+    }
+    if (inDate > outDate && outDate !== '') {
+        errors.inDate = 'La fecha de llegada debe ser anterior a la de salida';
+    }
+    if (parseInt(filters.priceMin) > parseInt(filters.priceMax) && filters.priceMin !== 'all' && filters.priceMax !== 'all') {
+        errors.priceMin = 'El precio mínimo debe ser menor que el máximo';
+    }
+
+    return errors;
+}
+
 
 export default function Reserva() {
     const dispatch = useDispatch();
@@ -20,6 +47,7 @@ export default function Reserva() {
         dispatch(Logeduser())
     }, [dispatch]);
     const allCabins = useSelector(state => state.cabins);
+    const [errors, setErrors] = useState({})
 
     // Paginado---------------------------------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
@@ -38,6 +66,16 @@ export default function Reserva() {
     }, [dispatch]);
 
 
+    const [filters, setFilters] = useState({
+        inDate: '',
+        outDate: '',
+        capacity: '',
+        priceMin: '',
+        priceMax: '',
+        wifi: '',
+        barbecue: '',
+        parking: '',
+    });
 
     function handleReload(e) {
         e.preventDefault();
@@ -54,17 +92,6 @@ export default function Reserva() {
         window.location.reload();
     }
 
-    const [filters, setFilters] = useState({
-        inDate: '',
-        outDate: '',
-        capacity: '',
-        price: '5000',
-        priceMin: '',
-        priceMax: '',
-        wifi: '',
-        barbecue: '',
-        parking: '',
-    });
     function handleCheck(e) {
         let evt = filters[e.target.name];
         e.target.value = evt === 'true' ? false : true;
@@ -74,13 +101,27 @@ export default function Reserva() {
             ...filters,
             [e.target.name]: e.target.value
         });
-        console.log(filters);
+        setErrors(validate({
+            ...filters,
+            [e.target.name]: e.target.value
+        }))
+        console.log('filters',filters);
+        console.log('errors',errors);
     }
+
 
     function handleFilters(e) {
         e.preventDefault();
-        console.log('Filters submited');
-        dispatch(filterCabins(filters));
+        console.log('errors:',errors);
+        if (!Object.getOwnPropertyNames(errors).length) {
+            console.log('Filters submited');
+            dispatch(filterCabins(filters));
+        }
+        else {
+            if(errors.today) alert(errors.today);
+            if (errors.inDate && !errors.today) alert(errors.inDate);
+            if (errors.priceMin) alert(errors.priceMin);
+        }
     }
 
     return (
@@ -203,18 +244,12 @@ export default function Reserva() {
                                         ID={el.ID}
                                         number={el.Number}
                                         capacity={el.Capacity}
-                                        notAvailable={el.NotAvailable}
+                                        Available={el.Available}
                                         price={el.Price}
                                         description={el.Description}
-                                        image={el.Image}
-                                        coffe={el.Coffe}
-                                        microwaves={el.Microwaves}
-                                        heat={el.Heat}
-                                        barbecue={el.Barbecue}
+                                        Picture={el.Picture}
+                                        parrilla={el.Parrilla}
                                         wifi={el.Wifi}
-                                        cleaning={el.Cleaning}
-                                        refrigerator={el.Refrigerator}
-                                        stove={el.Stove}
                                         parking={el.Parking}
                                     />
                                 </div>
