@@ -185,7 +185,7 @@ export function createCabains(payload, {token}) {
   }
   return async (dispatch) => {
     const json = await axios.post("/cabins/NewCabin", payload, config);
-    return (window.location.reload(), json);
+    return ( json);
   };
 }
 
@@ -503,7 +503,7 @@ export function editCabains(payload, { token }) {
   }
   return async function (dispatch) {
     const response = await axios.put("/cabins/EditCabin", payload, config);
-    return (response, window.location.reload());
+    return (response);
   };
 }
 export function editAvailible(payload) {
@@ -546,12 +546,12 @@ export function Logeduser() {
 export function removeCabains(id) {
   return async function (dispatch) {
 
-    var json = await axios.put("/cabins/RemoveCabin", id);
+    var json = await axios.put("https://villatranquila.herokuapp.com/cabins/RemoveCabin", id);
     return (dispatch({
       type: REMOVE_CABAINS,
       payload: id
 
-    }), window.location.reload())
+    }))
 
   };
 }
@@ -628,12 +628,12 @@ export function removeUsers(id) {
 export function restoreCabains(id){
   return async function (dispatch) {
    
-      var json = await axios.put("/cabins/RestoreCabin", id);
+      var json = await axios.put("https://villatranquila.herokuapp.com/cabins/RestoreCabin", id);
       return ( dispatch({
         type: REMOVE_CABAINS,
         payload: id
        
-       }), window.location.reload())
+       }))
        
   };
 }

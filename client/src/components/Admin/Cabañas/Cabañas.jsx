@@ -158,7 +158,7 @@ const Cabañas = () => {
   const pruebadispatch = () => {
     const { token } = logeduser;
     dispatch(editCabains(edit, { token }));
-    //window.location.reload(true);
+   
   };
   const ocultadas = () => {
     dispatch(readCabainsocultados());
@@ -184,7 +184,7 @@ const Cabañas = () => {
         <div className={styles.formsCont}>
           <div className={styles.crearCont}>
             <div className={styles.title}>Crear Cabaña</div>
-            <form  className={styles.form}>
+            <form onSubmit={handleSubmit} className={styles.form}>
               <div>
                 <input
                   type="number"
@@ -341,7 +341,7 @@ const Cabañas = () => {
               />
             </div> */}
               <div className={styles.btns}>
-                <button onClick={handleSubmit} className={styles.btn}>
+                <button type="submit" className={styles.btn}>
                   Crear
                 </button>
               </div>
@@ -552,6 +552,7 @@ const Cabañas = () => {
                   handlePrueba={handlePrueba}
                   handleeditSubmit={handleeditSubmit}
                   restaurar={habilitar}
+                  
                 />
               </div>
             );
