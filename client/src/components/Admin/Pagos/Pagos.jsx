@@ -129,8 +129,8 @@ export default function Pagos() {
                 //isClearable
               />
 
-              {/* 
-          <input
+               
+          {/* <input
             type="date"
             value={input.Date}
             minDate= {new Date()}

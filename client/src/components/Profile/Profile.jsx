@@ -10,7 +10,7 @@ import { ImCancelCircle } from 'react-icons/im';
 import { GiCutDiamond } from 'react-icons/gi';
 import { BiSave } from 'react-icons/bi';
 
-export default function Profile() {
+export default function Profile(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -18,10 +18,9 @@ export default function Profile() {
     }, [dispatch]);
 
 
-    const user = useSelector((state) => state.user);
-    const userid = user.userid;
+      const user = useSelector((state) => state.user);
+      const userid = user.userid;
     useEffect(() => {
-        console.log(userid)
         dispatch(getUserData(userid));
     }, [dispatch, userid]);
 
@@ -214,11 +213,13 @@ if(dataUser.ReservationsHistory){
             ) : (
               <div>
                 <span>
-                  Haz tu primer reserva aquí <FaLongArrowAltRight />
+                  Conviertete en cliente Premium completando tu primer reserva{" "}
+                  <FaLongArrowAltRight />
                 </span>
                 <Link to="/reserva">
                   <button>
-                    <BsBook />
+                    {" "}
+                    <BsBook />{" "}
                   </button>
                 </Link>
               </div>
