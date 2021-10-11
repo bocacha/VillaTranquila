@@ -5,19 +5,27 @@ import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 import Slider from "../Slider/Slider";
 import Upload from "../Reserva/Upload/Upload";
-import Searchbar from "../Searchbar/Searchbar";
-import Gallery from "../Gallery/Gallery";
+// import Searchbar from "../Searchbar/Searchbar";
+// import Gallery from "../Gallery/Gallery";
 import styles from "./Home.module.css";
 import{useEffect} from "react"
-import { useDispatch} from 'react-redux';
-import { Logeduser } from "../../actions";
+import { useDispatch, useSelector} from 'react-redux';
+import { Logeduser, getUserData } from "../../actions";
 import {steps} from "./Steps.js"
+import ServiciosBanner from "../ServiciosBanner/ServiciosBanner";
 
 export default function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(Logeduser());
   }, [dispatch]);
+
+
+  const user = useSelector((state) => state.user);
+  const ID = user && user.userid;
+  useEffect(() => {
+    dispatch(getUserData(ID))
+  },[dispatch]);
   
   return (
     <div className={styles.container}>
@@ -38,6 +46,7 @@ export default function Home() {
         <BannerIntro />
         {/* <Searchbar/> */}
         <Slider />
+        <ServiciosBanner />
       </div>
       <div className={styles.mapaContainer}>
         <iframe

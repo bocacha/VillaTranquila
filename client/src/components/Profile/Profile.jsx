@@ -10,7 +10,7 @@ import { ImCancelCircle } from 'react-icons/im';
 import { GiCutDiamond } from 'react-icons/gi';
 import { BiSave } from 'react-icons/bi';
 
-export default function Profile() {
+export default function Profile(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -21,7 +21,6 @@ export default function Profile() {
     const user = useSelector((state) => state.user);
     const userid = user.userid;
     useEffect(() => {
-        console.log(userid)
         dispatch(getUserData(userid));
     }, [dispatch, userid]);
 
@@ -62,6 +61,14 @@ export default function Profile() {
             window.location.reload();
         }
     }
+    let objetosaArray =[]
+if(dataUser.ReservationsHistory){
+ const reservas = dataUser.ReservationsHistory.map(e=>{
+   const {Show, ID, UserId, ...history} = e
+   console.log(history)
+   objetosaArray.push(Object.entries(history))
+ })
+}
 
     function handleChangeEdit(e) {
         setEdit({
@@ -137,14 +144,6 @@ export default function Profile() {
             alert('Error de tipeo, vuelva a introducir su nueva contraseña');
         }
     };
-    let objetosaArray =[]
-if(dataUser.ReservationsHistory){
- const reservas = dataUser.ReservationsHistory.map(e=>{
-   const {Show, ID, UserId, ...history} = e
-   console.log(history)
-   objetosaArray.push(Object.entries(history))
- })
-}
 
     return (
         <div className={styles.perfil}>
@@ -213,11 +212,13 @@ if(dataUser.ReservationsHistory){
             ) : (
               <div>
                 <span>
-                  Haz tu primer reserva aquí <FaLongArrowAltRight />
+                  Conviertete en cliente Premium completando tu primer reserva{" "}
+                  <FaLongArrowAltRight />
                 </span>
                 <Link to="/reserva">
                   <button>
-                    <BsBook />
+                    {" "}
+                    <BsBook />{" "}
                   </button>
                 </Link>
               </div>
@@ -252,6 +253,9 @@ if(dataUser.ReservationsHistory){
                                 onChange={(e) => handleChangeEdit(e)}
                                 placeholder="Nuevo nombre de usuario..."
                                 className={styles.formInputs}
+                                title='Debe contener mayusculas minusculas y numeros '
+                                pattern='^[0-9a-zA-Z\s]+$'
+                                required
                             />
                             <input
                                 type="text"
@@ -260,6 +264,9 @@ if(dataUser.ReservationsHistory){
                                 onChange={(e) => handleChangeEdit(e)}
                                 placeholder="Nuevo nombre..."
                                 className={styles.formInputs}
+                                title='Solo letras'
+                                pattern='[a-zA-Z ]{2,254}'
+                                required
                             />
                             <input
                                 type="text"
@@ -268,6 +275,9 @@ if(dataUser.ReservationsHistory){
                                 onChange={(e) => handleChangeEdit(e)}
                                 placeholder="Nuevo apellido..."
                                 className={styles.formInputs}
+                                title='Solo letras'
+                                pattern='[a-zA-Z ]{2,254}'
+                                required
                             />
                             <input
                                 type="text"
@@ -276,6 +286,9 @@ if(dataUser.ReservationsHistory){
                                 onChange={(e) => handleChangeEdit(e)}
                                 placeholder="Nueva dirección..."
                                 className={styles.formInputs}
+                                title='Debe contener mayusculas minusculas y numeros '
+                                pattern='^[0-9a-zA-Z\s]+$'
+                                required
                             />
                             <input
                                 type="text"
@@ -284,6 +297,9 @@ if(dataUser.ReservationsHistory){
                                 onChange={(e) => handleChangeEdit(e)}
                                 placeholder="Nuevo teléfono..."
                                 className={styles.formInputs}
+                                pattern="[+]{2}[0-9]{10-14}"
+                                placeholder="+54 9 11 12345678" 
+                                required
                             />
                             <input
                                 type="text"
@@ -292,6 +308,8 @@ if(dataUser.ReservationsHistory){
                                 onChange={(e) => handleChangeEdit(e)}
                                 placeholder="Nuevo email..."
                                 className={styles.formInputs}
+                                pattern='^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$'
+                                required
                             />
                             <input
                                 type="password"
@@ -300,6 +318,7 @@ if(dataUser.ReservationsHistory){
                                 onChange={(e) => handleChangeEdit(e)}
                                 placeholder="Introduzca su contraseña actual"
                                 className={styles.formInputs}
+                                required
                             />
                             <button
                                 type="submit"
@@ -322,18 +341,21 @@ if(dataUser.ReservationsHistory){
                                 onChange={(e) => handleChangeEdit(e)}
                                 placeholder="Introduzca su contraseña actual"
                                 className={styles.formInputs}
+                                required
                             />
                             <input
                                 type='password'
                                 className={styles.formInputs}
                                 placeholder='Nueva contraseña...'
                                 onChange={handleChangeContraseña}
+                                required
                             />
                             <input
                                 type='password'
                                 className={styles.formInputs}
                                 placeholder='Repetir nueva contraseña...'
                                 onChange={handleChangeRepetida}
+                                required
                             />
                             <button type='submit' className={styles.editarPerfil} id={styles.contra}>
                                 Guardar nueva contraseña <p><BsFillShieldLockFill /></p>
