@@ -18,8 +18,8 @@ export default function Profile(props) {
     }, [dispatch]);
 
 
-      const user = useSelector((state) => state.user);
-      const userid = user.userid;
+    const user = useSelector((state) => state.user);
+    const userid = user.userid;
     useEffect(() => {
         dispatch(getUserData(userid));
     }, [dispatch, userid]);
@@ -61,6 +61,14 @@ export default function Profile(props) {
             window.location.reload();
         }
     }
+    let objetosaArray =[]
+if(dataUser.ReservationsHistory){
+ const reservas = dataUser.ReservationsHistory.map(e=>{
+   const {Show, ID, UserId, ...history} = e
+   console.log(history)
+   objetosaArray.push(Object.entries(history))
+ })
+}
 
     function handleChangeEdit(e) {
         setEdit({
@@ -136,14 +144,6 @@ export default function Profile(props) {
             alert('Error de tipeo, vuelva a introducir su nueva contraseña');
         }
     };
-    let objetosaArray =[]
-if(dataUser.ReservationsHistory){
- const reservas = dataUser.ReservationsHistory.map(e=>{
-   const {Show, ID, UserId, ...history} = e
-   console.log(history)
-   objetosaArray.push(Object.entries(history))
- })
-}
 
     return (
         <div className={styles.perfil}>
@@ -200,15 +200,14 @@ if(dataUser.ReservationsHistory){
                         <summary>Historial de reservas</summary>
                         {dataUser.ReservationsHistory &&
             dataUser.ReservationsHistory.length ? (
-                <div>
+              <ul>
                 {objetosaArray.map((el) => {
-                return <ul>
-                    {el.map(e=>{
-                  return <li>{e[0]} :{e[1]}</li>
+                return <ul>{el.map(e=>{
+                  return <li>{e[0]}:{e[1]}</li>
                 })}</ul>;
               })
 }
-            </div>
+              </ul>
               
             ) : (
               <div>

@@ -31,9 +31,8 @@
     flex-wrap: wrap;
     place-content: center;
     overflow: auto;
-    /* margin-left: 35%; */
-    transition: 0.3s ease-in-out;
 }
+
 .editarPerfil{
     border-radius: 4px;
     background-color: #355978 ;
