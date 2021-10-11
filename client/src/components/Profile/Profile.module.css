@@ -31,8 +31,9 @@
     flex-wrap: wrap;
     place-content: center;
     overflow: auto;
+    /* margin-left: 35%; */
+    transition: 0.3s ease-in-out;
 }
-
 .editarPerfil{
     border-radius: 4px;
     background-color: #355978 ;
@@ -47,6 +48,7 @@
     height: auto;
     line-height: 35px;
     margin: 20px 5px 10px 5px;
+    margin-top: 10px; 
 }
 .editarPerfil:hover {
     background-color: #8bafbf ;
