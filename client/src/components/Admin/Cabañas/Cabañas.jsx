@@ -82,7 +82,6 @@ const Cabañas = () => {
       [e.target.name]: e.target.value,
     });
   }
-  console.log("handle", edit);
 
   // const handleCheckBox = (e) => {
   //   setCabain({
@@ -101,7 +100,7 @@ const Cabañas = () => {
     e.preventDefault();
     alert("su cabaña fue creada con exito");
     dispatch(createCabains(cabain, { token }));
-    window.location.reload(true);
+    //window.location.reload(true);
     
   };
 
@@ -159,7 +158,7 @@ const Cabañas = () => {
   const pruebadispatch = () => {
     const { token } = logeduser;
     dispatch(editCabains(edit, { token }));
-    window.location.reload(true);
+    //window.location.reload(true);
   };
   const ocultadas = () => {
     dispatch(readCabainsocultados());

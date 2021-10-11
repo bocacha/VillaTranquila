@@ -24,7 +24,7 @@ export default function CabinsDetail({
     alert("su cabaña fue Eliminada con exito");
     let obj = { id: ID };
     dispatch(removeCabains(obj));
-    window.location.reload(true);
+    //window.location.reload();
     
   };
 
@@ -33,7 +33,7 @@ export default function CabinsDetail({
     alert("su cabaña fue restaurada con exito");
     let obj = {id:ID}
     dispatch(restoreCabains(obj));
-    window.location.reload(true);
+    //window.location.reload(true);
     
   }
 
