@@ -6,6 +6,7 @@ import { ImCalendar } from "react-icons/im";
 import { RiAdminFill } from "react-icons/ri";
 import { GiPhotoCamera } from 'react-icons/gi';
 import { CgProfile } from 'react-icons/cg';
+import { SiCashapp } from 'react-icons/si';
 import styles from "./Navbar.module.css";
 import axios from "axios";
 import { BiWindows } from "react-icons/bi";
@@ -64,12 +65,13 @@ export default function Navbar() {
                 </strong>
               </button>
             </Link>
-          </li>
+          </li>          
           <li>
             <Link to='/galeria' ><button><strong>Galeria <span className={styles.span}><GiPhotoCamera /></span></strong></button></Link>
           </li>
           <li>
             {logeduser.admin ? (
+              <>
               <Link to="/admin">
                 <button>
                   <strong className={styles.list}>
@@ -77,6 +79,15 @@ export default function Navbar() {
                   </strong>
                 </button>
               </Link>
+              
+              <Link to="/admin/caja">
+                <button>
+                  <strong className={styles.list}> 
+                    Caja <SiCashapp className={styles.icons} />
+                  </strong>
+                </button>
+              </Link>
+            </>
             ) : (
               <div></div>
             )}

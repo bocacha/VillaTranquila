@@ -10,7 +10,7 @@ import {
 } from "../../../actions";
 import styles from "./Cabañas.module.css";
 import CabañasDetail from "../Cabañas/CabañasDetail";
-import { Link } from "react-router-dom";
+import NavAdmin from '../NavAdmin/NavAdmin';
 
 const Cabañas = () => {
   const dispatch = useDispatch();
@@ -171,10 +171,8 @@ const Cabañas = () => {
   // console.log(allFotos[0].Description)
   return (
     <div className={styles.container}>
-      <div className={styles.btnsContainer}>
-        <Link to="/admin">
-          <button className={styles.btnVolver}>Volver</button>
-        </Link>
+        <NavAdmin />
+        <div className={styles.btnsContainer}>
         {!habilitar ? (
           <button onClick={ocultadas} className={styles.btnSup}>Mostrar ocultadas</button>
         ) : (

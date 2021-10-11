@@ -92,6 +92,18 @@ export default function Admin() {
             </div>
             <Link to="/admin/usuarios" className={styles.link}>Usuarios</Link>
           </button>
+          <button  className={styles.cardsContainer}>
+            <div>
+              <Link to="/admin/caja">
+                <img
+                  src="https://i.pinimg.com/564x/f0/99/fb/f099fbdfde2c1379d91202b17d03c81a.jpg"
+                  alt="caja"
+                  className={styles.img}
+                />
+              </Link>
+            </div>
+            <Link to="/admin/caja" className={styles.link}>Caja</Link>
+          </button>
         </div>
       </div>
     </div>

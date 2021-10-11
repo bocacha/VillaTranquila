@@ -29,7 +29,7 @@ export default function Gallery() {
                         <img
                             className={styles.img}
                             src={imageId.Url}
-                            width="200px"
+                            width="100px"
                             value={imageId.Description} alt=""
                         />
                         <Modall className={styles.modal} url={imageId.Url} description={imageId.Description}/>

@@ -19,6 +19,7 @@ import UserCard from './components/UserCard/UserCard';
 import Profile from './components/Profile/Profile';
 import { useSelector } from 'react-redux';
 import PagosReserva from './components/PagoReserva/PagoReserva';
+import Caja from './components/Admin/Caja/Caja';
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
           <Route exact path="/admin/pagos" component={Pagos} />
           <Route exact path="/admin/fotos" component={Fotos} />
           <Route exact path="/admin/usuarios" component={Usuarios} />
+          <Route path="/admin/caja" component={Caja} />
           <Route path='/iniciarsesion' component={Login} />
           <Route path='/registrarse' component={Registro} />
           <Route path='/perfil' component={Profile} />
