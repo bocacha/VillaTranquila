@@ -12,8 +12,6 @@ export default function PagosReserva(ID) {
 }, [dispatch]);
   const user = useSelector((state) => state.user)
   const reservaciones = useSelector((state) => state.reservaciones);
-  const reservacionesdeusuario= reservaciones.map(el=> el.UserId === user.userid)
-  console.log(reservaciones);
   useEffect(() => {
     dispatch(readReservation());
   }, [dispatch]);
