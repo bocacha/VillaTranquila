@@ -10,7 +10,7 @@ import { ImCancelCircle } from 'react-icons/im';
 import { GiCutDiamond } from 'react-icons/gi';
 import { BiSave } from 'react-icons/bi';
 
-export default function Profile() {
+export default function Profile(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -21,7 +21,6 @@ export default function Profile() {
     const user = useSelector((state) => state.user);
     const userid = user.userid;
     useEffect(() => {
-        console.log(userid)
         dispatch(getUserData(userid));
     }, [dispatch, userid]);
 
@@ -62,6 +61,14 @@ export default function Profile() {
             window.location.reload();
         }
     }
+    let objetosaArray =[]
+if(dataUser.ReservationsHistory){
+ const reservas = dataUser.ReservationsHistory.map(e=>{
+   const {Show, ID, UserId, ...history} = e
+   console.log(history)
+   objetosaArray.push(Object.entries(history))
+ })
+}
 
     function handleChangeEdit(e) {
         setEdit({
@@ -137,14 +144,6 @@ export default function Profile() {
             alert('Error de tipeo, vuelva a introducir su nueva contraseña');
         }
     };
-    let objetosaArray =[]
-if(dataUser.ReservationsHistory){
- const reservas = dataUser.ReservationsHistory.map(e=>{
-   const {Show, ID, UserId, ...history} = e
-   console.log(history)
-   objetosaArray.push(Object.entries(history))
- })
-}
 
     return (
         <div className={styles.perfil}>
@@ -213,11 +212,13 @@ if(dataUser.ReservationsHistory){
             ) : (
               <div>
                 <span>
-                  Haz tu primer reserva aquí <FaLongArrowAltRight />
+                  Conviertete en cliente Premium completando tu primer reserva{" "}
+                  <FaLongArrowAltRight />
                 </span>
                 <Link to="/reserva">
                   <button>
-                    <BsBook />
+                    {" "}
+                    <BsBook />{" "}
                   </button>
                 </Link>
               </div>

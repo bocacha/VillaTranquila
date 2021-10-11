@@ -16,12 +16,10 @@ import {
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
 import { RiCreativeCommonsZeroLine } from "react-icons/ri";
-import DatePicker,{registerLocale} from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
 import es from 'date-fns/locale/es';
 import axios from "axios"
 import fechas from "./algoritmofechas.js"
-import DayPicker from 'react-day-picker';
-import 'react-day-picker/lib/style.css';
 registerLocale('es', es)
 
 
@@ -78,25 +76,25 @@ export default function Reservaciones() {
         console.log(checkbox[i].name)
       }
     }
-    for(let j=0; j < suma.length; j++){
-     costoadicional = costoadicional + parseFloat(suma[j])
-      
+    for (let j = 0; j < suma.length; j++) {
+      costoadicional = costoadicional + parseFloat(suma[j])
+
     }
     costoadicional = costoadicional+ parseFloat(JSON.parse(costo))
     setInput({...input,CostoFinal:costoadicional})
   }
   const checkboxselected = (e) => {
     e.preventDefault()
-      setInput({
-      ...input, CostoFinal:JSON.parse(costo),
-      Checkin:selectDateCI,Checkout:selectDateCO,
+    setInput({
+      ...input, CostoFinal: JSON.parse(costo),
+      Checkin: selectDateCI, Checkout: selectDateCO,
     })
     lala = [];
     const checkbox = Array.from(document.getElementsByClassName("Servicios"));
     for (let i = 0; i < checkbox.length; i++) {
       if (checkbox[i].checked) {
         lala.push(checkbox[i].value);
-        setInput({...input, ExtraServices: [...lala]});
+        setInput({ ...input, ExtraServices: [...lala] });
         console.log(checkbox[i].value);
       }
     }
@@ -127,6 +125,9 @@ export default function Reservaciones() {
     mostrarFecha(e);
   }
   useEffect(()=>{
+    calculofechas()
+    },[selectDateCO]);
+  useEffect(()=>{
     fechasafiltrar()
     console.log(fechasintermedias)
     },[selectDateCO]);
@@ -149,7 +150,7 @@ const mostrarFecha2 = selectDateCO =>{
 }
 const calculofechas=()=> {
  let fechasintermedias=[]
-  if(ocupadas.length>=1){
+  if(ocupadas.length>=0){
     fechasintermedias = [...ocupadas]
     fechasintermedias.push(fechas(reserva))
     console.log(fechasintermedias)
@@ -159,10 +160,10 @@ const calculofechas=()=> {
 useEffect(()=>{
   calculofechas()
   },[reserva]);
-
-  useEffect(()=>{
+useEffect(()=>{
     date(ocupadas)
     });
+
 const handlePrueba=()=>{
 console.log(input.Anombrede, logeduser.email, input.Checkin)
 dispatch(createReservation({...input, id:logeduser.userid},dispatch))

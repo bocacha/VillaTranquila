@@ -68,6 +68,20 @@ export function sendEmail(payload) {
     return json;
   };
 }
+
+
+// export function sendNotification(payload) {
+//   return async function (dispatch) {
+//       const json = await axios.post("/sendNotification", payload)
+
+//       return dispatch({
+//           type: 'SEND_NOTIFICATION',
+//           payload: json.data
+//       })
+//   }
+// }
+
+
 export function createReservation(payload) {
   return async function (dispatch) {
     const response = await axios.post("http://localhost:3001/reservations/NewReservation", payload);
@@ -493,6 +507,7 @@ export function editCabains(payload, { token }) {
   };
 }
 export function editAvailible(payload) {
+  console.log(payload)
   return async function (dispatch) {
     const response = await axios.put("http://localhost:3001/cabins/EditCabin/available", payload);
     return response;
@@ -705,6 +720,7 @@ export function readFechas(){
        
   };
 }
+
 export function sendNotification(payload) {
 
 return async function (dispatch) {
