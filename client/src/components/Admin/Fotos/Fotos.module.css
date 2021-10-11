@@ -135,8 +135,12 @@
   border-radius: 7px;
   padding: 10px 25px;
   margin-bottom: 10px;
-  width: fit-content;
-  white-space: nowrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
 }
 
 @media (max-width: 700px) {
@@ -144,3 +148,5 @@
     flex-direction: column;
   }
 }
+
+

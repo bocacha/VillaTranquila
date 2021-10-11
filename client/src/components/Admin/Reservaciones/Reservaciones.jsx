@@ -13,6 +13,7 @@ import DatePicker,{registerLocale} from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import es from 'date-fns/locale/es';
 import {Link} from "react-router-dom";
+import NavAdmin from '../NavAdmin/NavAdmin';
 registerLocale('es', es)
 
 export default function Reservaciones() {
@@ -85,6 +86,10 @@ export default function Reservaciones() {
   function handleSubmitEdit(e,ID) {
     e.preventDefault();
     
+
+    
+
+
     setMostrar(true);
     dispatch(editReservation(edit, { token }));
     setEdit({...edit,
@@ -94,7 +99,7 @@ export default function Reservaciones() {
   }
 
   const mostrarFecha = selectDateCI =>{
-    const options = {year:'numeric', month:'numeric', day:'numeric'}
+    const options = {weekday :'long', year:'yyyy', month:'MM', day:'dd'}
     setInput({...input,  Checkin: selectDateCI.toLocaleDateString('es-ES', options)})
   }
   function handlePrueba(e, ID) {
@@ -123,10 +128,8 @@ export default function Reservaciones() {
   }
   return (
     <div className={styles.container}>
+      <NavAdmin />
       <div className={styles.btnsContainer}>
-        <Link to="/admin">
-          <button className={styles.btnVolver}>Volver</button>
-        </Link>
         {!habilitar ?(
             <button onClick={ocultadas} className={styles.btnSup}>Mostrar ocultadas</button>
           ):(
@@ -140,39 +143,23 @@ export default function Reservaciones() {
           <div className={styles.crearCont}>
             <div className={styles.title}>Crear una  reservación</div>
             <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
-              <input
-                type="text"
-                value={input.Checkin}
-                name="Checkin"
-                onChange={(e) => handleChange(e)}
-                placeholder="Check in"
-                className={styles.formInputs}
-                required
+                  
+              <DatePicker
+              selected={selectDateCI}
+              onChange={date=> setSelectDateCI(date)}
+              dateFormat='dd/MM/yyyy'
+              minDate={new Date()}
+              required
+              //isClearable
+              /> 
+              <DatePicker
+              selected={selectDateCO}
+              onChange={date=> setSelectDateCO(date)}
+              dateFormat='dd/MM/yyyy'
+              minDate={new Date()}
+              required
+              //isClearable
               />
-              {/* <DatePicker
-          selected={selectDateCI}
-          onChange={date=> setSelectDateCI(date)}
-          dateFormat='dd/MM/yyyy'
-          minDate={new Date()}
-          //isClearable
-          /> */}
-              <input
-                type="text"
-                value={input.Checkout}
-                name="Checkout"
-                onChange={(e) => handleChange(e)}
-                placeholder="Check out"
-                className={styles.formInputs}
-                required
-              />
-              {/* 
-          <DatePicker
-          selected={selectDateCO}
-          onChange={date=> setSelectDateCO(date)}
-          dateFormat='dd/MM/yyyy'
-          minDate={new Date()}
-          //isClearable
-          /> */}
               <input
                 type="text"
                 value={input.UserId}
@@ -181,7 +168,7 @@ export default function Reservaciones() {
                 placeholder="Usuario Id"
                 className={styles.formInputs}
                 title='Formato: UUID4'
-               // pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
+                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                 required
               />
               <input
@@ -191,8 +178,8 @@ export default function Reservaciones() {
                 onChange={(e) => handleChange(e)}
                 placeholder="Pagos id"
                 className={styles.formInputs}
-                 title='Formato: UUID4'
-               // pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
+                title='Formato: UUID4'
+                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                 required
               />
               <input
@@ -203,7 +190,7 @@ export default function Reservaciones() {
                 placeholder="Cabaña id"
                 className={styles.formInputs}
                 title='Formato: UUID4'
-               // pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
+                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                 required
               />
               <input
@@ -227,21 +214,21 @@ export default function Reservaciones() {
             <div className={styles.editarCont}>
             <div className={styles.title}> Editar reserva</div>
             <form >
-              <input
-                type="text"
-                value={edit.Checkin}
-                name="Checkin"
-                onChange={(e) => handleChangeEdit(e)}
-                placeholder="Check in"
-                className={styles.formInputs}
-              />
-              <input
-                type="text"
-                value={edit.Checkout}
-                name="Checkout"
-                onChange={(e) => handleChangeEdit(e)}
-                placeholder="Check out"
-                className={styles.formInputs}
+              <DatePicker
+              selected={selectDateCI}
+              onChange={date=> setSelectDateCI(date)}
+              dateFormat='dd/MM/yyyy'
+              minDate={new Date()}
+              required
+              //isClearable
+              /> 
+              <DatePicker
+              selected={selectDateCO}
+              onChange={date=> setSelectDateCO(date)}
+              dateFormat='dd/MM/yyyy'
+              minDate={new Date()}
+              required
+              //isClearable
               />
               <input
                 type="text"
@@ -285,7 +272,7 @@ export default function Reservaciones() {
                 required
               />
               <input
-                type="text"
+                type="text" //?????
                 value={edit.ExtraServices}
                 name="ExtraServices"
                 onChange={(e) => handleChangeEdit(e)}

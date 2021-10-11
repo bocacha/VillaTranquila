@@ -22,7 +22,7 @@ export default function Admin() {
         <div className={styles.cards}>
           <button className={styles.cardsContainer}>
             <div>
-              <Link to="admin/cabañas">
+              <Link to="/admin/cabañas">
                 <img
                   src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/f0/fd/2d/cottage-complex-velt.jpg?w=1200&h=-1&s=1"
                   alt="cabañas"
@@ -30,11 +30,11 @@ export default function Admin() {
                 />
               </Link>
             </div>
-            <Link to="admin/cabañas" className={styles.link}>Cabañas</Link>
+            <Link to="/admin/cabañas" className={styles.link}>Cabañas</Link>
           </button>
           <button  className={styles.cardsContainer}>
             <div>
-              <Link to="admin/reservaciones">
+              <Link to="/admin/reservaciones">
                 <img
                   src="https://food.fnr.sndimg.com/content/dam/images/food/unsized/2014/6/23/0/fnd_Reserved-Sign-Thinkstock_s4x3.jpg"
                   alt="reservas"
@@ -42,11 +42,11 @@ export default function Admin() {
                 />
               </Link>
             </div>
-            <Link to="admin/reservaciones" className={styles.link}>Reservaciones</Link>
+            <Link to="/admin/reservaciones" className={styles.link}>Reservaciones</Link>
           </button>
           <button  className={styles.cardsContainer}>
             <div>
-              <Link to="admin/servicios">
+              <Link to="/admin/servicios">
                 <img
                   src="https://img.vixdata.io/pd/jpg-large/es/sites/default/files/imj/nuestrorumbo/q/que-servicios-debe-tener-un-hotel-para-ser-tres-estrellas-1.jpg"
                   alt="servicios"
@@ -54,11 +54,11 @@ export default function Admin() {
                 />
               </Link>
             </div>
-            <Link to="admin/servicios" className={styles.link}>Servicios</Link>
+            <Link to="/admin/servicios" className={styles.link}>Servicios</Link>
           </button>
           <button  className={styles.cardsContainer}>
             <div>
-              <Link to="admin/pagos">
+              <Link to="/admin/pagos">
                 <img
                   src="https://intl-blog.imgix.net/wp-content/uploads/2020/08/Pagos-por-movil-header.png?auto=format%2Cenhance"
                   alt="pagos"
@@ -66,11 +66,11 @@ export default function Admin() {
                 />
               </Link>
             </div>
-            <Link to="admin/pagos" className={styles.link}>Pagos</Link>
+            <Link to="/admin/pagos" className={styles.link}>Pagos</Link>
           </button>
           <button  className={styles.cardsContainer}>
             <div>
-              <Link to="admin/fotos">
+              <Link to="/admin/fotos">
                 <img
                   src="https://i.pinimg.com/736x/d6/5a/ce/d65acea83899fa0352ab4d29fd6997a4.jpg"
                   alt="fotos"
@@ -78,11 +78,11 @@ export default function Admin() {
                 />
               </Link>
             </div>
-            <Link to="admin/fotos" className={styles.link}>Fotos</Link>
+            <Link to="/admin/fotos" className={styles.link}>Fotos</Link>
           </button>
           <button  className={styles.cardsContainer}>
             <div>
-              <Link to="admin/usuarios">
+              <Link to="/admin/usuarios">
                 <img
                   src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1200px-User_icon_2.svg.png"
                   alt="usuarios"
@@ -90,7 +90,19 @@ export default function Admin() {
                 />
               </Link>
             </div>
-            <Link to="admin/usuarios" className={styles.link}>Usuarios</Link>
+            <Link to="/admin/usuarios" className={styles.link}>Usuarios</Link>
+          </button>
+          <button  className={styles.cardsContainer}>
+            <div>
+              <Link to="/admin/caja">
+                <img
+                  src="https://i.pinimg.com/564x/f0/99/fb/f099fbdfde2c1379d91202b17d03c81a.jpg"
+                  alt="caja"
+                  className={styles.img}
+                />
+              </Link>
+            </div>
+            <Link to="/admin/caja" className={styles.link}>Caja</Link>
           </button>
         </div>
       </div>

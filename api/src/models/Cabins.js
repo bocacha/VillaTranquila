@@ -30,6 +30,10 @@ module.exports = (sequelize) => {
     type: DataTypes.STRING,
     allowNull: false,
    },
+   Picture:{
+    type: DataTypes.STRING,
+    allowNull:false,
+   },
    Wifi:{
      type: DataTypes.BOOLEAN,
      allowNull:false,

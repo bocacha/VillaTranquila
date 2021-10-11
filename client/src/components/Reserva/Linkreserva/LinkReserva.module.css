@@ -27,7 +27,7 @@
 .btnVolver {
   margin-bottom: 20px;
   display: flex;
-  align-items: start;
+  align-items:flex-start;
   margin-left: 50px;
   padding-top: 10px;
 }
@@ -100,7 +100,7 @@
 
 .servicios {
   display: flex;
-  align-items: start;
+  align-items:flex-start;
   justify-content: center;
 }
 
