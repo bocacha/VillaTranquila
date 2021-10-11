@@ -58,6 +58,10 @@ export default function Footer() {
           <Link to="/reserva" className={styles.link}>
             Reservar
           </Link>
+          <br />
+          <Link to="/galeria" className={styles.link}>
+            Galería
+          </Link>
         </div>
         <div className={styles.redes}>
           <span className={styles.title}> Redes sociales </span> <br />

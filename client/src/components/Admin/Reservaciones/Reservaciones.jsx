@@ -13,6 +13,7 @@ import DatePicker,{registerLocale} from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import es from 'date-fns/locale/es';
 import {Link} from "react-router-dom";
+import NavAdmin from '../NavAdmin/NavAdmin';
 registerLocale('es', es)
 
 export default function Reservaciones() {
@@ -127,10 +128,8 @@ export default function Reservaciones() {
   }
   return (
     <div className={styles.container}>
+      <NavAdmin />
       <div className={styles.btnsContainer}>
-        <Link to="/admin">
-          <button className={styles.btnVolver}>Volver</button>
-        </Link>
         {!habilitar ?(
             <button onClick={ocultadas} className={styles.btnSup}>Mostrar ocultadas</button>
           ):(
