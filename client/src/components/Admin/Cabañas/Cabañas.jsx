@@ -184,7 +184,7 @@ const Cabañas = () => {
         <div className={styles.formsCont}>
           <div className={styles.crearCont}>
             <div className={styles.title}>Crear Cabaña</div>
-            <form onSubmit={handleSubmit} className={styles.form}>
+            <form  className={styles.form}>
               <div>
                 <input
                   type="number"
@@ -341,7 +341,7 @@ const Cabañas = () => {
               />
             </div> */}
               <div className={styles.btns}>
-                <button type="submit" className={styles.btn}>
+                <button onClick={handleSubmit} className={styles.btn}>
                   Crear
                 </button>
               </div>
