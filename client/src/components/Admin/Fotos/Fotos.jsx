@@ -6,6 +6,7 @@ import FotosDetail from "./FotosDetail";
 import Upload from "../../Reserva/Upload/Upload";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
+import NavAdmin from '../NavAdmin/NavAdmin';
 
 export default function Fotos() {
   const dispatch = useDispatch();
@@ -90,10 +91,8 @@ export default function Fotos() {
   
   return (
     <div className={styles.container}>
+      <NavAdmin />
       <div className={styles.btnsContainer}>
-        <Link to="/admin">
-          <button className={styles.btnVolver}>Volver</button>
-        </Link>
         {!habilitar ? (
           <button onClick={ocultadas} className={styles.btnSup}>Mostrar ocultadas</button>
         ) : (

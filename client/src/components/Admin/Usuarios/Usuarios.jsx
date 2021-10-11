@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { createUsers, readUsers, editUsers, Logeduser, readUsersocultados} from "../../../actions";
 import UsuariosDetail from "./UsuariosDetail";
 import { Link } from "react-router-dom";
+import NavAdmin from '../NavAdmin/NavAdmin';
 
 export default function Usuarios() {
   const dispatch = useDispatch();
@@ -205,10 +206,8 @@ e.preventDefault()
           </div>
         </form>
 */}
+      <NavAdmin />
       <div className={styles.btnsContainer}>
-        <Link to="/admin">
-          <button className={styles.btnVolver}>Volver</button>
-        </Link>
         {!habilitar ?(
             <button onClick={ocultadas} className={styles.btnSup}>Mostrar ocultadas</button>
           ):(
