@@ -5,8 +5,8 @@ import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 import Slider from "../Slider/Slider";
 import Upload from "../Reserva/Upload/Upload";
-import Searchbar from "../Searchbar/Searchbar";
-import Gallery from "../Gallery/Gallery";
+// import Searchbar from "../Searchbar/Searchbar";
+// import Gallery from "../Gallery/Gallery";
 import styles from "./Home.module.css";
 import{useEffect} from "react"
 import { useDispatch, useSelector} from 'react-redux';
@@ -39,10 +39,11 @@ export default function Home() {
       </div>
       <div>
         {/* <Searchbar/> */}
-        <Gallery/>
+        {/* <Gallery/> */}
       </div>
       <div>
         <BannerIntro />
+        {/* <Searchbar/> */}
         <Slider />
       </div>
       <div className={styles.mapaContainer}>

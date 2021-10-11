@@ -22,6 +22,7 @@ export default function Cabaña({
   Available,
   price,
   description,
+  Picture,
   parrilla,
   wifi,
   parking,
@@ -42,7 +43,7 @@ export default function Cabaña({
       {/* <img src={image} alt={`Cabaña número ${number}`} /> */}
       <div className={styles.infoContainer}>
         <img
-          src="https://res.cloudinary.com/villatranquila/image/upload/v1633134844/Cabins/5_vxhhvy.jpg"
+          src={Picture}
           alt={`Cabaña número ${number}`}
           className={styles.img}
         />

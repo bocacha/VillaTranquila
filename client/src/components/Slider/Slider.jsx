@@ -17,7 +17,7 @@ export default function Slider() {
             alt="Uno slide"
           />
           <Carousel.Caption>
-            <Link className={styles.link} to="/reserva"><div className={styles.wrapper}><h3 className={styles.h3}>Reserve Ya!</h3></div></Link>
+            <Link className={styles.link} to="/reserva"><div className={styles.wrapper}><h3 className={styles.h3}>¡Reserve Ya!</h3></div></Link>
           </Carousel.Caption>
         </Carousel.Item>
         {/* Segundo Slide */}
@@ -67,7 +67,7 @@ export default function Slider() {
           />
 
           <Carousel.Caption>
-           
+          <Link className={styles.link} to="/galeria"><div className={styles.wrapper}><h3 className={styles.chatea}>Galería de imagenes</h3></div></Link>
           </Carousel.Caption>
         </Carousel.Item>
         {/* Sexto Slide */}

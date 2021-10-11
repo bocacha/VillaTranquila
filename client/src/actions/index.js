@@ -68,6 +68,20 @@ export function sendEmail(payload) {
     return json;
   };
 }
+
+
+// export function sendNotification(payload) {
+//   return async function (dispatch) {
+//       const json = await axios.post("/sendNotification", payload)
+
+//       return dispatch({
+//           type: 'SEND_NOTIFICATION',
+//           payload: json.data
+//       })
+//   }
+// }
+
+
 export function createReservation(payload) {
   return async function (dispatch) {
     const response = await axios.post("http://localhost:3001/reservations/NewReservation", payload);
@@ -120,10 +134,12 @@ export function createServices(payload, { token }) {
 }
 
 export function createUsers(payload) {
-
-  return async function (dispatch) {
-    const response = await axios.post("http://localhost:3001/users/Singup", payload);
+    return async function (dispatch) {
+   try{ const response = await axios.post("http://localhost:3001/users/Singup", payload);
     return response;
+    }catch (err) {
+      alert("Error Nombre de usuario no disponible")
+    }
   };
 }
 
@@ -491,6 +507,7 @@ export function editCabains(payload, { token }) {
   };
 }
 export function editAvailible(payload) {
+  console.log(payload)
   return async function (dispatch) {
     const response = await axios.put("http://localhost:3001/cabins/EditCabin/available", payload);
     return response;
@@ -501,12 +518,14 @@ export function Loguser(payload) {
     try {
       let json = await axios.post("http://localhost:3001/login", payload);
       localStorage.setItem("LogedUser", JSON.stringify(json.data));
+      console.log(json)
       return dispatch({
         type: LOG_USER,
         payload: json.data,
       });
     } catch (err) {
-      console.log(err);
+      console.log(err)
+      alert("Error Usuario o Contraseña mal ingresados/inexistentes");
     }
   };
 }
@@ -701,6 +720,7 @@ export function readFechas(){
        
   };
 }
+
 export function sendNotification(payload) {
 
 return async function (dispatch) {
@@ -714,11 +734,12 @@ return async function (dispatch) {
  }
 }
 
-export function getUserData(userid){
+export function getUserData(username){
+  console.log(username)
   return async function (dispatch) {
     try {
-      let json = await axios.get("http://localhost:3001/users/" + userid);
-      console.log('getUserData --->',json.data)
+      let json = await axios.get("http://localhost:3001/users/" + username);
+      console.log(json.data)
       return dispatch({
         type: GET_USER_DATA,
         payload: json.data,
@@ -734,7 +755,7 @@ export function selectcabin(id){
       let json = await axios.get("http://localhost:3001/cabins/"+id);
       return dispatch({
         type: SELECTED_CABIN,
-        payload: json.data,
+        payload: json.data[0],
       });
     } catch (err) {
       console.log(err);

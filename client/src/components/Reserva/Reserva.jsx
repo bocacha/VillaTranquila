@@ -247,7 +247,7 @@ export default function Reserva() {
                                         Available={el.Available}
                                         price={el.Price}
                                         description={el.Description}
-                                        image={el.Image}
+                                        Picture={el.Picture}
                                         parrilla={el.Parrilla}
                                         wifi={el.Wifi}
                                         parking={el.Parking}
