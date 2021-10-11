@@ -22,6 +22,7 @@ import {
   READ_SERVICES_OCULTADOS,
   READ_CABINS_OCULTADOS,
   READ_FECHASNODISPONIBLES,
+  READ_WEATHER,
   EDIT_USER,
   EDIT_RESERVATIONS,
   EDIT_SERVICES,
@@ -54,7 +55,8 @@ const initialState = {
   user: {},
   reservaciones: [],
   fechasnodisponibles:[],
-  userData: {}
+  userData: {},
+  weather:[]
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -299,15 +301,21 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         userData: action.payload
       }
-      case SELECTED_CABIN:
+    case SELECTED_CABIN:
         return{
           ...state,
           selectedcabin: action.payload,
         }
-        case SEND_PASSWORD_EMAIL:
+    case SEND_PASSWORD_EMAIL:
           return {
             ...state,
-          };
+          }
+    case READ_WEATHER:
+      return {
+        ...state,
+        weather: action.payload
+      }
+
     default:
       return state;
   }
