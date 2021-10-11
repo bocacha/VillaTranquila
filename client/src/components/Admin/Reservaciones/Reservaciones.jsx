@@ -143,24 +143,23 @@ export default function Reservaciones() {
           <div className={styles.crearCont}>
             <div className={styles.title}>Crear una  reservación</div>
             <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
-              
+                  
               <DatePicker
-          selected={selectDateCI}
-          onChange={date=> setSelectDateCI(date)}
-          dateFormat='dd/MM/yyyy'
-          minDate={new Date()}
-          className={styles.formInputs}
-          //isClearable
-          /> 
-              
-          <DatePicker
-          selected={selectDateCO}
-          onChange={date=> setSelectDateCO(date)}
-          dateFormat='dd/MM/yyyy'
-          minDate={new Date()}
-          className={styles.formInputs}
-          //isClearable
-          />
+              selected={selectDateCI}
+              onChange={date=> setSelectDateCI(date)}
+              dateFormat='dd/MM/yyyy'
+              minDate={new Date()}
+              required
+              //isClearable
+              /> 
+              <DatePicker
+              selected={selectDateCO}
+              onChange={date=> setSelectDateCO(date)}
+              dateFormat='dd/MM/yyyy'
+              minDate={new Date()}
+              required
+              //isClearable
+              />
               <input
                 type="text"
                 value={input.UserId}
@@ -169,7 +168,7 @@ export default function Reservaciones() {
                 placeholder="Usuario Id"
                 className={styles.formInputs}
                 title='Formato: UUID4'
-               // pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
+                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                 required
               />
               <input
@@ -179,8 +178,8 @@ export default function Reservaciones() {
                 onChange={(e) => handleChange(e)}
                 placeholder="Pagos id"
                 className={styles.formInputs}
-                 title='Formato: UUID4'
-               // pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
+                title='Formato: UUID4'
+                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                 required
               />
               <input
@@ -191,7 +190,7 @@ export default function Reservaciones() {
                 placeholder="Cabaña id"
                 className={styles.formInputs}
                 title='Formato: UUID4'
-               // pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
+                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                 required
               />
               <input
@@ -215,21 +214,21 @@ export default function Reservaciones() {
             <div className={styles.editarCont}>
             <div className={styles.title}> Editar reserva</div>
             <form >
-              <input
-                type="text"
-                value={edit.Checkin}
-                name="Checkin"
-                onChange={(e) => handleChangeEdit(e)}
-                placeholder="Check in"
-                className={styles.formInputs}
-              />
-              <input
-                type="text"
-                value={edit.Checkout}
-                name="Checkout"
-                onChange={(e) => handleChangeEdit(e)}
-                placeholder="Check out"
-                className={styles.formInputs}
+              <DatePicker
+              selected={selectDateCI}
+              onChange={date=> setSelectDateCI(date)}
+              dateFormat='dd/MM/yyyy'
+              minDate={new Date()}
+              required
+              //isClearable
+              /> 
+              <DatePicker
+              selected={selectDateCO}
+              onChange={date=> setSelectDateCO(date)}
+              dateFormat='dd/MM/yyyy'
+              minDate={new Date()}
+              required
+              //isClearable
               />
               <input
                 type="text"
@@ -273,7 +272,7 @@ export default function Reservaciones() {
                 required
               />
               <input
-                type="text"
+                type="text" //?????
                 value={edit.ExtraServices}
                 name="ExtraServices"
                 onChange={(e) => handleChangeEdit(e)}
