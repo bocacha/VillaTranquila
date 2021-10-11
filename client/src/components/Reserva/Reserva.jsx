@@ -20,13 +20,17 @@ function validate(filters) {
     var dd = String(today.getDate()).padStart(2, '0');
     var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
     var yyyy = today.getFullYear();
-    today = yyyy + '-' + mm + '-' + dd;
+    today = dd + '/' + mm + '/' + yyyy;
 
-    if((filters.inDate < today && filters.inDate !== '') || (filters.outDate < today && filters.outDate !== '')){
+    var inDate = filters.inDate.split('-').reverse().join('/');
+    var outDate = filters.outDate.split('-').reverse().join('/');
+    console.log('inDate', inDate, 'today', today, inDate > today);
+    console.log('outDate', outDate, 'today', today, outDate > today);
+
+    if((inDate < today && inDate !== '') || (outDate < today && outDate !== '')){
         errors.today = 'Fechas inválidas';
-        console.log(today)
     }
-    if (filters.inDate > filters.outDate && filters.outDate !== '') {
+    if (inDate > outDate && outDate !== '') {
         errors.inDate = 'La fecha de llegada debe ser anterior a la de salida';
     }
     if (parseInt(filters.priceMin) > parseInt(filters.priceMax) && filters.priceMin !== 'all' && filters.priceMax !== 'all') {
@@ -101,13 +105,14 @@ export default function Reserva() {
             ...filters,
             [e.target.name]: e.target.value
         }))
-        console.log(filters);
+        console.log('filters',filters);
+        console.log('errors',errors);
     }
 
 
     function handleFilters(e) {
         e.preventDefault();
-        console.log(errors);
+        console.log('errors:',errors);
         if (!Object.getOwnPropertyNames(errors).length) {
             console.log('Filters submited');
             dispatch(filterCabins(filters));
