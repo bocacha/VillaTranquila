@@ -126,6 +126,7 @@ export default function Pagos() {
                 dateFormat="dd/MM/yyyy"
                 minDate={new Date()}
                 className={styles.formInputs}
+                required
                 //isClearable
               />
 
@@ -147,24 +148,24 @@ export default function Pagos() {
                 onChange={(e) => handleChange(e)}
                 placeholder="Cliente id"
                 className={styles.formInputs}
-                // pattern='^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$'
+                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                 required
               />
               <input
-                type="text"
+                type="number"
                 value={input.TotalAmount}
                 name="TotalAmount"
                 onChange={(e) => handleChange(e)}
-                placeholder="Monto total"
+                placeholder="Monto total $"
                 className={styles.formInputs}
                 required
               />
               <input
-                type="text"
+                type="number"
                 value={input.PaydAmount}
                 name="PaydAmount"
                 onChange={(e) => handleChange(e)}
-                placeholder="Monto a pagar"
+                placeholder="Monto a pagar $"
                 className={styles.formInputs}
                 required
               />
@@ -187,6 +188,7 @@ export default function Pagos() {
                   onChange={(e) => handleChangeEdit(e)}
                   placeholder="Fecha"
                   className={styles.formInputs}
+                  required
                 />
                 <input
                   type="text"
@@ -194,23 +196,27 @@ export default function Pagos() {
                   name="idClient"
                   onChange={(e) => handleChangeEdit(e)}
                   placeholder="Cliente id"
+                  pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                   className={styles.formInputs}
+                  required
                 />
                 <input
-                  type="text"
+                  type="number"
                   value={edit.TotalAmount}
                   name="TotalAmount"
                   onChange={(e) => handleChangeEdit(e)}
-                  placeholder="Monto total"
+                  placeholder="Monto total $"
                   className={styles.formInputs}
+                  required
                 />
                 <input
-                  type="text"
+                  type="number"
                   value={edit.PaydAmount}
                   name="PaydAmount"
                   onChange={(e) => handleChangeEdit(e)}
-                  placeholder="Monto a pagar"
+                  placeholder="Monto a pagar $"
                   className={styles.formInputs}
+                  required
                 />
               </form>
             </div>
