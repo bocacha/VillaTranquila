@@ -61,24 +61,28 @@ router.get("/ocultados", async (req, res)=>{
     
         const dbUser = await User.findAll() 
     });
-router.get('/:username', async (req, res) => {
-    const {username} = req.params;
-    try{
-        const user = await User.findOne({where:{UserName:username}});
-        res.send(user);
-    } catch(error){
-        res.send({error: error});
-    }
-})
+    router.get('/:ID', async (req, res) => {
+        const {ID} = req.params;
+        try{
+            const user = await User.findOne({where:{ID:ID}});
+            res.send(user);
+        } catch(error){
+            res.send({error: error});
+        }
+    })
 
 router.post("/Singup" , async (req, res)=>{
     const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email} = req.body;
     console.log('asdasd');
     const UserPasswordHashed = await bcrypt.hash(UserPassword,10)
     const dbUser = await User.findOne({ where:{UserName: UserName}})
+    const dbEmail = await User.findOne({ where:{Email: Email}})
     if(dbUser){
         res.status(504).send({msg:" error nombre de usuario no disponible"})
 
+    }
+    if(dbEmail){
+        res.status(409).send({msg:"Error Email ya se encuentra en uso"})
     }
     if(!dbUser){
         User.create({
@@ -114,6 +118,7 @@ router.put("/EditProfile/:ID", async (req,res) =>{
         })
     }
     if(ID){
+        console.log('modificando usuario')
         const UserPasswordHashed = await bcrypt.hash(UserPassword,10)
         const objecttoupdate={
             UserName: UserName,
@@ -129,15 +134,15 @@ router.put("/EditProfile/:ID", async (req,res) =>{
             ,
             {
                 where: {ID: ID}
-    
+
             })
             .then(doneTemp=>{
                 return res.status(200).json(doneTemp)
             })
             .catch(error=>{console.log(error)})
-    
+
     }
-    res.send.status(404);
+    res.status(404);
 });
 
 router.put("/EditUser", async (req,res) =>{
