@@ -68,6 +68,20 @@ export function sendEmail(payload) {
     return json;
   };
 }
+
+
+// export function sendNotification(payload) {
+//   return async function (dispatch) {
+//       const json = await axios.post("/sendNotification", payload)
+
+//       return dispatch({
+//           type: 'SEND_NOTIFICATION',
+//           payload: json.data
+//       })
+//   }
+// }
+
+
 export function createReservation(payload) {
   return async function (dispatch) {
     const response = await axios.post("http://localhost:3001/reservations/NewReservation", payload);
@@ -668,6 +682,7 @@ export function readFechas(){
        
   };
 }
+
 export function sendNotification(payload) {
 
 return async function (dispatch) {
