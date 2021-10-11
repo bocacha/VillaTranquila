@@ -33,7 +33,7 @@ export default function Caja(){
         <>
                
         <div className={styles.general}>             
-                {/* <Navbar />                                  */}
+                <Navbar />                                 
              <div className={styles.container}>
                 <label>Comprobante</label>
                 <label>Nombre</label>
@@ -46,25 +46,23 @@ export default function Caja(){
                     total=total + parseInt(el.PaydAmount);
                     return (
                         <div className={styles.detalle}>
-                        <div  key={index}>{index}</div>
-                       {datosUsuarios?.map((e)=>{                           
-                            if(e.ID===indiceCliente){
-                                return(
+                        <div  key={index}>A000-000{index}</div>
+                            {datosUsuarios?.map((e)=>{                           
+                                if(e.ID===indiceCliente){
+                                    return(
                                     <>
                                     <div className={styles.nombre}>
                                         <p >{e.FirstName}</p>                                
                                         <p >{e.LastName}</p>
                                     </div> 
-                                    <p>10/10/2021</p> 
-                                    
+                                    <p>10/10/2021</p>                                     
                                     </>                              
                                 )                              
-                            }else{
-                                return null;
-                            }
-                            
-                        })}
-                        <p>${el.PaydAmount}.00</p>
+                                }else{
+                                    return null;
+                                }                            
+                            })}
+                            <p>${el.PaydAmount}.00</p>
                         
                         </div>
                     )
