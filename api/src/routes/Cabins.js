@@ -54,13 +54,14 @@ if(!token || !decodedToken.id){
 if(!decodedToken.Admin){
    return res.status(400).json({error:"Ops.. No tenes permisos"})
 }
-    const {Number, Capacity, Available, Price, Description, Show, Wifi, Parking,Parrilla} = req.body;
+    const {Number, Capacity, Available, Price, Description, Picture, Show, Wifi, Parking,Parrilla} = req.body;
     Cabins.create({
         Number, 
         Capacity, 
         Available, 
         Price, 
         Description,
+        Picture,
         Show,
         Wifi, 
         Parking,
@@ -88,13 +89,14 @@ if(!token || !decodedToken.id){
 if(!decodedToken.Admin){
    return res.status(400).json({error:"Ops.. No tenes permisos"})
 }
-    const {Number, Capacity, Available, Price, Description, Parrilla, Wifi, Parking} = req.body;
+    const {Number, Capacity, Available, Price, Description, Picture, Parrilla, Wifi, Parking} = req.body;
     const objecttoupdate={
         Number: Number,
         Capacity: Capacity,
         Available: Available,
         Price: Price,
         Description: Description,
+        Picture: Picture,
         Parrilla: Parrilla,
         Wifi: Wifi, 
         Parking: Parking,

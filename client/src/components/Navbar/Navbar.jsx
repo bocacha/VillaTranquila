@@ -12,6 +12,7 @@ import { BiWindows } from "react-icons/bi";
 import { useSelector } from "react-redux";
 
 export default function Navbar() {
+
   let logeduser = useSelector((state) => state.user);
   if (logeduser === null) {
     logeduser = {};
@@ -106,7 +107,7 @@ export default function Navbar() {
             </div>
           ) : (
             <div>
-              <Link to="/perfil">
+              <Link to='/perfil'>
                 <li>
                   <button className={styles.signlog} >
                     <strong className={styles.list} >
