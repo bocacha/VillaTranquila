@@ -20,19 +20,21 @@ export default function CabinsDetail({
 }) {
   const dispatch = useDispatch();
   const [mostrar, setMostrar] = useState(true);
-  const handleSubmitDelete = (ID)=>{
+  const handleSubmitDelete = (e,ID)=>{
     alert("su cabaña fue Eliminada con exito");
     let obj = { id: ID };
     dispatch(removeCabains(obj));
-    //window.location.reload();
+    window.location.reload(true);
+    
   };
 
-  const handleSubmitrestore = (ID)=>{
+  const handleSubmitrestore = (e,ID)=>{
     console.log('funcion', ID)
-    alert("su cabaña fue eliminada con exito");
+    alert("su cabaña fue restaurada con exito");
     let obj = {id:ID}
     dispatch(restoreCabains(obj));
-    //window.location.reload();
+    window.location.reload(true);
+    
   }
 
   return (

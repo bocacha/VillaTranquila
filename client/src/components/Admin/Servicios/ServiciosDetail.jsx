@@ -20,14 +20,14 @@ export default function ServiciosDetail({
     alert("el servicio fue eliminado con exito");
     let obj = { id: ID };
     dispatch(removeServices(obj));
-    window.location.reload();
+    window.location.reload(false);
   };
   const handleSubmitrestore = (ID) => {
     console.log("funcion", ID);
-    alert("su cabaña fue Eliminada con exito");
+    alert("su cabaña fue Restaurada con exito");
     let obj = { id: ID };
     dispatch(restoreServices(obj));
-    window.location.reload();
+    window.location.reload(false);
   };
   return (
     <div className={styles.container}>

@@ -101,7 +101,8 @@ const Cabañas = () => {
     e.preventDefault();
     alert("su cabaña fue creada con exito");
     dispatch(createCabains(cabain, { token }));
-    //window.location.reload();
+    window.location.reload(true);
+    
   };
 
   const handleeditSubmit = (e, ID, Number,
@@ -158,7 +159,7 @@ const Cabañas = () => {
   const pruebadispatch = () => {
     const { token } = logeduser;
     dispatch(editCabains(edit, { token }));
-    //window.location.reload();
+    window.location.reload(true);
   };
   const ocultadas = () => {
     dispatch(readCabainsocultados());
