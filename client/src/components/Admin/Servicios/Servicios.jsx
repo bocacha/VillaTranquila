@@ -157,6 +157,8 @@ export default function Servicios() {
                   onChange={(e) => handleChangeEdit(e)}
                   placeholder="Nombre"
                   className={styles.formInputs}
+                  pattern="^[0-9a-zA-Z\s]+$"
+                  title="debe contener letras y numeros"
                   required
                 />
                 <input

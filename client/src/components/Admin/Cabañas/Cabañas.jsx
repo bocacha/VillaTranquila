@@ -12,6 +12,7 @@ import styles from "./Cabañas.module.css";
 import CabañasDetail from "../Cabañas/CabañasDetail";
 import NavAdmin from '../NavAdmin/NavAdmin';
 
+
 const Cabañas = () => {
   const dispatch = useDispatch();
   const allCabains = useSelector((state) => state.cabañas);
@@ -191,8 +192,9 @@ const Cabañas = () => {
                   value={cabain.Number}
                   onChange={handleChange}
                   placeholder="Numero de Cabaña"
+                  max="20"
                   className={styles.formInputs}
-                  requiered
+                  required
                 />
               </div>
               <div>
@@ -202,8 +204,9 @@ const Cabañas = () => {
                   value={cabain.Capacity}
                   onChange={handleChange}
                   placeholder="Numero de Camas"
+                  max="10"
                   className={styles.formInputs}
-                  requiered
+                  required
                 />
               </div>
               {/* <div> */}
@@ -226,7 +229,7 @@ const Cabañas = () => {
                   placeholder="Precio"
                   className={styles.formInputs}
                   max="50000"
-                  requiered
+                  required
                 />
               </div>
               <div>
@@ -237,7 +240,8 @@ const Cabañas = () => {
                   onChange={handleChange}
                   placeholder="Descripción"
                   className={styles.formInputs}
-                  requiered
+                  maxLength="100"
+                  required
                 />
               </div>
 
@@ -366,7 +370,9 @@ const Cabañas = () => {
                     value={edit.Number}
                     onChange={handleChangeEdit}
                     placeholder="Numero de Cabaña"
+                    max="20"
                     className={styles.formInputs}
+                    required
                   />
                 </div>
                 <div>
@@ -377,7 +383,9 @@ const Cabañas = () => {
                     value={edit.Capacity}
                     onChange={handleChangeEdit}
                     placeholder="Numero de Camas"
+                    max="10"
                     className={styles.formInputs}
+                    required
                   />
                 </div>
                 {/* <div>
@@ -399,6 +407,8 @@ const Cabañas = () => {
                     onChange={handleChangeEdit}
                     placeholder="Precio"
                     className={styles.formInputs}
+                    max="50000"
+                    required
                   />
                 </div>
                 <div>
@@ -409,7 +419,9 @@ const Cabañas = () => {
                     value={edit.Description}
                     onChange={handleChangeEdit}
                     placeholder="Descripción"
+                    maxLength="100"
                     className={styles.formInputs}
+                    required
                   />
                 </div>
 
