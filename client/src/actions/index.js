@@ -493,6 +493,7 @@ export function editCabains(payload, { token }) {
   };
 }
 export function editAvailible(payload) {
+  console.log(payload)
   return async function (dispatch) {
     const response = await axios.put("http://localhost:3001/cabins/EditCabin/available", payload);
     return response;

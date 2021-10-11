@@ -127,6 +127,9 @@ export default function Reservaciones() {
     mostrarFecha(e);
   }
   useEffect(()=>{
+    calculofechas()
+    },[selectDateCO]);
+  useEffect(()=>{
     fechasafiltrar()
     console.log(fechasintermedias)
     },[selectDateCO]);
@@ -149,7 +152,7 @@ const mostrarFecha2 = selectDateCO =>{
 }
 const calculofechas=()=> {
  let fechasintermedias=[]
-  if(ocupadas.length>=1){
+  if(ocupadas.length>=0){
     fechasintermedias = [...ocupadas]
     fechasintermedias.push(fechas(reserva))
     console.log(fechasintermedias)
@@ -159,10 +162,10 @@ const calculofechas=()=> {
 useEffect(()=>{
   calculofechas()
   },[reserva]);
-
-  useEffect(()=>{
+useEffect(()=>{
     date(ocupadas)
     });
+
 const handlePrueba=()=>{
 console.log(input.Anombrede, logeduser.email, input.Checkin)
 dispatch(createReservation({...input, id:logeduser.userid},dispatch))
