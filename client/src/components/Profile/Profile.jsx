@@ -201,14 +201,15 @@ if(dataUser.ReservationsHistory){
                         <summary>Historial de reservas</summary>
                         {dataUser.ReservationsHistory &&
             dataUser.ReservationsHistory.length ? (
-              <ul>
+                <div>
                 {objetosaArray.map((el) => {
-                return <ul>{el.map(e=>{
-                  return <li>{e[0]}:{e[1]}</li>
+                return <ul>
+                    {el.map(e=>{
+                  return <li>{e[0]} :{e[1]}</li>
                 })}</ul>;
               })
 }
-              </ul>
+            </div>
               
             ) : (
               <div>
