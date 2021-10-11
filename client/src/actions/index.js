@@ -70,16 +70,16 @@ export function sendEmail(payload) {
 }
 
 
-export function sendNotification(payload) {
-  return async function (dispatch) {
-      const json = await axios.post("/sendNotification", payload)
+// export function sendNotification(payload) {
+//   return async function (dispatch) {
+//       const json = await axios.post("/sendNotification", payload)
 
-      return dispatch({
-          type: 'SEND_NOTIFICATION',
-          payload: json.data
-      })
-  }
-}
+//       return dispatch({
+//           type: 'SEND_NOTIFICATION',
+//           payload: json.data
+//       })
+//   }
+// }
 
 
 export function createReservation(payload) {
@@ -682,6 +682,7 @@ export function readFechas(){
        
   };
 }
+
 export function sendNotification(payload) {
 
 return async function (dispatch) {

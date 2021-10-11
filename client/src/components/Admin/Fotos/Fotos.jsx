@@ -12,17 +12,9 @@ export default function Fotos() {
   const history = useHistory();
   const allPictures = useSelector((state) => state.fotos);
   const logeduser = useSelector((state) => state.user);
-<<<<<<< HEAD
-  const [habilitar, setHabilitar] = useState(false)
-  
-
-  const [description, setDescription] = useState('')
-  const [file, setFile] = useState({})
-=======
   const [habilitar, setHabilitar] = useState(false);
   const [description, setDescription] = useState("");
   const [file, setFile] = useState({});
->>>>>>> d25fce356aafe67faf4514b8ce31e812e2a2daad
   const [edit, setEdit] = useState({
     id: "",
     Description: "",
@@ -75,14 +67,6 @@ export default function Fotos() {
   const handledispatch=()=>{
     const { token } = logeduser;
     dispatch(editPictures(edit, { token }));
-<<<<<<< HEAD
-    setEdit({
-      ...edit,
-      id: ID
-    })
-
-=======
->>>>>>> d25fce356aafe67faf4514b8ce31e812e2a2daad
   }
  function handlePrueba(e, ID) {
     e.preventDefault();
@@ -95,18 +79,6 @@ export default function Fotos() {
     })
     window.location.reload();
   }
-<<<<<<< HEAD
-
-
-  const ocultadas = () => {
-    dispatch(readPicturesocultados())
-    setHabilitar(true)
-  }
-  const showtrue = () => {
-    dispatch(readPictures())
-    setHabilitar(false)
-  }
-=======
   const ocultadas = () => {
     dispatch(readPicturesocultados());
     setHabilitar(true);
@@ -116,7 +88,6 @@ export default function Fotos() {
     setHabilitar(false);
   };
   
->>>>>>> d25fce356aafe67faf4514b8ce31e812e2a2daad
   return (
     <div className={styles.container}>
       <div className={styles.btnsContainer}>
@@ -131,15 +102,6 @@ export default function Fotos() {
       </div>
       <div className={styles.container2}>
         <div className={styles.formsCont}>
-<<<<<<< HEAD
-          {!habilitar ? (
-            <button onClick={ocultadas}>Mostrar ocultadas</button>
-          ) : (
-            <button onClick={showtrue}>Mostrar habilitadas</button>
-          )
-          }
-=======
->>>>>>> d25fce356aafe67faf4514b8ce31e812e2a2daad
           {/* CREAR */}
           <div className={styles.crearCont}>
             <div className={styles.title}> Crear una nueva foto</div>
@@ -160,10 +122,6 @@ export default function Fotos() {
                 name="File"
                 onChange={(e) => {
                   setFile(e.target.files[0])
-<<<<<<< HEAD
-
-=======
->>>>>>> d25fce356aafe67faf4514b8ce31e812e2a2daad
                 }}
                 className={styles.formInputs}
                 required
@@ -181,13 +139,7 @@ export default function Fotos() {
             </form>
           </div>
           {/* EDITAR */}
-<<<<<<< HEAD
-          {mostrar
-
-            ?
-=======
           {mostrar ? (
->>>>>>> d25fce356aafe67faf4514b8ce31e812e2a2daad
             <div className={styles.editarCont}>
               <div className={styles.title}> Editar una nueva foto</div>
               <form className={styles.form}>
@@ -206,23 +158,6 @@ export default function Fotos() {
                   onChange={(e) => handleChangeEdit(e)}
                   placeholder="Descripción"
                   className={styles.formInputs}
-<<<<<<< HEAD
-                />
-                <input
-                  type="text"
-                  value={edit.Url}
-                  name="Url"
-                  onChange={(e) => handleChangeEdit(e)}
-                  placeholder="Url"
-                  className={styles.formInputs}
-                />
-
-              </form>
-            </div>
-            :
-            null
-          }
-=======
                 />
                 <input
                   type="text"
@@ -235,16 +170,12 @@ export default function Fotos() {
               </form>
             </div>
           ) : null}
->>>>>>> d25fce356aafe67faf4514b8ce31e812e2a2daad
           <div>
             {allPictures?.map((el) => {
               return (
                 <div className={styles.detalles} key={el.ID}>
                   <FotosDetail
-<<<<<<< HEAD
-=======
                     ID={el.ID}
->>>>>>> d25fce356aafe67faf4514b8ce31e812e2a2daad
                     Description={el.Description}
                     Url={el.Url}
                     handleSubmitEdit={handleSubmitEdit}
@@ -254,10 +185,6 @@ export default function Fotos() {
                 </div>
               );
             })}
-<<<<<<< HEAD
-
-=======
->>>>>>> d25fce356aafe67faf4514b8ce31e812e2a2daad
           </div>
         </div>
       </div>
