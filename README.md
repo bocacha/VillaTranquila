@@ -90,3 +90,5 @@ El cliente o Frontend de Villa Tranquila posee la siguiente estructura:
   Dicha información será interpretada por el Reductor para posteriormente configurar el estado global de la aplicación. 
   Dicho estado es utilizado para almacenar los datos requeridos por la lógica de la aplicación, la cual procesa el requerimiento y entrega los datos ya procesados a la Interfaz 
   del Usuario.
+  
+![flujo de datos](https://user-images.githubusercontent.com/82456534/136801539-8eab83ef-042e-427e-8bfa-b1241c57fe41.jpeg)
