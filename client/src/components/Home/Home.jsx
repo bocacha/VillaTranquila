@@ -12,6 +12,7 @@ import{useEffect} from "react"
 import { useDispatch, useSelector} from 'react-redux';
 import { Logeduser, getUserData } from "../../actions";
 import {steps} from "./Steps.js"
+import ServiciosBanner from "../ServiciosBanner/ServiciosBanner";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ export default function Home() {
         <BannerIntro />
         {/* <Searchbar/> */}
         <Slider />
+        <ServiciosBanner />
       </div>
       <div className={styles.mapaContainer}>
         <iframe
