@@ -144,7 +144,7 @@ export default function rootReducer(state = initialState, action) {
     case LOG_USER:
       return {
         ...state,
-        user: action.payload,
+        user: action.payload
       };
     case SEND_EMAIL:
       return {

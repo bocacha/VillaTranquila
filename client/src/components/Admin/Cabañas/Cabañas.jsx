@@ -6,6 +6,7 @@ import {
   editCabains,
   Logeduser,
   readCabainsocultados,
+  readPictures
 } from "../../../actions";
 import styles from "./Cabañas.module.css";
 import CabañasDetail from "../Cabañas/CabañasDetail";
@@ -15,6 +16,7 @@ const Cabañas = () => {
   const dispatch = useDispatch();
   const allCabains = useSelector((state) => state.cabañas);
   const logeduser = useSelector((state) => state.user);
+  const allFotos = useSelector((state) => state.fotos);
   const [habilitar, setHabilitar] = useState(false);
   const [cabain, setCabain] = useState({
     Number: "",
@@ -22,6 +24,7 @@ const Cabañas = () => {
     Available: [],
     Price: "",
     Description: "",
+    Picture: "",
     Coffe: false,
     Microondas: false,
     Calefaccion: false,
@@ -39,6 +42,7 @@ const Cabañas = () => {
     Available: [],
     Price: "",
     Description: "",
+    Picture: "",
     Coffe: false,
     Microondas: false,
     Calefaccion: false,
@@ -49,7 +53,7 @@ const Cabañas = () => {
     Stove: false,
     Parking: false,
   });
-console.log(edit.Available)
+
   const [mostrar, setMostrar] = useState(false);
 
   useEffect(() => {
@@ -58,6 +62,10 @@ console.log(edit.Available)
 
   useEffect(() => {
     dispatch(Logeduser());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(readPictures());
   }, [dispatch]);
 
   const handleChange = (e) => {
@@ -100,17 +108,21 @@ console.log(edit.Available)
     Available,
     Price,
     Description,
+    Picture,
     Parrilla,
     Wifi,
     Parking) => {
-    setEdit({ ...edit, id: ID, Number:Number,
-      Capacity:Capacity,
-      Available:Available,
-      Price:Price,
-      Description:Description,
-      Parrilla:Parrilla,
-      Wifi:Wifi,
-      Parking:Parking});
+    setEdit({
+      ...edit, id: ID, Number: Number,
+      Capacity: Capacity,
+      Available: Available,
+      Price: Price,
+      Description: Description,
+      Picture: Picture,
+      Parrilla: Parrilla,
+      Wifi: Wifi,
+      Parking: Parking
+    });
     e.preventDefault();
     setMostrar(true);
     const { token } = logeduser;
@@ -119,15 +131,23 @@ console.log(edit.Available)
   function handleSelect(e) {
     setCabain({
       ...cabain,
-      [e.target.name] : e.target.value,
+      [e.target.name]: e.target.value,
     });
   }
   function handleSelectedit(e) {
     setEdit({
       ...edit,
-      [e.target.name] : e.target.value,
+      [e.target.name]: e.target.value,
     });
   }
+
+  function handleSelectPicture(e) {
+    setCabain({
+      ...cabain,
+      [e.target.name]: e.target.value,
+    });
+  }
+
   const handlePrueba = (e, ID) => {
     setEdit({ ...edit, id: ID });
     e.preventDefault();
@@ -148,6 +168,7 @@ console.log(edit.Available)
     setHabilitar(false);
   };
 
+  // console.log(allFotos[0].Description)
   return (
     <div className={styles.container}>
         <NavAdmin />
@@ -161,7 +182,7 @@ console.log(edit.Available)
       <div className={styles.container2}>
         <div className={styles.formsCont}>
           <div className={styles.crearCont}>
-              <div className={styles.title}>Crear Cabaña</div>
+            <div className={styles.title}>Crear Cabaña</div>
             <form onSubmit={handleSubmit} className={styles.form}>
               <div>
                 <input
@@ -186,7 +207,7 @@ console.log(edit.Available)
                 />
               </div>
               {/* <div> */}
-                {/* <textarea
+              {/* <textarea
                   type="text"
                   name="Available"
                   value={cabain.Available}
@@ -219,40 +240,50 @@ console.log(edit.Available)
                   requiered
                 />
               </div>
+
+              <select name="Picture"
+                onChange={(e) => handleSelectPicture(e)}
+              >
+                <option>Seleccione Imagen:</option>
+                {allFotos.map((el) => {
+                  return (<option name="Picture" value={el.Url}>{el.Description}</option>)
+                })}
+              </select>
+
               <select
                 onChange={(e) => handleSelect(e)}
-               // value={cabain.Parking}
+                // value={cabain.Parking}
                 className={styles.formInputs}
                 name="Parking"
                 required
               >
                 <option>Estacionamiento:</option>
-                <option  name="Parking"  value="true">true</option>
-                <option  name="Parking" value="false">false</option>
+                <option name="Parking" value="true">true</option>
+                <option name="Parking" value="false">false</option>
               </select>
 
               <select
                 onChange={(e) => handleSelect(e)}
-               // value={cabain.Parrilla}
+                // value={cabain.Parrilla}
                 className={styles.formInputs}
                 name="Parrilla"
                 required
               >
                 <option>Parrilla:</option>
                 <option name="Parrilla" value="true">true</option>
-                <option name="Parrilla"  value="false">false</option>
+                <option name="Parrilla" value="false">false</option>
               </select>
 
               <select
                 onChange={(e) => handleSelect(e)}
                 name="Wifi"
-               // value={cabain.Wifi}
+                // value={cabain.Wifi}
                 className={styles.formInputs}
                 required
               >
                 <option>Wifi:</option>
-                <option name="Wifi"  value="true">true</option>
-                <option name="Wifi"  value="false">false</option>
+                <option name="Wifi" value="true">true</option>
+                <option name="Wifi" value="false">false</option>
               </select>
               {/* <div>
               <label>Cafe</label>
@@ -381,40 +412,49 @@ console.log(edit.Available)
                     className={styles.formInputs}
                   />
                 </div>
+
+                <select name="Picture"
+                  onChange={(e) => handleSelectedit(e)}
+                >
+                  <option>Seleccione Imagen:</option>
+                  {allFotos.map((el) => {
+                    return (<option name="Picture" value={el.Url}>{el.Description}</option>)
+                  })}
+                </select>
                 Servicios Basicos
                 <select
-                onChange={(e) => handleSelectedit(e)}
-               // value={edit.Parking}
-                className={styles.formInputs}
-                name="Parking"
-                required
-              >
-                <option>Estacionamiento:</option>
-                <option value="true">true</option>
-                <option value="false">false</option>
-              </select>
-              <select
-                onChange={(e) => handleSelectedit(e)}
-               // value={edit.Parrilla}
-                className={styles.formInputs}
-                name="Parrilla"
-                required
-              >
-                <option>Parrilla:</option>
-                <option value="true">true</option>
-                <option value="false">false</option>
-              </select>
-              <select
-                onChange={(e) => handleSelectedit(e)}
-               // value={edit.Wifi}
-                className={styles.formInputs}
-                name="Wifi"
-                required
-              >
-                <option>Wifi:</option>
-                <option value="true">true</option>
-                <option value="false">false</option>
-              </select>
+                  onChange={(e) => handleSelectedit(e)}
+                  // value={edit.Parking}
+                  className={styles.formInputs}
+                  name="Parking"
+                  required
+                >
+                  <option>Estacionamiento:</option>
+                  <option value="true">true</option>
+                  <option value="false">false</option>
+                </select>
+                <select
+                  onChange={(e) => handleSelectedit(e)}
+                  // value={edit.Parrilla}
+                  className={styles.formInputs}
+                  name="Parrilla"
+                  required
+                >
+                  <option>Parrilla:</option>
+                  <option value="true">true</option>
+                  <option value="false">false</option>
+                </select>
+                <select
+                  onChange={(e) => handleSelectedit(e)}
+                  // value={edit.Wifi}
+                  className={styles.formInputs}
+                  name="Wifi"
+                  required
+                >
+                  <option>Wifi:</option>
+                  <option value="true">true</option>
+                  <option value="false">false</option>
+                </select>
                 {/* <div>
               <label>Cafe</label> 
               <input
@@ -487,6 +527,7 @@ console.log(edit.Available)
                   Available={el.Available}
                   Price={el.Price}
                   Description={el.Description}
+                  Picture={el.Picture}
                   Coffe={el.Coffe}
                   Microondas={el.Microondas}
                   Calefaccion={el.Calefaccion}
