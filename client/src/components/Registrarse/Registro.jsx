@@ -49,9 +49,9 @@ export default function Usuarios() {
   const [errors, setErrors] = useState({});
 
   const dispatch = useDispatch();
-  useEffect(() => {
+ /*  useEffect(() => {
     dispatch(Logeduser());
-  }, [dispatch]);
+  }, [dispatch]); */
   const allUsers = useSelector((state) => state.usuarios);
   const [input, setInput] = useState({
     UserName: "",
