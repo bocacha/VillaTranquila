@@ -10,6 +10,7 @@ export default function CabinsDetail({
     Available,
     Price,
     Description,
+    Picture,
     Parrilla,
     Wifi,
     Parking,
@@ -48,6 +49,7 @@ export default function CabinsDetail({
           })}</div>
         <p className={styles.p}><strong>Price:</strong>  {Price}</p>
         <p className={styles.p}><strong>Descripcion:</strong>  {Description}</p>
+        <p className={styles.p}><strong>Picture:</strong></p><img width="100px" src={Picture}/>
         <p className={styles.p}><strong>Parrilla:</strong>  {Parrilla?<span>si</span>:<span>no</span>}</p>
         <p className={styles.p}><strong> Wifi:</strong> {Wifi?<span>si</span>:<span>no</span>}</p>
         <p className={styles.p}><strong>Parking:</strong>  {Parking?<span>si</span>:<span>no</span>}</p>
@@ -69,6 +71,7 @@ export default function CabinsDetail({
     Available,
     Price,
     Description,
+    Picture,
     Parrilla,
     Wifi,
     Parking);
