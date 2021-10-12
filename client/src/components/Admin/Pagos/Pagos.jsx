@@ -108,12 +108,12 @@ export default function Pagos() {
     if(e === null){
       return
     }
-    setSelectDateCI(e)
+    setSelectedDate(e)
     mostrarFecha(e);
   }
-  const mostrarFecha = selectDateCI =>{
+  const mostrarFecha = selectedDate =>{
     const options = {year:'numeric', month:'numeric', day:'2-digit'}
-    setEdit({...input,  Checkin: selectDateCI.toLocaleDateString('es-ES', options)})
+    setEdit({...input,  Checkin: selectedDate.toLocaleDateString('es-ES', options)})
     
   }
   return (
