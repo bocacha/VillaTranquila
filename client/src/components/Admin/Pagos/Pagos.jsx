@@ -121,7 +121,7 @@ export default function Pagos() {
       <div className={styles.container2}>
         <div className={styles.formsCont}>
           {/* CREAR */}
-          <div className={styles.crearCont}>
+          {/* <div className={styles.crearCont}>
             <div className={styles.title}>Crear un pago</div>
             <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
               <DatePicker
@@ -135,7 +135,7 @@ export default function Pagos() {
               />
 
                
-          {/* <input
+          <input
             type="date"
             value={input.Date}
             minDate= {new Date()}
@@ -144,7 +144,7 @@ export default function Pagos() {
             placeholder="Date"
             className={styles.Date}
             required
-          /> */}
+          />
               <input
                 type="text"
                 value={input.idClient}
@@ -179,7 +179,7 @@ export default function Pagos() {
                 </button>
               </div>
             </form>
-          </div>
+          </div> */}
           {/* EDITAR */}
           {mostrar ? (
             <div className={styles.editarCont}>

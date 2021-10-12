@@ -122,7 +122,7 @@ export default function Reservaciones() {
   }
 
   const mostrarFecha = selectDateCI =>{
-    const options = {weekday :'long', year:'yyyy', month:'MM', day:'dd'}
+    const options = {weekday :'long', year:'yyyy', month:'MM', day:'2-digit'}
     setEdit({...edit,  Checkin: selectDateCI.toLocaleDateString('es-ES', options)})
   }
   const mostrarFecha2 = selectDateCO =>{
@@ -136,7 +136,9 @@ export default function Reservaciones() {
   //})
     setMostrar(true);
     dispatch(editReservation(edit, { token }));
+    alert("Editado")
     //pruebadispatch()
+    window.location.reload()
   }
  // const pruebadispatch=() => {
    // const { token } = logeduser;
