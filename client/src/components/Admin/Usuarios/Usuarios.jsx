@@ -145,7 +145,7 @@ export default function Usuarios() {
     //    id: ID,
     //  });
      //dispatch(readUsers({ token }));
-     //window.location.reload();
+     window.location.reload();
    }
 const ocultadas= () => {
   const { token } = logeduser;
