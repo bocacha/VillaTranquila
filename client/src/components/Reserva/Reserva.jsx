@@ -6,7 +6,7 @@ import Navbar from "../Navbar/Navbar";
 import Cabaña from "./Cabaña/Cabaña";
 import styles from "./Reserva.module.css";
 import { FaWifi, FaCarAlt } from 'react-icons/fa';
-import { GiCampCookingPot } from 'react-icons/gi';
+import { GiBarbecue } from 'react-icons/gi';
 import { IoMdPeople } from 'react-icons/io';
 import { MdAttachMoney, MdRoomService } from 'react-icons/md';
 import { ImCalendar, ImSearch } from 'react-icons/im';
@@ -205,7 +205,7 @@ export default function Reserva() {
                             />
                         </li>
                         <li>
-                            <label>Parrilla <p className={styles.services}><GiCampCookingPot /></p></label>
+                            <label>Parrilla <p className={styles.services}><GiBarbecue /></p></label>
                             <input
                                 type='checkbox'
                                 name='barbecue'
