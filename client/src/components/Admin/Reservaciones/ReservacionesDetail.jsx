@@ -70,7 +70,14 @@ export default function ReservacionesDetail({
           <div>
             <button
               onClick={(e) => {
-                handleSubmitEdit(e, ID);
+                handleSubmitEdit(e, ID,
+                  Checkin,
+                  Checkout,
+                  UserId,
+                  Paymentsid,
+                  Cabinid,
+                  ExtraServices,
+                  CostoFinal,);
                 setMostrar(false);
               }}
               className={styles.btnPlus}

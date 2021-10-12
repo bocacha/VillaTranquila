@@ -56,12 +56,14 @@ export default function Fotos() {
     // window.location.reload();
     //
   }
-  function handleSubmitEdit(e, ID) {
+  function handleSubmitEdit(e, ID, Description,Url,) {
     e.preventDefault();
     setMostrar(true);
     setEdit({
       ...edit,
-      id: ID
+      id: ID,
+      Description: Description,
+      Url: url
     })
     handledispatch()
   }

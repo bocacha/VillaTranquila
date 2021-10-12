@@ -68,7 +68,11 @@ export default function PagosDetail({
           <div>
             <button
               onClick={(e) => {
-                handleSubmitEdit(e, ID);
+                handleSubmitEdit(e, ID,
+                  TotalAmount,
+                  PaydAmount,
+                  Date,
+                  idClient);
                 setMostrar(false);
               }}
               className={styles.btnPlus}

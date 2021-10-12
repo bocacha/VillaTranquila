@@ -83,13 +83,27 @@ export default function Reservaciones() {
     });
     window.location.reload();
   }
-  function handleSubmitEdit(e,ID) {
+  function handleSubmitEdit(e,ID,
+    Checkin,
+    Checkout,
+    UserId,
+    Paymentsid,
+    Cabinid,
+    ExtraServices,
+    CostoFinal) {
     e.preventDefault();
     setMostrar(true);
-    dispatch(editReservation(edit, { token }));
     setEdit({...edit,
-      id:ID  
+      id:ID,
+      Checkin:Checkin,
+      Checkout:Checkout,
+      UserId: UserId,
+      Paymentsid: Paymentsid,
+      Cabinid: Cabinid,
+      ExtraServices: ExtraServices,
+      CostoFinal:CostoFinal
     })
+    dispatch(editReservation(edit, { token }));
    
   }
 

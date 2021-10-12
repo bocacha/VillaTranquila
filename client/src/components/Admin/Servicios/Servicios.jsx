@@ -61,16 +61,22 @@ export default function Servicios() {
     });
     window.location.reload();
   }
-  function handleSubmitEdit(e, ID) {
+  function handleSubmitEdit(e, ID,
+    Name,
+    Description,
+    Price,) {
     const { token } = logeduser;
     e.preventDefault();
-    dispatch(editServices(edit, { token }));
     setMostrar(true);
     setEdit({
       ...edit,
       id: ID,
+      Name: Name,
+      Description:Description,
+      Price:Price,
     });
-    window.location.reload();
+    dispatch(editServices(edit, { token }));
+    //window.location.reload();
   }
   function handlePrueba(e, ID) {
     const { token } = logeduser;

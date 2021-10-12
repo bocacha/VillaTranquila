@@ -74,10 +74,14 @@ export default function Pagos() {
 
     window.location.reload();
   }
-  function handleSubmitEdit(e, ID) {
+  function handleSubmitEdit(e, ID,
+    TotalAmount,
+    PaydAmount,
+    Date,
+    idClient) {
     e.preventDefault();
     setMostrar(true);
-    setEdit({ ...edit, id: ID });
+    setEdit({ ...edit, id: ID,TotalAmount:TotalAmount,PaydAmount:PaydAmount,Date:Date});
     //dispatch(editPayments(edit, { token }));
   }
 

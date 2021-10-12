@@ -127,7 +127,7 @@ const Cabañas = () => {
     e.preventDefault();
     setMostrar(true);
     const { token } = logeduser;
-    dispatch(editCabains(edit, { token }));
+    //dispatch(editCabains(edit, { token }));
   };
   function handleSelect(e) {
     setCabain({

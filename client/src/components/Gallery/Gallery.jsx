@@ -9,7 +9,7 @@ export default function Gallery() {
     const [imageIds, setImageIds] = useState();
     const loadImages = async () => {
         try {
-            const res = await fetch('http://localhost:3001/pictures');
+            const res = await fetch('/pictures');
             const data = await res.json();
 
             setImageIds(data);

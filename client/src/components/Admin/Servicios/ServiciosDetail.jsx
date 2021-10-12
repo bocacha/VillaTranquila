@@ -61,7 +61,10 @@ export default function ServiciosDetail({
           <div>
             <button
               onClick={(e) => {
-                handleSubmitEdit(e, ID);
+                handleSubmitEdit(e, ID,
+                  Name,
+                  Description,
+                  Price,);
                 setMostrar(false);
               }}
               className={styles.btnPlus}

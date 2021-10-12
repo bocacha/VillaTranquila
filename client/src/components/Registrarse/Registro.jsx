@@ -84,7 +84,7 @@ export default function Usuarios() {
 
     dispatch(createUsers(input));
     alert("Usuario creado con éxito");
-    window.location.href='/login'
+    //window.location.href='/login'
     
   }
   const registroexitoso = async () => {
