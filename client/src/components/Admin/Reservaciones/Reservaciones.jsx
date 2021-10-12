@@ -170,7 +170,7 @@ export default function Reservaciones() {
       <div className={styles.container2}>
       <div className={styles.formsCont}>
           {/* 
-          <div className={styles.crearCont}>
+          <div className={styles.crearCont}>;
             <div className={styles.title}>Crear una  reservación</div>
             <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
                   
