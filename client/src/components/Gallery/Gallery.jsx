@@ -11,7 +11,7 @@ export default function Gallery() {
     const loadImages = async () => {
         try {
             const res = await axios.get('/pictures');
-            const data = await res.json();
+            const data =  res.data;
 
             setImageIds(data);
         } catch (err) {

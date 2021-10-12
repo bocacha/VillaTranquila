@@ -113,7 +113,7 @@ export default function Pagos() {
   }
   const mostrarFecha = selectedDate =>{
     const options = {year:'numeric', month:'numeric', day:'2-digit'}
-    setEdit({...input,  Checkin: selectedDate.toLocaleDateString('es-ES', options)})
+    setEdit({...edit,  Checkin: selectedDate.toLocaleDateString('es-ES', options)})
     
   }
   return (
@@ -198,7 +198,7 @@ export default function Pagos() {
               <div className={styles.title}> Editar un nuevo pago</div>
               <form className={styles.form}>
               <DatePicker
-                selected={edit.Date}
+                selected={selectedDate}
                 onChange={(e) => changeFechas(e)}
                 dateFormat="dd/MM/yyyy"
                // minDate={new Date()}

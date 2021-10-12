@@ -238,7 +238,7 @@ export default function Reservaciones() {
             <div className={styles.title}> Editar reserva</div>
             <form >
               <DatePicker
-              selected={edit.Checkin}
+              selected={selectDateCI}
               onChange={(e)=>changeFechas(e)}
               dateFormat='dd/MM/yyyy'
              // minDate={new Date()}
@@ -246,7 +246,7 @@ export default function Reservaciones() {
               //isClearable
               /> 
               <DatePicker
-              selected={edit.Checkout}
+              selected={selectDateCO}
               onChange={(e)=>changeFechas2(e)}
               dateFormat='dd/MM/yyyy'
              // minDate={new Date()}
