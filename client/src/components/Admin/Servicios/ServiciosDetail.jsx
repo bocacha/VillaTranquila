@@ -16,18 +16,14 @@ export default function ServiciosDetail({
   const [mostrar, setMostrar] = useState(true);
 
   const handleSubmitDelete = (ID) => {
-    console.log("funcion", ID);
+    dispatch(removeServices({ id: ID }));
     alert("el servicio fue eliminado con exito");
-    let obj = { id: ID };
-    dispatch(removeServices(obj));
-    //window.location.reload();
+    window.location.reload();
   };
   const handleSubmitrestore = (ID) => {
-    console.log("funcion", ID);
+    dispatch(restoreServices({ id: ID }));
     alert("su cabaña fue Restaurada con exito");
-    let obj = { id: ID };
-    dispatch(restoreServices(obj));
-    //window.location.reload();
+    window.location.reload();
   };
   return (
     <div className={styles.container}>

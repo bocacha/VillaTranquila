@@ -98,9 +98,9 @@ const Cabañas = () => {
   const handleSubmit = (e) => {
     const { token } = logeduser;
     e.preventDefault();
-    alert("su cabaña fue creada con exito");
     dispatch(createCabains(cabain, { token }));
-    //window.location.reload(true);
+    alert("su cabaña fue creada con exito");
+    window.location.reload();
     
   };
 

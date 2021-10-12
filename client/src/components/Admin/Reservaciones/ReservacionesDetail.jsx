@@ -19,17 +19,13 @@ export default function ReservacionesDetail({
   const dispatch = useDispatch();
   const [mostrar, setMostrar] = useState(true);
   const handleSubmitDelete = (ID) => {
-    console.log("funcion", ID);
+    dispatch(removeReservations({ id: ID }));
     alert("su Reserva fue Eliminada con exito");
-    let obj = { id: ID };
-    dispatch(removeReservations(obj));
     window.location.reload();
   };
   const handleSubmitrestore = (ID) => {
-    console.log("funcion", ID);
-    alert("su cabaña fue Eliminada con exito");
-    let obj = { id: ID };
-    dispatch(restoreReservations(obj));
+    dispatch(restoreReservations({ id: ID }));
+    alert("su cabaña fue Restaurada con exito");
     window.location.reload();
   };
   return (

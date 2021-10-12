@@ -546,7 +546,7 @@ export function Logeduser() {
 export function removeCabains(id) {
   return async function (dispatch) {
 
-    var json = await axios.put("https://villatranquila.herokuapp.com/cabins/RemoveCabin", id);
+    var json = await axios.put("/cabins/RemoveCabin", id);
     return (dispatch({
       type: REMOVE_CABAINS,
       payload: id
@@ -628,7 +628,7 @@ export function removeUsers(id) {
 export function restoreCabains(id){
   return async function (dispatch) {
    
-      var json = await axios.put("https://villatranquila.herokuapp.com/cabins/RestoreCabin", id);
+      var json = await axios.put("/cabins/RestoreCabin", id);
       return ( dispatch({
         type: REMOVE_CABAINS,
         payload: id

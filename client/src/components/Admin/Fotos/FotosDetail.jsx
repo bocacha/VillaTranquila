@@ -16,17 +16,13 @@ export default function FotosDetail({
   const [mostrar, setMostrar] = useState(true);
 
   const handleSubmitDelete = (ID) => {
-    console.log("funcion", ID);
+    dispatch(removePictures({ id: ID }));
     alert("su Foto fue Eliminada con exito");
-    let obj = { id: ID };
-    dispatch(removePictures(obj));
     window.location.reload();
   };
   const handleSubmitrestore = (ID) => {
-    console.log("funcion", ID);
-    alert("su cabaña fue Eliminada con exito");
-    let obj = { id: ID };
-    dispatch(restorePictures(obj));
+    dispatch(restorePictures({ id: ID }));
+    alert("su cabaña fue Restaurada con exito");
     window.location.reload();
   };
   return (

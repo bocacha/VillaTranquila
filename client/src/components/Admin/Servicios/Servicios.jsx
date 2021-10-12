@@ -59,7 +59,7 @@ export default function Servicios() {
       Description: "",
       Price: "",
     });
-    //window.location.reload(false);
+    window.location.reload();
   }
   function handleSubmitEdit(e, ID) {
     const { token } = logeduser;
@@ -70,7 +70,7 @@ export default function Servicios() {
       ...edit,
       id: ID,
     });
-    //window.location.reload();
+    window.location.reload();
   }
   function handlePrueba(e, ID) {
     const { token } = logeduser;
@@ -82,7 +82,7 @@ export default function Servicios() {
       id: ID,
     });
   }
-  //window.location.reload(false);
+  
   const ocultadas = () => {
     dispatch(readServicesocultados());
     setHabilitar(true);

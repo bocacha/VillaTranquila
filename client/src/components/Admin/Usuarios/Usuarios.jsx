@@ -142,6 +142,7 @@ const showtrue=()=>{
 }
   return (
     <div className={styles.container}>
+       <NavAdmin />
        {/* {!habilitar ?(
             <button onClick={ocultadas}>Mostrar ocultadas</button>
           ):(

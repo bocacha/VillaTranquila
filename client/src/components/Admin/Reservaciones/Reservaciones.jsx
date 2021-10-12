@@ -85,11 +85,6 @@ export default function Reservaciones() {
   }
   function handleSubmitEdit(e,ID) {
     e.preventDefault();
-    
-
-    
-
-
     setMostrar(true);
     dispatch(editReservation(edit, { token }));
     setEdit({...edit,

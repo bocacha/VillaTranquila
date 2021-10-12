@@ -21,8 +21,7 @@ export default function CabinsDetail({
   const dispatch = useDispatch();
   const [mostrar, setMostrar] = useState(true);
   const handleSubmitDelete = (ID)=>{
-   
-    dispatch(removeCabains({ id: ID }));
+   dispatch(removeCabains({ id: ID }));
     alert("su cabaña fue Eliminada con exito");
     window.location.reload();
     
@@ -30,8 +29,7 @@ export default function CabinsDetail({
 
   const handleSubmitrestore = (ID)=>{
     console.log('funcion', ID)
-    
-    dispatch(restoreCabains({id:ID}));
+     dispatch(restoreCabains({id:ID}));
     alert("su cabaña fue restaurada con exito");
     window.location.reload();
     
