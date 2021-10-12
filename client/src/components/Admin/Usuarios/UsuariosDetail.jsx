@@ -80,7 +80,14 @@ export default function UsuariosDetail({
           <div>
             <button
               onClick={(e) => {
-                handleSubmitEdit(e, ID);
+                handleSubmitEdit(e, ID,
+                  UserName,
+                  Admin,
+                  FirstName,
+                  LastName,
+                  Address,
+                  Phone,
+                  Email,);
                 setMostrar(false);
               }}
               className={styles.btnPlus}

@@ -75,7 +75,7 @@ export default function Servicios() {
       Description:Description,
       Price:Price,
     });
-    dispatch(editServices(edit, { token }));
+   // dispatch(editServices(edit, { token }));
     //window.location.reload();
   }
   function handlePrueba(e, ID) {
