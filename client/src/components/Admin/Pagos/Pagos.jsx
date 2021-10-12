@@ -118,9 +118,9 @@ export default function Pagos() {
   const mostrarFecha = selectedDate =>{
     console.log(selectedDate);
     const options = {year:'numeric', month:'numeric', day:'2-digit'}
-    setEdit({...edit,  Checkin: selectedDate.toLocaleDateString('es-ES', options)})
-    
+    setEdit({...edit,  Date: selectedDate.toLocaleDateString('es-ES', options)})
   }
+  
   return (
     <div className={styles.container}>
       <NavAdmin />
