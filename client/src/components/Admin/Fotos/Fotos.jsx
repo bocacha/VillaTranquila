@@ -63,7 +63,7 @@ export default function Fotos() {
       ...edit,
       id: ID,
       Description: Description,
-      Url: url
+      Url: Url
     })
     handledispatch()
   }
