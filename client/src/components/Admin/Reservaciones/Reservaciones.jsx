@@ -106,10 +106,28 @@ export default function Reservaciones() {
     //dispatch(editReservation(edit, { token }));
    
   }
+  const changeFechas=(e)=>{
+    if(e === null){
+      return
+    }
+    setSelectDateCI(e)
+    mostrarFecha(e);
+  }
+  const changeFechas2=async(e)=>{
+    if(e === null){
+      return
+    }
+    setSelectDateCO(e)
+    mostrarFecha2(e);
+  }
 
   const mostrarFecha = selectDateCI =>{
     const options = {weekday :'long', year:'yyyy', month:'MM', day:'dd'}
-    setInput({...input,  Checkin: selectDateCI.toLocaleDateString('es-ES', options)})
+    setEdit({...edit,  Checkin: selectDateCI.toLocaleDateString('es-ES', options)})
+  }
+  const mostrarFecha2 = selectDateCO =>{
+    const options = {year:'numeric', month:'numeric', day:'2-digit'}
+    setEdit({...edit,  Checkout: selectDateCO.toLocaleDateString('es-ES', options)})
   }
   function handlePrueba(e, ID) {
     e.preventDefault();
@@ -149,7 +167,7 @@ export default function Reservaciones() {
       </div>
       <div className={styles.container2}>
       <div className={styles.formsCont}>
-          {/* CREAR */}
+          {/* 
           <div className={styles.crearCont}>
             <div className={styles.title}>Crear una  reservación</div>
             <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
@@ -217,7 +235,7 @@ export default function Reservaciones() {
                 </button>
               </div>
             </form>
-          </div>
+          </div> */}
           {/* EDITAR */}
           {mostrar
          ? 
@@ -226,7 +244,7 @@ export default function Reservaciones() {
             <form >
               <DatePicker
               selected={selectDateCI}
-              onChange={date=> setSelectDateCI(date)}
+              onChange={(e)=>changeFechas(e)}
               dateFormat='dd/MM/yyyy'
               minDate={new Date()}
               required
@@ -234,7 +252,7 @@ export default function Reservaciones() {
               /> 
               <DatePicker
               selected={selectDateCO}
-              onChange={date=> setSelectDateCO(date)}
+              onChange={(e)=>changeFechas2(e)}
               dateFormat='dd/MM/yyyy'
               minDate={new Date()}
               required
