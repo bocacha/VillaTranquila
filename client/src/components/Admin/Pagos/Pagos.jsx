@@ -54,6 +54,8 @@ export default function Pagos() {
     });
   }
   function handleChangeEdit(e) {
+    console.log(e.target.name);
+    console.log(e.target.value);
     setEdit({
       ...edit,
       [e.target.name]: e.target.value,
@@ -72,7 +74,7 @@ export default function Pagos() {
       PaydAmount: "",
     });
 
-    window.location.reload();
+    //window.location.reload();
   }
   function handleSubmitEdit(e, ID,
     TotalAmount,
@@ -88,11 +90,13 @@ export default function Pagos() {
   function handlePrueba(e, ID) {
     const { token } = logeduser;
     e.preventDefault();
+    
     setMostrar(true);
-    setEdit({ ...edit, id: ID });
+    console.log(edit);
+    //setEdit({ ...edit, id: ID });
     dispatch(editPayments(edit, { token }));
 
-    window.location.reload();
+   // window.location.reload();
   }
   const ocultadas = () => {
     const { token } = logeduser;
@@ -112,6 +116,7 @@ export default function Pagos() {
     mostrarFecha(e);
   }
   const mostrarFecha = selectedDate =>{
+    console.log(selectedDate);
     const options = {year:'numeric', month:'numeric', day:'2-digit'}
     setEdit({...edit,  Checkin: selectedDate.toLocaleDateString('es-ES', options)})
     

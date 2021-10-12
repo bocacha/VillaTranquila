@@ -18,12 +18,12 @@ export default function PagosDetail({
   const handleSubmitDelete = (ID) => {
     dispatch(removePayments({ id: ID }));
     alert("su pago fue Eliminado con exito");
-    window.location.reload();
+    //window.location.reload();
   };
   const handleSubmitrestore = (ID) => {
     dispatch(restorePayments({ id: ID }));
     alert("su cabaña fue Restaurada con exito");
-    window.location.reload();
+   // window.location.reload();
   };
 
   return (

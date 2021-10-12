@@ -131,7 +131,7 @@ export default function Reservaciones() {
     dispatch(editReservation(edit, { token }));
     alert("Editado")
     //pruebadispatch()
-   // window.location.reload()
+    window.location.reload()
   }
  // const pruebadispatch=() => {
    // const { token } = logeduser;
