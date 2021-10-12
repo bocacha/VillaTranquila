@@ -56,7 +56,8 @@ export default function Fotos() {
     // window.location.reload();
     //
   }
-  function handleSubmitEdit(e, ID, Description,Url,) {
+  function handleSubmitEdit(e, Description,
+    Url,ID) {
     e.preventDefault();
     setMostrar(true);
     setEdit({

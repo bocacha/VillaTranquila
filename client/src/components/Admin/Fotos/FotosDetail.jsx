@@ -62,7 +62,7 @@ export default function FotosDetail({
         </div>
         {mostrar ? 
           <div>
-                  <button onClick={(e)=> {handleSubmitEdit(e,Description,
+                  <button onClick={(e)=> {handleSubmitEdit(e, Description,
   Url,ID);
                                       setMostrar(false);
                                       ;        } 
