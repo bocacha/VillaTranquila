@@ -37,7 +37,7 @@ export default function PagosReserva(ID) {
             <hr />
             <form action="https://villatranquila.herokuapp.com/checkout" method="POST">
               <input type="hidden" name="title" value='Villa Tranquila'/>
-              <input type="hidden" name="price" value={reservacion.CostoFinal}/>                                
+              <input type="hidden" name="price" value={costoFINAL}/>                                
               <input type="submit" value="Pagar" target="_blank" class="btn btn-primary btn-block"/>
             </form> 
           </div>

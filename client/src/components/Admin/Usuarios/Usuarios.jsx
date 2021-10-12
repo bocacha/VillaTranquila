@@ -115,7 +115,7 @@ export default function Usuarios() {
 
 
    // dispatch(editUsers(input));
-    setMostrar(true);
+   
     //alert("Usuario editado con éxito");
     setInput({
       ...input,
@@ -128,6 +128,7 @@ export default function Usuarios() {
       Phone:Phone,
       Email:Email,
     });
+    setMostrar(true);
     //dispatch(readUsers({ token }));
     //window.location.reload();
   }
@@ -135,6 +136,7 @@ export default function Usuarios() {
     // const { token } = logeduser;
      e.preventDefault();
      setMostrar(true);
+     console.log(input)
      dispatch(editUsers(input));
      alert("Usuario editado con éxito");
     //  setInput({
@@ -142,7 +144,7 @@ export default function Usuarios() {
     //    id: ID,
     //  });
      //dispatch(readUsers({ token }));
-     window.location.reload();
+     //window.location.reload();
    }
 const ocultadas= () => {
   const { token } = logeduser;
