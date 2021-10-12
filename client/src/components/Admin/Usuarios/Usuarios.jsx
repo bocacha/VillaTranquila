@@ -68,6 +68,7 @@ export default function Usuarios() {
   }, [dispatch, token]);
 
   function handleChange(e) {
+    console.log(e.target.value);
     setInput({
       ...input,
       [e.target.name]: e.target.value,
