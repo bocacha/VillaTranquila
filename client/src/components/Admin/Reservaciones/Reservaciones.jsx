@@ -114,7 +114,7 @@ export default function Reservaciones() {
   }
 
   const mostrarFecha = selectDateCI =>{
-    const options = {weekday :'long', year:'yyyy', month:'MM', day:'2-digit'}
+    const options = {year:'numeric', month:'numeric', day:'2-digit'}
     setEdit({...edit,  Checkin: selectDateCI.toLocaleDateString('es-ES', options)})
   }
   const mostrarFecha2 = selectDateCO =>{
@@ -238,18 +238,18 @@ export default function Reservaciones() {
             <div className={styles.title}> Editar reserva</div>
             <form >
               <DatePicker
-              selected={selectDateCI}
+              selected={edit.Checkin}
               onChange={(e)=>changeFechas(e)}
               dateFormat='dd/MM/yyyy'
-              minDate={new Date()}
+             // minDate={new Date()}
               required
               //isClearable
               /> 
               <DatePicker
-              selected={selectDateCO}
+              selected={edit.Checkout}
               onChange={(e)=>changeFechas2(e)}
               dateFormat='dd/MM/yyyy'
-              minDate={new Date()}
+             // minDate={new Date()}
               required
               //isClearable
               />

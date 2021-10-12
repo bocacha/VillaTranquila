@@ -201,7 +201,7 @@ export default function Pagos() {
                 selected={edit.Date}
                 onChange={(e) => changeFechas(e)}
                 dateFormat="dd/MM/yyyy"
-                minDate={new Date()}
+               // minDate={new Date()}
                 className={styles.formInputs}
                 required
                 //isClearable
