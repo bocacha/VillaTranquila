@@ -21,12 +21,12 @@ export default function ReservacionesDetail({
   const handleSubmitDelete = (ID) => {
     dispatch(removeReservations({ id: ID }));
     alert("su Reserva fue Eliminada con exito");
-    window.location.reload();
+   // window.location.reload();
   };
   const handleSubmitrestore = (ID) => {
     dispatch(restoreReservations({ id: ID }));
     alert("su cabaña fue Restaurada con exito");
-    window.location.reload();
+    //window.location.reload();
   };
   return (
     <div className={styles.container}>

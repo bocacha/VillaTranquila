@@ -104,6 +104,18 @@ export default function Pagos() {
     dispatch(readPayment({ token }));
     setHabilitar(false);
   };
+  const changeFechas=(e)=>{
+    if(e === null){
+      return
+    }
+    setSelectDateCI(e)
+    mostrarFecha(e);
+  }
+  const mostrarFecha = selectDateCI =>{
+    const options = {year:'numeric', month:'numeric', day:'2-digit'}
+    setEdit({...input,  Checkin: selectDateCI.toLocaleDateString('es-ES', options)})
+    
+  }
   return (
     <div className={styles.container}>
       <NavAdmin />
@@ -185,15 +197,15 @@ export default function Pagos() {
             <div className={styles.editarCont}>
               <div className={styles.title}> Editar un nuevo pago</div>
               <form className={styles.form}>
-                <input
-                  type="text"
-                  value={edit.Date}
-                  name="Date"
-                  onChange={(e) => handleChangeEdit(e)}
-                  placeholder="Fecha"
-                  className={styles.formInputs}
-                  required
-                />
+              <DatePicker
+                selected={edit.Date}
+                onChange={(e) => changeFechas(e)}
+                dateFormat="dd/MM/yyyy"
+                minDate={new Date()}
+                className={styles.formInputs}
+                required
+                //isClearable
+              />
                 <input
                   type="text"
                   value={edit.idClient}

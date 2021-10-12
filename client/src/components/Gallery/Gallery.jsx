@@ -4,12 +4,13 @@ import styles from "./Gallery.module.css";
 import { Link } from 'react-router-dom';
 import Modall from './Modal';
 import Navbar from "../Navbar/Navbar";
+import axios from 'axios';
 
 export default function Gallery() {
     const [imageIds, setImageIds] = useState();
     const loadImages = async () => {
         try {
-            const res = await fetch('/pictures');
+            const res = await axios.get('/pictures');
             const data = await res.json();
 
             setImageIds(data);

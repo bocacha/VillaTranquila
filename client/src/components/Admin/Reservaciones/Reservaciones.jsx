@@ -71,17 +71,8 @@ export default function Reservaciones() {
     e.preventDefault();
     dispatch(createReservation(input));
     alert("Reserva creada con éxito");
-    setInput({
-      id: "",
-      Checkin: "",
-      Checkout: "",
-      UserId: "",
-      Paymentsid: "",
-      Cabinid: "",
-      ExtraServices: "",
-      CostoFinal: "",
-    });
-    window.location.reload();
+  ;
+    //window.location.reload();
   }
   function handleSubmitEdit(e,ID,
     Checkin,
@@ -92,6 +83,7 @@ export default function Reservaciones() {
     ExtraServices,
     CostoFinal) {
     e.preventDefault();
+    console.log(edit);
     setMostrar(true);
     setEdit({...edit,
       id:ID,
@@ -131,6 +123,7 @@ export default function Reservaciones() {
   }
   function handlePrueba(e, ID) {
     e.preventDefault();
+    console.log(edit)
    //  setEdit({...edit,
    //   id:ID  
   //})
@@ -138,7 +131,7 @@ export default function Reservaciones() {
     dispatch(editReservation(edit, { token }));
     alert("Editado")
     //pruebadispatch()
-    window.location.reload()
+   // window.location.reload()
   }
  // const pruebadispatch=() => {
    // const { token } = logeduser;
