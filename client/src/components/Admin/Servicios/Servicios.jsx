@@ -139,7 +139,7 @@ export default function Servicios() {
                 type="number"
                 value={input.Price}
                 name="Price"
-                min="1000"
+                min="500"
                 max="20000"
                 onChange={(e) => handleChange(e)}
                 placeholder="Precio"
