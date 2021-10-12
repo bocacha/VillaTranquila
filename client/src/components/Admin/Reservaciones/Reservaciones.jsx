@@ -103,7 +103,7 @@ export default function Reservaciones() {
       ExtraServices: ExtraServices,
       CostoFinal:CostoFinal
     })
-    dispatch(editReservation(edit, { token }));
+    //dispatch(editReservation(edit, { token }));
    
   }
 
@@ -113,18 +113,19 @@ export default function Reservaciones() {
   }
   function handlePrueba(e, ID) {
     e.preventDefault();
-     setEdit({...edit,
-      id:ID  
-    })
+   //  setEdit({...edit,
+   //   id:ID  
+  //})
     setMostrar(true);
-    pruebadispatch()
-  }
-  const pruebadispatch=() => {
-    const { token } = logeduser;
-    console.log(edit)
     dispatch(editReservation(edit, { token }));
-    window.location.reload()
+    //pruebadispatch()
   }
+ // const pruebadispatch=() => {
+   // const { token } = logeduser;
+   // console.log(edit)
+   // 
+   // window.location.reload()
+  //}
   const ocultadas= () => {
    dispatch(readReservationocultados())
    setHabilitar(true)

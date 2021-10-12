@@ -87,6 +87,8 @@ export default function Servicios() {
       ...edit,
       id: ID,
     });
+    alert("Editado")
+    window.location.reload()
   }
   
   const ocultadas = () => {
