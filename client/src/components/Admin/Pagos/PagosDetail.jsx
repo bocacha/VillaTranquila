@@ -16,18 +16,14 @@ export default function PagosDetail({
   const dispatch = useDispatch();
   const [mostrar, setMostrar] = useState(true);
   const handleSubmitDelete = (ID) => {
-    console.log("funcion", ID);
+    dispatch(removePayments({ id: ID }));
     alert("su pago fue Eliminado con exito");
-    let obj = { id: ID };
-    dispatch(removePayments(obj));
-    window.location.reload();
+    //window.location.reload();
   };
   const handleSubmitrestore = (ID) => {
-    console.log("funcion", ID);
-    alert("su cabaña fue Eliminada con exito");
-    let obj = { id: ID };
-    dispatch(restorePayments(obj));
-    window.location.reload();
+    dispatch(restorePayments({ id: ID }));
+    alert("su cabaña fue Restaurada con exito");
+   // window.location.reload();
   };
 
   return (
@@ -72,7 +68,11 @@ export default function PagosDetail({
           <div>
             <button
               onClick={(e) => {
-                handleSubmitEdit(e, ID);
+                handleSubmitEdit(e, ID,
+                  TotalAmount,
+                  PaydAmount,
+                  Date,
+                  idClient);
                 setMostrar(false);
               }}
               className={styles.btnPlus}
