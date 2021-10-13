@@ -49,9 +49,9 @@ export default function Usuarios() {
   const [errors, setErrors] = useState({});
 
   const dispatch = useDispatch();
-  useEffect(() => {
+ /*  useEffect(() => {
     dispatch(Logeduser());
-  }, [dispatch]);
+  }, [dispatch]); */
   const allUsers = useSelector((state) => state.usuarios);
   const [input, setInput] = useState({
     UserName: "",
@@ -83,11 +83,12 @@ export default function Usuarios() {
   }
 
     dispatch(createUsers(input));
-    // window.location.href='/login'
     alert("Usuario creado con éxito");
+    //window.location.href='/login'
+    
   }
   const registroexitoso = async () => {
-    const newuser = await axios.get("http://localhost:3001/users/");
+    const newuser = await axios.get("/users/");
     const existe = newuser.data.filter((e) => e.UserName === uusername);
     console.log(existe);
     if (existe) {
@@ -113,6 +114,8 @@ export default function Usuarios() {
               name="UserName"
               onChange={(e) => handleChange(e)}
               placeholder="Nombre de Usuario"
+              maxLength="20"
+              minLength="5"
               className={styles.formInputs}
               required
             />{errors.UserName && (<p>{errors.UserName}</p>)}  
@@ -133,6 +136,8 @@ export default function Usuarios() {
               name="FirstName"
               onChange={(e) => handleChange(e)}
               placeholder="Nombre"
+              maxLength="20"
+              minLength="4"
               className={styles.formInputs}
               required
             />{errors.FirstName && (<p>{errors.FirstName}</p>)} 
@@ -143,6 +148,8 @@ export default function Usuarios() {
               name="LastName"
               onChange={(e) => handleChange(e)}
               placeholder="Apellido"
+              maxLength="20"
+              minLength="4"
               className={styles.formInputs}
               required
             />{errors.LastName && (<p>{errors.LastName}</p>)} 

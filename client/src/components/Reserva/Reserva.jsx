@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getCabins, filterCabins } from "../../actions";
+import { getCabins, filterCabins,readWeather } from "../../actions";
 import Paginado from './Paginado/Paginado';
 import Navbar from "../Navbar/Navbar";
 import Cabaña from "./Cabaña/Cabaña";
@@ -46,6 +46,11 @@ export default function Reserva() {
     useEffect(() => {
         dispatch(Logeduser())
     }, [dispatch]);
+
+    useEffect(()=>{
+        dispatch (readWeather());
+    });
+
     const allCabins = useSelector(state => state.cabins);
     const [errors, setErrors] = useState({})
 
