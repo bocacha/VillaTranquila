@@ -12,6 +12,9 @@ const getAllApi = async() =>{
         return {
             min_temp: e.day.mintemp_c,
             max_temp: e.day.maxtemp_c,
+            wind: e.day.maxwind_kph,
+            chance_rain: e.day.daily_chance_of_rain,
+            chance_snow: e.day.daily_chance_of_snow,
             icon: e.day.condition.icon
             }
     })

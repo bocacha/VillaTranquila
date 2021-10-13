@@ -85,9 +85,11 @@ export default function Pagos() {
     setMostrar(true);
     setEdit({ ...edit, id: ID,TotalAmount:TotalAmount,PaydAmount:PaydAmount,Date:Date});
     //dispatch(editPayments(edit, { token }));
+    setMostrar(true);
   }
 
   function handlePrueba(e, ID) {
+    console.log(edit)
     const { token } = logeduser;
     e.preventDefault();
     
@@ -142,8 +144,8 @@ export default function Pagos() {
             <div className={styles.title}>Crear un pago</div>
             <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
               <DatePicker
-                selected={selectedDate}
-                onChange={(date) => setSelectedDate(date)}
+                selected={input.Date}
+                onChange={(date) => setInput({...input, Date:date})}
                 dateFormat="dd/MM/yyyy"
                 minDate={new Date()}
                 className={styles.formInputs}
