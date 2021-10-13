@@ -12,6 +12,7 @@ const sendEmail = require('./SendEmail')
 const showGallery = require('./ShowGallery')
 const sendNotification= require('./SendNotification')
 const MercadoPago= require('./MercadoPago')
+const weather = require('./Weather')
 
 const router = Router();
 router.use("/cabins" , cabinsrouter)
@@ -26,10 +27,9 @@ router.use("/login", loginrouter)
 router.use("/showImages", showGallery)
 router.use("/sendNotification", sendNotification)
 router.use("/checkout", MercadoPago )
-
+router.use("/weather", weather)
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-
 
 module.exports = router;

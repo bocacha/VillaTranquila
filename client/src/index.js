@@ -8,9 +8,8 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'; // hay que envolver todo el index (<React.StrictMode> y todo lo de adentro) en un componente Provider para que ande redux.
 import { store } from './store';
 
-
-// import dotenv from "dotenv";
-// dotenv.config();
+ import dotenv from "dotenv";
+ dotenv.config();
 
  axios.defaults.baseURL = process.env.REACT_APP_API || "http://localhost:3001";
 
