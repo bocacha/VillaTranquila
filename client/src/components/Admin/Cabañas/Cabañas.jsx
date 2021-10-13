@@ -85,7 +85,6 @@ const Cabañas = () => {
       [e.target.name]: e.target.value,
     });
   }
-  console.log("handle", edit);
 
   // const handleCheckBox = (e) => {
   //   setCabain({
@@ -104,9 +103,8 @@ const Cabañas = () => {
     e.preventDefault();
     dispatch(createCabains(cabain, { token }));
     alert("su cabaña fue creada con exito");
-   // window.location.reload();
-   window.location.reload(true)
-   //setRende(`ordenando ${e.target.value}`)
+    window.location.reload();
+    
   };
 
   const handleeditSubmit = (e, ID, Number,
@@ -132,7 +130,7 @@ const Cabañas = () => {
     e.preventDefault();
     setMostrar(true);
     const { token } = logeduser;
-    dispatch(editCabains(edit, { token }));
+    //dispatch(editCabains(edit, { token }));
   };
   function handleSelect(e) {
     setCabain({
@@ -163,7 +161,7 @@ const Cabañas = () => {
   const pruebadispatch = () => {
     const { token } = logeduser;
     dispatch(editCabains(edit, { token }));
-    // window.location.reload();
+   
   };
   const ocultadas = () => {
     dispatch(readCabainsocultados());
@@ -557,6 +555,7 @@ const Cabañas = () => {
                   handlePrueba={handlePrueba}
                   handleeditSubmit={handleeditSubmit}
                   restaurar={habilitar}
+                  
                 />
               </div>
             );

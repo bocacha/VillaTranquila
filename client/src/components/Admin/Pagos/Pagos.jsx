@@ -54,7 +54,8 @@ export default function Pagos() {
     });
   }
   function handleChangeEdit(e) {
-    console.log(e.target.name, e.target.value)
+    console.log(e.target.name);
+    console.log(e.target.value);
     setEdit({
       ...edit,
       [e.target.name]: e.target.value,
@@ -73,20 +74,16 @@ export default function Pagos() {
       PaydAmount: "",
     });
 
-    window.location.reload();
+    //window.location.reload();
   }
   function handleSubmitEdit(e, ID,
     TotalAmount,
     PaydAmount,
     Date,
-    idClient,) {
+    idClient) {
     e.preventDefault();
-    
-    setEdit({ ...edit, id:  ID,
-      TotalAmount:TotalAmount,
-      PaydAmount: PaydAmount,
-      Date:Date,
-      idClient: idClient, });
+    setMostrar(true);
+    setEdit({ ...edit, id: ID,TotalAmount:TotalAmount,PaydAmount:PaydAmount,Date:Date});
     //dispatch(editPayments(edit, { token }));
     setMostrar(true);
   }
@@ -95,9 +92,13 @@ export default function Pagos() {
     console.log(edit)
     const { token } = logeduser;
     e.preventDefault();
+    
+    setMostrar(true);
+    console.log(edit);
+    //setEdit({ ...edit, id: ID });
     dispatch(editPayments(edit, { token }));
-    alert("editado")
-    window.location.reload();
+
+   // window.location.reload();
   }
   const ocultadas = () => {
     const { token } = logeduser;
@@ -109,6 +110,19 @@ export default function Pagos() {
     dispatch(readPayment({ token }));
     setHabilitar(false);
   };
+  const changeFechas=(e)=>{
+    if(e === null){
+      return
+    }
+    setSelectedDate(e)
+    mostrarFecha(e);
+  }
+  const mostrarFecha = selectedDate =>{
+    console.log(selectedDate);
+    const options = {year:'numeric', month:'numeric', day:'2-digit'}
+    setEdit({...edit,  Date: selectedDate.toLocaleDateString('es-ES', options)})
+  }
+  
   return (
     <div className={styles.container}>
       <NavAdmin />
@@ -126,7 +140,7 @@ export default function Pagos() {
       <div className={styles.container2}>
         <div className={styles.formsCont}>
           {/* CREAR */}
-          <div className={styles.crearCont}>
+          {/* <div className={styles.crearCont}>
             <div className={styles.title}>Crear un pago</div>
             <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
               <DatePicker
@@ -140,7 +154,7 @@ export default function Pagos() {
               />
 
                
-          {/* <input
+          <input
             type="date"
             value={input.Date}
             minDate= {new Date()}
@@ -149,7 +163,7 @@ export default function Pagos() {
             placeholder="Date"
             className={styles.Date}
             required
-          /> */}
+          />
               <input
                 type="text"
                 value={input.idClient}
@@ -184,21 +198,21 @@ export default function Pagos() {
                 </button>
               </div>
             </form>
-          </div>
+          </div> */}
           {/* EDITAR */}
           {mostrar ? (
             <div className={styles.editarCont}>
               <div className={styles.title}> Editar un nuevo pago</div>
               <form className={styles.form}>
-                <input
-                  type="text"
-                  value={edit.Date}
-                  name="Date"
-                  onChange={(e) => handleChangeEdit(e)}
-                  placeholder="Fecha"
-                  className={styles.formInputs}
-                  required
-                />
+              <DatePicker
+                selected={selectedDate}
+                onChange={(e) => changeFechas(e)}
+                dateFormat="dd/MM/yyyy"
+               // minDate={new Date()}
+                className={styles.formInputs}
+                required
+                //isClearable
+              />
                 <input
                   type="text"
                   value={edit.idClient}

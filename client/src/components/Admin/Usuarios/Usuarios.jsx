@@ -12,7 +12,7 @@ function validation(input){
   var num = "0123456789";
 
   let errors={}
-  
+
 
   if (!/[0-9]/.test(input.UserName)) {
     errors.UserName= "Debe contener un número";
@@ -68,6 +68,7 @@ export default function Usuarios() {
   }, [dispatch, token]);
 
   function handleChange(e) {
+    console.log(e.target.value);
     setInput({
       ...input,
       [e.target.name]: e.target.value,
@@ -96,7 +97,14 @@ export default function Usuarios() {
     });
   }
 
-  function handleSubmitEdit(e, ID) {
+  function handleSubmitEdit(e, ID,
+    UserName,
+    Admin,
+    FirstName,
+    LastName,
+    Address,
+    Phone,
+    Email,) {
    // const { token } = logeduser;
     e.preventDefault();
 
@@ -107,28 +115,37 @@ export default function Usuarios() {
 
 
 
-    dispatch(editUsers(input));
-    setMostrar(true);
+   // dispatch(editUsers(input));
+   
     //alert("Usuario editado con éxito");
     setInput({
       ...input,
       id: ID,
+      UserName:UserName,
+      Admin: Admin,
+      FirstName:FirstName,
+      LastName: LastName,
+      Address: Address,
+      Phone:Phone,
+      Email:Email,
     });
+    setMostrar(true);
     //dispatch(readUsers({ token }));
     //window.location.reload();
   }
   function handlePrueba(e, ID) {
     // const { token } = logeduser;
      e.preventDefault();
-     dispatch(editUsers(input));
      setMostrar(true);
-     //alert("Usuario editado con éxito");
-     setInput({
-       ...input,
-       id: ID,
-     });
+     console.log(input)
+     dispatch(editUsers(input));
+     alert("Usuario editado con éxito");
+    //  setInput({
+    //    ...input,
+    //    id: ID,
+    //  });
      //dispatch(readUsers({ token }));
-    // window.location.reload();
+     window.location.reload();
    }
 const ocultadas= () => {
   const { token } = logeduser;
@@ -142,18 +159,19 @@ const showtrue=()=>{
 }
   return (
     <div className={styles.container}>
+       <NavAdmin />
        {/* {!habilitar ?(
             <button onClick={ocultadas}>Mostrar ocultadas</button>
           ):(
             <button onClick={showtrue}>Mostrar habilitadas</button>
           )
           } */}
-      {/* CREAR 
+      {/* CREAR
       <div>
         Crear un nuevo usuario
         <form onSubmit={(e) => handleSubmit(e)}>
        */}
-     
+
       <div className={styles.btnsContainer}>
         {!habilitar ?(
             <button onClick={ocultadas} className={styles.btnSup}>Mostrar ocultadas</button>
@@ -165,7 +183,7 @@ const showtrue=()=>{
       <div className={styles.container2}>
       <div className={styles.formsCont}>
         {/* editar */}
-        {mostrar ? 
+        {mostrar ?
             <div className={styles.crearCont}>
             <div className={styles.title}> Editar un nuevo usuario</div>
             <form  id='form'  className={styles.form}>
@@ -177,7 +195,7 @@ const showtrue=()=>{
                 placeholder="Nombre de usuario"
                 className={styles.formInputs}
                 required
-              />{errors.UserName && (<p>{errors.UserName}</p>)}  
+              />{errors.UserName && (<p>{errors.UserName}</p>)}
 
               <input
                 type="text"
@@ -189,7 +207,7 @@ const showtrue=()=>{
                 title='Debe contener mayusculas, minusculas, numeros'
                 //pattern='^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$'
                 required
-              />{errors.UserPassword && (<p>{errors.UserPassword}</p>)} 
+              />{errors.UserPassword && (<p>{errors.UserPassword}</p>)}
 
               <input
                 type="text"
@@ -199,7 +217,7 @@ const showtrue=()=>{
                 placeholder="Nombre"
                 className={styles.formInputs}
                 required
-              />{errors.FirstName && (<p>{errors.FirstName}</p>)} 
+              />{errors.FirstName && (<p>{errors.FirstName}</p>)}
 
               <input
                 type="text"
@@ -209,7 +227,7 @@ const showtrue=()=>{
                 placeholder="Apellido"
                 className={styles.formInputs}
                 required
-              />{errors.LastName && (<p>{errors.LastName}</p>)} 
+              />{errors.LastName && (<p>{errors.LastName}</p>)}
 
               <input
                 type="text"
@@ -229,10 +247,10 @@ const showtrue=()=>{
                 onChange={(e) => handleChange(e)}
                 placeholder="Télefono"
                 className={styles.formInputs}
-                maxLength="17" 
-                minLength="10" 
-                 pattern="[+]{2}[0-9]{10-14}" 
-                placeholder="+54 9 11 12345678" 
+                maxLength="17"
+                minLength="10"
+                 pattern="[+]{2}[0-9]{10-14}"
+                placeholder="+54 9 11 12345678"
                 required
               />
               <input
@@ -243,7 +261,7 @@ const showtrue=()=>{
                 placeholder="Email"
                 className={styles.formInputs}
                 required
-              />{errors.Email && (<p>{errors.Email}</p>)}  
+              />{errors.Email && (<p>{errors.Email}</p>)}
 
               <select
                 onChange={(e) => handleSelectAdmin(e)}
@@ -282,15 +300,15 @@ const showtrue=()=>{
               </div> */}
             </form>
           </div>
-        : 
-            null       
+        :
+            null
             }
-        
-        
+
+
       </div>
       {/* VER */}
       <div>
-        {allUsers?.map((el)=>(           
+        {allUsers?.map((el)=>(
             <div className={styles.detalles} key={el.ID}>
               <UsuariosDetail
                 ID={el.ID}
