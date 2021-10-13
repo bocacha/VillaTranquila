@@ -36,7 +36,7 @@
   margin: 10px 50px;
 }
 
-.login .container .containerForm form input {
+input {
   padding: 7px 0px;
   text-align: center;
   height: 42px;
@@ -49,7 +49,7 @@
   transition: all 0.25s ease;
   margin: 10px 5px 10px 5px;
 }
-.login .container .containerForm form input:hover{
+input:hover{
   background-color: #8bafbf ;
   color:  #1c2531;
   border-color: #8bafbf;
@@ -104,9 +104,36 @@
   color: #1c2531 ;
   border-color: #8bafbf;
 }
-.login .container .containerForm .btn1 .icon{
-  margin-top: -4px;
+.icon{
+  margin-top: 10px;
   margin-left: 5px;
+}
+.recuperar{
+  margin: 0 20px;
+}
+#mail{
+  width: 300px;
+  margin-left: 10px;
+}
+#recuperar{
+  border-radius: 8px;
+  background-color: #355978 ;
+  border: solid #355978;
+  color: #fff;
+  text-align: center;
+  /* font-size: large; */
+  transition: all 0.5s ease;
+  cursor: pointer;
+  padding: 0 20px;
+  display: inline-flex;
+  height: 42px;
+  line-height: 35px;
+  margin: 20px 5px 20px 30px;
+}
+#recuperar:hover{
+  background-color: #8bafbf ;
+  color: #1c2531 ;
+  border-color: #8bafbf;
 }
 
 /* 

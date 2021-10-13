@@ -133,7 +133,7 @@ export default function rootReducer(state = initialState, action) {
       let barbecue = action.payload.barbecue;
       cabinsFiltered = barbecue === '' || barbecue === 'false' ?
         cabinsFiltered :
-        cabinsFiltered.filter(el => el.Barbecue);
+        cabinsFiltered.filter(el => el.Parrilla);
       // Filter by parking:
       let parking = action.payload.parking;
       cabinsFiltered = parking === '' || parking === 'false' ?

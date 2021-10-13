@@ -48,27 +48,23 @@ export default function Cabaña({
           className={styles.img}
         />
         <div className={styles.info}>
-          <span>Capacidad: {capacity}</span>
-          <div>Fechas NO Disponibles: {Available.map((e)=>{
-          return(  
-              <ul>
-                <li>Del {e[0]} Al {e[e.length -1]}</li>
-              </ul>)
-              
-          })}</div>
-          <span>Precio por noche: {price}</span>
+          <span>Capacidad: {capacity} personas</span>
+          {Available.length !== 0 &&
+            <div>Fechas ocupadas: {Available.map((e) => {
+              return (
+                <ul>
+                  <li>Del {e[0]} Al {e[e.length - 1]}</li>
+                </ul>)
+
+            })}</div>
+          }
+          <span>Precio por noche: $ {price}</span>
           <span> Descripción: {description}</span>
-          {/* <span> Servicios disponibles: 
-                {coffe && <GiCoffeeCup/>}
-                {microwaves && <GiChickenOven/>}
-                {heat && <GiFireplace/>}
-                {barbecue && <GiCampCookingPot/>}
-                {wifi && <FaWifi/>}
-                {cleaning && <GiVacuumCleaner/>}
-                {stove && <GiCookingPot/>}
-                {parking && <FaCarAlt/>}
-                {refrigerator && <RiFridgeLine/>}
-            </span> */}
+          <div className={styles.servicios}>
+            {parrilla && <p><GiCampCookingPot /></p>}
+            {wifi && <p><FaWifi /></p>}
+            {parking && <p><FaCarAlt /></p>}
+          </div>
         </div>
         <div className={styles.containerBtn}>
           <Link to="/reserva/reservar">

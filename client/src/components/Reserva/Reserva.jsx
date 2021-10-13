@@ -56,10 +56,11 @@ export default function Reserva() {
 
     // Paginado---------------------------------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
-    const [cabinsPerPage, /*setCabinsPerPage*/] = useState(6);
+    const [cabinsPerPage, /*setCabinsPerPage*/] = useState(5);
     const indexOfLastCabin = currentPage * cabinsPerPage;
     const indexOfFirstCabin = indexOfLastCabin - cabinsPerPage;
-    const currentCabins = allCabins.slice(indexOfFirstCabin, indexOfLastCabin);
+    let currentCabins = allCabins.slice(indexOfFirstCabin, indexOfLastCabin);
+    let orderedCabins = currentCabins?.sort((a, b) => parseInt(a.number) < parseInt(b.number) ? -1 : 1);
 
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -242,7 +243,7 @@ export default function Reserva() {
             <div className={styles.cabinPage}>
                 <div className={styles.cabinCont}>
                     {
-                        currentCabins?.map(el => {
+                        orderedCabins?.map(el => {
                             return (
                                 <div key={el.number} >
                                     <Cabaña
