@@ -91,7 +91,7 @@ export function createReservation(payload) {
   return async function (dispatch) {
     const response = await axios.post("/reservations/NewReservation", payload);
     const reserva = response.data
-    const users= await axios.get("/users/")
+    const users= await axios.get("/users")
     const user = users.data.filter(e=> e.ID === payload.id)
     let reservas = []
     if(user[0].ReservationsHistory){
@@ -138,8 +138,8 @@ export function createServices(payload, { token }) {
   };
 }
 
-export function createUsers(payload) {
-    return async function (dispatch) {
+export function createUsers(payload) { 
+  return async function (dispatch) {
    try{ const response = await axios.post("/users/Singup", payload);
     return response;
     }catch (err) {

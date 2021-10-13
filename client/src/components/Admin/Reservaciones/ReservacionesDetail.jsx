@@ -55,7 +55,7 @@ export default function ReservacionesDetail({
               onClick={() => handleSubmitDelete(ID)}
               className={styles.btn}
             >
-              Eliminar
+              Ocultar
             </button>
           ) : (
             <button

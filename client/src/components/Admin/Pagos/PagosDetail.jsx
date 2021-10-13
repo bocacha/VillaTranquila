@@ -53,7 +53,7 @@ export default function PagosDetail({
               onClick={() => handleSubmitDelete(ID)}
               className={styles.btn}
             >
-              Eliminar
+              Ocultar
             </button>
           ) : (
             <button

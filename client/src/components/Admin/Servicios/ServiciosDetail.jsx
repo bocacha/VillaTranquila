@@ -46,7 +46,7 @@ export default function ServiciosDetail({
               onClick={() => handleSubmitDelete(ID)}
               className={styles.btn}
             >
-              Eliminar
+              Ocultar
             </button>
           ) : (
             <button
