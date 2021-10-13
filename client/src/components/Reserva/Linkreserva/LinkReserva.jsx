@@ -283,7 +283,7 @@ alert("Reserva creada")
         <p className={styles.p}><strong>Parking:</strong>  {seleccionada.Parking?(<p>si</p>):(<span>no</span>)}</p>
               </div>
               <div className={styles.p}>Servicios Adicionales:</div>
-              <button onClick={checkboxselected}>Seleccionar Servicios</button>
+              
               <div>
                 {servicios.map((el) => (
                   <div className={styles.servicios} key={el.ID}>
@@ -300,6 +300,7 @@ alert("Reserva creada")
                   </div>
                 ))}
               </div>
+              <button onClick={checkboxselected}>Seleccionar Servicios</button>
             </div>
             <div className={styles.btns}>
               <Link to="/reserva/pago">

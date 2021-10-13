@@ -33,8 +33,10 @@ export default function Caja(){
         <>
                
         <div className={styles.general}>             
-                <Navbar />                                 
+                <Navbar /> 
+                <div className={styles.moveme}></div>                             
              <div className={styles.container}>
+             
                 <label>Comprobante</label>
                 <label>Nombre</label>
                 <label>Fecha</label>

@@ -52,9 +52,9 @@ export default function Usuarios() {
   const [errors, setErrors] = useState({});
 
   const dispatch = useDispatch();
-  useEffect(() => {
+ /*  useEffect(() => {
     dispatch(Logeduser());
-  }, [dispatch]);
+  }, [dispatch]); */
   const allUsers = useSelector((state) => state.usuarios);
   const [input, setInput] = useState({
     UserName: "",
@@ -86,11 +86,12 @@ export default function Usuarios() {
     }
 
     dispatch(createUsers(input));
-    // window.location.href='/login'
     alert("Usuario creado con éxito");
+    //window.location.href='/login'
+    
   }
   const registroexitoso = async () => {
-    const newuser = await axios.get("http://localhost:3001/users/");
+    const newuser = await axios.get("/users/");
     const existe = newuser.data.filter((e) => e.UserName === uusername);
     console.log(existe);
     if (existe) {

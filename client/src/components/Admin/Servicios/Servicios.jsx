@@ -59,17 +59,23 @@ export default function Servicios() {
       Description: "",
       Price: "",
     });
-    window.location.reload();
+    //window.location.reload();
   }
-  function handleSubmitEdit(e, ID) {
+  function handleSubmitEdit(e, ID,
+    Name,
+    Description,
+    Price,) {
     const { token } = logeduser;
     e.preventDefault();
-    dispatch(editServices(edit, { token }));
     setMostrar(true);
     setEdit({
       ...edit,
       id: ID,
+      Name: Name,
+      Description:Description,
+      Price:Price,
     });
+   // dispatch(editServices(edit, { token }));
     //window.location.reload();
   }
   function handlePrueba(e, ID) {
@@ -81,8 +87,10 @@ export default function Servicios() {
       ...edit,
       id: ID,
     });
+    alert("Editado")
+    window.location.reload()
   }
-  //window.location.reload();
+  
   const ocultadas = () => {
     dispatch(readServicesocultados());
     setHabilitar(true);
@@ -131,7 +139,7 @@ export default function Servicios() {
                 type="number"
                 value={input.Price}
                 name="Price"
-                min="1000"
+                min="500"
                 max="20000"
                 onChange={(e) => handleChange(e)}
                 placeholder="Precio"
