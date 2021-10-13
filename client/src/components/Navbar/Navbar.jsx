@@ -127,7 +127,7 @@ export default function Navbar() {
             </div>
           ) : (
             <div>
-              <Link to={`/${user.user}`}>
+              <Link to={`/Profile/${user.user}`}>
                 <li>
                   <button className={styles.signlog} >
                     <strong className={styles.list} >
