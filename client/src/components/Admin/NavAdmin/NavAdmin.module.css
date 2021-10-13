@@ -4,24 +4,25 @@
   width: 100%;
   z-index: 1;
   font-size: large;
+  margin-top:63px;
   margin-bottom: 4px;
 }
 
 .ul {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    list-style: none;
-    padding: 10px;
-    padding-right: 290px;
-    padding-left: 290px;
-    margin-top: 4px;
-    margin-bottom: 4px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  list-style: none;
+  padding: 10px;
+  padding-right: 290px;
+  padding-left: 290px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 .link {
-    text-decoration: none;
-    padding:10px;
+  text-decoration: none;
+  padding: 10px;
   height: 43px;
   border: transparent;
   background-color: transparent;
@@ -31,6 +32,6 @@
   transition: all 0.2s ease;
 }
 .link:hover {
-    background-color: #141f2ba2;
-    color: #fff;
+  background-color: #141f2ba2;
+  color: #fff;
 }

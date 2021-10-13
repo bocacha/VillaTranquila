@@ -7,6 +7,7 @@ import Upload from "../../Reserva/Upload/Upload";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router";
 import NavAdmin from '../NavAdmin/NavAdmin';
+import Navbar from "../../Navbar/Navbar";
 
 export default function Fotos() {
   const dispatch = useDispatch();
@@ -89,7 +90,12 @@ export default function Fotos() {
   
   return (
     <div className={styles.container}>
-      <NavAdmin />
+      <div className={styles.navs2}>
+        <div className={styles.navs}>
+          <Navbar />
+          <NavAdmin />
+        </div>
+      </div>
       <div className={styles.btnsContainer}>
         {!habilitar ? (
           <button onClick={ocultadas} className={styles.btnSup}>Mostrar ocultadas</button>

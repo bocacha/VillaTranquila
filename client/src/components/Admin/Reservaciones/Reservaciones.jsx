@@ -14,6 +14,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import es from 'date-fns/locale/es';
 import {Link} from "react-router-dom";
 import NavAdmin from '../NavAdmin/NavAdmin';
+import Navbar from "../../Navbar/Navbar";
 registerLocale('es', es)
 
 export default function Reservaciones() {
@@ -151,7 +152,12 @@ export default function Reservaciones() {
   }
   return (
     <div className={styles.container}>
-      <NavAdmin />
+      <div className={styles.navs2}>
+        <div className={styles.navs}>
+          <Navbar />
+          <NavAdmin />
+        </div>
+      </div>
       <div className={styles.btnsContainer}>
         {!habilitar ?(
             <button onClick={ocultadas} className={styles.btnSup}>Mostrar ocultadas</button>
