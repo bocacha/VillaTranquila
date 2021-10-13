@@ -21,9 +21,9 @@ let preference = {
       },
     ],
     back_urls:{
-      "success": "http://localhost:3000",
-      "failure": "http://localhost:3000/reserva/pago",
-      "pending": "http://localhost:3000/reserva/pago",
+      "success": "http://app-villa-tranquila.vercel.app",
+      "failure": "http://app-villa-tranquila.vercel.app/reserva/pago",
+      "pending": "http://app-villa-tranquila.vercel.app/reserva/pago",
     },
     auto_return: "approved",
     // payer = {

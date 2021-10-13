@@ -1,0 +1,58 @@
+.weather{
+    background-color: #355978;
+    margin-bottom: 30px
+}
+.container{
+    display: flex;
+    /* align-items: center; */
+    justify-items: center;
+    justify-content: center;
+}
+.dia{
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 40px -10px #000;
+    box-sizing: border-box;
+    text-decoration: none;
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    background-color: #293c4f;
+    flex-wrap: wrap;
+    place-content: center;
+    overflow: auto;
+    margin: 20px 2% 50px 2%;
+}
+.titulo{
+    font-size: xx-large;
+    padding-top: 20px;
+    color: #fff;
+    font-weight:600;
+}
+.today{
+    font-size: x-large;
+    font-weight: 500;
+    padding-top: 10px;
+}
+
+.izqu{
+    float: left;
+    margin-right: 80px;
+}
+.der{
+    float: right;
+    margin-left: 80px;
+}
+table{
+    margin: 10px 20px;
+}
+
+img{
+    margin-bottom: 20px;
+}

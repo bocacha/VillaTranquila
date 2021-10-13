@@ -124,21 +124,21 @@ export default function rootReducer(state = initialState, action) {
       cabinsFiltered = priceMax === 'all'||priceMax ===  "" ?
         cabinsFiltered :
         cabinsFiltered.filter(el => el.Price <= parseInt(priceMax));
-      // // Filter by wifi:
-      // let wifi = action.payload.wifi;
-      // cabinsFiltered = wifi === '' || wifi === 'false' ?
-      //   cabinsFiltered :
-      //   cabinsFiltered.filter(el => el.Wifi);
-      // // Filter by barbecue:
-      // let barbecue = action.payload.barbecue;
-      // cabinsFiltered = barbecue === '' || barbecue === 'false' ?
-      //   cabinsFiltered :
-      //   cabinsFiltered.filter(el => el.Barbecue);
-      // // Filter by parking:
-      // let parking = action.payload.parking;
-      // cabinsFiltered = parking === '' || parking === 'false' ?
-      //   cabinsFiltered :
-      //   cabinsFiltered.filter(el => el.Parking);
+      // Filter by wifi:
+      let wifi = action.payload.wifi;
+      cabinsFiltered = wifi === '' || wifi === 'false' ?
+        cabinsFiltered :
+        cabinsFiltered.filter(el => el.Wifi);
+      // Filter by barbecue:
+      let barbecue = action.payload.barbecue;
+      cabinsFiltered = barbecue === '' || barbecue === 'false' ?
+        cabinsFiltered :
+        cabinsFiltered.filter(el => el.Barbecue);
+      // Filter by parking:
+      let parking = action.payload.parking;
+      cabinsFiltered = parking === '' || parking === 'false' ?
+        cabinsFiltered :
+        cabinsFiltered.filter(el => el.Parking);
       return {
         ...state,
         cabins: cabinsFiltered
