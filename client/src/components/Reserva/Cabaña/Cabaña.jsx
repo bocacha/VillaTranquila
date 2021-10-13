@@ -1,15 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import styles from "./Cabaña.module.css";
-import {
-  GiCoffeeCup,
-  GiChickenOven,
-  GiFireplace,
-  GiCampCookingPot,
-  GiVacuumCleaner,
-  GiCookingPot,
-} from "react-icons/gi";
-import { RiFridgeLine } from "react-icons/ri";
+import { GiBarbecue } from "react-icons/gi";
 import { FaWifi, FaCarAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -61,7 +53,7 @@ export default function Cabaña({
           <span>Precio por noche: $ {price}</span>
           <span> Descripción: {description}</span>
           <div className={styles.servicios}>
-            {parrilla && <p><GiCampCookingPot /></p>}
+            {parrilla && <p><GiBarbecue /></p>}
             {wifi && <p><FaWifi /></p>}
             {parking && <p><FaCarAlt /></p>}
           </div>

@@ -8,7 +8,7 @@ export default function Weather() {
     let today = '';
     return (
         <div className={styles.weather}>
-            <p className={styles.titulo}>Clima actual</p>
+            {/* <p className={styles.titulo}>Clima</p> */}
             <div className={styles.container}>
                 {weather?.map(e => {
                     if (weather.indexOf(e) === 0) today = 'Hoy';

@@ -1,12 +1,13 @@
 .weather{
     background-color: #355978;
-    margin-bottom: 30px
+    /* margin-bottom: 30px */
 }
 .container{
     display: flex;
     /* align-items: center; */
     justify-items: center;
     justify-content: center;
+    padding-top: 20px;
 }
 .dia{
     position: relative;

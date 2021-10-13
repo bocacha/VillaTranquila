@@ -1,4 +1,4 @@
-.container {
+/* .container {
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -9,15 +9,18 @@
 }
 
 .container2 {
-  margin-top: 20px;
+  margin-top: 0px;
   display: flex;
   flex-direction: row;
   align-items: start;
-  justify-content: center;
-  width: 50%;
-  height: 100vh;
-}
+  justify-content: center; */
 
+  /*==============================================================================================================*/
+  /* width: 50%; */
+  /*==============================================================================================================*/
+  
+  /* height: 100vh;
+}
 .navs2 {
   display: flex;
   align-items: start;
@@ -34,12 +37,16 @@
 
 .btnsContainer {
   width: 100%;
-  margin-top: 145px;
+  margin-top: 120px;
   margin-bottom: 15px;
   display: flex;
-  align-items: start;
+  align-items: start; */
+
+  /*==============================================================================================================*/
   /* margin-left: 290px; */
-  padding-top: 10px;
+  /*==============================================================================================================*/
+
+  /* padding-top: 10px;
 }
 
 .btnVolver {
@@ -63,7 +70,7 @@
 .btnSup {
   margin-left: auto;
   margin-right: auto;
-  padding: 4px 7px;
+  padding: 4px 15px;
   background: #293c4f;
   color: #fff;
   border: none;
@@ -110,11 +117,58 @@
 .crearCont {
   display: flex;
   flex-direction: column;
-  align-items: start;
-  justify-content: start;
-  width: 33%;
+  align-items: center;
+  justify-content: center;
   height: max-content;
-  padding: 3px;
+  padding: 10px 20px;
+  background-color: #293c4f;
+  width:50%;
+  border-radius: 5px;
+  color: #fff;
+}
+.crearCont textarea{ */
+
+  /*==============================================================================================================*/
+  /* padding: 50% 0px; */
+  /*==============================================================================================================*/
+
+  /* width: 100%;
+  text-align: center;
+  font-size: 1em;
+  background-color: #355978 ;
+  color: #fff;
+  border: solid #355978;
+  border-radius: 8px;
+  transition: all 0.25s ease; */
+
+  /*==============================================================================================================*/
+  /* margin: 10px 5px 10px 5px; */
+  /*==============================================================================================================*/
+
+  /* margin-top: 6px;
+}
+.crearCont textarea:hover{
+  background-color: #8bafbf ;
+  color:  #1c2531;
+  border-color: #8bafbf;
+}
+
+.crearCont select{
+  padding: 7px 0px;
+    text-align: center;
+    height: 42px;
+    width: 100%;
+    font-size: 1em;
+    background-color: #355978 ;
+    color: #fff;
+    border: transparent;
+    border-radius: 8px;
+    transition: all 0.25s ease;
+    margin-top: 10px;
+}
+.crearCont select:hover{
+  background-color: #8bafbf ;
+    color: #1c2531;
 }
 
 .editarCont {
@@ -138,9 +192,30 @@
   margin-bottom: 8px;
   padding: 3px;
   border: solid 1.5px #293c4f;
-  width: 200px;
-  display: flex;
-  align-items: start;
+  width: 100%; */
+
+  /*==============================================================================================================*/
+  /* display: flex; */
+  /* align-items: start; */
+  /*==============================================================================================================*/
+
+/* }
+.crearCont .form input{
+  padding: 7px 0px;
+  text-align: center;
+  height: 42px;
+  width: 100%;
+  font-size: 1em;
+  background-color: #355978 ;
+  color: #fff;
+  border: transparent;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  margin-left: -0.3px;
+}
+.crearConta.form input:hover{
+  background-color: #8bafbf ;
+  color: #1c2531;
 }
 
 .detalles {
@@ -168,4 +243,170 @@
   flex-direction: column;
   justify-content: space-between;
   font-size: large;
+} */
+
+
+.adminCabañas{
+  width: 100%;
+  min-height: 100vh;
+  background-color: #94adbc;
+}
+.btns{
+  display: flex;
+    justify-items: center;
+    justify-content: center;
+}
+.btnsContainer{
+  margin-top: 130px;
+  position: relative;
+}
+.btnSup{
+  padding: 4px 60px;
+  background: #293c4f;
+  color: #fff;
+  border: none;
+  border: 1px solid #293c4f;
+  border-radius: 5px;
+  font-family: Lato, Arial, sans-serif;
+  font-weight: bold;
+  transition-duration: 0.4s;
+}
+.btnSup:hover{
+  background: none;
+  border: 1px solid #293c4f;
+  color: #000;
+}
+.container{
+  display: flex;
+    justify-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    /* margin-bottom: 30px; */
+    /* width: 100vh; */
+}
+.crearCont{
+  position: relative;
+  height: fit-content;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 40px -10px #000;
+  box-sizing: border-box;
+  text-decoration: none;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  background-color: #293c4f;
+  flex-wrap: wrap;
+  place-content: center;
+  overflow: auto;
+  width: 30%;
+  margin: 0 10px 30px 10px;
+  min-width: 30%;
+}
+.crearCont .title{
+  font-size: x-large;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.crearCont form{
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.crearCont form input{
+  padding: 7px 0px;
+  text-align: center;
+  height: 42px;
+  width: 80%;
+  font-size: 1em;
+  background-color: #355978 ;
+  color: #fff;
+  border: solid #355978;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  margin-top: 8px;
+  margin-left: 43px;
+}
+.crearCont form input:hover{
+  background-color: #8bafbf ;
+  color:  #1c2531;
+  border-color: #8bafbf;
+}
+.crearCont form textarea{
+  padding: 7px 0px;
+  text-align: center;
+  width: 80%;
+  font-size: 1em;
+  background-color: #355978 ;
+  color: #fff;
+  border: solid #355978;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  margin-top: 8px;
+}
+.crearCont form textarea:hover{
+  background-color: #8bafbf ;
+  color:  #1c2531;
+  border-color: #8bafbf;
+}
+.crearCont form select{
+  padding: 7px 0px;
+  text-align: center;
+  height: 42px;
+  width: 80%;
+  font-size: 1em;
+  background-color: #355978 ;
+  color: #fff;
+  border: solid #355978;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  margin-top: 8px;
+  margin-left: 43px;
+  margin-bottom: 8px;
+}
+.crearCont form select:hover{
+  background-color: #8bafbf ;
+  color:  #1c2531;
+  border-color: #8bafbf;
+}
+.crearCont form button{
+  border-radius: 4px;
+    background-color: #355978 ;
+    border-color: transparent;
+    color: #fff;
+    text-align: center;
+    font-size: large;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    padding: 10px 20px;
+    /* display: inline-flex; */
+    height: auto;
+    line-height: 35px;
+    width: 30%;
+    margin-left: 33%;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.crearCont form button:hover{
+  background-color: #8bafbf ;
+  color: #1c2531 ;
+  border-color: #8bafbf;
+}
+#id1{
+  margin-left: 4px;
+}
+#id2{
+  margin-left: 4px;
+}
+#id3{
+  margin-left: 4px;
+}
+#lastSelect{
+  margin-bottom: 20px;
 }

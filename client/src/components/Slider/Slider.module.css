@@ -1,10 +1,14 @@
+
+.slider{
+  background-color: #323031;
+  margin-top: 0;
+  padding-top: 20px;
+}
 .img {
-  width: 50%;
+  height: 50%;
+  max-height: 450px;
 }
 
-.container {
-  margin-bottom: 35px;
-}
 
 
 .test{
