@@ -56,28 +56,26 @@ export default function Fotos() {
     // window.location.reload();
     //
   }
-  function handleSubmitEdit(e, ID) {
+  function handleSubmitEdit(e, Description,
+    Url,ID) {
     e.preventDefault();
     setMostrar(true);
     setEdit({
       ...edit,
-      id: ID
+      id: ID,
+      Description: Description,
+      Url: Url
     })
-    handledispatch()
-  }
-  const handledispatch=()=>{
-    const { token } = logeduser;
-    dispatch(editPictures(edit, { token }));
   }
  function handlePrueba(e, ID) {
     e.preventDefault();
     const { token } = logeduser;
     dispatch(editPictures(edit, { token }));
+    // setEdit({
+    //   ...edit,
+    //   id: ID
+    // })
     alert("Foto editada con éxito");
-    setEdit({
-      ...edit,
-      id: ID
-    })
     window.location.reload();
   }
   const ocultadas = () => {
