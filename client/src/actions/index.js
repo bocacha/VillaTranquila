@@ -770,6 +770,7 @@ export function selectcabin(id){
 export function mailpassword(Email) {
   return async function (dispatch) {
     try {
+      var lala = await axios.post("/sendNotificationpassword",{Email:Email})
       var json = await axios.get("/users/");
       var useremail = json.data.filter((e)=> e.Email === Email)
       const cambiar={

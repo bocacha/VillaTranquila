@@ -13,6 +13,7 @@ const showGallery = require('./ShowGallery')
 const sendNotification= require('./SendNotification')
 const MercadoPago= require('./MercadoPago')
 const weather = require('./Weather')
+const SendNotificationpassword= require('./SendNotificationpassword')
 
 const router = Router();
 router.use("/cabins" , cabinsrouter)
@@ -25,7 +26,7 @@ router.use("/sendEmail", sendEmail)
 router.use("/sendNotification", sendNotification )
 router.use("/login", loginrouter)
 router.use("/showImages", showGallery)
-router.use("/sendNotification", sendNotification)
+router.use("/sendNotificationpassword", SendNotificationpassword)
 router.use("/checkout", MercadoPago )
 router.use("/weather", weather)
 
