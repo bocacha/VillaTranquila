@@ -71,51 +71,74 @@ export default function Reservaciones() {
     e.preventDefault();
     dispatch(createReservation(input));
     alert("Reserva creada con éxito");
-    setInput({
-      id: "",
-      Checkin: "",
-      Checkout: "",
-      UserId: "",
-      Paymentsid: "",
-      Cabinid: "",
-      ExtraServices: "",
-      CostoFinal: "",
-    });
-    window.location.reload();
+  ;
+    //window.location.reload();
   }
-  function handleSubmitEdit(e,ID) {
+  function handleSubmitEdit(e,ID,
+    Checkin,
+    Checkout,
+    UserId,
+    Paymentsid,
+    Cabinid,
+    ExtraServices,
+    CostoFinal) {
     e.preventDefault();
-    
-
-    
-
-
+    console.log(edit);
     setMostrar(true);
-    dispatch(editReservation(edit, { token }));
     setEdit({...edit,
-      id:ID  
+      id:ID,
+      Checkin:Checkin,
+      Checkout:Checkout,
+      UserId: UserId,
+      Paymentsid: Paymentsid,
+      Cabinid: Cabinid,
+      ExtraServices: ExtraServices,
+      CostoFinal:CostoFinal
     })
+    //dispatch(editReservation(edit, { token }));
    
+  }
+  const changeFechas=(e)=>{
+    if(e === null){
+      return
+    }
+    setSelectDateCI(e)
+    mostrarFecha(e);
+  }
+  const changeFechas2=async(e)=>{
+    if(e === null){
+      return
+    }
+    setSelectDateCO(e)
+    mostrarFecha2(e);
   }
 
   const mostrarFecha = selectDateCI =>{
-    const options = {weekday :'long', year:'yyyy', month:'MM', day:'dd'}
-    setInput({...input,  Checkin: selectDateCI.toLocaleDateString('es-ES', options)})
+    const options = {year:'numeric', month:'numeric', day:'2-digit'}
+    setEdit({...edit,  Checkin: selectDateCI.toLocaleDateString('es-ES', options)})
+  }
+  const mostrarFecha2 = selectDateCO =>{
+    const options = {year:'numeric', month:'numeric', day:'2-digit'}
+    setEdit({...edit,  Checkout: selectDateCO.toLocaleDateString('es-ES', options)})
   }
   function handlePrueba(e, ID) {
     e.preventDefault();
-     setEdit({...edit,
-      id:ID  
-    })
-    setMostrar(true);
-    pruebadispatch()
-  }
-  const pruebadispatch=() => {
-    const { token } = logeduser;
     console.log(edit)
+   //  setEdit({...edit,
+   //   id:ID  
+  //})
+    setMostrar(true);
     dispatch(editReservation(edit, { token }));
+    alert("Editado")
+    //pruebadispatch()
     window.location.reload()
   }
+ // const pruebadispatch=() => {
+   // const { token } = logeduser;
+   // console.log(edit)
+   // 
+   // window.location.reload()
+  //}
   const ocultadas= () => {
    dispatch(readReservationocultados())
    setHabilitar(true)
@@ -139,8 +162,8 @@ export default function Reservaciones() {
       </div>
       <div className={styles.container2}>
       <div className={styles.formsCont}>
-          {/* CREAR */}
-          <div className={styles.crearCont}>
+          {/* 
+          <div className={styles.crearCont}>;
             <div className={styles.title}>Crear una  reservación</div>
             <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
                   
@@ -207,7 +230,7 @@ export default function Reservaciones() {
                 </button>
               </div>
             </form>
-          </div>
+          </div> */}
           {/* EDITAR */}
           {mostrar
          ? 
@@ -216,17 +239,17 @@ export default function Reservaciones() {
             <form >
               <DatePicker
               selected={selectDateCI}
-              onChange={date=> setSelectDateCI(date)}
+              onChange={(e)=>changeFechas(e)}
               dateFormat='dd/MM/yyyy'
-              minDate={new Date()}
+             // minDate={new Date()}
               required
               //isClearable
               /> 
               <DatePicker
               selected={selectDateCO}
-              onChange={date=> setSelectDateCO(date)}
+              onChange={(e)=>changeFechas2(e)}
               dateFormat='dd/MM/yyyy'
-              minDate={new Date()}
+             // minDate={new Date()}
               required
               //isClearable
               />
