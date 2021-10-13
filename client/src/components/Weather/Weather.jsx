@@ -6,6 +6,7 @@ export default function Weather() {
     const weather = useSelector(state => state.weather);
     //console.log(weather)
     let today = '';
+
     return (
         <div className={styles.weather}>
             <p className={styles.titulo}>Clima actual</p>
