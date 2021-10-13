@@ -6,13 +6,12 @@ import {
   editCabains,
   Logeduser,
   readCabainsocultados,
-  readPictures
+  readPictures,
 } from "../../../actions";
 import styles from "./Cabañas.module.css";
 import CabañasDetail from "../Cabañas/CabañasDetail";
-import NavAdmin from '../NavAdmin/NavAdmin';
-import Navbar from "../../Navbar/Navbar"
-
+import Navbar from "../../Navbar/Navbar";
+import NavAdmin from "../NavAdmin/NavAdmin";
 
 const Cabañas = () => {
   const dispatch = useDispatch();
@@ -20,7 +19,7 @@ const Cabañas = () => {
   const logeduser = useSelector((state) => state.user);
   const allFotos = useSelector((state) => state.fotos);
 
- // const [rende, setRende] = useState('');
+  // const [rende, setRende] = useState('');
   const [habilitar, setHabilitar] = useState(false);
   const [cabain, setCabain] = useState({
     Number: "",
@@ -104,10 +103,12 @@ const Cabañas = () => {
     dispatch(createCabains(cabain, { token }));
     alert("su cabaña fue creada con exito");
     window.location.reload();
-    
   };
 
-  const handleeditSubmit = (e, ID, Number,
+  const handleeditSubmit = (
+    e,
+    ID,
+    Number,
     Capacity,
     Available,
     Price,
@@ -115,9 +116,12 @@ const Cabañas = () => {
     Picture,
     Parrilla,
     Wifi,
-    Parking) => {
+    Parking
+  ) => {
     setEdit({
-      ...edit, id: ID, Number: Number,
+      ...edit,
+      id: ID,
+      Number: Number,
       Capacity: Capacity,
       Available: Available,
       Price: Price,
@@ -125,7 +129,7 @@ const Cabañas = () => {
       Picture: Picture,
       Parrilla: Parrilla,
       Wifi: Wifi,
-      Parking: Parking
+      Parking: Parking,
     });
     e.preventDefault();
     setMostrar(true);
@@ -161,9 +165,8 @@ const Cabañas = () => {
   const pruebadispatch = () => {
     const { token } = logeduser;
     dispatch(editCabains(edit, { token }));
-    alert("Edicion exitosa")
-    window.location.reload()
-   
+    alert("Edicion exitosa");
+    window.location.reload();
   };
   const ocultadas = () => {
     dispatch(readCabainsocultados());
@@ -177,12 +180,21 @@ const Cabañas = () => {
   // console.log(allFotos[0].Description)
   return (
     <div className={styles.container}>
-        <NavAdmin />
-        <div className={styles.btnsContainer}>
+      <div className={styles.navs2}>
+        <div className={styles.navs}>
+          <Navbar />
+          <NavAdmin />
+        </div>
+      </div>
+      <div className={styles.btnsContainer}>
         {!habilitar ? (
-          <button onClick={ocultadas} className={styles.btnSup}>Mostrar ocultadas</button>
+          <button onClick={ocultadas} className={styles.btnSup}>
+            Mostrar ocultadas
+          </button>
         ) : (
-          <button onClick={showtrue} className={styles.btnSup}>Mostrar habilitadas</button>
+          <button onClick={showtrue} className={styles.btnSup}>
+            Mostrar habilitadas
+          </button>
         )}
       </div>
       <div className={styles.container2}>
@@ -250,12 +262,14 @@ const Cabañas = () => {
                 />
               </div>
 
-              <select name="Picture"
-                onChange={(e) => handleSelectPicture(e)}
-              >
+              <select name="Picture" className={styles.formInputs}  onChange={(e) => handleSelectPicture(e)}>
                 <option>Seleccione Imagen:</option>
                 {allFotos.map((el) => {
-                  return (<option name="Picture" value={el.Url}>{el.Description}</option>)
+                  return (
+                    <option name="Picture" value={el.Url}>
+                      {el.Description}
+                    </option>
+                  );
                 })}
               </select>
 
@@ -267,8 +281,12 @@ const Cabañas = () => {
                 required
               >
                 <option>Estacionamiento:</option>
-                <option name="Parking" value="true">true</option>
-                <option name="Parking" value="false">false</option>
+                <option name="Parking" value="true">
+                  true
+                </option>
+                <option name="Parking" value="false">
+                  false
+                </option>
               </select>
 
               <select
@@ -279,8 +297,12 @@ const Cabañas = () => {
                 required
               >
                 <option>Parrilla:</option>
-                <option name="Parrilla" value="true">true</option>
-                <option name="Parrilla" value="false">false</option>
+                <option name="Parrilla" value="true">
+                  true
+                </option>
+                <option name="Parrilla" value="false">
+                  false
+                </option>
               </select>
 
               <select
@@ -291,8 +313,12 @@ const Cabañas = () => {
                 required
               >
                 <option>Wifi:</option>
-                <option name="Wifi" value="true">true</option>
-                <option name="Wifi" value="false">false</option>
+                <option name="Wifi" value="true">
+                  true
+                </option>
+                <option name="Wifi" value="false">
+                  false
+                </option>
               </select>
               {/* <div>
               <label>Cafe</label>
@@ -373,7 +399,7 @@ const Cabañas = () => {
                     type="text"
                     name="Number"
                     value={edit.Number}
-                    onChange={(e)=>handleChangeEdit(e)}
+                    onChange={(e) => handleChangeEdit(e)}
                     placeholder="Numero de Cabaña"
                     max="20"
                     className={styles.formInputs}
@@ -386,7 +412,7 @@ const Cabañas = () => {
                     type="number"
                     name="Capacity"
                     value={edit.Capacity}
-                    onChange={(e)=>handleChangeEdit(e)}
+                    onChange={(e) => handleChangeEdit(e)}
                     placeholder="Numero de Camas"
                     max="10"
                     className={styles.formInputs}
@@ -409,7 +435,7 @@ const Cabañas = () => {
                     type="number"
                     name="Price"
                     value={edit.Price}
-                    onChange={(e)=>handleChangeEdit(e)}
+                    onChange={(e) => handleChangeEdit(e)}
                     placeholder="Precio"
                     className={styles.formInputs}
                     max="50000"
@@ -422,20 +448,21 @@ const Cabañas = () => {
                     type="text"
                     name="Description"
                     value={edit.Description}
-                    onChange={(e)=>handleChangeEdit(e)}
+                    onChange={(e) => handleChangeEdit(e)}
                     placeholder="Descripción"
                     maxLength="100"
                     className={styles.formInputs}
                     required
                   />
                 </div>
-
-                <select name="Picture"
-                  onChange={(e) => handleSelectedit(e)}
-                >
+                <select name="Picture" onChange={(e) => handleSelectedit(e)}>
                   <option>Seleccione Imagen:</option>
                   {allFotos.map((el) => {
-                    return (<option name="Picture" value={el.Url}>{el.Description}</option>)
+                    return (
+                      <option name="Picture" value={el.Url}>
+                        {el.Description}
+                      </option>
+                    );
                   })}
                 </select>
                 Servicios Basicos
@@ -557,7 +584,6 @@ const Cabañas = () => {
                   handlePrueba={handlePrueba}
                   handleeditSubmit={handleeditSubmit}
                   restaurar={habilitar}
-                  
                 />
               </div>
             );
