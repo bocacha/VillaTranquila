@@ -427,7 +427,7 @@ export function editServices(payload, { token }) {
   return async function (dispatch) {
     try {
       var json = await axios.put("/services/EditService", payload, config);
-      return dispatch({
+      return (dispatch({
         type: EDIT_SERVICES,
         payload: json.data,
       }),window.location.reload())
