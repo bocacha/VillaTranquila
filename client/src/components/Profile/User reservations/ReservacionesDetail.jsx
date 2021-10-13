@@ -93,7 +93,7 @@ export default function ReservacionesDetail({
         )}
       <div>
         <Link to="/reserva/pago">
-      <button value="Pagar" target="_blank" class="btn btn-primary btn-block">Pagar </button>
+      <button value="Pagar" target="_blank" className={styles.btnPlus}>Pagar </button>
         </Link>
         </div>
       </div>
