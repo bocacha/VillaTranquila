@@ -44,6 +44,15 @@ let preference = {
     //}
   };
   
+
+  // router.post('/', function(req, res) {
+  //   res.json({
+  //     Price: parseInt(req.body.price),
+  //     Status: req.query.status,
+  //     MerchantOrder: req.query.merchant_order_id
+  //   });
+  // });
+
   mercadopago.preferences.create(preference)
   .then(function(response){
     res.redirect(response.body.init_point);

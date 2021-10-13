@@ -81,7 +81,6 @@ export function readWeather() {
         payload: json.data,
       });
     } catch (err) {
-      console.log('error');
       console.error(err);
     }
   };

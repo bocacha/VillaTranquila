@@ -4,7 +4,7 @@ import {readWeather} from  "../../actions"
 
 export default function Weather(){
     const weather=useSelector(state => state.weather);
-        //console.log(weather)
+       
     return (
         <div>
         {weather?.map(e=>{
