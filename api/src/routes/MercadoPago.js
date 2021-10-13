@@ -25,7 +25,9 @@ let preference = {
       "failure":"http://localhost:3001/reserva/pago",
       "pending":"http://localhost:3001/reserva/pago",
     },
-  //"http://app-villa-tranquila.vercel.app","http://app-villa-tranquila.vercel.app/reserva/pago""http://app-villa-tranquila.vercel.app/reserva/pago"
+  //"http://app-villa-tranquila.vercel.app",
+  //"http://app-villa-tranquila.vercel.app/reserva/pago"
+  //"http://app-villa-tranquila.vercel.app/reserva/pago"
     auto_return: "approved",
     // payer = {
     //   name: "Charles",
