@@ -57,7 +57,7 @@ export default function CabinsDetail({
       <div className={styles.btnsContainer}>
         <div>
           {!restaurar?(
-            <button onClick={()=>handleSubmitDelete(ID)} className={styles.btn}>Eliminar</button>
+            <button onClick={()=>handleSubmitDelete(ID)} className={styles.btn}>Ocultar</button>
 
           ):(
             <button onClick={()=>handleSubmitrestore(ID)} className={styles.btn}>Restaurar</button>
