@@ -114,6 +114,8 @@ export default function Usuarios() {
               name="UserName"
               onChange={(e) => handleChange(e)}
               placeholder="Nombre de Usuario"
+              maxLength="20"
+              minLength="5"
               className={styles.formInputs}
               required
             />{errors.UserName && (<p>{errors.UserName}</p>)}  
@@ -134,6 +136,8 @@ export default function Usuarios() {
               name="FirstName"
               onChange={(e) => handleChange(e)}
               placeholder="Nombre"
+              maxLength="20"
+              minLength="4"
               className={styles.formInputs}
               required
             />{errors.FirstName && (<p>{errors.FirstName}</p>)} 
@@ -144,6 +148,8 @@ export default function Usuarios() {
               name="LastName"
               onChange={(e) => handleChange(e)}
               placeholder="Apellido"
+              maxLength="20"
+              minLength="4"
               className={styles.formInputs}
               required
             />{errors.LastName && (<p>{errors.LastName}</p>)} 
