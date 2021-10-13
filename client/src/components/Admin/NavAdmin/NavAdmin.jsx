@@ -42,6 +42,11 @@ export default function NavAdmin() {
               Usuarios
             </Link>
           </li>
+          <li className={styles.li}>
+            <Link to="/admin/caja" className={styles.link}>
+              Caja
+            </Link>
+          </li>
         </ul>
       </div>
     </div>
