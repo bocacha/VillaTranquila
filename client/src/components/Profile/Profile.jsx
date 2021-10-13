@@ -58,7 +58,8 @@ export default function Profile(props) {
             dispatch(editProfile(edit, ID));
             dispatch(Logeduser());
             setMostrar(false);
-            //window.location.reload();
+            alert("Edicion exitosa")
+            window.location.reload();
         }
     }
     let objetosaArray =[]
