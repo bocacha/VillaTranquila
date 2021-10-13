@@ -11,6 +11,7 @@ import {
 import styles from "./Cabañas.module.css";
 import CabañasDetail from "../Cabañas/CabañasDetail";
 import NavAdmin from '../NavAdmin/NavAdmin';
+import Navbar from "../../Navbar/Navbar"
 
 
 const Cabañas = () => {
@@ -18,6 +19,8 @@ const Cabañas = () => {
   const allCabains = useSelector((state) => state.cabañas);
   const logeduser = useSelector((state) => state.user);
   const allFotos = useSelector((state) => state.fotos);
+
+ // const [rende, setRende] = useState('');
   const [habilitar, setHabilitar] = useState(false);
   const [cabain, setCabain] = useState({
     Number: "",
@@ -158,6 +161,8 @@ const Cabañas = () => {
   const pruebadispatch = () => {
     const { token } = logeduser;
     dispatch(editCabains(edit, { token }));
+    alert("Edicion exitosa")
+    window.location.reload()
    
   };
   const ocultadas = () => {
@@ -368,7 +373,7 @@ const Cabañas = () => {
                     type="text"
                     name="Number"
                     value={edit.Number}
-                    onChange={handleChangeEdit}
+                    onChange={(e)=>handleChangeEdit(e)}
                     placeholder="Numero de Cabaña"
                     max="20"
                     className={styles.formInputs}
@@ -381,7 +386,7 @@ const Cabañas = () => {
                     type="number"
                     name="Capacity"
                     value={edit.Capacity}
-                    onChange={handleChangeEdit}
+                    onChange={(e)=>handleChangeEdit(e)}
                     placeholder="Numero de Camas"
                     max="10"
                     className={styles.formInputs}
@@ -404,7 +409,7 @@ const Cabañas = () => {
                     type="number"
                     name="Price"
                     value={edit.Price}
-                    onChange={handleChangeEdit}
+                    onChange={(e)=>handleChangeEdit(e)}
                     placeholder="Precio"
                     className={styles.formInputs}
                     max="50000"
@@ -417,7 +422,7 @@ const Cabañas = () => {
                     type="text"
                     name="Description"
                     value={edit.Description}
-                    onChange={handleChangeEdit}
+                    onChange={(e)=>handleChangeEdit(e)}
                     placeholder="Descripción"
                     maxLength="100"
                     className={styles.formInputs}

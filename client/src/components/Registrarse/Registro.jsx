@@ -6,39 +6,42 @@ import { Link } from "react-router-dom";
 import { Logeduser } from "../../actions";
 import Navbar from "../Navbar/Navbar";
 import axios from "axios";
+import { BiEdit, BiUserPlus } from 'react-icons/bi';
+import { FiUserCheck } from 'react-icons/fi';
+import { GoSignIn } from 'react-icons/go';
 
 
 
-function validation(input){
-  var letras="abcdefghyjklmnñopqrstuvwxyz";
-  var letras_m="ABCDEFGHYJKLMNÑOPQRSTUVWXYZ";
+function validation(input) {
+  var letras = "abcdefghyjklmnñopqrstuvwxyz";
+  var letras_m = "ABCDEFGHYJKLMNÑOPQRSTUVWXYZ";
   var num = "0123456789";
 
-  let errors={}
-  
+  let errors = {}
+
 
   if (!/[0-9]/.test(input.UserName)) {
-    errors.UserName= "Debe contener un número";
-  }else if  (!/[a-z]/.test(input.UserName)) {
-    errors.UserName= "Debe contener letras minusculas";
-  }else if  (!/[A-Z]/.test(input.UserName)) {
-    errors.UserName= "Debe contener letras mayusculas ";
-  }else if (!/[0-9]/.test(input.UserPasssword)) {
-    errors.UserPasssword= "Debe contener un número";
-  }else if  (!/[a-z]/.test(input.UserPasssword)) {
-    errors.UserPasssword= "Debe contener letras minusculas";
-  }else if  (!/[A-Z]/.test(input.UserPasssword)) {
-    errors.UserPasssword= "Debe contener letras mayusculas ";
-  }else if (!/[a-zA-Z]/.test(input.FirstName)){
-    errors.FirstName= "Debe contener solo letras";
-  }else if (!/[a-zA-Z]/.test(input.LastName)){
-    errors.LastName= "Debe contener solo letras";
-  }else if (!/^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/.test(input.Email)){
-    errors.Email= "Debe ser un email valido";
+    errors.UserName = "Debe contener un número";
+  } else if (!/[a-z]/.test(input.UserName)) {
+    errors.UserName = "Debe contener letras minusculas";
+  } else if (!/[A-Z]/.test(input.UserName)) {
+    errors.UserName = "Debe contener letras mayusculas ";
+  } else if (!/[0-9]/.test(input.UserPasssword)) {
+    errors.UserPasssword = "Debe contener un número";
+  } else if (!/[a-z]/.test(input.UserPasssword)) {
+    errors.UserPasssword = "Debe contener letras minusculas";
+  } else if (!/[A-Z]/.test(input.UserPasssword)) {
+    errors.UserPasssword = "Debe contener letras mayusculas ";
+  } else if (!/[a-zA-Z]/.test(input.FirstName)) {
+    errors.FirstName = "Debe contener solo letras";
+  } else if (!/[a-zA-Z]/.test(input.LastName)) {
+    errors.LastName = "Debe contener solo letras";
+  } else if (!/^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/.test(input.Email)) {
+    errors.Email = "Debe ser un email valido";
   }
 
 
-  
+
   return errors;
 }
 
@@ -70,17 +73,17 @@ export default function Usuarios() {
     });
 
     setErrors(validation({
-      ...input, [e.target.name] : e.target.value
-  }));
+      ...input, [e.target.name]: e.target.value
+    }));
   }
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    if (errors.UserName !== undefined || errors.Email!== undefined || errors.FirstName!== undefined || errors.LastName!== undefined  || errors.UserPassword!== undefined){
+    if (errors.UserName !== undefined || errors.Email !== undefined || errors.FirstName !== undefined || errors.LastName !== undefined || errors.UserPassword !== undefined) {
       document.getElementById('form');
       return alert('No se puede crear el registro porque contiene errores');
-  }
+    }
 
     dispatch(createUsers(input));
     alert("Usuario creado con éxito");
@@ -101,119 +104,126 @@ export default function Usuarios() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.registro}>
       <Navbar />
       {/* CREAR */}{" "}
-      {!creado ? (
-        <div className={styles.containerForm}>
-          <div className={styles.title}>Registrate</div>
-          <form id='form'  onSubmit={(e) => handleSubmit(e)} className={styles.form}>
-            <input
-              type="text"
-              value={input.UserName}
-              name="UserName"
-              onChange={(e) => handleChange(e)}
-              placeholder="Nombre de Usuario"
-              maxLength="20"
-              minLength="5"
-              className={styles.formInputs}
-              required
-            />{errors.UserName && (<p>{errors.UserName}</p>)}  
+      <div className={styles.container}>
+        {!creado ? (
+          <div className={styles.containerForm}>
+            <div className={styles.title}>Regístrate <BiEdit/></div>
+            <form id='form' onSubmit={(e) => handleSubmit(e)} className={styles.form}>
+              <input
+                type="text"
+                value={input.UserName}
+                name="UserName"
+                onChange={(e) => handleChange(e)}
+                placeholder="Nombre de Usuario"
+                maxLength="20"
+                minLength="5"
+                className={styles.formInputs}
+                required
+              />{errors.UserName && (<p>{errors.UserName}</p>)}
 
-            <input
-              type="password"
-              value={input.UserPassword}
-              name="UserPassword"
-              onChange={(e) => handleChange(e)}
-              placeholder="Contraseña"
-              className={styles.formInputs}
-              required
-            />{errors.UserPassword && (<p>{errors.UserPassword}</p>)} 
+              <input
+                type="password"
+                value={input.UserPassword}
+                name="UserPassword"
+                onChange={(e) => handleChange(e)}
+                placeholder="Contraseña"
+                className={styles.formInputs}
+                required
+              />{errors.UserPassword && (<p>{errors.UserPassword}</p>)}
 
-            <input
-              type="text"
-              value={input.FirstName}
-              name="FirstName"
-              onChange={(e) => handleChange(e)}
-              placeholder="Nombre"
-              maxLength="20"
-              minLength="4"
-              className={styles.formInputs}
-              required
-            />{errors.FirstName && (<p>{errors.FirstName}</p>)} 
+              <input
+                type="text"
+                value={input.FirstName}
+                name="FirstName"
+                onChange={(e) => handleChange(e)}
+                placeholder="Nombre"
+                maxLength="20"
+                minLength="4"
+                className={styles.formInputs}
+                required
+              />{errors.FirstName && (<p>{errors.FirstName}</p>)}
 
-            <input
-              type="text"
-              value={input.LastName}
-              name="LastName"
-              onChange={(e) => handleChange(e)}
-              placeholder="Apellido"
-              maxLength="20"
-              minLength="4"
-              className={styles.formInputs}
-              required
-            />{errors.LastName && (<p>{errors.LastName}</p>)} 
+              <input
+                type="text"
+                value={input.LastName}
+                name="LastName"
+                onChange={(e) => handleChange(e)}
+                placeholder="Apellido"
+                maxLength="20"
+                minLength="4"
+                className={styles.formInputs}
+                required
+              />{errors.LastName && (<p>{errors.LastName}</p>)}
 
-            <input
-              type="text"
-              value={input.Address}
-              name="Address"
-              onChange={(e) => handleChange(e)}
-              placeholder="Direccion"
-              className={styles.formInputs}
-              title='Debe contener mayusculas minusculas y numeros '
-              pattern='^[0-9a-zA-Z\s]+$'
-              required
-            />
+              <input
+                type="text"
+                value={input.Address}
+                name="Address"
+                onChange={(e) => handleChange(e)}
+                placeholder="Direccion"
+                className={styles.formInputs}
+                title='Debe contener mayusculas minusculas y numeros '
+                pattern='^[0-9a-zA-Z\s]+$'
+                required
+              />
 
-            <input
-              type="text"
-              value={input.Phone}
-              name="Phone"
-              onChange={(e) => handleChange(e)}
-              placeholder="Teléfono"
-              className={styles.formInputs}
-              maxLength="17" 
-              minLength="8" 
-              pattern="[+]{2}[0-9]{10-14}"
-              placeholder="+54 9 11 12345678" 
-              required
-            />
+              <input
+                type="text"
+                value={input.Phone}
+                name="Phone"
+                onChange={(e) => handleChange(e)}
+                placeholder="Teléfono"
+                className={styles.formInputs}
+                maxLength="17"
+                minLength="8"
+                pattern="[+]{2}[0-9]{10-14}"
+                placeholder="+54 9 11 12345678"
+                required
+              />
 
-            <input
-              type="text"
-              value={input.Email}
-              name="Email"
-              onChange={(e) => handleChange(e)}
-              placeholder="Email"
-              className={styles.formInputs}
-              required
-            />{errors.Email && (<p>{errors.Email}</p>)}  
+              <input
+                type="text"
+                value={input.Email}
+                name="Email"
+                onChange={(e) => handleChange(e)}
+                placeholder="Email"
+                className={styles.formInputs}
+                required
+              />{errors.Email && (<p>{errors.Email}</p>)}
 
-            <div className={styles.btns}>
+              <div className={styles.btns}>
+                <button
+                  type="submit"
+                  onClick={() => {
+                    setTimeout(function () {
+                      registroexitoso();
+                    }, 3000);
+                  }}
+                  className={styles.btn}
+                >
+                  <strong>Crear usuario <BiUserPlus className={styles.icon}/></strong>
+                </button>
+                {/* </Link> */}
+              </div>
+            </form>
+          </div>
+        ) : (
+          <div className={styles.containerForm}>
+            <div>
+              <h4 className={styles.title}> Cuenta creada <FiUserCheck className={styles.icon}/></h4>
               <button
-                type="submit"
-                onClick={() => {
-                  setTimeout(function() {
-                    registroexitoso();
-                  }, 3000);
-                }}
-                className={styles.btn}
+                className={styles.btn1}
+                onClick={() => { window.location.href = "/iniciarsesion" }}
               >
-                Crear
+                  <strong>Iniciar Sesion <GoSignIn className={styles.icon}/></strong>
               </button>
-              {/* </Link> */}
             </div>
-          </form>
-        </div>
-      ) : (
-        <div className={styles.container}> 
-        <div className={styles.containerForm}>
-      <h4> Cuenta creada </h4>
-         <button className={styles.btn1}onClick={()=>{window.location.href="/iniciarsesion"}} ><strong>Iniciar Sesion</strong></button>                 
+          </div>
+        )}
       </div>
-        </div>
-      )}
     </div>
   );
 }
