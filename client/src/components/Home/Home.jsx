@@ -4,23 +4,26 @@ import ChatBot from 'react-simple-chatbot';
 import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 import Slider from "../Slider/Slider";
+import Weather from "../Weather/Weather";
 import Upload from "../Reserva/Upload/Upload";
 // import Searchbar from "../Searchbar/Searchbar";
 // import Gallery from "../Gallery/Gallery";
 import styles from "./Home.module.css";
 import{useEffect} from "react"
 import { useDispatch, useSelector} from 'react-redux';
-import { Logeduser, getUserData } from "../../actions";
+import { Logeduser, getUserData, readWeather } from "../../actions";
 import {steps} from "./Steps.js"
 import ServiciosBanner from "../ServiciosBanner/ServiciosBanner";
 
 export default function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(Logeduser());
+    dispatch(Logeduser(), dispatch);
   }, [dispatch]);
 
-
+  useEffect(()=>{
+    dispatch(readWeather());
+  }, [dispatch]);
   const user = useSelector((state) => state.user);
   const ID = user && user.userid;
   useEffect(() => {
@@ -47,6 +50,7 @@ export default function Home() {
         {/* <Searchbar/> */}
         <Slider />
         <ServiciosBanner />
+        <Weather/>
       </div>
       <div className={styles.mapaContainer}>
         <iframe

@@ -25,6 +25,7 @@ export const READ_PICTURES_OCULTADOS = "READ_PICTURES_OCULTADOS";
 export const READ_USERS_OCULTADOS = "READ_USERS_OCULTADOS"; 
 export const READ_SERVICES_OCULTADOS = "READ_SERVICES_OCULTADOS"; 
 export const READ_CABINS_OCULTADOS = "READ_CABINS_OCULTADOS"; 
+export const READ_WEATHER = "READ_WEATHER";
 export const EDIT_RESERVATIONS = "EDIT_RESERVATIONS";
 export const EDIT_USER = "EDIT_USER";
 export const EDIT_SERVICES = "EDIT_SERVICES";
@@ -70,17 +71,21 @@ export function sendEmail(payload) {
 }
 
 
-// export function sendNotification(payload) {
-//   return async function (dispatch) {
-//       const json = await axios.post("/sendNotification", payload)
-
-//       return dispatch({
-//           type: 'SEND_NOTIFICATION',
-//           payload: json.data
-//       })
-//   }
-// }
-
+export function readWeather() {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("http://localhost:3001/weather/");
+      console.log('json',json.data)
+      return dispatch({
+        type: READ_WEATHER,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.log('error');
+      console.error(err);
+    }
+  };
+}
 
 export function createReservation(payload) {
   return async function (dispatch) {
@@ -427,10 +432,10 @@ export function editServices(payload, { token }) {
   return async function (dispatch) {
     try {
       var json = await axios.put("/services/EditService", payload, config);
-      return dispatch({
+      return (dispatch({
         type: EDIT_SERVICES,
         payload: json.data,
-      });
+      }),window.location.reload())
     } catch (err) {
       console.error(err);
     }
