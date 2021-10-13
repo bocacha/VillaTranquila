@@ -61,7 +61,7 @@ export default function Reservaciones() {
     UserId: logeduser.userid,
     CostoFinal: JSON.parse(costo),
     Cabinid: JSON.parse(cabinId),
-    ExtraServices: "",
+    ExtraServices: null,
     Anombrede:""
   });
   const consultarprecio=()=>{
@@ -71,7 +71,6 @@ export default function Reservaciones() {
     for (let i = 0; i < checkbox.length; i++) {
       
       if (checkbox[i].checked) {
-        console.log(suma)
         suma.push(parseFloat(checkbox[i].name))
         console.log(checkbox[i].name)
       }
@@ -91,12 +90,17 @@ export default function Reservaciones() {
     })
     lala = [];
     const checkbox = Array.from(document.getElementsByClassName("Servicios"));
+    let contador = 0
     for (let i = 0; i < checkbox.length; i++) {
       if (checkbox[i].checked) {
         lala.push(checkbox[i].value);
         setInput({ ...input, ExtraServices: [...lala] });
+        contador++
         console.log(checkbox[i].value);
       }
+    }
+    if(contador === 0){
+      setInput({...input , ExtraServices:null})
     }
   };
 
@@ -166,10 +170,11 @@ useEffect(()=>{
 
 const handlePrueba=()=>{
 console.log(input.Anombrede, logeduser.email, input.Checkin)
-dispatch(createReservation({...input, id:logeduser.userid},dispatch))
 const options = {year:'numeric', month:'numeric', day:'2-digit'}
-    const data = { username:logeduser.user ,name: input.Anombrede, email: logeduser.email, date: selectDateCI.toLocaleDateString('es-ES', options)}
- dispatch(sendNotification(data))
+const data = { username:logeduser.user ,name: input.Anombrede, email: logeduser.email, date: selectDateCI.toLocaleDateString('es-ES', options)}
+console.log(input)
+dispatch(createReservation({...input, id:logeduser.userid},dispatch))
+dispatch(sendNotification(data))
 dispatch(editAvailible(edit))
 alert("Reserva creada")
 }
