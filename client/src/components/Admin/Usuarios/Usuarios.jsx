@@ -5,6 +5,7 @@ import { createUsers, readUsers, editUsers, Logeduser, readUsersocultados} from 
 import UsuariosDetail from "./UsuariosDetail";
 import { Link } from "react-router-dom";
 import NavAdmin from '../NavAdmin/NavAdmin';
+import Navbar from "../../Navbar/Navbar";
 
 function validation(input){
   var letras="abcdefghyjklmnñopqrstuvwxyz";
@@ -159,7 +160,12 @@ const showtrue=()=>{
 }
   return (
     <div className={styles.container}>
-       <NavAdmin />
+       <div className={styles.navs2}>
+        <div className={styles.navs}>
+          <Navbar />
+          <NavAdmin />
+        </div>
+      </div>
        {/* {!habilitar ?(
             <button onClick={ocultadas}>Mostrar ocultadas</button>
           ):(

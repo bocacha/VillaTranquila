@@ -199,6 +199,9 @@ export default function Profile(props) {
                     </table>
                     <details>
                         <summary>Historial de reservas</summary>
+                        <Link to={`/${user.user}/${user.userid}`}>
+                        <button className={styles.editarPerfil} >Ver y editar mis reservaciones</button>
+                         </Link>
                         {dataUser.ReservationsHistory &&
                             dataUser.ReservationsHistory.length ? (
                             <ul>

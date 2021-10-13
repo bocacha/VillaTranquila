@@ -138,8 +138,8 @@ export function createServices(payload, { token }) {
   };
 }
 
-export function createUsers(payload) {
-    return async function (dispatch) {
+export function createUsers(payload) { 
+  return async function (dispatch) {
    try{ const response = await axios.post("/users/Singup", payload);
     return response;
     }catch (err) {

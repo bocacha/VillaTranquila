@@ -1,27 +1,31 @@
 import React, { useState } from "react";
-import styles from "./ServiciosDetail.module.css";
+import styles from "./ReservacionesDetail.module.css";
 import { useDispatch } from "react-redux";
-import { removeServices, restoreServices } from "../../../actions";
+import { removeReservations, restoreReservations } from "../../../actions";
+import {Link} from "react-router-dom"
 
-export default function ServiciosDetail({
+export default function ReservacionesDetail({
   ID,
-  Name,
-  Description,
-  Price,
+  Checkin,
+  Checkout,
+  UserId,
+  Paymentsid,
+  Cabinid,
+  ExtraServices,
+  CostoFinal,
   handleSubmitEdit,
   handlePrueba,
   restaurar,
 }) {
   const dispatch = useDispatch();
   const [mostrar, setMostrar] = useState(true);
-
   const handleSubmitDelete = (ID) => {
-    dispatch(removeServices({ id: ID }));
-    alert("el servicio fue eliminado con exito");
+    dispatch(removeReservations({ id: ID }));
+    alert("su Reserva fue Eliminada con exito");
     window.location.reload();
   };
   const handleSubmitrestore = (ID) => {
-    dispatch(restoreServices({ id: ID }));
+    dispatch(restoreReservations({ id: ID }));
     alert("su cabaña fue Restaurada con exito");
     window.location.reload();
   };
@@ -29,15 +33,21 @@ export default function ServiciosDetail({
     <div className={styles.container}>
       <div className={styles.infoContainer}>
         <p className={styles.p}>
-          Name:{Name}
-          {/* <strong>Name:</strong> {Name} */}
+          <strong>Checkin:</strong> {Checkin}
         </p>
         <p className={styles.p}>
-          <strong>Description:</strong> {Description}
+          <strong>Checkout:</strong> {Checkout}
         </p>
         <p className={styles.p}>
-          <strong>Price:</strong> {Price}
+          <strong>UserId:</strong> {UserId}
         </p>
+        <p className={styles.p}>
+          <strong>Costo Final por Noche(c/Servicios Extra):</strong> {CostoFinal}
+        </p>
+        <p className={styles.p}>
+          <strong>Cabinid:</strong> {Cabinid}
+        </p>
+        {/* <p><strong>ExtraServices:</strong> {ExtraServices}</p> */}
       </div>
       <div className={styles.btnsContainer}>
         <div>
@@ -62,9 +72,13 @@ export default function ServiciosDetail({
             <button
               onClick={(e) => {
                 handleSubmitEdit(e, ID,
-                  Name,
-                  Description,
-                  Price,);
+                  Checkin,
+                  Checkout,
+                  UserId,
+                  Paymentsid,
+                  Cabinid,
+                  ExtraServices,
+                  CostoFinal,);
                 setMostrar(false);
               }}
               className={styles.btnPlus}
@@ -77,6 +91,11 @@ export default function ServiciosDetail({
             <button onClick={(e) => handlePrueba(e, ID)} className={styles.btnPlus}>Guardar</button>
           </div>
         )}
+      <div>
+        <Link to="/reserva/pago">
+      <button value="Pagar" target="_blank" class="btn btn-primary btn-block">Pagar </button>
+        </Link>
+        </div>
       </div>
     </div>
   );
