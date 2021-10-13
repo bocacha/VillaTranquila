@@ -171,3 +171,7 @@
 .infoContainer span p{
   margin: 0 30px -5px 30px;
 }
+.derecha img{
+  width: 100%;
+  max-width: 280px;
+}

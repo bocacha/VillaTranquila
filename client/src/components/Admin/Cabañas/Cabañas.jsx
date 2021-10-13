@@ -765,6 +765,7 @@ const Cabañas = () => {
                   placeholder="Descripción"
                   maxLength="100"
                   className={styles.formInputs}
+                  id={styles.descripcionEditar}
                   required
                 />
               </div>
