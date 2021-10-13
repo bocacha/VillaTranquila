@@ -129,7 +129,7 @@ export function createServices(payload, { token }) {
   }
   return async function (dispatch) {
     const response = await axios.post("http://localhost:3001/services/NewService", payload, config);
-    return response;
+    return (response,window.location.reload());
   };
 }
 
@@ -427,10 +427,10 @@ export function editServices(payload, { token }) {
   return async function (dispatch) {
     try {
       var json = await axios.put("http://localhost:3001/services/EditService", payload, config);
-      return dispatch({
+      return (dispatch({
         type: EDIT_SERVICES,
         payload: json.data,
-      });
+      }),window.location.reload())
     } catch (err) {
       console.error(err);
     }
@@ -627,7 +627,6 @@ export function removeUsers(id) {
 
 export function restoreCabains(id){
   return async function (dispatch) {
-   
       var json = await axios.put("http://localhost:3001/cabins/RestoreCabin", id);
       return dispatch({
         type: REMOVE_CABAINS,

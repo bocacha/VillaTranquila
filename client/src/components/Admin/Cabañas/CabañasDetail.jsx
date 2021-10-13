@@ -24,7 +24,7 @@ export default function CabinsDetail({
     alert("su cabaña fue Eliminada con exito");
     let obj = { id: ID };
     dispatch(removeCabains(obj));
-    window.location.reload();
+    window.location.reload(true);
   };
 
   const handleSubmitrestore = (ID)=>{
@@ -32,7 +32,7 @@ export default function CabinsDetail({
     alert("su cabaña fue eliminada con exito");
     let obj = {id:ID}
     dispatch(restoreCabains(obj));
-    window.location.reload();
+    window.location.reload(false);
   }
 
   return (

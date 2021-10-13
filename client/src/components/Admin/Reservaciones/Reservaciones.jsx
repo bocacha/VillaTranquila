@@ -71,16 +71,6 @@ export default function Reservaciones() {
     e.preventDefault();
     dispatch(createReservation(input));
     alert("Reserva creada con éxito");
-    setInput({
-      id: "",
-      Checkin: "",
-      Checkout: "",
-      UserId: "",
-      Paymentsid: "",
-      Cabinid: "",
-      ExtraServices: "",
-      CostoFinal: "",
-    });
     window.location.reload();
   }
   function handleSubmitEdit(e,ID) {

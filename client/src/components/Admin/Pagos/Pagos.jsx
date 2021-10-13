@@ -54,6 +54,7 @@ export default function Pagos() {
     });
   }
   function handleChangeEdit(e) {
+    console.log(e.target.name, e.target.value)
     setEdit({
       ...edit,
       [e.target.name]: e.target.value,
@@ -74,20 +75,28 @@ export default function Pagos() {
 
     window.location.reload();
   }
-  function handleSubmitEdit(e, ID) {
+  function handleSubmitEdit(e, ID,
+    TotalAmount,
+    PaydAmount,
+    Date,
+    idClient,) {
     e.preventDefault();
-    setMostrar(true);
-    setEdit({ ...edit, id: ID });
+    
+    setEdit({ ...edit, id:  ID,
+      TotalAmount:TotalAmount,
+      PaydAmount: PaydAmount,
+      Date:Date,
+      idClient: idClient, });
     //dispatch(editPayments(edit, { token }));
+    setMostrar(true);
   }
 
   function handlePrueba(e, ID) {
+    console.log(edit)
     const { token } = logeduser;
     e.preventDefault();
-    setMostrar(true);
-    setEdit({ ...edit, id: ID });
     dispatch(editPayments(edit, { token }));
-
+    alert("editado")
     window.location.reload();
   }
   const ocultadas = () => {
@@ -121,8 +130,8 @@ export default function Pagos() {
             <div className={styles.title}>Crear un pago</div>
             <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
               <DatePicker
-                selected={selectedDate}
-                onChange={(date) => setSelectedDate(date)}
+                selected={input.Date}
+                onChange={(date) => setInput({...input, Date:date})}
                 dateFormat="dd/MM/yyyy"
                 minDate={new Date()}
                 className={styles.formInputs}
