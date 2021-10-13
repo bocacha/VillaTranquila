@@ -199,7 +199,7 @@ if(dataUser.ReservationsHistory){
                     </table>
                     <details>
                         <summary>Historial de reservas</summary>
-                        <Link to={`/Profile/${user.user}/${user.userid}`}>
+                        <Link to={`/Profile/${user.user}/${user.userid}`} className={styles.link}>
                         <button className={styles.editarPerfil} >Ver y editar mis reservaciones</button>
                          </Link>
                         {dataUser.ReservationsHistory &&
