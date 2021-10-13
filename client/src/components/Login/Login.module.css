@@ -1,24 +1,123 @@
-.container {
+.login {
   width: 100%;
   min-height: 100vh;
+  background-color: #355978;
+}
+.login .container{
   display: flex;
+  justify-items: center;
+  justify-content: center;
 }
 
-.containerForm {
+.login .container .containerForm{
+  margin-top: 100px;
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 40px -10px #000;
+  box-sizing: border-box;
+  text-decoration: none;
   display: flex;
-  flex-direction:column;
-  margin-top: 70px;
-  width: 100%;
+  -webkit-box-pack: center;
+  justify-content: center;
+  flex-direction: column;
+  -webkit-box-align: center;
   align-items: center;
+  background-color: #293c4f;
+  flex-wrap: wrap;
+  place-content: center;
+  overflow: auto;
 }
+
+.login .container .containerForm .title{
+  font-size: x-large;
+  margin: 10px 50px;
+}
+
+.login .container .containerForm form input {
+  padding: 7px 0px;
+  text-align: center;
+  height: 42px;
+  /* width: 100%; */
+  font-size: 1em;
+  background-color: #355978 ;
+  color: #fff;
+  border: solid #355978;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  margin: 10px 5px 10px 5px;
+}
+.login .container .containerForm form input:hover{
+  background-color: #8bafbf ;
+  color:  #1c2531;
+  border-color: #8bafbf;
+}
+.login .container .containerForm form .btn{
+  border-radius: 8px;
+  background-color: #355978 ;
+  border: solid #355978;
+  color: #fff;
+  text-align: center;
+  /* font-size: large; */
+  transition: all 0.5s ease;
+  cursor: pointer;
+  padding: 0 20px;
+  display: inline-flex;
+  height: 42px;
+  line-height: 35px;
+  margin: 20px 5px 20px 30px;
+}
+.login .container .containerForm form .btn:hover {
+  background-color: #8bafbf ;
+  color: #1c2531 ;
+  border-color: #8bafbf;
+}
+.login .container .containerForm .btn{
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.295);
+  border: transparent;
+  transition: all 0.3s ease;
+  margin-bottom: 15px;
+}
+.login .container .containerForm .btn:hover{
+  color: rgba(255, 255, 255, 0.822);
+}
+.login .container .containerForm .btn1{
+  border-radius: 8px;
+  background-color: #355978 ;
+  border: solid #355978;
+  color: #fff;
+  text-align: center;
+  font-size: large;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  padding: 0 20px;
+  /* display: inline-flex; */
+  /* height: 42px; */
+  line-height: 35px;
+  margin: 20px 5px 20px 30px;
+}
+.login .container .containerForm .btn1:hover {
+  background-color: #8bafbf ;
+  color: #1c2531 ;
+  border-color: #8bafbf;
+}
+.login .container .containerForm .btn1 .icon{
+  margin-top: -4px;
+  margin-left: 5px;
+}
+
+/* 
 .formInputs {
   margin-bottom: 8px;
   padding: 3px;
   border: solid 1.5px #293c4f;
   margin-right: 5px;
-}
+} */
 
-.btn {
+/* .btn {
   padding: 4px 7px;
   background: #293c4f;
   color: #fff;
@@ -33,11 +132,11 @@
   background: none;
   border: 1px solid #293c4f;
   color: #000;
-}
-.list{
+} */
+/* .list{
   list-style: none;
-}
-.btn1{
+} */
+/* .btn1{
   padding: 4px 7px;
   background: #293c4f;
   color: #fff;
@@ -49,9 +148,9 @@
   transition-duration: 0.4s;
   width: 10%;
 
-}
-.btn1:hover {
+} */
+/* .btn1:hover {
   background: none;
   border: 1px solid #293c4f;
   color: #000;
-}
+} */

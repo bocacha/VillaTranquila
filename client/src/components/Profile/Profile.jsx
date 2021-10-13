@@ -58,6 +58,7 @@ export default function Profile(props) {
             dispatch(editProfile(edit, ID));
             dispatch(Logeduser());
             setMostrar(false);
+            alert("Edicion exitosa")
             window.location.reload();
         }
     }
@@ -136,7 +137,7 @@ if(dataUser.ReservationsHistory){
                 dispatch(editUsers(cambios));
                 // dispatch(Logeduser());
                 setMostrar(false);
-                window.location.reload();
+                //window.location.reload();
             }
         }
         else {
@@ -322,7 +323,6 @@ if(dataUser.ReservationsHistory){
                             />
                             <button
                                 type="submit"
-                                onSubmit={(e) => handleSubmitEdit(e)}
                                 className={styles.editarPerfil}
                                 id={styles.guardar}
                             >
