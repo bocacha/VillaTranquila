@@ -33,6 +33,10 @@
     overflow: auto;
 }
 
+.link{
+    text-decoration: none;
+}
+
 .editarPerfil{
     border-radius: 4px;
     background-color: #355978 ;
@@ -48,6 +52,7 @@
     line-height: 35px;
     margin: 20px 10px 10px 10px;
     margin-top: 10px; 
+    text-decoration: none;
 }
 .editarPerfil:hover {
     background-color: #8bafbf ;
@@ -107,7 +112,7 @@ details:not([open])
 
 details[open]
 {
-    height: 4em;
+    height: 6em;
 }
 
 .reserva{
