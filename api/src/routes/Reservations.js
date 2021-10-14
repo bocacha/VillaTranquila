@@ -129,7 +129,7 @@ router.put('/RemoveReservation', (req,res) =>{
 router.put('/RestoreReservation', (req,res) =>{
     const {id}= req.body;
     if(!id){
-        return res.json({status: 404},{message:"Reservation not found"})
+        return res.status(500).json({message:"Reservation not found"})
     }
     Reservations.update(
         {Show:true},

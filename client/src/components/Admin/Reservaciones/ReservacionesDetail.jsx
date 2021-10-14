@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./ReservacionesDetail.module.css";
 import { useDispatch } from "react-redux";
 import { removeReservations, restoreReservations } from "../../../actions";
+import fechas from "../../Reserva/Linkreserva/algoritmofechas"
 
 export default function ReservacionesDetail({
   ID,
@@ -16,17 +17,18 @@ export default function ReservacionesDetail({
   handlePrueba,
   restaurar,
 }) {
+  const Available = fechas({Checkin:Checkin, Checkout:Checkout})
   const dispatch = useDispatch();
   const [mostrar, setMostrar] = useState(true);
   const handleSubmitDelete = (ID) => {
-    dispatch(removeReservations({ id: ID }));
-    alert("su Reserva fue Eliminada con exito");
-    window.location.reload();
+    dispatch(removeReservations({ id: ID , Available},dispatch));
+    //alert("su Reserva fue Eliminada con exito");
+   //window.location.reload();
   };
   const handleSubmitrestore = (ID) => {
-    dispatch(restoreReservations({ id: ID }));
-    alert("su cabaña fue Restaurada con exito");
-    window.location.reload();
+    dispatch(restoreReservations({ id: ID, Available },dispatch));
+    //alert("su cabaña fue Restaurada con exito");
+    //window.location.reload();
   };
   return (
     <div className={styles.container}>
