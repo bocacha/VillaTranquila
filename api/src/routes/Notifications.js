@@ -16,9 +16,11 @@ router.get('/', async (req, res)=>{
 
 router.post('/', async(req, res)=>{    
     const {id, data} = req.body;
+    console.log(data)
     Notifications.create({
         payment_id :id, 
         id: data.id
+        
     })
     .then(doneTemp=>{
         res.status(200).json(doneTemp)
@@ -33,6 +35,7 @@ router.post('/', async(req, res)=>{
    
    
     .catch(error=>{ res.send(error)})
+
 });
 
 module.exports = router;
