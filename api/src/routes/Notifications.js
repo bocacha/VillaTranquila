@@ -16,7 +16,7 @@ router.get('/', async (req, res)=>{
 
 router.post('/', async(req, res)=>{    
     const {id, data} = req.body;
-    console.log(data)
+    console.log(req.body)
     Notifications.create({
         payment_id :id, 
         id: data.id
