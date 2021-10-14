@@ -2,31 +2,35 @@ const { DataTypes, Sequelize } = require('sequelize');
 
 module.exports = (sequelize) => {
   sequelize.define('Payments', {
-    ID:{
+    id:{
       type: DataTypes.UUID,
       defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
       allowNull: false,
     },
-    TotalAmount:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    PaydAmount:{
-      type: DataTypes.STRING
-    },
-    Date:{
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    idClient:{
+    date_created:{
       type: DataTypes.JSON, 
-      allowNull: false,
+      allowNull: true,
     },
-    Show:{
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue:true
-     }
+    aplication_id:{
+      type: DataTypes.JSON, 
+      allowNull: true,
+    },
+    user_id:{
+      type: DataTypes.JSON, 
+      allowNull: true,
+    },
+    action:{
+      type: DataTypes.JSON, 
+      allowNull: true,
+    },
+    data:{
+      type: DataTypes.JSON, 
+      allowNull: true,
+    },
+    payment_id:{
+      type: DataTypes.JSON, 
+      allowNull: true,
+    }
   },{timestamps: false,});
 };
