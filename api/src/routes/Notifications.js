@@ -14,7 +14,7 @@ router.get('/', async (req, res)=>{
 
 })
 
-router.post('/', async(req, res)=>{    
+router.post('/', (req, res)=>{    
     const {id, data} = req.body;
     console.log(req.body)
     console.log(data)
