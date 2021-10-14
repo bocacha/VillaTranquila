@@ -41,13 +41,3 @@ router.post('/', (req, res)=>{
  });
 
 module.exports = router;
-// {
-//      action: 'payment.created',
-//        api_version: 'v1',
-//        data: { id: '1242368236' },
-//       date_created: '2021-10-14T20:15:00Z',
-//       id: 100008706566,
-//      live_mode: false,
-//    type: 'payment',
-//        user_id: '246910716'
-//    }
