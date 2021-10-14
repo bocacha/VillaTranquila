@@ -20,8 +20,8 @@ router.post('/', (req, res)=>{
     console.log(data)
     console.log(id)
     Notifications.create({
-        payment_id :id, 
-        id: data.id
+        id :id, 
+        data: data.id
         
     })
     .then(doneTemp=>{
