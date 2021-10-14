@@ -25,7 +25,7 @@ let preference = {
       "failure":"http://localhost:3001/reserva/pago",
       "pending":"http://localhost:3001/reserva/pago",
     },
-  //"http://app-villa-tranquila.vercel.app/%22,%22http://app-villa-tranquila.vercel.app/reserva/pago%22%22http://app-villa-tranquila.vercel.app/reserva/pago"
+  //"http://app-villa-tranquila.vercel.app","http://app-villa-tranquila.vercel.app/reserva/pago""http://app-villa-tranquila.vercel.app/reserva/pago"
     auto_return: "approved",
     notification_url:"https://villatranquila.herokuapp.com/payments/NewPayment",
 
