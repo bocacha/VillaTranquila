@@ -17,6 +17,8 @@ router.get('/', async (req, res)=>{
 router.post('/', async(req, res)=>{    
     const {id, data} = req.body;
     console.log(req.body)
+    console.log(data)
+    console.log(id)
 //     Notifications.create({
 //         payment_id :id, 
 //         id: data.id
@@ -39,3 +41,13 @@ router.post('/', async(req, res)=>{
  });
 
 module.exports = router;
+// {
+//      action: 'payment.created',
+//        api_version: 'v1',
+//        data: { id: '1242368236' },
+//       date_created: '2021-10-14T20:15:00Z',
+//       id: 100008706566,
+//      live_mode: false,
+//    type: 'payment',
+//        user_id: '246910716'
+//    }
