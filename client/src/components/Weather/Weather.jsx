@@ -6,15 +6,35 @@ export default function Weather() {
     const weather = useSelector(state => state.weather);
     //console.log(weather)
     let today = '';
-
+    let icono = [];
+   
     return (
         <div className={styles.weather}>
             <p className={styles.titulo}>Clima actual</p>
+            
             <div className={styles.container}>
                 {weather?.map(e => {
                     if (weather.indexOf(e) === 0) today = 'Hoy';
                     if (weather.indexOf(e) === 1) today = 'Mañana';
                     if (weather.indexOf(e) === 2) today = 'Pasado mañana';
+                    if (e.text === 'Patchy rain possible'){
+                       icono  =  (<div className={styles.wcont}>
+                       <div className={styles.icon, styles.rainy} id='rainy'>
+                           <div className={styles.cloud}></div>
+                           <div className={styles.rain}></div>
+                       </div>
+                   </div>)
+                    } else if(e.text === 'Sunny'){
+                       icono = ( 
+                        <div className={styles.wcont}>
+                            <div className={styles.icon, styles.sunny}>
+                                    <div className={styles.sun}>
+                                        <div className={styles.rays}></div>
+                                    </div>
+                                </div>
+                        </div>)
+                    }
+                    
 
                     return (
                         <div className={styles.dia}>
@@ -43,7 +63,9 @@ export default function Weather() {
                                     </tr>
                                 </tbody>
                             </table>
-                            <img src={e.icon} />
+                            {/* <label>{e.text}</label> */}                       
+                                {/* <img src={e.icon} />                           */}
+                               {icono}
                         </div>
                     )
                 })}

@@ -14,6 +14,7 @@ const getAllApi = async() =>{
             wind: e.day.maxwind_kph,
             chance_rain: e.day.daily_chance_of_rain,
             chance_snow: e.day.daily_chance_of_snow,
+            text:e.day.condition.text,
             icon: e.day.condition.icon
             }
     })
