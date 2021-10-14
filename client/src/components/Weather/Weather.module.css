@@ -11,10 +11,9 @@
 }
 .dia{
     position: relative;
-    width: fit-content;
     height: fit-content;
     color: #fff;
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 0 40px -10px #000;
     box-sizing: border-box;
     text-decoration: none;
@@ -29,29 +28,25 @@
     place-content: center;
     overflow: auto;
     margin: 20px 2% 50px 2%;
-}
-.titulo{
-    font-size: xx-large;
-    padding-top: 20px;
-    color: #fff;
-    font-weight:600;
+    width: 30%;
 }
 .today{
     font-size: x-large;
     font-weight: 500;
     padding-top: 10px;
 }
-
-.izqu{
+#tablaClima{
+    margin: 10px -100px;
+    width: 100%;
+}
+#tablaClima .izqu{
     float: left;
-    margin-right: 80px;
+    text-align: start;
+    margin-left: 5%;
 }
-.der{
+#tablaClima .der{
     float: right;
-    margin-left: 80px;
-}
-table{
-    margin: 10px 20px;
+    margin-right: 5%;
 }
 
 img{

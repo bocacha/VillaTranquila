@@ -17,7 +17,7 @@
   /* float:right;
   position: relative;
   right: 50%; */
-  width: 30%;
+  width: 70%;
   height: fit-content;
   color: #fff;
   border-radius: 8px;
@@ -116,5 +116,5 @@
   margin-top: -4px;
 }
 #creada{
-  width: 50%;
+  width: 70%;
 }

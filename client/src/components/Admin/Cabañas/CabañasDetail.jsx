@@ -61,7 +61,7 @@ export default function CabinsDetail({
               <td className={styles.derecha}>$ {Price}</td>
             </tr>
             <tr>
-              <td className={styles.izquierda} id={styles.descripcion}><strong>Descripción:</strong></td>
+              <td className={styles.izquierda} ><strong>Descripción:</strong></td>
               <td className={styles.derecha}><p>{Description}</p></td>
             </tr>
             <tr>
@@ -71,21 +71,6 @@ export default function CabinsDetail({
           </tbody>
         </table>
         <span> {Parrilla && <p><GiBarbecue /></p>}  {Wifi && <p><FaWifi /></p>}  {Parking && <p><FaCarAlt /></p>} </span>
-        {/* <p className={styles.p}><strong>Cabaña N°:</strong> {Number}</p>
-        <p className={styles.p}><strong>Camas:</strong>  {Capacity}</p>
-        <div ><strong>Fechas No disponible:</strong>  {Available.map((e)=>{
-          return(  
-              <ul>
-                <li>Del {e[0]} Al {e[e.length -1]}</li>
-              </ul>)
-              
-          })}</div>
-        <p className={styles.p}><strong>Price:</strong>  {Price}</p>
-        <p className={styles.p}><strong>Descripcion:</strong>  {Description}</p>
-        <p className={styles.p}><strong>Picture:</strong></p><img width="100px" src={Picture}/>
-        <p className={styles.p}><strong>Parrilla:</strong>  {Parrilla?<span>si</span>:<span>no</span>}</p>
-        <p className={styles.p}><strong> Wifi:</strong> {Wifi?<span>si</span>:<span>no</span>}</p>
-        <p className={styles.p}><strong>Parking:</strong>  {Parking?<span>si</span>:<span>no</span>}</p> */}
       </div>
       <div className={styles.btnsContainer}>
         <div>
@@ -99,23 +84,26 @@ export default function CabinsDetail({
         {mostrar
           ?
           <div>
-            <button onClick={(e) => {
-              handleeditSubmit(
-                e,
-                ID,
-                Number,
-                Capacity,
-                Available,
-                Price,
-                Description,
-                Picture,
-                Parrilla,
-                Wifi,
-                Parking);
-              setMostrar(false);
-              ;
-            }
-            } className={styles.btnPlus} >Editar</button>
+            <button
+              onClick={(e) => {
+                handleeditSubmit(
+                  e,
+                  ID,
+                  Number,
+                  Capacity,
+                  Available,
+                  Price,
+                  Description,
+                  Picture,
+                  Parrilla,
+                  Wifi,
+                  Parking);
+                setMostrar(false);
+                }}
+              className={styles.btnPlus}
+            >
+              Editar
+            </button>
           </div>
 
           :

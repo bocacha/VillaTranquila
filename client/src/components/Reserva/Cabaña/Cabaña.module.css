@@ -17,6 +17,8 @@
 
 .img {
   width: 350px;
+  max-height: 350px;
+  border-radius: 10px;
 }
 
 .infoContainer {
@@ -33,6 +35,7 @@
   width: 3200px;
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
+  
 }
 
 .containerBtn {
@@ -65,4 +68,29 @@
 .servicios p{
   margin-right: 10px;
   font-size: x-large;
+}
+table{
+  width: 120%
+}
+
+table .izquierda{
+  float:left;
+}
+table .derecha{
+  float:right;
+}
+table .derecha p{
+  max-width: 280px;
+  text-align: end;
+  text-align: justify;
+}
+.info span{
+  display:flex;
+  justify-items: center;
+  justify-content: center;
+}
+.info span p{
+  margin: 10px 30px -5px 30px;
+
+  font-size: xx-large;
 }

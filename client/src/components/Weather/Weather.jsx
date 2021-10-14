@@ -8,7 +8,6 @@ export default function Weather() {
     let today = '';
     return (
         <div className={styles.weather}>
-            {/* <p className={styles.titulo}>Clima</p> */}
             <div className={styles.container}>
                 {weather?.map(e => {
                     if (weather.indexOf(e) === 0) today = 'Hoy';
@@ -18,7 +17,7 @@ export default function Weather() {
                     return (
                         <div className={styles.dia}>
                             <p className={styles.today}>{today}</p>
-                            <table>
+                            <table id={styles.tablaClima}>
                                 <tbody>
                                     <tr>
                                         <td className={styles.izqu}>Temperatura mínima:</td>

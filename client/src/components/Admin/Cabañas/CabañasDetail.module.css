@@ -106,12 +106,12 @@
   overflow: auto;
   margin: 0 0 30px 10px;
 }
+.detailCard .infoContainer table{
+  width: 100%;
+  margin-left: -3px;
+}
 .izquierda{
   float:left;
-  margin-right: 80px;
-}
-#descripcion{
-  margin-top: 10%;
 }
 .derecha{
   float:right;
@@ -178,4 +178,6 @@
 .derecha img{
   width: 100%;
   max-width: 280px;
+  max-height: 280px;
+  border-radius: 10px;
 }

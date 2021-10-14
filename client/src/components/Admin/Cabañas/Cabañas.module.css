@@ -399,6 +399,9 @@
   color: #1c2531 ;
   border-color: #8bafbf;
 }
+.detalles{
+  width: 110%;
+}
 #id1{
   margin-left: 4px;
 }
@@ -414,3 +417,4 @@
 #descripcionEditar{
   min-height: 100px;
 }
+

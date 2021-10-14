@@ -40,7 +40,35 @@ export default function Cabaña({
           className={styles.img}
         />
         <div className={styles.info}>
-          <span>Capacidad: {capacity} personas</span>
+          <table>
+            <tbody>
+              <tr>
+                <td className={styles.izquierda}>Capacidad:</td>
+                <td className={styles.derecha}>{capacity} personas</td>
+              </tr>
+              {
+                Available.length !== 0 &&
+                <tr>
+                  <td className={styles.izquierda}>No dispobible:</td>
+                  <td className={styles.derecha}>
+                    <ul>
+                      {Available.map(el => <li>Del {el[0]} al {el[el.length - 1]}</li>)}
+                    </ul>
+                  </td>
+                </tr>
+              }
+              <tr>
+                <td className={styles.izquierda}>Precio por noche:</td>
+                <td className={styles.derecha}>$ {price}</td>
+              </tr>
+              <tr>
+                <td className={styles.izquierda}>Descripción:</td>
+                <td className={styles.derecha}><p>{description}</p></td>
+              </tr>
+            </tbody>
+          </table>
+          <span> {parrilla && <p><GiBarbecue /></p>}  {wifi && <p><FaWifi /></p>}  {parking && <p><FaCarAlt /></p>} </span>
+          {/* <span>Capacidad: {capacity} personas</span>
           {Available.length !== 0 &&
             <div>Fechas ocupadas: {Available.map((e) => {
               return (
@@ -56,7 +84,7 @@ export default function Cabaña({
             {parrilla && <p><GiBarbecue /></p>}
             {wifi && <p><FaWifi /></p>}
             {parking && <p><FaCarAlt /></p>}
-          </div>
+          </div> */}
         </div>
         <div className={styles.containerBtn}>
           <Link to="/reserva/reservar">
