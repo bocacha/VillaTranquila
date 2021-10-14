@@ -28,8 +28,9 @@ router.get('/', async (req, res)=>{
 
 
 router.post('/', async(req, res)=>{  
-    const {id} = req.body.data; 
-    await axios.get('https://api.mercadopago.com/v1/payments/' + id)
+    console.log(req.body)
+    console.log(req.params)
+    await axios.get('https://api.mercadopago.com/v1/payments/' + req.body.data.id)
     .then(res =>{
         console.log(res)
     })
