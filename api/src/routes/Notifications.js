@@ -21,19 +21,17 @@ router.post('/', async(req, res)=>{
         id: data.id
     })
     .then(doneTemp=>{
-         res.status(200).json(doneTemp)
+        res.status(200).json(doneTemp)
+         
+            const {data}=doneTemp.dataValues
+            const idPago=axios.get(`https://api.mercadopago.com/v1/payments/${data.id}`)
+            .then(res=>{
+                const {payer,title, unitPrice, card, transactionDetails,payment_method_id,date_approved,date_last_updated}=res.dataValues
+                const newPayment = axios.post('/payments/NewPayment',{payer,title, unitPrice, card, transactionDetails,payment_method_id,date_approved,date_last_updated})    
+        })
     })
-    .then(doneTemp=>{
-        const {data}=doneTemp.dataValues
-        const idPago=axios.get(`https://api.mercadopago.com/v1/payments/${data.id}`)
-
-    })
-    .then(res=>{
-        const {title, unitPrice, card, transactionDetails,payment_method_id,date_approved,date_last_updated}=res.dataValues
-        const newPayment = axios.post('/payments/NewPayment',{title, unitPrice, card, transactionDetails,payment_method_id,date_approved,date_last_updated})
-
-
-    })
+   
+   
     .catch(error=>{ res.send(error)})
 });
 
