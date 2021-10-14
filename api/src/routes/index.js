@@ -13,7 +13,7 @@ const showGallery = require('./ShowGallery')
 const sendNotification= require('./SendNotification')
 const MercadoPago= require('./MercadoPago')
 const weather = require('./Weather')
-const notification = require('./Notification')
+const notification = require('./Notifications')
 
 const router = Router();
 router.use("/cabins" , cabinsrouter)
