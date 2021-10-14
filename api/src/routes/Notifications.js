@@ -19,13 +19,13 @@ router.post('/', async(req, res)=>{
     console.log(req.body)
     console.log(data)
     console.log(id)
-//     Notifications.create({
-//         payment_id :id, 
-//         id: data.id
+    Notifications.create({
+        payment_id :id, 
+        id: data.id
         
-//     })
-//     .then(doneTemp=>{
-//         res.status(200).json(doneTemp)
+    })
+    .then(doneTemp=>{
+        res.status(200).json(doneTemp)
          
 //             const {data}=doneTemp.dataValues
 //             const idPago=axios.get(`https://api.mercadopago.com/v1/payments/${data.id}`)
@@ -36,8 +36,8 @@ router.post('/', async(req, res)=>{
 //     })
    
    
-//     .catch(error=>{ res.send(error)})
-
+    
+    }).catch(error=>{ res.send(error)})
  });
 
 module.exports = router;
