@@ -61,7 +61,7 @@ export default function CabinsDetail({
               <td className={styles.derecha}>$ {Price}</td>
             </tr>
             <tr>
-              <td className={styles.izquierda}><strong>Descripción:</strong></td>
+              <td className={styles.izquierda} id={styles.descripcion}><strong>Descripción:</strong></td>
               <td className={styles.derecha}><p>{Description}</p></td>
             </tr>
             <tr>

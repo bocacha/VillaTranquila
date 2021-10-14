@@ -110,12 +110,16 @@
   float:left;
   margin-right: 80px;
 }
+#descripcion{
+  margin-top: 10%;
+}
 .derecha{
   float:right;
 }
 .derecha p{
   max-width: 280px;
   text-align: end;
+  text-align: justify;
 }
 .btnsContainer{
   display:flex;

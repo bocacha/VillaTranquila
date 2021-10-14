@@ -763,7 +763,7 @@ const Cabañas = () => {
                   value={edit.Description}
                   onChange={(e) => handleChangeEdit(e)}
                   placeholder="Descripción"
-                  maxLength="100"
+                  maxLength="500"
                   className={styles.formInputs}
                   id={styles.descripcionEditar}
                   required

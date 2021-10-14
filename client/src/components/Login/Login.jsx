@@ -105,7 +105,7 @@ export default function Login() {
                 className={styles.btn1}
                 onClick={goHome}
               >
-                <strong>Comenzar reserva <ImCalendar className={styles.icon}/></strong>
+                <strong>Comenzar reserva <ImCalendar className={styles.icon} id={styles.reserva}/></strong>
               </button>
             </div>
 
