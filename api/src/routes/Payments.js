@@ -57,15 +57,13 @@ if(!decodedToken.Admin){
 });
 
 router.post("/NewPayment" , (req, res)=>{
-
-    const {Date, idClient, TotalAmount, PaydAmount} = req.body;
-    console.log(req.body)
+    const {id, date_created, user_id, action, data} = req.body;
     Payments.create({
-      TotalAmount, 
-      PaydAmount,
-      Date, 
-      idClient,
-      json:req.body
+        payment_id :id,
+        date_created, 
+        user_id, 
+        action, 
+        data:data.id
     })
     .then(doneTemp=>{
         return res.status(200).json(doneTemp)
