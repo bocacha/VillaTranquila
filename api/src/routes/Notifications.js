@@ -5,7 +5,7 @@ const router = Router();
 const {Notifications} = require('../db');
 
 router.get('/', async (req, res)=>{
-    const dbNotifications = await Notificationss.findAll()
+    const dbNotifications = await Notifications.findAll()
     try{
         res.send(dbNotifications)
     }catch(error){
