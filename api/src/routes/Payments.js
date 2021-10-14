@@ -57,13 +57,20 @@ if(!decodedToken.Admin){
 });
 
 router.post("/NewPayment" , (req, res)=>{
-    const {id, date_created, user_id, action, data} = req.body;
+    const {title, unitPrice, card, transactionDetails,payment_method_id,date_approved,date_last_updated} = req.body;
     Payments.create({
-        payment_id :id,
-        date_created, 
-        user_id, 
-        action, 
-        data:data.id
+        title:title,
+        unitPrice:unitPrice,
+        card:card,
+        transactionDetails:transactionDetails,
+        payment_method_id:payment_method_id,
+        date_approved:date_approved,
+        date_last_updated:date_last_updated,
+        // payment_id :id,
+        // date_created, 
+        // user_id, 
+        // action, 
+        // data:data.id
     })
     .then(doneTemp=>{
         return res.status(200).json(doneTemp)

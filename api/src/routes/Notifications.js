@@ -1,3 +1,4 @@
+const { default: axios } = require('axios');
 const { Router } = require('express');
 
 const router = Router();
@@ -13,14 +14,25 @@ router.get('/', async (req, res)=>{
 
 })
 
-router.post('/', async(req, res)=>{
+router.post('/', async(req, res)=>{    
     const {id, data} = req.body;
     Notifications.create({
         payment_id :id, 
         id: data.id
     })
     .then(doneTemp=>{
-        return res.status(200).json(doneTemp)
+         res.status(200).json(doneTemp)
+    })
+    .then(doneTemp=>{
+        const {data}=doneTemp.dataValues
+        const idPago=axios.get(`https://api.mercadopago.com/v1/payments/${data.id}`)
+
+    })
+    .then(res=>{
+        const {title, unitPrice, card, transactionDetails,payment_method_id,date_approved,date_last_updated}=res.dataValues
+        const newPayment = axios.post('/payments/NewPayment',{title, unitPrice, card, transactionDetails,payment_method_id,date_approved,date_last_updated})
+
+
     })
     .catch(error=>{ res.send(error)})
 });

@@ -27,8 +27,11 @@ let preference = {
     },
   //"http://app-villa-tranquila.vercel.app","http://app-villa-tranquila.vercel.app/reserva/pago""http://app-villa-tranquila.vercel.app/reserva/pago"
     auto_return: "approved",
-    notification_url:"https://villatranquila.herokuapp.com/payments/NewPayment",
-
+    notification_url:"https://villatranquila.herokuapp.com/notification",
+    payer:{
+      userName:req.body.userName,
+      userEmail:req.body.email,
+    }
   };
 
   // router.post('/', function(req, res) {
