@@ -16,7 +16,9 @@
 }
 
 .img {
-  width: 350px;
+  width:fit-content;
+  max-width: 350px;
+  height: fit-content;
   max-height: 350px;
   border-radius: 10px;
 }

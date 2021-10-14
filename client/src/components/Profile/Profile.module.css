@@ -65,80 +65,21 @@
     padding-left: 5px;
     margin-bottom: 2px;
 }
-.datos{
-    /* text-align: center; */
-    list-style-position: inside;
-    list-style-type: none;
-    width: 100%;
-    margin-top: 10px;
-}
-.dato{
-    /* text-align: center; */
-    text-decoration: none;
-    display: block;
-}
-.dato span{
-    float: left;
-    margin-left: 0;
-}
-.dato p{
-    /* float: right; */
-    margin-left: 50%;
-    list-style-type: disc;
-}
 
 details{
     margin-top: 10px;
     transition: 0.3s ease-in-out;
 }
-/* details[open] summary ~ * {
-    animation: sweep .5s ease-in-out;
-  }
-  
-  @keyframes sweep {
-    0%    {opacity: 0; margin-left: -10px}
-    100%  {opacity: 1; margin-left: 0px}
-  } */
-
 details{
     transition: height 0.2s ease;
     overflow: hidden;
 }
-
-details:not([open])
-{
+details:not([open]){
     height: 1.25em;
 }
-
-details[open]
-{
+details[open]{
     height: 6em;
 }
-
-.reserva{
-    display: flex;
-    margin-top: 10px;
-}
-.botonReserva{
-    border-radius: 4px;
-    background-color: #355978 ;
-    border-color: transparent;
-    color: #fff;
-    text-align: center;
-    font-size: large;
-    transition: all 0.5s ease;
-    cursor: pointer;
-    padding: 5px 20px;
-    display: inline-flex;
-    height: auto;
-    line-height: 35px;
-    margin: -2px 0 0 5px;
-}
-.botonReserva:hover {
-    background-color: #8bafbf ;
-    color: #1c2531 ;
-    border-color: #8bafbf;
-  }
 
   .premium{
       margin: 20px 20px;
@@ -171,16 +112,19 @@ details[open]
   
 
 /* Tabla ============================== */
-.izqu{
+.perfil .container .containerDatos table{
+    margin-top: 10px;
+    width:100%
+}
+
+.perfil .container .containerDatos table tbody tr .izqu{
     float: left;
-    margin-right: 120px;
+    margin-left: 10%;
 }
-.der{
+
+.perfil .container .containerDatos table tbody tr .der{
     float: right;
-    margin-left: 120px;
-}
-table{
-    margin: 10px 20px;
+    margin-right: 10%;
 }
 /*===================================== */
 
