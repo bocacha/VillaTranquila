@@ -67,8 +67,8 @@ export default function rootReducer(state = initialState, action) {
     case FILTER_CABINS:
       let cabinsFiltered = state.allCabins;
       // Filter by availability:
-      let inDate = action.payload.inDate;
-      let outDate = action.payload.outDate;
+      let inDate = action.payload.inDate.split('-').reverse().join('/');
+      let outDate = action.payload.outDate.split('-').reverse().join('/');
       cabinsFiltered = cabinsFiltered.filter(el => {
         var hitDates = el.Available || {};
         hitDates = Object.keys(hitDates);
