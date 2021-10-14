@@ -22,6 +22,7 @@ import {
   READ_SERVICES_OCULTADOS,
   READ_CABINS_OCULTADOS,
   READ_FECHASNODISPONIBLES,
+  READ_WEATHER,
   EDIT_USER,
   EDIT_RESERVATIONS,
   EDIT_SERVICES,
@@ -35,9 +36,11 @@ import {
   REMOVE_PAYMENTS,
   REMOVE_USERS,
   GET_USER_DATA,
+  SEND_PASSWORD_EMAIL,
   SELECTED_CABIN
 
 } from "../actions";
+import fechas from "../components/Reserva/Linkreserva/algoritmofechas"
 
 const initialState = {
   selectedcabin:[],
@@ -52,7 +55,8 @@ const initialState = {
   user: {},
   reservaciones: [],
   fechasnodisponibles:[],
-  userData: {}
+  userData: {},
+  weather:[]
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -62,6 +66,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         cabins: action.payload,
+        allCabins:action.payload,
       };
 
     case FILTER_CABINS:
@@ -69,15 +74,42 @@ export default function rootReducer(state = initialState, action) {
       // Filter by availability:
       let inDate = action.payload.inDate.split('-').reverse().join('/');
       let outDate = action.payload.outDate.split('-').reverse().join('/');
-      cabinsFiltered = cabinsFiltered.filter(el => {
-        var hitDates = el.Available || {};
-        hitDates = Object.keys(hitDates);
-        var hitDateMatchExists = hitDates.some(date => {
-          var newDate = new Date(date);
-          return newDate >= inDate && newDate <= outDate
-        });
-        return hitDateMatchExists;
-      });
+      const obj ={
+        Checkin: inDate,
+        Checkout: outDate
+      }
+      console.log(obj)
+      const fechasintermedias = fechas(obj)
+      console.log(fechasintermedias)
+      var nomostrar = []
+      cabinsFiltered.map(el => {
+        el.Available.map(e=>{
+          for(let i=0;i<e.length;i++){
+            for(let j=0;j<fechasintermedias.length;j++){
+              if(
+                e[i] === fechasintermedias[j]
+              ){
+                nomostrar.push(el)
+              }
+            }
+          }
+        })
+        })
+         cabinsFiltered = cabinsFiltered.filter(el=> {
+          return !nomostrar.includes(el)
+
+        })
+        console.log(cabinsFiltered)
+
+      // cabinsFiltered = cabinsFiltered.filter(el => {
+      //   var hitDates = el.Available || [];
+      //   hitDates = Object.keys(hitDates);
+      //   var hitDateMatchExists = hitDates.some(date => {
+      //     var newDate = new Date(date);
+      //     return newDate >= inDate && newDate <= outDate
+      //   });
+      //   return hitDateMatchExists;
+      // });
       // Filter by capacity:
       let capacity = action.payload.capacity;
       cabinsFiltered = capacity === 'all' ?
@@ -86,10 +118,10 @@ export default function rootReducer(state = initialState, action) {
       // Filter by priceMin and priceMax:
       let priceMin = action.payload.priceMin;
       let priceMax = action.payload.priceMax;
-      cabinsFiltered = priceMin === 'all' ?
+      cabinsFiltered = priceMin === 'all'  ||priceMin === "" ?
         cabinsFiltered :
         cabinsFiltered.filter(el => el.Price >= parseInt(priceMin));
-      cabinsFiltered = priceMax === 'al' ?
+      cabinsFiltered = priceMax === 'all'||priceMax ===  "" ?
         cabinsFiltered :
         cabinsFiltered.filter(el => el.Price <= parseInt(priceMax));
       // Filter by wifi:
@@ -101,7 +133,7 @@ export default function rootReducer(state = initialState, action) {
       let barbecue = action.payload.barbecue;
       cabinsFiltered = barbecue === '' || barbecue === 'false' ?
         cabinsFiltered :
-        cabinsFiltered.filter(el => el.Barbecue);
+        cabinsFiltered.filter(el => el.Parrilla);
       // Filter by parking:
       let parking = action.payload.parking;
       cabinsFiltered = parking === '' || parking === 'false' ?
@@ -269,11 +301,21 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         userData: action.payload
       }
-      case SELECTED_CABIN:
+    case SELECTED_CABIN:
         return{
           ...state,
           selectedcabin: action.payload,
         }
+    case SEND_PASSWORD_EMAIL:
+          return {
+            ...state,
+          }
+    case READ_WEATHER:
+      return {
+        ...state,
+        weather: action.payload
+      }
+
     default:
       return state;
   }

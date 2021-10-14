@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getCabins, filterCabins } from "../../actions";
+import { getCabins, filterCabins,readWeather } from "../../actions";
 import Paginado from './Paginado/Paginado';
 import Navbar from "../Navbar/Navbar";
 import Cabaña from "./Cabaña/Cabaña";
 import styles from "./Reserva.module.css";
 import { FaWifi, FaCarAlt } from 'react-icons/fa';
-import { GiCampCookingPot } from 'react-icons/gi';
+import { GiBarbecue } from 'react-icons/gi';
 import { IoMdPeople } from 'react-icons/io';
 import { MdAttachMoney, MdRoomService } from 'react-icons/md';
 import { ImCalendar, ImSearch } from 'react-icons/im';
@@ -46,15 +46,21 @@ export default function Reserva() {
     useEffect(() => {
         dispatch(Logeduser())
     }, [dispatch]);
+
+    useEffect(()=>{
+        dispatch (readWeather());
+    });
+
     const allCabins = useSelector(state => state.cabins);
     const [errors, setErrors] = useState({})
 
     // Paginado---------------------------------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
-    const [cabinsPerPage, /*setCabinsPerPage*/] = useState(6);
+    const [cabinsPerPage, /*setCabinsPerPage*/] = useState(5);
     const indexOfLastCabin = currentPage * cabinsPerPage;
     const indexOfFirstCabin = indexOfLastCabin - cabinsPerPage;
-    const currentCabins = allCabins.slice(indexOfFirstCabin, indexOfLastCabin);
+    let currentCabins = allCabins.slice(indexOfFirstCabin, indexOfLastCabin);
+    let orderedCabins = currentCabins?.sort((a, b) => parseInt(a.number) < parseInt(b.number) ? -1 : 1);
 
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -200,7 +206,7 @@ export default function Reserva() {
                             />
                         </li>
                         <li>
-                            <label>Parrilla <p className={styles.services}><GiCampCookingPot /></p></label>
+                            <label>Parrilla <p className={styles.services}><GiBarbecue /></p></label>
                             <input
                                 type='checkbox'
                                 name='barbecue'
@@ -237,25 +243,19 @@ export default function Reserva() {
             <div className={styles.cabinPage}>
                 <div className={styles.cabinCont}>
                     {
-                        currentCabins?.map(el => {
+                        orderedCabins?.map(el => {
                             return (
                                 <div key={el.number} >
                                     <Cabaña
                                         ID={el.ID}
                                         number={el.Number}
                                         capacity={el.Capacity}
-                                        notAvailable={el.NotAvailable}
+                                        Available={el.Available}
                                         price={el.Price}
                                         description={el.Description}
-                                        image={el.Image}
-                                        coffe={el.Coffe}
-                                        microwaves={el.Microwaves}
-                                        heat={el.Heat}
-                                        barbecue={el.Barbecue}
+                                        Picture={el.Picture}
+                                        parrilla={el.Parrilla}
                                         wifi={el.Wifi}
-                                        cleaning={el.Cleaning}
-                                        refrigerator={el.Refrigerator}
-                                        stove={el.Stove}
                                         parking={el.Parking}
                                     />
                                 </div>

@@ -58,6 +58,10 @@ export default function Footer() {
           <Link to="/reserva" className={styles.link}>
             Reservar
           </Link>
+          <br />
+          <Link to="/galeria" className={styles.link}>
+            Galería
+          </Link>
         </div>
         <div className={styles.redes}>
           <span className={styles.title}> Redes sociales </span> <br />
@@ -89,7 +93,7 @@ export default function Footer() {
                value={footer.email}
                placeholder='usuario@ejemplo.com'
                onChange={handleChange}
-               className={styles.input}
+               id={styles.input}
                required
               />
             </div>

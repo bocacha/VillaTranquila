@@ -24,17 +24,13 @@ export default function UsuariosDetail({
   const dispatch = useDispatch();
   const [mostrar, setMostrar] = useState(true);
   const handleSubmitDelete = (ID) => {
-    console.log("funcion", ID);
+    dispatch(removeUsers({ id: ID }));
     alert("su usuario fue Eliminado con exito");
-    let obj = { id: ID };
-    dispatch(removeUsers(obj));
     window.location.reload();
   };
   const handleSubmitrestore = (ID) => {
-    console.log("funcion", ID);
-    alert("su cabaña fue Eliminada con exito");
-    let obj = { id: ID };
-    dispatch(restoreUsers(obj));
+    dispatch(restoreUsers({ id: ID }));
+    alert("su cabaña fue Restaurada con exito");
     window.location.reload();
   };
   return (
@@ -69,7 +65,7 @@ export default function UsuariosDetail({
               onClick={() => handleSubmitDelete(ID)}
               className={styles.btn}
             >
-              Eliminar
+              Blockear
             </button>
           ) : (
             <button
@@ -84,7 +80,14 @@ export default function UsuariosDetail({
           <div>
             <button
               onClick={(e) => {
-                handleSubmitEdit(e, ID);
+                handleSubmitEdit(e, ID,
+                  UserName,
+                  Admin,
+                  FirstName,
+                  LastName,
+                  Address,
+                  Phone,
+                  Email,);
                 setMostrar(false);
               }}
               className={styles.btnPlus}

@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const GET_CABINS = "GET_CABINS";
+export const SEND_PASSWORD_EMAIL ="SEND_PASSWORD_EMAIL"
 export const SEND_EMAIL = "SEND_EMAIL";
 export const SEND_NOTIFICATION = "SEND_NOTIFICATION";
 export const FILTER_CABINS = 'FILTER_CABINS';
@@ -24,6 +25,7 @@ export const READ_PICTURES_OCULTADOS = "READ_PICTURES_OCULTADOS";
 export const READ_USERS_OCULTADOS = "READ_USERS_OCULTADOS"; 
 export const READ_SERVICES_OCULTADOS = "READ_SERVICES_OCULTADOS"; 
 export const READ_CABINS_OCULTADOS = "READ_CABINS_OCULTADOS"; 
+export const READ_WEATHER = "READ_WEATHER";
 export const EDIT_RESERVATIONS = "EDIT_RESERVATIONS";
 export const EDIT_USER = "EDIT_USER";
 export const EDIT_SERVICES = "EDIT_SERVICES";
@@ -67,11 +69,61 @@ export function sendEmail(payload) {
     return json;
   };
 }
+
+
+export function readWeather() {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("http://localhost:3001/weather/");
+      console.log('json',json.data)
+      return dispatch({
+        type: READ_WEATHER,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.log('error');
+      console.error(err);
+    }
+  };
+}
+
 export function createReservation(payload) {
   return async function (dispatch) {
-    const response = await axios.post("http://localhost:3001/reservations/NewReservation", payload);
-    return response;
-  };
+    const response = await axios.post("/reservations/NewReservation", payload);
+    const reserva = response.data
+    const users= await axios.get("/users")
+    const user = users.data.filter(e=> e.ID === payload.id)
+    let reservas = []
+    if(user[0].ReservationsHistory){
+user[0].ReservationsHistory.map(e=>{
+        reservas.push(e)
+      })
+      reservas.push(reserva)
+    const cambiar={
+      id: payload.id,
+      ReservationsHistory: reservas
+    }
+    console.log(cambiar)
+    return (dispatch({
+      type: CREATE_RESERVATION,
+      payload: response.data
+     
+     }),dispatch(editUsers(cambiar)));
+
+    }else{
+       reservas.push(reserva)
+    const cambiar={
+      id: payload.id,
+      ReservationsHistory: reservas
+    }
+    console.log(cambiar)
+    return (dispatch({
+      type: CREATE_RESERVATION,
+      payload: response.data
+     
+     }),dispatch(editUsers(cambiar))); 
+    }    
+}
 }
 
 export function createServices(payload, { token }) {
@@ -81,22 +133,24 @@ export function createServices(payload, { token }) {
     }
   }
   return async function (dispatch) {
-    const response = await axios.post("http://localhost:3001/services/NewService", payload, config);
+    const response = await axios.post("/services/NewService", payload, config);
     return response;
   };
 }
 
-export function createUsers(payload) {
-
+export function createUsers(payload) { 
   return async function (dispatch) {
-    const response = await axios.post("http://localhost:3001/users/Singup", payload);
+   try{ const response = await axios.post("/users/Singup", payload);
     return response;
+    }catch (err) {
+      alert("Error Nombre de usuario no disponible")
+    }
   };
 }
 
 export function createPayment(payload) {
   return async function (dispatch) {
-    const response = await axios.post("http://localhost:3001/payments/NewPayment", payload);
+    const response = await axios.post("/payments/NewPayment", payload);
     return response;
   };
 }
@@ -117,7 +171,7 @@ export function createimage(payload, { token }) {
     const Url = cloudinaryResponse.data.secure_url 
     
 
-    const response = await axios.post("http://localhost:3001/pictures/NewPicture", {
+    const response = await axios.post("/pictures/NewPicture", {
       Description: payload.description,
       Url: Url
     }, config);
@@ -136,7 +190,7 @@ export function createCabains(payload, {token}) {
   }
   return async (dispatch) => {
     const json = await axios.post("/cabins/NewCabin", payload, config);
-    return json;
+    return ( json);
   };
 }
 
@@ -148,7 +202,7 @@ export function readPayment({ token }) {
   }
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/payments/", config);
+      var json = await axios.get("/payments/", config);
       return dispatch({
         type: READ_PAYMENT,
         payload: json.data,
@@ -167,7 +221,7 @@ export function readReservation() {
   // }
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/reservations/");
+      var json = await axios.get("/reservations/");
       return dispatch({
         type: READ_RESERVATIONS,
         payload: json.data,
@@ -181,7 +235,7 @@ export function readReservation() {
 export function readPictures(id) {
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/pictures/");
+      var json = await axios.get("/pictures/");
       return dispatch({
         type: READ_PICTURES,
         payload: json.data,
@@ -200,7 +254,7 @@ export function readUsers({token}) {
   }
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/users/", config);
+      var json = await axios.get("/users/", config);
       return dispatch({
         type: READ_USERS,
         payload: json.data,
@@ -214,7 +268,7 @@ export function readUsers({token}) {
 export function readServices() {
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/services/");
+      var json = await axios.get("/services/");
       return dispatch({
         type: READ_SERVICES,
         payload: json.data,
@@ -228,7 +282,7 @@ export function readServices() {
 export function readCabains(id) {
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/cabins");
+      var json = await axios.get("/cabins");
       return dispatch({
         type: READ_CABINS,
         payload: json.data,
@@ -246,7 +300,7 @@ export function readPaymentocultados({token}) {
   }
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/payments/ocultados", config);
+      var json = await axios.get("/payments/ocultados", config);
       return dispatch({
         type: READ_PAYMENT,
         payload: json.data,
@@ -265,7 +319,7 @@ export function readReservationocultados() {
   // }
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/reservations/ocultadas");
+      var json = await axios.get("/reservations/ocultadas");
       return dispatch({
         type: READ_RESERVATIONS,
         payload: json.data,
@@ -279,7 +333,7 @@ export function readReservationocultados() {
 export function readPicturesocultados(id) {
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/pictures/ocultadas");
+      var json = await axios.get("/pictures/ocultadas");
       return dispatch({
         type: READ_PICTURES,
         payload: json.data,
@@ -298,7 +352,7 @@ export function readUsersocultados({token}) {
   }
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/users/ocultados", config);
+      var json = await axios.get("/users/ocultados", config);
       return dispatch({
         type: READ_USERS,
         payload: json.data,
@@ -312,7 +366,7 @@ export function readUsersocultados({token}) {
 export function readServicesocultados() {
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/services/ocultados");
+      var json = await axios.get("/services/ocultados");
       return dispatch({
         type: READ_SERVICES,
         payload: json.data,
@@ -326,7 +380,7 @@ export function readServicesocultados() {
 export function readCabainsocultados(id) {
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/cabins/ocultadas");
+      var json = await axios.get("/cabins/ocultadas");
       return dispatch({
         type: READ_CABINS,
         payload: json.data,
@@ -338,9 +392,10 @@ export function readCabainsocultados(id) {
 }
 
 export function editUsers(payload) {
+  console.log("action",payload)
   return async function (dispatch) {
     try {
-      var json = await axios.put("http://localhost:3001/users/EditUser", payload);
+      var json = await axios.put("/users/EditUser", payload);
       return dispatch({
         type: EDIT_USER,
         payload: json.data,
@@ -356,7 +411,7 @@ export function editProfile(payload, ID) {
   console.log("pay", payload);
   return async function (dispatch) {
     try {
-      var json = await axios.put("http://localhost:3001/users/EditProfile/" + ID, payload);
+      var json = await axios.put("/users/EditProfile/" + ID, payload);
       return dispatch({
         type: EDIT_USER,
         payload: json.data,
@@ -376,11 +431,11 @@ export function editServices(payload, { token }) {
   }
   return async function (dispatch) {
     try {
-      var json = await axios.put("http://localhost:3001/services/EditService", payload, config);
-      return dispatch({
+      var json = await axios.put("/services/EditService", payload, config);
+      return (dispatch({
         type: EDIT_SERVICES,
         payload: json.data,
-      });
+      }),window.location.reload())
     } catch (err) {
       console.error(err);
     }
@@ -395,7 +450,7 @@ export function editPayments(payload, { token }) {
   }
   return async function (dispatch) {
     try {
-      var json = await axios.put("http://localhost:3001/payments/EditPayment", payload, config);
+      var json = await axios.put("/payments/EditPayment", payload, config);
       return dispatch({
         type: EDIT_PAYMENT,
         payload: json.data,
@@ -414,7 +469,7 @@ export function editPictures(payload, { token }) {
   }
   return async function (dispatch) {
     try {
-      var json = await axios.put("http://localhost:3001/pictures/EditPicture", payload, config);
+      var json = await axios.put("/pictures/EditPicture", payload, config);
       return dispatch({
         type: EDIT_PICTURES,
         payload: json.data,
@@ -433,7 +488,7 @@ export function editReservation(payload, { token }) {
   }
   return async function (dispatch) {
     try {
-    const response = await axios.put("http://localhost:3001/reservations/EditReservation", payload, config);
+    const response = await axios.put("/reservations/EditReservation", payload, config);
     return dispatch({
       type: EDIT_RESERVATIONS,
       payload: response.data,
@@ -452,27 +507,30 @@ export function editCabains(payload, { token }) {
     }
   }
   return async function (dispatch) {
-    const response = await axios.put("http://localhost:3001/cabins/EditCabin", payload, config);
-    return response;
+    const response = await axios.put("/cabins/EditCabin", payload, config);
+    return (response);
   };
 }
 export function editAvailible(payload) {
+  console.log(payload)
   return async function (dispatch) {
-    const response = await axios.put("http://localhost:3001/cabins/EditCabin/available", payload);
+    const response = await axios.put("/cabins/EditCabin/available", payload);
     return response;
   };
 }
 export function Loguser(payload) {
   return async function (dispatch) {
     try {
-      let json = await axios.post("http://localhost:3001/login", payload);
+      let json = await axios.post("/login", payload);
       localStorage.setItem("LogedUser", JSON.stringify(json.data));
+      console.log(json)
       return dispatch({
         type: LOG_USER,
         payload: json.data,
       });
     } catch (err) {
-      console.log(err);
+      console.log(err)
+      alert("Error Usuario o Contraseña mal ingresados/inexistentes");
     }
   };
 }
@@ -493,12 +551,12 @@ export function Logeduser() {
 export function removeCabains(id) {
   return async function (dispatch) {
 
-    var json = await axios.put("http://localhost:3001/cabins/RemoveCabin", id);
-    return dispatch({
+    var json = await axios.put("/cabins/RemoveCabin", id);
+    return (dispatch({
       type: REMOVE_CABAINS,
       payload: id
 
-    })
+    }))
 
   };
 }
@@ -507,7 +565,7 @@ export function removeReservations(id) {
   console.log('remove', id);
   return async function (dispatch) {
 
-    var json = await axios.put("http://localhost:3001/reservations/RemoveReservation", id);
+    var json = await axios.put("/reservations/RemoveReservation", id);
     return dispatch({
       type: REMOVE_RESERVATIONS,
       payload: id
@@ -521,7 +579,7 @@ export function removeServices(id) {
   console.log('remove', id);
   return async function (dispatch) {
 
-    var json = await axios.put("http://localhost:3001/services/RemoveService", id);
+    var json = await axios.put("/services/RemoveService", id);
     return dispatch({
       type: REMOVE_SERVICES,
       payload: id
@@ -535,7 +593,7 @@ export function removePictures(id) {
   console.log('remove', id);
   return async function (dispatch) {
 
-    var json = await axios.put("http://localhost:3001/pictures/RemovePicture", id);
+    var json = await axios.put("/pictures/RemovePicture", id);
     return dispatch({
       type: REMOVE_PICTURES,
       payload: id
@@ -548,7 +606,7 @@ export function removePayments(id) {
   console.log('remove', id);
   return async function (dispatch) {
 
-    var json = await axios.put("http://localhost:3001/payments/RemovePayment", id);
+    var json = await axios.put("/payments/RemovePayment", id);
     return dispatch({
       type: REMOVE_PAYMENTS,
       payload: id
@@ -562,7 +620,7 @@ export function removeUsers(id) {
   console.log('remove', id);
   return async function (dispatch) {
 
-    var json = await axios.put("http://localhost:3001/users/RemoveUser", id);
+    var json = await axios.put("/users/RemoveUser", id);
     return dispatch({
       type: REMOVE_USERS,
       payload: id
@@ -575,12 +633,12 @@ export function removeUsers(id) {
 export function restoreCabains(id){
   return async function (dispatch) {
    
-      var json = await axios.put("http://localhost:3001/cabins/RestoreCabin", id);
-      return dispatch({
+      var json = await axios.put("/cabins/RestoreCabin", id);
+      return ( dispatch({
         type: REMOVE_CABAINS,
         payload: id
        
-       })
+       }))
        
   };
 }
@@ -589,7 +647,7 @@ export function restoreReservations(id){
   console.log('remove',id);
   return async function (dispatch) {
    
-      var json = await axios.put("http://localhost:3001/reservations/RestoreReservation", id);
+      var json = await axios.put("/reservations/RestoreReservation", id);
       return dispatch({
         type: REMOVE_RESERVATIONS,
         payload: id
@@ -603,7 +661,7 @@ export function restoreServices(id){
   console.log('remove',id);
   return async function (dispatch) {
    
-      var json = await axios.put("http://localhost:3001/services/RestoreService", id);
+      var json = await axios.put("/services/RestoreService", id);
       return dispatch({
         type: REMOVE_SERVICES,
         payload: id
@@ -617,7 +675,7 @@ export function restorePictures(id){
   console.log('remove',id);
   return async function (dispatch) {
    
-      var json = await axios.put("http://localhost:3001/pictures/RestorePicture", id);
+      var json = await axios.put("/pictures/RestorePicture", id);
       return dispatch({
         type: REMOVE_PICTURES,
         payload: id
@@ -630,7 +688,7 @@ export function restorePayments(id){
   console.log('remove',id);
   return async function (dispatch) {
    
-      var json = await axios.put("http://localhost:3001/payments/RestorePayment", id);
+      var json = await axios.put("/payments/RestorePayment", id);
       return dispatch({
         type: REMOVE_PAYMENTS,
         payload: id
@@ -644,7 +702,7 @@ export function restoreUsers(id){
   console.log('remove',id);
   return async function (dispatch) {
    
-      var json = await axios.put("http://localhost:3001/users/RestoreUser", id);
+      var json = await axios.put("/users/RestoreUser", id);
       return dispatch({
         type: REMOVE_USERS,
         payload: id
@@ -658,7 +716,7 @@ export function readFechas(){
   const cabinId = localStorage.getItem("id_cabaña");
   return async function (dispatch) {
    
-      var json = await axios.get(`http://localhost:3001/cabins/${JSON.parse(cabinId)}`)
+      var json = await axios.get(`/cabins/${JSON.parse(cabinId)}`)
       return dispatch({
         type: READ_FECHASNODISPONIBLES,
         payload: json.data[0].Available
@@ -667,6 +725,7 @@ export function readFechas(){
        
   };
 }
+
 export function sendNotification(payload) {
 
 return async function (dispatch) {
@@ -680,11 +739,12 @@ return async function (dispatch) {
  }
 }
 
-export function getUserData(userid){
+export function getUserData(username){
+  console.log(username)
   return async function (dispatch) {
     try {
-      let json = await axios.get("http://localhost:3001/users/" + userid);
-      console.log('getUserData --->',json.data)
+      let json = await axios.get("/users/" + username);
+      console.log(json.data)
       return dispatch({
         type: GET_USER_DATA,
         payload: json.data,
@@ -697,13 +757,31 @@ export function getUserData(userid){
 export function selectcabin(id){
   return async function (dispatch) {
     try {
-      let json = await axios.get("http://localhost:3001/cabins/"+id);
+      let json = await axios.get("/cabins/"+id);
       return dispatch({
         type: SELECTED_CABIN,
-        payload: json.data,
+        payload: json.data[0],
       });
     } catch (err) {
       console.log(err);
+    }
+  };
+}
+export function mailpassword(Email) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("/users/");
+      var useremail = json.data.filter((e)=> e.Email === Email)
+      const cambiar={
+        id: useremail[0].ID,
+        UserPassword: "ax54sa5s4a"
+      }
+      return (dispatch({
+        type: SEND_PASSWORD_EMAIL,
+        payload: useremail,
+      }),dispatch(editUsers(cambiar)));
+    } catch (err) {
+      console.error(err);
     }
   };
 }

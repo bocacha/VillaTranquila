@@ -10,6 +10,8 @@ import {
 } from "../../../actions";
 import ServiciosDetail from "./ServiciosDetail";
 import { Link } from "react-router-dom";
+import NavAdmin from '../NavAdmin/NavAdmin';
+import Navbar from "../../Navbar/Navbar";
 
 export default function Servicios() {
   const dispatch = useDispatch();
@@ -58,17 +60,23 @@ export default function Servicios() {
       Description: "",
       Price: "",
     });
-    window.location.reload();
+    //window.location.reload();
   }
-  function handleSubmitEdit(e, ID) {
+  function handleSubmitEdit(e, ID,
+    Name,
+    Description,
+    Price,) {
     const { token } = logeduser;
     e.preventDefault();
-    dispatch(editServices(edit, { token }));
     setMostrar(true);
     setEdit({
       ...edit,
       id: ID,
+      Name: Name,
+      Description:Description,
+      Price:Price,
     });
+   // dispatch(editServices(edit, { token }));
     //window.location.reload();
   }
   function handlePrueba(e, ID) {
@@ -80,8 +88,10 @@ export default function Servicios() {
       ...edit,
       id: ID,
     });
+    alert("Editado")
+    window.location.reload()
   }
-  //window.location.reload();
+  
   const ocultadas = () => {
     dispatch(readServicesocultados());
     setHabilitar(true);
@@ -92,10 +102,13 @@ export default function Servicios() {
   };
   return (
     <div className={styles.container}>
+      <div className={styles.navs2}>
+        <div className={styles.navs}>
+          <Navbar />
+          <NavAdmin />
+        </div>
+      </div>
       <div className={styles.btnsContainer}>
-        <Link to="/admin">
-          <button className={styles.btnVolver}>Volver</button>
-        </Link>
         {!habilitar ? (
           <button onClick={ocultadas} className={styles.btnSup}>Mostrar ocultadas</button>
         ) : (
@@ -132,7 +145,7 @@ export default function Servicios() {
                 type="number"
                 value={input.Price}
                 name="Price"
-                min="1000"
+                min="500"
                 max="20000"
                 onChange={(e) => handleChange(e)}
                 placeholder="Precio"
@@ -158,6 +171,8 @@ export default function Servicios() {
                   onChange={(e) => handleChangeEdit(e)}
                   placeholder="Nombre"
                   className={styles.formInputs}
+                  pattern="^[0-9a-zA-Z\s]+$"
+                  title="debe contener letras y numeros"
                   required
                 />
                 <input

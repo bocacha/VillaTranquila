@@ -2,6 +2,8 @@
     display: flex;
     align-items: center;
     position: relative;
+    margin-bottom: 30px;
+    margin-top: -70px
 }
 
 .numeros {
@@ -15,25 +17,32 @@
 }
 
 .numeros li button {
-    float: left;
-    padding: 8px 18px;
-    border-radius: 8px;
-    background-color: #ddbea9;
-    border: transparent;
-    margin: 3px;
+    padding: 5px 20px;
+    margin: 0 5px;
+  background: #293c4f;
+  color: #fff;
+  border: none;
+  border: 1px solid #293c4f;
+  border-radius: 5px;
+  font-family: Lato, Arial, sans-serif;
+  font-weight: bold;
+  transition-duration: 0.4s;
 }
 
 .numeros li button:hover{
-    background-color: #cb997e;
-    color: black;
+    background: #94adbc;
+  border: 1px solid #293c4f;
+  color: #000;
   }
 
-.numeros li button:active{
-    background-color: #cb997e;
-    box-shadow: 0 1px #666;
-    transform: translateY(1px);
-}
+/* .numeros li button:active{
+    background: #94adbc;
+  border: 1px solid #293c4f;
+  color: #000;
+} */
 
 .numeros li button:focus{
-    background-color: #cb997e;
+    background: #94adbc;
+    color: #000;
+    border: 1px solid #293c4f;
 }

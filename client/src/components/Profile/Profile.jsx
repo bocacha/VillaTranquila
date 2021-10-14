@@ -10,7 +10,7 @@ import { ImCancelCircle } from 'react-icons/im';
 import { GiCutDiamond } from 'react-icons/gi';
 import { BiSave } from 'react-icons/bi';
 
-export default function Profile() {
+export default function Profile(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -58,8 +58,17 @@ export default function Profile() {
             dispatch(editProfile(edit, ID));
             dispatch(Logeduser());
             setMostrar(false);
+            alert("Edicion exitosa")
             window.location.reload();
         }
+    }
+    let objetosaArray = []
+    if (dataUser.ReservationsHistory) {
+        const reservas = dataUser.ReservationsHistory.map(e => {
+            const { Show, ID, UserId, ...history } = e
+            console.log(history)
+            objetosaArray.push(Object.entries(history))
+        })
     }
 
     function handleChangeEdit(e) {
@@ -128,7 +137,7 @@ export default function Profile() {
                 dispatch(editUsers(cambios));
                 // dispatch(Logeduser());
                 setMostrar(false);
-                window.location.reload();
+                //window.location.reload();
             }
         }
         else {
@@ -154,7 +163,7 @@ export default function Profile() {
                         </button>
                         <button className={styles.editarPerfil} onClick={handleMostrarContraseña}>
                             {mostrarContraseña ? (
-                                <div><strong>Cancelar <p><FaUnlockAlt/></p></strong></div>
+                                <div><strong>Cancelar <p><FaUnlockAlt /></p></strong></div>
                             ) : (
                                 <div><strong>Cambiar contraseña <p><FaLock /></p></strong></div>
                             )}
@@ -190,19 +199,30 @@ export default function Profile() {
                     </table>
                     <details>
                         <summary>Historial de reservas</summary>
+                        <Link to={`/Profile/${user.user}/${user.userid}`} className={styles.link}>
+                        <button className={styles.editarPerfil} >Ver y editar mis reservaciones</button>
+                         </Link>
                         {dataUser.ReservationsHistory &&
                             dataUser.ReservationsHistory.length ? (
-                            dataUser.ReservationsHistory.map((el) => {
-                                return <p>{el}</p>;
-                            })
+                            <ul>
+                                {objetosaArray.map((el) => {
+                                    return <ul>{el.map(e => {
+                                        return <li>{e[0]}:{e[1]}</li>
+                                    })}</ul>;
+                                })
+                                }
+                            </ul>
+
                         ) : (
-                            <div className={styles.reserva}>
-                                <p>
-                                    Haz tu primer reserva aquí <FaLongArrowAltRight />
-                                </p>
+                            <div>
+                                <span>
+                                    Conviertete en cliente Premium completando tu primer reserva{" "}
+                                    <FaLongArrowAltRight />
+                                </span>
                                 <Link to="/reserva">
-                                    <button className={styles.botonReserva}>
-                                        <BsBook />
+                                    <button>
+                                        {" "}
+                                        <BsBook />{" "}
                                     </button>
                                 </Link>
                             </div>
@@ -237,6 +257,9 @@ export default function Profile() {
                                 onChange={(e) => handleChangeEdit(e)}
                                 placeholder="Nuevo nombre de usuario..."
                                 className={styles.formInputs}
+                                title='Debe contener mayusculas minusculas y numeros '
+                                pattern='^[0-9a-zA-Z\s]+$'
+                                required
                             />
                             <input
                                 type="text"
@@ -245,6 +268,9 @@ export default function Profile() {
                                 onChange={(e) => handleChangeEdit(e)}
                                 placeholder="Nuevo nombre..."
                                 className={styles.formInputs}
+                                title='Solo letras'
+                                pattern='[a-zA-Z ]{2,254}'
+                                required
                             />
                             <input
                                 type="text"
@@ -253,6 +279,9 @@ export default function Profile() {
                                 onChange={(e) => handleChangeEdit(e)}
                                 placeholder="Nuevo apellido..."
                                 className={styles.formInputs}
+                                title='Solo letras'
+                                pattern='[a-zA-Z ]{2,254}'
+                                required
                             />
                             <input
                                 type="text"
@@ -261,6 +290,9 @@ export default function Profile() {
                                 onChange={(e) => handleChangeEdit(e)}
                                 placeholder="Nueva dirección..."
                                 className={styles.formInputs}
+                                title='Debe contener mayusculas minusculas y numeros '
+                                pattern='^[0-9a-zA-Z\s]+$'
+                                required
                             />
                             <input
                                 type="text"
@@ -269,6 +301,9 @@ export default function Profile() {
                                 onChange={(e) => handleChangeEdit(e)}
                                 placeholder="Nuevo teléfono..."
                                 className={styles.formInputs}
+                                pattern="[+]{2}[0-9]{10-14}"
+                                placeholder="+54 9 11 12345678"
+                                required
                             />
                             <input
                                 type="text"
@@ -277,6 +312,8 @@ export default function Profile() {
                                 onChange={(e) => handleChangeEdit(e)}
                                 placeholder="Nuevo email..."
                                 className={styles.formInputs}
+                                pattern='^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$'
+                                required
                             />
                             <input
                                 type="password"
@@ -285,10 +322,10 @@ export default function Profile() {
                                 onChange={(e) => handleChangeEdit(e)}
                                 placeholder="Introduzca su contraseña actual"
                                 className={styles.formInputs}
+                                required
                             />
                             <button
                                 type="submit"
-                                onSubmit={(e) => handleSubmitEdit(e)}
                                 className={styles.editarPerfil}
                                 id={styles.guardar}
                             >
@@ -307,18 +344,21 @@ export default function Profile() {
                                 onChange={(e) => handleChangeEdit(e)}
                                 placeholder="Introduzca su contraseña actual"
                                 className={styles.formInputs}
+                                required
                             />
                             <input
                                 type='password'
                                 className={styles.formInputs}
                                 placeholder='Nueva contraseña...'
                                 onChange={handleChangeContraseña}
+                                required
                             />
                             <input
                                 type='password'
                                 className={styles.formInputs}
                                 placeholder='Repetir nueva contraseña...'
                                 onChange={handleChangeRepetida}
+                                required
                             />
                             <button type='submit' className={styles.editarPerfil} id={styles.contra}>
                                 Guardar nueva contraseña <p><BsFillShieldLockFill /></p>

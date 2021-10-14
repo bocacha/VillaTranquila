@@ -161,12 +161,12 @@
 #search span{
   display: inline-block;
   position: relative;
-  transition: 0.5s;
+  transition: 0.2s;
   align-items: center;
 }
 #search span:after{
   content: '\00bb';
-  transition: 0.5s;
+  transition: 0.2s;
 }
 #search:hover span{
   padding-left: 10px;

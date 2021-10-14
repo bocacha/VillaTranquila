@@ -16,12 +16,10 @@ import {
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
 import { RiCreativeCommonsZeroLine } from "react-icons/ri";
-import DatePicker,{registerLocale} from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
 import es from 'date-fns/locale/es';
 import axios from "axios"
 import fechas from "./algoritmofechas.js"
-import DayPicker from 'react-day-picker';
-import 'react-day-picker/lib/style.css';
 registerLocale('es', es)
 
 
@@ -33,6 +31,12 @@ export default function Reservaciones() {
   useEffect(() => {
     dispatch(readServices());
   }, [dispatch]);
+  const id = JSON.parse(localStorage.getItem("id_cabaña"))
+  useEffect(() => {
+    dispatch(selectcabin(id))
+  },[dispatch])
+ 
+
   const servicios = useSelector((state) => state.servicios);
   const seleccionada = useSelector((state) => state.selectedcabin)
   let lala = [];
@@ -57,7 +61,7 @@ export default function Reservaciones() {
     UserId: logeduser.userid,
     CostoFinal: JSON.parse(costo),
     Cabinid: JSON.parse(cabinId),
-    ExtraServices: "",
+    ExtraServices: null,
     Anombrede:""
   });
   const consultarprecio=()=>{
@@ -67,32 +71,36 @@ export default function Reservaciones() {
     for (let i = 0; i < checkbox.length; i++) {
       
       if (checkbox[i].checked) {
-        console.log(suma)
         suma.push(parseFloat(checkbox[i].name))
         console.log(checkbox[i].name)
       }
     }
-    for(let j=0; j < suma.length; j++){
-     costoadicional = costoadicional + parseFloat(suma[j])
-      
+    for (let j = 0; j < suma.length; j++) {
+      costoadicional = costoadicional + parseFloat(suma[j])
+
     }
     costoadicional = costoadicional+ parseFloat(JSON.parse(costo))
     setInput({...input,CostoFinal:costoadicional})
   }
   const checkboxselected = (e) => {
     e.preventDefault()
-      setInput({
-      ...input, CostoFinal:JSON.parse(costo),
-      Checkin:selectDateCI,Checkout:selectDateCO,
+    setInput({
+      ...input, CostoFinal: JSON.parse(costo),
+      Checkin: selectDateCI, Checkout: selectDateCO,
     })
     lala = [];
     const checkbox = Array.from(document.getElementsByClassName("Servicios"));
+    let contador = 0
     for (let i = 0; i < checkbox.length; i++) {
       if (checkbox[i].checked) {
         lala.push(checkbox[i].value);
-        setInput({...input, ExtraServices: [...lala]});
+        setInput({ ...input, ExtraServices: [...lala] });
+        contador++
         console.log(checkbox[i].value);
       }
+    }
+    if(contador === 0){
+      setInput({...input , ExtraServices:null})
     }
   };
 
@@ -112,7 +120,7 @@ export default function Reservaciones() {
       [e.target.name]: e.target.value,
     });
   }
-
+//console.log(seleccionada[0].Parrilla)
   const changeFechas=(e)=>{
     if(e === null){
       return
@@ -121,8 +129,10 @@ export default function Reservaciones() {
     mostrarFecha(e);
   }
   useEffect(()=>{
+    calculofechas()
+    },[selectDateCO]);
+  useEffect(()=>{
     fechasafiltrar()
-    console.log(fechasintermedias)
     },[selectDateCO]);
 const changeFechas2=async(e)=>{
   if(e === null){
@@ -135,15 +145,19 @@ const mostrarFecha = selectDateCI =>{
     const options = {year:'numeric', month:'numeric', day:'2-digit'}
     setInput({...input,  Checkin: selectDateCI.toLocaleDateString('es-ES', options)})
     setReserva({...reserva, Checkin:selectDateCI.toLocaleDateString('es-ES', options)})
-}
-const mostrarFecha2 = selectDateCO =>{
-  const options = {year:'numeric', month:'numeric', day:'2-digit'}
-  setInput({...input,  Checkout: selectDateCO.toLocaleDateString('es-ES', options)})
-  setReserva({...reserva, Checkout:selectDateCO.toLocaleDateString('es-ES', options)})
-}
+  }
+  const mostrarFecha2 = selectDateCO =>{
+    const options = {year:'numeric', month:'numeric', day:'2-digit'}
+    setInput({...input,  Checkout: selectDateCO.toLocaleDateString('es-ES', options)})
+    setReserva({...reserva, Checkout:selectDateCO.toLocaleDateString('es-ES', options)})
+    filtrarfechas()
+  }
+  const filtrarfechas=()=> {
+    fechasafiltrar(reserva)
+  }
 const calculofechas=()=> {
  let fechasintermedias=[]
-  if(ocupadas.length>=1){
+  if(ocupadas.length>=0){
     fechasintermedias = [...ocupadas]
     fechasintermedias.push(fechas(reserva))
     console.log(fechasintermedias)
@@ -153,23 +167,23 @@ const calculofechas=()=> {
 useEffect(()=>{
   calculofechas()
   },[reserva]);
-
-  useEffect(()=>{
+useEffect(()=>{
     date(ocupadas)
     });
+
 const handlePrueba=()=>{
 console.log(input.Anombrede, logeduser.email, input.Checkin)
-dispatch(createReservation(input))
 const options = {year:'numeric', month:'numeric', day:'2-digit'}
-    const data = { username:logeduser.user ,name: input.Anombrede, email: logeduser.email, date: selectDateCI.toLocaleDateString('es-ES', options)}
-   dispatch(sendNotification(data))
+const data = { username:logeduser.user ,name: input.Anombrede, email: logeduser.email, date: selectDateCI.toLocaleDateString('es-ES', options)}
+console.log(input)
+dispatch(createReservation({...input, id:logeduser.userid},dispatch))
+dispatch(sendNotification(data))
 dispatch(editAvailible(edit))
 alert("Reserva creada")
 }
   function handleSubmit(e) {
     e.preventDefault();
-    // console.log(input)
-  //   alert("Reserva creada con éxito");
+  alert("Reserva creada con éxito");
   }
 
   const parapiker2=[] 
@@ -199,7 +213,7 @@ alert("Reserva creada")
       for(let j =0;j<ocup.length; j++){
         if(intermedias[i] === ocup[j]){
           setSelectDateCO(null)
-          throw alert("error no podes elegir esas fechas, porlomenos una esta reservada")
+          return alert("error no podes elegir esas fechas, porlomenos una esta reservada")
         }
       }
      }
@@ -257,7 +271,7 @@ alert("Reserva creada")
             />
         <DatePicker
             selected={selectDateCO}
-            onChange={e=>changeFechas2(e)}
+            onChange={(e=>changeFechas2(e))}
             placeholderText="Fecha de Check out"
             onFocus={calculofechas}
             className={styles.formInputs}
@@ -271,12 +285,13 @@ alert("Reserva creada")
             />
             <div>
               <div className={styles.p}>Servicios Basicos:
-              <p className={styles.p}><strong>Parrilla:</strong>  {seleccionada.Parrilla?<span>si</span>:<span>no</span>}</p>
-               <p className={styles.p}><strong> Wifi:</strong> {seleccionada.Wifi?<span>si</span>:<span>no</span>}</p>
-               <p className={styles.p}><strong>Parking:</strong>  {seleccionada.Parking?<span>si</span>:<span>no</span>}</p>
+              <p className={styles.p}><strong>Descripcion:</strong>  {seleccionada.Description}</p>
+        <p className={styles.p}><strong>Parrilla:</strong>  {seleccionada.Parrilla?(<span>si</span>):(<span>no</span>)}</p>
+        <p className={styles.p}><strong> Wifi:</strong> {seleccionada.Wifi?(<span>si</span>):(<span>no</span>)}</p>
+        <p className={styles.p}><strong>Parking:</strong>  {seleccionada.Parking?(<p>si</p>):(<span>no</span>)}</p>
               </div>
               <div className={styles.p}>Servicios Adicionales:</div>
-              <button onClick={checkboxselected}>Seleccionar Servicios</button>
+              
               <div>
                 {servicios.map((el) => (
                   <div className={styles.servicios} key={el.ID}>
@@ -293,6 +308,7 @@ alert("Reserva creada")
                   </div>
                 ))}
               </div>
+              <button onClick={checkboxselected}>Seleccionar Servicios</button>
             </div>
             <div className={styles.btns}>
               <Link to="/reserva/pago">
