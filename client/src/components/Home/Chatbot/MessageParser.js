@@ -7,12 +7,46 @@ class MessageParser {
     parse(message) {
         const lowerCase = message.toLowerCase();
 
-        if (lowerCase.includes('precio') ||lowerCase.includes('paga')) {
+
+        switch (lowerCase){
+            case lowerCase.inculdes('precio') :
+                this.ActionProvider.handlePrecios();
+                setTimeout(() => {
+                    this.ActionProvider.handlePreciosLink();
+                }, 3000);
+                break;
+            case lowerCase.inculdes('paga') :
+                this.ActionProvider.handlePrecios();
+                setTimeout(() => {
+                    this.ActionProvider.handlePreciosLink();
+                }, 3000);
+                break;
+            case lowerCase.includes('reserva') : 
+                this.ActionProvider.handleReservas();
+                setTimeout(() => {
+                    this.ActionProvider.handleReservasLink();
+                }, 3000);
+                break;
+            case lowerCase.includes('disponi') : 
+                this.ActionProvider.handleReservas();
+                setTimeout(() => {
+                    this.ActionProvider.handleReservasLink();
+                }, 3000);
+                break;
+            case lowerCase.includes('disponi') : 
+                this.ActionProvider.handleReservas();
+                setTimeout(() => {
+                    this.ActionProvider.handleReservasLink();
+                }, 3000);
+                break; 
+        }
+
+       /*  if (lowerCase.includes('precio') ||lowerCase.includes('paga')) {
             this.ActionProvider.handlePrecios();
             setTimeout(() => {
                 this.ActionProvider.handlePreciosLink();
             }, 2000);
-        }
+        } */
         if(lowerCase.includes('reserva')||lowerCase.includes('disponi')||lowerCase.includes('fecha')){
             this.ActionProvider.handleReservas();
             setTimeout(() => {
