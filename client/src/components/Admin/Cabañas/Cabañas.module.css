@@ -168,6 +168,47 @@
   color: #1c2531 ;
   border-color: #8bafbf;
 }
+
+.btnsGuarCanc{
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+}
+.btnsGuarCanc button{
+  border-radius: 4px;
+    background-color: #355978 ;
+    border-color: transparent;
+    color: #fff;
+    /* text-align: center; */
+    font-size: large;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    padding: 10px 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+#guardar{
+  min-width: 65%;
+  margin-right: 2%;
+  margin-left: 0%;
+  background-color: #355978 ;
+}
+#guardar:hover{
+  background-color: #8bafbf ;
+  color: #1c2531 ;
+  border-color: solid #8bafbf;
+}
+#cancelar{
+  min-width:50%;
+  margin-left: 0;
+  background:#7f7979;
+}
+#cancelar:hover{
+  background-color: #b9b9b9;
+  border-color: solid #b9b9b9;
+  color:black;
+}
+
 .detalles{
   width: 110%;
 }

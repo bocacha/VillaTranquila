@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import styles from "./Reservaciones.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  createReservation,
   editReservation,
   readReservation,
   Logeduser,
-  readReservationocultados
+  readReservationocultados,
+  readUsers,
+  getCabins
 } from "../../../actions";
 import ReservacionesDetail from "./ReservacionesDetail";
 import DatePicker, { registerLocale } from "react-datepicker";
@@ -18,31 +19,54 @@ import Navbar from "../../Navbar/Navbar";
 registerLocale('es', es)
 
 export default function Reservaciones() {
+
+  const dispatch = useDispatch();
+
   const [selectDateCI, setSelectDateCI] = useState(null);
   const [selectDateCO, setSelectDateCO] = useState(null);
+
   const [mostrar, setMostrar] = useState(false);
-  const dispatch = useDispatch();
+
   const allReservations = useSelector((state) => state.reservaciones);
-  const [habilitar, setHabilitar] = useState(false)
+  console.log('reservas:', allReservations)
+
+  const [habilitar, setHabilitar] = useState(false);
+
+  useEffect(() => {
+    dispatch(getCabins())
+  },[dispatch])
+  const allCabins = useSelector((state) => state.cabins);
+  
   const logeduser = useSelector((state) => state.user);
+  
   const { token } = logeduser;
+
+  useEffect(() => {
+    dispatch(readUsers({ token }));
+  }, [dispatch, token]);
+  
+  const allUsers = useSelector((state) => state.usuarios);
+  
   const [input, setInput] = useState({
     id: "",
+    UserName: "",
+    Anombrede: "",
     Checkin: "",
     Checkout: "",
-    UserId: "",
-    Paymentsid: "",
-    Cabinid: "",
+    CabinNumber: "",
     ExtraServices: "",
     CostoFinal: "",
+    Paymentsid: "",
   });
+
   const [edit, setEdit] = useState({
     id: "",
+    UserName: "",
+    Anombrede: "",
     Checkin: "",
     Checkout: "",
-    UserId: "",
     Paymentsid: "",
-    Cabinid: "",
+    CabinNumber: "",
     ExtraServices: "",
     CostoFinal: "",
   });
@@ -68,13 +92,13 @@ export default function Reservaciones() {
     });
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
-    dispatch(createReservation(input));
-    alert("Reserva creada con éxito");
-    ;
-    //window.location.reload();
-  }
+  // function handleSubmit(e) {
+  //   e.preventDefault();
+  //   dispatch(createReservation(input));
+  //   alert("Reserva creada con éxito");
+  //   ;
+  //   //window.location.reload();
+  // }
   function handleSubmitEdit(e, ID,
     Checkin,
     Checkout,
@@ -169,24 +193,30 @@ export default function Reservaciones() {
             {mostrar
               ?
               <div className={styles.editarCont}>
-                <div className={styles.title}> Editar reserva</div>
+                <div className={styles.title}> <h3>Editar reserva</h3></div>
                 <form >
-                  <DatePicker
-                    selected={selectDateCI}
-                    onChange={(e) => changeFechas(e)}
-                    dateFormat='dd/MM/yyyy'
-                    // minDate={new Date()}
-                    required
-                  //isClearable
-                  />
-                  <DatePicker
-                    selected={selectDateCO}
-                    onChange={(e) => changeFechas2(e)}
-                    dateFormat='dd/MM/yyyy'
-                    // minDate={new Date()}
-                    required
-                  //isClearable
-                  />
+                  <div className={styles.datePicker}>
+                    <DatePicker
+                      selected={selectDateCI}
+                      onChange={(e) => changeFechas(e)}
+                      dateFormat='dd/MM/yyyy'
+                      // minDate={new Date()}
+                      required
+                      placeholderText='Fecha de Check in'
+                      id={styles.checkin}
+                    //isClearable
+                    />
+                    <DatePicker
+                      selected={selectDateCO}
+                      onChange={(e) => changeFechas2(e)}
+                      dateFormat='dd/MM/yyyy'
+                      // minDate={new Date()}
+                      required
+                      placeholderText='Fecha de Check out'
+                      id={styles.checkout}
+                    //isClearable
+                    />
+                  </div>
                   <input
                     type="text"
                     value={edit.CostoFinal}
@@ -236,39 +266,43 @@ export default function Reservaciones() {
                     placeholder="Servicios extra"
                     className={styles.formInputs}
                   />
-                  <div className={styles.btns}>
-                    <button type="submit" className={styles.btn}>
-                      Editar
-                    </button>
-                  </div>
                 </form>
+                <div className={styles.btns}>
+                  <button type="submit" onClick={handlePrueba} id={styles.guardar}>
+                    Guardar cambios
+                  </button>
+                  <button onClick={() => { if (mostrar) setMostrar(false) }} id={styles.cancelar}>Cancelar</button>
+                </div>
               </div>
               :
               null
             }
 
           </div>
-          {/* VER */}
-          <div className={styles.containerReservas}>
-            {allReservations?.map((el) => {
-              return (
-                <div className={styles.detalles} key={el.ID}>
-                  <ReservacionesDetail
-                    ID={el.ID}
-                    Checkin={el.Checkin}
-                    Checkout={el.Checkout}
-                    UserId={el.UserId}
-                    CostoFinal={el.CostoFinal}
-                    Cabinid={el.Cabinid}
-                    ExtraServices={el.ExtraServices}
-                    handlePrueba={handlePrueba}
-                    handleSubmitEdit={handleSubmitEdit}
-                    restaurar={habilitar}
-                  />
-                </div>
-              );
-            })}
-          </div>
+        </div>
+        {/* VER */}
+        <div className={styles.containerReservas}>
+          {allReservations?.map((el) => {
+            let username = allUsers.find(e => e.ID === el.UserId).UserName;
+            let cabinNumber = allCabins.find(e => e.ID === el.Cabinid).Number;
+            return (
+              <div className={styles.detalles} key={el.ID}>
+                <ReservacionesDetail
+                  ID={el.ID}
+                  Checkin={el.Checkin}
+                  Checkout={el.Checkout}
+                  CabinNumber = {cabinNumber}
+                  UserName = {username}
+                  Anombrede = {el.Anombrede}
+                  CostoFinal={el.CostoFinal}
+                  ExtraServices={el.ExtraServices}
+                  handlePrueba={handlePrueba}
+                  handleSubmitEdit={handleSubmitEdit}
+                  restaurar={habilitar}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
