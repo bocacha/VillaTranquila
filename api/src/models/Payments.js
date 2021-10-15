@@ -8,45 +8,33 @@ module.exports = (sequelize) => {
       primaryKey: true,
       allowNull: false,
     },
-    userName:{
-      type:DataTypes.STRING,
+    user:{
+      type:DataTypes.JSON,
       allowNull: false,
     },
-    userEmail:{
-      type:DataTypes.STRING,
+    status:{
+      type:DataTypes.JSON,
       allowNull: false,
     },
-    title:{
-      type:DataTypes.STRING,
+    status_detail:{
+      type:DataTypes.JSON,
       allowNull: false,
     },
-    unitPrice:{
-      type:DataTypes.STRING,
+    transaction_detail:{
+      type:DataTypes.JSON,
       allowNull: false,
     },
-    card:{
-      type:DataTypes.STRING,
+    id_reserva:{
+      type:DataTypes.JSON,
       allowNull: false,
     },
-    transactionDetails:{
-      type:DataTypes.STRING,
+    fecha:{
+      type:DataTypes.JSON,
       allowNull: false,
-    },
-    payment_method_id:{
-      type:DataTypes.STRING,
-      allowNull: false,
-    },
-    date_approved:{
-      type:DataTypes.STRING,
-      allowNull: false,
-    },
-    date_last_updated:{
-      type:DataTypes.STRING,
-      allowNull: false,
-    },
+    },   
     Show:{
       type:DataTypes.BOOLEAN, 
       defaultValue: true
-    }
+    },
   },{timestamps: false,});
 };

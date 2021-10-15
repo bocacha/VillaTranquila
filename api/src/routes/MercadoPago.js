@@ -21,13 +21,13 @@ let preference = {
       },
     ],
     back_urls:{
-      "success":"http://localhost:3001/",
+      "success":"http://localhost:3001//notification",
       "failure":"http://localhost:3001/reserva/pago",
       "pending":"http://localhost:3001/reserva/pago",
     },
   //"http://app-villa-tranquila.vercel.app","http://app-villa-tranquila.vercel.app/reserva/pago""http://app-villa-tranquila.vercel.app/reserva/pago"
     auto_return: "approved",
-    notification_url:"https://villatranquila.herokuapp.com/notification",
+    notification_url:"https://48381f13c519a606f7c2149ea31bd0d1.m.pipedream.net/",
     payer:{
       userName:req.body.userName,
       userEmail:req.body.email,
