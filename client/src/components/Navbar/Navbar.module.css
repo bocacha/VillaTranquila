@@ -112,7 +112,7 @@
   margin-left: 0px;
 }
 
-@media (max-width: 1155px) {
+@media (max-width: 1140px) {
   .navbar{
     width: fit-content;
     min-height: 50vh;
