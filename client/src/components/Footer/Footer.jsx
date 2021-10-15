@@ -93,7 +93,7 @@ export default function Footer() {
                value={footer.email}
                placeholder='usuario@ejemplo.com'
                onChange={handleChange}
-               className={styles.input}
+               id={styles.input}
                required
               />
             </div>

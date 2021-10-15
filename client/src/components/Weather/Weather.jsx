@@ -6,14 +6,109 @@ export default function Weather() {
     const weather = useSelector(state => state.weather);
     //console.log(weather)
     let today = '';
+    let icono = [];
+   
     return (
         <div className={styles.weather}>
             <p className={styles.titulo}>Clima actual</p>
+            
             <div className={styles.container}>
                 {weather?.map(e => {
                     if (weather.indexOf(e) === 0) today = 'Hoy';
-                    if (weather.indexOf(e) === 1) today = 'Mañana';
-                    if (weather.indexOf(e) === 2) today = 'Pasado mañana';
+                    if (weather.indexOf(e) === 1) today = e.fecha;
+                    if (weather.indexOf(e) === 2) today = e.fecha;
+                    if (e.text === 'Patchy rain possible' || e.text === 'Patchy sleet possible'){
+                        icono  = ( 
+                            <div className={styles.wcont}>
+                                <div class={styles.icon}>
+                                    <div class={styles.cloud}></div>
+                                    <div class={styles.sun}>
+                                        <div class={styles.rays}></div>
+                                    </div>
+                                    <div class={styles.rain}></div>
+                                    </div>
+                            </div>
+                        )
+                    } else if (e.text === 'Sunny' || e.text === 'Clear'){
+                        icono = ( 
+                            <div className={styles.wcont}>
+                                <div className={styles.icon, styles.sunny}>
+                                    <div className={styles.sun}>
+                                        <div className={styles.rays}></div>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    } else if (e.text === 'Partly cloudy'){
+                        icono = ( 
+                            <div className={styles.wcont}>
+                                <div className={styles.icon, styles.sunny}>
+                                    <div class={styles.cloud}></div>
+                                    <div className={styles.sun}>
+                                        <div className={styles.rays}></div>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    }else if (e.text === 'Cloudy' || e.text === 'Overcast'){
+                        icono = ( 
+                            <div className={styles.wcont}>
+                                <div className={styles.icon, styles.cloudy}>
+                                    <div class={styles.cloud}></div>
+                                    <div class={styles.cloud}></div>
+                                </div>
+                            </div>
+                        )
+                    }else if (e.text === 'Patchy snow possible' || e.text === 'Patchy heavy snow' || e.text === 'Patchy light snow' || e.text === 'Light snow showers'){
+                        icono = ( 
+                            <div className={styles.wcont}>
+                                <div class={styles.icon, styles.flurries}>
+                                    <div class={styles.cloud}></div>
+                                    <div class={styles.sun}>
+                                        <div class={styles.rays}></div>
+                                    </div>
+                                    <div className={styles.snow}>
+                                        <div class={styles.flake}></div>
+                                        <div class={styles.flake}></div>
+                                </div>
+                                </div>
+                            </div>
+                        )
+                    }else if (e.text === 'Moderate snow' || e.text ===  'Moderate or heavy snow showers'  || e.text === 'Light snow'){
+                        icono = ( 
+                            <div className={styles.wcont}>
+                                <div class={styles.icon, styles.flurries}>
+                                    <div class={styles.cloud}></div>
+                                    <div className={styles.snow}>
+                                        <div class={styles.flake}></div>
+                                        <div class={styles.flake}></div>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    }else if (e.text === 'Rainy'){
+                        icono = ( 
+                            <div className={styles.wcont}>
+                                <div class={styles.icon, styles.rainy}>
+                                    <div class={styles.cloud}></div>
+                                    <div class={styles.rain}></div>
+                                </div>
+                            </div>
+                        )
+                    }else if (e.text === 'Storm'){
+                        icono = ( 
+                            <div className={styles.wcont}>
+                                <div class={styles.icon}>
+                                    <div class={styles.cloud}></div>
+                                    <div class={styles.lightning}>
+                                        <div class={styles.bolt}></div>
+                                        <div class={styles.bolt}></div>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    }
+                    
 
                     return (
                         <div className={styles.dia}>
@@ -42,7 +137,9 @@ export default function Weather() {
                                     </tr>
                                 </tbody>
                             </table>
-                            <img src={e.icon} />
+                            {/* <label>{e.text}</label> */}                       
+                                {/* <img src={e.icon} />                           */}
+                               {icono}
                         </div>
                     )
                 })}
