@@ -7,22 +7,16 @@ class ActionProvider {
       this.createClientMessage = createClientMessage;
       
     }
+    
     handleNext(){
-      const message = this.createChatBotMessage('¿tiene alguna otra consulta?');
-      this.setState((prev) => ({
-          ...prev,
-          messages: [...prev.messages, message],
-        }));
-  }
-    handleNext(){
-        const message = this.createChatBotMessage('¿tiene alguna otra consulta?');
+        const message = this.createChatBotMessage('Su consulta es poco especifica, seleccione alguna de las palabras clave que se le proporciono al comienzo');
         this.setState((prev) => ({
             ...prev,
             messages: [...prev.messages, message],
           }));
     }
     handlePrecios() {
-        const message = this.createChatBotMessage('si quieres saber de nuestro precios o pagar ve al menu principal - Reservaciones o bien ingresa al link');
+        const message = this.createChatBotMessage('Si quieres saber de nuestros precios o pagar ve al menu principal - Reservaciones o bien ingresa al link');
     
         this.setState((prev) => ({
           ...prev,
@@ -54,7 +48,7 @@ class ActionProvider {
         }));
       }
       handleContacto() {
-        const message = this.createChatBotMessage('si quieres contactarnos puedes ir al menu- contacto o bien ingresa al link');
+        const message = this.createChatBotMessage('Si quieres contactarnos puedes ir al menu, contacto o bien ingresa al link');
     
         this.setState((prev) => ({
           ...prev,

@@ -24,7 +24,6 @@ function Chat() {
             actionProvider={ActionProvider}
             headerText='Villa Tranquila'
             placeholderText='Tu consulta Aqui...'
-            disableScrollToBottom={false}
           />
          
         </div>
