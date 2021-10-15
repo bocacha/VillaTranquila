@@ -9,6 +9,7 @@ const getAllApi = async() =>{
    
     const apiInfo = api.data.forecast.forecastday.map(e=> {
         return {
+            fecha: e.date,
             min_temp: e.day.mintemp_c,
             max_temp: e.day.maxtemp_c,
             wind: e.day.maxwind_kph,
