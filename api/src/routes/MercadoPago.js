@@ -16,6 +16,7 @@ let preference = {
     items: [
       {
         title: "Cabaña Nº"+req.body.title,
+        description:req.body.idreserva,
         unit_price: parseInt(req.body.price),
         quantity: 1
       },
