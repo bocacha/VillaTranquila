@@ -42,15 +42,24 @@ router.post("/NewPicture", (req, res) => {
     if (!decodedToken.Admin) {
         return res.status(400).json({ error: "Ops.. No tenes permisos" })
     }
-    const { Description, Url } = req.body;
+    console.log('hola mundo')
+    const { Description, Url, CabainNumber } = req.body;
+
+    console.log(req.body)
     Pictures.create({
         Description,
-        Url
+        Url,
+        CabainNumber
     })
         .then(doneTemp => {
+            console.log('done temp')
             return res.status(200).json(doneTemp)
         })
-        .catch(error => { res.send(error) })
+        .catch(error => {
+            console.error(error)
+            res.status(400) 
+            res.send('Algo salió mal')
+        })
 })
 
 
@@ -70,10 +79,11 @@ router.put("/EditPicture", (req, res) => {
     if (!decodedToken.Admin) {
         return res.status(400).json({ error: "Ops.. No tenes permisos" })
     }
-    const { Description, Url } = req.body;
+    const { Description, Url, CabainNumber } = req.body;
     const objecttoupdate = {
         Description: Description,
-        Url: Url
+        Url: Url,
+        CabainNumber: CabainNumber
     }
     Pictures.update(
         objecttoupdate
