@@ -3,6 +3,7 @@ const { Router } = require('express');
 const router = Router();
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
+const { cloudinary } = require('../utils/cloudinary');
 
 
 router.post('/', (req, res) => {
@@ -10,7 +11,7 @@ router.post('/', (req, res) => {
 
     let pdfDoc = new PDFDocument;
     pdfDoc.pipe(fs.createWriteStream(`reserva${name}.pdf`));
-    
+    console.log('creo el pdf')
 
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.email',
@@ -36,13 +37,14 @@ router.post('/', (req, res) => {
         to: email,
         subject: 'Reserva',
         text:`Hola ${username}! Tienes una reserva a nombre de ${name} en Villa Tranquila para el día ${date}, haz un pago para reservar tu fecha`,
-        attachments: [
+         attachments: [
             {
                 filename: `reserva${name}.pdf`, 
-                //path:`../../reserva${name}.pdf`,                                       
+                path: doc.file(path.join(__dirname, `../../reserva${name}.pdf`)),                                       
                 contentType: 'application/pdf',
             }]
     };
+    console.log('path',path)
 
     pdfDoc.image('Villa logo.jpg');
     pdfDoc.text('-------------------------------------------------------------------------------------------------',{lineGap:10})
@@ -55,8 +57,10 @@ router.post('/', (req, res) => {
     pdfDoc.end();
     
    
+   
 
     transporter.sendMail(mailOptions, (error, info) => {
+        console.log('llego al transporter')
         if(error) {
             res.status(500).send(error.message)
         } else {
