@@ -62,14 +62,14 @@ export default function Profile(props) {
             window.location.reload();
         }
     }
-    let objetosaArray =[]
-if(dataUser.ReservationsHistory){
- const reservas = dataUser.ReservationsHistory.map(e=>{
-   const {Show, ID, UserId, ...history} = e
-   console.log(history)
-   objetosaArray.push(Object.entries(history))
- })
-}
+    let objetosaArray = []
+    if (dataUser.ReservationsHistory) {
+        const reservas = dataUser.ReservationsHistory.map(e => {
+            const { Show, ID, UserId, ...history } = e
+            console.log(history)
+            objetosaArray.push(Object.entries(history))
+        })
+    }
 
     function handleChangeEdit(e) {
         setEdit({
@@ -163,7 +163,7 @@ if(dataUser.ReservationsHistory){
                         </button>
                         <button className={styles.editarPerfil} onClick={handleMostrarContraseña}>
                             {mostrarContraseña ? (
-                                <div><strong>Cancelar <p><FaUnlockAlt/></p></strong></div>
+                                <div><strong>Cancelar <p><FaUnlockAlt /></p></strong></div>
                             ) : (
                                 <div><strong>Cambiar contraseña <p><FaLock /></p></strong></div>
                             )}
@@ -199,34 +199,34 @@ if(dataUser.ReservationsHistory){
                     </table>
                     <details>
                         <summary>Historial de reservas</summary>
-                        <Link to={`/Profile/${user.user}/${user.userid}`}>
+                        <Link to={`/Profile/${user.user}/${user.userid}`} className={styles.link}>
                         <button className={styles.editarPerfil} >Ver y editar mis reservaciones</button>
                          </Link>
                         {dataUser.ReservationsHistory &&
-            dataUser.ReservationsHistory.length ? (
-              <ul>
-                {objetosaArray.map((el) => {
-                return <ul>{el.map(e=>{
-                  return <li>{e[0]}:{e[1]}</li>
-                })}</ul>;
-              })
-}
-              </ul>
-              
-            ) : (
-              <div>
-                <span>
-                  Conviertete en cliente Premium completando tu primer reserva{" "}
-                  <FaLongArrowAltRight />
-                </span>
-                <Link to="/reserva">
-                  <button>
-                    {" "}
-                    <BsBook />{" "}
-                  </button>
-                </Link>
-              </div>
-            )}
+                            dataUser.ReservationsHistory.length ? (
+                            <ul>
+                                {objetosaArray.map((el) => {
+                                    return <ul>{el.map(e => {
+                                        return <li>{e[0]}:{e[1]}</li>
+                                    })}</ul>;
+                                })
+                                }
+                            </ul>
+
+                        ) : (
+                            <div>
+                                <span>
+                                    Conviertete en cliente Premium completando tu primer reserva{" "}
+                                    <FaLongArrowAltRight />
+                                </span>
+                                <Link to="/reserva">
+                                    <button>
+                                        {" "}
+                                        <BsBook />{" "}
+                                    </button>
+                                </Link>
+                            </div>
+                        )}
                     </details>
                     <div className={styles.premium}>
                         {dataUser.Premium ? (
@@ -302,7 +302,7 @@ if(dataUser.ReservationsHistory){
                                 placeholder="Nuevo teléfono..."
                                 className={styles.formInputs}
                                 pattern="[+]{2}[0-9]{10-14}"
-                                placeholder="+54 9 11 12345678" 
+                                placeholder="+54 9 11 12345678"
                                 required
                             />
                             <input
