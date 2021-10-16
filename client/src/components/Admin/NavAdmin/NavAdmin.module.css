@@ -7,6 +7,8 @@
   margin-top:63px;
   margin-bottom: 4px;
   position: fixed;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: rgb(0 0 0 / 19%) 0px 10px 20px, rgb(0 0 0 / 23%) 0px 6px 6px;
 }
 
 .ul {

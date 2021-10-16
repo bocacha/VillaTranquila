@@ -75,10 +75,26 @@ export default function CabinsDetail({
       <div className={styles.btnsContainer}>
         <div>
           {!restaurar ? (
-            <button onClick={() => handleSubmitDelete(ID)} className={styles.btn}>Ocultar</button>
+            <button onClick={() => {
+              handleSubmitDelete(ID);
+              window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth',
+              });
+              }}
+              className={styles.btn}>Ocultar</button>
 
           ) : (
-            <button onClick={() => handleSubmitrestore(ID)} className={styles.btn}>Restaurar</button>
+            <button onClick={() => {
+              handleSubmitDelete(ID);
+              window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth',
+              });
+              }}
+              className={styles.btn}>Restaurar</button>
           )}
         </div>
           <div>
@@ -97,6 +113,11 @@ export default function CabinsDetail({
                   Wifi,
                   Parking);
                 setMostrar(false);
+                window.scrollTo({
+                  top: 0,
+                  left: 0,
+                  behavior: 'smooth',
+                });
                 }}
               className={styles.btnPlus}
             >

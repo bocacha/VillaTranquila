@@ -41,6 +41,7 @@ export const REMOVE_USERS= "REMOVE_USERS";
 export const READ_FECHASNODISPONIBLES = "READ_FECHASNODISPONIBLES";
 export const GET_USER_DATA = "GET_USER_DATA";
 export const SELECTED_CABIN = "SELECTED_CABIN";
+export const FILTER_RESERVATIONS = 'FILTER_RESERVATIONS';
 
 export function getCabins() {
   return async function (dispatch) {
@@ -794,4 +795,11 @@ export function mailpassword(Email) {
       console.error(err);
     }
   };
+}
+
+export function filterReservations(payload){
+  return {
+    type: FILTER_RESERVATIONS,
+    payload
+  }
 }
