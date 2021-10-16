@@ -6,6 +6,8 @@ import Navbar from "../Navbar/Navbar";
 import Slider from "../Slider/Slider";
 import Weather from "../Weather/Weather";
 import Upload from "../Reserva/Upload/Upload";
+
+import Testimoniales from "../Testimoniales/Testomoniales";
 // import Searchbar from "../Searchbar/Searchbar";
 // import Gallery from "../Gallery/Gallery";
 import styles from "./Home.module.css";
@@ -14,6 +16,7 @@ import { useDispatch, useSelector} from 'react-redux';
 import { Logeduser, getUserData, readWeather } from "../../actions";
 
 import ServiciosBanner from "../ServiciosBanner/ServiciosBanner";
+
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -62,6 +65,7 @@ export default function Home() {
           className={styles.mapa}
         ></iframe>
       </div>
+      {/* <Testimoniales /> */}
         <Footer />
 
     </div>

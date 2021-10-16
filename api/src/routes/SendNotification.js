@@ -33,8 +33,7 @@ router.post('/', (req, res) => {
         from: 'VILLA TRANQUILA',
         to: email,
         subject: 'Reserva',
-        text:`Hola ${username}! Tienes una reserva a nombre de ${name} en Villa Tranquila para el día ${date}, haz un pago para reservar tu fecha`,
-        
+        text:`Hola ${username}! Tienes una reserva a nombre de ${name} en Villa Tranquila para el día ${date}, haz un pago para reservar tu fecha`,  
     };
    
     
