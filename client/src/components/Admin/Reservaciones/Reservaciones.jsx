@@ -40,10 +40,10 @@ export default function Reservaciones() {
   const logeduser = useSelector((state) => state.user);
   
   const { token } = logeduser;
-
   useEffect(() => {
     dispatch(readUsers({ token }));
   }, [dispatch, token]);
+
   
   const allUsers = useSelector((state) => state.usuarios);
   
@@ -109,7 +109,6 @@ export default function Reservaciones() {
     CostoFinal) {
     e.preventDefault();
     console.log(edit);
-    setMostrar(true);
     setEdit({
       ...edit,
       id: ID,
@@ -121,6 +120,7 @@ export default function Reservaciones() {
       ExtraServices: ExtraServices,
       CostoFinal: CostoFinal
     })
+    setMostrar(true);
     //dispatch(editReservation(edit, { token }));
 
   }

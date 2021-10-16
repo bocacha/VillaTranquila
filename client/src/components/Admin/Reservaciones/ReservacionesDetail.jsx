@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styles from "./ReservacionesDetail.module.css";
-import { useDispatch } from "react-redux";
-import { removeReservations, restoreReservations } from "../../../actions";
+import { useDispatch, useSelector} from "react-redux";
+import { useHistory } from "react-router";
+import { readReservation, removeReservations, restoreReservations,readReservationocultados } from "../../../actions";
 import fechas from "../../Reserva/Linkreserva/algoritmofechas"
 
 export default function ReservacionesDetail({
@@ -20,16 +21,23 @@ export default function ReservacionesDetail({
 }) {
   const Available = fechas({Checkin:Checkin, Checkout:Checkout})
   const dispatch = useDispatch();
+  const history = useHistory();
   const [mostrar, setMostrar] = useState(true);
   const handleSubmitDelete = (ID) => {
     dispatch(removeReservations({ id: ID , Available},dispatch));
-    //alert("su Reserva fue Eliminada con exito");
-   //window.location.reload();
+    alert("su Reserva fue Eliminada con exito");
+    setTimeout(function () {
+      history.go(0);
+    }, 500)
+   // window.location.reload();
   };
   const handleSubmitrestore = (ID) => {
     dispatch(restoreReservations({ id: ID, Available },dispatch));
-    //alert("su cabaña fue Restaurada con exito");
-    //window.location.reload();
+    alert("su cabaña fue Restaurada con exito");
+    setTimeout(function () {
+      history.go(0);
+    }, 500)
+    // window.location.reload();
   };
   return (
     <div className={styles.container}>
@@ -94,12 +102,15 @@ export default function ReservacionesDetail({
         )}
         <button
           onClick={(e) => {
-            handleSubmitEdit(e, ID,
+            handleSubmitEdit(e,  ID,
               Checkin,
               Checkout,
+              CabinNumber,
+              UserName,
+              Anombrede,
               Paymentsid,
               ExtraServices,
-              CostoFinal);
+              CostoFinal,);
             setMostrar(false);
           }}
           className={styles.btnPlus}

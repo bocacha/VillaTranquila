@@ -651,16 +651,11 @@ export function restoreReservations(payload){
   console.log(payload)
   return async function (dispatch) {
     var cabins = await axios.get("/cabins")
-    console.log(cabins)
     var reserva = await axios.get("/reservations/ocultadas")
-    console.log(reserva)
     var filtrada = reserva.data.filter(e=> e.ID === payload.id)
-    console.log(filtrada)
     var cabinfiltrada = cabins.data.filter(e=>e.ID === filtrada[0].Cabinid )
-    console.log(cabinfiltrada)
     var Avaliable2 = cabinfiltrada[0].Available
     Avaliable2.push(payload.Available)
-    console.log(Avaliable2)
       var json = await axios.put("/reservations/RestoreReservation", {id: payload.id});
       return (dispatch({
         type: REMOVE_RESERVATIONS,
