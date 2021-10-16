@@ -228,3 +228,11 @@
   min-height: 100px;
 }
 
+.containerCabañas{
+  display:grid;
+  background-color: #94adbc;
+  grid-template-columns: repeat(auto-fill, minmax(30%, 30%));
+  justify-content: center;
+  justify-items: center;
+  grid-gap: 3%;
+}

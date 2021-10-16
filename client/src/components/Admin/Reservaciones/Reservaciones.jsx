@@ -16,6 +16,7 @@ import es from 'date-fns/locale/es';
 import { Link } from "react-router-dom";
 import NavAdmin from '../NavAdmin/NavAdmin';
 import Navbar from "../../Navbar/Navbar";
+import SearchBar from "./SearchBar";
 registerLocale('es', es)
 
 export default function Reservaciones() {
@@ -34,19 +35,19 @@ export default function Reservaciones() {
 
   useEffect(() => {
     dispatch(getCabins())
-  },[dispatch])
+  }, [dispatch])
   const allCabins = useSelector((state) => state.cabins);
-  
+
   const logeduser = useSelector((state) => state.user);
-  
+
   const { token } = logeduser;
+  const allUsers = useSelector((state) => state.usuarios);
 
   useEffect(() => {
     dispatch(readUsers({ token }));
   }, [dispatch, token]);
-  
-  const allUsers = useSelector((state) => state.usuarios);
-  
+
+
   const [input, setInput] = useState({
     id: "",
     UserName: "",
@@ -188,6 +189,9 @@ export default function Reservaciones() {
           )
           }
         </div>
+        <div>
+          <SearchBar />
+        </div>
         <div className={styles.container2}>
           <div className={styles.formsCont}>
             {mostrar
@@ -282,27 +286,29 @@ export default function Reservaciones() {
         </div>
         {/* VER */}
         <div className={styles.containerReservas}>
-          {allReservations?.map((el) => {
-            let username = allUsers.find(e => e.ID === el.UserId).UserName;
-            let cabinNumber = allCabins.find(e => e.ID === el.Cabinid).Number;
-            return (
-              <div className={styles.detalles} key={el.ID}>
-                <ReservacionesDetail
-                  ID={el.ID}
-                  Checkin={el.Checkin}
-                  Checkout={el.Checkout}
-                  CabinNumber = {cabinNumber}
-                  UserName = {username}
-                  Anombrede = {el.Anombrede}
-                  CostoFinal={el.CostoFinal}
-                  ExtraServices={el.ExtraServices}
-                  handlePrueba={handlePrueba}
-                  handleSubmitEdit={handleSubmitEdit}
-                  restaurar={habilitar}
-                />
-              </div>
-            );
-          })}
+          {allReservations.length !== 0 ?
+            allReservations.map((el) => {
+              let username = allUsers.find(e => e.ID === el.UserId).UserName;
+              let cabinNumber = allCabins.find(e => e.ID === el.Cabinid).Number;
+              return (
+                <div className={styles.detalles} key={el.ID}>
+                  <ReservacionesDetail
+                    ID={el.ID}
+                    Checkin={el.Checkin}
+                    Checkout={el.Checkout}
+                    CabinNumber={cabinNumber}
+                    UserName={username}
+                    Anombrede={el.Anombrede}
+                    CostoFinal={el.CostoFinal}
+                    ExtraServices={el.ExtraServices}
+                    handlePrueba={handlePrueba}
+                    handleSubmitEdit={handleSubmitEdit}
+                    restaurar={habilitar}
+                  />
+                </div>
+              );
+            }) :
+            <div className={styles.ninguna}>No se encontró ninguna reserva</div>}
         </div>
       </div>
     </div>

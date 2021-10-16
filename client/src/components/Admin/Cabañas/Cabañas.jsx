@@ -101,7 +101,7 @@ const Cabañas = () => {
     const { token } = logeduser;
     e.preventDefault();
     dispatch(createCabains(cabain, { token }));
-    alert("su cabaña fue creada con exito");
+    alert("Su cabaña fue creada con éxito 🏡");
     window.location.reload();
   };
 
@@ -405,49 +405,53 @@ const Cabañas = () => {
                 <option value="false">NO</option>
               </select>
             </form>
-              <div className={styles.btnsGuarCanc}>
-                <button  onClick={handlePrueba} id={styles.guardar}>Guardar cambios</button>
-                <button
-                  onClick={() => {
-                    if(mostrar) setMostrar(false);
-                  }}
-                  id={styles.cancelar}
-                >
-                  Cancelar
-                </button>
-              </div>
+            <div className={styles.btnsGuarCanc}>
+              <button onClick={handlePrueba} id={styles.guardar}>Guardar cambios</button>
+              <button
+                onClick={() => {
+                  if (mostrar) setMostrar(false);
+                }}
+                id={styles.cancelar}
+              >
+                Cancelar
+              </button>
+            </div>
           </div>
         ) : null}
         {/* VER */}
-        <div>
-          {allCabains?.map((el) => {
-            return (
-              <div className={styles.detalles} key={el.ID}>
-                <CabañasDetail
-                  ID={el.ID}
-                  Number={el.Number}
-                  Capacity={el.Capacity}
-                  Available={el.Available}
-                  Price={el.Price}
-                  Description={el.Description}
-                  Picture={el.Picture}
-                  Coffe={el.Coffe}
-                  Microondas={el.Microondas}
-                  Calefaccion={el.Calefaccion}
-                  Parrilla={el.Parrilla}
-                  Wifi={el.Wifi}
-                  Cleaning={el.Cleaning}
-                  Refrigerator={el.Refrigerator}
-                  Stove={el.Stove}
-                  Parking={el.Parking}
-                  handlePrueba={handlePrueba}
-                  handleeditSubmit={handleeditSubmit}
-                  restaurar={habilitar}
-                />
-              </div>
-            );
-          })}
-        </div>
+      </div>
+      <div className={styles.containerCabañas}>
+        {allCabains?.sort((a, b) => {
+          if(parseInt(a.Number) < parseInt(b.Number)) return -1;
+          if(parseInt(a.Number) > parseInt(b.Number)) return 1;
+          return 1;
+        }).map((el) => {
+          return (
+            <div className={styles.detalles} key={el.ID}>
+              <CabañasDetail
+                ID={el.ID}
+                Number={el.Number}
+                Capacity={el.Capacity}
+                Available={el.Available}
+                Price={el.Price}
+                Description={el.Description}
+                Picture={el.Picture}
+                Coffe={el.Coffe}
+                Microondas={el.Microondas}
+                Calefaccion={el.Calefaccion}
+                Parrilla={el.Parrilla}
+                Wifi={el.Wifi}
+                Cleaning={el.Cleaning}
+                Refrigerator={el.Refrigerator}
+                Stove={el.Stove}
+                Parking={el.Parking}
+                handlePrueba={handlePrueba}
+                handleeditSubmit={handleeditSubmit}
+                restaurar={habilitar}
+              />
+            </div>
+          );
+        })}
       </div>
 
 

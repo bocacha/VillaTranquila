@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getCabins, filterCabins,readWeather } from "../../actions";
+import { getCabins, filterCabins, readWeather } from "../../actions";
 import Paginado from './Paginado/Paginado';
 import Navbar from "../Navbar/Navbar";
 import Cabaña from "./Cabaña/Cabaña";
@@ -27,7 +27,7 @@ function validate(filters) {
     console.log('inDate', inDate, 'today', today, inDate > today);
     console.log('outDate', outDate, 'today', today, outDate > today);
 
-    if((inDate < today && inDate !== '') || (outDate < today && outDate !== '')){
+    if ((inDate < today && inDate !== '') || (outDate < today && outDate !== '')) {
         errors.today = 'Fechas inválidas';
     }
     if (inDate > outDate && outDate !== '') {
@@ -47,11 +47,16 @@ export default function Reserva() {
         dispatch(Logeduser())
     }, [dispatch]);
 
-    useEffect(()=>{
-        dispatch (readWeather());
+    useEffect(() => {
+        dispatch(readWeather());
     });
 
     const allCabins = useSelector(state => state.cabins);
+    let orderedCabins = allCabins.sort((a, b) => {
+        if (parseInt(a.Number) < parseInt(b.Number)) return -1;
+        if (parseInt(a.Number) > parseInt(b.Number)) return 1;
+        return 1;
+    })
     const [errors, setErrors] = useState({})
 
     // Paginado---------------------------------------------------------------
@@ -59,8 +64,7 @@ export default function Reserva() {
     const [cabinsPerPage, /*setCabinsPerPage*/] = useState(5);
     const indexOfLastCabin = currentPage * cabinsPerPage;
     const indexOfFirstCabin = indexOfLastCabin - cabinsPerPage;
-    let currentCabins = allCabins.slice(indexOfFirstCabin, indexOfLastCabin);
-    let orderedCabins = currentCabins?.sort((a, b) => parseInt(a.number) < parseInt(b.number) ? -1 : 1);
+    let currentCabins = orderedCabins.slice(indexOfFirstCabin, indexOfLastCabin);
 
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -111,20 +115,20 @@ export default function Reserva() {
             ...filters,
             [e.target.name]: e.target.value
         }))
-        console.log('filters',filters);
-        console.log('errors',errors);
+        console.log('filters', filters);
+        console.log('errors', errors);
     }
 
 
     function handleFilters(e) {
         e.preventDefault();
-        console.log('errors:',errors);
+        console.log('errors:', errors);
         if (!Object.getOwnPropertyNames(errors).length) {
             console.log('Filters submited');
             dispatch(filterCabins(filters));
         }
         else {
-            if(errors.today) alert(errors.today);
+            if (errors.today) alert(errors.today);
             if (errors.inDate && !errors.today) alert(errors.inDate);
             if (errors.priceMin) alert(errors.priceMin);
         }
@@ -243,7 +247,7 @@ export default function Reserva() {
             <div className={styles.cabinPage}>
                 <div className={styles.cabinCont}>
                     {
-                        orderedCabins?.map(el => {
+                        currentCabins?.map(el => {
                             return (
                                 <div key={el.number} >
                                     <Cabaña

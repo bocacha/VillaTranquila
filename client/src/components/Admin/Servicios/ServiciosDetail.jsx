@@ -29,14 +29,14 @@ export default function ServiciosDetail({
     <div className={styles.container}>
       <div className={styles.infoContainer}>
         <p className={styles.p}>
-          Name:{Name}
+          <strong>Nombre: </strong>{Name}
           {/* <strong>Name:</strong> {Name} */}
         </p>
         <p className={styles.p}>
-          <strong>Description:</strong> {Description}
+          <strong>Descripción: </strong> {Description}
         </p>
         <p className={styles.p}>
-          <strong>Price:</strong> {Price}
+          <strong>Precio: </strong> {Price}
         </p>
       </div>
       <div className={styles.btnsContainer}>
