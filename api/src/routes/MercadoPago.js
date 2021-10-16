@@ -25,7 +25,7 @@ let preference = {
     back_urls:{
       "success":"http://localhost:3000/",
       "failure":"http://localhost:3000/reserva/pago",
-      "pending":"http://localhost:3001/reserva/pago",
+      "pending":"http://localhost:3000/reserva/pago",
     },
   //"http://app-villa-tranquila.vercel.app/%22,%22http://app-villa-tranquila.vercel.app/reserva/pago%22%22http://app-villa-tranquila.vercel.app/reserva/pago"
     auto_return: "approved",
@@ -40,7 +40,6 @@ let preference = {
   //     MerchantOrder: req.query.merchant_order_id
   //   });
   // });
-  console.log(preference)
   mercadopago.preferences.create(preference)
   .then(function(response){
     console.log(response.body.init_point)

@@ -14,7 +14,7 @@
     border: 1px solid #fff;
     border-radius: 10px;
     display:grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;   
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;   
     justify-content:space-between;
     background: #293c4f;
     color:#fff;    
@@ -24,13 +24,14 @@
 
 .detalle{
     display:grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     color:#fff;
-    margin-top:5px;
+    margin-top:25px;
+    align-items:center;
 }
 .linea{
     display:grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 .nombre{
     display:flex;
@@ -49,4 +50,12 @@
 hr{
     background-color: #fff;
     border: 1px solid #fff;
+}
+.zoom{
+    background-color: transparent;
+    border:none;
+    color:#fff;
+    font-size: 30px;
+    padding-bottom: 30px;
+    
 }

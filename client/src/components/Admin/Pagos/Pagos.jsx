@@ -163,8 +163,6 @@ export default function Pagos() {
       </div>
       <div className={styles.container2}>
         <div className={styles.formsCont}>
-          
-
           {/* VER */}
           <div>
             {allPayments?.map((el) => {

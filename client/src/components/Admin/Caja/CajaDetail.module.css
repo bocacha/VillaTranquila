@@ -1,0 +1,18 @@
+.body{
+  width: 100%;
+  display: flex;
+  
+}
+
+.volver {
+    padding: 4px 7px;
+    background: #293c4f;
+    color: #fff;
+    border: none;
+    border: 1px solid #293c4f;
+    border-radius: 5px;
+    font-family: Lato, Arial, sans-serif;
+    font-weight: bold;
+    transition-duration: 0.4s;
+  }
+  
