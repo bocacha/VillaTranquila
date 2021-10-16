@@ -1,0 +1,38 @@
+.container {
+  overflow: hidden;
+  background-color: #293c4f;
+  width: 100%;
+  z-index: 1;
+  font-size: large;
+  margin-top:63px;
+  margin-bottom: 4px;
+  position: fixed;
+}
+
+.ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  list-style: none;
+  padding: 10px;
+  padding-right: 290px;
+  padding-left: 290px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.link {
+  text-decoration: none;
+  padding: 10px;
+  height: 43px;
+  border: transparent;
+  background-color: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.2s ease;
+}
+.link:hover {
+  background-color: #141f2ba2;
+  color: #fff;
+}

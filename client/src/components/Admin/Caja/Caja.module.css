@@ -1,0 +1,52 @@
+
+.general{
+    background-color: #355978;
+    min-height: 100vh;    
+}
+.moveme{
+    width: 100%;
+    padding:20px;
+    height:70px;
+}
+
+
+.container{       
+    border: 1px solid #fff;
+    border-radius: 10px;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;   
+    justify-content:space-between;
+    background: #293c4f;
+    color:#fff;    
+    padding:20px;     
+    width:100%;   
+}
+
+.detalle{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    color:#fff;
+    margin-top:5px;
+}
+.linea{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.nombre{
+    display:flex;
+    justify-content: center;
+    
+}
+.nombre p{
+    margin-right:5px;
+}
+.total{
+    display:flex;
+    color:#fff;
+    justify-content:flex-end;
+    margin-right: 50px;   
+}
+hr{
+    background-color: #fff;
+    border: 1px solid #fff;
+}

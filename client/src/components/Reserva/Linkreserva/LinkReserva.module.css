@@ -1,0 +1,135 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #94adbc;
+  display: flex;
+  flex-direction: row;
+}
+
+.formsCont {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  min-height: 100vh;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-left: 10px;
+}
+
+.crearCont {
+  width: 100%;
+  height: 100vh;
+}
+
+.btnVolver {
+  margin-bottom: 20px;
+  display: flex;
+  align-items:flex-start;
+  margin-left: 50px;
+  padding-top: 10px;
+}
+
+.btns{
+  margin-top: 20px;
+}
+
+.btn {
+  padding: 4px 7px;
+  background: #293c4f;
+  color: #fff;
+  border: none;
+  border: 1px solid #293c4f;
+  border-radius: 5px;
+  font-family: Lato, Arial, sans-serif;
+  font-weight: bold;
+  transition-duration: 0.4s;
+}
+.btn:hover {
+  background: none;
+  border: 1px solid #293c4f;
+  color: #000;
+}
+
+.btnRes {
+  padding: 7px 10px;
+  background: #293c4f;
+  color: #fff;
+  border: none;
+  border: 1px solid #293c4f;
+  border-radius: 5px;
+  font-family: Lato, Arial, sans-serif;
+  font-weight: bold;
+  transition-duration: 0.4s;
+}
+.btnRes:hover {
+  background: none;
+  border: 1px solid #293c4f;
+  color: #000;
+}
+
+.form {
+  /* width: fit-content; */
+}
+
+.editarCont {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  padding: 3px;
+  margin-left: 90px;
+}
+
+.title {
+  margin-bottom: 6px;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-weight: 300;
+  font-size: 32px;
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+.formInputs {
+  margin-bottom: 8px;
+  padding: 3px;
+  border: solid 1.5px #293c4f;
+  width: 300px;
+}
+
+.servicios {
+  display: flex;
+  align-items:flex-start;
+  justify-content: center;
+}
+
+.p{
+  font-family: Lato, sans-serif;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.checkbox {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.detalles {
+  margin-left: 30px;
+  background: #293c4f;
+  color: #fff;
+  border-radius: 7px;
+  padding: 10px 25px;
+  margin-bottom: 10px;
+  width: 400px;
+}
+
+.imagenFondo {
+  width: 50%;
+  min-height: 100vh;
+  background: #000;
+  background: url("https://res.cloudinary.com/villatranquila/image/upload/v1633134933/Cabins/12_rctcjm.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}

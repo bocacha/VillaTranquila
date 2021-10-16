@@ -1,38 +1,139 @@
 .navbar {
-    position: fixed;
-    overflow: hidden;
-    background-color: #7f7979;
-    width: 100%;
-    margin-top: 0;
-    z-index: 1;
-    display:flex;
-    justify-content: space-between;
-    font-size: large;
+  position: fixed;
+  overflow: hidden;
+  background-color: #7f7979;
+  width: 100%;
+  margin-top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  font-size: large;
+}
+
+.navbar2 {
+  display: flex;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+}
+
+.icons {
+  margin-left: 3px;
+}
+
+.navbar li {
+  float: left;
+  display: block;
+  text-align: center;
+  padding: 0px 2px 10px;
+  text-decoration: none;
+}
+
+.logins {
+  margin-right: 50px;
+}
+
+.span {
+  color: white;
+}
+
+/* RESPONSIVE */
+
+.navbarResp {
+  display: none;
+  margin-top: 18px;
+  margin-bottom: 18px;
+  margin-left: -18px;
+}
+.navbarRespp {
+  display: none;
+  margin-top: -9px;
+  margin-left: -6px;
+}
+.containerResp{
+  display: none;
+}
+
+
+.botonHamb{
+  background: none;
+  border: none
+}
+.menu{
+  background:#7f7979;
+  border-radius: 7px;
+  font-size: 50px;
+  padding: 10px;
+  color: #fff;
+  transition: all 0.2s ease;
+}
+.menu:hover{
+  background-color: #6e6565;
+}
+
+.navBtn{
+  height: 43px;
+  border: transparent;
+  background-color: transparent;
+  border-radius: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.2s ease;
+}
+.navBtn:hover{
+  background-color: #323031;
+}
+
+.liRes{
+  display: flex;
+  flex-direction: column;
+}
+
+.mostrar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+}
+
+.navbarResp{
+  display: flex;
+  align-items: start;
+  justify-content: start;
+}
+
+.containerResp{
+  background: #7f7979;
+  border-radius: 7px;
+  margin-top: 52px;
+  margin-left: 0px;
+}
+
+@media (max-width: 1140px) {
+  .navbar{
+    width: fit-content;
+    min-height: 50vh;
+    position: absolute;
+    background-color: transparent;
   }
   
-  .navbar li {
-    float: left;
+  .noMostrar {
+    display: none;
+    margin-top: 0;
+    z-index: 1;
+  }
+
+  .navbarResp {
     display: block;
-    text-align: center;
-    padding: 0px 2px 10px;
-    text-decoration: none;
   }
-
-  .navbar button{
-    height: 43px;
-    border: transparent;
-    background-color: transparent;
-    border-radius: 8px;
-    margin-top: 10px;
-    cursor: pointer;
-    color: #fff;
-    transition: all 0.2s ease;
+  .navbarRespp {
+    display: block;
+    position: absolute;
   }
-  .navbar button:hover{
-    background-color: #323031;
+  .containerResp{
+    display: block;
   }
-
-  .logins{
-    margin-right: 50px;
-    
-  }
+}

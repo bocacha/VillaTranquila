@@ -1,9 +1,8 @@
 import {
   GET_CABINS,
   FILTER_CABINS,
-  FILTER_BY_CAPACITY,
-  FILTER_BY_PRICE,
   SEND_EMAIL,
+  SEND_NOTIFICATION,
   CREATE_RESERVATION,
   CREATE_SERVICES,
   CREATE_USERS,
@@ -16,6 +15,14 @@ import {
   READ_USERS,
   READ_SERVICES,
   READ_CABINS,
+  READ_PAYMENT_OCULTADOS,
+  READ_RESERVATIONS_OCULTADOS,
+  READ_PICTURES_OCULTADOS,
+  READ_USERS_OCULTADOS,
+  READ_SERVICES_OCULTADOS,
+  READ_CABINS_OCULTADOS,
+  READ_FECHASNODISPONIBLES,
+  READ_WEATHER,
   EDIT_USER,
   EDIT_RESERVATIONS,
   EDIT_SERVICES,
@@ -27,10 +34,16 @@ import {
   REMOVE_SERVICES,
   REMOVE_PICTURES,
   REMOVE_PAYMENTS,
-  REMOVE_USERS
-  
+  REMOVE_USERS,
+  GET_USER_DATA,
+  SEND_PASSWORD_EMAIL,
+  SELECTED_CABIN
+
 } from "../actions";
+import fechas from "../components/Reserva/Linkreserva/algoritmofechas"
+
 const initialState = {
+  selectedcabin:[],
   cabins: [],
   allCabins: [],
   pagos: [],
@@ -39,8 +52,11 @@ const initialState = {
   usuarios: [],
   servicios: [],
   cabañas: [],
-  user:{},
-  reservaciones:[],
+  user: {},
+  reservaciones: [],
+  fechasnodisponibles:[],
+  userData: {},
+  weather:[]
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -50,16 +66,64 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         cabins: action.payload,
-        allCabins: action.payload,
+        allCabins:action.payload,
       };
 
     case FILTER_CABINS:
       let cabinsFiltered = state.allCabins;
+      // Filter by availability:
+      let inDate = action.payload.inDate.split('-').reverse().join('/');
+      let outDate = action.payload.outDate.split('-').reverse().join('/');
+      const obj ={
+        Checkin: inDate,
+        Checkout: outDate
+      }
+      console.log(obj)
+      const fechasintermedias = fechas(obj)
+      console.log(fechasintermedias)
+      var nomostrar = []
+      cabinsFiltered.map(el => {
+        el.Available.map(e=>{
+          for(let i=0;i<e.length;i++){
+            for(let j=0;j<fechasintermedias.length;j++){
+              if(
+                e[i] === fechasintermedias[j]
+              ){
+                nomostrar.push(el)
+              }
+            }
+          }
+        })
+        })
+         cabinsFiltered = cabinsFiltered.filter(el=> {
+          return !nomostrar.includes(el)
+
+        })
+        console.log(cabinsFiltered)
+
+      // cabinsFiltered = cabinsFiltered.filter(el => {
+      //   var hitDates = el.Available || [];
+      //   hitDates = Object.keys(hitDates);
+      //   var hitDateMatchExists = hitDates.some(date => {
+      //     var newDate = new Date(date);
+      //     return newDate >= inDate && newDate <= outDate
+      //   });
+      //   return hitDateMatchExists;
+      // });
       // Filter by capacity:
       let capacity = action.payload.capacity;
       cabinsFiltered = capacity === 'all' ?
         cabinsFiltered :
         cabinsFiltered.filter(el => el.Capacity >= capacity);
+      // Filter by priceMin and priceMax:
+      let priceMin = action.payload.priceMin;
+      let priceMax = action.payload.priceMax;
+      cabinsFiltered = priceMin === 'all'  ||priceMin === "" ?
+        cabinsFiltered :
+        cabinsFiltered.filter(el => el.Price >= parseInt(priceMin));
+      cabinsFiltered = priceMax === 'all'||priceMax ===  "" ?
+        cabinsFiltered :
+        cabinsFiltered.filter(el => el.Price <= parseInt(priceMax));
       // Filter by wifi:
       let wifi = action.payload.wifi;
       cabinsFiltered = wifi === '' || wifi === 'false' ?
@@ -69,12 +133,7 @@ export default function rootReducer(state = initialState, action) {
       let barbecue = action.payload.barbecue;
       cabinsFiltered = barbecue === '' || barbecue === 'false' ?
         cabinsFiltered :
-        cabinsFiltered.filter(el => el.Barbecue);
-      // Filter by cleaning:
-      let cleaning = action.payload.cleaning;
-      cabinsFiltered = cleaning === '' || cleaning === 'false' ?
-        cabinsFiltered :
-        cabinsFiltered.filter(el => el.Cleaning);
+        cabinsFiltered.filter(el => el.Parrilla);
       // Filter by parking:
       let parking = action.payload.parking;
       cabinsFiltered = parking === '' || parking === 'false' ?
@@ -84,12 +143,16 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         cabins: cabinsFiltered
       }
-      case LOG_USER:
-        return {
-          ...state,
-          user: action.payload,
-        };
+    case LOG_USER:
+      return {
+        ...state,
+        user: action.payload
+      };
     case SEND_EMAIL:
+      return {
+        ...state,
+      };
+      case SEND_NOTIFICATION:
       return {
         ...state,
       };
@@ -146,7 +209,38 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         cabañas: action.payload,
+        
       };
+      case READ_PAYMENT_OCULTADOS:
+        return {
+          ...state,
+          pagos: action.payload,
+        };
+      case READ_RESERVATIONS_OCULTADOS:
+        return {
+          ...state,
+          reservaciones: action.payload,
+        };
+      case READ_PICTURES_OCULTADOS:
+        return {
+          ...state,
+          fotos: action.payload,
+        };
+      case READ_USERS_OCULTADOS:
+        return {
+          ...state,
+          usuarios: action.payload,
+        };
+      case READ_SERVICES_OCULTADOS:
+        return {
+          ...state,
+          servicios: action.payload,
+        };
+      case READ_CABINS_OCULTADOS:
+        return {
+          ...state,
+          cabañas: action.payload,
+        };
     case EDIT_USER:
       return {
         ...state,
@@ -167,36 +261,61 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
-      case REMOVE_CABAINS:
-        return {
+    case REMOVE_CABAINS:
+      return {
+        ...state,
+        cabañas: state.cabañas.filter((cabaña) => cabaña.id !== action.payload)
+      };
+    case REMOVE_RESERVATIONS:
+      return {
+        ...state,
+        reservaciones: state.reservaciones.filter((reserva) => reserva.id !== action.payload)
+      };
+    case REMOVE_SERVICES:
+      return {
+        ...state,
+        servicios: state.servicios.filter((reserva) => reserva.id !== action.payload)
+      };
+    case REMOVE_PICTURES:
+      return {
+        ...state,
+        fotos: state.fotos.filter((foto) => foto.id !== action.payload)
+      };
+    case REMOVE_PAYMENTS:
+      return {
+        ...state,
+        pagos: state.pagos.filter((pago) => pago.id !== action.payload)
+      };
+    case REMOVE_USERS:
+      return {
+        ...state,
+        usuarios: state.usuarios.filter((usuario) => usuario.id !== action.payload)
+      };
+    case READ_FECHASNODISPONIBLES:
+      return {
+        ...state,
+        fechasnodisponibles:action.payload,
+      };
+    case GET_USER_DATA:
+      return {
+        ...state,
+        userData: action.payload
+      }
+    case SELECTED_CABIN:
+        return{
           ...state,
-          cabañas: state.cabañas.filter((cabaña)=> cabaña.id !== action.payload)
-        };
-        case REMOVE_RESERVATIONS:
+          selectedcabin: action.payload,
+        }
+    case SEND_PASSWORD_EMAIL:
           return {
             ...state,
-            reservaciones: state.reservaciones.filter((reserva)=> reserva.id !== action.payload)
-          };
-        case REMOVE_SERVICES:
-          return {
-            ...state,
-            servicios: state.servicios.filter((reserva)=> reserva.id !== action.payload)
-          };
-        case REMOVE_PICTURES:
-          return {
-            ...state,
-            fotos: state.fotos.filter((foto)=> foto.id !== action.payload)
-          };
-        case REMOVE_PAYMENTS:
-          return {
-            ...state,
-            pagos: state.pagos.filter((pago)=> pago.id !== action.payload)
-          };
-        case REMOVE_USERS:
-          return {
-            ...state,
-            usuarios: state.usuarios.filter((usuario)=> usuario.id !== action.payload)
-          };
+          }
+    case READ_WEATHER:
+      return {
+        ...state,
+        weather: action.payload
+      }
+
     default:
       return state;
   }
