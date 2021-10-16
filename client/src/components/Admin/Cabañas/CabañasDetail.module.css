@@ -172,6 +172,7 @@
   display:flex;
   justify-items: center;
   justify-content: center;
+  font-size: x-large;
 }
 .infoContainer span p{
   margin: 0 30px -5px 30px;

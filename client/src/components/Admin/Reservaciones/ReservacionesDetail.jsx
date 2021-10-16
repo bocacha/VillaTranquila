@@ -8,9 +8,10 @@ export default function ReservacionesDetail({
   ID,
   Checkin,
   Checkout,
-  UserId,
+  CabinNumber,
+  UserName,
+  Anombrede,
   Paymentsid,
-  Cabinid,
   ExtraServices,
   CostoFinal,
   handleSubmitEdit,
@@ -33,65 +34,78 @@ export default function ReservacionesDetail({
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
-        <p className={styles.p}>
-          <strong>Checkin:</strong> {Checkin}
-        </p>
-        <p className={styles.p}>
-          <strong>Checkout:</strong> {Checkout}
-        </p>
-        <p className={styles.p}>
-          <strong>UserId:</strong> {UserId}
-        </p>
-        <p className={styles.p}>
-          <strong>Costo final:</strong> {CostoFinal}
-        </p>
-        <p className={styles.p}>
-          <strong>Cabinid:</strong> {Cabinid}
-        </p>
-        {/* <p><strong>ExtraServices:</strong> {ExtraServices}</p> */}
+        <table>
+          <tbody>
+            <tr>
+              <td className={styles.izquierda}>Nombre de usuario:</td>
+              <td className={styles.derecha}>{UserName}</td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}>Reserva a nombre de:</td>
+              <td className={styles.derecha}>{Anombrede}</td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}>Fecha de llegada:</td>
+              <td className={styles.derecha}>{Checkin}</td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}>Fecha de salida:</td>
+              <td className={styles.derecha}>{Checkout}</td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}>Cabaña número:</td>
+              <td className={styles.derecha}>{CabinNumber}</td>
+            </tr>
+            {
+              ExtraServices && ExtraServices.length !== 0 &&
+              <tr>
+                <td className={styles.izquierda}>Servicios extra:</td>
+                <td className={styles.derecha}>
+                  <ul>
+                    {
+                      ExtraServices.map(el => <li>{el}</li>)
+                    }
+                  </ul>
+                </td>
+              </tr>
+            }
+            <tr>
+              <td className={styles.izquierda}>Precio final:</td>
+              <td className={styles.derecha}>$ {CostoFinal}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div className={styles.btnsContainer}>
-        <div>
-          {!restaurar ? (
-            <button
-              onClick={() => handleSubmitDelete(ID)}
-              className={styles.btn}
-            >
-              Ocultar
-            </button>
-          ) : (
-            <button
-              onClick={() => handleSubmitrestore(ID)}
-              className={styles.btn}
-            >
-              Restaurar
-            </button>
-          )}
-        </div>
-        {mostrar ? (
-          <div>
-            <button
-              onClick={(e) => {
-                handleSubmitEdit(e, ID,
-                  Checkin,
-                  Checkout,
-                  UserId,
-                  Paymentsid,
-                  Cabinid,
-                  ExtraServices,
-                  CostoFinal,);
-                setMostrar(false);
-              }}
-              className={styles.btnPlus}
-            >
-              Editar
-            </button>
-          </div>
+        {!restaurar ? (
+          <button
+            onClick={() => handleSubmitDelete(ID)}
+            className={styles.btn}
+          >
+            Ocultar
+          </button>
         ) : (
-          <div>
-            <button onClick={(e) => handlePrueba(e, ID)} className={styles.btnPlus}>Guardar</button>
-          </div>
+          <button
+            onClick={() => handleSubmitrestore(ID)}
+            className={styles.btn}
+          >
+            Restaurar
+          </button>
         )}
+        <button
+          onClick={(e) => {
+            handleSubmitEdit(e, ID,
+              Checkin,
+              Checkout,
+              Paymentsid,
+              ExtraServices,
+              CostoFinal);
+            setMostrar(false);
+          }}
+          className={styles.btnPlus}
+        >
+          Editar
+        </button>
       </div>
     </div>
   );

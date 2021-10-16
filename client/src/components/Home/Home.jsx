@@ -11,7 +11,6 @@ import styles from "./Home.module.css";
 import { useEffect } from "react"
 import { useDispatch, useSelector } from 'react-redux';
 import { Logeduser, getUserData, readWeather } from "../../actions";
-import { steps } from "./Steps.js"
 import ServiciosBanner from "../ServiciosBanner/ServiciosBanner";
 
 

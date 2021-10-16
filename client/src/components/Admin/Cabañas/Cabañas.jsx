@@ -12,7 +12,6 @@ import styles from "./Cabañas.module.css";
 import CabañasDetail from "../Cabañas/CabañasDetail";
 import Navbar from "../../Navbar/Navbar";
 import NavAdmin from "../NavAdmin/NavAdmin";
-import { BiSave } from 'react-icons/bi';
 
 const Cabañas = () => {
   const dispatch = useDispatch();
@@ -406,6 +405,17 @@ const Cabañas = () => {
                 <option value="false">NO</option>
               </select>
             </form>
+              <div className={styles.btnsGuarCanc}>
+                <button  onClick={handlePrueba} id={styles.guardar}>Guardar cambios</button>
+                <button
+                  onClick={() => {
+                    if(mostrar) setMostrar(false);
+                  }}
+                  id={styles.cancelar}
+                >
+                  Cancelar
+                </button>
+              </div>
           </div>
         ) : null}
         {/* VER */}

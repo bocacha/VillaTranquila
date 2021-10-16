@@ -81,8 +81,6 @@ export default function CabinsDetail({
             <button onClick={() => handleSubmitrestore(ID)} className={styles.btn}>Restaurar</button>
           )}
         </div>
-        {mostrar
-          ?
           <div>
             <button
               onClick={(e) => {
@@ -105,13 +103,6 @@ export default function CabinsDetail({
               Editar
             </button>
           </div>
-
-          :
-          <div>
-            <button onClick={(e) => handlePrueba(e, ID,)} className={styles.btnPlus}>Guardar</button>
-          </div>
-
-        }
       </div>
     </div>
   );
