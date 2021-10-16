@@ -171,7 +171,7 @@ export default function Navbar() {
                         <Link to="/" className={styles.mostrar}>
                           <li>
                             <button
-                              className={styles.signlog}
+                              className={styles.navBtn}
                               onClick={() => Logout()}
                             >
                               <strong className={styles.list}>
