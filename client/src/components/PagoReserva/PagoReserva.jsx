@@ -42,11 +42,10 @@ useEffect(() => {
               <li className={styles.li}>Costo final:{costoFINAL}</li>
             </ul>
             <hr />
-            <form action="https://villatranquila.herokuapp.com/checkout" method="POST">
+            <form action="http://localhost:3001/checkout" method="POST">
               <input type="hidden" name="title" value={seleccionada[0].Number}/>
               <input type="hidden" name="price" value={costoFINAL}/>
-              <input type="hidden" name="name" value={user.user}/>     
-              <input type="hidden" name="email" value={user.email}/>                          
+              <input type="hidden" name="idreserva" value={reservacion.ID}/>                         
               <input type="submit" value="Pagar" target="_blank" class="btn btn-primary btn-block"/>
             </form> 
           </div>

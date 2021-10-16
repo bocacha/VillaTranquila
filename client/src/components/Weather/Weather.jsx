@@ -137,9 +137,7 @@ export default function Weather() {
                                     </tr>
                                 </tbody>
                             </table>
-                            {/* <label>{e.text}</label> */}                       
-                                {/* <img src={e.icon} />                           */}
-                               {icono}
+                          {icono}
                         </div>
                     )
                 })}

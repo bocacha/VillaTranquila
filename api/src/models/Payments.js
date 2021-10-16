@@ -2,47 +2,39 @@ const { DataTypes, Sequelize } = require('sequelize');
 
 module.exports = (sequelize) => {
   sequelize.define('Payments', {
-    id:{
+    ID:{
       type: DataTypes.UUID,
       defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
       allowNull: false,
     },
-    title:{
-      type: DataTypes.JSON, 
-      allowNull: true,
+    user:{
+      type:DataTypes.STRING,
+      allowNull: false,
     },
-    unit_price:{
-      type: DataTypes.INTEGER, 
-      allowNull: true,
+    status:{
+      type:DataTypes.STRING,
+      allowNull: false,
     },
-    card:{
-      type: DataTypes.JSON, 
-      allowNull: true,
+    status_detail:{
+      type:DataTypes.STRING,
+      allowNull: false,
     },
     transaction_detail:{
-      type: DataTypes.JSON, 
-      allowNull: true,
+      type:DataTypes.JSON,
+      allowNull: false,
     },
-    payment_method_id:{
-      type: DataTypes.JSON, 
-      allowNull: true,
+    id_reserva:{
+      type:DataTypes.STRING,
+      allowNull: false,
     },
-    date_approved:{
-      type: DataTypes.STRING, 
-      allowNull: true,
+    fecha:{
+      type:DataTypes.STRING,
+      allowNull: false,
     },
-    date_last_updated:{
-      type: DataTypes.STRING, 
-      allowNull: true,
+    Show:{
+      type:DataTypes.BOOLEAN, 
+      defaultValue: true
     },
-    UserNAme:{
-      type: DataTypes.STRING, 
-      allowNull: true,
-    },
-    UserEMail:{
-      type: DataTypes.STRING, 
-      allowNull: true,
-    }
   },{timestamps: false,});
 };
