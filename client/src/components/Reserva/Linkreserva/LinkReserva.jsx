@@ -226,6 +226,7 @@ alert("Reserva creada")
             </Link>
           </div>
           <div className={styles.title}>Crear una nueva reservación</div>
+          <div className={styles.title}>Cabaña Nº {seleccionada.Number}</div>
           <form onSubmit={(e) => handleSubmit(e)}className={styles.form}>          
           <input
               type="text"

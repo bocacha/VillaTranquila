@@ -7,8 +7,6 @@ import { useState,useEffect} from 'react';
 
 
 export default function Caja(){
-    
-    
     const dispatch=useDispatch();
 
     useEffect(() => {
@@ -29,9 +27,7 @@ export default function Caja(){
     var total=0;
 
     return(
-        
-        <>
-               
+        <>   
         <div className={styles.general}>             
                 <Navbar /> 
                 <div className={styles.moveme}></div>                             

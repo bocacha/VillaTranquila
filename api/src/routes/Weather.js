@@ -9,11 +9,13 @@ const getAllApi = async() =>{
    
     const apiInfo = api.data.forecast.forecastday.map(e=> {
         return {
+            fecha: e.date,
             min_temp: e.day.mintemp_c,
             max_temp: e.day.maxtemp_c,
             wind: e.day.maxwind_kph,
             chance_rain: e.day.daily_chance_of_rain,
             chance_snow: e.day.daily_chance_of_snow,
+            text:e.day.condition.text,
             icon: e.day.condition.icon
             }
     })
