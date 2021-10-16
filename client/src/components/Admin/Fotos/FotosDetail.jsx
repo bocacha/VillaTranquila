@@ -5,6 +5,7 @@ import { removePictures, restorePictures } from "../../../actions";
 
 export default function FotosDetail({
   Description,
+  CabainNumber,
   Url,
   ID,
   handlePrueba,
@@ -31,6 +32,7 @@ export default function FotosDetail({
         <p className={styles.p}>
           <strong>Descripcion: </strong> {Description}
         </p>
+        <p className={styles.p}><strong>Imagen de cabaña N° </strong>{CabainNumber}</p>
         <p className={styles.p}>
           {Url}
         </p>
@@ -62,7 +64,7 @@ export default function FotosDetail({
         </div>
         {mostrar ? 
           <div>
-                  <button onClick={(e)=> {handleSubmitEdit(e, Description,
+                  <button onClick={(e)=> {handleSubmitEdit(e, Description, CabainNumber,
   Url,ID);
                                       setMostrar(false);
                                       ;        } 

@@ -172,7 +172,8 @@ export function createimage(payload, { token }) {
 
     const response = await axios.post("/pictures/NewPicture", {
       Description: payload.description,
-      Url: Url
+      Url: Url,
+      CabainNumber: payload.cabainNumber
     }, config);
 
     console.log(response)
