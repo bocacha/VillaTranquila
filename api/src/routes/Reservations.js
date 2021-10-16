@@ -68,7 +68,6 @@ router.post("/NewReservation" , (req, res)=>{
      Anombrede
     })
     .then(doneTemp=>{
-        console.log("awdawda"+ doneTemp)
         return res.status(200).json(doneTemp)
     })
     .catch(error=>{ res.send(error)})
