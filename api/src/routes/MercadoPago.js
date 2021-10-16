@@ -5,7 +5,7 @@ const mercadopago = require ('mercadopago');
 
 // Agrega credenciales
 mercadopago.configure({
-    access_token: 'TEST-1809569920933245-042220-88b3cb201a62483566af682f0c59281a-246910716'
+    access_token: 'TEST-439832133350008-100101-053d8a9498eb4e464ea236805bbc561f-97718867'
   });
 
 //routes
@@ -16,14 +16,15 @@ let preference = {
     items: [
       {
         description: req.body.idreserva,
-        title: "Cabaña Nº"+req.body.title,
+        title: "Cabaña Nº"+ req.body.title,
         unit_price: parseInt(req.body.price),
-        quantity: 1
+        quantity: 1,
+        description: req.body.name
       },
     ],   
     back_urls:{
-      "success":"http://localhost:3001/",
-      "failure":"http://localhost:3001/reserva/pago",
+      "success":"http://localhost:3000/",
+      "failure":"http://localhost:3000/reserva/pago",
       "pending":"http://localhost:3001/reserva/pago",
     },
   //"http://app-villa-tranquila.vercel.app/%22,%22http://app-villa-tranquila.vercel.app/reserva/pago%22%22http://app-villa-tranquila.vercel.app/reserva/pago"

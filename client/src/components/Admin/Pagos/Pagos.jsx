@@ -33,19 +33,29 @@ export default function Pagos() {
   const [selectedDate, setSelectedDate] = useState(null);
 
   const [input, setInput] = useState({
-    Date: "",
-    idClient: "",
-    TotalAmount: "",
-    PaydAmount: "",
+    user: "",
+    status: "",
+    status_detail: "",
+    transaction_detail: {
+        pagoTotal: "",
+        pagoNeto: ""
+    },
+    id_reserva: "",
+    fecha: ""
+    
   });
   const [mostrar, setMostrar] = useState(false);
 
   const [edit, setEdit] = useState({
-    id: "",
-    Date: "",
-    idClient: "",
-    TotalAmount: "",
-    PaydAmount: "",
+    user: "",
+    status: "",
+    status_detail: "",
+    transaction_detail: {
+        pagoTotal: "",
+        pagoNeto: ""
+    },
+    id_reserva: "",
+    fecha: ""
   });
 
   function handleChange(e) {
@@ -55,8 +65,8 @@ export default function Pagos() {
     });
   }
   function handleChangeEdit(e) {
-    console.log(e.target.name);
-    console.log(e.target.value);
+    //console.log(e.target.name);
+    //console.log(e.target.value);
     setEdit({
       ...edit,
       [e.target.name]: e.target.value,
@@ -69,33 +79,41 @@ export default function Pagos() {
     dispatch(createPayment(input));
     alert("Pago creado con éxito");
     setInput({
-      Date: "",
-      idClient: "",
-      TotalAmount: "",
-      PaydAmount: "",
+    ...input,
+        user: "",
+        status: "",
+        status_detail: "",
+        transaction_detail: {
+            pagoTotal: "",
+            pagoNeto: ""
+        },
+        id_reserva: "",
+        fecha: ""
     });
 
     //window.location.reload();
   }
   function handleSubmitEdit(e, ID,
-    TotalAmount,
-    PaydAmount,
-    Date,
-    idClient) {
+    user,
+    status,
+    status_detail,
+    transaction_detail,
+    id_reserva,
+    fecha,) {
     e.preventDefault();
     setMostrar(true);
-    setEdit({ ...edit, id: ID,TotalAmount:TotalAmount,PaydAmount:PaydAmount,Date:Date});
+    setEdit({ ...edit, id: ID,status:status,transaction_detail:transaction_detail,fecha:fecha,id_reserva:id_reserva});
     //dispatch(editPayments(edit, { token }));
     setMostrar(true);
   }
 
   function handlePrueba(e, ID) {
-    console.log(edit)
+    //console.log(edit)
     const { token } = logeduser;
     e.preventDefault();
     
     setMostrar(true);
-    console.log(edit);
+    //console.log(edit);
     //setEdit({ ...edit, id: ID });
     dispatch(editPayments(edit, { token }));
 
@@ -119,7 +137,7 @@ export default function Pagos() {
     mostrarFecha(e);
   }
   const mostrarFecha = selectedDate =>{
-    console.log(selectedDate);
+    //console.log(selectedDate);
     const options = {year:'numeric', month:'numeric', day:'2-digit'}
     setEdit({...edit,  Date: selectedDate.toLocaleDateString('es-ES', options)})
   }
@@ -145,111 +163,7 @@ export default function Pagos() {
       </div>
       <div className={styles.container2}>
         <div className={styles.formsCont}>
-          {/* CREAR */}
-          {/* <div className={styles.crearCont}>
-            <div className={styles.title}>Crear un pago</div>
-            <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
-              <DatePicker
-                selected={input.Date}
-                onChange={(date) => setInput({...input, Date:date})}
-                dateFormat="dd/MM/yyyy"
-                minDate={new Date()}
-                className={styles.formInputs}
-                required
-                //isClearable
-              />
-
-               
-          <input
-            type="date"
-            value={input.Date}
-            minDate= {new Date()}
-            name="Date"
-            onChange={(e) => handleChange(e)}
-            placeholder="Date"
-            className={styles.Date}
-            required
-          />
-              <input
-                type="text"
-                value={input.idClient}
-                name="idClient"
-                onChange={(e) => handleChange(e)}
-                placeholder="Cliente id"
-                className={styles.formInputs}
-                pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
-                required
-              />
-              <input
-                type="number"
-                value={input.TotalAmount}
-                name="TotalAmount"
-                onChange={(e) => handleChange(e)}
-                placeholder="Monto total $"
-                className={styles.formInputs}
-                required
-              />
-              <input
-                type="number"
-                value={input.PaydAmount}
-                name="PaydAmount"
-                onChange={(e) => handleChange(e)}
-                placeholder="Monto a pagar $"
-                className={styles.formInputs}
-                required
-              />
-              <div className={styles.btns}>
-                <button type="submit" className={styles.btn}>
-                  Crear
-                </button>
-              </div>
-            </form>
-          </div> */}
-          {/* EDITAR */}
-          {mostrar ? (
-            <div className={styles.editarCont}>
-              <div className={styles.title}> Editar un nuevo pago</div>
-              <form className={styles.form}>
-              <DatePicker
-                selected={selectedDate}
-                onChange={(e) => changeFechas(e)}
-                dateFormat="dd/MM/yyyy"
-               // minDate={new Date()}
-                className={styles.formInputs}
-                required
-                //isClearable
-              />
-                <input
-                  type="text"
-                  value={edit.idClient}
-                  name="idClient"
-                  onChange={(e) => handleChangeEdit(e)}
-                  placeholder="Cliente id"
-                  pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
-                  className={styles.formInputs}
-                  required
-                />
-                <input
-                  type="number"
-                  value={edit.TotalAmount}
-                  name="TotalAmount"
-                  onChange={(e) => handleChangeEdit(e)}
-                  placeholder="Monto total $"
-                  className={styles.formInputs}
-                  required
-                />
-                <input
-                  type="number"
-                  value={edit.PaydAmount}
-                  name="PaydAmount"
-                  onChange={(e) => handleChangeEdit(e)}
-                  placeholder="Monto a pagar $"
-                  className={styles.formInputs}
-                  required
-                />
-              </form>
-            </div>
-          ) : null}
+          
 
           {/* VER */}
           <div>
@@ -258,10 +172,12 @@ export default function Pagos() {
                 <div className={styles.detalles} key={el.ID}>
                   <PagosDetail
                     ID={el.ID}
-                    idClient={el.idClient}
-                    Date={el.Date}
-                    PaydAmount={el.PaydAmount}
-                    TotalAmount={el.TotalAmount}
+                    user ={el.user}
+                    status={el.status}
+                    status_detail={el.status_detail}
+                    transaction_detail={el.transaction_detail}
+                    id_reserva={el.id_reserva}
+                    fecha={el.fecha}
                     handlePrueba={handlePrueba}
                     handleSubmitEdit={handleSubmitEdit}
                     restaurar={habilitar}
@@ -275,3 +191,6 @@ export default function Pagos() {
     </div>
   );
 }
+
+       
+    

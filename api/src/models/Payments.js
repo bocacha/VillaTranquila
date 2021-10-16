@@ -8,25 +8,33 @@ module.exports = (sequelize) => {
       primaryKey: true,
       allowNull: false,
     },
-    TotalAmount:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    PaydAmount:{
-      type: DataTypes.STRING
-    },
-    Date:{
-      type: DataTypes.STRING,
+    user:{
+      type:DataTypes.STRING,
       allowNull: false,
     },
-    idClient:{
-      type: DataTypes.JSON, 
+    status:{
+      type:DataTypes.STRING,
+      allowNull: false,
+    },
+    status_detail:{
+      type:DataTypes.STRING,
+      allowNull: false,
+    },
+    transaction_detail:{
+      type:DataTypes.JSON,
+      allowNull: false,
+    },
+    id_reserva:{
+      type:DataTypes.STRING,
+      allowNull: false,
+    },
+    fecha:{
+      type:DataTypes.STRING,
       allowNull: false,
     },
     Show:{
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue:true
-     }
+      type:DataTypes.BOOLEAN, 
+      defaultValue: true
+    },
   },{timestamps: false,});
 };

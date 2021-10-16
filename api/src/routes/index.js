@@ -14,6 +14,7 @@ const sendNotification= require('./SendNotification')
 const MercadoPago= require('./MercadoPago')
 const weather = require('./Weather')
 const SendNotificationpassword= require('./SendNotificationpassword')
+const notification = require('./Notifications')
 
 const router = Router();
 router.use("/cabins" , cabinsrouter)
@@ -29,6 +30,7 @@ router.use("/showImages", showGallery)
 router.use("/sendNotificationpassword", SendNotificationpassword)
 router.use("/checkout", MercadoPago )
 router.use("/weather", weather)
+router.use("/notification", notification)
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
