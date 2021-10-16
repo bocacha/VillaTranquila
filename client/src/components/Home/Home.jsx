@@ -1,19 +1,18 @@
 import React from "react";
 import BannerIntro from "../BannerIntro/BannerIntro";
-import ChatBot from 'react-simple-chatbot';
+import Chat from "./Chatbot/Chat";
 import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
 import Slider from "../Slider/Slider";
 import Weather from "../Weather/Weather";
 import Upload from "../Reserva/Upload/Upload";
-// import Searchbar from "../Searchbar/Searchbar";
-// import Gallery from "../Gallery/Gallery";
+import Testimoniales from "../Testimoniales/Testomoniales";
 import styles from "./Home.module.css";
 import { useEffect } from "react"
 import { useDispatch, useSelector } from 'react-redux';
 import { Logeduser, getUserData, readWeather } from "../../actions";
-import { steps } from "./Steps.js"
 import ServiciosBanner from "../ServiciosBanner/ServiciosBanner";
+
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -41,6 +40,9 @@ export default function Home() {
           <p className={styles.complejo}>- complejo de cabañas -</p>
         </div>
       </div>
+      <div className={styles.chat}>
+        <Chat  />
+      </div>
       <div>
         {/* <Searchbar/> */}
         {/* <Gallery/> */}
@@ -61,12 +63,8 @@ export default function Home() {
           ></iframe>
         </div>
       </div>
-      <ChatBot
-        floating={true}
-        customDelay={2000}
-        steps={steps}
-      />
-      <Footer />
+      {/* <Testimoniales /> */}
+        <Footer />
 
     </div>
   );

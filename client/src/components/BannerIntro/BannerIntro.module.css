@@ -2,8 +2,7 @@
   width: 100%;
   min-height: 30vh;
   display: flex;
-  background-color:#293C4F;
-  /* margin-bottom: 25px; */
+  background-color: #293c4f;
 }
 
 .txt {
@@ -19,9 +18,97 @@
   border-radius: 7px;
   display: flex;
   justify-content: center;
-  margin:1em;
+  margin: 1em;
   font-size: 1.3em;
-  font-family: 'Mukta', sans-serif;
+  font-family: "Mukta", sans-serif;
   text-align: justify;
   color: white;
+}
+
+@media (min-width: 320px) {
+  .container {
+    width: 100%;
+  }
+  .p {
+    display: none;
+  }
+  .p2 {
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+    font-size: 1.3em;
+    font-family: "Mukta", sans-serif;
+    text-align: justify;
+    color: white;
+  }
+  .txt {
+    width: 100%;
+  }
+}
+@media (min-width: 480px) {
+  .container {
+    width: 100%;
+  }
+  .p {
+    display: none;
+  }
+  .p2 {
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+    font-size: 1.3em;
+    font-family: "Mukta", sans-serif;
+    text-align: justify;
+    color: white;
+  }
+  .txt {
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 100%;
+  }
+  .p {
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+    font-size: 1.3em;
+    font-family: "Mukta", sans-serif;
+    text-align: justify;
+    color: white;
+  }
+  .p2 {
+    display: none;
+  }
+  .txt {
+    width: 100%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    width: 100%;
+  }
+  .p {
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+    font-size: 1.3em;
+    font-family: "Mukta", sans-serif;
+    text-align: justify;
+    color: white;
+  }
+  .p2 {
+    display: none;
+  }
+  .txt {
+    width: 100%;
+    max-width: 1024px;
+  }
 }

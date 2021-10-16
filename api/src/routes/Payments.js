@@ -57,17 +57,20 @@ if(!decodedToken.Admin){
 });
 
 router.post("/NewPayment" , (req, res)=>{
-    const {Date, idClient, TotalAmount, PaydAmount} = req.body;
+    const {user,status,status_detail,transaction_detail,id_reserva,fecha} = req.body;
     Payments.create({
-      TotalAmount, 
-      PaydAmount,
-      Date, 
-      idClient
+        user,
+        status,
+        status_detail,
+        transaction_detail,
+        id_reserva,
+        fecha
     })
     .then(doneTemp=>{
+        console.log(doneTemp)
         return res.status(200).json(doneTemp)
     })
-    .catch(error=>{ res.send(error)})
+    .catch(error=>{ console.log(error)})
 })
 router.put("/EditPayment", (req,res) =>{
     const authorizations = req.get("Authorization") 

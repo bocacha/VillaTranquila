@@ -60,7 +60,7 @@ export default function Servicios() {
       Description: "",
       Price: "",
     });
-    //window.location.reload();
+    window.location.reload();
   }
   function handleSubmitEdit(e, ID,
     Name,

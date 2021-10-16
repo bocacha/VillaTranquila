@@ -20,6 +20,13 @@ export default function BannerIntro() {
           podes disfrutar de las instalaciones sin tener contacto directo con
           otros huespedes.
         </p>
+        <p className={styles.p2}>
+          Nuestro complejo cuenta con diez cabañas totalmente equipadas,
+          modernas y luminosas. Para que no quede nadie afuera,
+          tenemos el agrado de recibir a sus mascotas. Localizadas a escasos 5
+          minutos del centro de Villa la Angostura y próximas a los lagos Nahuel
+          Huapi y Correntoso.
+        </p>
       </div>
     </div>
   );

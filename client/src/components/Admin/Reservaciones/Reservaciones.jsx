@@ -47,7 +47,6 @@ export default function Reservaciones() {
     dispatch(readUsers({ token }));
   }, [dispatch, token]);
 
-
   const [input, setInput] = useState({
     id: "",
     UserName: "",
@@ -110,7 +109,6 @@ export default function Reservaciones() {
     CostoFinal) {
     e.preventDefault();
     console.log(edit);
-    setMostrar(true);
     setEdit({
       ...edit,
       id: ID,
@@ -122,6 +120,7 @@ export default function Reservaciones() {
       ExtraServices: ExtraServices,
       CostoFinal: CostoFinal
     })
+    setMostrar(true);
     //dispatch(editReservation(edit, { token }));
 
   }

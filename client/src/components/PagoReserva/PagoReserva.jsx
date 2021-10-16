@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { readReservation, Logeduser } from "../../actions";
+import { readReservation, Logeduser, selectcabin, readCabains } from "../../actions";
 import Navbar from "../Navbar/Navbar";
 import styles from "./PagoReserva.module.css";
 import fechas from "../Reserva/Linkreserva/algoritmofechas"
@@ -10,17 +10,23 @@ export default function PagosReserva(ID) {
   useEffect(() => {
     dispatch(Logeduser());
 }, [dispatch]);
-  const user = useSelector((state) => state.user)
-  const reservaciones = useSelector((state) => state.reservaciones);
-  useEffect(() => {
-    dispatch(readReservation());
-  }, [dispatch]);
+useEffect(() => {
+  dispatch(readReservation());
+}, [dispatch]);
+useEffect(() => {
+  dispatch(readCabains());
+}, [dispatch]);
 
+  const user = useSelector((state) => state.user);
+  const reservaciones = useSelector((state) => state.reservaciones);
+  const cabañas = useSelector((state)=> state.allCabins);
   return (
     <div className={styles.container}>
       <Navbar />
       <div className={styles.title}>¡Tus vacaciones ya están cerca!</div>
       {reservaciones?.map((reservacion) => {
+        if(cabañas){
+          const seleccionada = cabañas.filter(e=> e.ID === reservacion.Cabinid)
         if(reservacion.UserId === user.userid){
           const reser = { Checkin: reservacion.Checkin, Checkout: reservacion.Checkout}
         const diasdereserva=fechas(reser)
@@ -28,6 +34,7 @@ export default function PagosReserva(ID) {
         return (
           <div className={styles.containerInfo}>
             <ul>
+              <li className={styles.li}>Cabaña Nª {seleccionada[0].Number}</li>
               <li className={styles.li}>Reservacion a nombre de: {reservacion.Anombrede}</li>
               <li className={styles.li}>Checkin:{reservacion.Checkin}</li>
               <li className={styles.li}>Checkout:{reservacion.Checkout}</li>
@@ -35,16 +42,19 @@ export default function PagosReserva(ID) {
               <li className={styles.li}>Costo final:{costoFINAL}</li>
             </ul>
             <hr />
+            {/* <form action="http://localhost:3001/checkout" method="POST"> */}
             <form action="https://villatranquila.herokuapp.com/checkout" method="POST">
-              <input type="hidden" name="title" value='Villa Tranquila'/>
-              <input type="hidden" name="price" value={costoFINAL}/>                                
+              <input type="hidden" name="title" value={seleccionada[0].Number}/>
+              <input type="hidden" name="price" value={costoFINAL}/>
+              <input type="hidden" name="idreserva" value={reservacion.ID}/>                         
               <input type="submit" value="Pagar" target="_blank" class="btn btn-primary btn-block"/>
             </form> 
           </div>
         );
         }
         return null
-      })}
+      }else{return null}
+    })}
       
     </div>
   );

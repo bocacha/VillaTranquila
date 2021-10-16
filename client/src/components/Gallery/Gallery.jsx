@@ -11,7 +11,7 @@ export default function Gallery() {
     const loadImages = async () => {
         try {
             const res = await axios.get('/pictures');
-            const data =  res.data;
+            const data = res.data;
 
             setImageIds(data);
         } catch (err) {
@@ -21,22 +21,28 @@ export default function Gallery() {
     useEffect(() => {
         loadImages();
     }, []);
+
+    console.log(imageIds)
+
     return (
         <div className={styles.slidershow}>
             <Navbar />
             <div className={styles.slides}>
-                {imageIds?.map((imageId, index) => (
-                    <div className={styles.wrapper}>
-                        <img
-                            className={styles.img}
-                            src={imageId.Url}
-                            width="100px"
-                            value={imageId.Description} alt=""
-                        />
-                        <Modall className={styles.modal} url={imageId.Url} description={imageId.Description}/>
-                    </div>
-                ))}
-            </div>        
+                {imageIds?.map((imageId, index) => {
+                    console.log(imageId)
+                    return (
+                        <div className={styles.wrapper}>
+                            <img
+                                className={styles.img}
+                                src={imageId.Url}
+                                width="100px"
+                                value={imageId.Description} alt=""
+                            />
+                            <Modall className={styles.modal} url={imageId.Url} description={imageId.Description} from={imageId.CabainNumber} />
+                        </div>
+                    )
+                })}
+            </div>
         </div>
     );
 }

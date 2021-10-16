@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Fotos.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { createimage, readPictures, editPictures, Logeduser, readPicturesocultados } from "../../../actions";
+import {
+  createimage,
+  readPictures,
+  editPictures,
+  Logeduser,
+  readPicturesocultados,
+  readCabains
+} from "../../../actions";
 import FotosDetail from "./FotosDetail";
 import Upload from "../../Reserva/Upload/Upload";
 import { Link } from "react-router-dom";
@@ -13,13 +20,16 @@ export default function Fotos() {
   const dispatch = useDispatch();
   const history = useHistory();
   const allPictures = useSelector((state) => state.fotos);
+  const allCabains = useSelector((state) => state.cabañas);
   const logeduser = useSelector((state) => state.user);
   const [habilitar, setHabilitar] = useState(false);
   const [description, setDescription] = useState("");
+  const [cabainNumber, setCabainNumber] = useState("");
   const [file, setFile] = useState({});
   const [edit, setEdit] = useState({
     id: "",
     Description: "",
+    CabainNumber:"",
     Url: "",
   });
   const [mostrar, setMostrar] = useState(false);
@@ -29,6 +39,10 @@ export default function Fotos() {
 
   useEffect(() => {
     dispatch(readPictures());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(readCabains());
   }, [dispatch]);
 
   function handleChangeEdit(e) {
@@ -45,6 +59,7 @@ export default function Fotos() {
       createimage(
         {
           description,
+          cabainNumber,
           file,
         },
         { token }
@@ -57,18 +72,19 @@ export default function Fotos() {
     // window.location.reload();
     //
   }
-  function handleSubmitEdit(e, Description,
-    Url,ID) {
+  function handleSubmitEdit(e, Description, CabainNumber,
+    Url, ID) {
     e.preventDefault();
     setMostrar(true);
     setEdit({
       ...edit,
       id: ID,
       Description: Description,
+      CabainNumber: CabainNumber,
       Url: Url
     })
   }
- function handlePrueba(e, ID) {
+  function handlePrueba(e, ID) {
     e.preventDefault();
     const { token } = logeduser;
     dispatch(editPictures(edit, { token }));
@@ -87,7 +103,9 @@ export default function Fotos() {
     dispatch(readPictures());
     setHabilitar(false);
   };
-  
+
+  console.log('cabain number', cabainNumber)
+
   return (
     <div className={styles.container}>
       <div className={styles.navs2}>
@@ -120,6 +138,20 @@ export default function Fotos() {
                 className={styles.formInputs}
                 required
               />
+              <label>Seleccione una cabaña para asociar a la imagen:</label>
+              <select
+                name="CabainNumber"
+                onChange={(e) => {
+                  setCabainNumber(e.target.value);
+                }}
+              >
+                <option>Cabaña N°</option>
+                {allCabains.map((c) => {
+                  return (
+                    <option name="CabainNumber">{c.Number}</option>
+                  )
+                })}
+              </select>
               <input
                 type="file"
                 name="File"
@@ -162,6 +194,22 @@ export default function Fotos() {
                   placeholder="Descripción"
                   className={styles.formInputs}
                 />
+                
+                <label>Seleccione una cabaña para asociar a la imagen:</label>
+                <select
+                  name="CabainNumber"
+                  onChange={(e) => {
+                    handleChangeEdit(e);
+                  }}
+                >
+                  <option>Cabaña N°</option>
+                  {allCabains.map((c) => {
+                    return (
+                      <option name="CabainNumber">{c.Number}</option>
+                    )
+                  })}
+                </select>
+
                 <input
                   type="text"
                   value={edit.Url}
@@ -180,6 +228,7 @@ export default function Fotos() {
                   <FotosDetail
                     ID={el.ID}
                     Description={el.Description}
+                    CabainNumber={el.CabainNumber}
                     Url={el.Url}
                     handleSubmitEdit={handleSubmitEdit}
                     handlePrueba={handlePrueba}
