@@ -227,7 +227,12 @@
 #descripcionEditar{
   min-height: 100px;
 }
-
+.containerContainerCabañas{
+  display: flex;
+  position:absolute;
+  height: 100%;
+  background-color: black;
+}
 .containerCabañas{
   display:grid;
   background-color: #94adbc;

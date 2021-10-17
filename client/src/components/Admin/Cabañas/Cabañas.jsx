@@ -233,7 +233,7 @@ const Cabañas = () => {
                 value={cabain.Description}
                 onChange={handleChange}
                 placeholder="Descripción . . ."
-                maxLength="500"
+                maxLength="250"
                 required
               />
             </div>
@@ -353,7 +353,7 @@ const Cabañas = () => {
                   value={edit.Description}
                   onChange={(e) => handleChangeEdit(e)}
                   placeholder="Descripción..."
-                  maxLength="500"
+                  maxLength="250"
                   className={styles.formInputs}
                   id={styles.descripcionEditar}
                   required
@@ -420,38 +420,40 @@ const Cabañas = () => {
         ) : null}
         {/* VER */}
       </div>
-      <div className={styles.containerCabañas}>
-        {allCabains?.sort((a, b) => {
-          if(parseInt(a.Number) < parseInt(b.Number)) return -1;
-          if(parseInt(a.Number) > parseInt(b.Number)) return 1;
-          return 1;
-        }).map((el) => {
-          return (
-            <div className={styles.detalles} key={el.ID}>
-              <CabañasDetail
-                ID={el.ID}
-                Number={el.Number}
-                Capacity={el.Capacity}
-                Available={el.Available}
-                Price={el.Price}
-                Description={el.Description}
-                Picture={el.Picture}
-                Coffe={el.Coffe}
-                Microondas={el.Microondas}
-                Calefaccion={el.Calefaccion}
-                Parrilla={el.Parrilla}
-                Wifi={el.Wifi}
-                Cleaning={el.Cleaning}
-                Refrigerator={el.Refrigerator}
-                Stove={el.Stove}
-                Parking={el.Parking}
-                handlePrueba={handlePrueba}
-                handleeditSubmit={handleeditSubmit}
-                restaurar={habilitar}
-              />
-            </div>
-          );
-        })}
+      <div id={styles.containerContainerCabañas}>
+        <div className={styles.containerCabañas}>
+          {allCabains?.sort((a, b) => {
+            if (parseInt(a.Number) < parseInt(b.Number)) return -1;
+            if (parseInt(a.Number) > parseInt(b.Number)) return 1;
+            return 1;
+          }).map((el) => {
+            return (
+              <div className={styles.detalles} key={el.ID}>
+                <CabañasDetail
+                  ID={el.ID}
+                  Number={el.Number}
+                  Capacity={el.Capacity}
+                  Available={el.Available}
+                  Price={el.Price}
+                  Description={el.Description}
+                  Picture={el.Picture}
+                  Coffe={el.Coffe}
+                  Microondas={el.Microondas}
+                  Calefaccion={el.Calefaccion}
+                  Parrilla={el.Parrilla}
+                  Wifi={el.Wifi}
+                  Cleaning={el.Cleaning}
+                  Refrigerator={el.Refrigerator}
+                  Stove={el.Stove}
+                  Parking={el.Parking}
+                  handlePrueba={handlePrueba}
+                  handleeditSubmit={handleeditSubmit}
+                  restaurar={habilitar}
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
 
 

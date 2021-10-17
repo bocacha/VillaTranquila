@@ -9,35 +9,47 @@
   padding: 1.5%;
   color: #293c4f;
   border-radius: 10px;
-  width:74.5%;
+  width:100%;
 }
 .searchBar .container form input{
-    margin-left:1%;
-    margin-right:1%;
+    margin-left:0.3%;
+    margin-right:0.3%;
     border: 1px solid #293c4f;
-    background-color: #293c4f;
+    background-color: #94adbc;
+    border-radius: 50px;
+    color:#293c4f;
+    width:23.85%;
+    height:40px;
+    padding-bottom: 9px;
 }
 .searchBar .container form input:hover{
-  background: #94adbc;
+  background: #d1e4f0;
+  color: #fff;
+}
+.searchBar .container form input:focus{
+  background: #d1e4f0;
+  color: #293c4f;
 }
 .btnSup {
-    margin-left: 1%;
-    margin-right: 1%;
-    padding: 4px 5%;
-    background: #94adbc;
-    color: #293c4f;
+    margin-left: 0.3%;
+    margin-right: 0.3%;
+    background: #293c4f;
+    color: #fff;
     border: none;
     border: 1px solid #293c4f;
-    border-radius: 5px;
+    border-radius: 50px;
     font-family: Lato, Arial, sans-serif;
     font-weight:bolder;
     transition-duration: 0.3s;
+    height:40px;
+    width:36.1%
   }
   .btnSup:hover {
-    background: #293c4f;
+    background: #94adbc;
     border: 1px solid #293c4f;
-    color: #fff;
+    color: #293c4f;
   }
   .icon{
-      color:inherit;
+      margin-top: -2px;
+      margin-left: 10px;
   }
