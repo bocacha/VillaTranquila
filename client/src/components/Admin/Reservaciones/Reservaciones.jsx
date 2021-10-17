@@ -262,10 +262,6 @@ export default function Reservaciones() {
                   )
                 })}
                 </select>
-
-
-
-
                   {/* <input
                     type="text"
                     value={edit.CabinNumber}
@@ -334,5 +330,3 @@ export default function Reservaciones() {
     </div>
   );
 }
-
-// const {Checkin, Checkout, UserId, Paymentsid, Cabinid, ExtraServices} = req.body;

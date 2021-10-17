@@ -59,7 +59,9 @@ export default function CabinsDetail({
             <tr>
               <td className={styles.izquierda}><strong>Fechas ocupadas:</strong></td>
               <td className={styles.derecha}><ul>{
-                Available.length !== 0 && Available.map(e => <li>Del {e[0]} al {e[e.length - 1]}</li>)
+                Available.length !== 0 ?
+                  Available.map(e => <li>Del {e[0]} al {e[e.length - 1]}</li>) :
+                  'Sin reservas aún'
               }</ul></td>
             </tr>
             <tr>

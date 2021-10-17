@@ -113,6 +113,11 @@ export default function ReservacionesDetail({
               CostoFinal,
               Cabinid,);
             setMostrar(false);
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: 'smooth',
+            });
           }}
           className={styles.btnPlus}
         >

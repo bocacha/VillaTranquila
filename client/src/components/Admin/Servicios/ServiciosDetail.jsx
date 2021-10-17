@@ -28,55 +28,56 @@ export default function ServiciosDetail({
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
-        <p className={styles.p}>
-          <strong>Nombre: </strong>{Name}
-          {/* <strong>Name:</strong> {Name} */}
-        </p>
-        <p className={styles.p}>
-          <strong>Descripción: </strong> {Description}
-        </p>
-        <p className={styles.p}>
-          <strong>Precio: </strong> {Price}
-        </p>
+        <table>
+          <tbody>
+            <tr>
+              <td className={styles.izquierda}><strong>Nombre:</strong></td>
+              <td className={styles.derecha}><p>{Name}</p></td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Descripción:</strong></td>
+              <td className={styles.derecha}><p id={styles.description}>{Description}</p></td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Precio:</strong></td>
+              <td className={styles.derecha}><p>$ {Price}</p></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div className={styles.btnsContainer}>
-        <div>
-          {!restaurar ? (
-            <button
-              onClick={() => handleSubmitDelete(ID)}
-              className={styles.btn}
-            >
-              Ocultar
-            </button>
-          ) : (
-            <button
-              onClick={() => handleSubmitrestore(ID)}
-              className={styles.btn}
-            >
-              Restaurar
-            </button>
-          )}
-        </div>
-        {mostrar ? (
-          <div>
-            <button
-              onClick={(e) => {
-                handleSubmitEdit(e, ID,
-                  Name,
-                  Description,
-                  Price,);
-                setMostrar(false);
-              }}
-              className={styles.btnPlus}
-            >
-              Editar
-            </button>
-          </div>
+        {!restaurar ? (
+          <button
+            onClick={() => handleSubmitDelete(ID)}
+            className={styles.btn}
+          >
+            Ocultar
+          </button>
         ) : (
-          <div>
-            <button onClick={(e) => handlePrueba(e, ID)} className={styles.btnPlus}>Guardar</button>
-          </div>
+          <button
+            onClick={() => handleSubmitrestore(ID)}
+            className={styles.btn}
+          >
+            Restaurar
+          </button>
         )}
+        <button
+          onClick={(e) => {
+            handleSubmitEdit(e, ID,
+              Name,
+              Description,
+              Price);
+            setMostrar(false);
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: 'smooth',
+            });
+          }}
+          className={styles.btnPlus}
+        >
+          Editar
+        </button>
       </div>
     </div>
   );
