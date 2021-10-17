@@ -12,9 +12,11 @@ import styles from "./Cabañas.module.css";
 import CabañasDetail from "../Cabañas/CabañasDetail";
 import Navbar from "../../Navbar/Navbar";
 import NavAdmin from "../NavAdmin/NavAdmin";
+import { useHistory } from "react-router";
 
 const Cabañas = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const allCabains = useSelector((state) => state.cabañas);
   const logeduser = useSelector((state) => state.user);
   const allFotos = useSelector((state) => state.fotos);
@@ -102,7 +104,9 @@ const Cabañas = () => {
     e.preventDefault();
     dispatch(createCabains(cabain, { token }));
     alert("Su cabaña fue creada con éxito 🏡");
-    window.location.reload();
+    setTimeout(function () {
+      history.go(0);
+    }, 2000)
   };
 
   const handleeditSubmit = (
@@ -166,7 +170,10 @@ const Cabañas = () => {
     const { token } = logeduser;
     dispatch(editCabains(edit, { token }));
     alert("Edicion exitosa");
-    window.location.reload();
+    setTimeout(function () {
+      history.go(0);
+    }, 2000)
+    //window.location.reload();
   };
   const ocultadas = () => {
     dispatch(readCabainsocultados());
