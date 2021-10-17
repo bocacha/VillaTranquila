@@ -31,6 +31,8 @@ export default function Reservaciones() {
   const { token } = logeduser;
   const [selectDateCI, setSelectDateCI] = useState(null);
   const [selectDateCO, setSelectDateCO] = useState(null);
+  const [cabinid, setCabinid] = useState(null)
+  const [cabinnumber, setCabinnumber] = useState(null)
   const [mostrar, setMostrar] = useState(false);
   const [habilitar, setHabilitar] = useState(false);
   const allCabins = useSelector((state) => state.cabins);
@@ -43,7 +45,6 @@ export default function Reservaciones() {
 
   const allUsers = useSelector((state) => state.usuarios);
   const allReservations = useSelector((state) => state.reservaciones);
- 
   const [edit, setEdit] = useState({
     id: "",
     Anombrede: "",
@@ -80,8 +81,8 @@ export default function Reservaciones() {
     Cabinid,
     ) {
     e.preventDefault();
-
-
+    setCabinid(Cabinid)
+    setCabinnumber(CabinNumber)
     setSelectDateCI()
     setSelectDateCO()
     setEdit({
@@ -99,6 +100,21 @@ export default function Reservaciones() {
     setMostrar(true);
     //dispatch(editReservation(edit, { token }));
 
+  }
+  function handleSelect(e) {
+    if(e.target.value === "Cabaña N°"){
+    setEdit({...edit,
+    Cabinid:cabinid,
+  CabinNumber:cabinnumber})
+    }else{
+      const select=allCabins.find(el => el.ID === e.target.value)
+   console.log(select.Number)
+       setEdit({
+         ...edit,
+         CabinNumber:select.Number ,
+         Cabinid: e.target.value,
+       });
+    }
   }
   const changeFechas = (e) => {
     if (e === null) {
@@ -234,6 +250,18 @@ export default function Reservaciones() {
                     pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                     required
                   /> */}
+              <label>Cabaña Nº:</label>
+              <select
+                onChange={(e) => handleSelect(e)}
+              >
+                <option >Cabaña N°</option>
+                {allCabins.map((c) => {
+
+                  return (
+                    <option value={c.ID}>{c.Number} </option>
+                  )
+                })}
+                </select>
                   {/* <input
                     type="text"
                     value={edit.CabinNumber}

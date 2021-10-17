@@ -56,16 +56,17 @@ router.get("/ocultadas", async (req, res) => {
     }
 });
 
-router.post("/NewReservation", (req, res) => {
-    const { Checkin, Checkout, UserId, Cabinid, ExtraServices, CostoFinal, Anombrede } = req.body;
-    Reservations.create({
-        Checkin,
-        Checkout,
-        UserId,
-        Cabinid,
-        ExtraServices,
-        CostoFinal,
-        Anombrede
+router.post("/NewReservation" , (req, res)=>{
+    const {Checkin, Checkout, Cabinid,UserId, ExtraServices, CostoFinal,Anombrede,CabinNumber,} = req.body;
+     Reservations.create({
+     Checkin,
+     Checkout,
+     Cabinid, 
+     UserId: UserId,
+     ExtraServices,
+     CabinNumber,
+     CostoFinal,
+     Anombrede
     })
         .then(doneTemp => {
             return res.status(200).json(doneTemp)
@@ -75,24 +76,24 @@ router.post("/NewReservation", (req, res) => {
 router.put("/EditReservation", (req, res) => {
     const authorizations = req.get("Authorization")
     let token = ""
-    if (authorizations && authorizations.toLowerCase().startsWith("bearer")) {
-        token = authorizations.substring(7)
-        console.log(token)
-    }
-    const decodedToken = jwt.verify(token, config.JWT_SECRET)
-    if (!token || !decodedToken.id) {
-        return res.status(401).json({
-            error: "token missing or invalid"
-        })
-    }
-    if (!decodedToken.Admin) {
-        return res.status(400).json({ error: "Ops.. No tenes permisos" })
-    }
-    const { Checkin, Checkout, Anombrede, Cabinid, ExtraServices, CostoFinal } = req.body;
-    const objecttoupdate = {
+if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
+  token = authorizations.substring(7)
+  console.log(token)
+}
+const decodedToken= jwt.verify(token, config.JWT_SECRET)
+if(!token || !decodedToken.id){
+   return res.status(401).json({
+       error:"token missing or invalid"
+   })
+}
+if(!decodedToken.Admin){
+   return res.status(400).json({error:"Ops.. No tenes permisos"})
+}
+    const {Checkin, Checkout, Cabinid, ExtraServices, CostoFinal,Anombrede,CabinNumber} = req.body;
+    const objecttoupdate={
         Checkin: Checkin,
         Checkout: Checkout,
-        Anombrede: Anombrede,
+        CabinNumber: CabinNumber,
         Cabinid: Cabinid,
         CostoFinal: CostoFinal,
         ExtraServices: ExtraServices,
