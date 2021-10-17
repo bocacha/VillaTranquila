@@ -20,71 +20,42 @@ import SearchBar from "./SearchBar";
 registerLocale('es', es)
 
 export default function Reservaciones() {
-
   const dispatch = useDispatch();
-
-  const [selectDateCI, setSelectDateCI] = useState(null);
-  const [selectDateCO, setSelectDateCO] = useState(null);
-
-  const [mostrar, setMostrar] = useState(false);
-
-  const allReservations = useSelector((state) => state.reservaciones);
-  console.log('reservas:', allReservations)
-
-  const [habilitar, setHabilitar] = useState(false);
-
-  useEffect(() => {
-    dispatch(getCabins())
-  }, [dispatch])
-  const allCabins = useSelector((state) => state.cabins);
-
-  const logeduser = useSelector((state) => state.user);
-
-  const { token } = logeduser;
-  const allUsers = useSelector((state) => state.usuarios);
-
-  useEffect(() => {
-    dispatch(readUsers({ token }));
-  }, [dispatch, token]);
-
-  const [input, setInput] = useState({
-    id: "",
-    UserName: "",
-    Anombrede: "",
-    Checkin: "",
-    Checkout: "",
-    CabinNumber: "",
-    ExtraServices: "",
-    CostoFinal: "",
-    Paymentsid: "",
-  });
-
-  const [edit, setEdit] = useState({
-    id: "",
-    UserName: "",
-    Anombrede: "",
-    Checkin: "",
-    Checkout: "",
-    Paymentsid: "",
-    CabinNumber: "",
-    ExtraServices: "",
-    CostoFinal: "",
-  });
   useEffect(() => {
     dispatch(Logeduser());
   }, [dispatch]);
-
+  useEffect(() => {
+    dispatch(getCabins())
+  }, [dispatch])
+  const logeduser = useSelector((state) => state.user);
+  const { token } = logeduser;
+  const [selectDateCI, setSelectDateCI] = useState(null);
+  const [selectDateCO, setSelectDateCO] = useState(null);
+  const [cabinid, setCabinid] = useState(null)
+  const [cabinnumber, setCabinnumber] = useState(null)
+  const [mostrar, setMostrar] = useState(false);
+  const [habilitar, setHabilitar] = useState(false);
+  const allCabins = useSelector((state) => state.cabins);
+  useEffect(() => {
+    dispatch(readUsers({ token }));
+  }, [dispatch]);
   useEffect(() => {
     dispatch(readReservation({ token }));
-  }, [dispatch, token]);
+  }, [dispatch]);
 
-  function handleChange(e) {
-    setInput({
-      ...input,
-      [e.target.name]: e.target.value,
-    });
-  }
-
+  const allUsers = useSelector((state) => state.usuarios);
+  const allReservations = useSelector((state) => state.reservaciones);
+  const [edit, setEdit] = useState({
+    id: "",
+    Anombrede: "",
+    Checkin: "",
+    Checkout: "",
+    CabinNumber: "",
+    Cabinid:"",
+    ExtraServices: "",
+    CostoFinal: "",
+  });
+ 
   function handleChangeEdit(e) {
     setEdit({
       ...edit,
@@ -99,30 +70,51 @@ export default function Reservaciones() {
   //   ;
   //   //window.location.reload();
   // }
-  function handleSubmitEdit(e, ID,
+  function handleSubmitEdit(e,   ID,
     Checkin,
     Checkout,
-    UserId,
-    Paymentsid,
-    Cabinid,
+    CabinNumber,
+    UserName,
+    Anombrede,
     ExtraServices,
-    CostoFinal) {
+    CostoFinal,
+    Cabinid,
+    ) {
     e.preventDefault();
-    console.log(edit);
+    setCabinid(Cabinid)
+    setCabinnumber(CabinNumber)
+    setSelectDateCI()
+    setSelectDateCO()
     setEdit({
       ...edit,
       id: ID,
       Checkin: Checkin,
       Checkout: Checkout,
-      UserId: UserId,
-      Paymentsid: Paymentsid,
-      Cabinid: Cabinid,
+      UserName: UserName,
+      Anombrede: Anombrede,
+      CabinNumber: CabinNumber,
       ExtraServices: ExtraServices,
-      CostoFinal: CostoFinal
+      CostoFinal: CostoFinal,
+      Cabinid: Cabinid,
     })
     setMostrar(true);
     //dispatch(editReservation(edit, { token }));
 
+  }
+  function handleSelect(e) {
+    if(e.target.value === "Cabaña N°"){
+    setEdit({...edit,
+    Cabinid:cabinid,
+  CabinNumber:cabinnumber})
+    }else{
+      const select=allCabins.find(el => el.ID === e.target.value)
+   console.log(select.Number)
+       setEdit({
+         ...edit,
+         CabinNumber:select.Number ,
+         Cabinid: e.target.value,
+       });
+    }
   }
   const changeFechas = (e) => {
     if (e === null) {
@@ -157,7 +149,7 @@ export default function Reservaciones() {
     dispatch(editReservation(edit, { token }));
     alert("Editado")
     //pruebadispatch()
-    window.location.reload()
+   // window.location.reload()
   }
   // const pruebadispatch=() => {
   // const { token } = logeduser;
@@ -222,13 +214,21 @@ export default function Reservaciones() {
                   </div>
                   <input
                     type="text"
+                    value={edit.Anombrede}
+                    name="Anombrede"
+                    onChange={(e) => handleChangeEdit(e)}
+                    placeholder="A nombre de . . ."
+                    className={styles.formInputs}
+                  />
+                  <input
+                    type="text"
                     value={edit.CostoFinal}
                     name="CostoFinal"
                     onChange={(e) => handleChangeEdit(e)}
                     placeholder="Costo Final"
                     className={styles.formInputs}
                   />
-                  <input
+                  {/* <input
                     type="text"
                     value={edit.UserId}
                     name="UserId"
@@ -238,8 +238,8 @@ export default function Reservaciones() {
                     title='Formato: UUID4'
                     pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                     required
-                  />
-                  <input
+                  /> */}
+                  {/* <input
                     type="text"
                     value={edit.Paymentsid}
                     name="Paymentsid"
@@ -249,18 +249,34 @@ export default function Reservaciones() {
                     title='Formato: UUID4'
                     pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                     required
-                  />
-                  <input
+                  /> */}
+              <label>Cabaña Nº:</label>
+              <select
+                onChange={(e) => handleSelect(e)}
+              >
+                <option >Cabaña N°</option>
+                {allCabins.map((c) => {
+
+                  return (
+                    <option value={c.ID}>{c.Number} </option>
+                  )
+                })}
+                </select>
+
+
+
+
+                  {/* <input
                     type="text"
-                    value={edit.Cabinid}
-                    name="Cabinid"
+                    value={edit.CabinNumber}
+                    name="CabinNumber"
                     onChange={(e) => handleChangeEdit(e)}
-                    placeholder="Cabaña id"
+                    placeholder="Numero de Cabaña"
                     className={styles.formInputs}
                     title='Formato: UUID4'
                     pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                     required
-                  />
+                  /> */}
                   <input
                     type="text" //?????
                     value={edit.ExtraServices}
@@ -287,25 +303,30 @@ export default function Reservaciones() {
         <div className={styles.containerReservas}>
           {allReservations.length !== 0 ?
             allReservations.map((el) => {
-              let username = allUsers.find(e => e.ID === el.UserId).UserName;
-              let cabinNumber = allCabins.find(e => e.ID === el.Cabinid).Number;
-              return (
-                <div className={styles.detalles} key={el.ID}>
-                  <ReservacionesDetail
-                    ID={el.ID}
-                    Checkin={el.Checkin}
-                    Checkout={el.Checkout}
-                    CabinNumber={cabinNumber}
-                    UserName={username}
-                    Anombrede={el.Anombrede}
-                    CostoFinal={el.CostoFinal}
-                    ExtraServices={el.ExtraServices}
-                    handlePrueba={handlePrueba}
-                    handleSubmitEdit={handleSubmitEdit}
-                    restaurar={habilitar}
-                  />
-                </div>
-              );
+              if(allUsers.length>0){
+                if(allCabins.length>0){
+                  let username = allUsers.find(e => e.ID === el.UserId).UserName;               
+                  let cabinNumber = allCabins.find(e => e.ID === el.Cabinid).Number;         
+                  return (
+                    <div className={styles.detalles} key={el.ID}>
+                      <ReservacionesDetail
+                        ID={el.ID}
+                        Checkin={el.Checkin}
+                        Checkout={el.Checkout}
+                        CabinNumber={cabinNumber}
+                        UserName={username}
+                        Anombrede={el.Anombrede}
+                        CostoFinal={el.CostoFinal}
+                        ExtraServices={el.ExtraServices}
+                        handlePrueba={handlePrueba}
+                        handleSubmitEdit={handleSubmitEdit}
+                        restaurar={habilitar}
+                      />
+                    </div>
+                  );
+
+                }
+              }
             }) :
             <div className={styles.ninguna}>No se encontró ninguna reserva</div>}
         </div>

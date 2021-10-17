@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { removeCabains, restoreCabains } from '../../../actions';
 import { GiBarbecue } from 'react-icons/gi';
 import { FaWifi, FaCarAlt } from 'react-icons/fa';
+import { useHistory } from "react-router";
 
 export default function CabinsDetail({
   ID,
@@ -21,11 +22,15 @@ export default function CabinsDetail({
   restaurar
 }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [mostrar, setMostrar] = useState(true);
   const handleSubmitDelete = (ID) => {
     dispatch(removeCabains({ id: ID }));
     alert("su cabaña fue Eliminada con exito");
-    window.location.reload();
+    //window.location.reload();
+    setTimeout(function () {
+      history.go(0);
+    }, 2000)
 
   };
 
@@ -33,8 +38,9 @@ export default function CabinsDetail({
     console.log('funcion', ID)
     dispatch(restoreCabains({ id: ID }));
     alert("su cabaña fue restaurada con exito");
-    window.location.reload();
-
+    setTimeout(function () {
+      history.go(0);
+    }, 2000)
   }
 
   return (

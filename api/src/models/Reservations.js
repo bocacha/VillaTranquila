@@ -39,6 +39,11 @@ module.exports = (sequelize) => {
         isNumeric: true,  
       }
     },
+    CabinNumber:{
+      type: DataTypes.STRING,
+      allowNull:false,
+
+    },
     Cabinid:{
       type: DataTypes.STRING,
       allowNull: false,

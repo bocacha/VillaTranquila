@@ -15,6 +15,7 @@ export default function ReservacionesDetail({
   Paymentsid,
   ExtraServices,
   CostoFinal,
+  Cabinid,
   handleSubmitEdit,
   handlePrueba,
   restaurar,
@@ -108,9 +109,9 @@ export default function ReservacionesDetail({
               CabinNumber,
               UserName,
               Anombrede,
-              Paymentsid,
               ExtraServices,
-              CostoFinal,);
+              CostoFinal,
+              Cabinid,);
             setMostrar(false);
           }}
           className={styles.btnPlus}
