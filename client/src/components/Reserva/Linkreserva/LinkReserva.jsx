@@ -58,6 +58,7 @@ export default function Reservaciones() {
     Nombre: "",
     Checkin: "",
     Checkout: "",
+    CabinNumber:seleccionada.Number,
     UserId: logeduser.userid,
     CostoFinal: JSON.parse(costo),
     Cabinid: JSON.parse(cabinId),
@@ -117,6 +118,7 @@ export default function Reservaciones() {
     setInput({
       ...input,
       UserId: logeduser.userid,
+      CabinNumber:seleccionada.Number,
       [e.target.name]: e.target.value,
     });
   }
