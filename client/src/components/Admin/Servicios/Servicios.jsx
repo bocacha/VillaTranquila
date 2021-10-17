@@ -11,6 +11,7 @@ import {
 import ServiciosDetail from "./ServiciosDetail";
 import { Link } from "react-router-dom";
 import NavAdmin from '../NavAdmin/NavAdmin';
+import Navbar from "../../Navbar/Navbar";
 
 export default function Servicios() {
   const dispatch = useDispatch();
@@ -59,7 +60,7 @@ export default function Servicios() {
       Description: "",
       Price: "",
     });
-    //window.location.reload();
+    window.location.reload();
   }
   function handleSubmitEdit(e, ID,
     Name,
@@ -101,7 +102,12 @@ export default function Servicios() {
   };
   return (
     <div className={styles.container}>
-      <NavAdmin />
+      <div className={styles.navs2}>
+        <div className={styles.navs}>
+          <Navbar />
+          <NavAdmin />
+        </div>
+      </div>
       <div className={styles.btnsContainer}>
         {!habilitar ? (
           <button onClick={ocultadas} className={styles.btnSup}>Mostrar ocultadas</button>

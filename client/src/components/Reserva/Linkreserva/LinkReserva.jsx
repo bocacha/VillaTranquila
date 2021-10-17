@@ -133,7 +133,6 @@ export default function Reservaciones() {
     },[selectDateCO]);
   useEffect(()=>{
     fechasafiltrar()
-    console.log(fechasintermedias)
     },[selectDateCO]);
 const changeFechas2=async(e)=>{
   if(e === null){
@@ -146,12 +145,16 @@ const mostrarFecha = selectDateCI =>{
     const options = {year:'numeric', month:'numeric', day:'2-digit'}
     setInput({...input,  Checkin: selectDateCI.toLocaleDateString('es-ES', options)})
     setReserva({...reserva, Checkin:selectDateCI.toLocaleDateString('es-ES', options)})
-}
-const mostrarFecha2 = selectDateCO =>{
-  const options = {year:'numeric', month:'numeric', day:'2-digit'}
-  setInput({...input,  Checkout: selectDateCO.toLocaleDateString('es-ES', options)})
-  setReserva({...reserva, Checkout:selectDateCO.toLocaleDateString('es-ES', options)})
-}
+  }
+  const mostrarFecha2 = selectDateCO =>{
+    const options = {year:'numeric', month:'numeric', day:'2-digit'}
+    setInput({...input,  Checkout: selectDateCO.toLocaleDateString('es-ES', options)})
+    setReserva({...reserva, Checkout:selectDateCO.toLocaleDateString('es-ES', options)})
+    filtrarfechas()
+  }
+  const filtrarfechas=()=> {
+    fechasafiltrar(reserva)
+  }
 const calculofechas=()=> {
  let fechasintermedias=[]
   if(ocupadas.length>=0){
@@ -210,7 +213,7 @@ alert("Reserva creada")
       for(let j =0;j<ocup.length; j++){
         if(intermedias[i] === ocup[j]){
           setSelectDateCO(null)
-          throw alert("error no podes elegir esas fechas, porlomenos una esta reservada")
+          return alert("error no podes elegir esas fechas, porlomenos una esta reservada")
         }
       }
      }
@@ -226,6 +229,7 @@ alert("Reserva creada")
             </Link>
           </div>
           <div className={styles.title}>Crear una nueva reservación</div>
+          <div className={styles.title}>Cabaña Nº {seleccionada.Number}</div>
           <form onSubmit={(e) => handleSubmit(e)}className={styles.form}>          
           <input
               type="text"
@@ -268,7 +272,7 @@ alert("Reserva creada")
             />
         <DatePicker
             selected={selectDateCO}
-            onChange={e=>changeFechas2(e)}
+            onChange={(e=>changeFechas2(e))}
             placeholderText="Fecha de Check out"
             onFocus={calculofechas}
             className={styles.formInputs}

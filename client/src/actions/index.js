@@ -41,6 +41,7 @@ export const REMOVE_USERS= "REMOVE_USERS";
 export const READ_FECHASNODISPONIBLES = "READ_FECHASNODISPONIBLES";
 export const GET_USER_DATA = "GET_USER_DATA";
 export const SELECTED_CABIN = "SELECTED_CABIN";
+export const FILTER_RESERVATIONS = 'FILTER_RESERVATIONS';
 
 export function getCabins() {
   return async function (dispatch) {
@@ -81,7 +82,6 @@ export function readWeather() {
         payload: json.data,
       });
     } catch (err) {
-      console.log('error');
       console.error(err);
     }
   };
@@ -138,8 +138,8 @@ export function createServices(payload, { token }) {
   };
 }
 
-export function createUsers(payload) {
-    return async function (dispatch) {
+export function createUsers(payload) { 
+  return async function (dispatch) {
    try{ const response = await axios.post("/users/Singup", payload);
     return response;
     }catch (err) {
@@ -173,7 +173,8 @@ export function createimage(payload, { token }) {
 
     const response = await axios.post("/pictures/NewPicture", {
       Description: payload.description,
-      Url: Url
+      Url: Url,
+      CabainNumber: payload.cabainNumber
     }, config);
 
     console.log(response)
@@ -561,16 +562,20 @@ export function removeCabains(id) {
   };
 }
 
-export function removeReservations(id) {
-  console.log('remove', id);
+export function removeReservations(payload) {
+  console.log('remove', payload.Available);
   return async function (dispatch) {
-
-    var json = await axios.put("/reservations/RemoveReservation", id);
-    return dispatch({
+    var cabins = await axios.get("/cabins")
+    var reserva = await axios.get("/reservations")
+    var json = await axios.put("/reservations/RemoveReservation", {id: payload.id});
+    var filtrada = reserva.data.filter(e=> e.ID === payload.id)
+    var cabinfiltrada = cabins.data.filter(e=>e.ID === filtrada[0].Cabinid )
+    var Avaliable2 = cabinfiltrada[0].Available.filter(e=> !e.includes(...payload.Available))
+    return (dispatch({
       type: REMOVE_RESERVATIONS,
-      payload: id
+      payload: payload.id
 
-    })
+    }),dispatch(editAvailible({id:cabinfiltrada[0].ID , Available: Avaliable2})))
 
   };
 }
@@ -643,16 +648,21 @@ export function restoreCabains(id){
   };
 }
 
-export function restoreReservations(id){
-  console.log('remove',id);
+export function restoreReservations(payload){
+  console.log(payload)
   return async function (dispatch) {
-   
-      var json = await axios.put("/reservations/RestoreReservation", id);
-      return dispatch({
+    var cabins = await axios.get("/cabins")
+    var reserva = await axios.get("/reservations/ocultadas")
+    var filtrada = reserva.data.filter(e=> e.ID === payload.id)
+    var cabinfiltrada = cabins.data.filter(e=>e.ID === filtrada[0].Cabinid )
+    var Avaliable2 = cabinfiltrada[0].Available
+    Avaliable2.push(payload.Available)
+      var json = await axios.put("/reservations/RestoreReservation", {id: payload.id});
+      return (dispatch({
         type: REMOVE_RESERVATIONS,
-        payload: id
+        payload: payload.id
        
-       })
+       }),dispatch(editAvailible({id:cabinfiltrada[0].ID , Available: Avaliable2})))
        
   };
 }
@@ -770,6 +780,7 @@ export function selectcabin(id){
 export function mailpassword(Email) {
   return async function (dispatch) {
     try {
+      var lala = await axios.post("/sendNotificationpassword",{Email:Email})
       var json = await axios.get("/users/");
       var useremail = json.data.filter((e)=> e.Email === Email)
       const cambiar={
@@ -784,4 +795,11 @@ export function mailpassword(Email) {
       console.error(err);
     }
   };
+}
+
+export function filterReservations(payload){
+  return {
+    type: FILTER_RESERVATIONS,
+    payload
+  }
 }

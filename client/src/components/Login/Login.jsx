@@ -5,6 +5,8 @@ import Navbar from "../Navbar/Navbar";
 import { Link } from "react-router-dom";
 import styles from "./Login.module.css";
 import { ImCalendar } from 'react-icons/im';
+import { GoSignIn } from 'react-icons/go';
+import { FaUnlockAlt } from 'react-icons/fa';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -68,27 +70,29 @@ export default function Login() {
                 onChange={Handlechange}
                 className={styles.formInputs}
               />
-              <button onClick={handleLogin} className={styles.btn}>Iniciar sesión</button>
+              <button onClick={handleLogin} className={styles.btn}>
+                Iniciar sesión <GoSignIn className={styles.icon}/>
+              </button>
             </form>
             <div>
               <button
                 className={styles.btn}
                 onClick={() => setON(true)}
               >
-                <u>Olvidé mi usuario o contraseña</u>
+                <u>Olvidé mi contraseña</u>
               </button>
               <div>
                 {on ? (
-                  <div>
-                    Email:
+                  <div className={styles.recuperar}>
+                    Enviaremos tu nueva contraseña a: 
                     <input
                       type="text"
                       placeholder="ejemplo@ejemplo.com"
                       name="Email"
                       value={email.Email}
                       onChange={HandlechangeE}
-                      className={styles.formInputs} />
-                    <button className={styles.btn} onClick={send}>enviar</button>
+                      id={styles.mail} />
+                    <button id={styles.recuperar} onClick={send}>Recuperar contraseña <FaUnlockAlt className={styles.icon}/></button>
                   </div>
                 ) : null}
               </div>
@@ -101,7 +105,7 @@ export default function Login() {
                 className={styles.btn1}
                 onClick={goHome}
               >
-                <strong>Comenzar reserva <ImCalendar className={styles.icon}/></strong>
+                <strong>Comenzar reserva <ImCalendar className={styles.icon} id={styles.reserva}/></strong>
               </button>
             </div>
 

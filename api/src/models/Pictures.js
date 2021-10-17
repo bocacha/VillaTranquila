@@ -12,6 +12,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    CabainNumber: {
+      type: DataTypes.STRING,
+      allowNull:false
+    },
     Url:{
       type: DataTypes.STRING,
       allowNull:false

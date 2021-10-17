@@ -15,8 +15,7 @@
   align-items: start;
   justify-content: center;
   width: 50%;
-  height: 100%;
-  min-height: 100vh;
+  height: 100vh;
 }
 
 .navs2 {
@@ -42,7 +41,6 @@
   /* margin-left: 290px; */
   padding-top: 10px;
 }
-
 
 .btnVolver {
   margin-left: 40px;
@@ -152,12 +150,7 @@
   border-radius: 7px;
   padding: 10px 25px;
   margin-bottom: 10px;
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  -webkit-hyphens: auto;
-  -moz-hyphens: auto;
-  -ms-hyphens: auto;
-  hyphens: auto;
+  width: 400px;
 }
 
 @media (max-width: 700px) {
@@ -165,5 +158,3 @@
     flex-direction: column;
   }
 }
-
-
