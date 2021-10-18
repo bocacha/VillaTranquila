@@ -57,7 +57,7 @@ router.get("/ocultadas", async (req, res) => {
 });
 
 router.post("/NewReservation" , (req, res)=>{
-    const {Checkin, Checkout, Cabinid,UserId, ExtraServices, CostoFinal,Anombrede,CabinNumber,} = req.body;
+    const {Checkin, Checkout, Cabinid,UserId, ExtraServices, CostoFinal,Anombrede,CabinNumber,UserName} = req.body;
      Reservations.create({
      Checkin,
      Checkout,
@@ -66,7 +66,8 @@ router.post("/NewReservation" , (req, res)=>{
      ExtraServices,
      CabinNumber,
      CostoFinal,
-     Anombrede
+     Anombrede,
+     UserName
     })
         .then(doneTemp => {
             return res.status(200).json(doneTemp)
@@ -97,6 +98,7 @@ if(!decodedToken.Admin){
         Cabinid: Cabinid,
         CostoFinal: CostoFinal,
         ExtraServices: ExtraServices,
+        UserName: UserName,
     }
     Reservations.update(
         objecttoupdate

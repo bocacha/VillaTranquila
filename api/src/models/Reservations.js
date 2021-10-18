@@ -44,6 +44,11 @@ module.exports = (sequelize) => {
       allowNull:false,
 
     },
+    UserName:{
+      type: DataTypes.STRING,
+      allowNull:false,
+
+    },
     Cabinid:{
       type: DataTypes.STRING,
       allowNull: false,

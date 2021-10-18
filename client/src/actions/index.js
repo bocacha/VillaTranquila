@@ -812,3 +812,13 @@ export function findUser(payload){
     payload
   }
 }
+export function cambiarReserva(payload){
+  return async function (dispatch) {
+    try {
+      let json = await axios.post("/CambiosReserva/Cambios",payload);
+      
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
