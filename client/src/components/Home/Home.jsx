@@ -40,9 +40,9 @@ export default function Home() {
           <p className={styles.complejo}>- complejo de cabañas -</p>
         </div>
       </div>
-      <div className={styles.chat}>
+      {/* <div className={styles.chat}>
         <Chat  />
-      </div>
+      </div> */}
       <div>
         {/* <Searchbar/> */}
         {/* <Gallery/> */}
