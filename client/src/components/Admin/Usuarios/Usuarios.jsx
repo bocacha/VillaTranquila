@@ -316,7 +316,11 @@ export default function Usuarios() {
           </div>
           {/* VER */}
           <div className={styles.containerUsuarios}>
-            {allUsers?.map((el) => (
+            {allUsers.length > 0 && allUsers.sort((a, b) => {
+              if(a.UserName < b.UserName) return -1;
+              if(a.UserName > b.UserName) return 1;
+              return 1;
+            }).map((el) => (
               <div key={el.ID}>
                 <UsuariosDetail
                   ID={el.ID}
