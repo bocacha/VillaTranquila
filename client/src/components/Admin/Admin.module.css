@@ -8,8 +8,22 @@
   margin-right: auto;
 }
 
+.navs2 {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  width: 100%;
+}
+
+.navs {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+}
+
 .bienvenida {
-  margin-top: 100px;
+  margin-top: 140px;
   margin-bottom: 50px;
 }
 
@@ -44,6 +58,8 @@
   background: #355978;
   padding: 10px;
   transition: all 0.2s ease-in-out;
+  border-radius: 10px;
+
 }
 .cardsContainer:hover {
   filter: opacity(0.5);
@@ -61,4 +77,31 @@
 .img {
   width: 200px;
   height: 150px;
+}
+
+@media (min-width: 320px) {
+  .navs{
+    display: none;
+  }
+  .bienvenida{
+    margin-top: 100px;
+  margin-bottom: 30px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container{
+    width: 70%;
+  }
+  .navs{
+    display: block;
+    position: relative;
+  }
+  .navRsp{
+    display:none;
+  }
+  .bienvenida{
+    margin-top: 140px;
+  margin-bottom: 30px;
+  }
 }

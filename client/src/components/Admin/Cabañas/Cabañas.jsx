@@ -12,9 +12,11 @@ import styles from "./Cabañas.module.css";
 import CabañasDetail from "../Cabañas/CabañasDetail";
 import Navbar from "../../Navbar/Navbar";
 import NavAdmin from "../NavAdmin/NavAdmin";
+import { useHistory } from "react-router";
 
 const Cabañas = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const allCabains = useSelector((state) => state.cabañas);
   const logeduser = useSelector((state) => state.user);
   const allFotos = useSelector((state) => state.fotos);
@@ -101,8 +103,10 @@ const Cabañas = () => {
     const { token } = logeduser;
     e.preventDefault();
     dispatch(createCabains(cabain, { token }));
-    alert("su cabaña fue creada con exito");
-    window.location.reload();
+    alert("Su cabaña fue creada con éxito 🏡");
+    setTimeout(function () {
+      history.go(0);
+    }, 2000)
   };
 
   const handleeditSubmit = (
@@ -166,7 +170,10 @@ const Cabañas = () => {
     const { token } = logeduser;
     dispatch(editCabains(edit, { token }));
     alert("Edicion exitosa");
-    window.location.reload();
+    setTimeout(function () {
+      history.go(0);
+    }, 2000)
+    //window.location.reload();
   };
   const ocultadas = () => {
     dispatch(readCabainsocultados());
@@ -177,92 +184,189 @@ const Cabañas = () => {
     setHabilitar(false);
   };
 
-  // console.log(allFotos[0].Description)
   return (
-    <div className={styles.container}>
-      <div className={styles.navs2}>
-        <div className={styles.navs}>
-          <Navbar />
-          <NavAdmin />
+    <div className={styles.adminCabañas}>
+      <Navbar />
+      <NavAdmin />
+      <div className={styles.btns}>
+        <div className={styles.btnsContainer}>
+          {!habilitar ? (
+            <button onClick={ocultadas} className={styles.btnSup}>
+              Mostrar ocultadas
+            </button>
+          ) : (
+            <button onClick={showtrue} className={styles.btnSup}>
+              Mostrar habilitadas
+            </button>
+          )}
         </div>
       </div>
-      <div className={styles.btnsContainer}>
-        {!habilitar ? (
-          <button onClick={ocultadas} className={styles.btnSup}>
-            Mostrar ocultadas
-          </button>
-        ) : (
-          <button onClick={showtrue} className={styles.btnSup}>
-            Mostrar habilitadas
-          </button>
-        )}
-      </div>
-      <div className={styles.container2}>
-        <div className={styles.formsCont}>
+      <div className={styles.container}>
+        <div className={styles.crearCont}>
+          <div className={styles.title}>Crear Cabaña</div>
+          <form onSubmit={handleSubmit} >
+            <input
+              type="number"
+              name="Number"
+              value={cabain.Number}
+              onChange={handleChange}
+              placeholder="Número de Cabaña"
+              max="20"
+              required
+            />
+            <input
+              type="number"
+              name="Capacity"
+              value={cabain.Capacity}
+              onChange={handleChange}
+              placeholder="Número de Camas"
+              max="10"
+              required
+            />
+            <input
+              type="number"
+              name="Price"
+              value={cabain.Price}
+              onChange={handleChange}
+              placeholder="Precio"
+              max="50000"
+              required
+            />
+
+            <div>
+              <textarea
+                type="text"
+                name="Description"
+                value={cabain.Description}
+                onChange={handleChange}
+                placeholder="Descripción . . ."
+                maxLength="250"
+                required
+              />
+            </div>
+
+            <select name="Picture" className={styles.formInputs} onChange={(e) => handleSelectPicture(e)}>
+              <option>Seleccione Imagen:</option>
+              {allFotos.map((el) => {
+                return (
+                  <option name="Picture" value={el.Url}>
+                    {el.Description}
+                  </option>
+                );
+              })}
+            </select>
+
+            <select
+              onChange={(e) => handleSelect(e)}
+              // value={cabain.Parking}
+              className={styles.formInputs}
+              name="Parking"
+              required
+            >
+              <option>Estacionamiento:</option>
+              <option name="Parking" value="true">
+                SI
+              </option>
+              <option name="Parking" value="false">
+                NO
+              </option>
+            </select>
+
+            <select
+              onChange={(e) => handleSelect(e)}
+              // value={cabain.Parrilla}
+              className={styles.formInputs}
+              name="Parrilla"
+              required
+            >
+              <option>Parrilla:</option>
+              <option name="Parrilla" value="true">
+                SI
+              </option>
+              <option name="Parrilla" value="false">
+                NO
+              </option>
+            </select>
+
+            <select
+              onChange={(e) => handleSelect(e)}
+              name="Wifi"
+              // value={cabain.Wifi}
+              className={styles.formInputs}
+              required
+            >
+              <option>Wifi:</option>
+              <option name="Wifi" value="true">
+                SI
+              </option>
+              <option name="Wifi" value="false">
+                NO
+              </option>
+            </select>
+            <button type="submit" >
+              Crear
+            </button>
+          </form>
+        </div>
+        {/* EDITAR */}
+        {mostrar ? (
           <div className={styles.crearCont}>
-            <div className={styles.title}>Crear Cabaña</div>
-            <form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.title}>Editar Cabaña</div>
+            <form className={styles.form} onSubmit={handlePrueba}>
               <div>
+                Nº De Cabaña:
                 <input
-                  type="number"
+                  type="text"
                   name="Number"
-                  value={cabain.Number}
-                  onChange={handleChange}
+                  value={edit.Number}
+                  onChange={(e) => handleChangeEdit(e)}
                   placeholder="Numero de Cabaña"
                   max="20"
-                  className={styles.formInputs}
+                  id={styles.id1}
                   required
                 />
               </div>
               <div>
+                Cantidad de Camas:
                 <input
                   type="number"
                   name="Capacity"
-                  value={cabain.Capacity}
-                  onChange={handleChange}
+                  value={edit.Capacity}
+                  onChange={(e) => handleChangeEdit(e)}
                   placeholder="Numero de Camas"
                   max="10"
-                  className={styles.formInputs}
+                  id={styles.id2}
                   required
                 />
               </div>
-              {/* <div> */}
-              {/* <textarea
-                  type="text"
-                  name="Available"
-                  value={cabain.Available}
-                  onChange={handleChange}
-                  placeholder={cabain.Available}
-                  className={styles.formInputs}
-                  requiered
-                />
-              </div> */}
               <div>
+                Costo por Noche:
                 <input
                   type="number"
                   name="Price"
-                  value={cabain.Price}
-                  onChange={handleChange}
+                  value={edit.Price}
+                  onChange={(e) => handleChangeEdit(e)}
                   placeholder="Precio"
-                  className={styles.formInputs}
+                  id={styles.id3}
                   max="50000"
                   required
                 />
               </div>
-              <div>
+              <div className={styles.descripcion}>
+                Descripción:
                 <textarea
                   type="text"
                   name="Description"
-                  value={cabain.Description}
-                  onChange={handleChange}
-                  placeholder="Descripción"
+                  value={edit.Description}
+                  onChange={(e) => handleChangeEdit(e)}
+                  placeholder="Descripción..."
+                  maxLength="250"
                   className={styles.formInputs}
-                  maxLength="100"
+                  id={styles.descripcionEditar}
                   required
                 />
               </div>
-
-              <select name="Picture" className={styles.formInputs}  onChange={(e) => handleSelectPicture(e)}>
+              <select name="Picture" onChange={(e) => handleSelectedit(e)}>
                 <option>Seleccione Imagen:</option>
                 {allFotos.map((el) => {
                   return (
@@ -272,296 +376,64 @@ const Cabañas = () => {
                   );
                 })}
               </select>
-
+              Servicios Basicos
               <select
-                onChange={(e) => handleSelect(e)}
-                // value={cabain.Parking}
+                onChange={(e) => handleSelectedit(e)}
+                // value={edit.Parking}
                 className={styles.formInputs}
                 name="Parking"
                 required
               >
                 <option>Estacionamiento:</option>
-                <option name="Parking" value="true">
-                  true
-                </option>
-                <option name="Parking" value="false">
-                  false
-                </option>
+                <option value="true">SI</option>
+                <option value="false">NO</option>
               </select>
-
               <select
-                onChange={(e) => handleSelect(e)}
-                // value={cabain.Parrilla}
+                onChange={(e) => handleSelectedit(e)}
+                // value={edit.Parrilla}
                 className={styles.formInputs}
                 name="Parrilla"
                 required
               >
                 <option>Parrilla:</option>
-                <option name="Parrilla" value="true">
-                  true
-                </option>
-                <option name="Parrilla" value="false">
-                  false
-                </option>
+                <option value="true">SI</option>
+                <option value="false">NO</option>
               </select>
-
               <select
-                onChange={(e) => handleSelect(e)}
-                name="Wifi"
-                // value={cabain.Wifi}
+                onChange={(e) => handleSelectedit(e)}
+                // value={edit.Wifi}
                 className={styles.formInputs}
+                id={styles.lastSelect}
+                name="Wifi"
                 required
               >
                 <option>Wifi:</option>
-                <option name="Wifi" value="true">
-                  true
-                </option>
-                <option name="Wifi" value="false">
-                  false
-                </option>
+                <option value="true">SI</option>
+                <option value="false">NO</option>
               </select>
-              {/* <div>
-              <label>Cafe</label>
-              <input
-                type="checkbox"
-                name="Coffe"
-                value={cabain.Coffe}
-                onChange={handleCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Microondas</label>
-              <input
-                type="checkbox"
-                name="Microondas"
-                value={cabain.Microondas}
-                onChange={handleCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Calefaccion</label>
-              <input
-                type="checkbox"
-                name="Calefaccion"
-                value={cabain.Calefaccion}
-                onChange={handleCheckBox}
-                className={styles.formInputs}
-              />
-
-              <label>Parrilla</label>
-              <input
-                type="checkbox"
-                name="Barbecue"
-                value={cabain.Barbecue}
-                onChange={handleCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Wifi</label>
-              <input
-                type="checkbox"
-                name="Wifi"
-                value={cabain.Wifi}
-                onChange={handleCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Estacionamiento</label>
-              <input
-                type="checkbox"
-                name="Parking"
-                value={cabain.Parking}
-                onChange={handleCheckBox}
-                className={styles.formInputs}
-              />
-            </div> */}
-              <div className={styles.btns}>
-                <button type="submit" className={styles.btn}>
-                  Crear
-                </button>
-              </div>
             </form>
-          </div>
-          {/* EDITAR */}
-          {mostrar ? (
-            <div className={styles.editarCont}>
-              <div className={styles.title}>Editar Cabaña</div>
-              <form className={styles.form}>
-                {/* <div>
-              <input
-                type="text"
-                name="id"
-                value={edit.id}
-                onChange={handleChangeEdit}
-                placeholder="Id"
-                className={styles.formInputs}
-              />
-            </div> */}
-                <div>
-                  Nº De Cabaña
-                  <input
-                    type="text"
-                    name="Number"
-                    value={edit.Number}
-                    onChange={(e) => handleChangeEdit(e)}
-                    placeholder="Numero de Cabaña"
-                    max="20"
-                    className={styles.formInputs}
-                    required
-                  />
-                </div>
-                <div>
-                  Cantidad de Camas
-                  <input
-                    type="number"
-                    name="Capacity"
-                    value={edit.Capacity}
-                    onChange={(e) => handleChangeEdit(e)}
-                    placeholder="Numero de Camas"
-                    max="10"
-                    className={styles.formInputs}
-                    required
-                  />
-                </div>
-                {/* <div>
-                  <input
-                    type="text"
-                    name="Available"
-                    value={edit.Available}
-                    onChange={handleChangeEdit}
-                    placeholder={edit.Available}
-                    className={styles.formInputs}
-                  />
-                </div> */}
-                <div>
-                  Costo por Noche
-                  <input
-                    type="number"
-                    name="Price"
-                    value={edit.Price}
-                    onChange={(e) => handleChangeEdit(e)}
-                    placeholder="Precio"
-                    className={styles.formInputs}
-                    max="50000"
-                    required
-                  />
-                </div>
-                <div>
-                  Description
-                  <textarea
-                    type="text"
-                    name="Description"
-                    value={edit.Description}
-                    onChange={(e) => handleChangeEdit(e)}
-                    placeholder="Descripción"
-                    maxLength="100"
-                    className={styles.formInputs}
-                    required
-                  />
-                </div>
-                <select name="Picture" onChange={(e) => handleSelectedit(e)}>
-                  <option>Seleccione Imagen:</option>
-                  {allFotos.map((el) => {
-                    return (
-                      <option name="Picture" value={el.Url}>
-                        {el.Description}
-                      </option>
-                    );
-                  })}
-                </select>
-                Servicios Basicos
-                <select
-                  onChange={(e) => handleSelectedit(e)}
-                  // value={edit.Parking}
-                  className={styles.formInputs}
-                  name="Parking"
-                  required
-                >
-                  <option>Estacionamiento:</option>
-                  <option value="true">true</option>
-                  <option value="false">false</option>
-                </select>
-                <select
-                  onChange={(e) => handleSelectedit(e)}
-                  // value={edit.Parrilla}
-                  className={styles.formInputs}
-                  name="Parrilla"
-                  required
-                >
-                  <option>Parrilla:</option>
-                  <option value="true">true</option>
-                  <option value="false">false</option>
-                </select>
-                <select
-                  onChange={(e) => handleSelectedit(e)}
-                  // value={edit.Wifi}
-                  className={styles.formInputs}
-                  name="Wifi"
-                  required
-                >
-                  <option>Wifi:</option>
-                  <option value="true">true</option>
-                  <option value="false">false</option>
-                </select>
-                {/* <div>
-              <label>Cafe</label> 
-              <input
-                type="checkbox"
-                name="Coffe"
-                value={edit.Coffe}
-                onChange={handleeditCheckBox}
-                placeholder="h"
-                className={styles.formInputs}
-              />
-              <label>Microondas</label>
-              <input
-                type="checkbox"
-                name="Microondas"
-                value={edit.Microondas}
-                onChange={handleeditCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Calefaccion</label>
-              <input
-                type="checkbox"
-                name="Calefaccion"
-                value={edit.Calefaccion}
-                onChange={handleeditCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Parrilla</label>
-              <input
-                type="checkbox"
-                name="Barbecue"
-                value={edit.Barbecue}
-                onChange={handleeditCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Wifi</label>
-              <input
-                type="checkbox"
-                name="Wifi"
-                value={edit.Wifi}
-                onChange={handleeditCheckBox}
-                className={styles.formInputs}
-              />
-              <label>Estacionamiento</label>
-              <input
-                type="checkbox"
-                name="Parking"
-                value={edit.Parking}
-                onChange={handleeditCheckBox}
-                className={styles.formInputs}
-              />
-            </div> */}
-                {/*  <div className={styles.btns}>
-              <button type="submit" className={styles.btn}>
-                Guardar
+            <div className={styles.btnsGuarCanc}>
+              <button onClick={handlePrueba} id={styles.guardar}>Guardar cambios</button>
+              <button
+                onClick={() => {
+                  if (mostrar) setMostrar(false);
+                }}
+                id={styles.cancelar}
+              >
+                Cancelar
               </button>
-            </div>  */}
-              </form>
             </div>
-          ) : null}
-        </div>
+          </div>
+        ) : null}
         {/* VER */}
-        <div>
-          {allCabains?.map((el) => {
+      </div>
+      <div id={styles.containerContainerCabañas}>
+        <div className={styles.containerCabañas}>
+          {allCabains?.sort((a, b) => {
+            if (parseInt(a.Number) < parseInt(b.Number)) return -1;
+            if (parseInt(a.Number) > parseInt(b.Number)) return 1;
+            return 1;
+          }).map((el) => {
             return (
               <div className={styles.detalles} key={el.ID}>
                 <CabañasDetail
@@ -590,6 +462,8 @@ const Cabañas = () => {
           })}
         </div>
       </div>
+
+
     </div>
   );
 };

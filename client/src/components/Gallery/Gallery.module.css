@@ -32,3 +32,124 @@
   height: auto;
 }
 
+@media (min-width: 320px) {
+  .slidershow{
+    background-color: #293c4f;
+    height: 100%;
+    width: 100%;
+  }
+  .slides{
+    width: 100%;
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+  }
+  .wrapper{
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .img{
+    width: 280px;
+    margin-bottom: -27px;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 480px) {
+  .slidershow{
+    background-color: #355978;
+    height: 100%;
+    width: 100%;
+  }
+  .slides{
+    background-color: #293c4f;
+    width: 100%;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+  }
+  .wrapper{
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .img{
+    width: 280px;
+    margin-bottom: -27px;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 768px) {
+  .slidershow{
+    background-color: #355978;
+    height: 100%;
+    width: 100%;
+  }
+  .slides{
+    background-color: #293c4f;
+    width: 100%;
+    width: 640px;
+    display: grid;
+  grid-template-columns: 1fr 1fr;
+  }
+  .wrapper{
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .img{
+    width: 280px;
+    margin-bottom: -27px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .slidershow{
+    background-color: #355978;
+    height: 100%;
+    width: 100%;
+  }
+  .slides{
+    background-color: #293c4f;
+    width: 100%;
+    width: 850px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px;
+  }
+  .wrapper{
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .img{
+    width: 400px;
+    margin-bottom: -27px;
+  }
+}
+
+@media (min-width: 1155px) {
+  .slidershow{
+    background-color: #355978;
+    height: 100%;
+    width: 100%;
+  }
+  .slides{
+    background-color: #293c4f;
+    width: 100%;
+    width: 1150px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 5px;
+  }
+  .wrapper{
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .img{
+    width: auto;
+    height: 250px;
+    margin-bottom: -27px;
+  }
+}
+
