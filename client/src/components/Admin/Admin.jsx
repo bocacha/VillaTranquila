@@ -17,7 +17,10 @@ export default function Admin() {
       <div className={styles.navs2}>
         <div className={styles.navs}>
           <Navbar />
-          <NavAdmin />
+          <NavAdmin  className={styles.navAdmin}/>
+        </div>
+        <div className={styles.navRsp}>
+          <Navbar />
         </div>
       </div>
       <div className={styles.container}>

@@ -1,16 +1,10 @@
-
 import Navbar from '../../Navbar/Navbar';
 import styles from './Caja.module.css';
 import { readPayment,readUsers,Logeduser} from '../../../actions/index'
 import { useDispatch,useSelector } from "react-redux";
-import { useState,useEffect} from 'react';
-import { Link } from "react-router-dom";
-import { TiZoomIn } from "react-icons/ti";
-import CajaDetail from './CajaDetail';
+import { useEffect} from 'react';
 
-
-export default function Caja(){
-    
+export default function Caja(){   
     
     const dispatch=useDispatch();
 
@@ -23,114 +17,69 @@ export default function Caja(){
 
     useEffect (() =>{        
         dispatch(readPayment({token}));
-    },[dispatch]);
+    },[dispatch,token]);
+
     useEffect (() =>{        
         dispatch(readUsers({token}));
-    },[dispatch]);
+    },[dispatch,token]);
 
     const pagos= useSelector((state) => state.pagos);
     const datosUsuarios = useSelector((state)=> state.usuarios);
-    const [mostrar, setMostrar] = useState(false);
+   
 
     var total=0;
-    const Mostrar=()=>{
-        setMostrar(true)
+   
+    function formato(texto){
+        return texto.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1');
     }
-    const NoMostrar=()=>{
-        setMostrar(false)
-    }
-    return(
-               
+    return(               
         <div className={styles.general}>             
                 <Navbar /> 
                 <div className={styles.moveme}></div>                             
-             <div className={styles.container}>
-             
-                <label>Comprobante</label>
+             <div className={styles.container}>             
+                <label className={styles.comprobante}>Comprobante</label>
                 <label>Nombre</label>
-                <label>Fecha</label>
-                <label>Monto</label> 
-                <label>Detalle</label>
-
+                <label className={styles.fecha}>Fecha</label>
+                <label className={styles.neto}>Monto</label> 
+                <label>NETO</label>
             </div>
-            <div >
+            <div className={styles.sub}>
                 {pagos?.map((el,index)=>{
                     const indiceCliente=el.user;
-                    total=total + parseInt(el.transaction_detail.pagoTotal);
+                    const idPago=el.ID;
+                    const comprobante=idPago.substr(14,3);
+                    const fechaCompleta=el.fecha;
+                    const fechaPago=fechaCompleta.substr(0,10);
+                    const miFecha=formato(fechaPago);
+                    total=total + parseFloat(el.transaction_detail.pagoNeto);
                     return (
-                        <div className={styles.detalle}>
-                        <div  key={index}>{el.status}{index}</div>
-                            {datosUsuarios?.map((e)=>{  
-                                console.log(e)                         
+                        <div key={index} className={styles.detalle}>
+                        <div className={styles.comprobante}>A00-0{comprobante}0</div>
+                            {datosUsuarios?.map((e)=>{                          
                                 if(e.UserName === indiceCliente){
                                     return(
                                     <>
-                                    <div className={styles.nombre}>
-                                        <p >{e.UserName}</p>
-                                        {/* <p >{e.FirstName}</p>                                
-                                        <p >{e.LastName}</p> */}
-                                    </div>                                  
-                                    <p>{el.fecha}</p> 
-                                    <p>${el.transaction_detail.pagoTotal}.00</p>
-                                    <button className={styles.zoom} onClick={Mostrar}><TiZoomIn className={styles.icons} /></button>
-                                    
-                                    <div>
-                                        {mostrar ?
-                                            <div>
-                                                <CajaDetail
-                                                    id_reserva={el.id_reserva}
-                                                    status={el.status}
-                                                    status_detail={el.status_detail}
-                                                    pagoNeto={el.transaction_detail.pagoNeto}
-                                                    pagoTotal={el.transaction_detail.pagoTotal}
-                                                    UserName={e.UserName}
-                                                    FirstName={e.FirstName}
-                                                    LastName={e.LastName}
-                                                    Email={e.Email}
-                                                    fecha={e.fecha}
-                                                    reservationhistory={e.ReservationsHistory}
-                                                    Address={e.Address}
-                                                    NoMostrar={NoMostrar}
-                                                />
-                                            </div>
-                                        : null}
-                                    </div>                                    
-                                            
-                                        
+                                        <div className={styles.nombre}>
+                                            <p >{e.FirstName}</p>                                
+                                            <p >{e.LastName}</p>
+                                        </div>                                  
+                                        <p className={styles.fecha}>{miFecha}</p> 
+                                        <p className={styles.neto}>${el.transaction_detail.pagoTotal}.00</p>
+                                        <p>${el.transaction_detail.pagoNeto}</p>                                        
                                     </>                              
                                 )                              
                                 }else{
                                     return null;
                                 }                            
-                            })}
-                            {/* <p>${el.transaction_detail.pagoTotal}.00</p> */}
-                            {/* <Link to="/admin/cajadetail">
-                                <button>
-                                    <strong className={styles.list}>
-                                    <strong >
-                                          <TiZoomIn className={styles.icons} />
-                                    </strong>
-                                </button>
-                            </Link> */}
-                     
+                            })}                                                 
                         </div>
-                    )
+                    )                    
                 })}
                 <hr/>
             </div>
-            {/* <div className={styles.total}>
-                <h4>Neto : </h4>
-                <h4>${el.transaction_detail.pagoNeto}.00</h4>
-
-            </div>  */}
             <div className={styles.total}>
-                <h4>TOTAL : ${total}.00</h4>
+                <h4>TOTAL : ${total}</h4>
             </div>
         </div>
     )
-
-
-
-
-
 }
