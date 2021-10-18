@@ -42,6 +42,7 @@ export const READ_FECHASNODISPONIBLES = "READ_FECHASNODISPONIBLES";
 export const GET_USER_DATA = "GET_USER_DATA";
 export const SELECTED_CABIN = "SELECTED_CABIN";
 export const FILTER_RESERVATIONS = 'FILTER_RESERVATIONS';
+export const FIND_USER = 'FIND_USER';
 
 export function getCabins() {
   return async function (dispatch) {
@@ -767,7 +768,7 @@ export function getUserData(username){
 export function selectcabin(id){
   return async function (dispatch) {
     try {
-      let json = await axios.get("/cabins/"+id);
+      let json = await axios.get(`/cabins/${id}`);
       return dispatch({
         type: SELECTED_CABIN,
         payload: json.data[0],
@@ -800,6 +801,14 @@ export function mailpassword(Email) {
 export function filterReservations(payload){
   return {
     type: FILTER_RESERVATIONS,
+    payload
+  }
+}
+
+export function findUser(payload){
+  console.log(payload);
+  return {
+    type: FIND_USER,
     payload
   }
 }

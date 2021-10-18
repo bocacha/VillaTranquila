@@ -32,7 +32,7 @@ export default function Navbar() {
   }
   const Logout = () => {
     localStorage.removeItem("LogedUser");
-    alert("Good by");
+    alert("Hasta pronto");
     window.location.href = "/";
   };
 
