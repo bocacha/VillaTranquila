@@ -9,12 +9,16 @@ export default function ServiciosBanner() {
     return(
         <div className={styles.container}>
             <ul className={styles.ul}>
-                <li className={styles.li}><AiOutlineWifi  className={styles.items} /></li>
-                <li className={styles.li}><GiBarbecue className={styles.items} /></li>
-                <li className={styles.li}><FaParking  className={styles.items}/></li>
-                <li className={styles.li}><MdFreeBreakfast  className={styles.items}/></li>
-                <li className={styles.li}><GiVacuumCleaner  className={styles.items}/></li>
-                <li className={styles.li}><GiBathtub className={styles.items} /></li>
+                <div className={styles.div1}>
+                    <li className={styles.li}><AiOutlineWifi  className={styles.items} /></li>
+                    <li className={styles.li}><GiBarbecue className={styles.items} /></li>
+                    <li className={styles.li}><FaParking  className={styles.items}/></li>
+                </div> 
+                <div className={styles.div2}>
+                    <li className={styles.li}><MdFreeBreakfast  className={styles.items}/></li>
+                    <li className={styles.li}><GiVacuumCleaner  className={styles.items}/></li>
+                    <li className={styles.li}><GiBathtub className={styles.items} /></li>
+                </div>
             </ul>
         </div>
     )

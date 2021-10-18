@@ -5,10 +5,12 @@ import { removePayments, restorePayments } from "../../../actions";
 
 export default function PagosDetail({
   ID,
-  TotalAmount,
-  PaydAmount,
-  Date,
-  idClient,
+  user,
+  status,
+  status_detail,
+  transaction_detail,
+  id_reserva,
+  fecha,
   handleSubmitEdit,
   handlePrueba,
   restaurar,
@@ -31,19 +33,31 @@ export default function PagosDetail({
       <div className={styles.infoContainer}>
         <p className={styles.p}>
           {" "}
-          <strong>Id cliente:</strong> {idClient}
+          <strong>Id cliente:</strong> {user}
         </p>
         <p className={styles.p}>
           {" "}
-          <strong>Fecha:</strong> {Date}
+          <strong>Estado:</strong> {status}
         </p>
         <p className={styles.p}>
           {" "}
-          <strong>Monto inicial:</strong> ${PaydAmount}.00
+          <strong>Detalles del Estado:</strong> {status_detail}
         </p>
         <p className={styles.p}>
           {" "}
-          <strong>Monto total:</strong> ${TotalAmount}.00
+          <strong>Fecha:</strong> {fecha}
+        </p>
+        <p className={styles.p}>
+          {" "}
+          <strong>PagoTotal:</strong> ${transaction_detail.pagoTotal}.00
+        </p>
+        <p className={styles.p}>
+          {" "}
+          <strong>Pago Neto:</strong> ${transaction_detail.pagoNeto}.00
+        </p>
+        <p className={styles.p}>
+          {" "}
+          <strong>Id Reserva:</strong> {id_reserva}
         </p>
       </div>
       <div className={styles.btnsContainer}>
@@ -53,7 +67,7 @@ export default function PagosDetail({
               onClick={() => handleSubmitDelete(ID)}
               className={styles.btn}
             >
-              Eliminar
+              Ocultar
             </button>
           ) : (
             <button
@@ -64,28 +78,19 @@ export default function PagosDetail({
             </button>
           )}
         </div>
-        {mostrar ? (
-          <div>
-            <button
-              onClick={(e) => {
-                handleSubmitEdit(e, ID,
-                  TotalAmount,
-                  PaydAmount,
-                  Date,
-                  idClient);
-                setMostrar(false);
-              }}
-              className={styles.btnPlus}
-            >
-              Editar
-            </button>
-          </div>
-        ) : (
-          <div>
-            <button onClick={(e) => handlePrueba(e, ID)} className={styles.btnPlus}>Guardar</button>
-          </div>
-        )}
       </div>
     </div>
   );
 }
+
+// "ID": "472cee18-cffd-422b-8359-85f2eb0f5c3a",
+//         "user": "joakinAdmin1",
+//         "status": "approved",
+//         "status_detail": "accredited",
+//         "transaction_detail": {
+//             "pagoTotal": 4444,
+//             "pagoNeto": 4347.57
+//         },
+//         "id_reserva": "a3eace8e-014b-4a7c-9bc8-f5b1e03b14bd",
+//         "fecha": "2021-10-15T19:04:00.912-04:00",
+//         "Show": true

@@ -163,7 +163,7 @@ export default function Usuarios() {
                 value={input.Address}
                 name="Address"
                 onChange={(e) => handleChange(e)}
-                placeholder="Direccion"
+                placeholder="Dirección"
                 className={styles.formInputs}
                 title='Debe contener mayusculas minusculas y numeros '
                 pattern='^[0-9a-zA-Z\s]+$'
@@ -200,7 +200,7 @@ export default function Usuarios() {
                   onClick={() => {
                     setTimeout(function () {
                       registroexitoso();
-                    }, 3000);
+                    }, 1000);
                   }}
                   className={styles.btn}
                 >
@@ -211,7 +211,7 @@ export default function Usuarios() {
             </form>
           </div>
         ) : (
-          <div className={styles.containerForm}>
+          <div className={styles.containerForm} id={styles.creada}>
             <div>
               <h4 className={styles.title}> Cuenta creada <FiUserCheck className={styles.icon}/></h4>
               <button

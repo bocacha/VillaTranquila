@@ -1,4 +1,4 @@
-.container {
+/* .container {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
@@ -84,4 +84,115 @@
   .container {
     flex-direction: column;
   }
+} */
+
+.detailCard{
+  position: relative;
+  height: fit-content;
+  min-height: 705px;
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 40px -10px #000;
+  box-sizing: border-box;
+  text-decoration: none;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  background-color: #293c4f;
+  flex-wrap: wrap;
+  place-content: center;
+  overflow: auto;
+  margin: 0 0 30px 10px;
+  padding:0vh;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: rgb(0 0 0 / 19%) 0px 10px 20px, rgb(0 0 0 / 23%) 0px 6px 6px;
+  transition: all 0.3s ease 0s;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+}
+.detailCard:hover{
+  box-shadow: 0 12px 24px 0 rgba(0,0,0,0.2);
+    transform: scale(1.02);
+}
+.detailCard .infoContainer table{
+  width: 100%;
+  margin-left: -3px;
+  margin-top: 10px;
+}
+.izquierda{
+  float:left;
+}
+.derecha{
+  float:right;
+}
+.derecha p{
+  max-width: 280px;
+  text-align: justify;
+  text-align-last: end;
+}
+.btnsContainer{
+  display:flex;
+  margin: 20px 0;
+}
+.btn{
+  border-radius: 4px;
+    background-color: #783535 ;
+    border-color: transparent;
+    color: #fff;
+    text-align: center;
+    font-size: large;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    padding: 10px 20px;
+    /* display: inline-flex; */
+    height: auto;
+    line-height: 35px;
+    margin-right: 5px;
+    width: 120px;
+}
+.btn:hover{
+  background-color: #a72424 ;
+  color: #1c2531 ;
+  /* border-color: #783535c0; */
+}
+.btnPlus{
+  border-radius: 4px;
+    background-color: #355978 ;
+    border-color: transparent;
+    color: #fff;
+    text-align: center;
+    font-size: large;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    padding: 10px 20px;
+    /* display: inline-flex; */
+    height: auto;
+    line-height: 35px;
+    margin-left: 5px;
+    width: 120px;
+}
+.btnPlus:hover{
+  background-color: #8bafbf ;
+  color: #1c2531 ;
+  /* border-color: #8bafbf; */
+}
+.infoContainer span{
+  display:flex;
+  justify-items: center;
+  justify-content: center;
+  font-size: x-large;
+}
+.infoContainer span p{
+  margin: 0 30px -5px 30px;
+}
+.derecha img{
+  width: 100%;
+  max-width: 280px;
+  max-height: 280px;
+  border-radius: 10px;
 }

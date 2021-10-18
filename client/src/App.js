@@ -22,7 +22,7 @@ import PagosReserva from './components/PagoReserva/PagoReserva';
 //import { useEffect } from 'react';
 //import { getUserData } from './actions';
 import Caja from './components/Admin/Caja/Caja';
-
+import UserReservations from "./components/Profile/User reservations/UserReservations"
 
 
 function App() {
@@ -50,7 +50,8 @@ function App() {
           <Route path="/admin/caja" component={Caja} />
           <Route path='/iniciarsesion' component={Login} />
           <Route path='/registrarse' component={Registro} />
-          <Route path='/:username' component={Profile} />
+          <Route exact path='/Profile/:username' component={Profile} />
+          <Route exact path='/Profile/:username/:id' component={UserReservations} />
         </Switch>
       </div>
     </BrowserRouter>
