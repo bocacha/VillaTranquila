@@ -23,11 +23,11 @@ const {id_reserva,status,status_detail,pagoNeto,pagoTotal,UserName,
     const allReservations = useSelector((state) => state.reservaciones);
     const reserva= allReservations.filter(e=>""+ e.ID === ""+id_reserva)
     return (
-        <>
+        <div className={styles.fondo}>
             <div className={styles.container}>
                 <div className={styles.encabezado}>
                     <h3>Detalle del pago</h3>
-                    <h3>Fecha: {""+fecha}</h3>
+                    <h4>Fecha: {""+fecha}</h4>
                     <hr/>
                 </div>
                 
@@ -56,9 +56,9 @@ const {id_reserva,status,status_detail,pagoNeto,pagoTotal,UserName,
                     <p>Historial de reservas del usuario:</p>
                     {/* <p>{reservationhistory}</p> */}
                 </div>
-                    <button className={styles.volver}onClick={NoMostrar}>Volver</button>
+                    <button className={styles.volver}onClick={NoMostrar}>Ocultar</button>
             </div>
-        </>
+        </div>
 
     )
 }
