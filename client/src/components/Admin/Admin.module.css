@@ -58,6 +58,8 @@
   background: #355978;
   padding: 10px;
   transition: all 0.2s ease-in-out;
+  border-radius: 10px;
+
 }
 .cardsContainer:hover {
   filter: opacity(0.5);
