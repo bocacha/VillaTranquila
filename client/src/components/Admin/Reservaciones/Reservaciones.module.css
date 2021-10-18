@@ -119,16 +119,24 @@
 }
 
 .ninguna{
-  width:100%;
+  position:absolute;
+  margin-top: 150px;
+  width:70%;
+  margin-left:15%;
   justify-items: center;
   justify-content: center;
   align-items: center;
-  padding-top: 12px;
-  padding-bottom: 12px;;
-  margin-left:111%;
+  padding: 3%;
   color:#fff;
   background-color: #293c4f;
-  border-radius: 10px;
+  border-radius: 200px;
+}
+
+.paginado{
+  position:absolute;
+  width: 100%;
+  background-color: red;
+  margin-left:50%;
 }
 
 @media (max-width: 700px) {

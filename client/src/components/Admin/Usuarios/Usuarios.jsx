@@ -183,7 +183,7 @@ export default function Usuarios() {
           )
           }
         </div>
-        <SearchBar/>
+        <SearchBar />
         <div className={styles.container2}>
           <div className={styles.formsCont}>
             {/* editar */}
@@ -316,27 +316,35 @@ export default function Usuarios() {
           </div>
           {/* VER */}
           <div className={styles.containerUsuarios}>
-            {allUsers.length > 0 && allUsers.sort((a, b) => {
-              if(a.UserName < b.UserName) return -1;
-              if(a.UserName > b.UserName) return 1;
-              return 1;
-            }).map((el) => (
-              <div key={el.ID}>
-                <UsuariosDetail
-                  ID={el.ID}
-                  UserName={el.UserName}
-                  FirstName={el.FirstName}
-                  LastName={el.LastName}
-                  Address={el.Address}
-                  Phone={el.Phone}
-                  Email={el.Email}
-                  Admin={el.Admin}
-                  handlePrueba={handlePrueba}
-                  handleSubmitEdit={handleSubmitEdit}
-                  restaurar={habilitar}
-                />
-              </div>
-            ))}
+            {
+              Array.isArray(allUsers) ?
+                allUsers.sort((a, b) => {
+                  if (a.UserName < b.UserName) return -1;
+                  if (a.UserName > b.UserName) return 1;
+                  return 1;
+                }).map((el) => (
+                  <div key={el.ID}>
+                    <UsuariosDetail
+                      ID={el.ID}
+                      UserName={el.UserName}
+                      FirstName={el.FirstName}
+                      LastName={el.LastName}
+                      Address={el.Address}
+                      Phone={el.Phone}
+                      Email={el.Email}
+                      Admin={el.Admin}
+                      handlePrueba={handlePrueba}
+                      handleSubmitEdit={handleSubmitEdit}
+                      restaurar={habilitar}
+                    />
+                  </div>
+                )) :
+                <div id={styles.noDisponible}>
+                  <div>
+                    <h1>{allUsers}</h1>
+                  </div>
+                </div>
+            }
           </div>
         </div>
       </div>

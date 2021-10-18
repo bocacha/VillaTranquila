@@ -205,6 +205,18 @@
   margin-left: 45%;
 }
 
+#noDisponible{
+  background-color: #293c4f;
+  position: relative;
+  margin-top: 30%;
+  align-items: center;
+  width: 100%;
+  height: fit-content;
+  border-radius: 5px;
+  color: #fff;
+  padding: 20px;
+}
+
 
 /* @media (min-width: 320px) {
   .filtrosContainer{

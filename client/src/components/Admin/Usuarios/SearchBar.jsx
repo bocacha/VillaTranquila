@@ -17,23 +17,39 @@ export default function SearchBar() {
     };
 
     function handleSearch(e) {
+        // e.preventDefault();
         e.preventDefault();
-        e.preventDefault();
-        // dispatch(findUser(busqueda));
+        dispatch(findUser(busqueda));
+        setBusqueda('');
     }
 
     function handleReload(e) {
         e.preventDefault();
         setBusqueda('');
-        // window.location.reload();
+        window.location.reload();
     }
+
+    // function handleKeyDown(e){
+    //     const key=e.keyCode;
+    //     if(key === 13){
+    //         e.preventDefault();
+    //         dispatch(findUser(busqueda));
+    //         setBusqueda('');
+    //     }
+    // }
 
     return (
         <div className={styles.searchBar}>
             <div className={styles.container}>
-                <span><strong>Buscá por nombre de usuario:</strong></span>
                 <form>
-                    <input style={{width:'72.7%'}} type='text' placeholder='Nombre de usuario . . .' onChange={handleInputChange} />
+                    <input
+                        style={{width:'72.7%'}}
+                        type='text'
+                        placeholder='Buscá por nombre de usuario . . .'
+                        onChange={handleInputChange}
+                        // onKeyDown={(e) =>handleKeyDown(e)}
+                        onKeyPress={e => e.key === 'Enter' && handleSearch(e)}
+                    />
                 </form>
                 <div>
                     <button onClick={handleSearch} className={styles.btnSup}>Buscar <FaSearch className={styles.icon} /></button>

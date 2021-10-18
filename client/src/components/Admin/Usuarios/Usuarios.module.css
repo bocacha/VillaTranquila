@@ -177,6 +177,16 @@
   grid-template-columns: auto auto auto auto;
 }
 
+#noDisponible{
+  position:absolute;
+  width: 70%;
+  margin-left: 15%;
+  padding: 3%;
+  background-color: #293c4f;
+  border-radius: 200px;
+  color: #fff;
+}
+
 @media (max-width: 700px) {
   .formsCont {
     flex-direction: column;
