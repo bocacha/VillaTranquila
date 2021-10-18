@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { readReservation, Logeduser, selectcabin, readCabains } from "../../actions";
+import { readReservation, Logeduser, selectcabin, readCabains} from "../../actions";
 import Navbar from "../Navbar/Navbar";
 import styles from "./PagoReserva.module.css";
 import fechas from "../Reserva/Linkreserva/algoritmofechas"
