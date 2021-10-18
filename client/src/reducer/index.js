@@ -39,8 +39,8 @@ import {
   SEND_PASSWORD_EMAIL,
   SELECTED_CABIN,
   FILTER_RESERVATIONS,
-  GET_TESTIMONIAL
-
+  GET_TESTIMONIAL,
+  FIND_USER
 
 } from "../actions";
 import fechas from "../components/Reserva/Linkreserva/algoritmofechas"
@@ -205,6 +205,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         usuarios: action.payload,
+        allUsers: action.payload,
       };
     case READ_SERVICES:
       return {
@@ -355,6 +356,13 @@ export default function rootReducer(state = initialState, action) {
           testimoniales : [action.payload]
         }
 
+    case FIND_USER:
+      let allUsers = state.allUsers;
+      let user = allUsers.find(el => el.UserName === action.payload)
+      return {
+        ...state,
+        usuarios: user,
+      }
 
     default:
       return state;
