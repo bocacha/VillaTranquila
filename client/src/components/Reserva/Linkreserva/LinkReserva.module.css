@@ -5,31 +5,30 @@
   margin-right: auto;
   background-color: #94adbc;
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; */
 }
 
 .formsCont {
-  display: flex;
-  flex-direction: row;
   width: 50%;
   min-height: 100vh;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-  margin-left: 10px;
 }
 
 .crearCont {
   width: 100%;
   height: 100vh;
+  max-width: 100%;
+  justify-items: center;
+  justify-content: center;
 }
 
 .btnVolver {
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   display: flex;
   align-items:flex-start;
-  margin-left: 50px;
+  /* margin-left: 50px; */
   padding-top: 10px;
+  margin-left:3%;
+  width: 100%;
 }
 
 .btns{
@@ -38,9 +37,9 @@
 
 .btn {
   padding: 4px 7px;
+  width:200%;
   background: #293c4f;
   color: #fff;
-  border: none;
   border: 1px solid #293c4f;
   border-radius: 5px;
   font-family: Lato, Arial, sans-serif;
@@ -55,10 +54,10 @@
 
 .btnRes {
   padding: 7px 10px;
-  background: #293c4f;
+  background: #355978;
   color: #fff;
   border: none;
-  border: 1px solid #293c4f;
+  border: 1px solid #355978;
   border-radius: 5px;
   font-family: Lato, Arial, sans-serif;
   font-weight: bold;
@@ -66,13 +65,24 @@
 }
 .btnRes:hover {
   background: none;
-  border: 1px solid #293c4f;
+  border: 1px solid #8bafbf;
   color: #000;
 }
-
-.form {
-  /* width: fit-content; */
+#confirmar{
+  margin-bottom: 20px;
+  margin-top:-20px;
 }
+#reservar{
+  width:53%;
+  border-radius: 50px;
+}
+#reservar:hover{
+  background-color: #8bafbf;
+  border: 1px solid #8bafbf;
+  transform:scale(1.1)
+}
+
+
 
 .editarCont {
   display: flex;
@@ -81,14 +91,36 @@
   padding: 3px;
   margin-left: 90px;
 }
-
+.titlecontainer{
+  max-width: 100%;
+  justify-content: center;
+  justify-items: center;
+}
 .title {
-  margin-bottom: 6px;
+  /* position: relative; */
+  margin-top:10px;
   font-family: 'Hind Siliguri', sans-serif;
   font-weight: 300;
   font-size: 32px;
   white-space: nowrap;
   font-weight: bold;
+}
+#title1{
+  margin-bottom: -5px;
+}
+#title2{
+  margin-top: -10px;
+}
+
+.form{
+  margin-top: 10px;
+  background-color: #293c4f;
+  padding: 3%;
+  border-radius: 10px;
+  width: 90%;
+  margin-left:5%;
+  color:#fff;
+
 }
 
 .formInputs {
@@ -98,18 +130,51 @@
   width: 300px;
 }
 
-.servicios {
-  display: flex;
-  align-items:flex-start;
-  justify-content: center;
-}
 
+
+
+.parri{
+  display: flex;
+  width:100%;
+  font-size: xx-large;
+  justify-items: center;
+  justify-content: center;
+  margin-top: -15px;
+}
+.parri p{
+  margin-left: 10px;
+  margin-right: 10px;
+}
 .p{
   font-family: Lato, sans-serif;
   font-weight: bold;
+  margin-top: 20px;
   margin-bottom: 10px;
 }
-
+.serviceContainer{
+  width:90%;
+  justify-content: center;
+  justify-items: center;
+  margin-left:5%;
+}
+.servicios {
+  display: grid;
+  grid-template-columns: 33.33% 33.33% 33.33%;
+  /* justify-content: center; */
+  justify-items: center;
+  align-items: center;
+  text-align: justify;
+  width:60%;
+  margin-left:20%;
+}
+.izquierda{
+  /* margin-right: 10%; */
+  margin-left: 0%;
+  text-align: start;
+}
+.derecha{
+  float: right;
+}
 .checkbox {
   margin-top: auto;
   margin-bottom: auto;
@@ -132,4 +197,8 @@
   background: url("https://res.cloudinary.com/villatranquila/image/upload/v1633134933/Cabins/12_rctcjm.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+#precioFinal{
+  cursor:default;
 }

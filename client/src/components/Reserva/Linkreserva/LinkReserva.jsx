@@ -16,6 +16,8 @@ import {
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
 import { RiCreativeCommonsZeroLine } from "react-icons/ri";
+import { GiBarbecue } from 'react-icons/gi';
+import { FaCarAlt, FaWifi } from 'react-icons/fa';
 import DatePicker, { registerLocale } from "react-datepicker";
 import es from 'date-fns/locale/es';
 import axios from "axios"
@@ -34,8 +36,8 @@ export default function Reservaciones() {
   const id = JSON.parse(localStorage.getItem("id_cabaña"))
   useEffect(() => {
     dispatch(selectcabin(id))
-  },[dispatch])
- 
+  }, [dispatch])
+
 
   const servicios = useSelector((state) => state.servicios);
   const seleccionada = useSelector((state) => state.selectedcabin)
@@ -43,17 +45,17 @@ export default function Reservaciones() {
   let id1 = 0;
   let suma = []
   let costoadicional = 0
-  let fechasintermedias=[]
+  let fechasintermedias = []
   const ocupadas = useSelector((state) => state.fechasnodisponibles)
   //console.log(ocupadas)
-  const [selectDateCI, setSelectDateCI] = useState(null);
-  const [selectDateCO, setSelectDateCO] = useState(null);
-  const [reserva, setReserva] = useState({Checkin:"",Checkout:""});
+  const [selecpateCI, setSelecpateCI] = useState(null);
+  const [selecpateCO, setSelecpateCO] = useState(null);
+  const [reserva, setReserva] = useState({ Checkin: "", Checkout: "" });
   const costo = localStorage.getItem("costo");
   const cabinId = localStorage.getItem("id_cabaña");
   const logeduser = useSelector((state) => state.user);
   const { token } = logeduser;
-  const [edit,setEdit]= useState({id:JSON.parse(cabinId), Available:[]})
+  const [edit, setEdit] = useState({ id: JSON.parse(cabinId), Available: [] })
   const [input, setInput] = useState({
     Checkin: "",
     Checkout: "",
@@ -62,14 +64,14 @@ export default function Reservaciones() {
     CostoFinal: JSON.parse(costo),
     Cabinid: JSON.parse(cabinId),
     ExtraServices: null,
-    Anombrede:""
+    Anombrede: ""
   });
-  const consultarprecio=()=>{
+  const consultarprecio = () => {
     suma = []
     costoadicional = 0
     const checkbox = Array.from(document.getElementsByClassName("Servicios"));
     for (let i = 0; i < checkbox.length; i++) {
-      
+
       if (checkbox[i].checked) {
         suma.push(parseFloat(checkbox[i].name))
         console.log(checkbox[i].name)
@@ -79,14 +81,14 @@ export default function Reservaciones() {
       costoadicional = costoadicional + parseFloat(suma[j])
 
     }
-    costoadicional = costoadicional+ parseFloat(JSON.parse(costo))
-    setInput({...input,CostoFinal:costoadicional})
+    costoadicional = costoadicional + parseFloat(JSON.parse(costo))
+    setInput({ ...input, CostoFinal: costoadicional })
   }
   const checkboxselected = (e) => {
-    e.preventDefault()
+    e.prevenpefault()
     setInput({
       ...input, CostoFinal: JSON.parse(costo),
-      Checkin: selectDateCI, Checkout: selectDateCO,
+      Checkin: selecpateCI, Checkout: selecpateCO,
     })
     lala = [];
     const checkbox = Array.from(document.getElementsByClassName("Servicios"));
@@ -99,8 +101,8 @@ export default function Reservaciones() {
         console.log(checkbox[i].value);
       }
     }
-    if(contador === 0){
-      setInput({...input , ExtraServices:null})
+    if (contador === 0) {
+      setInput({ ...input, ExtraServices: null })
     }
   };
 
@@ -112,123 +114,123 @@ export default function Reservaciones() {
   }, [dispatch]);
   useEffect(() => {
     dispatch(selectcabin(localStorage.getItem("id_cabaña")))
-  }, [dispatch,cabinId]);
+  }, [dispatch, cabinId]);
   function handleChange(e) {
     setInput({
       ...input,
       UserId: logeduser.userid,
-      CabinNumber:seleccionada.Number,
+      CabinNumber: seleccionada.Number,
       [e.target.name]: e.target.value,
     });
   }
-//console.log(seleccionada[0].Parrilla)
-  const changeFechas=(e)=>{
-    if(e === null){
+  //console.log(seleccionada[0].Parrilla)
+  const changeFechas = (e) => {
+    if (e === null) {
       return
     }
-    setSelectDateCI(e)
+    setSelecpateCI(e)
     mostrarFecha(e);
   }
-  useEffect(()=>{
+  useEffect(() => {
     calculofechas()
-    },[selectDateCO]);
-  useEffect(()=>{
+  }, [selecpateCO]);
+  useEffect(() => {
     fechasafiltrar()
-    },[selectDateCO]);
-const changeFechas2=async(e)=>{
-  if(e === null){
-    return
+  }, [selecpateCO]);
+  const changeFechas2 = async (e) => {
+    if (e === null) {
+      return
+    }
+    setSelecpateCO(e)
+    mostrarFecha2(e);
+
   }
-  setSelectDateCO(e)
-  mostrarFecha2(e);
- 
-}
-const mostrarFecha = selectDateCI =>{
-    const options = {year:'numeric', month:'numeric', day:'2-digit'}
-    setInput({...input,  Checkin: selectDateCI.toLocaleDateString('es-ES', options)})
-    setReserva({...reserva, Checkin:selectDateCI.toLocaleDateString('es-ES', options)})
+  const mostrarFecha = selecpateCI => {
+    const options = { year: 'numeric', month: 'numeric', day: '2-digit' }
+    setInput({ ...input, Checkin: selecpateCI.toLocaleDateString('es-ES', options) })
+    setReserva({ ...reserva, Checkin: selecpateCI.toLocaleDateString('es-ES', options) })
   }
-  const mostrarFecha2 = selectDateCO =>{
-    const options = {year:'numeric', month:'numeric', day:'2-digit'}
-    setInput({...input,  Checkout: selectDateCO.toLocaleDateString('es-ES', options)})
-    setReserva({...reserva, Checkout:selectDateCO.toLocaleDateString('es-ES', options)})
-     //filtrarfechas()
+  const mostrarFecha2 = selecpateCO => {
+    const options = { year: 'numeric', month: 'numeric', day: '2-digit' }
+    setInput({ ...input, Checkout: selecpateCO.toLocaleDateString('es-ES', options) })
+    setReserva({ ...reserva, Checkout: selecpateCO.toLocaleDateString('es-ES', options) })
+    //filtrarfechas()
   }
-  const filtrarfechas=()=> {
+  const filtrarfechas = () => {
     fechasafiltrar(reserva)
   }
-const calculofechas=()=> {
- let fechasintermedias=[]
-  if(ocupadas.length>=0 && reserva.Checkout !==null){
-    fechasintermedias = [...ocupadas]
-    fechasintermedias.push(fechas(reserva))
-    console.log(fechasintermedias)
-    setEdit({...edit,Available:fechasintermedias})
+  const calculofechas = () => {
+    let fechasintermedias = []
+    if (ocupadas.length >= 0 && reserva.Checkout !== null) {
+      fechasintermedias = [...ocupadas]
+      fechasintermedias.push(fechas(reserva))
+      console.log(fechasintermedias)
+      setEdit({ ...edit, Available: fechasintermedias })
+    }
   }
-}
-useEffect(()=>{
-  calculofechas()
-  },[reserva]);
-useEffect(()=>{
+  useEffect(() => {
+    calculofechas()
+  }, [reserva]);
+  useEffect(() => {
     date(ocupadas)
-    });
+  });
 
-const handlePrueba=()=>{
-console.log(input.Anombrede, logeduser.email, input.Checkin)
-const options = {year:'numeric', month:'numeric', day:'2-digit'}
-const data = { username:logeduser.user ,name: input.Anombrede, email: logeduser.email, date: selectDateCI.toLocaleDateString('es-ES', options)}
-console.log(input)
-dispatch(createReservation({...input, id:logeduser.userid},dispatch))
-dispatch(sendNotification(data))
-dispatch(editAvailible(edit))
-console.log(input)
-alert("Reserva creada")
-}
-  const parapiker2=[] 
-  const parapiker =[]
-  function date(array){
-    array.map(e=>{
-        e.map(i=>{
-    parapiker.push(i)
-        })
+  const handlePrueba = () => {
+    console.log(input.Anombrede, logeduser.email, input.Checkin)
+    const options = { year: 'numeric', month: 'numeric', day: '2-digit' }
+    const data = { username: logeduser.user, name: input.Anombrede, email: logeduser.email, date: selecpateCI.toLocaleDateString('es-ES', options) }
+    console.log(input)
+    dispatch(createReservation({ ...input, id: logeduser.userid }, dispatch))
+    dispatch(sendNotification(data))
+    dispatch(editAvailible(edit))
+    console.log(input)
+    alert("Reserva creada")
+  }
+  const parapiker2 = []
+  const parapiker = []
+  function date(array) {
+    array.map(e => {
+      e.map(i => {
+        parapiker.push(i)
+      })
     })
-    parapiker.map(e=>{
-        let dia = e.slice(0,2)
-        let mes = e.slice(3,5)
-        let anio = e.slice(6)
-      if(mes === '01' || mes === '02' || mes === '03' || mes === '04' || mes === '05' || mes === '06' || mes === '07' || mes === '08' || mes === '09' ){
+    parapiker.map(e => {
+      let dia = e.slice(0, 2)
+      let mes = e.slice(3, 5)
+      let anio = e.slice(6)
+      if (mes === '01' || mes === '02' || mes === '03' || mes === '04' || mes === '05' || mes === '06' || mes === '07' || mes === '08' || mes === '09') {
         mes = mes - 0;
       }
-      parapiker2.push(new Date(anio, mes-1, dia))
+      parapiker2.push(new Date(anio, mes - 1, dia))
     })
 
-    }
-    const fechasafiltrar=()=>{
-      console.log("entre")
-      if(reserva.Checkout === null){
-        return
-      }else{
-        const intermedias = fechas(reserva)
-        const ocup = parapiker
-        for(let i= 0; i<intermedias.length; i++){
-         for(let j =0;j<ocup.length; j++){
-           if(intermedias[i] === ocup[j]){
-             setSelectDateCO(null)
-             setEdit({...edit, Checkout:null})
-             setReserva({...reserva, Checkout:null})
-             return alert("error no podes elegir esas fechas, porlomenos una esta reservada")
-           }
-         }
+  }
+  const fechasafiltrar = () => {
+    console.log("entre")
+    if (reserva.Checkout === null) {
+      return
+    } else {
+      const intermedias = fechas(reserva)
+      const ocup = parapiker
+      for (let i = 0; i < intermedias.length; i++) {
+        for (let j = 0; j < ocup.length; j++) {
+          if (intermedias[i] === ocup[j]) {
+            setSelecpateCO(null)
+            setEdit({ ...edit, Checkout: null })
+            setReserva({ ...reserva, Checkout: null })
+            return alert("error no podes elegir esas fechas, porlomenos una esta reservada")
+          }
         }
-
       }
+
     }
-    useEffect(() => {
-      fechasafiltrar()
-    },[reserva.Checkout])
-    const handleSubmit = (e) => {
-      e.preventDefault()
-    }
+  }
+  useEffect(() => {
+    fechasafiltrar()
+  }, [reserva.Checkout])
+  const handleSubmit = (e) => {
+    e.prevenpefault()
+  }
   return (
     <div className={styles.container}>
       <div className={styles.formsCont}>
@@ -239,28 +241,23 @@ alert("Reserva creada")
               <button className={styles.btn}>Volver</button>
             </Link>
           </div>
-          <div className={styles.title}>Crear una nueva reservación</div>
-          <div className={styles.title}>Cabaña Nº {seleccionada.Number}</div>
-          <form onSubmit={(e) => handleSubmit(e)}className={styles.form}>          
-          <input
+          <div className={styles.titlecontainer}>
+            <div id={styles.title1}><p className={styles.title}>Completá los datos solicitados para</p></div>
+            <div id={styles.title2}><p className={styles.title}>continuar con tu reserva</p></div>
+          </div>
+          <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
+            <h1 className={styles.title}>Cabaña Nº {seleccionada.Number}</h1>
+            <input
               type="text"
               name="Anombrede"
               onChange={(e) => handleChange(e)}
-              placeholder="A nombre de:"
-              className={styles.formInputs}
-              required
-            /> 
-            <div>Costo por noche:   </div>
-               <input
-              type="number"
-              value={input.CostoFinal}
-              name="Checkin"
-              placeholder={"Por Noche:" + input.CostoFinal}
+              placeholder="Reserva a nombre de:"
               className={styles.formInputs}
               required
             />
-         
-{/*          
+
+
+            {/*          
             <input
               type="text"
               value={input.Checkin}
@@ -270,44 +267,57 @@ alert("Reserva creada")
               className={styles.formInputs}
               required
             /> */}
-          <DatePicker
-            selected={selectDateCI}
-            onChange={e=>changeFechas(e)}
-            placeholderText="Fecha de Check in"
-            className={styles.formInputs}
-            defaultDate={new Date()}
-            dateFormat="dd 'de' MMMM 'de' yyyy"
-            minDate={new Date()}
-            locale='es'
-            excludeDates={parapiker2}
+            <DatePicker
+              selected={selecpateCI}
+              onChange={e => changeFechas(e)}
+              placeholderText="Fecha de Check in"
+              className={styles.formInputs}
+              defaulpate={new Date()}
+              dateFormat="dd 'de' MMMM 'de' yyyy"
+              minDate={new Date()}
+              locale='es'
+              excludeDates={parapiker2}
             />
-        <DatePicker
-            selected={selectDateCO}
-            onChange={(e=>changeFechas2(e))}
-            placeholderText="Fecha de Check out"
-            onFocus={calculofechas}
-            className={styles.formInputs}
-            dateFormat="dd 'de' MMMM 'de' yyyy"
-            minDate={new Date()}
-            locale='es'
-            excludeDates={parapiker2}
-            filterDate={d => {
-              return selectDateCI < d;
-            }}
+            <DatePicker
+              selected={selecpateCO}
+              onChange={(e => changeFechas2(e))}
+              placeholderText="Fecha de Check out"
+              onFocus={calculofechas}
+              className={styles.formInputs}
+              dateFormat="dd 'de' MMMM 'de' yyyy"
+              minDate={new Date()}
+              locale='es'
+              excludeDates={parapiker2}
+              filterDate={d => {
+                return selecpateCI < d;
+              }}
             />
             <div>
-              <div className={styles.p}>Servicios Basicos:
-              <p className={styles.p}><strong>Descripcion:</strong>  {seleccionada.Description}</p>
-        <p className={styles.p}><strong>Parrilla:</strong>  {seleccionada.Parrilla?(<span>si</span>):(<span>no</span>)}</p>
-        <p className={styles.p}><strong> Wifi:</strong> {seleccionada.Wifi?(<span>si</span>):(<span>no</span>)}</p>
-        <p className={styles.p}><strong>Parking:</strong>  {seleccionada.Parking?(<p>si</p>):(<span>no</span>)}</p>
+              <p className={styles.p}>{seleccionada.Description}</p>
+              <div className={styles.p}><p>Servicios básicos: </p>
+                {
+                  !seleccionada.Parrilla && !seleccionada.Wifi && !seleccionada.Parking ?
+                    <span>No cuenta con parrilla, estacionamiento ni wifi</span> :
+                    <span className={styles.parri}> {seleccionada.Parrilla && <p><GiBarbecue /></p>}  {seleccionada.Wifi && <p><FaWifi /></p>}  {seleccionada.Parking && <p><FaCarAlt /></p>} </span>
+
+                }
               </div>
               <div className={styles.p}>Servicios Adicionales:</div>
-              
-              <div>
-                {servicios.map((el) => (
+
+              <div className={styles.serviceContainer}>
+                {servicios.length !== 0 && servicios.map((el) => (
                   <div className={styles.servicios} key={el.ID}>
-                    {el.Name + " $" + el.Price}
+                          <p className={styles.izquierda}>{el.Name}</p>
+                          <p>$ {el.Price}</p>
+                          <p className={styles.derecha}><input
+                            className="Servicios"
+                            type="checkbox"
+                            name={el.Price}
+                            value={el.Name}
+                            id={id1++}
+                            onChange={consultarprecio}
+                          /></p>
+                    {/* <p>{el.Name + " $" + el.Price}</p>
                     <input
                       className="Servicios"
                       type="checkbox"
@@ -316,15 +326,25 @@ alert("Reserva creada")
                       id={id1++}
                       onChange={consultarprecio}
                     />
-                    <label >{el.name}</label>
+                    <label >{el.name}</label> */}
                   </div>
                 ))}
               </div>
-              <button onClick={checkboxselected}>Seleccionar Servicios</button>
+              <button onClick={checkboxselected} className={styles.btnRes} id={styles.confirmar}>Confirmar servicios seleccionados</button>
             </div>
+            <div>Costo final por noche:   </div>
+            <input
+              type="text"
+              value={input.CostoFinal}
+              name="Checkin"
+              placeholder={"Por Noche:" + input.CostoFinal}
+              className={styles.formInputs}
+              id={styles.precioFinal}
+              required
+            />
             <div className={styles.btns}>
               <Link to="/reserva/pago">
-                <button onClick={handlePrueba} className={styles.btnRes}>
+                <button onClick={handlePrueba} className={styles.btnRes} id={styles.reservar}>
                   Reservar
                 </button>
               </Link>

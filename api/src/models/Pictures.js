@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
     },
     CabainNumber: {
       type: DataTypes.STRING,
-      allowNull:false
+      allowNull:true
     },
     Url:{
       type: DataTypes.STRING,

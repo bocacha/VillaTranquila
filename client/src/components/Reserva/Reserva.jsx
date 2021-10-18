@@ -221,41 +221,51 @@ export default function Reserva() {
                 <li>
                     <hr />
                     <label className={styles.serviceTitle}><p><MdRoomService /></p> Que cuente con:</label>
-                    <ul className={styles.serviceCont}>
-                        <li>
-                            <label>Wifi <p className={styles.services}><FaWifi /></p></label>
-                            <input
-                                type='checkbox'
-                                name='wifi'
-                                onChange={e => {
-                                    handleCheck(e);
-                                    return handleChange(e);
-                                }}
-                            />
-                        </li>
-                        <li>
-                            <label>Parrilla <p className={styles.services}><GiBarbecue /></p></label>
-                            <input
-                                type='checkbox'
-                                name='barbecue'
-                                onChange={e => {
-                                    handleCheck(e);
-                                    return handleChange(e);
-                                }}
-                            />
-                        </li>
-                        <li>
-                            <label>Estacionamiento techado <p className={styles.services}><FaCarAlt /></p></label>
-                            <input
-                                type='checkbox'
-                                name='parking'
-                                onChange={e => {
-                                    handleCheck(e);
-                                    return handleChange(e);
-                                }}
-                            />
-                        </li>
-                    </ul>
+                    <div className={styles.tablaServicios}>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td className={styles.izquierda}><FaWifi className={styles.iconsServ}/></td>
+                                    <td>Wifi</td>
+                                    <td><input
+                                        type='checkbox'
+                                        name='wifi'
+                                        onChange={e => {
+                                            handleCheck(e);
+                                            return handleChange(e);
+                                        }}
+                                        className={styles.checkbox}
+                                    /></td>
+                                </tr>
+                                <tr>
+                                    <td className={styles.izquierda}><GiBarbecue className={styles.iconsServ}/></td>
+                                    <td>Parrilla</td>
+                                    <td><input
+                                        type='checkbox'
+                                        name='barbecue'
+                                        onChange={e => {
+                                            handleCheck(e);
+                                            return handleChange(e);
+                                        }}
+                                        className={styles.checkbox}
+                                    /></td>
+                                </tr>
+                                <tr>
+                                    <td className={styles.izquierda}><FaCarAlt className={styles.iconsServ}/></td>
+                                    <td>Estacionamiento</td>
+                                    <td><input
+                                        type='checkbox'
+                                        name='parking'
+                                        onChange={e => {
+                                            handleCheck(e);
+                                            return handleChange(e);
+                                        }}
+                                        className={styles.checkbox}
+                                    /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </li>
                 <hr />
                 <li>

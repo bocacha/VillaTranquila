@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import NavAdmin from '../NavAdmin/NavAdmin';
 import Navbar from "../../Navbar/Navbar";
 import SearchBar from "./SearchBar";
+import Paginado from "./Paginado/Paginado";
 
 function validation(input) {
   var letras = "abcdefghyjklmnñopqrstuvwxyz";
@@ -159,6 +160,21 @@ export default function Usuarios() {
     dispatch(readUsers({ token }))
     setHabilitar(false)
   }
+
+  // Paginado---------------------------------------------------------------
+  const [currentPage, setCurrentPage] = useState(1);
+  const [usersPerPage, /*setUsersPerPage*/] = useState(12);
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  let currentUsers = Array.isArray(allUsers) ?
+    allUsers.slice(indexOfFirstUser, indexOfLastUser) :
+    allUsers;
+
+  const paginado = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+  //-------------------------------------------------------------------------
+
   return (
     <div className={styles.container}>
       <Navbar />
@@ -183,7 +199,9 @@ export default function Usuarios() {
           )
           }
         </div>
-        <SearchBar />
+        <div id={styles.searchbarcontainer}>
+          <SearchBar />
+        </div>
         <div className={styles.container2}>
           <div className={styles.formsCont}>
             {/* editar */}
@@ -317,8 +335,8 @@ export default function Usuarios() {
           {/* VER */}
           <div className={styles.containerUsuarios}>
             {
-              Array.isArray(allUsers) ?
-                allUsers.sort((a, b) => {
+              Array.isArray(currentUsers) ?
+                currentUsers.sort((a, b) => {
                   if (a.UserName < b.UserName) return -1;
                   if (a.UserName > b.UserName) return 1;
                   return 1;
@@ -345,6 +363,9 @@ export default function Usuarios() {
                   </div>
                 </div>
             }
+          </div>
+          <div className={styles.paginado}>
+            <Paginado usersPerPage={usersPerPage} allUsers={allUsers.length} paginado={paginado} />
           </div>
         </div>
       </div>
