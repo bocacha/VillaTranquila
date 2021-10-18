@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import styles from "./ReservacionesDetail.module.css";
-import { useDispatch } from "react-redux";
-import { removeReservations, restoreReservations } from "../../../actions";
+import { useDispatch} from "react-redux";
+import { removeReservations, restoreReservations ,readUsers} from "../../../actions";
 import {Link} from "react-router-dom"
 
 export default function ReservacionesDetail({
@@ -18,6 +18,9 @@ export default function ReservacionesDetail({
   restaurar,
 }) {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(readUsers())
+  })
   const [mostrar, setMostrar] = useState(true);
   const handleSubmitDelete = (ID) => {
     dispatch(removeReservations({ id: ID }));

@@ -248,15 +248,15 @@ export function readPictures(id) {
   };
 }
 
-export function readUsers({token}) {
-  const config={
-    headers:{
-    Authorization: `Bearer ${token}`,
-  }
-  }
+export function readUsers() {
+  // const config={
+  //   headers:{
+  //   Authorization: `Bearer ${token}`,
+  // }
+  // }
   return async function (dispatch) {
     try {
-      var json = await axios.get("/users/", config);
+      var json = await axios.get("/users/");
       return dispatch({
         type: READ_USERS,
         payload: json.data,
