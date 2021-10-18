@@ -17,12 +17,13 @@ import LinkReserva from"./components/Reserva/Linkreserva/LinkReserva"
 import Gallery from './components/Gallery/Gallery';
 import UserCard from './components/UserCard/UserCard';
 import Profile from './components/Profile/Profile';
-import { useDispatch, useSelector } from 'react-redux';
+//import { useDispatch, useSelector } from 'react-redux';
 import PagosReserva from './components/PagoReserva/PagoReserva';
-import { useEffect } from 'react';
-import { getUserData } from './actions';
+//import { useEffect } from 'react';
+//import { getUserData } from './actions';
 import Caja from './components/Admin/Caja/Caja';
 import UserReservations from "./components/Profile/User reservations/UserReservations"
+
 
 function App() {
   

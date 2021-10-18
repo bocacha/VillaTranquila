@@ -200,7 +200,7 @@ export default function Usuarios() {
                   onClick={() => {
                     setTimeout(function () {
                       registroexitoso();
-                    }, 3000);
+                    }, 1000);
                   }}
                   className={styles.btn}
                 >

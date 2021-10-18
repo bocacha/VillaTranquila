@@ -89,6 +89,7 @@
 .detailCard{
   position: relative;
   height: fit-content;
+  min-height: 705px;
   color: #fff;
   border-radius: 8px;
   box-shadow: 0 0 40px -10px #000;
@@ -105,6 +106,18 @@
   place-content: center;
   overflow: auto;
   margin: 0 0 30px 10px;
+  padding:0vh;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: rgb(0 0 0 / 19%) 0px 10px 20px, rgb(0 0 0 / 23%) 0px 6px 6px;
+  transition: all 0.3s ease 0s;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+}
+.detailCard:hover{
+  box-shadow: 0 12px 24px 0 rgba(0,0,0,0.2);
+    transform: scale(1.02);
 }
 .detailCard .infoContainer table{
   width: 100%;
@@ -119,8 +132,8 @@
 }
 .derecha p{
   max-width: 280px;
-  text-align: end;
   text-align: justify;
+  text-align-last: end;
 }
 .btnsContainer{
   display:flex;
@@ -172,6 +185,7 @@
   display:flex;
   justify-items: center;
   justify-content: center;
+  font-size: x-large;
 }
 .infoContainer span p{
   margin: 0 30px -5px 30px;

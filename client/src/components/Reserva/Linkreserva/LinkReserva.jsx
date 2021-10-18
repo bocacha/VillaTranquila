@@ -55,9 +55,9 @@ export default function Reservaciones() {
   const { token } = logeduser;
   const [edit,setEdit]= useState({id:JSON.parse(cabinId), Available:[]})
   const [input, setInput] = useState({
-    Nombre: "",
     Checkin: "",
     Checkout: "",
+    CabinNumber: seleccionada.Number,
     UserId: logeduser.userid,
     CostoFinal: JSON.parse(costo),
     Cabinid: JSON.parse(cabinId),
@@ -117,6 +117,7 @@ export default function Reservaciones() {
     setInput({
       ...input,
       UserId: logeduser.userid,
+      CabinNumber:seleccionada.Number,
       [e.target.name]: e.target.value,
     });
   }
@@ -140,6 +141,7 @@ const changeFechas2=async(e)=>{
   }
   setSelectDateCO(e)
   mostrarFecha2(e);
+ 
 }
 const mostrarFecha = selectDateCI =>{
     const options = {year:'numeric', month:'numeric', day:'2-digit'}
@@ -150,14 +152,14 @@ const mostrarFecha = selectDateCI =>{
     const options = {year:'numeric', month:'numeric', day:'2-digit'}
     setInput({...input,  Checkout: selectDateCO.toLocaleDateString('es-ES', options)})
     setReserva({...reserva, Checkout:selectDateCO.toLocaleDateString('es-ES', options)})
-    filtrarfechas()
+     //filtrarfechas()
   }
   const filtrarfechas=()=> {
     fechasafiltrar(reserva)
   }
 const calculofechas=()=> {
  let fechasintermedias=[]
-  if(ocupadas.length>=0){
+  if(ocupadas.length>=0 && reserva.Checkout !==null){
     fechasintermedias = [...ocupadas]
     fechasintermedias.push(fechas(reserva))
     console.log(fechasintermedias)
@@ -179,13 +181,9 @@ console.log(input)
 dispatch(createReservation({...input, id:logeduser.userid},dispatch))
 dispatch(sendNotification(data))
 dispatch(editAvailible(edit))
+console.log(input)
 alert("Reserva creada")
 }
-  function handleSubmit(e) {
-    e.preventDefault();
-  alert("Reserva creada con éxito");
-  }
-
   const parapiker2=[] 
   const parapiker =[]
   function date(array){
@@ -207,16 +205,29 @@ alert("Reserva creada")
     }
     const fechasafiltrar=()=>{
       console.log("entre")
-     const intermedias = fechas(reserva)
-     const ocup = parapiker
-     for(let i= 0; i<intermedias.length; i++){
-      for(let j =0;j<ocup.length; j++){
-        if(intermedias[i] === ocup[j]){
-          setSelectDateCO(null)
-          return alert("error no podes elegir esas fechas, porlomenos una esta reservada")
+      if(reserva.Checkout === null){
+        return
+      }else{
+        const intermedias = fechas(reserva)
+        const ocup = parapiker
+        for(let i= 0; i<intermedias.length; i++){
+         for(let j =0;j<ocup.length; j++){
+           if(intermedias[i] === ocup[j]){
+             setSelectDateCO(null)
+             setEdit({...edit, Checkout:null})
+             setReserva({...reserva, Checkout:null})
+             return alert("error no podes elegir esas fechas, porlomenos una esta reservada")
+           }
+         }
         }
+
       }
-     }
+    }
+    useEffect(() => {
+      fechasafiltrar()
+    },[reserva.Checkout])
+    const handleSubmit = (e) => {
+      e.preventDefault()
     }
   return (
     <div className={styles.container}>
@@ -229,6 +240,7 @@ alert("Reserva creada")
             </Link>
           </div>
           <div className={styles.title}>Crear una nueva reservación</div>
+          <div className={styles.title}>Cabaña Nº {seleccionada.Number}</div>
           <form onSubmit={(e) => handleSubmit(e)}className={styles.form}>          
           <input
               type="text"

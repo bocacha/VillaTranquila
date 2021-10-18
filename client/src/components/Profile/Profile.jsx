@@ -199,19 +199,12 @@ export default function Profile(props) {
                     </table>
                     <details>
                         <summary>Historial de reservas</summary>
-                        <Link to={`/Profile/${user.user}/${user.userid}`} className={styles.link}>
-                        <button className={styles.editarPerfil} >Ver y editar mis reservaciones</button>
-                         </Link>
+                       
                         {dataUser.ReservationsHistory &&
                             dataUser.ReservationsHistory.length ? (
-                            <ul>
-                                {objetosaArray.map((el) => {
-                                    return <ul>{el.map(e => {
-                                        return <li>{e[0]}:{e[1]}</li>
-                                    })}</ul>;
-                                })
-                                }
-                            </ul>
+                          <Link to={`/Profile/${user.user}/${user.userid}`} className={styles.link}>
+                        <button className={styles.editarPerfil} >Ver y editar mis reservaciones</button>
+                         </Link>
 
                         ) : (
                             <div>

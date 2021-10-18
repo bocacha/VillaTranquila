@@ -12,10 +12,11 @@ import styles from "./Cabañas.module.css";
 import CabañasDetail from "../Cabañas/CabañasDetail";
 import Navbar from "../../Navbar/Navbar";
 import NavAdmin from "../NavAdmin/NavAdmin";
-import { BiSave } from 'react-icons/bi';
+import { useHistory } from "react-router";
 
 const Cabañas = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const allCabains = useSelector((state) => state.cabañas);
   const logeduser = useSelector((state) => state.user);
   const allFotos = useSelector((state) => state.fotos);
@@ -102,8 +103,10 @@ const Cabañas = () => {
     const { token } = logeduser;
     e.preventDefault();
     dispatch(createCabains(cabain, { token }));
-    alert("su cabaña fue creada con exito");
-    window.location.reload();
+    alert("Su cabaña fue creada con éxito 🏡");
+    setTimeout(function () {
+      history.go(0);
+    }, 2000)
   };
 
   const handleeditSubmit = (
@@ -167,7 +170,10 @@ const Cabañas = () => {
     const { token } = logeduser;
     dispatch(editCabains(edit, { token }));
     alert("Edicion exitosa");
-    window.location.reload();
+    setTimeout(function () {
+      history.go(0);
+    }, 2000)
+    //window.location.reload();
   };
   const ocultadas = () => {
     dispatch(readCabainsocultados());
@@ -234,7 +240,7 @@ const Cabañas = () => {
                 value={cabain.Description}
                 onChange={handleChange}
                 placeholder="Descripción . . ."
-                maxLength="500"
+                maxLength="250"
                 required
               />
             </div>
@@ -354,7 +360,7 @@ const Cabañas = () => {
                   value={edit.Description}
                   onChange={(e) => handleChangeEdit(e)}
                   placeholder="Descripción..."
-                  maxLength="500"
+                  maxLength="250"
                   className={styles.formInputs}
                   id={styles.descripcionEditar}
                   required
@@ -406,11 +412,28 @@ const Cabañas = () => {
                 <option value="false">NO</option>
               </select>
             </form>
+            <div className={styles.btnsGuarCanc}>
+              <button onClick={handlePrueba} id={styles.guardar}>Guardar cambios</button>
+              <button
+                onClick={() => {
+                  if (mostrar) setMostrar(false);
+                }}
+                id={styles.cancelar}
+              >
+                Cancelar
+              </button>
+            </div>
           </div>
         ) : null}
         {/* VER */}
-        <div>
-          {allCabains?.map((el) => {
+      </div>
+      <div id={styles.containerContainerCabañas}>
+        <div className={styles.containerCabañas}>
+          {allCabains?.sort((a, b) => {
+            if (parseInt(a.Number) < parseInt(b.Number)) return -1;
+            if (parseInt(a.Number) > parseInt(b.Number)) return 1;
+            return 1;
+          }).map((el) => {
             return (
               <div className={styles.detalles} key={el.ID}>
                 <CabañasDetail
