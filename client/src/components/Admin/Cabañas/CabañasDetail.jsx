@@ -95,7 +95,7 @@ export default function CabinsDetail({
 
           ) : (
             <button onClick={() => {
-              handleSubmitDelete(ID);
+              handleSubmitrestore(ID);
               window.scrollTo({
                 top: 0,
                 left: 0,
