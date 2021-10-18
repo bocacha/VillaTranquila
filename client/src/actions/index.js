@@ -768,7 +768,7 @@ export function getUserData(username){
 export function selectcabin(id){
   return async function (dispatch) {
     try {
-      let json = await axios.get(`/cabins/id=${id}`);
+      let json = await axios.get(`/cabins/${id}`);
       return dispatch({
         type: SELECTED_CABIN,
         payload: json.data[0],
