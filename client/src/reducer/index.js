@@ -351,10 +351,14 @@ export default function rootReducer(state = initialState, action) {
 
     case FIND_USER:
       let allUsers = state.allUsers;
-      let user = allUsers.find(el => el.UserName === action.payload)
+      let usuarios = [];
+      let user = allUsers.find(el => el.UserName === action.payload);
+      console.log(user);
+      usuarios.push(user);
+      console.log(usuarios)
       return {
         ...state,
-        usuarios: user,
+        usuarios: usuarios,
       }
 
     default:
