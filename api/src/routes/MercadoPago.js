@@ -22,9 +22,9 @@ let preference = {
       },
     ],
     back_urls:{
-      "success":"http://localhost:3001//notification",
-      "failure":"http://localhost:3001/reserva/pago",
-      "pending":"http://localhost:3001/reserva/pago",
+      "success":"https://app-villa-tranquila.vercel.app/",
+      "failure":"https://app-villa-tranquila.vercel.app/reserva/pago",
+      "pending":"https://app-villa-tranquila.vercel.app/reserva/pago",
     },
   //"http://app-villa-tranquila.vercel.app","http://app-villa-tranquila.vercel.app/reserva/pago""http://app-villa-tranquila.vercel.app/reserva/pago"
     auto_return: "approved",
