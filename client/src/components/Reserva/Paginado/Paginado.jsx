@@ -14,7 +14,16 @@ export default function Paginado({cabinsPerPage, allCabins, paginado}) {
                 {pageNumbers.length > 1 && 
                 pageNumbers.map(number => (
                     <li key={number}>
-                        <button onClick={() => paginado(number)}><strong>{number}</strong></button>
+                        <button onClick={() => {
+                            paginado(number);
+                            window.scrollTo({
+                                top: window.top,
+                                left: 0,
+                                behavior: 'smooth',
+                              });
+                            }}
+                        ><strong>{number}</strong>
+                        </button>
                     </li>
                 ))}
             </ul>

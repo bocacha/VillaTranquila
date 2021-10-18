@@ -1,33 +1,39 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { getCabins, filterCabins,readWeather } from "../../actions";
+import { getCabins, filterCabins, readWeather } from "../../actions";
 import Paginado from './Paginado/Paginado';
 import Navbar from "../Navbar/Navbar";
 import Cabaña from "./Cabaña/Cabaña";
 import styles from "./Reserva.module.css";
-import { FaWifi, FaCarAlt } from 'react-icons/fa';
-import { GiBarbecue } from 'react-icons/gi';
-import { IoMdPeople } from 'react-icons/io';
-import { MdAttachMoney, MdRoomService } from 'react-icons/md';
-import { ImCalendar, ImSearch } from 'react-icons/im';
-import { AiOutlineReload } from 'react-icons/ai';
+import { FaWifi, FaCarAlt } from "react-icons/fa";
+import { GiBarbecue } from "react-icons/gi";
+import { IoMdPeople } from "react-icons/io";
+import { MdAttachMoney, MdRoomService } from "react-icons/md";
+import { ImCalendar, ImSearch } from "react-icons/im";
+import { AiOutlineReload } from "react-icons/ai";
 import { Logeduser } from "../../actions";
 
 function validate(filters) {
-    let errors = {};
+  let errors = {};
 
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-    today = dd + '/' + mm + '/' + yyyy;
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, "0");
+  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+  var yyyy = today.getFullYear();
+  today = dd + "/" + mm + "/" + yyyy;
 
-    var inDate = filters.inDate.split('-').reverse().join('/');
-    var outDate = filters.outDate.split('-').reverse().join('/');
-    console.log('inDate', inDate, 'today', today, inDate > today);
-    console.log('outDate', outDate, 'today', today, outDate > today);
+  var inDate = filters.inDate
+    .split("-")
+    .reverse()
+    .join("/");
+  var outDate = filters.outDate
+    .split("-")
+    .reverse()
+    .join("/");
+  console.log("inDate", inDate, "today", today, inDate > today);
+  console.log("outDate", outDate, "today", today, outDate > today);
 
-    if((inDate < today && inDate !== '') || (outDate < today && outDate !== '')){
+    if ((inDate < today && inDate !== '') || (outDate < today && outDate !== '')) {
         errors.today = 'Fechas inválidas';
     }
     if (inDate > outDate && outDate !== '') {
@@ -37,50 +43,68 @@ function validate(filters) {
         errors.priceMin = 'El precio mínimo debe ser menor que el máximo';
     }
 
-    return errors;
+  return errors;
 }
 
-
 export default function Reserva() {
-    const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(Logeduser())
-    }, [dispatch]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(Logeduser());
+  }, [dispatch]);
 
-    useEffect(()=>{
-        dispatch (readWeather());
+    useEffect(() => {
+        dispatch(readWeather());
     });
 
     const allCabins = useSelector(state => state.cabins);
+    let orderedCabins = allCabins.sort((a, b) => {
+        if (parseInt(a.Number) < parseInt(b.Number)) return -1;
+        if (parseInt(a.Number) > parseInt(b.Number)) return 1;
+        return 1;
+    })
     const [errors, setErrors] = useState({})
 
     // Paginado---------------------------------------------------------------
     const [currentPage, setCurrentPage] = useState(1);
-    const [cabinsPerPage, /*setCabinsPerPage*/] = useState(6);
+    const [cabinsPerPage, /*setCabinsPerPage*/] = useState(5);
     const indexOfLastCabin = currentPage * cabinsPerPage;
     const indexOfFirstCabin = indexOfLastCabin - cabinsPerPage;
-    const currentCabins = allCabins.slice(indexOfFirstCabin, indexOfLastCabin);
+    let currentCabins = orderedCabins.slice(indexOfFirstCabin, indexOfLastCabin);
 
-    const paginado = (pageNumber) => {
-        setCurrentPage(pageNumber);
-    }
-    //-------------------------------------------------------------------------
+  const paginado = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+  //-------------------------------------------------------------------------
 
-    useEffect(() => {
-        dispatch(getCabins())
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(getCabins());
+  }, [dispatch]);
 
+  const [filters, setFilters] = useState({
+    inDate: "",
+    outDate: "",
+    capacity: "",
+    priceMin: "",
+    priceMax: "",
+    wifi: "",
+    barbecue: "",
+    parking: "",
+  });
 
-    const [filters, setFilters] = useState({
-        inDate: '',
-        outDate: '',
-        capacity: '',
-        priceMin: '',
-        priceMax: '',
-        wifi: '',
-        barbecue: '',
-        parking: '',
+  function handleReload(e) {
+    e.preventDefault();
+    setFilters({
+      inDate: "",
+      outDate: "",
+      capacity: "",
+      priceMin: "",
+      priceMax: "",
+      wifi: "",
+      barbecue: "",
+      parking: "",
     });
+    window.location.reload();
+  }
 
     function handleReload(e) {
         e.preventDefault();
@@ -110,24 +134,25 @@ export default function Reserva() {
             ...filters,
             [e.target.name]: e.target.value
         }))
-        console.log('filters',filters);
-        console.log('errors',errors);
+        console.log('filters', filters);
+        console.log('errors', errors);
     }
 
 
     function handleFilters(e) {
         e.preventDefault();
-        console.log('errors:',errors);
+        console.log('errors:', errors);
         if (!Object.getOwnPropertyNames(errors).length) {
             console.log('Filters submited');
             dispatch(filterCabins(filters));
         }
         else {
-            if(errors.today) alert(errors.today);
+            if (errors.today) alert(errors.today);
             if (errors.inDate && !errors.today) alert(errors.inDate);
             if (errors.priceMin) alert(errors.priceMin);
         }
     }
+  
 
     return (
         <div>
@@ -265,8 +290,7 @@ export default function Reserva() {
                 <div className={styles.paginado}>
                     <Paginado cabinsPerPage={cabinsPerPage} allCabins={allCabins.length} paginado={paginado} />
                 </div>
-            </div>
-
-        </div >
-    )
+      </div>
+    </div>
+  );
 }

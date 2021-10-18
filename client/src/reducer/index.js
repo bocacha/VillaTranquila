@@ -37,7 +37,9 @@ import {
   REMOVE_USERS,
   GET_USER_DATA,
   SEND_PASSWORD_EMAIL,
-  SELECTED_CABIN
+  SELECTED_CABIN,
+  FILTER_RESERVATIONS,
+  FIND_USER
 
 } from "../actions";
 import fechas from "../components/Reserva/Linkreserva/algoritmofechas"
@@ -54,6 +56,7 @@ const initialState = {
   cabañas: [],
   user: {},
   reservaciones: [],
+  allReservations: [],
   fechasnodisponibles:[],
   userData: {},
   weather:[]
@@ -133,7 +136,7 @@ export default function rootReducer(state = initialState, action) {
       let barbecue = action.payload.barbecue;
       cabinsFiltered = barbecue === '' || barbecue === 'false' ?
         cabinsFiltered :
-        cabinsFiltered.filter(el => el.Barbecue);
+        cabinsFiltered.filter(el => el.Parrilla);
       // Filter by parking:
       let parking = action.payload.parking;
       cabinsFiltered = parking === '' || parking === 'false' ?
@@ -189,6 +192,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         reservaciones: action.payload,
+        allReservations: action.payload
       };
     case READ_PICTURES:
       return {
@@ -199,6 +203,7 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         usuarios: action.payload,
+        allUsers: action.payload,
       };
     case READ_SERVICES:
       return {
@@ -314,6 +319,42 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         weather: action.payload
+      }
+
+    case FILTER_RESERVATIONS:
+      let allReservations = state.allReservations;
+      // Filter by username:
+      let username = action.payload.username;
+      let userID = state.usuarios.find(el => el.UserName === username)?.ID;
+      allReservations = username === '' ?
+        allReservations :
+        !userID ?
+          alert('Usuario no encontrado') :
+          allReservations.filter(el => el.UserId === userID);
+      // Filter by cabinNumber:
+      let cabinNumber = action.payload.cabinNumber;
+      let cabinID = state.cabins.find(el => el.Number === cabinNumber)?.ID;
+      allReservations = cabinNumber === '' ?
+        allReservations :
+        !cabinID ?
+          alert('Cabaña no encontrada') :
+          allReservations.filter(el => el.Cabinid === cabinID);
+      // Filter by date:
+      let date = action.payload.date.split('-').reverse().join('/');
+      allReservations = date === '' ?
+        allReservations :
+        allReservations.filter(el => el.Checkin === date);
+      return {
+        ...state,
+        reservaciones: allReservations
+      }
+
+    case FIND_USER:
+      let allUsers = state.allUsers;
+      let user = allUsers.find(el => el.UserName === action.payload)
+      return {
+        ...state,
+        usuarios: user,
       }
 
     default:
