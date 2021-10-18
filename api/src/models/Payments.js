@@ -9,15 +9,15 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     user:{
-      type:DataTypes.STRING,
+      type:DataTypes.JSON,
       allowNull: false,
     },
     status:{
-      type:DataTypes.STRING,
+      type:DataTypes.JSON,
       allowNull: false,
     },
     status_detail:{
-      type:DataTypes.STRING,
+      type:DataTypes.JSON,
       allowNull: false,
     },
     transaction_detail:{
@@ -25,13 +25,13 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     id_reserva:{
-      type:DataTypes.STRING,
+      type:DataTypes.JSON,
       allowNull: false,
     },
     fecha:{
-      type:DataTypes.STRING,
+      type:DataTypes.JSON,
       allowNull: false,
-    },
+    },   
     Show:{
       type:DataTypes.BOOLEAN, 
       defaultValue: true

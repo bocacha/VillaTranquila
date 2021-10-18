@@ -36,70 +36,76 @@ export default function UsuariosDetail({
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
-        <p className={styles.p}>
-          <strong>UserName:</strong> {UserName}
-        </p>
-        <p className={styles.p}>
-          <strong>FirstName:</strong> {FirstName}
-        </p>
-        <p className={styles.p}>
-          <strong>LastName:</strong> {LastName}
-        </p>
-        <p className={styles.p}>
-          <strong>Address:</strong> {Address}
-        </p>
-        <p className={styles.p}>
-          <strong>Phone:</strong> {Phone}
-        </p>
-        <p className={styles.p}>
-          <strong>Email:</strong> {Email}
-        </p>
-        <p className={styles.p}>
-          <strong>Admin:</strong> {Admin}
-        </p>
+        <table>
+          <tbody>
+            <tr>
+              <td className={styles.izquierda}><strong>Nombre de usuario:</strong></td>
+              <td className={styles.derecha}><p>{UserName}</p></td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Nombre:</strong></td>
+              <td className={styles.derecha}><p>{FirstName}</p></td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Apellido:</strong></td>
+              <td className={styles.derecha}><p>{LastName}</p></td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Dirección:</strong></td>
+              <td className={styles.derecha}><p>{Address}</p></td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Teléfono:</strong></td>
+              <td className={styles.derecha}><p>{Phone}</p></td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Email:</strong></td>
+              <td className={styles.derecha}><p>{Email}</p></td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Admin:</strong></td>
+              <td className={styles.derecha}><p>{Admin}</p></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <div className={styles.btnsContainer}>
-        <div>
-          {!restaurar ? (
-            <button
-              onClick={() => handleSubmitDelete(ID)}
-              className={styles.btn}
-            >
-              Eliminar
-            </button>
-          ) : (
-            <button
-              onClick={() => handleSubmitrestore(ID)}
-              className={styles.btn}
-            >
-              Restaurar
-            </button>
-          )}
-        </div>
-        {mostrar ? (
-          <div>
-            <button
-              onClick={(e) => {
-                handleSubmitEdit(e, ID,
-                  UserName,
-                  Admin,
-                  FirstName,
-                  LastName,
-                  Address,
-                  Phone,
-                  Email,);
-                setMostrar(false);
-              }}
-              className={styles.btnPlus}
-            >
-              Editar
-            </button>
-          </div>
+        {!restaurar ? (
+          <button
+            onClick={() => handleSubmitDelete(ID)}
+            className={styles.btn}
+          >
+            Blockear
+          </button>
         ) : (
-          <div>
-            <button onClick={(e) => handlePrueba(e, ID)} className={styles.btnPlus}>Guardar</button>
-          </div>
+          <button
+            onClick={() => handleSubmitrestore(ID)}
+            className={styles.btn}
+          >
+            Restaurar
+          </button>
         )}
+        <button
+          onClick={(e) => {
+            handleSubmitEdit(e, ID,
+              UserName,
+              Admin,
+              FirstName,
+              LastName,
+              Address,
+              Phone,
+              Email);
+            setMostrar(false);
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: 'smooth',
+            });
+          }}
+          className={styles.btnPlus}
+        >
+          Editar
+        </button>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import styles from './Weather.module.css';
+import styles from "./Weather.module.css";
 
 export default function Weather() {
     const weather = useSelector(state => state.weather);
@@ -141,7 +141,7 @@ export default function Weather() {
                         </div>
                     )
                 })}
-            </div>
-        </div>
-    )
-};
+      </div>
+    </div>
+  );
+}

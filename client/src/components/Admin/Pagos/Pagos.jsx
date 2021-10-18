@@ -13,6 +13,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
 import NavAdmin from '../NavAdmin/NavAdmin';
+import Navbar from "../../Navbar/Navbar";
 // import { Link } from "react-router-dom";
 
 export default function Pagos() {
@@ -143,7 +144,12 @@ export default function Pagos() {
   
   return (
     <div className={styles.container}>
-      <NavAdmin />
+      <div className={styles.navs2}>
+        <div className={styles.navs}>
+          <Navbar />
+          <NavAdmin />
+        </div>
+      </div>
       <div className={styles.btnsContainer}>
         {!habilitar ? (
           <button onClick={ocultadas} className={styles.btnSup}>
@@ -157,8 +163,6 @@ export default function Pagos() {
       </div>
       <div className={styles.container2}>
         <div className={styles.formsCont}>
-          
-
           {/* VER */}
           <div>
             {allPayments?.map((el) => {

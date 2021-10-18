@@ -5,6 +5,7 @@ import Navbar from "../Navbar/Navbar";
 import{useEffect} from "react"
 import { useDispatch} from 'react-redux';
 import { Logeduser } from "../../actions";
+import NavAdmin from "./NavAdmin/NavAdmin";
 
 export default function Admin() {
   const dispatch = useDispatch();
@@ -13,7 +14,15 @@ export default function Admin() {
 }, [dispatch]);
   return (
     <div>
-      <Navbar />
+      <div className={styles.navs2}>
+        <div className={styles.navs}>
+          <Navbar />
+          <NavAdmin  className={styles.navAdmin}/>
+        </div>
+        <div className={styles.navRsp}>
+          <Navbar />
+        </div>
+      </div>
       <div className={styles.container}>
         <div className={styles.bienvenida}>
           <span className={styles.title}>¡Bienvenido, Administrador!</span> <br />
