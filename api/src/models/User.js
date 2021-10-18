@@ -27,10 +27,8 @@ module.exports = (sequelize) => {
     type: DataTypes.STRING,
     allownull: false,
     validate:{
-        isAlpha:{
-          args:true,
-          msg:"El nombre solo puede contener letras"
-        },
+      is:'[a-zA-Z\s]',
+       
         len:{
           args:[4,20],
           msg:"El nombre tiene que contener entre  4 y 20 caracteres"
@@ -41,10 +39,7 @@ module.exports = (sequelize) => {
     type: DataTypes.STRING,
     allownull: false,
     validate:{
-        isAlpha:{
-          args:true,
-          msg:"El apellido solo puede contener letras"
-        },
+        is:'[a-zA-Z\s]',
         len:{
           args:[4,20],
           msg:"El apellido tiene que contener entre  4 y 20 caracteres"
