@@ -42,6 +42,7 @@ export const READ_FECHASNODISPONIBLES = "READ_FECHASNODISPONIBLES";
 export const GET_USER_DATA = "GET_USER_DATA";
 export const SELECTED_CABIN = "SELECTED_CABIN";
 export const FILTER_RESERVATIONS = 'FILTER_RESERVATIONS';
+export const GET_TESTIMONIAL = 'GET_TESTIMONIAL';
 
 export function getCabins() {
   return async function (dispatch) {
@@ -801,5 +802,13 @@ export function filterReservations(payload){
   return {
     type: FILTER_RESERVATIONS,
     payload
+  }
+}
+
+export function getTestimonials(payload) {
+  console.log('¿',payload)
+  return {
+    type: GET_TESTIMONIAL,
+    payload,
   }
 }

@@ -38,7 +38,9 @@ import {
   GET_USER_DATA,
   SEND_PASSWORD_EMAIL,
   SELECTED_CABIN,
-  FILTER_RESERVATIONS
+  FILTER_RESERVATIONS,
+  GET_TESTIMONIAL
+
 
 } from "../actions";
 import fechas from "../components/Reserva/Linkreserva/algoritmofechas"
@@ -58,7 +60,8 @@ const initialState = {
   allReservations: [],
   fechasnodisponibles:[],
   userData: {},
-  weather:[]
+  weather:[],
+  testimoniales: []
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -346,6 +349,11 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         reservaciones: allReservations
       }
+      case GET_TESTIMONIAL:
+        return{
+          ...state,
+          testimoniales : [action.payload]
+        }
 
 
     default:

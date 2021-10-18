@@ -106,6 +106,18 @@ export default function Navbar() {
                       </Link>
                     </li>
                     <li>
+                      <Link to="/testimonial" className={styles.mostrar}>
+                        <button className={styles.navBtn}>
+                          <strong className={styles.list}>
+                            Testiomonial{" "}
+                            <span className={styles.span}>
+                              <GiPhotoCamera />
+                            </span>
+                          </strong>
+                        </button>
+                      </Link>
+                    </li>
+                    <li>
                       {logeduser.admin ? (
                         <>
                           <Link to="/admin" className={styles.mostrar}>

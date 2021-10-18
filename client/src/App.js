@@ -17,6 +17,7 @@ import LinkReserva from"./components/Reserva/Linkreserva/LinkReserva"
 import Gallery from './components/Gallery/Gallery';
 import UserCard from './components/UserCard/UserCard';
 import Profile from './components/Profile/Profile';
+import GaleriaTestimonial from './components/Testimoniales/GaleriaTestimonial';
 //import { useDispatch, useSelector } from 'react-redux';
 import PagosReserva from './components/PagoReserva/PagoReserva';
 //import { useEffect } from 'react';
@@ -38,6 +39,7 @@ function App() {
           <Route path="/reserva/reservar" component={LinkReserva} />
           <Route path='/reserva/pago' component={PagosReserva} />
           <Route path="/galeria" component={Gallery} />
+          <Route path="/testimonial" component={GaleriaTestimonial} />
           <Route path="/usercard" component={UserCard} />
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/admin/cabañas" component={Cabañas} />
