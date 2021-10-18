@@ -89,19 +89,18 @@ img{
     position: relative;
     max-width: 22em;
     max-height: 22em;
-    margin: 15px auto;
-    margin-top: 25px;
+    margin: 0 auto;
+    margin-bottom: 25px;
     color: #355978;
     font-family: 'Roboto', sans-serif;
     text-align: center;
-    background-color: currentColor;
   }
 
 .icon {
     position: relative;
     display: inline-block;
-    width: 8em;
-    height: 6em;
+    width: 12em;
+    height: 8em;
     font-size: 1em; /* control icon size here */
 }
 
