@@ -195,20 +195,20 @@ const Cabañas = () => {
           <Navbar />
         </div>
       </div>
-      <div className={styles.container}>
-        <div className={styles.btns}>
-          <div className={styles.btnsContainer}>
-            {!habilitar ? (
-              <button onClick={ocultadas} className={styles.btnSup}>
-                Mostrar ocultadas
-              </button>
-            ) : (
-              <button onClick={showtrue} className={styles.btnSup}>
-                Mostrar habilitadas
-              </button>
-            )}
-          </div>
+      <div className={styles.btns}>
+        <div className={styles.btnsContainer}>
+          {!habilitar ? (
+            <button onClick={ocultadas} className={styles.btnSup}>
+              Mostrar ocultadas
+            </button>
+          ) : (
+            <button onClick={showtrue} className={styles.btnSup}>
+              Mostrar habilitadas
+            </button>
+          )}
         </div>
+      </div>
+      <div className={styles.container}>
         <div className={styles.crearCont}>
           <div className={styles.title}>Crear Cabaña</div>
           <form onSubmit={handleSubmit} className={styles.form}>
@@ -316,15 +316,21 @@ const Cabañas = () => {
                 NO
               </option>
             </select>
-            <button type="submit" className={styles.btn}>Crear</button>
+            <button type="submit" className={styles.btn}>
+              Crear
+            </button>
           </form>
         </div>
         {/* EDITAR */}
         {mostrar ? (
           <div className={styles.crearCont}>
             <div className={styles.title}>Editar Cabaña</div>
-            <form className={styles.form} onSubmit={handlePrueba}>
-              <div>
+            <form
+              className={styles.form}
+              onSubmit={handlePrueba}
+              id={styles.formEditar}
+            >
+              <div className={styles.inputEditar}>
                 Nº De Cabaña: <br />
                 <input
                   type="text"
@@ -335,10 +341,9 @@ const Cabañas = () => {
                   max="20"
                   id={styles.id1}
                   required
-                  className={styles.inputForm}
                 />
               </div>
-              <div>
+              <div className={styles.inputEditar}>
                 Cantidad de Camas: <br />
                 <input
                   type="number"
@@ -349,10 +354,9 @@ const Cabañas = () => {
                   max="10"
                   id={styles.id2}
                   required
-                  className={styles.inputForm}
                 />
               </div>
-              <div>
+              <div className={styles.inputEditar}>
                 Costo por Noche: <br />
                 <input
                   type="number"
@@ -363,7 +367,6 @@ const Cabañas = () => {
                   id={styles.id3}
                   max="50000"
                   required
-                  className={styles.inputForm}
                 />
               </div>
               <div className={styles.descripcion}>
