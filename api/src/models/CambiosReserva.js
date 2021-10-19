@@ -1,7 +1,7 @@
 const { DataTypes, Sequelize} = require('sequelize');
 
 module.exports = (sequelize) => {
-  sequelize.define('Reservations', {
+  sequelize.define('CambiosReserva', {
     ID:{
         type: DataTypes.UUID,
         defaultValue: Sequelize.UUIDV4,
@@ -20,6 +20,11 @@ module.exports = (sequelize) => {
         type: DataTypes.BOOLEAN,
         allownull:true,
         defaultValue: false
-    }
+    },
+    CancelChange:{
+      type: DataTypes.BOOLEAN,
+      allownull:true,
+      defaultValue: false
+  }
   },{timestamps: false,});
 };

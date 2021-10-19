@@ -83,11 +83,11 @@ module.exports = (sequelize) => {
         }
       }
   },
-   ReservationsHistory:{
-    type: DataTypes.JSON,
-    defaultValue: [],
-    allowNull: false,
-   },
+  //  ReservationsHistory:{
+  //   type: DataTypes.JSON,
+  //   defaultValue: [],
+  //   allowNull: false,
+  //  },
    Blocked:{
     type: DataTypes.BOOLEAN,
     defaultValue: false,

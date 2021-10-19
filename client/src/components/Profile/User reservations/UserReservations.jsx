@@ -5,7 +5,7 @@ import {
   editReservation,
   readReservation,
   Logeduser,
-  readReservationocultados,getUserData,readServices, selectcabin
+  readReservationocultados,getUserData,readServices, selectcabin,cambiarReserva
 } from "../../../actions";
 import ReservacionesDetail from "./ReservacionesDetail";
 import DatePicker,{registerLocale} from "react-datepicker";
@@ -22,18 +22,22 @@ export default function Reservaciones() {
       useEffect(() => {
         dispatch(readServices());
       }, [dispatch]);
+      useEffect(() => {
+        dispatch(readReservation());
+      }, [dispatch]);
   const [selectDateCI, setSelectDateCI] = useState(null);
   const [selectDateCO, setSelectDateCO] = useState(null);
   const [mostrar, setMostrar] = useState(false);
   const [habilitar, setHabilitar]= useState(false)
   const logeduser = useSelector((state) => state.user);
+  const allreservations = useSelector((state) => state.allReservations);
   const { token } = logeduser;
+  const user = useSelector((state) => state.user);
   const [edit, setEdit] = useState({
     id: "",
     Checkin: "",
     Checkout: "",
-    UserId: "",
-    Paymentsid: "",
+    UserId: user.userid,
     Cabinid: "",
     ExtraServices: "",
     CostoFinal: "",
@@ -42,14 +46,12 @@ export default function Reservaciones() {
   id: "",
   Checkin: "",
   Checkout: "",
-  UserId: "",
-  Paymentsid: "",
+  UserId: user.userid,
   Cabinid: "",
   ExtraServices: "",
   CostoFinal: "",})
   const dataUser = useSelector((state) => state.userData)
  // const costo = useSelector((state) => state.selectedcabin);
-  const user = useSelector((state) => state.user);
   const userid = user.userid;
   const servicios = useSelector((state) => state.servicios);
   let lala = [];
@@ -83,6 +85,7 @@ export default function Reservaciones() {
       ExtraServices: ExtraServices,
       CostoFinal: CostoFinal,
       Cabinid: Cabinid,
+      UserId: user.userid,
     })
     setOriginal({
       ...original,
@@ -95,6 +98,7 @@ export default function Reservaciones() {
       ExtraServices: ExtraServices,
       CostoFinal: CostoFinal,
       Cabinid: Cabinid,
+      UserId: user.userid,
     })
   }
   function handleChangeEdit(e) {
@@ -168,15 +172,11 @@ export default function Reservaciones() {
   };
   function handlePrueba(e, ID) {
     e.preventDefault();
-    console.log(edit)
-   //  setEdit({...edit,
-   //   id:ID  
-  //})
-    setMostrar(true);
-    dispatch(editReservation(edit, { token }));
-    alert("Editado")
-    //pruebadispatch()
-    window.location.reload()
+    const obj ={
+      Original: original,
+      Nuevo: edit,
+    }
+    dispatch(cambiarReserva(obj))
   }
  // const pruebadispatch=() => {
    // const { token } = logeduser;
@@ -184,8 +184,7 @@ export default function Reservaciones() {
    // 
    // window.location.reload()
   //}
-  const reservasUsuario = dataUser.ReservationsHistory
-
+  const reservasUsuario = allreservations.filter(e=>e.UserName === logeduser.user)
   return (
     <div className={styles.container}>
       <div className={styles.navs2}>
@@ -251,6 +250,7 @@ export default function Reservaciones() {
                 ))}
               </div>
               <button onClick={checkboxselected}>Seleccionar Servicios</button>
+              <button onClick={handlePrueba}>Solicitar Cambios</button>
             </div>
           :
           null

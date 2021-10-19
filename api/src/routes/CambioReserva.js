@@ -30,5 +30,44 @@ router.post("/Cambios" , (req, res)=>{
     })
     .catch(error=>{ console.log(error)})
 })
+router.put("/Cambios/Done", (req,res) =>{
+    CambiosReserva.update(
+          {Done:true}
+        ,
+        {
+            where: {ID: req.body.id}
 
+        })
+        .then(doneTemp=>{
+            return res.status(200).json(doneTemp)
+        })
+        .catch(error=>{console.log(error)})
+});
+router.put("/Cambios/Cancel", (req,res) =>{
+    CambiosReserva.update(
+          {CancelChange:true}
+        ,
+        {
+            where: {ID: req.body.id}
+
+        })
+        .then(doneTemp=>{
+            return res.status(200).json(doneTemp)
+        })
+        .catch(error=>{console.log(error)})
+});
+router.put("/Cambios/Restore", (req,res) =>{
+    CambiosReserva.update(
+          {CancelChange:false,
+            Done:false}
+        ,
+        {
+            where: {ID: req.body.id}
+
+        })
+        .then(doneTemp=>{
+            return res.status(200).json(doneTemp)
+        })
+        .catch(error=>{console.log(error)})
+});
 module.exports = router;

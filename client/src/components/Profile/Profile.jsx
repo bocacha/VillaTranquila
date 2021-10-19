@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { editProfile, editUsers, getUserData, Logeduser, Loguser } from "../../actions";
+import { editProfile, editUsers, getUserData, Logeduser, Loguser,readReservation } from "../../actions";
 import styles from "./Profile.module.css";
 import Navbar from "../Navbar/Navbar";
 import { FaLongArrowAltRight, FaLock, FaUnlockAlt } from "react-icons/fa";
@@ -12,20 +12,23 @@ import { BiSave } from 'react-icons/bi';
 
 export default function Profile(props) {
     const dispatch = useDispatch();
-
+    useEffect(() => {
+        dispatch(readReservation());
+    }, [dispatch]);
     useEffect(() => {
         dispatch(Logeduser());
     }, [dispatch]);
 
-
+   
     const user = useSelector((state) => state.user);
+    const allreservations = useSelector((state) => state.allReservations).filter(e=> e.UserId === user.userid)
     const userid = user.userid;
     useEffect(() => {
         dispatch(getUserData(userid));
-    }, [dispatch, userid]);
-
+    }, [dispatch, userid]);  
+    
     const dataUser = useSelector((state) => state.userData);
-
+//
     const [edit, setEdit] = useState({
         UserName: dataUser.UserName,
         FirstName: dataUser.FirstName,
@@ -145,7 +148,7 @@ export default function Profile(props) {
             alert('Error de tipeo, vuelva a introducir su nueva contraseña');
         }
     };
-
+    const user_reservations = allreservations
     return (
         <div className={styles.perfil}>
             <Navbar />
@@ -200,8 +203,8 @@ export default function Profile(props) {
                     <details>
                         <summary>Historial de reservas</summary>
                        
-                        {dataUser.ReservationsHistory &&
-                            dataUser.ReservationsHistory.length ? (
+                        { user_reservations &&
+                           user_reservations.length>0 ? (
                           <Link to={`/Profile/${user.user}/${user.userid}`} className={styles.link}>
                         <button className={styles.editarPerfil} >Ver y editar mis reservaciones</button>
                          </Link>

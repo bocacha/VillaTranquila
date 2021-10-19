@@ -146,8 +146,7 @@ router.put("/EditProfile/:ID", async (req,res) =>{
 });
 
 router.put("/EditUser", async (req,res) =>{
-    const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email, Admin,Premium,ReservationsHistory} = req.body;
-    console.log("reserva",ReservationsHistory)
+    const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email, Admin,Premium} = req.body;
     // const authorizations = req.get("Authorization") 
     //      let token = ""
     // if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
@@ -175,7 +174,6 @@ router.put("/EditUser", async (req,res) =>{
             Email: Email,
             Admin: Admin,
             Premium: Premium,
-            ReservationsHistory: ReservationsHistory
         }
         User.update(
             objecttoupdate
@@ -199,8 +197,6 @@ router.put("/EditUser", async (req,res) =>{
         Email: Email,
         Admin: Admin,
         Premium: Premium,
-        ReservationsHistory: ReservationsHistory
-
     }
     User.update(
         objecttoupdate

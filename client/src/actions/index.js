@@ -43,6 +43,8 @@ export const GET_USER_DATA = "GET_USER_DATA";
 export const SELECTED_CABIN = "SELECTED_CABIN";
 export const FILTER_RESERVATIONS = 'FILTER_RESERVATIONS';
 export const FIND_USER = 'FIND_USER';
+export const READ_CAMBIOS = "READ_CAMBIOS";
+export const READ_CAMBIOS_DONE= "READ_CAMBIOS_DONE";
 
 export function getCabins() {
   return async function (dispatch) {
@@ -89,42 +91,14 @@ export function readWeather() {
 }
 
 export function createReservation(payload) {
+  console.log(payload)
   return async function (dispatch) {
     const response = await axios.post("/reservations/NewReservation", payload);
-    const reserva = response.data
-    const users= await axios.get("/users")
-    const user = users.data.filter(e=> e.ID === payload.id)
-    let reservas = []
-    if(user[0].ReservationsHistory){
-user[0].ReservationsHistory.map(e=>{
-        reservas.push(e)
-      })
-      reservas.push(reserva)
-    const cambiar={
-      id: payload.id,
-      ReservationsHistory: reservas
-    }
-    console.log(cambiar)
     return (dispatch({
       type: CREATE_RESERVATION,
-      payload: response.data
-     
-     }),dispatch(editUsers(cambiar)));
-
-    }else{
-       reservas.push(reserva)
-    const cambiar={
-      id: payload.id,
-      ReservationsHistory: reservas
-    }
-    console.log(cambiar)
-    return (dispatch({
-      type: CREATE_RESERVATION,
-      payload: response.data
-     
-     }),dispatch(editUsers(cambiar))); 
-    }    
-}
+      payload: response.data    
+     }));
+  }
 }
 
 export function createServices(payload, { token }) {
@@ -216,11 +190,6 @@ export function readPayment({ token }) {
 }
 
 export function readReservation() {
-  // const config={
-  //   headers:{
-  //   Authorization: `Bearer ${token}`,
-  // }
-  // }
   return async function (dispatch) {
     try {
       var json = await axios.get("/reservations/");
@@ -751,7 +720,6 @@ return async function (dispatch) {
 }
 
 export function getUserData(username){
-  console.log(username)
   return async function (dispatch) {
     try {
       let json = await axios.get("/users/" + username);
@@ -817,6 +785,77 @@ export function cambiarReserva(payload){
     try {
       let json = await axios.post("/CambiosReserva/Cambios",payload);
       
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+export function aceptarCambios(payload, { token },ID){
+  const obj ={
+    id: payload.id,
+    Checkin:payload.Checkin,
+    Checkout: payload.Checkout,
+    UserId:payload.UserId,
+    ExtraServices:payload.ExtraServices,
+    CostoFinal:payload.CostoFinal ,
+    UserName:payload.UserName,
+    Anombrede:payload.Anombrede,
+    CabinNumber:payload.CabinNumber
+  }
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  }
+  return async function (dispatch) {
+    try {
+      let json = await axios.put("/reservations/EditReservation", obj, config);
+      let json2 = await axios.put("/CambiosReserva/Cambios/Done",{id:ID})
+      
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+export function cancelarCambios(ID){
+  return async function (dispatch) {
+    try {
+      let json = await axios.put("/CambiosReserva/Cambios/Cancel",{id:ID});
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+export function RestaurarCambios(ID){
+  return async function (dispatch) {
+    try {
+      let json = await axios.put("/CambiosReserva/Cambios/Restore",{id:ID});
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+export function getCambiosDone(){
+  return async function (dispatch) {
+    try {
+      let json = await axios.get("/CambiosReserva/Done");
+      return dispatch({
+        type: READ_CAMBIOS_DONE,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+export function getCambios(){
+  return async function (dispatch) {
+    try {
+      let json = await axios.get("/CambiosReserva");
+      return dispatch({
+        type: READ_CAMBIOS,
+        payload: json.data,
+      });
     } catch (err) {
       console.log(err);
     }

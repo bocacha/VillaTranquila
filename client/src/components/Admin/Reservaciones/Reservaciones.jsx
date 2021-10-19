@@ -54,6 +54,7 @@ export default function Reservaciones() {
     Cabinid:"",
     ExtraServices: "",
     CostoFinal: "",
+    UserName: "",
   });
  
   function handleChangeEdit(e) {
