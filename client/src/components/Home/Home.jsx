@@ -34,15 +34,15 @@ export default function Home() {
       <div>
         <Navbar />
       </div>
+      <div className={styles.chat}>
+        <Chat  />
+      </div>
       <div className={styles.nombre}>
         <div className={styles.nombre1}>
           <p className={styles.villa}>Villa Tranquila </p>
           <p className={styles.complejo}>- complejo de cabañas -</p>
         </div>
       </div>
-      {/* <div className={styles.chat}>
-        <Chat  />
-      </div> */}
       <div>
         {/* <Searchbar/> */}
         {/* <Gallery/> */}

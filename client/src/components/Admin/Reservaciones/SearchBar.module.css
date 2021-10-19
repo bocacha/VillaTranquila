@@ -1,55 +1,77 @@
-.searchBar{
-    display: flex;
+.searchBar {
+  display: flex;
   justify-items: center;
   justify-content: center;
 }
-.container{
-    justify-items: center;
-    justify-content: center;
+.container {
+  justify-items: center;
+  justify-content: center;
   padding: 1.5%;
   color: #293c4f;
   border-radius: 10px;
-  width:100%;
+  width: 100%;
 }
-.searchBar .container form input{
-    margin-left:0.3%;
-    margin-right:0.3%;
-    border: 1px solid #293c4f;
-    background-color: #94adbc;
-    border-radius: 50px;
-    color:#293c4f;
-    width:23.85%;
-    height:40px;
-    padding-bottom: 9px;
+.input {
+  margin-left: 0.3%;
+  margin-right: 0.3%;
+  border: 1px solid #293c4f;
+  background-color: #94adbc;
+  border-radius: 50px;
+  color: #293c4f;
+  width: 23.85%;
+  height: 40px;
+  padding-bottom: 9px;
 }
-.searchBar .container form input:hover{
+.input:hover {
   background: #d1e4f0;
   color: #fff;
 }
-.searchBar .container form input:focus{
+.input:focus {
   background: #d1e4f0;
   color: #293c4f;
 }
 .btnSup {
-    margin-left: 0.3%;
-    margin-right: 0.3%;
-    background: #293c4f;
-    color: #fff;
-    border: none;
-    border: 1px solid #293c4f;
-    border-radius: 50px;
-    font-family: Lato, Arial, sans-serif;
-    font-weight:bolder;
-    transition-duration: 0.3s;
-    height:40px;
-    width:36.1%
+  margin-left: 0.3%;
+  margin-right: 0.3%;
+  background: #293c4f;
+  color: #fff;
+  border: none;
+  border: 1px solid #293c4f;
+  border-radius: 50px;
+  font-family: Lato, Arial, sans-serif;
+  font-weight: bolder;
+  transition-duration: 0.3s;
+  height: 40px;
+  width: 36.1%;
+}
+.btnSup:hover {
+  background: #94adbc;
+  border: 1px solid #293c4f;
+  color: #293c4f;
+}
+.icon {
+  margin-top: -2px;
+  margin-left: 10px;
+}
+
+@media (min-width: 320px) {
+  .input{
+    width: 300px;
+    padding:15px
   }
-  .btnSup:hover {
-    background: #94adbc;
-    border: 1px solid #293c4f;
-    color: #293c4f;
+  .btnSup{
+    width: 300px;
+    margin-bottom: 10px;
   }
-  .icon{
-      margin-top: -2px;
-      margin-left: 10px;
+}
+
+@media (min-width: 1024px) {
+  .input{
+    width: 250px;
+    padding:15px
   }
+  .btnSup{
+    width: 250px;
+    margin-bottom: 10px;
+  }
+}

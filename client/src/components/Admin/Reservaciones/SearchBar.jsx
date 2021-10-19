@@ -49,18 +49,21 @@ export default function SearchBar() {
                         placeholder='Nombre de usuario'
                         name='username'
                         onChange={handleInputChange}
+                        className={styles.input}
                     />
                     <input
                         type='text'
                         placeholder='Número de cabaña'
                         name='cabinNumber'
                         onChange={handleInputChange}
+                        className={styles.input}
                     />
                     <input
                         type='date'
                         placeholder='Fecha de llegada'
                         name='date'
                         onChange={handleInputChange}
+                        className={styles.input}
                     />
                 </form>
                 <div>

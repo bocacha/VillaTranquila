@@ -169,8 +169,15 @@ export default function Reservaciones() {
   }
   return (
     <div className={styles.reservasAdmin}>
-      <Navbar />
-      <NavAdmin />
+      <div className={styles.navs2}>
+        <div className={styles.navs}>
+          <Navbar />
+          <NavAdmin  className={styles.navAdmin}/>
+        </div>
+        <div className={styles.navRsp}>
+          <Navbar />
+        </div>
+      </div>
       <div className={styles.container1}>
         <div className={styles.btnsContainer}>
           {!habilitar ? (
