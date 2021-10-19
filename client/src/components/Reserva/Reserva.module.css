@@ -220,7 +220,8 @@
 
 .paginado {
   position: absolute;
-  margin-left: 45%;
+  width:100%;
+  margin-top: 100px;
 }
 
 #noDisponible{

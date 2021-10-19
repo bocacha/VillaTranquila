@@ -136,7 +136,7 @@
   position:absolute;
   width: 100%;
   background-color: red;
-  margin-left:50%;
+  margin-top: 150px;
 }
 
 @media (max-width: 700px) {

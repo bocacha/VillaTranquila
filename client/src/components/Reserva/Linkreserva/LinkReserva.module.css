@@ -5,6 +5,9 @@
   margin-right: auto;
   background-color: #94adbc;
   display: flex;
+  position: fixed;
+  overflow-y: scroll;
+  overflow-x: hidden;
   /* flex-direction: row; */
 }
 
@@ -82,7 +85,9 @@
   transform:scale(1.1)
 }
 
-
+.form{
+  margin-bottom: 10px;
+}
 
 .editarCont {
   display: flex;
@@ -197,6 +202,8 @@
   background: url("https://res.cloudinary.com/villatranquila/image/upload/v1633134933/Cabins/12_rctcjm.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+  position: fixed;
+  margin-left: 50%;
 }
 
 #precioFinal{
