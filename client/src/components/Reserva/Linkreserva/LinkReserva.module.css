@@ -5,10 +5,12 @@
   margin-right: auto;
   background-color: #94adbc;
   display: flex;
+  flex-direction: row;
+  top: 0;
+  bottom: 0;
   position: fixed;
   overflow-y: scroll;
   overflow-x: hidden;
-  /* flex-direction: row; */
 }
 
 .formsCont {
@@ -34,7 +36,7 @@
   width: 100%;
 }
 
-.btns{
+.btns {
   margin-top: 20px;
 }
 
@@ -135,9 +137,6 @@
   width: 300px;
 }
 
-
-
-
 .parri{
   display: flex;
   width:100%;
@@ -150,7 +149,7 @@
   margin-left: 10px;
   margin-right: 10px;
 }
-.p{
+.p {
   font-family: Lato, sans-serif;
   font-weight: bold;
   margin-top: 20px;
@@ -208,4 +207,144 @@
 
 #precioFinal{
   cursor:default;
+}
+
+.hr {
+  width: 100%;
+}
+
+.servAdi {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.servicios {
+  display: flex;
+  align-items: center;
+  margin-top: -4%;
+}
+
+.containerCosto{
+  margin-top: 20px;
+  background: #355978;
+  border-radius: 9px;
+}
+
+.costoTitle{
+  background: #355978;
+  border-radius: 9px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: -10px;
+}
+
+.inputCosto{
+  margin-bottom: -1px;
+}
+
+@media (min-width: 320px) {
+  .imagenFondo {
+    display: none;
+  }
+  .container {
+    width: 100%;
+  }
+  .btnVolver {
+    margin-top: 10px;
+    margin-left: 5px;
+  }
+  .titleContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+  }
+  .title {
+    font-size: 24px;
+  }
+  .formsCont{
+    width: 100%;
+  }
+  .formCont{
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+  }
+  .form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    margin-left: -3%;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .serviciosContainer {
+    margin-top: 20px;
+    padding: 20px 25px;
+    background: #293c4f;
+    color: #fff;
+    border-radius: 12px;
+  }
+  .title2 {
+    font-weight: bold;
+  }
+  .btnRes{
+   margin-bottom: 20px; 
+  }
+}
+
+@media (min-width: 1024px) {
+  .imagenFondo {
+    display: block;
+    position: fixed;
+    left: 50%;
+  }
+  .container {
+    width: 100%;
+    outline: 1px solid red;
+  }
+  .btnVolver {
+    margin-top: 10px;
+    margin-left: 5px;
+  }
+  .titleContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+  }
+  .title {
+    font-size: 24px;
+  }
+  .formsCont{
+    width: 50%;
+  }
+  .form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    margin-left: -3%;
+    width: fit-content;
+  }
+  .serviciosContainer {
+    margin-top: 20px;
+    padding: 20px 25px;
+    background: #293c4f;
+    color: #fff;
+    border-radius: 12px;
+  }
+  .title2 {
+    font-weight: bold;
+  }
 }

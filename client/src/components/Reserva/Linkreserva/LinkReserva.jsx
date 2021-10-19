@@ -19,11 +19,10 @@ import { RiCreativeCommonsZeroLine } from "react-icons/ri";
 import { GiBarbecue } from 'react-icons/gi';
 import { FaCarAlt, FaWifi } from 'react-icons/fa';
 import DatePicker, { registerLocale } from "react-datepicker";
-import es from 'date-fns/locale/es';
-import axios from "axios"
-import fechas from "./algoritmofechas.js"
-registerLocale('es', es)
-
+import es from "date-fns/locale/es";
+import axios from "axios";
+import fechas from "./algoritmofechas.js";
+registerLocale("es", es);
 
 export default function Reservaciones() {
   const dispatch = useDispatch();
@@ -33,29 +32,28 @@ export default function Reservaciones() {
   useEffect(() => {
     dispatch(readServices());
   }, [dispatch]);
-  const id = JSON.parse(localStorage.getItem("id_cabaña"))
+  const id = JSON.parse(localStorage.getItem("id_cabaña"));
   useEffect(() => {
-    dispatch(selectcabin(id))
-  }, [dispatch])
-
+    dispatch(selectcabin(id));
+  }, [dispatch]);
 
   const servicios = useSelector((state) => state.servicios);
-  const seleccionada = useSelector((state) => state.selectedcabin)
+  const seleccionada = useSelector((state) => state.selectedcabin);
   let lala = [];
   let id1 = 0;
-  let suma = []
-  let costoadicional = 0
-  let fechasintermedias = []
-  const ocupadas = useSelector((state) => state.fechasnodisponibles)
+  let suma = [];
+  let costoadicional = 0;
+  let fechasintermedias = [];
+  const ocupadas = useSelector((state) => state.fechasnodisponibles);
   //console.log(ocupadas)
-  const [selecpateCI, setSelecpateCI] = useState(null);
-  const [selecpateCO, setSelecpateCO] = useState(null);
+  const [selectDateCI, setSelectDateCI] = useState(null);
+  const [selectDateCO, setSelectDateCO] = useState(null);
   const [reserva, setReserva] = useState({ Checkin: "", Checkout: "" });
   const costo = localStorage.getItem("costo");
   const cabinId = localStorage.getItem("id_cabaña");
   const logeduser = useSelector((state) => state.user);
   const { token } = logeduser;
-  const [edit, setEdit] = useState({ id: JSON.parse(cabinId), Available: [] })
+  const [edit, setEdit] = useState({ id: JSON.parse(cabinId), Available: [] });
   const [input, setInput] = useState({
     Checkin: "",
     Checkout: "",
@@ -64,47 +62,51 @@ export default function Reservaciones() {
     CostoFinal: JSON.parse(costo),
     Cabinid: JSON.parse(cabinId),
     ExtraServices: null,
-    Anombrede: ""
+    Anombrede: "",
   });
   const consultarprecio = () => {
-    suma = []
-    costoadicional = 0
+    suma = [];
+    costoadicional = 0;
     const checkbox = Array.from(document.getElementsByClassName("Servicios"));
     for (let i = 0; i < checkbox.length; i++) {
-
       if (checkbox[i].checked) {
-        suma.push(parseFloat(checkbox[i].name))
-        console.log(checkbox[i].name)
+        suma.push(parseFloat(checkbox[i].name));
+        console.log(checkbox[i].name);
       }
     }
     for (let j = 0; j < suma.length; j++) {
-      costoadicional = costoadicional + parseFloat(suma[j])
-
+      costoadicional = costoadicional + parseFloat(suma[j]);
     }
-    costoadicional = costoadicional + parseFloat(JSON.parse(costo))
-    setInput({ ...input, CostoFinal: costoadicional })
-  }
+    costoadicional = costoadicional + parseFloat(JSON.parse(costo));
+    setInput({ ...input, CostoFinal: costoadicional });
+  };
   const checkboxselected = (e) => {
-    e.prevenpefault()
+    e.preventDefault();
     setInput({
-      ...input, CostoFinal: JSON.parse(costo),
-      Checkin: selecpateCI, Checkout: selecpateCO,
-    })
+      ...input,
+      CostoFinal: JSON.parse(costo),
+      Checkin: selectDateCI,
+      Checkout: selectDateCO,
+    });
     lala = [];
     const checkbox = Array.from(document.getElementsByClassName("Servicios"));
-    let contador = 0
+    let contador = 0;
     for (let i = 0; i < checkbox.length; i++) {
       if (checkbox[i].checked) {
         lala.push(checkbox[i].value);
         setInput({ ...input, ExtraServices: [...lala] });
-        contador++
+        contador++;
         console.log(checkbox[i].value);
       }
     }
     if (contador === 0) {
-      setInput({ ...input, ExtraServices: null })
+      setInput({ ...input, ExtraServices: null });
     }
   };
+
+  useEffect(() => {
+    console.log("Entree", input.CostoFinal);
+  }, [input.CostoFinal]);
 
   useEffect(() => {
     dispatch(readReservation({ token }));
@@ -113,7 +115,7 @@ export default function Reservaciones() {
     dispatch(readFechas());
   }, [dispatch]);
   useEffect(() => {
-    dispatch(selectcabin(localStorage.getItem("id_cabaña")))
+    dispatch(selectcabin(localStorage.getItem("id_cabaña")));
   }, [dispatch, cabinId]);
   function handleChange(e) {
     setInput({
@@ -126,111 +128,137 @@ export default function Reservaciones() {
   //console.log(seleccionada[0].Parrilla)
   const changeFechas = (e) => {
     if (e === null) {
-      return
+      return;
     }
-    setSelecpateCI(e)
+    setSelectDateCI(e);
     mostrarFecha(e);
-  }
+  };
   useEffect(() => {
-    calculofechas()
-  }, [selecpateCO]);
+    calculofechas();
+  }, [selectDateCO]);
   useEffect(() => {
-    fechasafiltrar()
-  }, [selecpateCO]);
+    fechasafiltrar();
+  }, [selectDateCO]);
   const changeFechas2 = async (e) => {
     if (e === null) {
-      return
+      return;
     }
-    setSelecpateCO(e)
+    setSelectDateCO(e);
     mostrarFecha2(e);
-
-  }
-  const mostrarFecha = selecpateCI => {
-    const options = { year: 'numeric', month: 'numeric', day: '2-digit' }
-    setInput({ ...input, Checkin: selecpateCI.toLocaleDateString('es-ES', options) })
-    setReserva({ ...reserva, Checkin: selecpateCI.toLocaleDateString('es-ES', options) })
-  }
-  const mostrarFecha2 = selecpateCO => {
-    const options = { year: 'numeric', month: 'numeric', day: '2-digit' }
-    setInput({ ...input, Checkout: selecpateCO.toLocaleDateString('es-ES', options) })
-    setReserva({ ...reserva, Checkout: selecpateCO.toLocaleDateString('es-ES', options) })
+  };
+  const mostrarFecha = (selectDateCI) => {
+    const options = { year: "numeric", month: "numeric", day: "2-digit" };
+    setInput({
+      ...input,
+      Checkin: selectDateCI.toLocaleDateString("es-ES", options),
+    });
+    setReserva({
+      ...reserva,
+      Checkin: selectDateCI.toLocaleDateString("es-ES", options),
+    });
+  };
+  const mostrarFecha2 = (selectDateCO) => {
+    const options = { year: "numeric", month: "numeric", day: "2-digit" };
+    setInput({
+      ...input,
+      Checkout: selectDateCO.toLocaleDateString("es-ES", options),
+    });
+    setReserva({
+      ...reserva,
+      Checkout: selectDateCO.toLocaleDateString("es-ES", options),
+    });
     //filtrarfechas()
-  }
+  };
   const filtrarfechas = () => {
-    fechasafiltrar(reserva)
-  }
+    fechasafiltrar(reserva);
+  };
   const calculofechas = () => {
-    let fechasintermedias = []
+    let fechasintermedias = [];
     if (ocupadas.length >= 0 && reserva.Checkout !== null) {
-      fechasintermedias = [...ocupadas]
-      fechasintermedias.push(fechas(reserva))
-      console.log(fechasintermedias)
-      setEdit({ ...edit, Available: fechasintermedias })
+      fechasintermedias = [...ocupadas];
+      fechasintermedias.push(fechas(reserva));
+      console.log(fechasintermedias);
+      setEdit({ ...edit, Available: fechasintermedias });
     }
-  }
+  };
   useEffect(() => {
-    calculofechas()
+    calculofechas();
   }, [reserva]);
   useEffect(() => {
-    date(ocupadas)
+    date(ocupadas);
   });
 
   const handlePrueba = () => {
-    console.log(input.Anombrede, logeduser.email, input.Checkin)
-    const options = { year: 'numeric', month: 'numeric', day: '2-digit' }
-    const data = { username: logeduser.user, name: input.Anombrede, email: logeduser.email, date: selecpateCI.toLocaleDateString('es-ES', options) }
-    console.log(input)
-    dispatch(createReservation({ ...input, id: logeduser.userid }, dispatch))
-    dispatch(sendNotification(data))
-    dispatch(editAvailible(edit))
-    console.log(input)
-    alert("Reserva creada")
-  }
-  const parapiker2 = []
-  const parapiker = []
+    console.log(input.Anombrede, logeduser.email, input.Checkin);
+    const options = { year: "numeric", month: "numeric", day: "2-digit" };
+    const data = {
+      username: logeduser.user,
+      name: input.Anombrede,
+      email: logeduser.email,
+      date: selectDateCI.toLocaleDateString("es-ES", options),
+    };
+    console.log(input);
+    dispatch(createReservation({ ...input, id: logeduser.userid }, dispatch));
+    dispatch(sendNotification(data));
+    dispatch(editAvailible(edit));
+    console.log(input);
+    alert("Reserva creada");
+  };
+  const parapiker2 = [];
+  const parapiker = [];
   function date(array) {
-    array.map(e => {
-      e.map(i => {
-        parapiker.push(i)
-      })
-    })
-    parapiker.map(e => {
-      let dia = e.slice(0, 2)
-      let mes = e.slice(3, 5)
-      let anio = e.slice(6)
-      if (mes === '01' || mes === '02' || mes === '03' || mes === '04' || mes === '05' || mes === '06' || mes === '07' || mes === '08' || mes === '09') {
+    array.map((e) => {
+      e.map((i) => {
+        parapiker.push(i);
+      });
+    });
+    parapiker.map((e) => {
+      let dia = e.slice(0, 2);
+      let mes = e.slice(3, 5);
+      let anio = e.slice(6);
+      if (
+        mes === "01" ||
+        mes === "02" ||
+        mes === "03" ||
+        mes === "04" ||
+        mes === "05" ||
+        mes === "06" ||
+        mes === "07" ||
+        mes === "08" ||
+        mes === "09"
+      ) {
         mes = mes - 0;
       }
-      parapiker2.push(new Date(anio, mes - 1, dia))
-    })
-
+      parapiker2.push(new Date(anio, mes - 1, dia));
+    });
   }
   const fechasafiltrar = () => {
-    console.log("entre")
     if (reserva.Checkout === null) {
-      return
+      return;
     } else {
-      const intermedias = fechas(reserva)
-      const ocup = parapiker
+      const intermedias = fechas(reserva);
+      const ocup = parapiker;
       for (let i = 0; i < intermedias.length; i++) {
         for (let j = 0; j < ocup.length; j++) {
           if (intermedias[i] === ocup[j]) {
-            setSelecpateCO(null)
-            setEdit({ ...edit, Checkout: null })
-            setReserva({ ...reserva, Checkout: null })
-            return alert("error no podes elegir esas fechas, porlomenos una esta reservada")
+            setSelectDateCO(null);
+            setEdit({ ...edit, Checkout: null });
+            setReserva({ ...reserva, Checkout: null });
+            return alert(
+              "error no podes elegir esas fechas, porlomenos una esta reservada"
+            );
           }
         }
       }
 
     }
-  }
+  };
   useEffect(() => {
-    fechasafiltrar()
-  }, [reserva.Checkout])
+    fechasafiltrar();
+  }, [reserva.Checkout]);
   const handleSubmit = (e) => {
-    e.prevenpefault()
-  }
+    e.preventDefault();
+  };
   return (
     <div className={styles.container}>
       <div className={styles.formsCont}>
@@ -255,18 +283,6 @@ export default function Reservaciones() {
               className={styles.formInputs}
               required
             />
-
-
-            {/*          
-            <input
-              type="text"
-              value={input.Checkin}
-              name="Checkin"
-              onChange={(e) => handleChange(e)}
-              placeholder="Check in"
-              className={styles.formInputs}
-              required
-            /> */}
             <DatePicker
               selected={selecpateCI}
               onChange={e => changeFechas(e)}
