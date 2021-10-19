@@ -10,14 +10,14 @@ export default function Weather() {
    
     return (
         <div className={styles.weather}>
-            <p className={styles.titulo}>Clima actual</p>
+            <p className={styles.titulo}>Clima</p>
             
             <div className={styles.container}>
                 {weather?.map(e => {
                     if (weather.indexOf(e) === 0) today = 'Hoy';
-                    if (weather.indexOf(e) === 1) today = e.fecha;
-                    if (weather.indexOf(e) === 2) today = e.fecha;
-                    if (e.text === 'Patchy rain possible' || e.text === 'Patchy sleet possible'){
+                    if (weather.indexOf(e) === 1) today = e.fecha.split('-').reverse().join('-');
+                    if (weather.indexOf(e) === 2) today = e.fecha.split('-').reverse().join('-');
+                    if (e.text === 'Sunny' || e.text === 'Patchy sleet possible'){
                         icono  = ( 
                                 <div class={styles.icon}>
                                     <div class={styles.cloud}></div>
@@ -25,8 +25,7 @@ export default function Weather() {
                                         <div class={styles.rays}></div>
                                     </div>
                                     <div class={styles.rain}></div>
-                                    </div>
-                            
+                                </div>
                         )
                     } else if (e.text === 'Sunny' || e.text === 'Clear'){
                         icono = ( 

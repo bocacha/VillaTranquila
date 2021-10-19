@@ -16,6 +16,8 @@ import {
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
 import { RiCreativeCommonsZeroLine } from "react-icons/ri";
+import { GiBarbecue } from 'react-icons/gi';
+import { FaCarAlt, FaWifi } from 'react-icons/fa';
 import DatePicker, { registerLocale } from "react-datepicker";
 import es from "date-fns/locale/es";
 import axios from "axios";
@@ -248,6 +250,7 @@ export default function Reservaciones() {
           }
         }
       }
+
     }
   };
   useEffect(() => {
@@ -266,122 +269,103 @@ export default function Reservaciones() {
               <button className={styles.btn}>Volver</button>
             </Link>
           </div>
-          <div className={styles.titleContainer}>
-            <div className={styles.title}>Crear una nueva reservación</div>
-            <div className={styles.title}>Cabaña Nº {seleccionada.Number}</div>
+          <div className={styles.titlecontainer}>
+            <div id={styles.title1}><p className={styles.title}>Completá los datos solicitados para</p></div>
+            <div id={styles.title2}><p className={styles.title}>continuar con tu reserva</p></div>
           </div>
-          <div className={styles.formCont}>
-            <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
-              <input
-                type="text"
-                name="Anombrede"
-                onChange={(e) => handleChange(e)}
-                placeholder="A nombre de:"
-                className={styles.formInputs}
-                required
-              />
-              {/*          
+          <form onSubmit={(e) => handleSubmit(e)} className={styles.form}>
+            <h1 className={styles.title}>Cabaña Nº {seleccionada.Number}</h1>
             <input
               type="text"
-              value={input.Checkin}
-              name="Checkin"
+              name="Anombrede"
               onChange={(e) => handleChange(e)}
-              placeholder="Check in"
+              placeholder="Reserva a nombre de:"
               className={styles.formInputs}
               required
-            /> */}
-              <DatePicker
-                selected={selectDateCI}
-                onChange={(e) => changeFechas(e)}
-                placeholderText="Fecha de Check in"
-                className={styles.formInputs}
-                defaultDate={new Date()}
-                dateFormat="dd 'de' MMMM 'de' yyyy"
-                minDate={new Date()}
-                locale="es"
-                excludeDates={parapiker2}
-              />
-              <DatePicker
-                selected={selectDateCO}
-                onChange={(e) => changeFechas2(e)}
-                placeholderText="Fecha de Check out"
-                onFocus={calculofechas}
-                className={styles.formInputs}
-                dateFormat="dd 'de' MMMM 'de' yyyy"
-                minDate={new Date()}
-                locale="es"
-                excludeDates={parapiker2}
-                filterDate={(d) => {
-                  return selectDateCI < d;
-                }}
-              />
-              <div className={styles.serviciosContainer}>
-                <div className={styles.title2}>
-                  Servicios Básicos:
-                  <hr className={styles.hr} />
-                </div>
-                <div>
-                  <p className={styles.p}>
-                    <strong>Descripción:</strong> {seleccionada.Description}
-                  </p>
-                  <p className={styles.p}>
-                    <strong>Parrilla:</strong>{" "}
-                    {seleccionada.Parrilla ? <span>si</span> : <span>no</span>}
-                  </p>
-                  <p className={styles.p}>
-                    <strong> Wifi:</strong>{" "}
-                    {seleccionada.Wifi ? <span>si</span> : <span>no</span>}
-                  </p>
-                  <p className={styles.p}>
-                    <strong>Parking:</strong>{" "}
-                    {seleccionada.Parking ? <span>si</span> : <span>no</span>}
-                  </p>
-                  <hr className={styles.hr} />
-                </div>
-                <div className={styles.title2}>
-                  Servicios Adicionales:
-                  <hr className={styles.hr} />
-                </div>
-                <div className={styles.servAdi}>
-                  {servicios.map((el) => (
-                    <div className={styles.servicios} key={el.ID}>
-                      {el.Name + " $" + el.Price}
-                      <input
-                        className="Servicios"
-                        type="checkbox"
-                        name={el.Price}
-                        value={el.Name}
-                        id={id1++}
-                        onChange={consultarprecio}
-                      />
-                      <label>{el.name}</label>
-                    </div>
-                  ))}
-                </div>
-                <button onClick={checkboxselected}>
-                  Seleccionar Servicios
+            />
+            <DatePicker
+              selected={selecpateCI}
+              onChange={e => changeFechas(e)}
+              placeholderText="Fecha de Check in"
+              className={styles.formInputs}
+              defaulpate={new Date()}
+              dateFormat="dd 'de' MMMM 'de' yyyy"
+              minDate={new Date()}
+              locale='es'
+              excludeDates={parapiker2}
+            />
+            <DatePicker
+              selected={selecpateCO}
+              onChange={(e => changeFechas2(e))}
+              placeholderText="Fecha de Check out"
+              onFocus={calculofechas}
+              className={styles.formInputs}
+              dateFormat="dd 'de' MMMM 'de' yyyy"
+              minDate={new Date()}
+              locale='es'
+              excludeDates={parapiker2}
+              filterDate={d => {
+                return selecpateCI < d;
+              }}
+            />
+            <div>
+              <p className={styles.p}>{seleccionada.Description}</p>
+              <div className={styles.p}><p>Servicios básicos: </p>
+                {
+                  !seleccionada.Parrilla && !seleccionada.Wifi && !seleccionada.Parking ?
+                    <span>No cuenta con parrilla, estacionamiento ni wifi</span> :
+                    <span className={styles.parri}> {seleccionada.Parrilla && <p><GiBarbecue /></p>}  {seleccionada.Wifi && <p><FaWifi /></p>}  {seleccionada.Parking && <p><FaCarAlt /></p>} </span>
+
+                }
+              </div>
+              <div className={styles.p}>Servicios Adicionales:</div>
+
+              <div className={styles.serviceContainer}>
+                {servicios.length !== 0 && servicios.map((el) => (
+                  <div className={styles.servicios} key={el.ID}>
+                          <p className={styles.izquierda}>{el.Name}</p>
+                          <p>$ {el.Price}</p>
+                          <p className={styles.derecha}><input
+                            className="Servicios"
+                            type="checkbox"
+                            name={el.Price}
+                            value={el.Name}
+                            id={id1++}
+                            onChange={consultarprecio}
+                          /></p>
+                    {/* <p>{el.Name + " $" + el.Price}</p>
+                    <input
+                      className="Servicios"
+                      type="checkbox"
+                      name={el.Price}
+                      value={el.Name}
+                      id={id1++}
+                      onChange={consultarprecio}
+                    />
+                    <label >{el.name}</label> */}
+                  </div>
+                ))}
+              </div>
+              <button onClick={checkboxselected} className={styles.btnRes} id={styles.confirmar}>Confirmar servicios seleccionados</button>
+            </div>
+            <div>Costo final por noche:   </div>
+            <input
+              type="text"
+              value={input.CostoFinal}
+              name="Checkin"
+              placeholder={"Por Noche:" + input.CostoFinal}
+              className={styles.formInputs}
+              id={styles.precioFinal}
+              required
+            />
+            <div className={styles.btns}>
+              <Link to="/reserva/pago">
+                <button onClick={handlePrueba} className={styles.btnRes} id={styles.reservar}>
+                  Reservar
                 </button>
-              </div>
-              <div className={styles.containerCosto}>
-                <div className={styles.costoTitle}>Costo por noche: </div>
-                <input
-                  type="number"
-                  value={input.CostoFinal}
-                  name="Checkin"
-                  placeholder={"Por Noche:" + input.CostoFinal}
-                  className={styles.inputCosto}
-                  required
-                />
-              </div>
-              <div className={styles.btns}>
-                <Link to="/reserva/pago">
-                  <button onClick={handlePrueba} className={styles.btnRes}>
-                    Reservar
-                  </button>
-                </Link>
-              </div>
-            </form>
-          </div>
+              </Link>
+            </div>
+          </form>
         </div>
       </div>
       <div className={styles.imagenFondo}></div>

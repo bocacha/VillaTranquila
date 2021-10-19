@@ -806,7 +806,6 @@ export function filterReservations(payload){
 }
 
 export function findUser(payload){
-  console.log(payload);
   return {
     type: FIND_USER,
     payload

@@ -122,17 +122,25 @@
   background: #94adbc;
 }
 
-.ninguna {
-  width: 100%;
+.ninguna{
+  position:absolute;
+  margin-top: 150px;
+  width:70%;
+  margin-left:15%;
   justify-items: center;
   justify-content: center;
   align-items: center;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  margin-left: 111%;
-  color: #fff;
+  padding: 3%;
+  color:#fff;
   background-color: #293c4f;
-  border-radius: 10px;
+  border-radius: 200px;
+}
+
+.paginado{
+  position:absolute;
+  width: 100%;
+  background-color: red;
+  margin-top: 150px;
 }
 
 @media (min-width: 320px) {

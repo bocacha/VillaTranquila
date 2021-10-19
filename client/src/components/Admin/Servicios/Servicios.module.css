@@ -173,9 +173,9 @@
 }
 .servicesContainer {
   display: grid;
-  grid-template-columns: auto auto auto auto;
-  background-color: #94adbc;
-  width: 100%;
+  grid-template-columns: 25% 25% 25% 25%;
+  background-color: #94adbc; 
+  width:100%;
 }
 
 @media (min-width: 320px) {
