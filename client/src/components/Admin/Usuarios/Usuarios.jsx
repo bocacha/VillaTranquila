@@ -107,8 +107,9 @@ export default function Usuarios() {
     LastName,
     Address,
     Phone,
+    UserDNI,
     Email,
-    UserDNI) {
+    ) {
     e.preventDefault();
 
     if (errors.UserName !== undefined || errors.Email !== undefined || errors.FirstName !== undefined || errors.LastName !== undefined || errors.UserPassword !== undefined) {
@@ -258,7 +259,7 @@ export default function Usuarios() {
                     maxLength="17"
                     minLength="10"
                     pattern="[+]{2}[0-9]{10-14}"
-                    placeholder="+54 9 11 12345678"
+                    //placeholder="+54 9 11 12345678"
                     required
                   />
                   <input

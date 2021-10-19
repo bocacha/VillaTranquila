@@ -325,11 +325,11 @@ alert("Reserva creada")
               <button onClick={checkboxselected}>Seleccionar Servicios</button>
             </div>
             <div className={styles.btns}>
+              <Link to="/reserva/pago">
                 <button onClick={handlePrueba} className={styles.btnRes}>
                   Reservar
                 </button>
-              {/* <Link to="/reserva/pago">
-              </Link> */}
+              </Link>
             </div>
           </form>
         </div>

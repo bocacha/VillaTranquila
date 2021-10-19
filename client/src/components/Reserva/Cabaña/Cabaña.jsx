@@ -5,7 +5,7 @@ import { GiBarbecue } from "react-icons/gi";
 import { FaWifi, FaCarAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { selectcabin } from "../../../actions";
+import { selectcabin, Logeduser} from "../../../actions";
 
 export default function Cabaña({
   ID,
@@ -21,6 +21,9 @@ export default function Cabaña({
   image,
 }) {
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(Logeduser());
+  }, [dispatch]);
   const id = ID;
   const prices = price;
   const id_cabaña = () => {
@@ -28,7 +31,19 @@ export default function Cabaña({
     localStorage.setItem("costo", JSON.stringify(prices));
     dispatch(selectcabin(id))
   };
-
+  let logeduser = useSelector((state) => state.user);
+  if (logeduser === null) {
+    logeduser = {}
+    logeduser.admin = false
+    logeduser.token = false
+    logeduser.Blocked = false
+  }
+ const IniciaSecion=() =>{
+  return alert("Debes iniciar secion para poder reservar")
+ }
+ const Blockeado=() =>{
+  alert("Tu usuario se encuentra blockeado si crees que se trata de un error visita nuestra seccion de contacto y envianos un email")
+ }
   return (
     <div className={styles.cabaña}>
       <h1 className={styles.title}>Cabaña número {number}</h1>
@@ -86,13 +101,35 @@ export default function Cabaña({
             {parking && <p><FaCarAlt /></p>}
           </div> */}
         </div>
+        {!logeduser.token ? (
         <div className={styles.containerBtn}>
-          <Link to="/reserva/reservar">
-            <button onClick={id_cabaña} className={styles.btn}>
+         
+            <button onClick={IniciaSecion}className={styles.btn}>
               ¡Reserva ya!
             </button>
-          </Link>
+
         </div>
+        ):(
+          <div className={styles.containerBtn}>
+            {!logeduser.Blocked ? (
+          <div className={styles.containerBtn}>
+            <Link to="/reserva/reservar">
+            <button onClick={id_cabaña}  className={styles.btn}>
+              ¡Reserva ya!
+            </button>
+                      </Link>
+          </div>
+            ):(
+          <div className={styles.containerBtn}>
+              <button onClick={Blockeado} className={styles.btn}>
+                ¡Reserva ya!
+              </button>
+          </div>
+            )}
+          </div>
+     
+        )}
+       
       </div>
     </div>
   );

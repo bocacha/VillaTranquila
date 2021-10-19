@@ -749,9 +749,9 @@ export function selectcabin(id){
 export function mailpassword(Email) {
   return async function (dispatch) {
     try {
-      var lala = await axios.post("/sendNotificationpassword",{Email:Email})
       var json = await axios.get("/users/");
       var useremail = json.data.filter((e)=> e.Email === Email)
+      var lala = await axios.post("/sendNotificationpassword",{Email:Email,username: useremail[0].UserName})
       const cambiar={
         id: useremail[0].ID,
         UserPassword: "ax54sa5s4a"
@@ -791,6 +791,7 @@ export function cambiarReserva(payload){
   };
 }
 export function aceptarCambios(payload, { token },ID){
+  console.log(payload)
   const obj ={
     id: payload.id,
     Checkin:payload.Checkin,
@@ -802,6 +803,7 @@ export function aceptarCambios(payload, { token },ID){
     Anombrede:payload.Anombrede,
     CabinNumber:payload.CabinNumber
   }
+  console.log(obj)
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -809,18 +811,21 @@ export function aceptarCambios(payload, { token },ID){
   }
   return async function (dispatch) {
     try {
-      let json = await axios.put("/reservations/EditReservation", obj, config);
+      let json = await axios.put("/reservations/EditReservation", payload, config);
       let json2 = await axios.put("/CambiosReserva/Cambios/Done",{id:ID})
+      let lala = await axios.post("/sendNotificationCambios",{username:payload.UserName, name:payload.Anombrede, date:payload.Checkin})
       
     } catch (err) {
       console.log(err);
     }
   };
 }
-export function cancelarCambios(ID){
+export function cancelarCambios(payload,ID){
   return async function (dispatch) {
     try {
       let json = await axios.put("/CambiosReserva/Cambios/Cancel",{id:ID});
+      let lala = await axios.post("/sendNotificationCambios/NO",{username:payload.UserName, name:payload.Anombrede, date:payload.Checkin})
+
     } catch (err) {
       console.log(err);
     }

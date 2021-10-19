@@ -76,6 +76,7 @@ router.post("/NewReservation" , (req, res)=>{
         .catch(error => { res.send(error) })
 });
 router.put("/EditReservation", (req, res) => {
+    console.log(req.body)
     const authorizations = req.get("Authorization")
     let token = ""
 if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
@@ -91,7 +92,7 @@ if(!token || !decodedToken.id){
 if(!decodedToken.Admin){
    return res.status(400).json({error:"Ops.. No tenes permisos"})
 }
-    const {Checkin, Checkout, Cabinid, ExtraServices, CostoFinal,Anombrede,CabinNumber,UserDNI} = req.body;
+    const {Checkin, Checkout, Cabinid, ExtraServices, CostoFinal,Anombrede,CabinNumber,UserDNI,UserName} = req.body;
     const objecttoupdate={
         Checkin: Checkin,
         Checkout: Checkout,
@@ -101,6 +102,7 @@ if(!decodedToken.Admin){
         ExtraServices: ExtraServices,
         UserName: UserName,
         UserDNI: UserDNI,
+        Anombrede: Anombrede,
     }
     Reservations.update(
         objecttoupdate
