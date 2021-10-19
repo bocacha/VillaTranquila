@@ -219,7 +219,7 @@
 .detalles {
   width: 100%;
 }
-#id1 {
+/* #id1 {
   margin-left: 4px;
 }
 #id2 {
@@ -227,7 +227,7 @@
 }
 #id3 {
   margin-left: 4px;
-}
+} */
 #lastSelect {
   margin-bottom: 20px;
 }
@@ -277,12 +277,42 @@
     justify-content: center;
     justify-items: center;
   }
+  .textarea,
+  .inputEditar,
+  .descripcion{
+    width: 100%;
+  }
+  .inputEditar{
+    margin-left: 0%;
+    width: 100%;
+  }
+  #id1,
+  #id2,
+  #id3,
+  #descripcionEditar{
+    min-width:100%;
+  }
 }
 
 @media (min-width: 480px) {
   #containerContainerCabañas {
     margin-left: 14%;
     margin-right: auto;
+  }
+  .textarea,
+  .inputEditar,
+  .descripcion{
+    width: 100%;
+  }
+  .inputEditar{
+    margin-left: 0%;
+    width: 100%;
+  }
+  #id1,
+  #id2,
+  #id3,
+  #descripcionEditar{
+    min-width:100%;
   }
 }
 
@@ -299,6 +329,47 @@
   }
   .containerReservas {
     grid-template-columns: repeat(auto-fill, minmax(70%, 70%));
+  }
+  .form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    max-width:600px;
+  }
+  
+  #formEditar{
+    width: 80%;
+    max-width:600px;
+  }
+  .crearCont{
+    min-width: 600px;
+    max-width:40%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  .container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  } 
+   
+  .textarea,
+  .inputEditar,
+  .descripcion{
+    width: 100%;
+  }
+  .inputEditar{
+    margin-left: 0%;
+    width: 100%;
+  }
+  #id1,
+  #id2,
+  #id3,
+  #descripcionEditar{
+    min-width:100%;
   }
 }
 
@@ -321,6 +392,7 @@
     width: 100%;
     margin-left: -7%;
   }
+  
 }
 
 @media (min-width: 1155px) {
@@ -336,5 +408,15 @@
   }
   .containerReservas {
     grid-template-columns: repeat(auto-fill, minmax(40%, 40%));
+  }
+  
+}
+@media (min-width: 1355px) {
+  
+  .container{
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+
   }
 }
