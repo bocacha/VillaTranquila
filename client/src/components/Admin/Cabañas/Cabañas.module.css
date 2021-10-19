@@ -1,18 +1,22 @@
-.adminCabañas{
+.adminCabañas {
   width: 100%;
-  min-height: 100vh;
+  top: 0;
+  bottom: 0;
+  position: fixed;
+  overflow-y: scroll;
+  overflow-x: hidden;
   background-color: #94adbc;
 }
-.btns{
+.btns {
   display: flex;
-    justify-items: center;
-    justify-content: center;
+  justify-items: center;
+  justify-content: center;
 }
-.btnsContainer{
+.btnsContainer {
   margin-top: 130px;
   position: relative;
 }
-.btnSup{
+.btnSup {
   padding: 4px 60px;
   background: #293c4f;
   color: #fff;
@@ -23,20 +27,22 @@
   font-weight: bold;
   transition-duration: 0.4s;
 }
-.btnSup:hover{
+.btnSup:hover {
   background: none;
   border: 1px solid #293c4f;
   color: #000;
 }
-.container{
+.container {
   display: flex;
-    justify-items: center;
-    justify-content: center;
-    margin-top: 10px;
-    /* margin-bottom: 30px; */
-    /* width: 100vh; */
+  justify-items: center;
+  justify-content: center;
+  margin-top: 10px;
 }
-.crearCont{
+.crearCont {
+  display: flex;
+  justify-content: start;
+  justify-items: start;
+  align-items: center;
   position: relative;
   height: fit-content;
   color: #fff;
@@ -44,200 +50,291 @@
   box-shadow: 0 0 40px -10px #000;
   box-sizing: border-box;
   text-decoration: none;
-  display: flex;
   -webkit-box-pack: center;
   justify-content: center;
   flex-direction: column;
   -webkit-box-align: center;
-  align-items: center;
   background-color: #293c4f;
   flex-wrap: wrap;
   place-content: center;
   overflow: auto;
   width: 30%;
-  margin: 0 10px 30px 10px;
+  margin: 0 10px 30px 0px;
   min-width: 30%;
 }
-.crearCont .title{
+.crearCont .title {
   font-size: x-large;
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.crearCont form{
+.form {
   display: flex;
   flex-direction: column;
   justify-items: center;
   justify-content: center;
-  width: 100%;
+  width: 80%;
 }
 
-.crearCont form input{
+.inputForm {
   padding: 7px 0px;
   text-align: center;
   height: 42px;
-  width: 80%;
+  width: 100%;
   font-size: 1em;
-  background-color: #355978 ;
+  background-color: #355978;
   color: #fff;
   border: solid #355978;
   border-radius: 8px;
   transition: all 0.25s ease;
   margin-top: 8px;
-  margin-left: 43px;
 }
-.crearCont form input:hover{
-  background-color: #8bafbf ;
-  color:  #1c2531;
+.inputForm:hover {
+  background-color: #8bafbf;
+  color: #1c2531;
   border-color: #8bafbf;
 }
-.crearCont form textarea{
+
+.form input {
+  margin-left: -0.4%;
+}
+
+.textarea {
   padding: 7px 0px;
   text-align: center;
-  width: 80%;
-  height: 100px;
+  height: 42px;
+  margin-bottom: 0.625rem;
+  width: 100%;
   font-size: 1em;
-  background-color: #355978 ;
+  background-color: #355978;
   color: #fff;
   border: solid #355978;
   border-radius: 8px;
   transition: all 0.25s ease;
   margin-top: 8px;
+  height: 100px;
   text-align: justify;
 }
-.crearCont form textarea:hover{
-  background-color: #8bafbf ;
-  color:  #1c2531;
+
+.textarea:hover {
+  background-color: #8bafbf;
+  color: #1c2531;
   border-color: #8bafbf;
 }
-.crearCont form textarea::-webkit-scrollbar {
+.textarea::-webkit-scrollbar {
   width: 12px;
   background-color: #8f8f8f;
   border-radius: 5px;
 }
 
-.crearCont form textarea::-webkit-scrollbar-track{
+.textarea::-webkit-scrollbar-track {
   border-radius: 3px;
   background-color: transparent;
 }
 
-.crearCont form textarea::-webkit-scrollbar-thumb{
-  border-radius:5px;
-  background-color:#515769;
-  border:1px solid #eff1f5
+.textarea::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #515769;
+  border: 1px solid #eff1f5;
 }
-.crearCont form select{
+.crearCont form select {
   padding: 7px 0px;
   text-align: center;
   height: 42px;
-  width: 80%;
+  width: 100%;
   font-size: 1em;
-  background-color: #355978 ;
+  background-color: #355978;
   color: #fff;
   border: solid #355978;
   border-radius: 8px;
   transition: all 0.25s ease;
   margin-top: 8px;
-  margin-left: 43px;
   margin-bottom: 8px;
 }
-.crearCont form select:hover{
-  background-color: #8bafbf ;
-  color:  #1c2531;
+.crearCont form select:hover {
+  background-color: #8bafbf;
+  color: #1c2531;
   border-color: #8bafbf;
 }
-.crearCont form button{
-  border-radius: 4px;
-    background-color: #355978 ;
-    border-color: transparent;
-    color: #fff;
-    text-align: center;
-    font-size: large;
-    transition: all 0.5s ease;
-    cursor: pointer;
-    padding: 10px 20px;
-    /* display: inline-flex; */
-    height: auto;
-    line-height: 35px;
-    width: 30%;
-    margin-left: 33%;
-    margin-top: 10px;
-    margin-bottom: 20px;
+.btn {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  padding: 4px 5%;
+  background: #355978;
+  color: #fff;
+  border: none;
+  border: 1px solid #293c4f;
+  border-radius: 5px;
+  font-family: Lato, Arial, sans-serif;
+  font-weight: bold;
+  transition-duration: 0.4s;
 }
-.crearCont form button:hover{
-  background-color: #8bafbf ;
-  color: #1c2531 ;
+
+.btn:hover {
+  background-color: #8bafbf;
+  color: #1c2531;
   border-color: #8bafbf;
 }
 
-.btnsGuarCanc{
+.btnsGuarCanc {
   display: flex;
   justify-items: center;
   justify-content: center;
 }
-.btnsGuarCanc button{
+.btnsGuarCanc button {
   border-radius: 4px;
-    background-color: #355978 ;
-    border-color: transparent;
-    color: #fff;
-    /* text-align: center; */
-    font-size: large;
-    transition: all 0.5s ease;
-    cursor: pointer;
-    padding: 10px 20px;
-    margin-top: 10px;
-    margin-bottom: 20px;
+  background-color: #355978;
+  border-color: transparent;
+  color: #fff;
+  font-size: large;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  padding: 10px 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
-#guardar{
+#guardar {
   min-width: 65%;
   margin-right: 2%;
   margin-left: 0%;
-  background-color: #355978 ;
+  background-color: #355978;
 }
-#guardar:hover{
-  background-color: #8bafbf ;
-  color: #1c2531 ;
+#guardar:hover {
+  background-color: #8bafbf;
+  color: #1c2531;
   border-color: solid #8bafbf;
 }
-#cancelar{
-  min-width:50%;
+#cancelar {
+  min-width: 50%;
   margin-left: 0;
-  background:#7f7979;
+  background: #7f7979;
 }
-#cancelar:hover{
+#cancelar:hover {
   background-color: #b9b9b9;
   border-color: solid #b9b9b9;
-  color:black;
+  color: black;
 }
 
-.detalles{
-  width: 110%;
+.detalles {
+  width: 100%;
 }
-#id1{
+#id1 {
   margin-left: 4px;
 }
-#id2{
+#id2 {
   margin-left: 4px;
 }
-#id3{
+#id3 {
   margin-left: 4px;
 }
-#lastSelect{
+#lastSelect {
   margin-bottom: 20px;
 }
-#descripcionEditar{
+#descripcionEditar {
   min-height: 100px;
 }
-.containerContainerCabañas{
+.containerContainerCabañas {
   display: flex;
-  position:absolute;
+  position: absolute;
   height: 100%;
   background-color: black;
 }
-.containerCabañas{
-  display:grid;
+.containerCabañas {
+  display: grid;
   background-color: #94adbc;
   grid-template-columns: repeat(auto-fill, minmax(30%, 30%));
   justify-content: center;
   justify-items: center;
   grid-gap: 3%;
+}
+
+@media (min-width: 320px) {
+  .navs {
+    display: none;
+  }
+  .container {
+    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
+  }
+  .btns {
+    margin-top: -50px;
+  }
+  .crearCont {
+    margin-top: 20px;
+    width: 100%;
+  }
+  .containerCabañas {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .containerCabañas {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+  }
+}
+
+@media (min-width: 480px) {
+  #containerContainerCabañas {
+    margin-left: 14%;
+    margin-right: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .btns {
+    margin-top: 30px;
+  }
+  .navs {
+    display: block;
+    position: relative;
+  }
+  .navRsp {
+    display: none;
+  }
+  .containerReservas {
+    grid-template-columns: repeat(auto-fill, minmax(70%, 70%));
+  }
+}
+
+@media (min-width: 1024px) {
+  .container1 {
+    top: 0px;
+  }
+  .navs {
+    display: block;
+    position: relative;
+  }
+  .navRsp {
+    display: none;
+  }
+  .containerCabañas {
+    display: grid;
+    background-color: #94adbc;
+    grid-template-columns: repeat(auto-fill, minmax(30%, 30%));
+    grid-gap: 3%;
+    width: 100%;
+    margin-left: -7%;
+  }
+}
+
+@media (min-width: 1155px) {
+  .container1 {
+    top: 0px;
+  }
+  .navs {
+    display: block;
+    position: relative;
+  }
+  .navRsp {
+    display: none;
+  }
+  .containerReservas {
+    grid-template-columns: repeat(auto-fill, minmax(40%, 40%));
+  }
 }

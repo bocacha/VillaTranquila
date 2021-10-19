@@ -177,8 +177,28 @@
   grid-template-columns: auto auto auto auto;
 }
 
-@media (max-width: 700px) {
+
+@media (min-width: 320px) {
+  .navs{
+    display: none;
+  }
+  
+}
+
+
+
+@media (min-width: 768px) {
+  .navs{
+    display: block;
+    position: relative;
+  }
+  .navRsp{
+    display:none;
+  }
+}
+
+/* @media (max-width: 700px) {
   .formsCont {
     flex-direction: column;
   }
-}
+} */

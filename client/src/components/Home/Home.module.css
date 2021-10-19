@@ -51,7 +51,15 @@
   border-radius: 10px;
 }
 
+.chat{
+  position: relative;
+  top: 80px;
+}
+
 @media (min-width: 320px) {
+  .chat{
+    display: none;
+  }
   .villa {
     font-family: "Bebas Neue", cursive;
     padding: 0.875rem 0.875rem 0rem 0.875rem;
@@ -103,6 +111,9 @@
 }
 
 @media (min-width: 480px) {
+  .chat{
+    display: none;
+  }
   .villa {
     font-family: "Bebas Neue", cursive;
     padding: 0.875rem 0.875rem 0rem 0.875rem;
@@ -153,6 +164,9 @@
 }
 
 @media (min-width: 768px) {
+  .chat{
+    display: block;
+  }
   .villa {
     font-family: "Bebas Neue", cursive;
     padding: 0.875rem 0.875rem 0rem 0.875rem;
@@ -203,6 +217,9 @@
 }
 
 @media (min-width: 1024px) {
+  .chat{
+    display: block;
+  }
   .villa {
     font-family: "Bebas Neue", cursive;
     padding: 0.875rem 0.875rem 0rem 0.875rem;
@@ -257,6 +274,9 @@
 }
 
 @media (min-width: 1140px) {
+  .chat{
+    display: block;
+  }
   .villa {
     font-family: "Bebas Neue", cursive;
     padding: 0.875rem 0.875rem 0rem 0.875rem;
