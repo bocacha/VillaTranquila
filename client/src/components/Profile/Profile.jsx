@@ -36,6 +36,7 @@ export default function Profile(props) {
         Address: dataUser.Address,
         Phone: dataUser.Phone,
         Email: dataUser.Email,
+        UserDNI: dataUser.UserDNI,
         UserPassword: "",
     });
 
@@ -298,7 +299,7 @@ export default function Profile(props) {
                                 placeholder="Nuevo teléfono..."
                                 className={styles.formInputs}
                                 pattern="[+]{2}[0-9]{10-14}"
-                                placeholder="+54 9 11 12345678"
+                               // placeholder="+54 9 11 12345678"
                                 required
                             />
                             <input
@@ -309,6 +310,15 @@ export default function Profile(props) {
                                 placeholder="Nuevo email..."
                                 className={styles.formInputs}
                                 pattern='^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$'
+                                required
+                            />
+                              <input
+                                type="text"
+                                defaultValue={dataUser.UserDNI}
+                                name="UserDNI"
+                                onChange={(e) => handleChangeEdit(e)}
+                                placeholder="DNI..."
+                                className={styles.formInputs}
                                 required
                             />
                             <input

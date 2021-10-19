@@ -55,6 +55,7 @@ export default function Reservaciones() {
     ExtraServices: "",
     CostoFinal: "",
     UserName: "",
+    UserDNI: "",
   });
  
   function handleChangeEdit(e) {
@@ -80,6 +81,7 @@ export default function Reservaciones() {
     ExtraServices,
     CostoFinal,
     Cabinid,
+    UserDNI,
     ) {
     e.preventDefault();
     setCabinid(Cabinid)
@@ -97,6 +99,7 @@ export default function Reservaciones() {
       ExtraServices: ExtraServices,
       CostoFinal: CostoFinal,
       Cabinid: Cabinid,
+      UserDNI: UserDNI,
     })
     setMostrar(true);
     //dispatch(editReservation(edit, { token }));
@@ -315,6 +318,7 @@ export default function Reservaciones() {
                         Anombrede={el.Anombrede}
                         CostoFinal={el.CostoFinal}
                         ExtraServices={el.ExtraServices}
+                        UserDNI= {el.UserDNI}
                         handlePrueba={handlePrueba}
                         handleSubmitEdit={handleSubmitEdit}
                         restaurar={habilitar}

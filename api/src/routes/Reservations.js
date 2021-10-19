@@ -57,12 +57,13 @@ router.get("/ocultadas", async (req, res) => {
 });
 
 router.post("/NewReservation" , (req, res)=>{
-    const {Checkin, Checkout, Cabinid,UserId, ExtraServices, CostoFinal,Anombrede,CabinNumber,UserName} = req.body;
+    const {Checkin, Checkout, Cabinid,UserId, ExtraServices, CostoFinal,Anombrede,CabinNumber,UserName,UserDNI} = req.body;
      Reservations.create({
      Checkin,
      Checkout,
      Cabinid, 
      UserId: UserId,
+     UserDNI: UserDNI,
      ExtraServices,
      CabinNumber,
      CostoFinal,
@@ -90,7 +91,7 @@ if(!token || !decodedToken.id){
 if(!decodedToken.Admin){
    return res.status(400).json({error:"Ops.. No tenes permisos"})
 }
-    const {Checkin, Checkout, Cabinid, ExtraServices, CostoFinal,Anombrede,CabinNumber} = req.body;
+    const {Checkin, Checkout, Cabinid, ExtraServices, CostoFinal,Anombrede,CabinNumber,UserDNI} = req.body;
     const objecttoupdate={
         Checkin: Checkin,
         Checkout: Checkout,
@@ -99,6 +100,7 @@ if(!decodedToken.Admin){
         CostoFinal: CostoFinal,
         ExtraServices: ExtraServices,
         UserName: UserName,
+        UserDNI: UserDNI,
     }
     Reservations.update(
         objecttoupdate

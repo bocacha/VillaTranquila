@@ -65,6 +65,10 @@ module.exports = (sequelize) => {
       allownull: false
 
     },
+    UserDNI:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     Show:{
       type: DataTypes.BOOLEAN,
       allowNull: false,

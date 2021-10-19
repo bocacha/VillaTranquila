@@ -51,7 +51,10 @@ module.exports = (sequelize) => {
         }
       }
    },
-
+   UserDNI:{
+    type: DataTypes.STRING,
+    allownull: false
+   },
    UserPasswordHashed:{
     type: DataTypes.STRING,
     allownull: false,

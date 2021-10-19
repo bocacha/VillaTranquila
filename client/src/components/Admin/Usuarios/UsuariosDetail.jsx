@@ -12,6 +12,7 @@ export default function UsuariosDetail({
   Address,
   Phone,
   Email,
+  UserDNI,
   handlePrueba,
   handleSubmitEdit,
   restaurar,
@@ -49,6 +50,10 @@ export default function UsuariosDetail({
             <tr>
               <td className={styles.izquierda}><strong>Apellido:</strong></td>
               <td className={styles.derecha}><p>{LastName}</p></td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>DNI:</strong></td>
+              <td className={styles.derecha}><p>{UserDNI}</p></td>
             </tr>
             <tr>
               <td className={styles.izquierda}><strong>Dirección:</strong></td>
@@ -94,6 +99,7 @@ export default function UsuariosDetail({
               LastName,
               Address,
               Phone,
+              UserDNI,
               Email);
             setMostrar(false);
             window.scrollTo({

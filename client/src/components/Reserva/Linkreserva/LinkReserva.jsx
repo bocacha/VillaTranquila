@@ -59,6 +59,7 @@ export default function Reservaciones() {
     Checkout: "",
     CabinNumber: seleccionada.Number,
     UserId: logeduser.userid,
+    UserDNI: logeduser.userdni,
     CostoFinal: JSON.parse(costo),
     Cabinid: JSON.parse(cabinId),
     ExtraServices: null,
@@ -118,6 +119,7 @@ export default function Reservaciones() {
     setInput({
       ...input,
       UserId: logeduser.userid,
+      UserDNI: logeduser.userdni,
       CabinNumber:seleccionada.Number,
       UserName: logeduser.user,
       [e.target.name]: e.target.value,
@@ -176,7 +178,7 @@ useEffect(()=>{
     });
 
 const handlePrueba=()=>{
-console.log(input.Anombrede, logeduser.email, input.Checkin)
+console.log(input)
 const options = {year:'numeric', month:'numeric', day:'2-digit'}
 const data = { username:logeduser.user ,name: input.Anombrede, email: logeduser.email, date: selectDateCI.toLocaleDateString('es-ES', options)}
 dispatch(createReservation({...input, id:logeduser.userid},dispatch))
@@ -323,11 +325,11 @@ alert("Reserva creada")
               <button onClick={checkboxselected}>Seleccionar Servicios</button>
             </div>
             <div className={styles.btns}>
-              <Link to="/reserva/pago">
                 <button onClick={handlePrueba} className={styles.btnRes}>
                   Reservar
                 </button>
-              </Link>
+              {/* <Link to="/reserva/pago">
+              </Link> */}
             </div>
           </form>
         </div>

@@ -58,6 +58,7 @@ export default function Usuarios() {
     Phone: "",
     Email: "",
     Admin: "",
+    UserDNI:"",
     Premium: false,
     Blocked: false,
   });
@@ -106,20 +107,14 @@ export default function Usuarios() {
     LastName,
     Address,
     Phone,
-    Email,) {
-    // const { token } = logeduser;
+    Email,
+    UserDNI) {
     e.preventDefault();
 
     if (errors.UserName !== undefined || errors.Email !== undefined || errors.FirstName !== undefined || errors.LastName !== undefined || errors.UserPassword !== undefined) {
       document.getElementById('form');
       return alert('No se puede crear el registro porque contiene errores');
     }
-
-
-
-    // dispatch(editUsers(input));
-
-    //alert("Usuario editado con éxito");
     setInput({
       ...input,
       id: ID,
@@ -130,6 +125,7 @@ export default function Usuarios() {
       Address: Address,
       Phone: Phone,
       Email: Email,
+      UserDNI: UserDNI,
     });
     setMostrar(true);
     //dispatch(readUsers({ token }));
@@ -232,7 +228,15 @@ export default function Usuarios() {
                     className={styles.formInputs}
                     required
                   />{errors.LastName && (<p>{errors.LastName}</p>)}
-
+                  <input
+                    type="text"
+                    value={input.UserDNI}
+                    name="UserDNI"
+                    onChange={(e) => handleChange(e)}
+                    placeholder="DNI"
+                    className={styles.formInputs}
+                    required
+                  />
                   <input
                     type="text"
                     value={input.Address}
@@ -327,6 +331,7 @@ export default function Usuarios() {
                   Phone={el.Phone}
                   Email={el.Email}
                   Admin={el.Admin}
+                  UserDNI={el.UserDNI}
                   handlePrueba={handlePrueba}
                   handleSubmitEdit={handleSubmitEdit}
                   restaurar={habilitar}

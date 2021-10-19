@@ -72,7 +72,7 @@ router.get("/ocultados", async (req, res)=>{
     })
 
 router.post("/Singup" , async (req, res)=>{
-    const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email} = req.body;
+    const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email,UserDNI} = req.body;
     console.log('asdasd');
     const UserPasswordHashed = await bcrypt.hash(UserPassword,10)
     const dbUser = await User.findOne({ where:{UserName: UserName}})
@@ -93,6 +93,7 @@ router.post("/Singup" , async (req, res)=>{
             Address, 
             Phone, 
             Email,
+            UserDNI
         })
         .then(doneTemp=>{
             console.log(doneTemp)
@@ -105,7 +106,7 @@ router.post("/Singup" , async (req, res)=>{
     
 })
 router.put("/EditProfile/:ID", async (req,res) =>{
-    const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email,} = req.body;
+    const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email,UserDNI} = req.body;
     const ID = req.params.ID;
     const user = await User.findOne({ where: { ID: ID } });
     const passwordCorrect = user === null
@@ -121,6 +122,7 @@ router.put("/EditProfile/:ID", async (req,res) =>{
         console.log('modificando usuario')
         const UserPasswordHashed = await bcrypt.hash(UserPassword,10)
         const objecttoupdate={
+            UserDNI:UserDNI,
             UserName: UserName,
             UserPasswordHashed: UserPasswordHashed,
             FirstName: FirstName,
@@ -146,7 +148,7 @@ router.put("/EditProfile/:ID", async (req,res) =>{
 });
 
 router.put("/EditUser", async (req,res) =>{
-    const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email, Admin,Premium} = req.body;
+    const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email, Admin,Premium,UserDNI} = req.body;
     // const authorizations = req.get("Authorization") 
     //      let token = ""
     // if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
@@ -165,6 +167,7 @@ router.put("/EditUser", async (req,res) =>{
     if(UserPassword){
         const UserPasswordHashed = await bcrypt.hash(UserPassword,10)
         const objecttoupdate={
+            UserDNI:UserDNI,
             UserName: UserName,
             UserPasswordHashed: UserPasswordHashed,
             FirstName: FirstName,
