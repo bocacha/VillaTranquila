@@ -17,7 +17,7 @@ export default function Weather() {
                     if (weather.indexOf(e) === 0) today = 'Hoy';
                     if (weather.indexOf(e) === 1) today = e.fecha.split('-').reverse().join('-');
                     if (weather.indexOf(e) === 2) today = e.fecha.split('-').reverse().join('-');
-                    if (e.text === 'Sunny' || e.text === 'Patchy sleet possible'){
+                    if (e.text === 'Patchy rain possible' || e.text === 'Patchy sleet possible'){
                         icono  = ( 
                                 <div class={styles.icon}>
                                     <div class={styles.cloud}></div>

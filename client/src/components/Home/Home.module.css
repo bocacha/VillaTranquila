@@ -1,22 +1,21 @@
-.nombre {
+.nombre{
   width: 100%;
-  min-height: 100vh;
+  height: 700px;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  width: 100%;
-  background-image: url("../../img/cabaña_nieveBG.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-  overflow-x: hidden;
+  overflow: hidden;
+  margin-top: 63px;
 }
 
 .nombre1 {
+  position: absolute;
   background-color: #323031;
   color: #fff;
   border-radius: 15px;
   box-shadow: 6px 7px 5px 0px rgba(0, 0, 0, 0.5);
+  z-index: 10;
 }
 
 .villa {
@@ -78,7 +77,7 @@
     align-items: center;
     min-height: 100vh;
     width: 100%;
-    background-image: url("../../img/cabaña.jpg");
+    /* background-image: url("../../img/cabaña.jpg"); */
     background-repeat: no-repeat;
     background-size: cover;
     overflow-x: hidden;
@@ -128,7 +127,7 @@
     align-items: center;
     min-height: 100vh;
     width: 100%;
-    background-image: url("../../img/cabaña_nieve.jpg");
+    /* background-image: url("../../img/cabaña_nieve.jpg"); */
     background-repeat: no-repeat;
     background-size: cover;
     overflow-x: hidden;
@@ -178,7 +177,7 @@
     align-items: center;
     min-height: 100vh;
     width: 100%;
-    background-image: url("../../img/cabaña.jpg");
+    /* background-image: url("../../img/cabaña.jpg"); */
     background-repeat: no-repeat;
     background-size: cover;
     overflow-x: hidden;
@@ -202,7 +201,7 @@
   }
 }
 
-@media (min-width: 1024px) {
+/* @media (min-width: 1024px) {
   .villa {
     font-family: "Bebas Neue", cursive;
     padding: 0.875rem 0.875rem 0rem 0.875rem;
@@ -235,7 +234,6 @@
   }
   .mapContainer {
     width: 100%;
-    /* max-width: 1024px; */
     height: fit-content;
     display: flex;
     margin-left: auto;
@@ -289,7 +287,6 @@
   }
   .mapContainer {
     width: 100%;
-    /* max-width: 1024px; */
     height: fit-content;
     display: flex;
     margin-left: auto;
@@ -307,6 +304,198 @@
     min-width: 100%;
     max-width: 1024px;
   }
+} */
+
+/* *------*------- */
+.sun {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  z-index: 10;
+  background: url(../../img/cabaña_nieveG.png);
 }
 
+.sun img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
 
+.sun::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  left: 25%;
+  width: 150px;
+  height: 150px;
+  background-color: white;
+  box-shadow: 0 0 20px white, 0 0 30px white, 0 0 40px white,
+    0 0 50px rgba(255, 255, 255, 0.8), 0 0 60px white,
+    0 0 80px rgba(255, 255, 255, 0.5);
+  filter: blur(5);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.rays {
+  position: absolute;
+  top: -25px;
+  left: 130px;
+  width: 100%;
+  height: 10px;
+  background: -moz-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  filter: blur(5);
+  transform-origin: 100px 20px;
+  z-index: 2;
+}
+.rays:nth-child(2) {
+  animation: brilla 12s linear infinite;
+}
+.rays:nth-child(3) {
+  animation: brilla2 15s linear infinite;
+}
+.rays:nth-child(4) {
+  animation: brilla3 20s linear infinite;
+}
+.rays:nth-child(5) {
+  animation: brilla3 16s linear infinite;
+}
+.rays:nth-child(6) {
+  animation: brilla2 12s linear infinite;
+}
+.rays:nth-child(7) {
+  animation: brilla 16s linear infinite;
+}
+.rays:nth-child(8) {
+  animation: brilla4 20s linear infinite;
+}
+.rays:nth-child(9) {
+  animation: brilla4 30s linear infinite;
+}
+
+@keyframes brilla {
+  0%,
+  100% {
+    transform: rotate(160deg) perspective(50px) rotateY(30deg);
+  }
+  50% {
+    transform: rotate(210deg) perspective(50px) rotateY(30deg);
+  }
+}
+@keyframes brilla2 {
+  0%,
+  100% {
+    transform: rotate(170deg) perspective(50px) rotateY(30deg);
+  }
+  50% {
+    transform: rotate(220deg) perspective(50px) rotateY(30deg);
+  }
+}
+@keyframes brilla3 {
+  0%,
+  100% {
+    transform: rotate(140deg) perspective(50px) rotateY(30deg);
+  }
+  50% {
+    transform: rotate(225deg) perspective(50px) rotateY(30deg);
+  }
+}
+@keyframes brilla4 {
+  0%,
+  100% {
+    transform: rotate(190deg) perspective(50px) rotateY(30deg);
+  }
+  50% {
+    transform: rotate(245deg) perspective(50px) rotateY(30deg);
+  }
+}
+.snow {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 10;
+  background: url(../../img/cabaña_nieve.png);
+}
+
+.snow img{
+  position: absolute;
+  display: inline-block;
+  top: 0;
+  left: 0;
+  width: 235%;
+  height: 100%;
+  z-index: 1;
+}
+
+.copos {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150%;
+  height: 100%;
+  background: url(../../img/snow.jpg);
+  z-index: 5;
+  mix-blend-mode: screen;
+}
+.copos:nth-child(2){
+  animation: animate 10s linear infinite;
+}
+.copos:nth-child(3){
+  animation: animate2 15s linear infinite;
+}
+.copos:nth-child(4){
+  animation: animate3 20s linear infinite;
+}
+.copos:nth-child(5){
+  animation: animate2 14s linear infinite;
+}
+.copos:nth-child(6){
+  animation: animate 16s linear infinite;
+}
+@keyframes animate {
+  0%{
+    background-position-x: 50px;
+    background-position-y: 0;
+  }
+  100%{
+    background-position-x: 50px;
+    background-position-y: 600px;
+  }
+}
+@keyframes animate2 {
+  0%{
+    background-position-x: 100px;
+    background-position-y: 0;
+  }
+  100%{
+    background-position-x: 100px;
+    background-position-y: 600px;
+  }
+}
+@keyframes animate3{
+  0%{
+    transform: scale(1.5);
+    background-position-x: -100px;
+    background-position-y: 0;
+  }
+  100%{
+    transform: scale(1.5);
+    background-position-x: -100px;
+    background-position-y: 600px;
+  }
+}

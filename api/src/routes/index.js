@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const router = Router();
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 const cabinsrouter = require('./Cabins')
@@ -14,7 +15,8 @@ const sendNotification= require('./SendNotification')
 const MercadoPago= require('./MercadoPago')
 const weather = require('./Weather')
 const SendNotificationpassword= require('./SendNotificationpassword')
-const router = Router();
+const feedback = require('./Feedback')
+
 router.use("/cabins" , cabinsrouter)
 router.use("/payments" , paymentsrouter)
 router.use("/pictures", picturesrouter)
@@ -28,6 +30,7 @@ router.use("/showImages", showGallery)
 router.use("/sendNotificationpassword", SendNotificationpassword)
 router.use("/checkout", MercadoPago )
 router.use("/weather", weather)
+router.use("/feedback", feedback)
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
