@@ -23,9 +23,9 @@ export default function EditReserva({
     const handleSubmitDelete = (ID) => {
         dispatch(cancelarCambios({...Original},{id:ID}))
         alert("su Reserva fue Eliminada con exito");
-        // setTimeout(function () {
-        //     history.go(0);
-        // }, 500)
+        setTimeout(function () {
+            history.go(0);
+        }, 500)
 
     };
     const handleSubmitrestore = (ID) => {
@@ -34,9 +34,9 @@ export default function EditReserva({
         }else{
             dispatch(RestaurarCambios({...Original},{id:ID},{token}))
             alert("su cabaña fue Restaurada con exito");
-            // setTimeout(function () {
-            //     history.go(0);
-            // }, 500)
+            setTimeout(function () {
+                history.go(0);
+            }, 500)
 
         }
 

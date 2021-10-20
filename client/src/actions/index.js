@@ -1020,7 +1020,7 @@ export function restaurarCancelado(payload,ID,{token}){
       var json1 = await axios.get("/users/");
       var useremail = json1.data.filter((e)=> e.ID === payload.UserId)
       let lala = await axios.post("/sendNotificationCambios",{username:payload.UserName, name:payload.Anombrede, date:payload.Checkin,email:useremail[0].Email })
-      let json = await axios.put("/CambiosReserva/Cambios/Done",ID)
+      let json = await axios.put("/CambiosReserva/Cambios/Restore",ID)
       console.log(Available)
       return (dispatch({
         type: CANCELAR_RESERVA,
