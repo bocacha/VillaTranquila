@@ -10,7 +10,7 @@
 
 .container2 {
   margin-top: 20px;
-  display: flex;
+  /* display: flex; */
   flex-direction: row;
   align-items: start;
   justify-content: center;
@@ -102,12 +102,12 @@
   width: fit-content;
 }
 
-.formsCont {
+/* .formsCont {
   display: flex;
   align-items: start;
   justify-content: space-around;
   height: 100%;
-}
+} */
 
 .crearCont {
   display: flex;

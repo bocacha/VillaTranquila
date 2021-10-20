@@ -29,15 +29,24 @@ export default function FotosDetail({
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
-        <p className={styles.p}>
-          <strong>Descripcion: </strong> {Description}
-        </p>
-        <p className={styles.p}><strong>Imagen de cabaña N° </strong>{CabainNumber}</p>
-        <p className={styles.p}>
-          {Url}
-        </p>
+        <table>
+          <tbody>
+            <tr>
+              <td className={styles.izquierda}><strong>Descripción:</strong></td>
+              <td className={styles.derecha}>{Description}</td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Imagen de cabaña N°:</strong></td>
+              <td className={styles.derecha}>{CabainNumber}</td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Url:</strong></td>
+              <td className={styles.derecha}>{Url}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      
+
       <img
         onClick={() => console.log("edit")}
         className={styles.img}
@@ -62,19 +71,15 @@ export default function FotosDetail({
             </button>
           )}
         </div>
-        {mostrar ? 
-          <div>
-                  <button onClick={(e)=> {handleSubmitEdit(e, Description, CabainNumber,
-  Url,ID);
-                                      setMostrar(false);
-                                      ;        } 
-        } className={styles.btnPlus} >Editar</button>
-          </div> 
-          :
-          <div>
-            <button onClick={(e) => handlePrueba(e, ID)} className={styles.btnPlus}>Guardar</button>
-          </div>
-        }
+        <div>
+          <button onClick={(e) => {
+            handleSubmitEdit(e, Description, CabainNumber,
+              Url, ID);
+            setMostrar(false);
+            ;
+          }
+          } className={styles.btnPlus} >Editar</button>
+        </div>
       </div>
     </div>
   );

@@ -31,7 +31,39 @@ export default function PagosDetail({
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
-        <p className={styles.p}>
+        <table>
+          <tbody>
+            <tr>
+              <td className={styles.izquierda}><strong>ID Cliente:</strong></td>
+              <td className={styles.derecha}>{user}</td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Estado:</strong></td>
+              <td className={styles.derecha}>{status}</td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Detalles del estado:</strong></td>
+              <td className={styles.derecha}>{status_detail}</td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Fecha:</strong></td>
+              <td className={styles.derecha}>{fecha}</td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Pago total:</strong></td>
+              <td className={styles.derecha}>$ {transaction_detail.pagoTotal}.-</td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Pago neto:</strong></td>
+              <td className={styles.derecha}>$ {transaction_detail.pagoNeto}.-</td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>ID Reserva:</strong></td>
+              <td className={styles.derecha}>{id_reserva}</td>
+            </tr>
+          </tbody>
+        </table>
+        {/* <p className={styles.p}>
           {" "}
           <strong>Id cliente:</strong> {user}
         </p>
@@ -58,7 +90,7 @@ export default function PagosDetail({
         <p className={styles.p}>
           {" "}
           <strong>Id Reserva:</strong> {id_reserva}
-        </p>
+        </p> */}
       </div>
       <div className={styles.btnsContainer}>
         <div>

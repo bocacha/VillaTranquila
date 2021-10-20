@@ -29,7 +29,7 @@ export default function Fotos() {
   const [edit, setEdit] = useState({
     id: "",
     Description: "",
-    CabainNumber:"",
+    CabainNumber: "",
     Url: "",
   });
   const [mostrar, setMostrar] = useState(false);
@@ -194,7 +194,7 @@ export default function Fotos() {
                   placeholder="Descripción"
                   className={styles.formInputs}
                 />
-                
+
                 <label>Seleccione una cabaña para asociar a la imagen:</label>
                 <select
                   name="CabainNumber"
@@ -219,25 +219,34 @@ export default function Fotos() {
                   className={styles.formInputs}
                 />
               </form>
+              <div className={styles.btnsGuarCanc}>
+                <button onClick={handlePrueba} id={styles.guardar}>Guardar cambios</button>
+                <button
+                  onClick={() => mostrar && setMostrar(false)}
+                  id={styles.cancelar}
+                >
+                  Cancelar
+                </button>
+              </div>
             </div>
           ) : null}
-          <div>
-            {allPictures?.map((el) => {
-              return (
-                <div className={styles.detalles} key={el.ID}>
-                  <FotosDetail
-                    ID={el.ID}
-                    Description={el.Description}
-                    CabainNumber={el.CabainNumber}
-                    Url={el.Url}
-                    handleSubmitEdit={handleSubmitEdit}
-                    handlePrueba={handlePrueba}
-                    restaurar={habilitar}
-                  />
-                </div>
-              );
-            })}
-          </div>
+        </div>
+        <div>
+          {allPictures?.map((el) => {
+            return (
+              <div className={styles.detalles} key={el.ID}>
+                <FotosDetail
+                  ID={el.ID}
+                  Description={el.Description}
+                  CabainNumber={el.CabainNumber}
+                  Url={el.Url}
+                  handleSubmitEdit={handleSubmitEdit}
+                  handlePrueba={handlePrueba}
+                  restaurar={habilitar}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

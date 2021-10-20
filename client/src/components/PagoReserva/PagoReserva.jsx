@@ -33,21 +33,58 @@ useEffect(() => {
         const costoFINAL = reservacion.CostoFinal * (diasdereserva.length -1)
         return (
           <div className={styles.containerInfo}>
-            <ul>
+            <table>
+              <tbody>
+                <tr>
+                  <td className={styles.izquierda}>Cabaña N°</td>
+                  <td className={styles.derecha}>{seleccionada[0].Number}</td>
+                </tr>
+                <tr>
+                  <td className={styles.izquierda}>Reserva a nombre de:</td>
+                  <td className={styles.derecha}>{reservacion.Anombrede}</td>
+                </tr>
+                <tr>
+                  <td className={styles.izquierda}>Fecha de llegada:</td>
+                  <td className={styles.derecha}>{reservacion.Checkin}</td>
+                </tr>
+                <tr>
+                  <td className={styles.izquierda}>Fecha de salida:</td>
+                  <td className={styles.derecha}>{reservacion.Checkout}</td>
+                </tr>
+                {
+                  reservacion.ExtraServices && reservacion.ExtraServices.length !== 0 && 
+                  <tr>
+                    <td className={styles.izquierda}>Servicios extra:</td>
+                    <td className={styles.derecha}>
+                      <ul>
+                        {
+                          reservacion.ExtraServices.map(el => <li>{el}</li>)
+                        }
+                      </ul>
+                    </td>
+                  </tr>
+                }
+                <hr/>
+                <tr>
+                  <td className={styles.izquierda}>Costo final:</td>
+                  <td className={styles.derecha}>$ {costoFINAL} .-</td>
+                </tr>
+              </tbody>
+            </table>
+            {/* <ul>
               <li className={styles.li}>Cabaña Nª {seleccionada[0].Number}</li>
               <li className={styles.li}>Reservacion a nombre de: {reservacion.Anombrede}</li>
               <li className={styles.li}>Checkin:{reservacion.Checkin}</li>
               <li className={styles.li}>Checkout:{reservacion.Checkout}</li>
               <li className={styles.li}>Servicios extra:{reservacion.ExtraServices}</li>
               <li className={styles.li}>Costo final:{costoFINAL}</li>
-            </ul>
-            <hr />
+            </ul> */}
             {/* <form action="http://localhost:3001/checkout" method="POST"> */}
             <form action="https://villatranquila.herokuapp.com/checkout" method="POST">
               <input type="hidden" name="title" value={seleccionada[0].Number}/>
               <input type="hidden" name="price" value={costoFINAL}/>
               <input type="hidden" name="idreserva" value={reservacion.ID}/>                         
-              <input type="submit" value="Pagar" target="_blank" class="btn btn-primary btn-block"/>
+              <input type="submit" value="Pagar" target="_blank" class="btn btn-primary btn-block" id={styles.btnPlus}/>
             </form> 
           </div>
         );
