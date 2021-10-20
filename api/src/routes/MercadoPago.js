@@ -19,7 +19,7 @@ let preference = {
         title: "Cabaña Nº"+ req.body.title,
         unit_price: parseInt(req.body.price),
         quantity: 1,
-        description: req.body.name
+        //description: req.body.name
       },
     ],   
     back_urls:{
