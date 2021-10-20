@@ -57,13 +57,15 @@ const TestimonialForm = () => {
                 value={description} 
                 onChange={handleChange}>
             </textarea>
-            <ReactStars
+            <div className={style.star}>
+                  <ReactStars
                 count={5}
                 onChange={ratingChanged}
-                size={24}
+                size={30}
                 activeColor="#ffd700"
-             />
-          
+             />   
+            </div>
+       
                 <button onClick={(e)=>handleClicks(e)}>Enviar</button>
            
         </form>
