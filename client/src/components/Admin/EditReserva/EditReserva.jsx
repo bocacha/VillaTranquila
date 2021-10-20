@@ -12,7 +12,9 @@ import {
   getCambiosDone,
   RestaurarCambios,
   cancelarCambios,
-  aceptarCambios
+  aceptarCambios,
+  removeReservations,
+  aceptarCancelacion
 } from "../../../actions";
 import EditReservaDetail from "./EditReservaDetail";
 import DatePicker, { registerLocale } from "react-datepicker";
@@ -45,11 +47,14 @@ export default function Reservaciones() {
   const allReservations = useSelector((state) => state.solicitudes);
 
   
-  function handlePrueba(e, ID, Nuevo) {
-      console.log(Nuevo)
-      dispatch(aceptarCambios({...Nuevo},{ token },{id:ID}))
+  function handlePrueba(e, ID, Nuevo,Original) {
     e.preventDefault();
-    alert("Editado")
+     if(Nuevo.Cancelar){
+      return (dispatch(removeReservations(Original)), dispatch(aceptarCancelacion(Original,{id:ID})))
+     }else{
+    dispatch(aceptarCambios({...Nuevo},{ token },{id:ID}))
+     alert("Editado")
+     }
 
   }
  

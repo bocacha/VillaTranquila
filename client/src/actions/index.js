@@ -50,7 +50,7 @@ export const FILTER_PAYMENT='FILTER_PAYMENT';
 export const FILTER_PAGOS = 'FILTER_PAGOS';
 export const READ_CAMBIOS = "READ_CAMBIOS";
 export const READ_CAMBIOS_DONE= "READ_CAMBIOS_DONE";
-
+export const CANCELAR_RESERVA= "CANCELAR_RESERVA";
 export function getCabins() {
   return async function (dispatch) {
     try {
@@ -577,7 +577,10 @@ export function removeCabains(id) {
 }
 
 export function removeReservations(payload) {
-  console.log('remove', payload.Available);
+  console.log(payload)
+  if(!payload.Available){
+    payload.Available = fechas({Checkin:payload.Checkin,Checkout:payload.Checkout})
+  }
   return async function (dispatch) {
     var cabins = await axios.get("/cabins")
     var reserva = await axios.get("/reservations")
@@ -975,6 +978,54 @@ export function getCambios(){
         type: READ_CAMBIOS,
         payload: json.data,
       });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+
+export function cancelarReserva(payload){
+  return async function (dispatch) {
+    try {
+      let json = await axios.post("/CambiosReserva/Cambios",payload);
+      return dispatch({
+        type: CANCELAR_RESERVA,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+export function aceptarCancelacion(payload,ID){
+  return async function (dispatch) {
+    try {
+      var json1 = await axios.get("/users/");
+      var useremail = json1.data.filter((e)=> e.ID === payload.UserId)
+      let lala = await axios.post("/sendNotificationCambios",{username:payload.UserName, name:payload.Anombrede, date:payload.Checkin,email:useremail[0].Email })
+      let json = await axios.put("/CambiosReserva/Cambios/Done",ID)
+      return dispatch({
+        type: CANCELAR_RESERVA,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+export function restaurarCancelado(payload,ID,{token}){
+  return async function (dispatch) {
+    try {
+      const Available = fechas({Checkin:payload.Checkin,Checkout:payload.Checkout})
+      var json1 = await axios.get("/users/");
+      var useremail = json1.data.filter((e)=> e.ID === payload.UserId)
+      let lala = await axios.post("/sendNotificationCambios",{username:payload.UserName, name:payload.Anombrede, date:payload.Checkin,email:useremail[0].Email })
+      let json = await axios.put("/CambiosReserva/Cambios/Done",ID)
+      console.log(Available)
+      return (dispatch({
+        type: CANCELAR_RESERVA,
+        payload: json.data,
+      }),dispatch(restoreReservations({ id: payload.id, Available})));
     } catch (err) {
       console.log(err);
     }

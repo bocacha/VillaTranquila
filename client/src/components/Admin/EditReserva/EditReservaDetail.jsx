@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import styles from "./EditReserva.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { cancelarCambios, RestaurarCambios} from "../../../actions";
+import { cancelarCambios, RestaurarCambios, restaurarCancelado} from "../../../actions";
+import cancelar from "../../../img/cancelar.png"
 // import fechas from "../../Reserva/Linkreserva/algoritmofechas"
 
 export default function EditReserva({
@@ -28,11 +29,16 @@ export default function EditReserva({
 
     };
     const handleSubmitrestore = (ID) => {
-        dispatch(RestaurarCambios({...Original},{id:ID},{token}))
-        alert("su cabaña fue Restaurada con exito");
-        // setTimeout(function () {
-        //     history.go(0);
-        // }, 500)
+        if(Nuevo.Cancelar){
+           return dispatch(restaurarCancelado({...Original},{id:ID},{token}))
+        }else{
+            dispatch(RestaurarCambios({...Original},{id:ID},{token}))
+            alert("su cabaña fue Restaurada con exito");
+            // setTimeout(function () {
+            //     history.go(0);
+            // }, 500)
+
+        }
 
     };
     return (
@@ -81,7 +87,7 @@ export default function EditReserva({
                         </tbody>
                     </table>
                 </div>
-
+                    {!Nuevo.Cancelar ? (
                 <div className={styles.infoContainer}>
                     <table>
                         <tbody>
@@ -126,6 +132,12 @@ export default function EditReserva({
                     </table>
                 </div>
 
+                    ):(
+                        <div className={styles.infoContainer}>
+                            <img src={cancelar} alt="Imagen no encontrada"></img>
+                        </div>
+                    )}
+
             </div>
             <div className={styles.btnsContainer}>
                 {!restaurar ? (
@@ -145,7 +157,7 @@ export default function EditReserva({
                 )}
                 <button
                     onClick={(e) => {
-                        handlePrueba(e,ID,Nuevo);
+                        handlePrueba(e,ID,Nuevo,Original);
                         setMostrar(false);
                         window.scrollTo({
                             top: 0,
