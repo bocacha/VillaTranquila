@@ -44,6 +44,7 @@ export const GET_USER_DATA = "GET_USER_DATA";
 export const SELECTED_CABIN = "SELECTED_CABIN";
 export const FILTER_RESERVATIONS = 'FILTER_RESERVATIONS';
 export const FIND_USER = 'FIND_USER';
+export const FILTER_PAGOS = 'FILTER_PAGOS';
 export const READ_CAMBIOS = "READ_CAMBIOS";
 export const READ_CAMBIOS_DONE= "READ_CAMBIOS_DONE";
 
@@ -775,12 +776,18 @@ export function filterReservations(payload){
 }
 
 export function findUser(payload){
-  console.log(payload);
+  //console.log(payload);
   return {
     type: FIND_USER,
     payload
   }
 }
+
+export function filterPagos(payload){
+  return{
+    type: FILTER_PAGOS,
+    payload
+  }
 export function cambiarReserva(payload){
   return async function (dispatch) {
     try {

@@ -40,6 +40,7 @@ import {
   SELECTED_CABIN,
   FILTER_RESERVATIONS,
   FIND_USER,
+  FILTER_PAGOS,
   READ_CAMBIOS,
   READ_CAMBIOS_DONE,
 
@@ -351,6 +352,13 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         reservaciones: allReservations
       }
+
+      // case FILTER_PAGOS:
+      //   let allPagos = state.pagos;
+      //   return {
+      //     ...state,
+      //     pagos: allPagos
+      //   }
 
     case FIND_USER:
       let allUsers = state.allUsers;
