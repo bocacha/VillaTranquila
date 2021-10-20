@@ -46,6 +46,7 @@ export const FILTER_RESERVATIONS = 'FILTER_RESERVATIONS';
 export const GET_TESTIMONIAL = 'GET_TESTIMONIAL';
 export const POST_TESTIMONIAL = 'POST_TESTIMONIAL';
 export const FIND_USER = 'FIND_USER';
+export const FILTER_PAYMENT='FILTER_PAYMENT';
 export const FILTER_PAGOS = 'FILTER_PAGOS';
 export const READ_CAMBIOS = "READ_CAMBIOS";
 export const READ_CAMBIOS_DONE= "READ_CAMBIOS_DONE";
@@ -191,6 +192,37 @@ export function readPayment({ token }) {
       console.error(err);
     }
   };
+}
+
+export function filterPayment({token},mes){
+  // console.log("el mes es: " + mes);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  }
+  function formato(texto){
+    return texto.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1');
+  }
+
+  return async function(dispatch){
+    try {
+      var json = await axios.get("/payments/", config);
+
+      const pagoFiltrado=json.data.filter((e)=>{
+        let miDato=formato(e.fecha);
+        let miMes=miDato.substr(5,2);
+        //console.log("mi mes es:" + miMes);
+        return miMes===mes;        
+      })
+      return dispatch({
+        type: FILTER_PAYMENT,
+        payload: pagoFiltrado,
+      });
+    } catch (err) {
+      console.error(err);
+    }    
+  }
 }
 
 export function readReservation() {
