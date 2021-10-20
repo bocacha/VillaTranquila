@@ -41,7 +41,7 @@ import {
   FILTER_RESERVATIONS,
   GET_TESTIMONIAL,
   POST_TESTIMONIAL,
-  FIND_USER
+  FIND_USER,
   FILTER_PAGOS,
   READ_CAMBIOS,
   READ_CAMBIOS_DONE,
@@ -65,7 +65,7 @@ const initialState = {
   fechasnodisponibles:[],
   userData: {},
   weather:[],
-  testimoniales: []
+  testimoniales: [],
   solicitudes:[]
 };
 

@@ -830,6 +830,7 @@ export function filterPagos(payload){
     type: FILTER_PAGOS,
     payload
   }
+}
 export function cambiarReserva(payload){
   return async function (dispatch) {
     try {

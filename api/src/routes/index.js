@@ -18,7 +18,6 @@ const SendNotificationpassword= require('./SendNotificationpassword')
 const feedback = require('./Feedback')
 const CambiosReserva = require('./CambioReserva')
 const sendNotificationCambios= require('./SendNotificationCambios')
-const router = Router();
 
 router.use("/cabins" , cabinsrouter)
 router.use("/payments" , paymentsrouter)
