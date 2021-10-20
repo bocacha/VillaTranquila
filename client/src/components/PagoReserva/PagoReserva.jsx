@@ -37,7 +37,7 @@ useEffect(() => {
               <tbody>
                 <tr>
                   <td className={styles.izquierda}>Cabaña N°</td>
-                  <td className={styles.derecha}>{seleccionada[0].Number}</td>
+                  <td className={styles.derecha}>{reservacion.CabinNumber}</td>
                 </tr>
                 <tr>
                   <td className={styles.izquierda}>Reserva a nombre de:</td>
@@ -81,7 +81,7 @@ useEffect(() => {
             </ul> */}
             {/* <form action="http://localhost:3001/checkout" method="POST"> */}
             <form action="https://villatranquila.herokuapp.com/checkout" method="POST">
-              <input type="hidden" name="title" value={seleccionada[0].Number}/>
+              <input type="hidden" name="title" value={reservacion.CabinNumber}/>
               <input type="hidden" name="price" value={costoFINAL}/>
               <input type="hidden" name="idreserva" value={reservacion.ID}/>                         
               <input type="submit" value="Pagar" target="_blank" class="btn btn-primary btn-block" id={styles.btnPlus}/>

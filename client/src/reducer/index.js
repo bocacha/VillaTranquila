@@ -39,6 +39,7 @@ import {
   SEND_PASSWORD_EMAIL,
   SELECTED_CABIN,
   FILTER_RESERVATIONS,
+  FILTER_PAYMENT,
   GET_TESTIMONIAL,
   POST_TESTIMONIAL,
   FIND_USER,
@@ -391,6 +392,12 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         usuarios: usuarios,
       }
+    case FILTER_PAYMENT:
+      return {
+        ...state,
+        pagos: action.payload,
+      };
+
       case READ_CAMBIOS_DONE:
         return {
           ...state,
