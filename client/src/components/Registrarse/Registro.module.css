@@ -1,60 +1,120 @@
-.container {
+.registro {
   width: 100%;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  background-color: #355978;
+  
 }
 
-.form {
+.registro .container{
   display: flex;
-  flex-direction: column;
+    justify-items: center;
+    justify-content: center;
 }
 
-.containerForm {
-  display: flex;
-  margin-top: 70px;
-  justify-content: center;
-  width: 100%;
-  display: flex;
-  flex-direction:column;
-}
-.formInputs {
-  margin-bottom: 8px;
-  padding: 3px;
-  border: solid 1.5px #293c4f;
-  margin-right: 5px;
-  width: 250px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.containerForm {
-  display: flex;
-  margin-top: 70px;
-  justify-content: center;
-  width: 100%;
-}
-.btn {
-  padding: 4px 7px;
-  background: #293c4f;
+.registro .container .containerForm{
+  margin-top: 100px;
+  position: relative;
+  /* float:right;
+  position: relative;
+  right: 50%; */
+  width: 70%;
+  height: fit-content;
   color: #fff;
-  border: none;
-  border: 1px solid #293c4f;
-  border-radius: 5px;
-  font-family: Lato, Arial, sans-serif;
-  font-weight: bold;
-  transition-duration: 0.4s;
-  margin-bottom: 5px;
-}
-.btn:hover {
-  background: none;
-  border: 1px solid #293c4f;
-  color: #000;
+  border-radius: 8px;
+  box-shadow: 0 0 40px -10px #000;
+  box-sizing: border-box;
+  text-decoration: none;
+  display: flex;
+  -webkit-box-pack: center;
+  justify-content: center;
+  flex-direction: column;
+  -webkit-box-align: center;
+  align-items: center;
+  background-color: #293c4f;
+  flex-wrap: wrap;
+  place-content: center;
+  overflow: auto;
 }
 
-.title {
-    margin-bottom: 6px;
-    font-family: Lato, Arial, sans-serif;
-    font-weight: bold;
-    font-size: 17px;
-  }
+.registro .container .containerForm .title{
+  font-size: x-large;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.registro .container .containerForm form {
+  display: flex;
+  flex-direction: column;
+  width: 80%
+}
+.registro .container .containerForm form input {
+  padding: 7px 0px;
+  text-align: center;
+  height: 42px;
+  /* width: 100%; */
+  font-size: 1em;
+  background-color: #355978 ;
+  color: #fff;
+  border: solid #355978;
+  border-radius: 8px;
+  transition: all 0.25s ease;
+  margin: 10px 5px 10px 5px;
+}
+.registro .container .containerForm form input:hover{
+  background-color: #8bafbf ;
+  color:  #1c2531;
+  border-color: #8bafbf;
+}
+.registro .container .containerForm form .btn{
+  border-radius: 4px;
+    background-color: #355978 ;
+    border-color: transparent;
+    color: #fff;
+    text-align: center;
+    font-size: large;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    padding: 10px 20px;
+    display: inline-flex;
+    height: auto;
+    line-height: 35px;
+    margin: 20px 5px 20px 5px;
+}
+.registro .container .containerForm form .btn:hover {
+  background-color: #8bafbf ;
+  color: #1c2531 ;
+  border-color: #8bafbf;
+}
+.registro .container .containerForm form .btn .icon{
+  margin-top: -4px;
+}
+
+.registro .container .containerForm div button{
+  border-radius: 4px;
+    background-color: #355978 ;
+    border-color: transparent;
+    color: #fff;
+    text-align: center;
+    font-size: large;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    padding: 10px 20px;
+    display: inline-flex;
+    height: auto;
+    line-height: 35px;
+    margin: 20px 5px 20px 5px;
+}
+.registro .container .containerForm div button:hover{
+  background-color: #8bafbf ;
+  color: #1c2531 ;
+  border-color: #8bafbf;
+}
+.registro .container .containerForm div .title .icon{
+  margin-top: -4px;
+}
+.registro .container .containerForm div .btn1 .icon{
+  margin-top: -4px;
+}
+#creada{
+  width: 70%;
+}

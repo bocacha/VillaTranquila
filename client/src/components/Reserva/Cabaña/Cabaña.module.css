@@ -1,9 +1,98 @@
-.cabaña{
-    background-color: #f3cd54 ;
-    position: relative;
-    margin-top: 10px;
-    align-items: center;
-    width: 100%;
-    border-radius: 5px;
+.cabaña {
+  background-color: #293c4f;
+  position: relative;
+  margin-top: 10px;
+  align-items: center;
+  width: 100%;
+  height: fit-content;
+  border-radius: 5px;
+  color: #fff;
+  padding: 20px;
+}
 
+.title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+}
+
+.img {
+  width:fit-content;
+  max-width: 350px;
+  height: fit-content;
+  max-height: 350px;
+  border-radius: 10px;
+}
+
+.infoContainer {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: row;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 25px;
+  width: 3200px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  
+}
+
+.containerBtn {
+  display: flex;
+  align-items: end;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 2px;
+}
+
+.btn {
+  padding: 4px 7px;
+  background: #7f7979;
+  color: #fff;
+  border: none;
+  border: 1px solid #293c4f;
+  border-radius: 5px;
+  font-family: Lato, Arial, sans-serif;
+  font-weight: bold;
+  transition-duration: 0.4s;
+}
+.btn:hover {
+  background: #94adbc;
+  border: 1px solid #293c4f;
+  color: #000;
+}
+.servicios{
+  display: flex;
+}
+.servicios p{
+  margin-right: 10px;
+  font-size: x-large;
+}
+table{
+  width: 120%
+}
+
+table .izquierda{
+  float:left;
+}
+table .derecha{
+  float:right;
+}
+table .derecha p{
+  max-width: 280px;
+  text-align: end;
+  text-align: justify;
+}
+.info span{
+  display:flex;
+  justify-items: center;
+  justify-content: center;
+}
+.info span p{
+  margin: 10px 30px -5px 30px;
+
+  font-size: xx-large;
 }

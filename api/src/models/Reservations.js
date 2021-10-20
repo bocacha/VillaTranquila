@@ -7,30 +7,73 @@ module.exports = (sequelize) => {
       defaultValue: Sequelize.UUIDV4,
       primaryKey: true,
       allowNull: false,
+      validate:{
+        is: '^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$',
+      }
     },
     Checkin: {
       type: DataTypes.STRING,
       allowNull: false,
+      // validate:{
+      //   isDate: true,
+      // }
     },
     Checkout:{
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      // validate:{
+      //   isDate: true,
+      // }
     },
     UserId:{
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate:{
+        is: '^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$',
+      }
     },
-    Paymentsid:{
+    CostoFinal:{
       type: DataTypes.STRING,
       allowNull: false,
+      validate:{
+        isNumeric: true,  
+      }
+    },
+    CabinNumber:{
+      type: DataTypes.STRING,
+      allowNull:false,
+
+    },
+    UserName:{
+      type: DataTypes.STRING,
+      allowNull:false,
+
     },
     Cabinid:{
       type: DataTypes.STRING,
       allowNull: false,
+      validate:{
+        is: '^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$',
+      }
     },
     ExtraServices:{
-      type: DataTypes.STRING,
+      type: DataTypes.JSON,
       allowNull: true,
-    }
+    },
+    Anombrede:{
+      type: DataTypes.STRING,
+      allownull: false
+
+    },
+    UserDNI:{
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    Show:{
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue:true,
+      validate:{}
+     }
   },{timestamps: false,});
 };

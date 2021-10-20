@@ -1,5 +1,113 @@
-.container{
-    margin-top: 20px;
-    display: flex;
-    flex-direction: row;
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  background-color: #293c4f;
+  color: #fff;
+  border-radius: 10px;
+  margin: 10px;
+  padding:10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: rgb(0 0 0 / 19%) 0px 10px 20px, rgb(0 0 0 / 23%) 0px 6px 6px;
+  transition: all 0.3s ease 0s;
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+}
+.container:hover{
+  box-shadow: 0 12px 24px 0 rgba(0,0,0,0.2);
+    transform: scale(1.02);
+    position: relative;
+}
+
+.infoContainer{
+  width:100%;
+  margin-left:0;
+
+}
+
+.izquierda{
+  float:left;
+  margin-left: 10px;
+}
+.derecha{
+  float:right;
+  margin-right:10px;
+}
+
+.btnsContainer {
+  display: flex;
+  /* flex-direction: row; */
+  margin-top:10px;
+  width:100%;
+  justify-content: center;
+  justify-items: center;
+}
+
+.btn{
+  border-radius: 4px;
+    background-color: #783535 ;
+    border-color: transparent;
+    color: #fff;
+    text-align: center;
+    font-size: large;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    padding: 10px 20px;
+    /* display: inline-flex; */
+    height: auto;
+    line-height: 35px;
+    margin-right: 5px;
+    width: 120px;
+}
+.btn:hover{
+  background-color: #a72424 ;
+  color: #1c2531 ;
+  /* border-color: #783535c0; */
+}
+
+.btnPlus{
+  border-radius: 4px;
+    background-color: #355978 ;
+    border-color: transparent;
+    color: #fff;
+    text-align: center;
+    font-size: large;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    padding: 10px 20px;
+    /* display: inline-flex; */
+    height: auto;
+    line-height: 35px;
+    margin-left: 5px;
+    width: 120px;
+}
+.btnPlus:hover{
+  background-color: #8bafbf ;
+  color: #1c2531 ;
+  /* border-color: #8bafbf; */
+}
+
+.container1 {
+  align-items: center;
+  border: 0.5px solid black;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  grid-gap: 2em;
+  padding: 5px;
+  width: 70vw;
+}
+
+.img1 {
+  height: auto;
+  width: 150px;
+}
+
+@media (max-width: 1280px) {
+  .container {
+    flex-direction: column;
+  }
 }

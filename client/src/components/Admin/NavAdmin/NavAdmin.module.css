@@ -1,0 +1,40 @@
+.container {
+  overflow: hidden;
+  background-color: #293c4f;
+  width: 100%;
+  z-index: 1;
+  font-size: large;
+  margin-top:63px;
+  margin-bottom: 4px;
+  position: fixed;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: rgb(0 0 0 / 19%) 0px 10px 20px, rgb(0 0 0 / 23%) 0px 6px 6px;
+}
+
+.ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  list-style: none;
+  padding: 10px;
+  padding-right: 290px;
+  padding-left: 290px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.link {
+  text-decoration: none;
+  padding: 10px;
+  height: 43px;
+  border: transparent;
+  background-color: transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+  transition: all 0.2s ease;
+}
+.link:hover {
+  background-color: #141f2ba2;
+  color: #fff;
+}

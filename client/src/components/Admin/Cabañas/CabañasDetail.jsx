@@ -1,55 +1,138 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./CabañasDetail.module.css";
 import { useDispatch } from "react-redux";
-import {removeCabains}  from '../../../actions'
+import { removeCabains, restoreCabains } from '../../../actions';
+import { GiBarbecue } from 'react-icons/gi';
+import { FaWifi, FaCarAlt } from 'react-icons/fa';
+import { useHistory } from "react-router";
 
-export default function CabinsDetail({ 
-    ID,
-    Number,
-    Capacity,
-    Available,
-    Price,
-    Description,
-    Coffe,
-    Microondas,
-    Calefaccion,
-    Barbecue,
-    Wifi,
-    Cleaning,
-    Refrigerator,
-    Stove,
-    Parking
-
+export default function CabinsDetail({
+  ID,
+  Number,
+  Capacity,
+  Available,
+  Price,
+  Description,
+  Picture,
+  Parrilla,
+  Wifi,
+  Parking,
+  handleeditSubmit,
+  handlePrueba,
+  restaurar
 }) {
   const dispatch = useDispatch();
-
-  const handleSubmitDelete = (ID)=>{
-    console.log('funcion', ID)
+  const history = useHistory();
+  const [mostrar, setMostrar] = useState(true);
+  const handleSubmitDelete = (ID) => {
+    dispatch(removeCabains({ id: ID }));
     alert("su cabaña fue Eliminada con exito");
-    let obj = {id:ID}
-    dispatch(removeCabains(obj));
+    //window.location.reload();
+    setTimeout(function () {
+      history.go(0);
+    }, 500)
+
+  };
+
+  const handleSubmitrestore = (ID) => {
+    console.log('funcion', ID)
+    dispatch(restoreCabains({ id: ID }));
+    alert("su cabaña fue restaurada con exito");
+    setTimeout(function () {
+      history.go(0);
+    }, 500)
   }
+
   return (
-    <div className={styles.container}>
-      <p><strong>Id:</strong>  {ID} </p>
-      <p><strong> Number:</strong> {Number}</p>
-      <p><strong>Capacity:</strong>  {Capacity}</p>
-      <p><strong>Available:</strong>  {Available}</p>
-      <p><strong>Price:</strong>  {Price}</p>
-      <p><strong>Descripcion:</strong>  {Description}</p>
-      <p><strong>Coffe:</strong>  {Coffe?<span>si</span>:<span>no</span>}</p>
-      <p><strong>Microondas:</strong>  {Microondas?<span>si</span>:<span>no</span>}</p>
-      <p><strong>Calefaccion:</strong>  {Calefaccion?<span>si</span>:<span>no</span>}</p>
-      <p><strong>Barbecue:</strong>  {Barbecue?<span>si</span>:<span>no</span>}</p>
-      <p><strong> Wifi:</strong> {Wifi?<span>si</span>:<span>no</span>}</p>
-      <p><strong>Cleaning: </strong> {Cleaning?<span>si</span>:<span>no</span>}</p>
-      <p><strong>Refrigerator:</strong>  {Refrigerator?<span>si</span>:<span>no</span>}</p>
-      <p><strong>Stove:</strong>  {Stove?<span>si</span>:<span>no</span>}</p>
-      <p><strong>Parking:</strong>  {Parking?<span>si</span>:<span>no</span>}</p>
-      <div>
-        <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
+    <div className={styles.detailCard}>
+      <div className={styles.infoContainer}>
+        <table>
+          <tbody>
+            <tr>
+              <td className={styles.izquierda}><strong>Cabaña N°:</strong></td>
+              <td className={styles.derecha}>{Number}</td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Camas:</strong></td>
+              <td className={styles.derecha}>{Capacity}</td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Fechas ocupadas:</strong></td>
+              <td className={styles.derecha}><ul>{
+                Available.length !== 0 ?
+                  Available.map(e => <li>Del {e[0]} al {e[e.length - 1]}</li>) :
+                  'Sin reservas aún'
+              }</ul></td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Precio:</strong></td>
+              <td className={styles.derecha}>$ {Price}</td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda} ><strong>Descripción:</strong></td>
+              <td className={styles.derecha}><p>{Description}</p></td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Foto:</strong></td>
+              <td className={styles.derecha}><img width="100px" src={Picture} /></td>
+            </tr>
+          </tbody>
+        </table>
+        <span> {Parrilla && <p><GiBarbecue /></p>}  {Wifi && <p><FaWifi /></p>}  {Parking && <p><FaCarAlt /></p>} </span>
+      </div>
+      <div className={styles.btnsContainer}>
+        <div>
+          {!restaurar ? (
+            <button onClick={() => {
+              handleSubmitDelete(ID);
+              window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth',
+              });
+              }}
+              className={styles.btn}>Ocultar</button>
+
+          ) : (
+            <button onClick={() => {
+              handleSubmitrestore(ID);
+              window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth',
+              });
+              }}
+              className={styles.btn}>Restaurar</button>
+          )}
+        </div>
+          <div>
+            <button
+              onClick={(e) => {
+                handleeditSubmit(
+                  e,
+                  ID,
+                  Number,
+                  Capacity,
+                  Available,
+                  Price,
+                  Description,
+                  Picture,
+                  Parrilla,
+                  Wifi,
+                  Parking);
+                setMostrar(false);
+                window.scrollTo({
+                  top: 0,
+                  left: 0,
+                  behavior: 'smooth',
+                });
+                }}
+              className={styles.btnPlus}
+            >
+              Editar
+            </button>
+          </div>
       </div>
     </div>
-    
   );
 }

@@ -1,39 +1,117 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./UsuariosDetail.module.css";
 import { useDispatch } from "react-redux";
-import {removeUsers}  from '../../../actions'
+import { removeUsers, restoreUsers } from "../../../actions";
 
 export default function UsuariosDetail({
-    ID,
-    UserName,
-    UserPassword,
-    FirstName,
-    LastName,
-    Address,
-    Phone,
-    Email,
+  ID,
+  UserName,
+  Admin,
+  FirstName,
+  LastName,
+  Address,
+  Phone,
+  Email,
+  UserDNI,
+  handlePrueba,
+  handleSubmitEdit,
+  restaurar,
 }) {
-
-  const dispatch = useDispatch();
-
-  const handleSubmitDelete = (ID)=>{
-    console.log('funcion', ID)
-    alert("su usuario fue Eliminado con exito");
-    let obj = {id:ID}
-    dispatch(removeUsers(obj));
+  if (Admin === true) {
+    Admin = "Si";
+  } else {
+    Admin = "No";
   }
+  const dispatch = useDispatch();
+  const [mostrar, setMostrar] = useState(true);
+  const handleSubmitDelete = (ID) => {
+    dispatch(removeUsers({ id: ID }));
+    alert("su usuario fue Eliminado con exito");
+    window.location.reload();
+  };
+  const handleSubmitrestore = (ID) => {
+    dispatch(restoreUsers({ id: ID }));
+    alert("su cabaña fue Restaurada con exito");
+    window.location.reload();
+  };
   return (
     <div className={styles.container}>
-      <p><strong>Id:</strong> {ID}</p>
-      <p><strong>UserName:</strong> {UserName}</p>
-      <p><strong>UserPassword:</strong> {UserPassword}</p>
-      <p><strong>FirstName:</strong> {FirstName}</p>
-      <p><strong>LastName:</strong> {LastName}</p>
-      <p><strong>Address:</strong> {Address}</p>
-      <p><strong>Phone:</strong> {Phone}</p>
-      <p><strong>Email:</strong> {Email}</p> 
-      <div>
-        <button onClick={()=>handleSubmitDelete(ID)}>Eliminar</button>
+      <div className={styles.infoContainer}>
+        <table>
+          <tbody>
+            <tr>
+              <td className={styles.izquierda}><strong>Nombre de usuario:</strong></td>
+              <td className={styles.derecha}><p>{UserName}</p></td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Nombre:</strong></td>
+              <td className={styles.derecha}><p>{FirstName}</p></td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Apellido:</strong></td>
+              <td className={styles.derecha}><p>{LastName}</p></td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>DNI:</strong></td>
+              <td className={styles.derecha}><p>{UserDNI}</p></td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Dirección:</strong></td>
+              <td className={styles.derecha}><p>{Address}</p></td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Teléfono:</strong></td>
+              <td className={styles.derecha}><p>{Phone}</p></td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Email:</strong></td>
+              <td className={styles.derecha}><p>{Email}</p></td>
+            </tr>
+            <tr>
+              <td className={styles.izquierda}><strong>Admin:</strong></td>
+              <td className={styles.derecha}><p>{Admin}</p></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div className={styles.btnsContainer}>
+        {!restaurar ? (
+          <button
+            onClick={() => handleSubmitDelete(ID)}
+            className={styles.btn}
+          >
+            Blockear
+          </button>
+        ) : (
+          <button
+            onClick={() => handleSubmitrestore(ID)}
+            className={styles.btn}
+          >
+            Restaurar
+          </button>
+        )}
+        <button
+          onClick={(e) => {
+            handleSubmitEdit(e, ID,
+              UserName,
+              Admin,
+              FirstName,
+              LastName,
+              Address,
+              Phone,
+              UserDNI,
+              Email);
+            setMostrar(false);
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: 'smooth',
+            });
+          }}
+          className={styles.btnPlus}
+        >
+          Editar
+        </button>
       </div>
     </div>
   );

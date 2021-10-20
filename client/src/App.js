@@ -13,8 +13,22 @@ import Pagos from "./components/Admin/Pagos/Pagos";
 import Fotos from "./components/Admin/Fotos/Fotos";
 import Usuarios from "./components/Admin/Usuarios/Usuarios";
 import Registro from "./components/Registrarse/Registro";
+import LinkReserva from"./components/Reserva/Linkreserva/LinkReserva"
+import Gallery from './components/Gallery/Gallery';
+import UserCard from './components/UserCard/UserCard';
+import Profile from './components/Profile/Profile';
+//import { useDispatch, useSelector } from 'react-redux';
+import PagosReserva from './components/PagoReserva/PagoReserva';
+//import { useEffect } from 'react';
+//import { getUserData } from './actions';
+import Caja from './components/Admin/Caja/Caja';
+import UserReservations from "./components/Profile/User reservations/UserReservations"
+import EditReserva from "./components/Admin/EditReserva/EditReserva";
+
 
 function App() {
+  
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -22,7 +36,11 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route path="/nosotros" component={Nosotros} />
           <Route path="/contacto" component={Contacto} />
-          <Route path="/reserva" component={Reserva} />
+          <Route exact path="/reserva" component={Reserva} />
+          <Route path="/reserva/reservar" component={LinkReserva} />
+          <Route path='/reserva/pago' component={PagosReserva} />
+          <Route path="/galeria" component={Gallery} />
+          <Route path="/usercard" component={UserCard} />
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/admin/cabañas" component={Cabañas} />
           <Route exact path="/admin/reservaciones" component={Reservaciones} />
@@ -30,8 +48,12 @@ function App() {
           <Route exact path="/admin/pagos" component={Pagos} />
           <Route exact path="/admin/fotos" component={Fotos} />
           <Route exact path="/admin/usuarios" component={Usuarios} />
-          <Route path='/login' component={Login} />
-          <Route path='/SingUp' component={Registro} />
+          <Route path="/admin/caja" component={Caja} />
+          <Route path='/iniciarsesion' component={Login} />
+          <Route path='/registrarse' component={Registro} />
+          <Route exact path='/Profile/:username' component={Profile} />
+          <Route exact path='/Profile/:username/:id' component={UserReservations} />
+          <Route exact path="/admin/solicitudes" component={EditReserva} />
         </Switch>
       </div>
     </BrowserRouter>

@@ -10,7 +10,12 @@ const usersrouter = require('./User')
 const loginrouter=require('./Login')
 const sendEmail = require('./SendEmail')
 const showGallery = require('./ShowGallery')
-
+const sendNotification= require('./SendNotification')
+const MercadoPago= require('./MercadoPago')
+const weather = require('./Weather')
+const SendNotificationpassword= require('./SendNotificationpassword')
+const CambiosReserva = require('./CambioReserva')
+const sendNotificationCambios= require('./SendNotificationCambios')
 const router = Router();
 router.use("/cabins" , cabinsrouter)
 router.use("/payments" , paymentsrouter)
@@ -19,12 +24,16 @@ router.use("/reservations", reservationsrouter)
 router.use("/services", servicesrouter)
 router.use("/users", usersrouter)
 router.use("/sendEmail", sendEmail)
+router.use("/sendNotification", sendNotification )
 router.use("/login", loginrouter)
 router.use("/showImages", showGallery)
-
+router.use("/sendNotificationpassword", SendNotificationpassword)
+router.use("/checkout", MercadoPago )
+router.use("/weather", weather)
+router.use("/CambiosReserva", CambiosReserva)
+router.use("/sendNotificationCambios", sendNotificationCambios )
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-
 
 module.exports = router;
