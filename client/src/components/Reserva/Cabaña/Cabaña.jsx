@@ -32,7 +32,6 @@ export default function Cabaña({
   return (
     <div className={styles.cabaña}>
       <h1 className={styles.title}>Cabaña número {number}</h1>
-      {/* <img src={image} alt={`Cabaña número ${number}`} /> */}
       <div className={styles.infoContainer}>
         <img
           src={Picture}

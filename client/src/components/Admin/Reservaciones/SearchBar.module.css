@@ -1,34 +1,34 @@
-.searchBar {
+.searchBar{
   display: flex;
+justify-items: center;
+justify-content: center;
+}
+.container{
   justify-items: center;
   justify-content: center;
+padding: 1.5%;
+color: #293c4f;
+border-radius: 10px;
+width:100%;
 }
-.container {
-  justify-items: center;
-  justify-content: center;
-  padding: 1.5%;
-  color: #293c4f;
-  border-radius: 10px;
-  width: 100%;
-}
-.input {
-  margin-left: 0.3%;
-  margin-right: 0.3%;
+.searchBar .container form input{
+  margin-left:0.3%;
+  margin-right:0.3%;
   border: 1px solid #293c4f;
   background-color: #94adbc;
   border-radius: 50px;
-  color: #293c4f;
-  width: 23.85%;
-  height: 40px;
+  color:#293c4f;
+  width:23.85%;
+  height:40px;
   padding-bottom: 9px;
 }
-.input:hover {
-  background: #d1e4f0;
-  color: #fff;
+.searchBar .container form input:hover{
+background: #d1e4f0;
+color: #fff;
 }
-.input:focus {
-  background: #d1e4f0;
-  color: #293c4f;
+.searchBar .container form input:focus{
+background: #d1e4f0;
+color: #293c4f;
 }
 .btnSup {
   margin-left: 0.3%;
@@ -39,25 +39,36 @@
   border: 1px solid #293c4f;
   border-radius: 50px;
   font-family: Lato, Arial, sans-serif;
-  font-weight: bolder;
+  font-weight:bolder;
   transition-duration: 0.3s;
-  height: 40px;
-  width: 36.1%;
+  height:40px;
+  width:36.1%
 }
 .btnSup:hover {
   background: #94adbc;
   border: 1px solid #293c4f;
   color: #293c4f;
 }
-.icon {
-  margin-top: -2px;
-  margin-left: 10px;
+.icon{
+    margin-top: -2px;
+    margin-left: 10px;
+}
+#input{
+  width: 72.5%;
 }
 
 @media (min-width: 320px) {
+  .container{
+    display: flex;
+    flex-direction: column;
+  }
   .input{
     width: 300px;
     padding:15px
+  }
+  #input{
+    width: 300px;
+      margin-bottom: 10px;
   }
   .btnSup{
     width: 300px;
@@ -65,13 +76,23 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 626px) {
+  #input{
+    width: 610px;
+  }
   .input{
-    width: 250px;
-    padding:15px
+    width: 100%;
+  }
+}
+@media (min-width: 1024px) {
+  #input{
+    width: 72.5%;
+  }
+  .input{
+    width: 100%;
   }
   .btnSup{
-    width: 250px;
+    width: 36.1%;
     margin-bottom: 10px;
   }
 }
