@@ -103,8 +103,15 @@ export default function Servicios() {
   };
   return (
     <div className={styles.servicios}>
-      <Navbar />
-      <NavAdmin />
+      <div className={styles.navs2}>
+        <div className={styles.navs}>
+          <Navbar />
+          <NavAdmin  className={styles.navAdmin}/>
+        </div>
+        <div className={styles.navRsp}>
+          <Navbar />
+        </div>
+      </div>
       <div className={styles.containerContainer}>
         <div className={styles.container}>
           <div>
@@ -162,7 +169,7 @@ export default function Servicios() {
               {mostrar ? (
                 <div className={styles.editarCont}>
                   <div className={styles.title}> Editar un nuevo servicio</div>
-                  <form>
+                  <form className={styles.form}>
                     <input
                       type="text"
                       value={edit.Name}
@@ -196,7 +203,7 @@ export default function Servicios() {
                     />
                   </form>
                   <div className={styles.btnsContainer}>
-                    <button onClick={handlePrueba} id={styles.guardar}>Guardar cambios</button>
+                    <button onClick={handlePrueba} id={styles.guardar}>Guardar </button>
                     <button onClick={() => mostrar && setMostrar(false)} id={styles.cancelar}>Cancelar</button>
                   </div>
                 </div>

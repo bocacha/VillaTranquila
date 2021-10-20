@@ -74,8 +74,6 @@ export default function Caja(){
             </div>
             <div className={styles.sub}>
                 {pagos?.map((el,index)=>{
-    
-                    
                     const indiceCliente=el.user;
                     const idPago=el.ID;
                     const comprobante=idPago.substr(14,3);
@@ -104,7 +102,6 @@ export default function Caja(){
                             })}                                                 
                         </div>
                     )
-                                  
                 })}
                 <hr/>
             </div>

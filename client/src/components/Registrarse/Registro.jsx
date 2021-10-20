@@ -32,15 +32,13 @@ function validation(input) {
     errors.UserPasssword = "Debe contener letras minusculas";
   } else if (!/[A-Z]/.test(input.UserPasssword)) {
     errors.UserPasssword = "Debe contener letras mayusculas ";
-  } else if (!/[a-zA-Z]/.test(input.FirstName)) {
+  } else if (!/[a-zA-Z\s]/.test(input.FirstName)) {
     errors.FirstName = "Debe contener solo letras";
-  } else if (!/[a-zA-Z]/.test(input.LastName)) {
+  } else if (!/[a-zA-Z\s]/.test(input.LastName)) {
     errors.LastName = "Debe contener solo letras";
   } else if (!/^\w+([.-]?\w+)@\w+([.-]?\w+)(.\w{2,3})+$/.test(input.Email)) {
     errors.Email = "Debe ser un email valido";
   }
-
-
 
   return errors;
 }
@@ -64,6 +62,7 @@ export default function Usuarios() {
     Address: "",
     Phone: "",
     Email: "",
+    UserDNI:"",
   });
   let uusername = input.UserName;
   function handleChange(e) {
@@ -157,7 +156,16 @@ export default function Usuarios() {
                 className={styles.formInputs}
                 required
               />{errors.LastName && (<p>{errors.LastName}</p>)}
-
+              <input
+                type="text"
+                value={input.UserDNI}
+                name="UserDNI"
+                onChange={(e) => handleChange(e)}
+                placeholder="DNI"
+                className={styles.formInputs}
+                minLength="7"
+                required
+              />
               <input
                 type="text"
                 value={input.Address}

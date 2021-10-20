@@ -1,0 +1,49 @@
+.paginado{
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-bottom: 30px;
+    margin-top: -70px
+}
+
+.numeros {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    font-size: medium;
+    width:100%;
+}
+.numeros li {
+    display: inline;
+}
+
+.numeros li button {
+    padding: 5px 20px;
+    margin: 0 5px;
+  background: #293c4f;
+  color: #fff;
+  border: none;
+  border: 1px solid #293c4f;
+  border-radius: 5px;
+  font-family: Lato, Arial, sans-serif;
+  font-weight: bold;
+  transition-duration: 0.4s;
+}
+
+.numeros li button:hover{
+    background: #94adbc;
+  border: 1px solid #293c4f;
+  color: #000;
+  }
+
+/* .numeros li button:active{
+    background: #94adbc;
+  border: 1px solid #293c4f;
+  color: #000;
+} */
+
+.numeros li button:focus{
+    background: #94adbc;
+    color: #000;
+    border: 1px solid #293c4f;
+}

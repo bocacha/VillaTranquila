@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { RiTeamLine, RiMailLine, RiLoginBoxLine } from "react-icons/ri";
+import { RiTeamLine, RiMailLine, RiLoginBoxLine, } from "react-icons/ri";
 import { GoSignIn, GoHome } from "react-icons/go";
 import { ImCalendar } from "react-icons/im";
 import { RiAdminFill } from "react-icons/ri";
@@ -12,10 +12,11 @@ import axios from "axios";
 import { BiWindows } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserData } from "../../actions";
+import { IoIosCheckmark } from "react-icons/io";
 
 export default function Navbar() {
   const dispatch = useDispatch();
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const user = useSelector((state) => state.user);
   const userData = useSelector((state) => state.userData);
   const username = userData && userData.UserName;
@@ -100,6 +101,18 @@ export default function Navbar() {
                             Galeria{" "}
                             <span className={styles.span}>
                               <GiPhotoCamera />
+                            </span>
+                          </strong>
+                        </button>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/testimonial" className={styles.mostrar}>
+                        <button className={styles.navBtn}>
+                          <strong className={styles.list}>
+                            Testiomonial{" "}
+                            <span className={styles.span}>
+                              <IoIosCheckmark />
                             </span>
                           </strong>
                         </button>
@@ -238,6 +251,18 @@ export default function Navbar() {
                 </button>
               </Link>
             </li>
+            <li>
+              <Link to="/testimonial" className={styles.mostrar}>
+                    <button className={styles.navBtn}>
+                       <strong className={styles.list}>
+                          Testiomonial{" "}
+                        <span className={styles.span}>
+                          <IoIosCheckmark />
+                        </span>
+                      </strong>
+                    </button>
+                  </Link>
+              </li>
             <li>
               {logeduser.admin ? (
                 <>

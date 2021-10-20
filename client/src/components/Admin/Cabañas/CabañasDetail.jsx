@@ -30,7 +30,7 @@ export default function CabinsDetail({
     //window.location.reload();
     setTimeout(function () {
       history.go(0);
-    }, 2000)
+    }, 500)
 
   };
 
@@ -40,7 +40,7 @@ export default function CabinsDetail({
     alert("su cabaña fue restaurada con exito");
     setTimeout(function () {
       history.go(0);
-    }, 2000)
+    }, 500)
   }
 
   return (
@@ -95,7 +95,7 @@ export default function CabinsDetail({
 
           ) : (
             <button onClick={() => {
-              handleSubmitDelete(ID);
+              handleSubmitrestore(ID);
               window.scrollTo({
                 top: 0,
                 left: 0,

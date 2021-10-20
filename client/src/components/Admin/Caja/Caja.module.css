@@ -126,4 +126,21 @@ hr{
     background-color: #8bafbf ;
     color:  #1c2531;
     border-color: #8bafbf;
+
+@media (min-width: 320px) {
+    .navs{
+      display: none;
+    }
+    
+  }
+  
+  
+ @media (min-width: 768px) {
+    .navs{
+      display: block;
+      position: relative;
+    }
+    .navRsp{
+      display:none;
+    }
   }
