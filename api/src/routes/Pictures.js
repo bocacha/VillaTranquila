@@ -42,21 +42,21 @@ router.post("/NewPicture", (req, res) => {
     if (!decodedToken.Admin) {
         return res.status(400).json({ error: "Ops.. No tenes permisos" })
     }
-    console.log('hola mundo')
+    //console.log('hola mundo')
     const { Description, Url, CabainNumber } = req.body;
 
-    console.log(req.body)
+    //console.log(req.body)
     Pictures.create({
         Description,
         Url,
         CabainNumber
     })
         .then(doneTemp => {
-            console.log('done temp')
+            //console.log('done temp')
             return res.status(200).json(doneTemp)
         })
         .catch(error => {
-            console.error(error)
+            //console.error(error)
             res.status(400) 
             res.send('Algo salió mal')
         })

@@ -39,7 +39,12 @@ import {
   SEND_PASSWORD_EMAIL,
   SELECTED_CABIN,
   FILTER_RESERVATIONS,
+  GET_TESTIMONIAL,
+  POST_TESTIMONIAL,
   FIND_USER
+  FILTER_PAGOS,
+  READ_CAMBIOS,
+  READ_CAMBIOS_DONE,
 
 } from "../actions";
 import fechas from "../components/Reserva/Linkreserva/algoritmofechas"
@@ -59,7 +64,9 @@ const initialState = {
   allReservations: [],
   fechasnodisponibles:[],
   userData: {},
-  weather:[]
+  weather:[],
+  testimoniales: []
+  solicitudes:[]
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -354,6 +361,22 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         reservaciones: allReservations
       }
+      case POST_TESTIMONIAL:
+        return{
+          ...state,
+      }
+      case GET_TESTIMONIAL:
+        return{
+          ...state,
+          testimoniales : action.payload
+      }
+
+      // case FILTER_PAGOS:
+      //   let allPagos = state.pagos;
+      //   return {
+      //     ...state,
+      //     pagos: allPagos
+      //   }
 
     case FIND_USER:
       let allUsers = state.allUsers;
@@ -367,6 +390,16 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         usuarios: usuarios,
       }
+      case READ_CAMBIOS_DONE:
+        return {
+          ...state,
+          solicitudes: action.payload,
+        };
+        case READ_CAMBIOS:
+          return {
+            ...state,
+            solicitudes: action.payload,
+          };  
 
     default:
       return state;
