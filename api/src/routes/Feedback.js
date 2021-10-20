@@ -18,21 +18,20 @@ router.post("/", (req, res) => {
             error: "token missing or invalid"
         })
     }
-    if (!decodedToken.Admin) {
-        return res.status(400).json({ error: "Ops.. No tenes permisos" })
-    }
+    
     const {name, description, stars}  = req.body;
-    User.create({
-        name, 
-        description,
-        stars
+    console.log('reqboduy,',req.body);
+    Feedback.create({
+        Name:name, 
+        Description:description,
+        Stars:stars
     })
     .then(doneTemp => {
-        //console.log('done temp')
+        console.log('done temp')
         return res.status(200).json(doneTemp)
     })
     .catch(error => {
-        //console.error(error)
+        console.error(error)
         res.status(400) 
         res.send(error)
     })
@@ -40,6 +39,14 @@ router.post("/", (req, res) => {
 
 router.get("/", async (req, res)=>{
     const dbFeedback = await Feedback.findAll({where:{Show:true}})
+    try{
+        res.send(dbFeedback)
+    }catch(error){
+        console.log(error)
+    }
+});
+router.get("/ocultadas", async (req, res)=>{
+    const dbFeedback = await Feedback.findAll({where:{Show:false}})
     try{
         res.send(dbFeedback)
     }catch(error){

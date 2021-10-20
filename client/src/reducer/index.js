@@ -39,7 +39,9 @@ import {
   SEND_PASSWORD_EMAIL,
   SELECTED_CABIN,
   FILTER_RESERVATIONS,
-  FIND_USER,
+  GET_TESTIMONIAL,
+  POST_TESTIMONIAL,
+  FIND_USER
   FILTER_PAGOS,
   READ_CAMBIOS,
   READ_CAMBIOS_DONE,
@@ -63,6 +65,7 @@ const initialState = {
   fechasnodisponibles:[],
   userData: {},
   weather:[],
+  testimoniales: []
   solicitudes:[]
 };
 
@@ -357,6 +360,15 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         reservaciones: allReservations
+      }
+      case POST_TESTIMONIAL:
+        return{
+          ...state,
+      }
+      case GET_TESTIMONIAL:
+        return{
+          ...state,
+          testimoniales : action.payload
       }
 
       // case FILTER_PAGOS:
