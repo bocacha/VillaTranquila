@@ -73,7 +73,6 @@ router.get("/ocultados", async (req, res)=>{
 
 router.post("/Singup" , async (req, res)=>{
     const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email,UserDNI} = req.body;
-    console.log('asdasd');
     const UserPasswordHashed = await bcrypt.hash(UserPassword,10)
     const dbUser = await User.findOne({ where:{UserName: UserName}})
     const dbEmail = await User.findOne({ where:{Email: Email}})

@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import NavAdmin from '../NavAdmin/NavAdmin';
 import Navbar from "../../Navbar/Navbar";
 import SearchBar from "./SearchBar";
+import Paginado from "./Paginado/Paginado";
 
 function validation(input) {
   var letras = "abcdefghyjklmnñopqrstuvwxyz";
@@ -156,10 +157,32 @@ export default function Usuarios() {
     dispatch(readUsers({ token }))
     setHabilitar(false)
   }
+
+  // Paginado---------------------------------------------------------------
+  const [currentPage, setCurrentPage] = useState(1);
+  const [usersPerPage, /*setUsersPerPage*/] = useState(12);
+  const indexOfLastUser = currentPage * usersPerPage;
+  const indexOfFirstUser = indexOfLastUser - usersPerPage;
+  let currentUsers = Array.isArray(allUsers) ?
+    allUsers.slice(indexOfFirstUser, indexOfLastUser) :
+    allUsers;
+
+  const paginado = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+  //-------------------------------------------------------------------------
+
   return (
     <div className={styles.container}>
-      <Navbar />
-      <NavAdmin />
+      <div className={styles.navs2}>
+        <div className={styles.navs}>
+          <Navbar />
+          <NavAdmin  className={styles.navAdmin}/>
+        </div>
+        <div className={styles.navRsp}>
+          <Navbar />
+        </div>
+      </div>
       {/* {!habilitar ?(
             <button onClick={ocultadas}>Mostrar ocultadas</button>
           ):(
@@ -180,7 +203,9 @@ export default function Usuarios() {
           )
           }
         </div>
-        <SearchBar/>
+        <div id={styles.searchbarcontainer}>
+          <SearchBar />
+        </div>
         <div className={styles.container2}>
           <div className={styles.formsCont}>
             {/* editar */}
@@ -321,24 +346,39 @@ export default function Usuarios() {
           </div>
           {/* VER */}
           <div className={styles.containerUsuarios}>
-            {allUsers?.map((el) => (
-              <div key={el.ID}>
-                <UsuariosDetail
-                  ID={el.ID}
-                  UserName={el.UserName}
-                  FirstName={el.FirstName}
-                  LastName={el.LastName}
-                  Address={el.Address}
-                  Phone={el.Phone}
-                  Email={el.Email}
-                  Admin={el.Admin}
-                  UserDNI={el.UserDNI}
-                  handlePrueba={handlePrueba}
-                  handleSubmitEdit={handleSubmitEdit}
-                  restaurar={habilitar}
-                />
-              </div>
-            ))}
+            {
+              Array.isArray(currentUsers) ?
+                currentUsers.sort((a, b) => {
+                  if (a.UserName < b.UserName) return -1;
+                  if (a.UserName > b.UserName) return 1;
+                  return 1;
+                }).map((el) => (
+                  <div key={el.ID}>
+                    <UsuariosDetail
+                      ID={el.ID}
+                      UserName={el.UserName}
+                      FirstName={el.FirstName}
+                      LastName={el.LastName}
+                      Address={el.Address}
+                      Phone={el.Phone}
+                      Email={el.Email}
+                      Admin={el.Admin}
+                      UserDNI={el.UserDNI}
+                      handlePrueba={handlePrueba}
+                      handleSubmitEdit={handleSubmitEdit}
+                      restaurar={habilitar}
+                    />
+                  </div>
+                )) :
+                <div id={styles.noDisponible}>
+                  <div>
+                    <h1>{allUsers}</h1>
+                  </div>
+                </div>
+            }
+          </div>
+          <div className={styles.paginado}>
+            <Paginado usersPerPage={usersPerPage} allUsers={allUsers.length} paginado={paginado} />
           </div>
         </div>
       </div>

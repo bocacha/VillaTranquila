@@ -12,6 +12,8 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from 'react-redux';
 import { Logeduser, getUserData, readWeather } from "../../actions";
 import ServiciosBanner from "../ServiciosBanner/ServiciosBanner";
+import cabañaN from "../../img/cabaña_nieve.png";
+import cabañaS from "../../img/cabaña_nieveG.png";
 
 
 export default function Home() {
@@ -24,6 +26,8 @@ export default function Home() {
     dispatch(readWeather());
   }, [dispatch]);
   const user = useSelector((state) => state.user);
+  const allUsersData = useSelector((state) => state.userData);
+  console.log('all',allUsersData)
   const ID = user && user.userid;
   useEffect(() => {
     dispatch(getUserData(ID))
@@ -34,7 +38,29 @@ export default function Home() {
       <div>
         <Navbar />      
       </div>
+      <div className={styles.chat}>
+        <Chat  />
+      </div>
       <div className={styles.nombre}>
+      <div className={styles.snow}>
+          <img src={cabañaN} alt="IMAGEN NO ENCONTRADA"/>
+            <div className={styles.copos}></div>
+            <div className={styles.copos}></div>
+            <div className={styles.copos}></div>
+            <div className={styles.copos}></div>
+            <div className={styles.copos}></div>
+        </div>
+        <div className={styles.sun}>
+        <img src={cabañaS} alt="IMAGEN NO ENCONTRADA"/>
+          <span className={styles.rays}></span>
+          <span className={styles.rays}></span>
+          <span className={styles.rays}></span>
+          <span className={styles.rays}></span>
+          <span className={styles.rays}></span>
+          <span className={styles.rays}></span>
+          <span className={styles.rays}></span>
+          <span className={styles.rays}></span>
+        </div>
         <div className={styles.nombre1}>
           <p className={styles.villa}>Villa Tranquila </p>
           <p className={styles.complejo}>- complejo de cabañas -</p>
@@ -63,7 +89,8 @@ export default function Home() {
           ></iframe>
         </div>
       </div>
-      {/* <Testimoniales /> */}
+      {/* {allUsersData.Premium ? */} <Testimoniales />  {/* : null } */}
+          
         <Footer />
 
     </div>

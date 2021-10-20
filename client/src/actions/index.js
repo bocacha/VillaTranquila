@@ -43,7 +43,10 @@ export const READ_FECHASNODISPONIBLES = "READ_FECHASNODISPONIBLES";
 export const GET_USER_DATA = "GET_USER_DATA";
 export const SELECTED_CABIN = "SELECTED_CABIN";
 export const FILTER_RESERVATIONS = 'FILTER_RESERVATIONS';
+export const GET_TESTIMONIAL = 'GET_TESTIMONIAL';
+export const POST_TESTIMONIAL = 'POST_TESTIMONIAL';
 export const FIND_USER = 'FIND_USER';
+export const FILTER_PAGOS = 'FILTER_PAGOS';
 export const READ_CAMBIOS = "READ_CAMBIOS";
 export const READ_CAMBIOS_DONE= "READ_CAMBIOS_DONE";
 
@@ -79,7 +82,7 @@ export function sendEmail(payload) {
 export function readWeather() {
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/weather/");
+      var json = await axios.get("/weather");
       console.log('json',json.data)
       return dispatch({
         type: READ_WEATHER,
@@ -782,10 +785,57 @@ export function filterReservations(payload){
   }
 }
 
+export function getTestimonials(payload) {
+  return async function (dispatch) {
+    try {
+      let json = await axios.get("/feedback");
+      return dispatch({
+        type: GET_TESTIMONIAL,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+
+export function postTestimonials(payload , {token}) {
+  
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  }
+  return async function (dispatch) {
+    const response = await axios.post("/feedback", payload, config);
+    return response;
+  }
+}
+
+export function removeTestimonials(id) {
+  console.log('remove', id);
+  return async function (dispatch) {
+
+    var json = await axios.put("/feedback/", id);
+    return dispatch({
+      type: REMOVE_PICTURES,
+      payload: id
+
+    })
+
+  };
+}
+
 export function findUser(payload){
-  console.log(payload);
   return {
     type: FIND_USER,
+    payload
+  }
+}
+
+export function filterPagos(payload){
+  return{
+    type: FILTER_PAGOS,
     payload
   }
 }
