@@ -15,6 +15,7 @@ const Testimonial = () => {
         dispatch(getTestimonials());
       }, [dispatch]);
       var array = [1,2,3,4,5]
+      
       const handleSubmitDelete = (ID) => {
         dispatch(RemoveFeedback({ id: ID }));
         alert("su Reseña fue Eliminada con exito");
