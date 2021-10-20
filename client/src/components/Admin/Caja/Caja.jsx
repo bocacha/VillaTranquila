@@ -26,16 +26,41 @@ export default function Caja(){
     const pagos= useSelector((state) => state.pagos);
     const datosUsuarios = useSelector((state)=> state.usuarios);
    
-
     var total=0;
    
     function formato(texto){
         return texto.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1');
     }
+
+    // const mes;
+    // const miDato=pagos.fecha;
+    // const miMes=miDato.substr(5,7);
+
+    // function handleMes(e){
+    //     mes=e.target.value;
+    // }
+
     return(               
         <div className={styles.general}>             
                 <Navbar /> 
-                <div className={styles.moveme}></div>                             
+                <div className={styles.moveme}></div>  
+                    <div className={styles.filtro}>
+                        <h3>Ver pagos del mes de:</h3> 
+                        {/* <select id="mes" name="mes" onClick={handleMes}>
+                            <option value="01">Enero</option>
+                            <option value="02">Febrero</option>
+                            <option value="03">Marzo</option>
+                            <option value="04">Abril</option>
+                            <option value="05">Mayo</option>
+                            <option value="06">Junio</option>
+                            <option value="07">Julio</option>
+                            <option value="08">Agosto</option>
+                            <option value="09">Septiembre</option>
+                            <option value="10">Octubre</option>
+                            <option value="11">Noviembre</option>
+                            <option value="12">Diciembre</option>
+                        </select>                           */}
+                    </div>                           
              <div className={styles.container}>             
                 <label className={styles.comprobante}>Comprobante</label>
                 <label>Nombre</label>
@@ -45,6 +70,7 @@ export default function Caja(){
             </div>
             <div className={styles.sub}>
                 {pagos?.map((el,index)=>{
+                   // if(mes===miMes){
                     const indiceCliente=el.user;
                     const idPago=el.ID;
                     const comprobante=idPago.substr(14,3);
@@ -73,7 +99,10 @@ export default function Caja(){
                                 }                            
                             })}                                                 
                         </div>
-                    )                    
+                    )
+                    // }else{
+                    //     return <h3>No existen pagos en el mes seleccionado</h3>
+                    // }                    
                 })}
                 <hr/>
             </div>
