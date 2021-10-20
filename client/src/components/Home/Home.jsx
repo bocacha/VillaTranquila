@@ -36,6 +36,9 @@ export default function Home() {
       <div>
         <Navbar />      
       </div>
+      <div className={styles.chat}>
+        <Chat  />
+      </div>
       <div className={styles.nombre}>
       <div className={styles.snow}>
           <img src={cabañaN} alt="IMAGEN NO ENCONTRADA"/>

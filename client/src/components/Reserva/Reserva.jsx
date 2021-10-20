@@ -14,24 +14,24 @@ import { AiOutlineReload } from "react-icons/ai";
 import { Logeduser } from "../../actions";
 
 function validate(filters) {
-  let errors = {};
+    let errors = {};
 
-  var today = new Date();
-  var dd = String(today.getDate()).padStart(2, "0");
-  var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
-  var yyyy = today.getFullYear();
-  today = dd + "/" + mm + "/" + yyyy;
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    var yyyy = today.getFullYear();
+    today = dd + "/" + mm + "/" + yyyy;
 
-  var inDate = filters.inDate
-    .split("-")
-    .reverse()
-    .join("/");
-  var outDate = filters.outDate
-    .split("-")
-    .reverse()
-    .join("/");
-  console.log("inDate", inDate, "today", today, inDate > today);
-  console.log("outDate", outDate, "today", today, outDate > today);
+    var inDate = filters.inDate
+        .split("-")
+        .reverse()
+        .join("/");
+    var outDate = filters.outDate
+        .split("-")
+        .reverse()
+        .join("/");
+    console.log("inDate", inDate, "today", today, inDate > today);
+    console.log("outDate", outDate, "today", today, outDate > today);
 
     if ((inDate < today && inDate !== '') || (outDate < today && outDate !== '')) {
         errors.today = 'Fechas inválidas';
@@ -43,14 +43,14 @@ function validate(filters) {
         errors.priceMin = 'El precio mínimo debe ser menor que el máximo';
     }
 
-  return errors;
+    return errors;
 }
 
 export default function Reserva() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(Logeduser());
-  }, [dispatch]);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(Logeduser());
+    }, [dispatch]);
 
     useEffect(() => {
         dispatch(readWeather());
@@ -58,11 +58,13 @@ export default function Reserva() {
     const user = useSelector(state => state.user);
     const logeduser = useSelector(state => state.user)
     const allCabins = useSelector(state => state.cabins);
-    let orderedCabins = allCabins.sort((a, b) => {
-        if (parseInt(a.Number) < parseInt(b.Number)) return -1;
-        if (parseInt(a.Number) > parseInt(b.Number)) return 1;
-        return 1;
-    })
+    let orderedCabins = Array.isArray(allCabins) ?
+        allCabins.sort((a, b) => {
+            if (parseInt(a.Number) < parseInt(b.Number)) return -1;
+            if (parseInt(a.Number) > parseInt(b.Number)) return 1;
+            return 1;
+        }) :
+        allCabins;
     const [errors, setErrors] = useState({})
 
     // Paginado---------------------------------------------------------------
@@ -70,42 +72,44 @@ export default function Reserva() {
     const [cabinsPerPage, /*setCabinsPerPage*/] = useState(5);
     const indexOfLastCabin = currentPage * cabinsPerPage;
     const indexOfFirstCabin = indexOfLastCabin - cabinsPerPage;
-    let currentCabins = orderedCabins.slice(indexOfFirstCabin, indexOfLastCabin);
+    let currentCabins = Array.isArray(orderedCabins) ?
+        orderedCabins.slice(indexOfFirstCabin, indexOfLastCabin) :
+        orderedCabins;
 
-  const paginado = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-  //-------------------------------------------------------------------------
+    const paginado = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+    //-------------------------------------------------------------------------
 
-  useEffect(() => {
-    dispatch(getCabins());
-  }, [dispatch]);
+    useEffect(() => {
+        dispatch(getCabins());
+    }, [dispatch]);
 
-  const [filters, setFilters] = useState({
-    inDate: "",
-    outDate: "",
-    capacity: "",
-    priceMin: "",
-    priceMax: "",
-    wifi: "",
-    barbecue: "",
-    parking: "",
-  });
-
-  function handleReload(e) {
-    e.preventDefault();
-    setFilters({
-      inDate: "",
-      outDate: "",
-      capacity: "",
-      priceMin: "",
-      priceMax: "",
-      wifi: "",
-      barbecue: "",
-      parking: "",
+    const [filters, setFilters] = useState({
+        inDate: "",
+        outDate: "",
+        capacity: "",
+        priceMin: "",
+        priceMax: "",
+        wifi: "",
+        barbecue: "",
+        parking: "",
     });
-    window.location.reload();
-  }
+
+    function handleReload(e) {
+        e.preventDefault();
+        setFilters({
+            inDate: "",
+            outDate: "",
+            capacity: "",
+            priceMin: "",
+            priceMax: "",
+            wifi: "",
+            barbecue: "",
+            parking: "",
+        });
+        window.location.reload();
+    }
 
     function handleReload(e) {
         e.preventDefault();
@@ -153,6 +157,7 @@ export default function Reserva() {
             if (errors.priceMin) alert(errors.priceMin);
         }
     }
+
     return (
         <div>
             <Navbar className={styles.navbar} />
@@ -217,41 +222,51 @@ export default function Reserva() {
                 <li>
                     <hr />
                     <label className={styles.serviceTitle}><p><MdRoomService /></p> Que cuente con:</label>
-                    <ul className={styles.serviceCont}>
-                        <li>
-                            <label>Wifi <p className={styles.services}><FaWifi /></p></label>
-                            <input
-                                type='checkbox'
-                                name='wifi'
-                                onChange={e => {
-                                    handleCheck(e);
-                                    return handleChange(e);
-                                }}
-                            />
-                        </li>
-                        <li>
-                            <label>Parrilla <p className={styles.services}><GiBarbecue /></p></label>
-                            <input
-                                type='checkbox'
-                                name='barbecue'
-                                onChange={e => {
-                                    handleCheck(e);
-                                    return handleChange(e);
-                                }}
-                            />
-                        </li>
-                        <li>
-                            <label>Estacionamiento techado <p className={styles.services}><FaCarAlt /></p></label>
-                            <input
-                                type='checkbox'
-                                name='parking'
-                                onChange={e => {
-                                    handleCheck(e);
-                                    return handleChange(e);
-                                }}
-                            />
-                        </li>
-                    </ul>
+                    <div className={styles.tablaServicios}>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td className={styles.izquierda}><FaWifi className={styles.iconsServ}/></td>
+                                    <td>Wifi</td>
+                                    <td><input
+                                        type='checkbox'
+                                        name='wifi'
+                                        onChange={e => {
+                                            handleCheck(e);
+                                            return handleChange(e);
+                                        }}
+                                        className={styles.checkbox}
+                                    /></td>
+                                </tr>
+                                <tr>
+                                    <td className={styles.izquierda}><GiBarbecue className={styles.iconsServ}/></td>
+                                    <td>Parrilla</td>
+                                    <td><input
+                                        type='checkbox'
+                                        name='barbecue'
+                                        onChange={e => {
+                                            handleCheck(e);
+                                            return handleChange(e);
+                                        }}
+                                        className={styles.checkbox}
+                                    /></td>
+                                </tr>
+                                <tr>
+                                    <td className={styles.izquierda}><FaCarAlt className={styles.iconsServ}/></td>
+                                    <td>Estacionamiento</td>
+                                    <td><input
+                                        type='checkbox'
+                                        name='parking'
+                                        onChange={e => {
+                                            handleCheck(e);
+                                            return handleChange(e);
+                                        }}
+                                        className={styles.checkbox}
+                                    /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </li>
                 <hr />
                 <li>
@@ -267,31 +282,43 @@ export default function Reserva() {
             <div className={styles.cabinPage}>
                 <div className={styles.cabinCont}>
                     {
-                        currentCabins?.map(el => {
-                            return (
-                                <div key={el.number} >
-                                    <Cabaña
-                                        ID={el.ID}
-                                        number={el.Number}
-                                        capacity={el.Capacity}
-                                        Available={el.Available}
-                                        price={el.Price}
-                                        description={el.Description}
-                                        Picture={el.Picture}
-                                        parrilla={el.Parrilla}
-                                        wifi={el.Wifi}
-                                        parking={el.Parking}
-                                    />
+                        Array.isArray(currentCabins) ?
+                            <div>
+                                {
+                                    currentCabins.map(el => {
+                                        return (
+                                            <div key={el.number} >
+                                                <Cabaña
+                                                    ID={el.ID}
+                                                    number={el.Number}
+                                                    capacity={el.Capacity}
+                                                    Available={el.Available}
+                                                    price={el.Price}
+                                                    description={el.Description}
+                                                    Picture={el.Picture}
+                                                    parrilla={el.Parrilla}
+                                                    wifi={el.Wifi}
+                                                    parking={el.Parking}
+                                                />
+                                            </div>
+                                        )
+                                    })
+                                }
+                                <div className={styles.paginado}>
+                                    <Paginado cabinsPerPage={cabinsPerPage} allCabins={allCabins.length} paginado={paginado} />
                                 </div>
-                            )
-                        })
+                            </div>
+                            :
+                            <div id={styles.noDisponible}>
+                                <div>
+                                    <h1>{currentCabins}</h1>
+                                </div>
+                            </div>
                     }
                 </div>
-                <div className={styles.paginado}>
-                    <Paginado cabinsPerPage={cabinsPerPage} allCabins={allCabins.length} paginado={paginado} />
-                </div>
-                 </div>
-                </div>    
-    </div>
-  );
+
+            </div>
+        </div>
+    );
 }
+

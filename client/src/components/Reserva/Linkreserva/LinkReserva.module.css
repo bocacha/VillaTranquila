@@ -6,41 +6,45 @@
   background-color: #94adbc;
   display: flex;
   flex-direction: row;
+  top: 0;
+  bottom: 0;
+  position: fixed;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .formsCont {
-  display: flex;
-  flex-direction: row;
   width: 50%;
   min-height: 100vh;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-  margin-left: 10px;
 }
 
 .crearCont {
   width: 100%;
   height: 100vh;
+  max-width: 100%;
+  justify-items: center;
+  justify-content: center;
 }
 
 .btnVolver {
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   display: flex;
   align-items:flex-start;
-  margin-left: 50px;
+  /* margin-left: 50px; */
   padding-top: 10px;
+  margin-left:3%;
+  width: 100%;
 }
 
-.btns{
+.btns {
   margin-top: 20px;
 }
 
 .btn {
   padding: 4px 7px;
+  width:200%;
   background: #293c4f;
   color: #fff;
-  border: none;
   border: 1px solid #293c4f;
   border-radius: 5px;
   font-family: Lato, Arial, sans-serif;
@@ -55,10 +59,11 @@
 
 .btnRes {
   padding: 7px 10px;
-  background: #293c4f;
+  width: fit-content;
+  background: #355978;
   color: #fff;
   border: none;
-  border: 1px solid #293c4f;
+  border: 1px solid #355978;
   border-radius: 5px;
   font-family: Lato, Arial, sans-serif;
   font-weight: bold;
@@ -66,12 +71,25 @@
 }
 .btnRes:hover {
   background: none;
-  border: 1px solid #293c4f;
+  border: 1px solid #8bafbf;
   color: #000;
 }
+#confirmar{
+  margin-bottom: 20px;
+  margin-top:-20px;
+}
+#reservar{
+  width:fit-content;
+  border-radius: 50px;
+}
+#reservar:hover{
+  background-color: #8bafbf;
+  border: 1px solid #8bafbf;
+  transform:scale(1.1)
+}
 
-.form {
-  /* width: fit-content; */
+.form{
+  margin-bottom: 10px;
 }
 
 .editarCont {
@@ -81,14 +99,36 @@
   padding: 3px;
   margin-left: 90px;
 }
-
+.titlecontainer{
+  max-width: 100%;
+  justify-content: center;
+  justify-items: center;
+}
 .title {
-  margin-bottom: 6px;
+  /* position: relative; */
+  margin-top:10px;
   font-family: 'Hind Siliguri', sans-serif;
   font-weight: 300;
   font-size: 32px;
   white-space: nowrap;
   font-weight: bold;
+}
+#title1{
+  margin-bottom: -5px;
+}
+#title2{
+  margin-top: -10px;
+}
+
+.form{
+  margin-top: 10px;
+  background-color: #293c4f;
+  padding: 3%;
+  border-radius: 10px;
+  width: 90%;
+  margin-left:5%;
+  color:#fff;
+
 }
 
 .formInputs {
@@ -98,18 +138,48 @@
   width: 300px;
 }
 
-.servicios {
+.parri{
   display: flex;
-  align-items:flex-start;
+  width:100%;
+  font-size: xx-large;
+  justify-items: center;
   justify-content: center;
+  margin-top: -15px;
 }
-
-.p{
+.parri p{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.p {
   font-family: Lato, sans-serif;
   font-weight: bold;
+  margin-top: 20px;
   margin-bottom: 10px;
 }
-
+.serviceContainer{
+  width:90%;
+  justify-content: center;
+  justify-items: center;
+  margin-left:5%;
+}
+.servicios {
+  display: grid;
+  grid-template-columns: 33.33% 33.33% 33.33%;
+  /* justify-content: center; */
+  justify-items: center;
+  align-items: center;
+  text-align: justify;
+  width:60%;
+  margin-left:20%;
+}
+.izquierda{
+  /* margin-right: 10%; */
+  margin-left: 0%;
+  text-align: start;
+}
+.derecha{
+  float: right;
+}
 .checkbox {
   margin-top: auto;
   margin-bottom: auto;
@@ -125,6 +195,7 @@
   width: 400px;
 }
 
+
 .imagenFondo {
   width: 50%;
   min-height: 100vh;
@@ -132,4 +203,160 @@
   background: url("https://res.cloudinary.com/villatranquila/image/upload/v1633134933/Cabins/12_rctcjm.jpg");
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+#precioFinal{
+  cursor:default;
+}
+
+.hr {
+  width: 100%;
+}
+
+.servAdi {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.servicios {
+  display: flex;
+  align-items: center;
+  margin-top: -4%;
+}
+
+.containerCosto{
+  margin-top: 20px;
+  background: #355978;
+  border-radius: 9px;
+}
+
+.costoTitle{
+  background: #355978;
+  border-radius: 9px;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: -10px;
+}
+
+.inputCosto{
+  margin-bottom: -1px;
+}
+
+
+
+@media (min-width: 320px) {
+  .imagenFondo {
+    display: none;
+  }
+  .container {
+    width: 100%;
+  }
+  .btnVolver {
+    margin-top: 10px;
+    margin-left: 5px;
+    margin-bottom: 25px;
+  }
+  .titleContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+  }
+  .title {
+    font-size: 20px;
+  }
+  .formsCont{
+    width: 100%;
+    margin-top:70px;
+  }
+  .formCont{
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+  }
+  .form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    margin-left: -3%;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .serviciosContainer {
+    margin-top: 20px;
+    padding: 20px 25px;
+    background: #293c4f;
+    color: #fff;
+    border-radius: 12px;
+  }
+  .title2 {
+    font-weight: bold;
+  }
+  .btnRes{
+   margin-bottom: 20px; 
+  }
+}
+
+@media (min-width: 768px) {
+  .form{
+    width: 90%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .imagenFondo {
+    display: block;
+    position: fixed;
+    left: 50%;  
+  }
+  .container {
+    width: 100%;
+  }
+  .titleContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+  }
+  .title {
+    font-size: 24px;
+  }
+  .formsCont{
+    width: 50%;
+  }
+  .form {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    flex-direction: column;
+    margin-left: 5%;
+  }
+  .serviciosContainer {
+    margin-top: 20px;
+    padding: 20px 25px;
+    background: #293c4f;
+    color: #fff;
+    border-radius: 12px;
+  }
+  .title2 {
+    font-weight: bold;
+  }
+}
+
+@media (min-width:1155px) {
+  .form{
+    width: 95%;
+    margin-left: 2.5%;
+  }
 }

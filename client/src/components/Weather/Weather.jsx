@@ -10,7 +10,7 @@ export default function Weather() {
    
     return (
         <div className={styles.weather}>
-            <p className={styles.titulo}>Clima actual</p>
+            <p className={styles.titulo}>Clima</p>
             
             <div className={styles.container}>
                 {weather?.map(e => {

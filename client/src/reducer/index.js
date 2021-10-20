@@ -146,6 +146,10 @@ export default function rootReducer(state = initialState, action) {
       cabinsFiltered = parking === '' || parking === 'false' ?
         cabinsFiltered :
         cabinsFiltered.filter(el => el.Parking);
+      
+      cabinsFiltered = cabinsFiltered.length !== 0 ?
+        cabinsFiltered :
+        'No hay cabañas disponibles para los filtros seleccionados';
       return {
         ...state,
         cabins: cabinsFiltered
@@ -333,7 +337,7 @@ export default function rootReducer(state = initialState, action) {
       allReservations = username === '' ?
         allReservations :
         !userID ?
-          alert('Usuario no encontrado') :
+          [] :
           allReservations.filter(el => el.UserId === userID);
       // Filter by cabinNumber:
       let cabinNumber = action.payload.cabinNumber;
@@ -341,10 +345,12 @@ export default function rootReducer(state = initialState, action) {
       allReservations = cabinNumber === '' ?
         allReservations :
         !cabinID ?
-          alert('Cabaña no encontrada') :
+          [] :
           allReservations.filter(el => el.Cabinid === cabinID);
       // Filter by date:
-      let date = action.payload.date.split('-').reverse().join('/');
+      let date = action.payload.date !== '' ?
+        action.payload.date.split('-').reverse().join('/') :
+        action.payload.date;
       allReservations = date === '' ?
         allReservations :
         allReservations.filter(el => el.Checkin === date);
@@ -362,10 +368,15 @@ export default function rootReducer(state = initialState, action) {
 
     case FIND_USER:
       let allUsers = state.allUsers;
-      let user = allUsers.find(el => el.UserName === action.payload)
+      let usuarios = [];
+      let buscado = action.payload;
+      let user = allUsers.find(el => el.UserName === buscado);
+      user !== undefined ? usuarios.push(user) : usuarios = `No se encontró '${buscado}' en la lista de usuarios`;
+      console.log(user);
+      console.log(usuarios)
       return {
         ...state,
-        usuarios: user,
+        usuarios: usuarios,
       }
       case READ_CAMBIOS_DONE:
         return {
