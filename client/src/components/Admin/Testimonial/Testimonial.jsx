@@ -1,14 +1,16 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { useSelector , useDispatch } from 'react-redux';
-import {getTestimonials, RemoveFeedback} from "../../../actions";
-import style from '../Testimonial/TestimonialAdmin.module.css';
+import {getTestimonials, removeFeedback, restoreFeedback, readFeedbackocultados} from "../../../actions";
+import styles from '../Testimonial/TestimonialAdmin.module.css';
 import {useHistory} from 'react-router-dom';
+import NavAdmin from '../NavAdmin/NavAdmin';
+import Navbar from "../../Navbar/Navbar";
 
 
 const Testimonial = () => {
 
     const allTestimonials = useSelector((state) => state.testimoniales);
-    const allUsersData = useSelector((state) => state.userData);
+    const [habilitar, setHabilitar] = useState(false);
     const history = useHistory();
     const dispatch = useDispatch();
     useEffect(() => {
@@ -17,33 +19,56 @@ const Testimonial = () => {
       var array = [1,2,3,4,5]
       
       const handleSubmitDelete = (ID) => {
-        dispatch(RemoveFeedback({ id: ID }));
+        dispatch(removeFeedback({ id: ID }));
         alert("su Reseña fue Eliminada con exito");
-        //window.location.reload();
         setTimeout(function () {
           history.go(0);
         }, 500)
     
       };
+
+      const handleSubmitrestore = (ID) => {
+        console.log('funcion', ID)
+        dispatch(restoreFeedback({ id: ID }));
+        alert("su reseña fue restaurada con exito");
+        setTimeout(function () {
+          history.go(0);
+        }, 500)
+      }
+
+      const ocultadas = () => {
+        dispatch(readFeedbackocultados());
+        setHabilitar(true);
+      };
+      const showtrue = () => {
+        dispatch(getTestimonials());
+        setHabilitar(false);
+      };
     return (
-        <div>
+        
+        <div >
+         {!habilitar?
+          <button onClick={()=>ocultadas()}>Mostrar Ocultas</button> 
+          :
+          <button onClick={()=>showtrue()}>Mostrar Habilitadas</button>
+        } 
         {allTestimonials.length !== 0 
         ?
         <div>
         {
-         allTestimonials.map((expe, id)=>{
+         allTestimonials.map((expe, i)=>{
            
           return (
               <div>
-          <div key={id} className={style.container}>
+          <div key={i} className={styles.container}>
             <h3>Nombre : {expe.Name} </h3>
             <p>Descripcion : {expe.Description} </p> 
-            <div className={style.arrayStar}>
+            <div className={styles.arrayStar}>
             {array.map((la)=>{
                 return ( 
                 <div>
-                    {(la<=allTestimonials[id].Stars) ?
-                        <div  className={style.paint}><p>★</p></div> 
+                    {(la<=allTestimonials[i].Stars) ?
+                        <div  className={styles.paint}><p>★</p></div> 
                     :
                         <div><p>☆</p></div>}
                 </div>)
@@ -51,9 +76,17 @@ const Testimonial = () => {
             })}
             </div>
          </div>
+         {!habilitar
+         ?
          <div>
-            <button onClick={()=>handleSubmitDelete()}>Ocultar</button>
-        </div>  
+            <button onClick={()=>handleSubmitDelete(expe.ID)}>Ocultar</button>
+         </div> 
+         :
+         <div>
+            <button onClick={()=>handleSubmitrestore(expe.ID)}>Restaurar</button>
+         </div> 
+         }
+        
         </div>
          ) 
         })}
@@ -62,11 +95,12 @@ const Testimonial = () => {
         </div>
         :
         <div>
-            <h3>No hay testimoniales para mostrar</h3>
+            <h3>No hay Reseñas para mostrar</h3>
             
         </div>    
         }
     </div>
+  
       );
 }
  

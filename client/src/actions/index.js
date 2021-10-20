@@ -51,6 +51,8 @@ export const FILTER_PAGOS = 'FILTER_PAGOS';
 export const READ_CAMBIOS = "READ_CAMBIOS";
 export const READ_CAMBIOS_DONE= "READ_CAMBIOS_DONE";
 export const REMOVE_FEEDBACK = "REMOVE_FEEDBACK";
+export const RESTORE_SERVICES = "RESTORE_SERVICES";
+export const READ_FEEDBACK_OCULTADOS = "READ_FEEDBACK_OCULTADOS";
 
 export function getCabins() {
   return async function (dispatch) {
@@ -948,7 +950,8 @@ export function getCambios(){
   };
 }
 
-export function RemoveFeedback(id) {
+export function removeFeedback(id) {
+  console.log('idf',id)
   return async function (dispatch) {
 
     var json = await axios.put("/feedback/RemoveFeedback", id);
@@ -958,5 +961,33 @@ export function RemoveFeedback(id) {
 
     })
 
+  };
+}
+
+export function restoreFeedback(id){
+  console.log('idresto',id)
+  return async function (dispatch) {
+   
+      var json = await axios.put("/feedback/RestoreFeedback", id);
+      return dispatch({
+        type: RESTORE_SERVICES,
+        payload: id
+       
+       })
+       
+  };
+}
+
+export function readFeedbackocultados(id) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("/feedback/ocultadas");
+      return dispatch({
+        type: READ_FEEDBACK_OCULTADOS,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.error(err);
+    }
   };
 }

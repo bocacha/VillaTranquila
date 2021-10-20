@@ -9,12 +9,10 @@
    
 }
 
-.arrayStar{
-    display: inline block;
-    
-    
-    
-}
+ .arrayStar{
+    display: flex;
+    font-size: 40px;
+} 
 
 .paint{
     color:#ffd700;
