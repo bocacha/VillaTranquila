@@ -11,7 +11,7 @@ router.get("/", async (req, res)=>{
     }
 });
 router.get("/Done", async (req, res)=>{
-    const dbCambios = await Payments.findAll({where:{Done:true}})
+    const dbCambios = await CambiosReserva.findAll({where:{Done:true}})
     try{
         res.send(dbCambios)
     }catch(error){
@@ -31,6 +31,7 @@ router.post("/Cambios" , (req, res)=>{
     .catch(error=>{ console.log(error)})
 })
 router.put("/Cambios/Done", (req,res) =>{
+    console.log(req.body.id)
     CambiosReserva.update(
           {Done:true}
         ,

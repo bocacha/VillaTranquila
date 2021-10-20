@@ -33,13 +33,8 @@ export default function Reservaciones() {
   }, [dispatch])
   const logeduser = useSelector((state) => state.user);
   const { token } = logeduser;
-  const [selectDateCI, setSelectDateCI] = useState(null);
-  const [selectDateCO, setSelectDateCO] = useState(null);
-  const [cabinid, setCabinid] = useState(null)
-  const [cabinnumber, setCabinnumber] = useState(null)
-  const [mostrar, setMostrar] = useState(false);
   const [habilitar, setHabilitar] = useState(false);
-  const allCabins = useSelector((state) => state.cabañas);
+
   useEffect(() => {
     dispatch(readUsers({ token }));
   }, [dispatch]);
@@ -54,18 +49,17 @@ export default function Reservaciones() {
       console.log(Nuevo)
       dispatch(aceptarCambios({...Nuevo},{ token },{id:ID}))
     e.preventDefault();
-    setMostrar(true);
     alert("Editado")
 
   }
  
   const ocultadas = () => {
-    dispatch(readReservationocultados())
+    dispatch(getCambiosDone())
     setHabilitar(true)
 
   }
   const showtrue = () => {
-    dispatch(readReservation())
+    dispatch(getCambios())
     setHabilitar(false)
 
   }
@@ -94,6 +88,8 @@ export default function Reservaciones() {
                         Original={el.Original}
                         Nuevo={el.Nuevo}
                         handlePrueba={handlePrueba}
+                        logeduser={logeduser}
+                        restaurar={habilitar}
                       />
                     </div>
                   );

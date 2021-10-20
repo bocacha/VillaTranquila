@@ -9,6 +9,7 @@ export default function EditReserva({
     ID,
     Original,
     Nuevo,
+    logeduser,
     handlePrueba,
     restaurar,
 }) {
@@ -16,22 +17,22 @@ export default function EditReserva({
     const dispatch = useDispatch();
     const history = useHistory();
     const [mostrar, setMostrar] = useState(true);
-
+    const {token}= logeduser
 
     const handleSubmitDelete = (ID) => {
-        dispatch(cancelarCambios({Original ,id:ID}))
+        dispatch(cancelarCambios({...Original},{id:ID}))
         alert("su Reserva fue Eliminada con exito");
-        setTimeout(function () {
-            history.go(0);
-        }, 500)
+        // setTimeout(function () {
+        //     history.go(0);
+        // }, 500)
 
     };
     const handleSubmitrestore = (ID) => {
-        dispatch(RestaurarCambios({Original ,id:ID}))
+        dispatch(RestaurarCambios({...Original},{id:ID},{token}))
         alert("su cabaña fue Restaurada con exito");
-        setTimeout(function () {
-            history.go(0);
-        }, 500)
+        // setTimeout(function () {
+        //     history.go(0);
+        // }, 500)
 
     };
     return (
@@ -129,14 +130,14 @@ export default function EditReserva({
             <div className={styles.btnsContainer}>
                 {!restaurar ? (
                     <button
-                        onClick={(e) => handleSubmitDelete(e)}
+                        onClick={(e) => handleSubmitDelete(ID)}
                         className={styles.btn}
                     >
                         Negar
                     </button>
                 ) : (
                     <button
-                        onClick={(e) => handleSubmitrestore(e,ID,Original)}
+                        onClick={(e) => handleSubmitrestore(ID,Original)}
                         className={styles.btn}
                     >
                         Restaurar

@@ -791,7 +791,7 @@ export function cambiarReserva(payload){
   };
 }
 export function aceptarCambios(payload, { token },ID){
-  console.log(payload)
+  console.log(ID)
   const obj ={
     id: payload.id,
     Checkin:payload.Checkin,
@@ -812,7 +812,7 @@ export function aceptarCambios(payload, { token },ID){
   return async function (dispatch) {
     try {
       let json = await axios.put("/reservations/EditReservation", payload, config);
-      let json2 = await axios.put("/CambiosReserva/Cambios/Done",{id:ID})
+      let json2 = await axios.put("/CambiosReserva/Cambios/Done",ID)
       let lala = await axios.post("/sendNotificationCambios",{username:payload.UserName, name:payload.Anombrede, date:payload.Checkin})
       
     } catch (err) {
@@ -823,7 +823,7 @@ export function aceptarCambios(payload, { token },ID){
 export function cancelarCambios(payload,ID){
   return async function (dispatch) {
     try {
-      let json = await axios.put("/CambiosReserva/Cambios/Cancel",{id:ID});
+      let json = await axios.put("/CambiosReserva/Cambios/Cancel",ID);
       let lala = await axios.post("/sendNotificationCambios/NO",{username:payload.UserName, name:payload.Anombrede, date:payload.Checkin})
 
     } catch (err) {
@@ -831,19 +831,28 @@ export function cancelarCambios(payload,ID){
     }
   };
 }
-export function RestaurarCambios(ID){
+export function RestaurarCambios(payload,ID,{token}){
+  console.log(ID)
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  }
   return async function (dispatch) {
     try {
-      let json = await axios.put("/CambiosReserva/Cambios/Restore",{id:ID});
+      let json = await axios.put("/reservations/EditReservation", payload, config);
+      let json2 = await axios.put("/CambiosReserva/Cambios/Restore",ID);
     } catch (err) {
       console.log(err);
     }
   };
 }
 export function getCambiosDone(){
+  console.log("entre2")
   return async function (dispatch) {
     try {
       let json = await axios.get("/CambiosReserva/Done");
+      console.log(json.data)
       return dispatch({
         type: READ_CAMBIOS_DONE,
         payload: json.data,
@@ -854,9 +863,11 @@ export function getCambiosDone(){
   };
 }
 export function getCambios(){
+  console.log("entre1")
   return async function (dispatch) {
     try {
       let json = await axios.get("/CambiosReserva");
+      console.log(json.data)
       return dispatch({
         type: READ_CAMBIOS,
         payload: json.data,
