@@ -62,6 +62,7 @@ export default function Usuarios() {
     Address: "",
     Phone: "",
     Email: "",
+    UserDNI:"",
   });
   let uusername = input.UserName;
   function handleChange(e) {
@@ -155,7 +156,16 @@ export default function Usuarios() {
                 className={styles.formInputs}
                 required
               />{errors.LastName && (<p>{errors.LastName}</p>)}
-
+              <input
+                type="text"
+                value={input.UserDNI}
+                name="UserDNI"
+                onChange={(e) => handleChange(e)}
+                placeholder="DNI"
+                className={styles.formInputs}
+                minLength="7"
+                required
+              />
               <input
                 type="text"
                 value={input.Address}

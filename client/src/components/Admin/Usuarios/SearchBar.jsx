@@ -43,12 +43,13 @@ export default function SearchBar() {
             <div className={styles.container}>
                 <form>
                     <input
-                        style={{width:'72.7%'}}
                         type='text'
                         placeholder='Buscá por nombre de usuario . . .'
                         onChange={handleInputChange}
                         // onKeyDown={(e) =>handleKeyDown(e)}
                         onKeyPress={e => e.key === 'Enter' && handleSearch(e)}
+                        className={styles.input}
+                        id={styles.input}
                     />
                 </form>
                 <div>

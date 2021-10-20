@@ -59,6 +59,7 @@
 
 .btnRes {
   padding: 7px 10px;
+  width: fit-content;
   background: #355978;
   color: #fff;
   border: none;
@@ -78,7 +79,7 @@
   margin-top:-20px;
 }
 #reservar{
-  width:53%;
+  width:fit-content;
   border-radius: 50px;
 }
 #reservar:hover{
@@ -194,6 +195,7 @@
   width: 400px;
 }
 
+
 .imagenFondo {
   width: 50%;
   min-height: 100vh;
@@ -201,8 +203,6 @@
   background: url("https://res.cloudinary.com/villatranquila/image/upload/v1633134933/Cabins/12_rctcjm.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  position: fixed;
-  margin-left: 50%;
 }
 
 #precioFinal{
@@ -244,6 +244,8 @@
   margin-bottom: -1px;
 }
 
+
+
 @media (min-width: 320px) {
   .imagenFondo {
     display: none;
@@ -254,6 +256,7 @@
   .btnVolver {
     margin-top: 10px;
     margin-left: 5px;
+    margin-bottom: 25px;
   }
   .titleContainer {
     width: 100%;
@@ -264,10 +267,11 @@
     margin-bottom: 25px;
   }
   .title {
-    font-size: 24px;
+    font-size: 20px;
   }
   .formsCont{
     width: 100%;
+    margin-top:70px;
   }
   .formCont{
     margin-left: auto;
@@ -300,19 +304,20 @@
   }
 }
 
+@media (min-width: 768px) {
+  .form{
+    width: 90%;
+  }
+}
+
 @media (min-width: 1024px) {
   .imagenFondo {
     display: block;
     position: fixed;
-    left: 50%;
+    left: 50%;  
   }
   .container {
     width: 100%;
-    outline: 1px solid red;
-  }
-  .btnVolver {
-    margin-top: 10px;
-    margin-left: 5px;
   }
   .titleContainer {
     width: 100%;
@@ -329,13 +334,13 @@
     width: 50%;
   }
   .form {
+    width: 90%;
     display: flex;
     justify-content: center;
-    flex-direction: column;
     align-items: center;
     justify-items: center;
-    margin-left: -3%;
-    width: fit-content;
+    flex-direction: column;
+    margin-left: 5%;
   }
   .serviciosContainer {
     margin-top: 20px;
@@ -346,5 +351,12 @@
   }
   .title2 {
     font-weight: bold;
+  }
+}
+
+@media (min-width:1155px) {
+  .form{
+    width: 95%;
+    margin-left: 2.5%;
   }
 }

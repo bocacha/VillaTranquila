@@ -46,7 +46,10 @@ module.exports = (sequelize) => {
         }
       }
    },
-
+   UserDNI:{
+    type: DataTypes.STRING,
+    allownull: false
+   },
    UserPasswordHashed:{
     type: DataTypes.STRING,
     allownull: false,
@@ -78,11 +81,11 @@ module.exports = (sequelize) => {
         }
       }
   },
-   ReservationsHistory:{
-    type: DataTypes.JSON,
-    defaultValue: [],
-    allowNull: false,
-   },
+  //  ReservationsHistory:{
+  //   type: DataTypes.JSON,
+  //   defaultValue: [],
+  //   allowNull: false,
+  //  },
    Blocked:{
     type: DataTypes.BOOLEAN,
     defaultValue: false,

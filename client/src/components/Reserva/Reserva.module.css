@@ -1,3 +1,8 @@
+.general{
+  background-color: #94ADBC;
+
+}
+
 .reserva {
   position: fixed;
   overflow: auto;
@@ -236,18 +241,100 @@
   padding: 20px;
 }
 
+.btnRespCont{
+  display: none;
+  position: absolute;
+  width: 100%;
+}
+.filtrosNo{
+  position: fixed;
+  top:8%;
+  right: 150px;
+  z-index: 4;
+}
 
-/* @media (min-width: 320px) {
-  .filtrosContainer{
-    display: none;
-  }
-  .reserva{
-    display: none;
-  }
-  .cabinPage{
+.btnFiltro{
+ background: #293c4f;
+ color: #fff;
+ border-radius: 50%;
+ border: none;
+ font-size: 20px;
+ width: 50px;
+ height: 50px;
+}
+
+.reservaResp{
+  position: fixed;
+  overflow: auto;
+  background-color: #293c4f;
+  margin-top: 70px;
+  padding: 0;
+  height: 100%;
+  width: 25%;
+  list-style-type: none;
+  font-size: large;
+}
+
+.reloadResp{
+  border-radius: 4px;
+  background-color: #355978;
+  border-color: transparent;
+  color: #fff;
+  text-align: center;
+  font-size: large;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  padding: 5px 20px;
+  display: inline-flex;
+  height: auto;
+  line-height: 35px;
+}
+
+@media (min-width: 320px) {
+  /* .cabinPage{
     width: 100%;
+    margin-left: 0%;
+  } */
+  .cabinPage::-webkit-scrollbar {
+    width: 0px;
+    background-color: #eff1f5;
   }
   .cabinCont{
     width: 100%;
+    margin-top: 80px;
+    margin-left: 0px;
   }
-} */
+  /* .cabinPage{
+    width: 100%;
+  } */
+}
+
+@media (min-width:1024) {
+  .mostrarSi{
+    display: block;
+  }
+  .cabinPage{
+    width: 400px;
+  height: 100%;
+  position: fixed;
+  overflow: auto;
+  background-color: #94adbc;
+  margin-left: 25%;
+  }
+  .reserva {
+    display: block;
+    position: fixed;
+    overflow: auto;
+    background-color: #293c4f;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 25%;
+    list-style-type: none;
+    font-size: large;
+  }
+}
+
+
+
+
