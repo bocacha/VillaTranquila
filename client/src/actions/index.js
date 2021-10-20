@@ -46,6 +46,7 @@ export const FILTER_RESERVATIONS = 'FILTER_RESERVATIONS';
 export const GET_TESTIMONIAL = 'GET_TESTIMONIAL';
 export const POST_TESTIMONIAL = 'POST_TESTIMONIAL';
 export const FIND_USER = 'FIND_USER';
+export const FILTER_PAYMENT='FILTER_PAYMENT';
 export const FILTER_PAGOS = 'FILTER_PAGOS';
 export const READ_CAMBIOS = "READ_CAMBIOS";
 export const READ_CAMBIOS_DONE= "READ_CAMBIOS_DONE";
@@ -191,6 +192,37 @@ export function readPayment({ token }) {
       console.error(err);
     }
   };
+}
+
+export function filterPayment({token},mes){
+  // console.log("el mes es: " + mes);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  }
+  function formato(texto){
+    return texto.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1');
+  }
+
+  return async function(dispatch){
+    try {
+      var json = await axios.get("/payments/", config);
+
+      const pagoFiltrado=json.data.filter((e)=>{
+        let miDato=formato(e.fecha);
+        let miMes=miDato.substr(5,2);
+        //console.log("mi mes es:" + miMes);
+        return miMes===mes;        
+      })
+      return dispatch({
+        type: FILTER_PAYMENT,
+        payload: pagoFiltrado,
+      });
+    } catch (err) {
+      console.error(err);
+    }    
+  }
 }
 
 export function readReservation() {
@@ -456,6 +488,7 @@ export function editPictures(payload, { token }) {
 }
 
 export function editReservation(payload, { token }) {
+  console.log(payload)
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -463,17 +496,24 @@ export function editReservation(payload, { token }) {
   }
   return async function (dispatch) {
     try {
+      var cabins = await axios.get("/cabins")
+      var reserva = await axios.get("/reservations")
+      var filtrada = reserva.data.filter(e=> e.ID === payload.id)
+      var cabinfiltrada = cabins.data.filter(e=>e.ID === filtrada[0].Cabinid)
+      var Avaliable2 = cabinfiltrada[0].Available.filter((e)=> !e.includes(...fechas({Checkin:filtrada[0].Checkin,Checkout:filtrada[0].Checkout})))
+      Avaliable2.push(fechas({Checkin:payload.Checkin,Checkout:payload.Checkout}))
+      console.log(Avaliable2)
     const response = await axios.put("/reservations/EditReservation", payload, config);
-    return dispatch({
+    return (dispatch({
       type: EDIT_RESERVATIONS,
       payload: response.data,
-    });
+    }),dispatch(editAvailible({id:cabinfiltrada[0].ID , Available: Avaliable2})));
   } catch (err) {
     console.error(err);
   }
 };
 }
-
+//
 
 export function editCabains(payload, { token }) {
   const config = {
