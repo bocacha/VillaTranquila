@@ -145,7 +145,7 @@ export default function Reservaciones() {
       costoadicional = costoadicional + parseFloat(suma[j])
 
     }
-    costoadicional = costoadicional+ original.CostoFinal
+    costoadicional = parseFloat(costoadicional) + parseFloat(original.CostoFinal)
     setEdit({...edit,CostoFinal:costoadicional})
   }
 
@@ -221,6 +221,16 @@ export default function Reservaciones() {
                 return selectDateCI < d;
               }}
               />
+               <div>Costo final por noche:   </div>
+            <input
+              type="text"
+              value={edit.CostoFinal}
+              name="CostoFinal"
+              placeholder={"Por Noche:" + edit.CostoFinal}
+              className={styles.formInputs}
+              id={styles.precioFinal}
+              required
+            />
                <input
                     type="text"
                     value={edit.Anombrede}

@@ -39,13 +39,13 @@ import {
   SEND_PASSWORD_EMAIL,
   SELECTED_CABIN,
   FILTER_RESERVATIONS,
-  FIND_USER,
   FILTER_PAYMENT,
   GET_TESTIMONIAL,
   POST_TESTIMONIAL,
   FILTER_PAGOS,
   READ_CAMBIOS,
   READ_CAMBIOS_DONE,
+  FIND_USER
 
 } from "../actions";
 import fechas from "../components/Reserva/Linkreserva/algoritmofechas"
