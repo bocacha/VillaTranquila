@@ -198,8 +198,7 @@ export default function Reservaciones() {
     setCurrentPage(pageNumber);
   };
   //-------------------------------------------------------------------------
-  const checkboxselected = (e) => {
-    e.preventDefault()
+  const checkboxselected = () => {
     setEdit({
       ...edit, CostoFinal: edit.CostoFinal,
       Checkin: selectDateCI, Checkout: selectDateCO,
@@ -237,7 +236,6 @@ export default function Reservaciones() {
     costoadicional = parseFloat(costoadicional) + parseFloat(costo)
     setEdit({...edit,CostoFinal:costoadicional})
   }
-
   return (
     <div className={styles.reservasAdmin}>
       <div className={styles.navs2}>
@@ -306,6 +304,7 @@ export default function Reservaciones() {
               placeholder={"Por Noche:" + edit.CostoFinal}
               className={styles.formInputs}
               id={styles.precioFinal}
+            //  onChange={()=>checkboxselected()}
               required
             />
                   {/* <input
