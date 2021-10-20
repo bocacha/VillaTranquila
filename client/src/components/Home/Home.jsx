@@ -26,6 +26,8 @@ export default function Home() {
     dispatch(readWeather());
   }, [dispatch]);
   const user = useSelector((state) => state.user);
+  const allUsersData = useSelector((state) => state.userData);
+  console.log('all',allUsersData)
   const ID = user && user.userid;
   useEffect(() => {
     dispatch(getUserData(ID))
@@ -35,6 +37,9 @@ export default function Home() {
     <div className={styles.container}>
       <div>
         <Navbar />      
+      </div>
+      <div className={styles.chat}>
+        <Chat  />
       </div>
       <div className={styles.nombre}>
       <div className={styles.snow}>
@@ -84,7 +89,8 @@ export default function Home() {
           ></iframe>
         </div>
       </div>
-      {/* <Testimoniales /> */}
+      {/* {allUsersData.Premium ? */} <Testimoniales />  {/* : null } */}
+          
         <Footer />
 
     </div>

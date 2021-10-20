@@ -16,7 +16,7 @@
 }
 
 .img {
-  width:fit-content;
+  width: fit-content;
   max-width: 350px;
   height: fit-content;
   max-height: 350px;
@@ -37,7 +37,6 @@
   width: 3200px;
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
-  
 }
 
 .containerBtn {
@@ -64,35 +63,142 @@
   border: 1px solid #293c4f;
   color: #000;
 }
-.servicios{
+.servicios {
   display: flex;
 }
-.servicios p{
+.servicios p {
   margin-right: 10px;
   font-size: x-large;
 }
-table{
-  width: 120%
+table {
+  width: 120%;
 }
 
-table .izquierda{
-  float:left;
+table .izquierda {
+  float: left;
 }
-table .derecha{
-  float:right;
+table .derecha {
+  float: right;
 }
-table .derecha p{
+table .derecha p {
   max-width: 280px;
   text-align: end;
   text-align: justify;
 }
-.info span{
-  display:flex;
+.info span {
+  display: flex;
   justify-items: center;
   justify-content: center;
 }
-.info span p{
+.info span p {
   margin: 10px 30px -5px 30px;
 
   font-size: xx-large;
+}
+
+@media (min-width: 320px) {
+  .info{
+    width: 90%;
+  }
+  .infoContainer {
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  .img{
+    max-width:100%;
+  }
+  table{
+    width: 120%;
+    margin-left: -23px;
+  }
+  span{
+    width: 100%;
+    margin-left: -23px;
+    margin-bottom: 14px;
+  }
+  .izquierda{
+    float:left;
+  }
+}
+
+@media (min-width: 480px) {
+  .info{
+    width: 90%;
+  }
+  .infoContainer {
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+  .img{
+    max-width:100%;
+  }
+  table{
+    width: 110%;
+    margin-left: -15px;
+  }
+  span{
+    width: 100%;
+    margin-left: -23px;
+    margin-bottom: 14px;
+  }
+  .izquierda{
+    float:left;
+  }
+}
+
+@media (min-width:768px){
+  .cabaña{
+    width: 90%;
+    margin-left:5%;
+  }
+  .info{
+    width: 70%;
+  }
+  .img{
+    width: 500px;
+    height: auto;
+  }
+}
+
+@media (min-width:1024px){
+  .cabaña{
+    width: 80%;
+    margin-left:10%;
+    
+  }
+  .info{
+    width: 60%;
+  }
+  .img{
+    width: 500px;
+    height: auto;
+  }
+  
+}
+
+@media (min-width:1155px){
+  .cabaña{
+    width: 80%;
+    margin-left:10%;
+    
+  }
+  .info{
+    width: 300%;
+  }
+  .infoContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+  }
+  .img{
+    width: 500px;
+    height: auto;
+  }
+  .containerBtn{
+    align-self: end;
+  }
 }

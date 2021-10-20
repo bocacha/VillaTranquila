@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import { findUser } from "../../../actions";
+import { findUser } from "../../../actions/index";
 import { FaSearch } from 'react-icons/fa';
 import { AiOutlineReload } from 'react-icons/ai';
 import styles from '../Reservaciones/SearchBar.module.css';
@@ -16,9 +16,11 @@ export default function SearchBar() {
         setBusqueda(e.target.value);
     };
 
-    function handleSubmit(e) {
-        e.preventDefault()
-        dispatch(findUser(busqueda))
+    function handleSearch(e) {
+        // e.preventDefault();
+        e.preventDefault();
+        dispatch(findUser(busqueda));
+        setBusqueda('');
     }
 
     function handleReload(e) {
@@ -27,15 +29,31 @@ export default function SearchBar() {
         window.location.reload();
     }
 
+    // function handleKeyDown(e){
+    //     const key=e.keyCode;
+    //     if(key === 13){
+    //         e.preventDefault();
+    //         dispatch(findUser(busqueda));
+    //         setBusqueda('');
+    //     }
+    // }
+
     return (
         <div className={styles.searchBar}>
             <div className={styles.container}>
-                <span><strong>Buscá por nombre de usuario:</strong></span>
                 <form>
-                    <input style={{width:'72.7%'}} type='text' placeholder='Nombre de usuario . . .' onChange={handleInputChange} />
+                    <input
+                        type='text'
+                        placeholder='Buscá por nombre de usuario . . .'
+                        onChange={handleInputChange}
+                        // onKeyDown={(e) =>handleKeyDown(e)}
+                        onKeyPress={e => e.key === 'Enter' && handleSearch(e)}
+                        className={styles.input}
+                        id={styles.input}
+                    />
                 </form>
                 <div>
-                    <button onClick={handleSubmit} className={styles.btnSup}>Buscar <FaSearch className={styles.icon} /></button>
+                    <button onClick={handleSearch} className={styles.btnSup}>Buscar <FaSearch className={styles.icon} /></button>
                     <button onClick={handleReload} className={styles.btnSup} >Recargar usuarios <AiOutlineReload className={styles.icon} /></button>
                 </div>
             </div>
