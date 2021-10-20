@@ -1,19 +1,29 @@
 import React, {useEffect} from 'react';
 import { useSelector , useDispatch } from 'react-redux';
-import {getTestimonials} from "../../../actions";
+import {getTestimonials, RemoveFeedback} from "../../../actions";
 import style from '../Testimonial/TestimonialAdmin.module.css';
-
+import {useHistory} from 'react-router-dom';
 
 
 const Testimonial = () => {
 
     const allTestimonials = useSelector((state) => state.testimoniales);
     const allUsersData = useSelector((state) => state.userData);
+    const history = useHistory();
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getTestimonials());
       }, [dispatch]);
       var array = [1,2,3,4,5]
+      const handleSubmitDelete = (ID) => {
+        dispatch(RemoveFeedback({ id: ID }));
+        alert("su Reseña fue Eliminada con exito");
+        //window.location.reload();
+        setTimeout(function () {
+          history.go(0);
+        }, 500)
+    
+      };
     return (
         <div>
         {allTestimonials.length !== 0 
@@ -41,7 +51,7 @@ const Testimonial = () => {
             </div>
          </div>
          <div>
-            <button>Ocultar</button>
+            <button onClick={()=>handleSubmitDelete()}>Ocultar</button>
         </div>  
         </div>
          ) 
