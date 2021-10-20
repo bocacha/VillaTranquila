@@ -50,6 +50,7 @@ export default function SearchBar() {
                         name='username'
                         onChange={handleInputChange}
                         onKeyPress={e => e.key === 'Enter' && handleSubmit()}
+                        className={styles.input}
                     />
                     <input
                         type='text'
@@ -57,6 +58,7 @@ export default function SearchBar() {
                         name='cabinNumber'
                         onChange={handleInputChange}
                         onKeyPress={e => e.key === 'Enter' && handleSubmit()}
+                        className={styles.input}
                     />
                     <input
                         type='date'
@@ -64,6 +66,7 @@ export default function SearchBar() {
                         name='date'
                         onChange={handleInputChange}
                         onKeyPress={e => e.key === 'Enter' && handleSubmit()}
+                        className={styles.input}
                     />
                 </form>
                 <div>

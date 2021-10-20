@@ -75,7 +75,7 @@ export default function UsuariosDetail({
             onClick={() => handleSubmitDelete(ID)}
             className={styles.btn}
           >
-            Blockear
+            Bloquear
           </button>
         ) : (
           <button

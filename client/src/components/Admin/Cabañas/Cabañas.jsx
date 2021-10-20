@@ -104,9 +104,9 @@ const Cabañas = () => {
     e.preventDefault();
     dispatch(createCabains(cabain, { token }));
     alert("Su cabaña fue creada con éxito 🏡");
-    setTimeout(function () {
+    setTimeout(function() {
       history.go(0);
-    }, 2000)
+    }, 2000);
   };
 
   const handleeditSubmit = (
@@ -170,9 +170,9 @@ const Cabañas = () => {
     const { token } = logeduser;
     dispatch(editCabains(edit, { token }));
     alert("Edicion exitosa");
-    setTimeout(function () {
+    setTimeout(function() {
       history.go(0);
-    }, 2000)
+    }, 2000);
     //window.location.reload();
   };
   const ocultadas = () => {
@@ -186,8 +186,15 @@ const Cabañas = () => {
 
   return (
     <div className={styles.adminCabañas}>
-      <Navbar />
-      <NavAdmin />
+      <div className={styles.navs2}>
+        <div className={styles.navs}>
+          <Navbar />
+          <NavAdmin className={styles.navAdmin} />
+        </div>
+        <div className={styles.navRsp}>
+          <Navbar />
+        </div>
+      </div>
       <div className={styles.btns}>
         <div className={styles.btnsContainer}>
           {!habilitar ? (
@@ -204,7 +211,7 @@ const Cabañas = () => {
       <div className={styles.container}>
         <div className={styles.crearCont}>
           <div className={styles.title}>Crear Cabaña</div>
-          <form onSubmit={handleSubmit} >
+          <form onSubmit={handleSubmit} className={styles.form}>
             <input
               type="number"
               name="Number"
@@ -213,6 +220,7 @@ const Cabañas = () => {
               placeholder="Número de Cabaña"
               max="20"
               required
+              className={styles.inputForm}
             />
             <input
               type="number"
@@ -222,6 +230,7 @@ const Cabañas = () => {
               placeholder="Número de Camas"
               max="10"
               required
+              className={styles.inputForm}
             />
             <input
               type="number"
@@ -231,21 +240,25 @@ const Cabañas = () => {
               placeholder="Precio"
               max="50000"
               required
+              className={styles.inputForm}
             />
 
-            <div>
-              <textarea
-                type="text"
-                name="Description"
-                value={cabain.Description}
-                onChange={handleChange}
-                placeholder="Descripción . . ."
-                maxLength="250"
-                required
-              />
-            </div>
+            <textarea
+              type="text"
+              name="Description"
+              value={cabain.Description}
+              onChange={handleChange}
+              placeholder="Descripción . . ."
+              maxLength="250"
+              required
+              className={styles.textarea}
+            />
 
-            <select name="Picture" className={styles.formInputs} onChange={(e) => handleSelectPicture(e)}>
+            <select
+              name="Picture"
+              className={styles.inputForm}
+              onChange={(e) => handleSelectPicture(e)}
+            >
               <option>Seleccione Imagen:</option>
               {allFotos.map((el) => {
                 return (
@@ -259,7 +272,7 @@ const Cabañas = () => {
             <select
               onChange={(e) => handleSelect(e)}
               // value={cabain.Parking}
-              className={styles.formInputs}
+              className={styles.inputForm}
               name="Parking"
               required
             >
@@ -275,7 +288,7 @@ const Cabañas = () => {
             <select
               onChange={(e) => handleSelect(e)}
               // value={cabain.Parrilla}
-              className={styles.formInputs}
+              className={styles.inputForm}
               name="Parrilla"
               required
             >
@@ -292,7 +305,7 @@ const Cabañas = () => {
               onChange={(e) => handleSelect(e)}
               name="Wifi"
               // value={cabain.Wifi}
-              className={styles.formInputs}
+              className={styles.inputForm}
               required
             >
               <option>Wifi:</option>
@@ -303,7 +316,7 @@ const Cabañas = () => {
                 NO
               </option>
             </select>
-            <button type="submit" >
+            <button type="submit" className={styles.btn}>
               Crear
             </button>
           </form>
@@ -312,9 +325,13 @@ const Cabañas = () => {
         {mostrar ? (
           <div className={styles.crearCont}>
             <div className={styles.title}>Editar Cabaña</div>
-            <form className={styles.form} onSubmit={handlePrueba}>
-              <div>
-                Nº De Cabaña:
+            <form
+              className={styles.form}
+              onSubmit={handlePrueba}
+              id={styles.formEditar}
+            >
+              <div className={styles.inputEditar}>
+                Nº De Cabaña: <br />
                 <input
                   type="text"
                   name="Number"
@@ -326,8 +343,8 @@ const Cabañas = () => {
                   required
                 />
               </div>
-              <div>
-                Cantidad de Camas:
+              <div className={styles.inputEditar}>
+                Cantidad de Camas: <br />
                 <input
                   type="number"
                   name="Capacity"
@@ -339,8 +356,8 @@ const Cabañas = () => {
                   required
                 />
               </div>
-              <div>
-                Costo por Noche:
+              <div className={styles.inputEditar}>
+                Costo por Noche: <br />
                 <input
                   type="number"
                   name="Price"
@@ -361,7 +378,7 @@ const Cabañas = () => {
                   onChange={(e) => handleChangeEdit(e)}
                   placeholder="Descripción..."
                   maxLength="250"
-                  className={styles.formInputs}
+                  className={styles.textarea}
                   id={styles.descripcionEditar}
                   required
                 />
@@ -413,7 +430,9 @@ const Cabañas = () => {
               </select>
             </form>
             <div className={styles.btnsGuarCanc}>
-              <button onClick={handlePrueba} id={styles.guardar}>Guardar cambios</button>
+              <button onClick={handlePrueba} id={styles.guardar}>
+                Guardar cambios
+              </button>
               <button
                 onClick={() => {
                   if (mostrar) setMostrar(false);
@@ -429,41 +448,41 @@ const Cabañas = () => {
       </div>
       <div id={styles.containerContainerCabañas}>
         <div className={styles.containerCabañas}>
-          {allCabains?.sort((a, b) => {
-            if (parseInt(a.Number) < parseInt(b.Number)) return -1;
-            if (parseInt(a.Number) > parseInt(b.Number)) return 1;
-            return 1;
-          }).map((el) => {
-            return (
-              <div className={styles.detalles} key={el.ID}>
-                <CabañasDetail
-                  ID={el.ID}
-                  Number={el.Number}
-                  Capacity={el.Capacity}
-                  Available={el.Available}
-                  Price={el.Price}
-                  Description={el.Description}
-                  Picture={el.Picture}
-                  Coffe={el.Coffe}
-                  Microondas={el.Microondas}
-                  Calefaccion={el.Calefaccion}
-                  Parrilla={el.Parrilla}
-                  Wifi={el.Wifi}
-                  Cleaning={el.Cleaning}
-                  Refrigerator={el.Refrigerator}
-                  Stove={el.Stove}
-                  Parking={el.Parking}
-                  handlePrueba={handlePrueba}
-                  handleeditSubmit={handleeditSubmit}
-                  restaurar={habilitar}
-                />
-              </div>
-            );
-          })}
+          {allCabains
+            ?.sort((a, b) => {
+              if (parseInt(a.Number) < parseInt(b.Number)) return -1;
+              if (parseInt(a.Number) > parseInt(b.Number)) return 1;
+              return 1;
+            })
+            .map((el) => {
+              return (
+                <div className={styles.detalles} key={el.ID}>
+                  <CabañasDetail
+                    ID={el.ID}
+                    Number={el.Number}
+                    Capacity={el.Capacity}
+                    Available={el.Available}
+                    Price={el.Price}
+                    Description={el.Description}
+                    Picture={el.Picture}
+                    Coffe={el.Coffe}
+                    Microondas={el.Microondas}
+                    Calefaccion={el.Calefaccion}
+                    Parrilla={el.Parrilla}
+                    Wifi={el.Wifi}
+                    Cleaning={el.Cleaning}
+                    Refrigerator={el.Refrigerator}
+                    Stove={el.Stove}
+                    Parking={el.Parking}
+                    handlePrueba={handlePrueba}
+                    handleeditSubmit={handleeditSubmit}
+                    restaurar={habilitar}
+                  />
+                </div>
+              );
+            })}
         </div>
       </div>
-
-
     </div>
   );
 };

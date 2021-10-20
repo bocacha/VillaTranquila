@@ -27,7 +27,7 @@ export default function PagosDetail({
     alert("su cabaña fue Restaurada con exito");
    // window.location.reload();
   };
-
+  
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
@@ -47,7 +47,7 @@ export default function PagosDetail({
             </tr>
             <tr>
               <td className={styles.izquierda}><strong>Fecha:</strong></td>
-              <td className={styles.derecha}>{fecha}</td>
+              <td className={styles.derecha}>{fecha.slice(0,10).split("-").reverse().join("/")}</td>
             </tr>
             <tr>
               <td className={styles.izquierda}><strong>Pago total:</strong></td>
@@ -63,34 +63,6 @@ export default function PagosDetail({
             </tr>
           </tbody>
         </table>
-        {/* <p className={styles.p}>
-          {" "}
-          <strong>Id cliente:</strong> {user}
-        </p>
-        <p className={styles.p}>
-          {" "}
-          <strong>Estado:</strong> {status}
-        </p>
-        <p className={styles.p}>
-          {" "}
-          <strong>Detalles del Estado:</strong> {status_detail}
-        </p>
-        <p className={styles.p}>
-          {" "}
-          <strong>Fecha:</strong> {fecha}
-        </p>
-        <p className={styles.p}>
-          {" "}
-          <strong>PagoTotal:</strong> ${transaction_detail.pagoTotal}.00
-        </p>
-        <p className={styles.p}>
-          {" "}
-          <strong>Pago Neto:</strong> ${transaction_detail.pagoNeto}.00
-        </p>
-        <p className={styles.p}>
-          {" "}
-          <strong>Id Reserva:</strong> {id_reserva}
-        </p> */}
       </div>
       <div className={styles.btnsContainer}>
         <div>
