@@ -12,6 +12,7 @@ export default function UsuariosDetail({
   Address,
   Phone,
   Email,
+  UserDNI,
   handlePrueba,
   handleSubmitEdit,
   restaurar,
@@ -51,6 +52,10 @@ export default function UsuariosDetail({
               <td className={styles.derecha}><p>{LastName}</p></td>
             </tr>
             <tr>
+              <td className={styles.izquierda}><strong>DNI:</strong></td>
+              <td className={styles.derecha}><p>{UserDNI}</p></td>
+            </tr>
+            <tr>
               <td className={styles.izquierda}><strong>Dirección:</strong></td>
               <td className={styles.derecha}><p>{Address}</p></td>
             </tr>
@@ -75,7 +80,7 @@ export default function UsuariosDetail({
             onClick={() => handleSubmitDelete(ID)}
             className={styles.btn}
           >
-            Blockear
+            Bloquear
           </button>
         ) : (
           <button
@@ -94,6 +99,7 @@ export default function UsuariosDetail({
               LastName,
               Address,
               Phone,
+              UserDNI,
               Email);
             setMostrar(false);
             window.scrollTo({

@@ -45,7 +45,11 @@ export default function Login() {
     logeduser = {}
     logeduser.admin = false
     logeduser.token = false
+    logeduser.Blocked = false
   }
+  const Blockeado=() =>{
+    alert("Tu usuario se encuentra blockeado si crees que se trata de un error visita nuestra seccion de contacto y envianos un email")
+   }
   return (
     <div className={styles.login}>
       <Navbar />
@@ -99,7 +103,9 @@ export default function Login() {
             </div>
           </div>
         ) : (
-            <div className={styles.containerForm}>
+          <div className={styles.containerForm}>
+          {!logeduser.Blocked ? (
+            <div>
               <h4 className={styles.title}> Bienvenido/a  {logeduser.user}, vamos a   </h4>
               <button
                 className={styles.btn1}
@@ -109,6 +115,21 @@ export default function Login() {
               </button>
             </div>
 
+          ):(
+            <div>
+            <h4 className={styles.title}> Bienvenido/a  {logeduser.user}</h4>
+            <Link to="/contacto">
+            <button
+              className={styles.btn1}
+              onClick={Blockeado}
+            >
+              <strong>Usuario Blockeado</strong>
+            </button>
+            </Link>
+          </div>
+          )
+          }
+          </div>
 
         )
         }

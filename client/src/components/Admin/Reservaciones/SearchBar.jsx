@@ -49,18 +49,24 @@ export default function SearchBar() {
                         placeholder='Nombre de usuario'
                         name='username'
                         onChange={handleInputChange}
+                        onKeyPress={e => e.key === 'Enter' && handleSubmit()}
+                        className={styles.input}
                     />
                     <input
                         type='text'
                         placeholder='Número de cabaña'
                         name='cabinNumber'
                         onChange={handleInputChange}
+                        onKeyPress={e => e.key === 'Enter' && handleSubmit()}
+                        className={styles.input}
                     />
                     <input
                         type='date'
                         placeholder='Fecha de llegada'
                         name='date'
                         onChange={handleInputChange}
+                        onKeyPress={e => e.key === 'Enter' && handleSubmit()}
+                        className={styles.input}
                     />
                 </form>
                 <div>

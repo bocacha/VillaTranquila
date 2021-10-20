@@ -17,12 +17,15 @@ import LinkReserva from"./components/Reserva/Linkreserva/LinkReserva"
 import Gallery from './components/Gallery/Gallery';
 import UserCard from './components/UserCard/UserCard';
 import Profile from './components/Profile/Profile';
+import GaleriaTestimonial from './components/Testimoniales/GaleriaTestimonial';
+import Testimonial from './components/Admin/Testimonial/Testimonial';
 //import { useDispatch, useSelector } from 'react-redux';
 import PagosReserva from './components/PagoReserva/PagoReserva';
 //import { useEffect } from 'react';
 //import { getUserData } from './actions';
 import Caja from './components/Admin/Caja/Caja';
 import UserReservations from "./components/Profile/User reservations/UserReservations"
+import EditReserva from "./components/Admin/EditReserva/EditReserva";
 
 
 function App() {
@@ -39,6 +42,7 @@ function App() {
           <Route path="/reserva/reservar" component={LinkReserva} />
           <Route path='/reserva/pago' component={PagosReserva} />
           <Route path="/galeria" component={Gallery} />
+          <Route path="/testimonial" component={GaleriaTestimonial} />
           <Route path="/usercard" component={UserCard} />
           <Route exact path="/admin" component={Admin} />
           <Route exact path="/admin/cabañas" component={Cabañas} />
@@ -47,11 +51,13 @@ function App() {
           <Route exact path="/admin/pagos" component={Pagos} />
           <Route exact path="/admin/fotos" component={Fotos} />
           <Route exact path="/admin/usuarios" component={Usuarios} />
+          <Route exact path="/admin/testimonial" component={Testimonial} />
           <Route path="/admin/caja" component={Caja} />
           <Route path='/iniciarsesion' component={Login} />
           <Route path='/registrarse' component={Registro} />
           <Route exact path='/Profile/:username' component={Profile} />
           <Route exact path='/Profile/:username/:id' component={UserReservations} />
+          <Route exact path="/admin/solicitudes" component={EditReserva} />
         </Switch>
       </div>
     </BrowserRouter>

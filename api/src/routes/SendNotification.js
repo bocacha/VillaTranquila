@@ -27,13 +27,34 @@ router.post('/', (req, res) => {
           console.log('listo para mandar email')
       })
 
-     
+     let fecha = new Date()
 
     var mailOptions = {
         from: 'VILLA TRANQUILA',
         to: email,
         subject: 'Reserva',
-        text:`Hola ${username}! Tienes una reserva a nombre de ${name} en Villa Tranquila para el día ${date}, haz un pago para reservar tu fecha`,  
+        text:`Villa tranquila                                                                              \n                   ${fecha}
+        __________________________________________________________________________________________________________________________________\n
+        __________________________________________________________________________________________________________________________________\n
+        \n
+        \n
+        \n
+        \n
+        Hola ${username}!:\n
+        
+        Tienes una reserva a nombre de ${name} en Villa Tranquila para el día ${date}, haz un pago para reservar tu fecha\n
+
+
+        Desde ya muchas gracias.\n
+
+
+
+        Staff de Villa tranquila
+
+        
+        
+        
+        `,  
     };
    
     
