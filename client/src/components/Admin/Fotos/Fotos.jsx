@@ -144,10 +144,6 @@ export default function Fotos() {
                   className={styles.formInputs}
                   required
                 />
-<<<<<<< HEAD
-
-=======
->>>>>>> edicionesNacho2
                 <label>Seleccione una cabaña para asociar a la imagen:</label>
                 <select
                   name="CabainNumber"
@@ -191,11 +187,6 @@ export default function Fotos() {
                 </button>
               </div>
             </div>
-<<<<<<< HEAD
-          ) : null}
-        </div>
-        <div>
-=======
             {/* EDITAR */}
             {mostrar ? (
               <div className={styles.crearCont}>
@@ -255,7 +246,6 @@ export default function Fotos() {
             ) : null}
         </div>
         <div className={styles.containerDetalles}>
->>>>>>> edicionesNacho2
           {allPictures?.map((el) => {
             return (
               <div className={styles.detalles} key={el.ID}>

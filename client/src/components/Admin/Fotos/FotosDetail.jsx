@@ -32,18 +32,6 @@ export default function FotosDetail({
         <table>
           <tbody>
             <tr>
-<<<<<<< HEAD
-              <td className={styles.izquierda}><strong>Descripción:</strong></td>
-              <td className={styles.derecha}>{Description}</td>
-            </tr>
-            <tr>
-              <td className={styles.izquierda}><strong>Imagen de cabaña N°:</strong></td>
-              <td className={styles.derecha}>{CabainNumber}</td>
-            </tr>
-            <tr>
-              <td className={styles.izquierda}><strong>Url:</strong></td>
-              <td className={styles.derecha}>{Url}</td>
-=======
               <td className={styles.izquierda}>
                 <strong>Descripción:</strong>
               </td>
@@ -62,7 +50,6 @@ export default function FotosDetail({
               <td className={styles.derecha}>
                 <p id={styles.url}>{Url}</p>
               </td>
->>>>>>> edicionesNacho2
             </tr>
           </tbody>
         </table>
@@ -93,15 +80,6 @@ export default function FotosDetail({
           )}
         </div>
         <div>
-<<<<<<< HEAD
-          <button onClick={(e) => {
-            handleSubmitEdit(e, Description, CabainNumber,
-              Url, ID);
-            setMostrar(false);
-            ;
-          }
-          } className={styles.btnPlus} >Editar</button>
-=======
           <button
             onClick={(e) => {
               handleSubmitEdit(e, Description, CabainNumber, Url, ID);
@@ -111,7 +89,6 @@ export default function FotosDetail({
           >
             Editar
           </button>
->>>>>>> edicionesNacho2
         </div>
       </div>
     </div>

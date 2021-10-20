@@ -10,12 +10,6 @@
 
 .container2 {
   margin-top: 20px;
-<<<<<<< HEAD
-  /* display: flex; */
-  flex-direction: row;
-  align-items: start;
-=======
->>>>>>> edicionesNacho2
   justify-content: center;
   width: 100%;
   height: 100%;
@@ -121,14 +115,6 @@
   width: fit-content;
 }
 
-<<<<<<< HEAD
-/* .formsCont {
-  display: flex;
-  align-items: start;
-  justify-content: space-around;
-  height: 100%;
-} */
-=======
 .formsCont {
   width: 100%;
   display: flex;
@@ -136,7 +122,6 @@
     justify-content: center;
     margin-top: 10px;
 }
->>>>>>> edicionesNacho2
 
 .crearCont {
   position: relative;

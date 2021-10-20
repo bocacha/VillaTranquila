@@ -49,16 +49,18 @@ export default function Weather() {
                                         <div className={styles.rays}></div>
                                     </div>
                                 </div>
+                                </div>
                         )
-                    }else if (e.text === 'Cloudy' || e.text === 'Overcast'){
+                    } else if (e.text === 'Cloudy' || e.text === 'Overcast'){
                         icono = ( 
                             <div className={styles.wcont}>
                                 <div className={styles.icon, styles.cloudy}>
                                     <div className={styles.cloud}></div>
                                     <div className={styles.cloud}></div>
                                 </div>
+                                </div>
                         )
-                    }else if (e.text === 'Patchy snow possible' || e.text === 'Patchy heavy snow' || e.text === 'Patchy light snow' || e.text === 'Light snow showers'){
+                    } else if (e.text === 'Patchy snow possible' || e.text === 'Patchy heavy snow' || e.text === 'Patchy light snow' || e.text === 'Light snow showers'){
                         icono = ( 
                             <div className={styles.wcont}>
                                 <div className={styles.icon, styles.flurries}>
@@ -69,10 +71,11 @@ export default function Weather() {
                                     <div className={styles.snow}>
                                         <div className={styles.flake}></div>
                                         <div className={styles.flake}></div>
+                                    </div>
                                 </div>
-                                </div>
+                            </div>
                         )
-                    }else if (e.text === 'Moderate snow' || e.text ===  'Moderate or heavy snow showers'  || e.text === 'Light snow'){
+                    } else if (e.text === 'Moderate snow' || e.text ===  'Moderate or heavy snow showers'  || e.text === 'Light snow'){
                         icono = ( 
                             <div className={styles.wcont}>
                                 <div className={styles.icon, styles.flurries}>
@@ -82,6 +85,7 @@ export default function Weather() {
                                         <div className={styles.flake}></div>
                                     </div>
                                 </div>
+                                </div>
                         )
                     }else if (e.text === 'Rainy'){
                         icono = ( 
@@ -89,6 +93,7 @@ export default function Weather() {
                                 <div className={styles.icon, styles.rainy}>
                                     <div className={styles.cloud}></div>
                                     <div className={styles.rain}></div>
+                                </div>
                                 </div>
                         )
                     }else if (e.text === 'Storm'){
@@ -100,6 +105,7 @@ export default function Weather() {
                                         <div className={styles.bolt}></div>
                                         <div className={styles.bolt}></div>
                                     </div>
+                                </div>
                                 </div>
                         )
                     }
@@ -138,7 +144,8 @@ export default function Weather() {
                         </div>
                     )
                 })}
-      </div>
-    </div>
+                </div>
+        </div>
+    
   );
 }
