@@ -177,8 +177,15 @@ export default function Usuarios() {
 
   return (
     <div className={styles.container}>
-      <Navbar />
-      <NavAdmin />
+      <div className={styles.navs2}>
+        <div className={styles.navs}>
+          <Navbar />
+          <NavAdmin  className={styles.navAdmin}/>
+        </div>
+        <div className={styles.navRsp}>
+          <Navbar />
+        </div>
+      </div>
       {/* {!habilitar ?(
             <button onClick={ocultadas}>Mostrar ocultadas</button>
           ):(

@@ -13,6 +13,7 @@ import {
   selectcabin,
 } from "../../../actions";
 // import ReservacionesDetail from "./ReservacionesDetail";
+import Navbar from "../../Navbar/Navbar"
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
 import { RiCreativeCommonsZeroLine } from "react-icons/ri";
@@ -23,7 +24,6 @@ import es from "date-fns/locale/es";
 import axios from "axios";
 import fechas from "./algoritmofechas.js";
 registerLocale("es", es);
-
 export default function Reservaciones() {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -261,14 +261,15 @@ export default function Reservaciones() {
   };
   return (
     <div className={styles.container}>
+      <Navbar/>
       <div className={styles.formsCont}>
         {/* CREAR */}
         <div className={styles.crearCont}>
-          <div className={styles.btnVolver}>
+          {/* <div className={styles.btnVolver}>
             <Link to="/reserva">
               <button className={styles.btn}>Volver</button>
             </Link>
-          </div>
+          </div> */}
           <div className={styles.titlecontainer}>
             <div id={styles.title1}><p className={styles.title}>Completá los datos solicitados para</p></div>
             <div id={styles.title2}><p className={styles.title}>continuar con tu reserva</p></div>
@@ -284,7 +285,7 @@ export default function Reservaciones() {
               required
             />
             <DatePicker
-              selected={selecpateCI}
+              selected={selectDateCI}
               onChange={e => changeFechas(e)}
               placeholderText="Fecha de Check in"
               className={styles.formInputs}
@@ -295,7 +296,7 @@ export default function Reservaciones() {
               excludeDates={parapiker2}
             />
             <DatePicker
-              selected={selecpateCO}
+              selected={selectDateCO}
               onChange={(e => changeFechas2(e))}
               placeholderText="Fecha de Check out"
               onFocus={calculofechas}
@@ -305,7 +306,7 @@ export default function Reservaciones() {
               locale='es'
               excludeDates={parapiker2}
               filterDate={d => {
-                return selecpateCI < d;
+                return selectDateCI < d;
               }}
             />
             <div>

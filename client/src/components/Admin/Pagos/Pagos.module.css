@@ -8,17 +8,6 @@
   background-color: #94adbc;
 }
 
-.container2 {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: row;
-  align-items: start;
-  justify-content: center;
-  width: 50%;
-  height: 100%;
-  min-height: 100vh;
-}
-
 .navs2 {
   display: flex;
   align-items: start;
@@ -31,6 +20,7 @@
   display: flex;
   flex-direction: row;
   position: fixed;
+  align-items: start;
 }
 
 .btnsContainer {
@@ -41,24 +31,6 @@
   align-items: start;
   /* margin-left: 290px; */
   padding-top: 10px;
-}
-
-.btnVolver {
-  margin-left: 40px;
-  padding: 4px 7px;
-  background: #293c4f;
-  color: #fff;
-  border: none;
-  border: 1px solid #293c4f;
-  border-radius: 5px;
-  font-family: Lato, Arial, sans-serif;
-  font-weight: bold;
-  transition-duration: 0.4s;
-}
-.btnVolver:hover {
-  background: none;
-  border: 1px solid #293c4f;
-  color: #000;
 }
 
 .btnSup {
@@ -80,88 +52,67 @@
   color: #000;
 }
 
-.btn {
-  padding: 4px 7px;
-  background: #293c4f;
-  color: #fff;
-  border: none;
-  border: 1px solid #293c4f;
-  border-radius: 5px;
-  font-family: Lato, Arial, sans-serif;
-  font-weight: bold;
-  transition-duration: 0.4s;
-}
-.btn:hover {
-  background: none;
-  border: 1px solid #293c4f;
-  color: #000;
-}
 
-.form {
-  width: fit-content;
-}
 
-.formsCont {
+#btnSupp{
   display: flex;
-  align-items: start;
-  justify-content: space-around;
-  height: 100%;
+  align-items: center;
+  padding: 5px;
 }
 
-.crearCont {
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  justify-content: start;
-  width: 33%;
-  height: max-content;
-  padding: 3px;
-}
-
-.editarCont {
-  display: flex;
-  flex-direction: column;
-  width: 33%;
-  padding: 3px;
-  margin-left: 70px;
-}
-
-.title {
-  margin-bottom: 6px;
-  font-family: Lato, Arial, sans-serif;
-  font-weight: 300;
-  font-size: 17px;
-  font-weight: bold;
-  white-space: nowrap;
-}
-
-.formInputs {
-  margin-bottom: 8px;
-  padding: 3px;
-  border: solid 1.5px #293c4f;
-  width: 200px;
-  display: flex;
-  align-items: start;
+.containerDetalles{
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
 }
 
 .detalles {
-  margin-left: 120px;
+  width: 96%;
+  margin:2%;
+  justify-content: center;
   background: #293c4f;
   color: #fff;
   border-radius: 7px;
   padding: 10px 25px;
   margin-bottom: 10px;
-  width: 320px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
 }
 
 @media (min-width: 320px) {
-  .navs{
+  .navs {
     display: none;
   }
-  
+  .navRsp{
+    display:block;
+  }
+  .containerDetalles{
+    margin-top: 40px;
+  display: grid;
+  grid-template-columns: 100%;
+  }
+  .btnsContainer{
+    margin-top:15px;
+  }
 }
 
 
+@media (min-width: 480px) {
+  .navs {
+    display: none;
+  }
+  .navRsp{
+    display:block;
+  }
+  .containerDetalles{
+    display: grid;
+    grid-template-columns: 100%;
+  }
+}
 
 @media (min-width: 768px) {
   .navs{
@@ -171,10 +122,29 @@
   .navRsp{
     display:none;
   }
-}
-/* 
-@media (max-width: 700px) {
-  .formsCont {
-    flex-direction: column;
+  .containerDetalles{
+    display: grid;
+    grid-template-columns: 50% 50%;
   }
-} */
+  .btnsContainer{
+    margin-top:130px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navs {
+    display: block;
+    position: relative;
+  }
+  .containerDetalles{
+    display: grid;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+  }
+}
+
+@media (min-width: 1155px) {
+  .containerDetalles{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+  }
+}
