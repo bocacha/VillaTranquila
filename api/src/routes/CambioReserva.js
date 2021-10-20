@@ -46,7 +46,8 @@ router.put("/Cambios/Done", (req,res) =>{
 });
 router.put("/Cambios/Cancel", (req,res) =>{
     CambiosReserva.update(
-          {CancelChange:true}
+          {CancelChange:true,
+            Done:true}
         ,
         {
             where: {ID: req.body.id}

@@ -1,4 +1,5 @@
 import axios from "axios";
+import fechas from "../components/Reserva/Linkreserva/algoritmofechas"
 
 export const GET_CABINS = "GET_CABINS";
 export const SEND_PASSWORD_EMAIL ="SEND_PASSWORD_EMAIL"
@@ -791,19 +792,7 @@ export function cambiarReserva(payload){
   };
 }
 export function aceptarCambios(payload, { token },ID){
-  console.log(ID)
-  const obj ={
-    id: payload.id,
-    Checkin:payload.Checkin,
-    Checkout: payload.Checkout,
-    UserId:payload.UserId,
-    ExtraServices:payload.ExtraServices,
-    CostoFinal:payload.CostoFinal ,
-    UserName:payload.UserName,
-    Anombrede:payload.Anombrede,
-    CabinNumber:payload.CabinNumber
-  }
-  console.log(obj)
+  console.log(payload)
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -811,10 +800,20 @@ export function aceptarCambios(payload, { token },ID){
   }
   return async function (dispatch) {
     try {
+      var cabins = await axios.get("/cabins")
+      var reserva = await axios.get("/reservations")
+      var filtrada = reserva.data.filter(e=> e.ID === payload.id)
+      var cabinfiltrada = cabins.data.filter(e=>e.Number === payload.CabinNumber )
+      console.log(filtrada[0].Checkout)
+      var Avaliable2 = cabinfiltrada[0].Available.filter((e)=> !e.includes(...fechas({Checkin:filtrada[0].Checkin,Checkout:filtrada[0].Checkout})))
+      console.log(cabinfiltrada[0].Available)
+      Avaliable2.push(fechas({Checkin:payload.Checkin,Checkout:payload.Checkout}))
+      var json1 = await axios.get("/users/");
+      var useremail = json1.data.filter((e)=> e.ID === payload.UserId)
       let json = await axios.put("/reservations/EditReservation", payload, config);
       let json2 = await axios.put("/CambiosReserva/Cambios/Done",ID)
-      let lala = await axios.post("/sendNotificationCambios",{username:payload.UserName, name:payload.Anombrede, date:payload.Checkin})
-      
+      let lala = await axios.post("/sendNotificationCambios",{username:payload.UserName, name:payload.Anombrede, date:payload.Checkin,email:useremail[0].Email })
+      return dispatch(editAvailible({id:cabinfiltrada[0].ID , Available: Avaliable2}))
     } catch (err) {
       console.log(err);
     }
@@ -823,8 +822,11 @@ export function aceptarCambios(payload, { token },ID){
 export function cancelarCambios(payload,ID){
   return async function (dispatch) {
     try {
+      var json1 = await axios.get("/users/");
+      var useremail = json1.data.filter((e)=> e.ID === payload.UserId)
+      console.log(useremail[0].Email)
       let json = await axios.put("/CambiosReserva/Cambios/Cancel",ID);
-      let lala = await axios.post("/sendNotificationCambios/NO",{username:payload.UserName, name:payload.Anombrede, date:payload.Checkin})
+      let lala = await axios.post("/sendNotificationCambios/NO",{username:payload.UserName, name:payload.Anombrede, date:payload.Checkin,email:useremail[0].Email})
 
     } catch (err) {
       console.log(err);
@@ -832,7 +834,7 @@ export function cancelarCambios(payload,ID){
   };
 }
 export function RestaurarCambios(payload,ID,{token}){
-  console.log(ID)
+  console.log(payload)
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -840,8 +842,19 @@ export function RestaurarCambios(payload,ID,{token}){
   }
   return async function (dispatch) {
     try {
+      var cabins = await axios.get("/cabins")
+      var reserva = await axios.get("/reservations")
+      var filtrada = reserva.data.filter(e=> e.ID === payload.id)
+      var cabinfiltrada = cabins.data.filter(e=>e.Number === payload.CabinNumber )
+      var Avaliable2 = cabinfiltrada[0].Available.filter((e)=> !e.includes(...fechas({Checkin:filtrada[0].Checkin,Checkout:filtrada[0].Checkout})))
+      console.log(cabinfiltrada[0].Available)
+      Avaliable2.push(fechas({Checkin:payload.Checkin,Checkout:payload.Checkout}))
+      var json1 = await axios.get("/users/");
+      var useremail = json1.data.filter((e)=> e.ID === payload.UserId)
       let json = await axios.put("/reservations/EditReservation", payload, config);
       let json2 = await axios.put("/CambiosReserva/Cambios/Restore",ID);
+      let lala = await axios.post("/sendNotificationCambios/Error",{username:payload.UserName, name:payload.Anombrede, date:payload.Checkin,email:useremail[0].Email})
+      return dispatch(editAvailible({id:cabinfiltrada[0].ID , Available: Avaliable2}))
     } catch (err) {
       console.log(err);
     }
