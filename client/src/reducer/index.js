@@ -39,6 +39,8 @@ import {
   SEND_PASSWORD_EMAIL,
   SELECTED_CABIN,
   FILTER_RESERVATIONS,
+  GET_TESTIMONIAL,
+  POST_TESTIMONIAL,
   FIND_USER
 
 } from "../actions";
@@ -59,7 +61,8 @@ const initialState = {
   allReservations: [],
   fechasnodisponibles:[],
   userData: {},
-  weather:[]
+  weather:[],
+  testimoniales: []
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -347,6 +350,15 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
         reservaciones: allReservations
+      }
+      case POST_TESTIMONIAL:
+        return{
+          ...state,
+      }
+      case GET_TESTIMONIAL:
+        return{
+          ...state,
+          testimoniales : action.payload
       }
 
     case FIND_USER:
