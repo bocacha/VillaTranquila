@@ -16,7 +16,7 @@ import { IoIosCheckmark } from "react-icons/io";
 
 export default function Navbar() {
   const dispatch = useDispatch();
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const user = useSelector((state) => state.user);
   const userData = useSelector((state) => state.userData);
   const username = userData && userData.UserName;

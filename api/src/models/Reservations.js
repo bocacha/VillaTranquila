@@ -44,6 +44,11 @@ module.exports = (sequelize) => {
       allowNull:false,
 
     },
+    UserName:{
+      type: DataTypes.STRING,
+      allowNull:false,
+
+    },
     Cabinid:{
       type: DataTypes.STRING,
       allowNull: false,
@@ -59,6 +64,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allownull: false
 
+    },
+    UserDNI:{
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     Show:{
       type: DataTypes.BOOLEAN,

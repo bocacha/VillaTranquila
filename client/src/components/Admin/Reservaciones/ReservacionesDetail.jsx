@@ -16,6 +16,7 @@ export default function ReservacionesDetail({
   ExtraServices,
   CostoFinal,
   Cabinid,
+  UserDNI,
   handleSubmitEdit,
   handlePrueba,
   restaurar,
@@ -65,6 +66,10 @@ export default function ReservacionesDetail({
               <td className={styles.izquierda}>Cabaña número:</td>
               <td className={styles.derecha}>{CabinNumber}</td>
             </tr>
+            <tr>
+              <td className={styles.izquierda}>DNI del Usuario:</td>
+              <td className={styles.derecha}>{UserDNI}</td>
+            </tr>
             {
               ExtraServices && ExtraServices.length !== 0 &&
               <tr>
@@ -111,6 +116,7 @@ export default function ReservacionesDetail({
               Anombrede,
               ExtraServices,
               CostoFinal,
+              UserDNI,
               Cabinid,);
             setMostrar(false);
             window.scrollTo({

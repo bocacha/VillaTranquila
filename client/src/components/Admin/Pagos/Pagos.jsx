@@ -147,7 +147,10 @@ export default function Pagos() {
       <div className={styles.navs2}>
         <div className={styles.navs}>
           <Navbar />
-          <NavAdmin />
+          <NavAdmin className={styles.navAdmin} />
+        </div>
+        <div className={styles.navRsp}>
+          <Navbar />
         </div>
       </div>
       <div className={styles.btnsContainer}>
@@ -161,11 +164,20 @@ export default function Pagos() {
           </button>
         )}
       </div>
-      <div className={styles.container2}>
-        <div className={styles.formsCont}>
+      <div className={styles.containerDetalles}>
           {/* VER */}
-          <div>
-            {allPayments?.map((el) => {
+            {allPayments.length !== 0 ?
+            allPayments.sort((a, b) => {
+              let fechaA = a.fecha.slice(0,10).split("-").reverse().join("/")
+              let fechaB = b.fecha.slice(0,10).split("-").reverse().join("/")
+              if(fechaA < fechaB) {
+                return 1
+              } 
+              if(fechaA > fechaB) {
+                return -1
+              }
+              return 1
+            }).map((el) => {
               return (
                 <div className={styles.detalles} key={el.ID}>
                   <PagosDetail
@@ -182,10 +194,8 @@ export default function Pagos() {
                   />
                 </div>
               );
-            })}
-          </div>
+            }): <div>No se realizó ningún pago aún</div>}
         </div>
-      </div>
     </div>
   );
 }

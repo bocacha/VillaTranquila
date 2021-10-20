@@ -10,13 +10,13 @@ export default function Weather() {
    
     return (
         <div className={styles.weather}>
-            <p className={styles.titulo}>Clima actual</p>
+            <p className={styles.titulo}>Clima</p>
             
             <div className={styles.container}>
                 {weather?.map(e => {
                     if (weather.indexOf(e) === 0) today = 'Hoy';
-                    if (weather.indexOf(e) === 1) today = e.fecha;
-                    if (weather.indexOf(e) === 2) today = e.fecha;
+                    if (weather.indexOf(e) === 1) today = e.fecha.split('-').reverse().join('-');
+                    if (weather.indexOf(e) === 2) today = e.fecha.split('-').reverse().join('-');
                     if (e.text === 'Patchy rain possible' || e.text === 'Patchy sleet possible'){
                         icono  = ( 
                             <div className={styles.wcont}>
@@ -31,24 +31,24 @@ export default function Weather() {
                         )
                     } else if (e.text === 'Sunny' || e.text === 'Clear'){
                         icono = ( 
-                            <div className={styles.wcont}>
-                                <div className={styles.icon, styles.sunny}>
+                            
+                                <div className={styles.icon}>
                                     <div className={styles.sun}>
                                         <div className={styles.rays}></div>
                                     </div>
                                 </div>
-                            </div>
+                           
                         )
                     } else if (e.text === 'Partly cloudy'){
                         icono = ( 
                             <div className={styles.wcont}>
                                 <div className={styles.icon, styles.sunny}>
                                     <div className={styles.cloud}></div>
+
                                     <div className={styles.sun}>
                                         <div className={styles.rays}></div>
                                     </div>
                                 </div>
-                            </div>
                         )
                     }else if (e.text === 'Cloudy' || e.text === 'Overcast'){
                         icono = ( 
@@ -57,7 +57,6 @@ export default function Weather() {
                                     <div className={styles.cloud}></div>
                                     <div className={styles.cloud}></div>
                                 </div>
-                            </div>
                         )
                     }else if (e.text === 'Patchy snow possible' || e.text === 'Patchy heavy snow' || e.text === 'Patchy light snow' || e.text === 'Light snow showers'){
                         icono = ( 
@@ -72,7 +71,6 @@ export default function Weather() {
                                         <div className={styles.flake}></div>
                                 </div>
                                 </div>
-                            </div>
                         )
                     }else if (e.text === 'Moderate snow' || e.text ===  'Moderate or heavy snow showers'  || e.text === 'Light snow'){
                         icono = ( 
@@ -84,7 +82,6 @@ export default function Weather() {
                                         <div className={styles.flake}></div>
                                     </div>
                                 </div>
-                            </div>
                         )
                     }else if (e.text === 'Rainy'){
                         icono = ( 
@@ -93,7 +90,6 @@ export default function Weather() {
                                     <div className={styles.cloud}></div>
                                     <div className={styles.rain}></div>
                                 </div>
-                            </div>
                         )
                     }else if (e.text === 'Storm'){
                         icono = ( 
@@ -105,7 +101,6 @@ export default function Weather() {
                                         <div className={styles.bolt}></div>
                                     </div>
                                 </div>
-                            </div>
                         )
                     }
                     
@@ -137,7 +132,9 @@ export default function Weather() {
                                     </tr>
                                 </tbody>
                             </table>
+                            <div className={styles.wcont}>
                           {icono}
+                          </div>
                         </div>
                     )
                 })}

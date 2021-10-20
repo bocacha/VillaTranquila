@@ -1,4 +1,5 @@
 import axios from "axios";
+import fechas from "../components/Reserva/Linkreserva/algoritmofechas"
 
 export const GET_CABINS = "GET_CABINS";
 export const SEND_PASSWORD_EMAIL ="SEND_PASSWORD_EMAIL"
@@ -45,6 +46,9 @@ export const FILTER_RESERVATIONS = 'FILTER_RESERVATIONS';
 export const GET_TESTIMONIAL = 'GET_TESTIMONIAL';
 export const POST_TESTIMONIAL = 'POST_TESTIMONIAL';
 export const FIND_USER = 'FIND_USER';
+export const FILTER_PAGOS = 'FILTER_PAGOS';
+export const READ_CAMBIOS = "READ_CAMBIOS";
+export const READ_CAMBIOS_DONE= "READ_CAMBIOS_DONE";
 
 export function getCabins() {
   return async function (dispatch) {
@@ -91,42 +95,14 @@ export function readWeather() {
 }
 
 export function createReservation(payload) {
+  console.log(payload)
   return async function (dispatch) {
     const response = await axios.post("/reservations/NewReservation", payload);
-    const reserva = response.data
-    const users= await axios.get("/users")
-    const user = users.data.filter(e=> e.ID === payload.id)
-    let reservas = []
-    if(user[0].ReservationsHistory){
-user[0].ReservationsHistory.map(e=>{
-        reservas.push(e)
-      })
-      reservas.push(reserva)
-    const cambiar={
-      id: payload.id,
-      ReservationsHistory: reservas
-    }
-    console.log(cambiar)
     return (dispatch({
       type: CREATE_RESERVATION,
-      payload: response.data
-     
-     }),dispatch(editUsers(cambiar)));
-
-    }else{
-       reservas.push(reserva)
-    const cambiar={
-      id: payload.id,
-      ReservationsHistory: reservas
-    }
-    console.log(cambiar)
-    return (dispatch({
-      type: CREATE_RESERVATION,
-      payload: response.data
-     
-     }),dispatch(editUsers(cambiar))); 
-    }    
-}
+      payload: response.data    
+     }));
+  }
 }
 
 export function createServices(payload, { token }) {
@@ -218,11 +194,6 @@ export function readPayment({ token }) {
 }
 
 export function readReservation() {
-  // const config={
-  //   headers:{
-  //   Authorization: `Bearer ${token}`,
-  // }
-  // }
   return async function (dispatch) {
     try {
       var json = await axios.get("/reservations/");
@@ -250,15 +221,15 @@ export function readPictures(id) {
   };
 }
 
-export function readUsers({token}) {
-  const config={
-    headers:{
-    Authorization: `Bearer ${token}`,
-  }
-  }
+export function readUsers() {
+  // const config={
+  //   headers:{
+  //   Authorization: `Bearer ${token}`,
+  // }
+  // }
   return async function (dispatch) {
     try {
-      var json = await axios.get("/users/", config);
+      var json = await axios.get("/users/");
       return dispatch({
         type: READ_USERS,
         payload: json.data,
@@ -753,7 +724,6 @@ return async function (dispatch) {
 }
 
 export function getUserData(username){
-  console.log(username)
   return async function (dispatch) {
     try {
       let json = await axios.get("/users/" + username);
@@ -783,9 +753,9 @@ export function selectcabin(id){
 export function mailpassword(Email) {
   return async function (dispatch) {
     try {
-      var lala = await axios.post("/sendNotificationpassword",{Email:Email})
       var json = await axios.get("/users/");
       var useremail = json.data.filter((e)=> e.Email === Email)
+      var lala = await axios.post("/sendNotificationpassword",{Email:Email,username: useremail[0].UserName})
       const cambiar={
         id: useremail[0].ID,
         UserPassword: "ax54sa5s4a"
@@ -849,9 +819,123 @@ export function removeTestimonials(id) {
 }
 
 export function findUser(payload){
-  console.log(payload);
   return {
     type: FIND_USER,
     payload
   }
+}
+
+export function filterPagos(payload){
+  return{
+    type: FILTER_PAGOS,
+    payload
+  }
+export function cambiarReserva(payload){
+  return async function (dispatch) {
+    try {
+      let json = await axios.post("/CambiosReserva/Cambios",payload);
+      
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+export function aceptarCambios(payload, { token },ID){
+  console.log(payload)
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  }
+  return async function (dispatch) {
+    try {
+      var cabins = await axios.get("/cabins")
+      var reserva = await axios.get("/reservations")
+      var filtrada = reserva.data.filter(e=> e.ID === payload.id)
+      var cabinfiltrada = cabins.data.filter(e=>e.Number === payload.CabinNumber )
+      console.log(filtrada[0].Checkout)
+      var Avaliable2 = cabinfiltrada[0].Available.filter((e)=> !e.includes(...fechas({Checkin:filtrada[0].Checkin,Checkout:filtrada[0].Checkout})))
+      console.log(cabinfiltrada[0].Available)
+      Avaliable2.push(fechas({Checkin:payload.Checkin,Checkout:payload.Checkout}))
+      var json1 = await axios.get("/users/");
+      var useremail = json1.data.filter((e)=> e.ID === payload.UserId)
+      let json = await axios.put("/reservations/EditReservation", payload, config);
+      let json2 = await axios.put("/CambiosReserva/Cambios/Done",ID)
+      let lala = await axios.post("/sendNotificationCambios",{username:payload.UserName, name:payload.Anombrede, date:payload.Checkin,email:useremail[0].Email })
+      return dispatch(editAvailible({id:cabinfiltrada[0].ID , Available: Avaliable2}))
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+export function cancelarCambios(payload,ID){
+  return async function (dispatch) {
+    try {
+      var json1 = await axios.get("/users/");
+      var useremail = json1.data.filter((e)=> e.ID === payload.UserId)
+      console.log(useremail[0].Email)
+      let json = await axios.put("/CambiosReserva/Cambios/Cancel",ID);
+      let lala = await axios.post("/sendNotificationCambios/NO",{username:payload.UserName, name:payload.Anombrede, date:payload.Checkin,email:useremail[0].Email})
+
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+export function RestaurarCambios(payload,ID,{token}){
+  console.log(payload)
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  }
+  return async function (dispatch) {
+    try {
+      var cabins = await axios.get("/cabins")
+      var reserva = await axios.get("/reservations")
+      var filtrada = reserva.data.filter(e=> e.ID === payload.id)
+      var cabinfiltrada = cabins.data.filter(e=>e.Number === payload.CabinNumber )
+      var Avaliable2 = cabinfiltrada[0].Available.filter((e)=> !e.includes(...fechas({Checkin:filtrada[0].Checkin,Checkout:filtrada[0].Checkout})))
+      console.log(cabinfiltrada[0].Available)
+      Avaliable2.push(fechas({Checkin:payload.Checkin,Checkout:payload.Checkout}))
+      var json1 = await axios.get("/users/");
+      var useremail = json1.data.filter((e)=> e.ID === payload.UserId)
+      let json = await axios.put("/reservations/EditReservation", payload, config);
+      let json2 = await axios.put("/CambiosReserva/Cambios/Restore",ID);
+      let lala = await axios.post("/sendNotificationCambios/Error",{username:payload.UserName, name:payload.Anombrede, date:payload.Checkin,email:useremail[0].Email})
+      return dispatch(editAvailible({id:cabinfiltrada[0].ID , Available: Avaliable2}))
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+export function getCambiosDone(){
+  console.log("entre2")
+  return async function (dispatch) {
+    try {
+      let json = await axios.get("/CambiosReserva/Done");
+      console.log(json.data)
+      return dispatch({
+        type: READ_CAMBIOS_DONE,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+export function getCambios(){
+  console.log("entre1")
+  return async function (dispatch) {
+    try {
+      let json = await axios.get("/CambiosReserva");
+      console.log(json.data)
+      return dispatch({
+        type: READ_CAMBIOS,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 }

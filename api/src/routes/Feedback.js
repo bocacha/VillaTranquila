@@ -45,7 +45,6 @@ router.get("/", async (req, res)=>{
         console.log(error)
     }
 });
-
 router.get("/ocultadas", async (req, res)=>{
     const dbFeedback = await Feedback.findAll({where:{Show:false}})
     try{

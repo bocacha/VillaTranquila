@@ -111,7 +111,19 @@ export default function Admin() {
                 />
               </Link>
             </div>
-            <Link to="/admin/caja" className={styles.link}>Caja</Link>
+            <Link to="/admin/Solicitudes" className={styles.link}>Caja</Link>
+          </button>
+          <button  className={styles.cardsContainer}>
+            <div>
+              <Link to="/admin/Solicitudes">
+                <img
+                  src="https://food.fnr.sndimg.com/content/dam/images/food/unsized/2014/6/23/0/fnd_Reserved-Sign-Thinkstock_s4x3.jpg"
+                  alt="reservas"
+                  className={styles.img}
+                />
+              </Link>
+            </div>
+            <Link to="/admin/Solicitudes" className={styles.link}>Solicitudes de Cambios</Link>
           </button>
           <button  className={styles.cardsContainer}>
             <div>
@@ -126,6 +138,7 @@ export default function Admin() {
             <Link to="/admin/testimonial" className={styles.link}>Reseñas</Link>
           </button>
         </div>
+        
       </div>
     </div>
   );
