@@ -40,6 +40,7 @@ import {
   SELECTED_CABIN,
   FILTER_RESERVATIONS,
   GET_TESTIMONIAL,
+  POST_TESTIMONIAL,
   FIND_USER
 
 } from "../actions";
@@ -350,11 +351,15 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         reservaciones: allReservations
       }
+      case POST_TESTIMONIAL:
+        return{
+          ...state,
+      }
       case GET_TESTIMONIAL:
         return{
           ...state,
-          testimoniales : [action.payload]
-        }
+          testimoniales : action.payload
+      }
 
     case FIND_USER:
       let allUsers = state.allUsers;

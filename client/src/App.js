@@ -18,6 +18,7 @@ import Gallery from './components/Gallery/Gallery';
 import UserCard from './components/UserCard/UserCard';
 import Profile from './components/Profile/Profile';
 import GaleriaTestimonial from './components/Testimoniales/GaleriaTestimonial';
+import Testimonial from './components/Admin/Testimonial/Testimonial';
 //import { useDispatch, useSelector } from 'react-redux';
 import PagosReserva from './components/PagoReserva/PagoReserva';
 //import { useEffect } from 'react';
@@ -49,6 +50,7 @@ function App() {
           <Route exact path="/admin/pagos" component={Pagos} />
           <Route exact path="/admin/fotos" component={Fotos} />
           <Route exact path="/admin/usuarios" component={Usuarios} />
+          <Route exact path="/admin/testimonial" component={Testimonial} />
           <Route path="/admin/caja" component={Caja} />
           <Route path='/iniciarsesion' component={Login} />
           <Route path='/registrarse' component={Registro} />
