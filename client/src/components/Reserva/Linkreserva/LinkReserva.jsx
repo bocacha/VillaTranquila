@@ -357,7 +357,7 @@ export default function Reservaciones() {
             <input
               type="text"
               value={input.CostoFinal}
-              name="Checkin"
+              name="CostoFinal"
               placeholder={"Por Noche:" + input.CostoFinal}
               className={styles.formInputs}
               id={styles.precioFinal}
