@@ -453,6 +453,7 @@ export function editPictures(payload, { token }) {
 }
 
 export function editReservation(payload, { token }) {
+  console.log(payload)
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -460,17 +461,24 @@ export function editReservation(payload, { token }) {
   }
   return async function (dispatch) {
     try {
+      var cabins = await axios.get("/cabins")
+      var reserva = await axios.get("/reservations")
+      var filtrada = reserva.data.filter(e=> e.ID === payload.id)
+      var cabinfiltrada = cabins.data.filter(e=>e.ID === filtrada[0].Cabinid)
+      var Avaliable2 = cabinfiltrada[0].Available.filter((e)=> !e.includes(...fechas({Checkin:filtrada[0].Checkin,Checkout:filtrada[0].Checkout})))
+      Avaliable2.push(fechas({Checkin:payload.Checkin,Checkout:payload.Checkout}))
+      console.log(Avaliable2)
     const response = await axios.put("/reservations/EditReservation", payload, config);
-    return dispatch({
+    return (dispatch({
       type: EDIT_RESERVATIONS,
       payload: response.data,
-    });
+    }),dispatch(editAvailible({id:cabinfiltrada[0].ID , Available: Avaliable2})));
   } catch (err) {
     console.error(err);
   }
 };
 }
-
+//
 
 export function editCabains(payload, { token }) {
   const config = {

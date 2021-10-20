@@ -254,7 +254,7 @@ export default function Reservaciones() {
                     pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                     required
                   /> */}
-              <label>Cabaña Nº:</label>
+              {/* <label>Cabaña Nº:</label>
               <select
                 onChange={(e) => handleSelect(e)}
               >
@@ -265,7 +265,7 @@ export default function Reservaciones() {
                     <option value={c.ID}>{c.Number} </option>
                   )
                 })}
-                </select>
+                </select> */}
                   {/* <input
                     type="text"
                     value={edit.CabinNumber}
@@ -319,6 +319,7 @@ export default function Reservaciones() {
                         CostoFinal={el.CostoFinal}
                         ExtraServices={el.ExtraServices}
                         UserDNI= {el.UserDNI}
+                        Cabinid={el.Cabinid}
                         handlePrueba={handlePrueba}
                         handleSubmitEdit={handleSubmitEdit}
                         restaurar={habilitar}
