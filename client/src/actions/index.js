@@ -43,6 +43,7 @@ export const GET_USER_DATA = "GET_USER_DATA";
 export const SELECTED_CABIN = "SELECTED_CABIN";
 export const FILTER_RESERVATIONS = 'FILTER_RESERVATIONS';
 export const FIND_USER = 'FIND_USER';
+export const FILTER_PAYMENT='FILTER_PAYMENT';
 
 export function getCabins() {
   return async function (dispatch) {
@@ -213,6 +214,37 @@ export function readPayment({ token }) {
       console.error(err);
     }
   };
+}
+
+export function filterPayment({token},mes){
+  // console.log("el mes es: " + mes);
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    }
+  }
+  function formato(texto){
+    return texto.replace(/^(\d{4})-(\d{2})-(\d{2})$/g,'$3/$2/$1');
+  }
+
+  return async function(dispatch){
+    try {
+      var json = await axios.get("/payments/", config);
+
+      const pagoFiltrado=json.data.filter((e)=>{
+        let miDato=formato(e.fecha);
+        let miMes=miDato.substr(5,2);
+        //console.log("mi mes es:" + miMes);
+        return miMes===mes;        
+      })
+      return dispatch({
+        type: FILTER_PAYMENT,
+        payload: pagoFiltrado,
+      });
+    } catch (err) {
+      console.error(err);
+    }    
+  }
 }
 
 export function readReservation() {

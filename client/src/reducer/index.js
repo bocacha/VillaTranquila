@@ -39,7 +39,8 @@ import {
   SEND_PASSWORD_EMAIL,
   SELECTED_CABIN,
   FILTER_RESERVATIONS,
-  FIND_USER
+  FIND_USER,
+  FILTER_PAYMENT
 
 } from "../actions";
 import fechas from "../components/Reserva/Linkreserva/algoritmofechas"
@@ -356,6 +357,12 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         usuarios: user,
       }
+    case FILTER_PAYMENT:
+      return {
+        ...state,
+        pagos: action.payload,
+      };
+
 
     default:
       return state;
