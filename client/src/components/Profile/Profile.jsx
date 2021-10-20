@@ -201,13 +201,13 @@ export default function Profile(props) {
                             </tr>
                         </tbody>
                     </table>
-                    <details>
+                    <details id={styles.verResp}>
                         <summary>Historial de reservas</summary>
                        
                         { user_reservations &&
                            user_reservations.length>0 ? (
                           <Link to={`/Profile/${user.user}/${user.userid}`} className={styles.link}>
-                        <button className={styles.editarPerfil} >Ver y editar mis reservaciones</button>
+                        <button className={styles.editarPerfil} id={styles.botonVerResp} >Ver y editar mis reservaciones</button>
                          </Link>
 
                         ) : (
@@ -244,7 +244,7 @@ export default function Profile(props) {
                 </div>
 
                 {mostrar ? (
-                    <div className={styles.editarCont}>
+                    <div className={styles.editarCont} id={styles.editarResp}>
                         <div className={styles.title}><strong> Editar perfil</strong></div>
                         <form className={styles.form} onSubmit={(e) => handleSubmitEdit(e)}>
                             <input
@@ -341,7 +341,7 @@ export default function Profile(props) {
                     </div>
                 ) : null}
                 {mostrarContraseña ?
-                    (<div className={styles.editarCont}>
+                    (<div className={styles.editarCont} id={styles.editarContraseñaResp}>
                         <form onSubmit={handleConfirmarNuevaContraseña}>
                             <label className={styles.title}><strong>Cambiar contraseña:</strong></label>
                             <input
@@ -367,7 +367,7 @@ export default function Profile(props) {
                                 required
                             />
                             <button type='submit' className={styles.editarPerfil} id={styles.contra}>
-                                Guardar nueva contraseña <p><BsFillShieldLockFill /></p>
+                                Guardar nueva contraseña <p id={styles.iconoresp}><BsFillShieldLockFill /></p>
                             </button>
                         </form>
                     </div>

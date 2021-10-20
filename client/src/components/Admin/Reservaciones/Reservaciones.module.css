@@ -115,7 +115,7 @@
   margin-top: 10px;
   margin-bottom: 10px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(30%, 30%));
+  grid-template-columns: 30% 30% 30%;
   justify-content: center;
   grid-gap: 3%;
   align-items: center;
@@ -144,26 +144,32 @@
 }
 
 @media (min-width: 320px) {
+  .reservasAdmin{
+    width:100%;
+  }
   .navs {
     display: none;
   }
   .container1 {
-    top: -50px;
+    margin-top: -125px;
   }
   .containerReservas {
-    grid-template-columns: repeat(auto-fill, minmax(100%, 100%));
+    grid-template-columns: 100%;
   }
 }
 
 @media (min-width: 480px) {
   .containerReservas {
-    grid-template-columns: repeat(auto-fill, minmax(90%, 90%));
+    grid-template-columns: 90%;
   }
 }
 
 @media (min-width: 768px) {
   .container1 {
     top: 0px;
+  }
+  .btnsContainer{
+    margin-top: 250px;
   }
   .navs {
     display: block;
@@ -173,7 +179,8 @@
     display: none;
   }
   .containerReservas {
-    grid-template-columns: repeat(auto-fill, minmax(70%, 70%));
+    grid-template-columns: 45% 45%;
+    gap:2.5%;
   }
 }
 
@@ -189,7 +196,7 @@
     display: none;
   }
   .containerReservas {
-    grid-template-columns: repeat(auto-fill, minmax(50%, 50%));
+    grid-template-columns: 45% 45%;
   }
 }
 
@@ -205,6 +212,6 @@
     display: none;
   }
   .containerReservas {
-    grid-template-columns: repeat(auto-fill, minmax(40%, 40%));
+    grid-template-columns: 30% 30% 30%;
   }
-}
+} 
