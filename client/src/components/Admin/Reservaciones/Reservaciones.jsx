@@ -38,6 +38,7 @@ export default function Reservaciones() {
   const [selectDateCO, setSelectDateCO] = useState(null);
   const [cabinid, setCabinid] = useState(null)
   const [cabinnumber, setCabinnumber] = useState(null)
+  const [costo, setCosto] = useState(null)
   const [mostrar, setMostrar] = useState(false);
   const [habilitar, setHabilitar] = useState(false);
   const allCabins = useSelector((state) => state.cabins);
@@ -95,6 +96,7 @@ export default function Reservaciones() {
     e.preventDefault();
     setCabinid(Cabinid)
     setCabinnumber(CabinNumber)
+    setCosto(CostoFinal)
     setSelectDateCI()
     setSelectDateCO()
     setEdit({
@@ -232,9 +234,10 @@ export default function Reservaciones() {
       costoadicional = costoadicional + parseFloat(suma[j])
 
     }
-    costoadicional = parseFloat(costoadicional) + parseFloat(edit.CostoFinal)
+    costoadicional = parseFloat(costoadicional) + parseFloat(costo)
     setEdit({...edit,CostoFinal:costoadicional})
   }
+
   return (
     <div className={styles.reservasAdmin}>
       <div className={styles.navs2}>
@@ -295,14 +298,16 @@ export default function Reservaciones() {
                     placeholder="A nombre de . . ."
                     className={styles.formInputs}
                   />
-                  <input
-                    type="text"
-                    value={edit.CostoFinal}
-                    name="CostoFinal"
-                    onChange={(e) => handleChangeEdit(e)}
-                    placeholder="Costo Final"
-                    className={styles.formInputs}
-                  />
+                  <div>Costo final por noche:   </div>
+                 <input
+              type="text"
+              value={edit.CostoFinal}
+              name="CostoFinal"
+              placeholder={"Por Noche:" + edit.CostoFinal}
+              className={styles.formInputs}
+              id={styles.precioFinal}
+              required
+            />
                   {/* <input
                     type="text"
                     value={edit.UserId}
@@ -376,6 +381,7 @@ export default function Reservaciones() {
               </div>
                 </form>
                 <div className={styles.btns}>
+                <button onClick={checkboxselected}>Seleccionar Servicios</button>
                   <button type="submit" onClick={handlePrueba} id={styles.guardar}>
                     Guardar cambios
                   </button>
