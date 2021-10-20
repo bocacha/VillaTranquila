@@ -40,7 +40,9 @@ import {
   SELECTED_CABIN,
   FILTER_RESERVATIONS,
   FIND_USER,
-  FILTER_PAGOS
+  FILTER_PAGOS,
+  READ_CAMBIOS,
+  READ_CAMBIOS_DONE,
 
 } from "../actions";
 import fechas from "../components/Reserva/Linkreserva/algoritmofechas"
@@ -60,7 +62,8 @@ const initialState = {
   allReservations: [],
   fechasnodisponibles:[],
   userData: {},
-  weather:[]
+  weather:[],
+  solicitudes:[]
 };
 
 export default function rootReducer(state = initialState, action) {
@@ -364,6 +367,16 @@ export default function rootReducer(state = initialState, action) {
         ...state,
         usuarios: user,
       }
+      case READ_CAMBIOS_DONE:
+        return {
+          ...state,
+          solicitudes: action.payload,
+        };
+        case READ_CAMBIOS:
+          return {
+            ...state,
+            solicitudes: action.payload,
+          };  
 
     default:
       return state;

@@ -59,10 +59,12 @@ export default function Reservaciones() {
     Checkout: "",
     CabinNumber: seleccionada.Number,
     UserId: logeduser.userid,
+    UserDNI: logeduser.userdni,
     CostoFinal: JSON.parse(costo),
     Cabinid: JSON.parse(cabinId),
     ExtraServices: null,
-    Anombrede:""
+    Anombrede:"",
+    UserName: logeduser.user,
   });
   const consultarprecio=()=>{
     suma = []
@@ -117,7 +119,9 @@ export default function Reservaciones() {
     setInput({
       ...input,
       UserId: logeduser.userid,
+      UserDNI: logeduser.userdni,
       CabinNumber:seleccionada.Number,
+      UserName: logeduser.user,
       [e.target.name]: e.target.value,
     });
   }
@@ -174,14 +178,12 @@ useEffect(()=>{
     });
 
 const handlePrueba=()=>{
-console.log(input.Anombrede, logeduser.email, input.Checkin)
+console.log(input)
 const options = {year:'numeric', month:'numeric', day:'2-digit'}
 const data = { username:logeduser.user ,name: input.Anombrede, email: logeduser.email, date: selectDateCI.toLocaleDateString('es-ES', options)}
-console.log(input)
 dispatch(createReservation({...input, id:logeduser.userid},dispatch))
 dispatch(sendNotification(data))
 dispatch(editAvailible(edit))
-console.log(input)
 alert("Reserva creada")
 }
   const parapiker2=[] 

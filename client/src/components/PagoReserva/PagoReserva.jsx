@@ -19,7 +19,7 @@ useEffect(() => {
 
   const user = useSelector((state) => state.user);
   const reservaciones = useSelector((state) => state.reservaciones);
-  const cabañas = useSelector((state)=> state.allCabins);
+  const cabañas = useSelector((state)=> state.cabañas);
   return (
     <div className={styles.container}>
       <Navbar />

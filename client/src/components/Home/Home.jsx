@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <div>
-        <Navbar />
+        <Navbar />      
       </div>
       <div className={styles.nombre}>
       <div className={styles.snow}>
@@ -61,9 +61,9 @@ export default function Home() {
           <p className={styles.complejo}>- complejo de cabañas -</p>
         </div>
       </div>
-      <div className={styles.chat}>
+      {/* <div className={styles.chat}>
         <Chat  />
-      </div>
+      </div> */}
       <div>
         {/* <Searchbar/> */}
         {/* <Gallery/> */}

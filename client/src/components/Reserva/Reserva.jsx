@@ -55,7 +55,8 @@ export default function Reserva() {
     useEffect(() => {
         dispatch(readWeather());
     });
-
+    const user = useSelector(state => state.user);
+    const logeduser = useSelector(state => state.user)
     const allCabins = useSelector(state => state.cabins);
     let orderedCabins = allCabins.sort((a, b) => {
         if (parseInt(a.Number) < parseInt(b.Number)) return -1;
@@ -152,11 +153,10 @@ export default function Reserva() {
             if (errors.priceMin) alert(errors.priceMin);
         }
     }
-  
-
     return (
         <div>
             <Navbar className={styles.navbar} />
+        <div>
             <ul className={styles.reserva}>
                 <li>
                     <button className={styles.reload} onClick={e => handleReload(e)}>Limpiar filtros <p><AiOutlineReload /></p></button>
@@ -290,7 +290,8 @@ export default function Reserva() {
                 <div className={styles.paginado}>
                     <Paginado cabinsPerPage={cabinsPerPage} allCabins={allCabins.length} paginado={paginado} />
                 </div>
-      </div>
+                 </div>
+                </div>    
     </div>
   );
 }

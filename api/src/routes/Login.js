@@ -17,20 +17,23 @@ router.post("/", async (req, res)=>{
             error: "invalid User or Password"
         })
     }
-    if(user.Blocked){return res.status(404).send("Error Usuario Blokeado")}
     const userForToken={
         name: user.FirstName,
         user: user.UserName,
+        userdni:user.UserDNI,
         Admin: user.Admin,
         Premium: user.Premium,
+        Blocked:user.Blocked,
         id: user.ID
     }
     const token = jwt.sign(userForToken,config.JWT_SECRET,{expiresIn:"15h"})
     res.send({
         userid: user.ID,
+        userdni:user.UserDNI,
         user: user.UserName,
         admin: user.Admin,
         email: user.Email,
+        Blocked:user.Blocked,
         token
     })
 })

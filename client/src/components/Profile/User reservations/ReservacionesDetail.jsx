@@ -1,102 +1,90 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import styles from "./ReservacionesDetail.module.css";
-import { useDispatch } from "react-redux";
-import { removeReservations, restoreReservations } from "../../../actions";
+import { useDispatch} from "react-redux";
+import { removeReservations, restoreReservations ,readUsers} from "../../../actions";
 import {Link} from "react-router-dom"
 
 export default function ReservacionesDetail({
   ID,
   Checkin,
   Checkout,
-  UserId,
-  Paymentsid,
-  Cabinid,
+  CabinNumber,
+  UserName,
+  Anombrede,
   ExtraServices,
   CostoFinal,
+  Cabinid,
   handleSubmitEdit,
   handlePrueba,
   restaurar,
 }) {
   const dispatch = useDispatch();
-  const [mostrar, setMostrar] = useState(true);
-  const handleSubmitDelete = (ID) => {
-    dispatch(removeReservations({ id: ID }));
-    alert("su Reserva fue Eliminada con exito");
-    window.location.reload();
-  };
-  const handleSubmitrestore = (ID) => {
-    dispatch(restoreReservations({ id: ID }));
-    alert("su cabaña fue Restaurada con exito");
-    window.location.reload();
-  };
+  useEffect(() => {
+    dispatch(readUsers())
+  })
   return (
     <div className={styles.container}>
-      <div className={styles.infoContainer}>
-        <p className={styles.p}>
-          <strong>Checkin:</strong> {Checkin}
-        </p>
-        <p className={styles.p}>
-          <strong>Checkout:</strong> {Checkout}
-        </p>
-        <p className={styles.p}>
-          <strong>UserId:</strong> {UserId}
-        </p>
-        <p className={styles.p}>
-          <strong>Costo Final por Noche(c/Servicios Extra):</strong> {CostoFinal}
-        </p>
-        <p className={styles.p}>
-          <strong>Cabinid:</strong> {Cabinid}
-        </p>
-        {/* <p><strong>ExtraServices:</strong> {ExtraServices}</p> */}
-      </div>
-      <div className={styles.btnsContainer}>
-        <div>
-          {!restaurar ? (
-            <button
-              onClick={() => handleSubmitDelete(ID)}
-              className={styles.btn}
-            >
-              Ocultar
-            </button>
-          ) : (
-            <button
-              onClick={() => handleSubmitrestore(ID)}
-              className={styles.btn}
-            >
-              Restaurar
-            </button>
-          )}
-        </div>
-        {mostrar ? (
-          <div>
-            <button
-              onClick={(e) => {
-                handleSubmitEdit(e, ID,
-                  Checkin,
-                  Checkout,
-                  UserId,
-                  Paymentsid,
-                  Cabinid,
-                  ExtraServices,
-                  CostoFinal,);
-                setMostrar(false);
-              }}
-              className={styles.btnPlus}
-            >
-              Editar
-            </button>
-          </div>
-        ) : (
-          <div>
-            <button onClick={(e) => handlePrueba(e, ID)} className={styles.btnPlus}>Guardar</button>
-          </div>
-        )}
-      <div>
-        <Link to="/reserva/pago">
-      <button value="Pagar" target="_blank" className={styles.btnPlus}>Pagar </button>
-        </Link>
-        </div>
-      </div>
+    <div className={styles.infoContainer}>
+      <table>
+        <tbody>
+          <tr>
+            <td className={styles.izquierda}>Nombre de usuario:</td>
+            <td className={styles.derecha}>{UserName}</td>
+          </tr>
+          <tr>
+            <td className={styles.izquierda}>Reserva a nombre de:</td>
+            <td className={styles.derecha}>{Anombrede}</td>
+          </tr>
+          <tr>
+            <td className={styles.izquierda}>Fecha de llegada:</td>
+            <td className={styles.derecha}>{Checkin}</td>
+          </tr>
+          <tr>
+            <td className={styles.izquierda}>Fecha de salida:</td>
+            <td className={styles.derecha}>{Checkout}</td>
+          </tr>
+          <tr>
+            <td className={styles.izquierda}>Cabaña número:</td>
+            <td className={styles.derecha}>{CabinNumber}</td>
+          </tr>
+          {
+            ExtraServices && ExtraServices.length !== 0 &&
+            <tr>
+              <td className={styles.izquierda}>Servicios extra:</td>
+              <td className={styles.derecha}>
+                <ul>
+                  {
+                    ExtraServices.map(el => <li>{el}</li>)
+                  }
+                </ul>
+              </td>
+            </tr>
+          }
+          <tr>
+            <td className={styles.izquierda}>Precio final:</td>
+            <td className={styles.derecha}>$ {CostoFinal}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+    <div className={styles.btnsContainer}>
+      <button
+        onClick={(e) => {
+          handleSubmitEdit(e,  ID,
+            Checkin,
+            Checkout,
+            CabinNumber,
+            UserName,
+            Anombrede,
+            ExtraServices,
+            CostoFinal,
+            Cabinid,);
+        }}
+        className={styles.btnPlus}
+      >
+        Editar
+      </button>
+    </div>
+  </div>
   );
 }
