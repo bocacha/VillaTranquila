@@ -59,10 +59,12 @@ export default function Reservaciones() {
     Checkout: "",
     CabinNumber: seleccionada.Number,
     UserId: logeduser.userid,
+    UserDNI: logeduser.userdni,
     CostoFinal: JSON.parse(costo),
     Cabinid: JSON.parse(cabinId),
     ExtraServices: null,
-    Anombrede: "",
+    Anombrede:"",
+    UserName: logeduser.user,
   });
   const consultarprecio = () => {
     suma = [];
@@ -121,7 +123,9 @@ export default function Reservaciones() {
     setInput({
       ...input,
       UserId: logeduser.userid,
-      CabinNumber: seleccionada.Number,
+      UserDNI: logeduser.userdni,
+      CabinNumber:seleccionada.Number,
+      UserName: logeduser.user,
       [e.target.name]: e.target.value,
     });
   }

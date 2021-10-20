@@ -57,16 +57,18 @@ router.get("/ocultadas", async (req, res) => {
 });
 
 router.post("/NewReservation" , (req, res)=>{
-    const {Checkin, Checkout, Cabinid,UserId, ExtraServices, CostoFinal,Anombrede,CabinNumber,} = req.body;
+    const {Checkin, Checkout, Cabinid,UserId, ExtraServices, CostoFinal,Anombrede,CabinNumber,UserName,UserDNI} = req.body;
      Reservations.create({
      Checkin,
      Checkout,
      Cabinid, 
      UserId: UserId,
+     UserDNI: UserDNI,
      ExtraServices,
      CabinNumber,
      CostoFinal,
-     Anombrede
+     Anombrede,
+     UserName
     })
         .then(doneTemp => {
             return res.status(200).json(doneTemp)
@@ -74,6 +76,7 @@ router.post("/NewReservation" , (req, res)=>{
         .catch(error => { res.send(error) })
 });
 router.put("/EditReservation", (req, res) => {
+    console.log(req.body)
     const authorizations = req.get("Authorization")
     let token = ""
 if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
@@ -89,7 +92,7 @@ if(!token || !decodedToken.id){
 if(!decodedToken.Admin){
    return res.status(400).json({error:"Ops.. No tenes permisos"})
 }
-    const {Checkin, Checkout, Cabinid, ExtraServices, CostoFinal,Anombrede,CabinNumber} = req.body;
+    const {Checkin, Checkout, Cabinid, ExtraServices, CostoFinal,Anombrede,CabinNumber,UserDNI,UserName} = req.body;
     const objecttoupdate={
         Checkin: Checkin,
         Checkout: Checkout,
@@ -97,6 +100,9 @@ if(!decodedToken.Admin){
         Cabinid: Cabinid,
         CostoFinal: CostoFinal,
         ExtraServices: ExtraServices,
+        UserName: UserName,
+        UserDNI: UserDNI,
+        Anombrede: Anombrede,
     }
     Reservations.update(
         objecttoupdate

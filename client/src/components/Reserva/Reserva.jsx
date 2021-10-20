@@ -55,7 +55,8 @@ export default function Reserva() {
     useEffect(() => {
         dispatch(readWeather());
     });
-
+    const user = useSelector(state => state.user);
+    const logeduser = useSelector(state => state.user)
     const allCabins = useSelector(state => state.cabins);
     let orderedCabins = Array.isArray(allCabins) ?
         allCabins.sort((a, b) => {
@@ -157,10 +158,10 @@ export default function Reserva() {
         }
     }
 
-
     return (
         <div>
             <Navbar className={styles.navbar} />
+        <div>
             <ul className={styles.reserva}>
                 <li>
                     <button className={styles.reload} onClick={e => handleReload(e)}>Limpiar filtros <p><AiOutlineReload /></p></button>

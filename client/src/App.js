@@ -23,6 +23,7 @@ import PagosReserva from './components/PagoReserva/PagoReserva';
 //import { getUserData } from './actions';
 import Caja from './components/Admin/Caja/Caja';
 import UserReservations from "./components/Profile/User reservations/UserReservations"
+import EditReserva from "./components/Admin/EditReserva/EditReserva";
 
 
 function App() {
@@ -52,6 +53,7 @@ function App() {
           <Route path='/registrarse' component={Registro} />
           <Route exact path='/Profile/:username' component={Profile} />
           <Route exact path='/Profile/:username/:id' component={UserReservations} />
+          <Route exact path="/admin/solicitudes" component={EditReserva} />
         </Switch>
       </div>
     </BrowserRouter>
