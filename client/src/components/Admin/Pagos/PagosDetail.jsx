@@ -31,7 +31,7 @@ export default function PagosDetail({
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
-      <table>
+        <table>
           <tbody>
             <tr>
               <td className={styles.izquierda}><strong>ID Cliente:</strong></td>
