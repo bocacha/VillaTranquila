@@ -103,8 +103,6 @@ export default function Fotos() {
     setHabilitar(false);
   };
 
-  console.log("cabain number", cabainNumber);
-
   return (
     <div className={styles.container}>
       <div className={styles.navs2}>

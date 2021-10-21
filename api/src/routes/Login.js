@@ -7,7 +7,6 @@ const config = require("../config")
 
 router.post("/", async (req, res)=>{
     const {UserName, UserPassword} = req.body;
-    console.log(req.body);
     const user = await User.findOne({ where: { UserName: UserName } });
     const passwordCorrect = user === null
     ? false
