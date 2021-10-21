@@ -177,15 +177,6 @@ export default function Fotos() {
                   </button>
                 </div>
               </form>
-              <div className={styles.btnsGuarCanc}>
-                <button onClick={handlePrueba} id={styles.guardar}>Guardar cambios</button>
-                <button
-                  onClick={() => mostrar && setMostrar(false)}
-                  id={styles.cancelar}
-                >
-                  Cancelar
-                </button>
-              </div>
             </div>
             {/* EDITAR */}
             {mostrar ? (

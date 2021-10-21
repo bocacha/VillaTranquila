@@ -8,33 +8,36 @@ class MessageParser {
         const lowerCase = message.toLowerCase();
         
 
-        if (lowerCase.includes('precio') ||lowerCase.includes('paga')) {
+        if (lowerCase.includes('precio')||lowerCase.includes('sale')||lowerCase.includes('cuesta')) {
             this.ActionProvider.handlePrecios();
-            setTimeout(() => {
-                this.ActionProvider.handlePreciosLink();
-            }, 3000);
             return;
         }
-
-        if(lowerCase.includes('reserva')||lowerCase.includes('disponi')||lowerCase.includes('fecha')){
+        if(lowerCase.includes('reser')||lowerCase.includes('disponi')||lowerCase.includes('fecha')){
             this.ActionProvider.handleReservas();
-            setTimeout(() => {
-                this.ActionProvider.handleReservasLink();
-            }, 3000);
             return;
         }
         if(lowerCase.includes('contac')||lowerCase.includes('email')||lowerCase.includes('telefono')||lowerCase.includes('comunic')){
             this.ActionProvider.handleContacto()
-            setTimeout(() => {
-                this.ActionProvider.handleContactoLink();
-            }, 3000);
             return;
         }
         if(lowerCase.includes('registr')){
             this.ActionProvider.handleRegistro()
-            setTimeout(() => {
-                this.ActionProvider.handleRegistroLink();
-            }, 3000);
+            return;
+        }
+        if(lowerCase.includes('gracia')){
+            this.ActionProvider.handleDespedida()
+            return;
+        }
+        if(lowerCase.includes('paga')||(lowerCase.includes('tarjeta'))){
+            this.ActionProvider.handlePaga()
+            return;
+        }
+        if(lowerCase.includes('animal')||(lowerCase.includes('perro'))||(lowerCase.includes('gato'))){
+            this.ActionProvider.handleAnimales()
+            return;
+        }
+        if(lowerCase.includes('visa')||(lowerCase.includes('mastercard'))||(lowerCase.includes('american'))){
+            this.ActionProvider.handleCredito()
             return;
         }
         if(lowerCase){

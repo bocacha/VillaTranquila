@@ -2,7 +2,25 @@
   width: 100%;
   min-height: 100vh;
   background-color: #94adbc;
-  display: flex;
+  min-height:100%;
+  position:fixed;
+  overflow-y:scroll;
+  overflow-x:hidden;
+}
+.servicios::-webkit-scrollbar {
+  width: 12px;
+  background-color: #eff1f5;
+}
+
+.servicios::-webkit-scrollbar-track {
+  border-radius: 3px;
+  background-color: transparent;
+}
+
+.servicios::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: #515769;
+  border: 2px solid #eff1f5;
 }
 .containerContainer {
   display: flex;
@@ -183,7 +201,10 @@
     display: none;
   }
   .container {
-    margin-top: -50px;
+    margin-top: -120px;
+  }
+  .formsCont{
+    margin-top:20px
   }
   .crearCont {
     width: fit-content;
@@ -198,6 +219,12 @@
   }
   .servicesContainer {
     display: flex;
+    flex-direction: column;
+  }
+  .form{
+    width: 100%;
+    display: flex;
+    align-items: center;
     flex-direction: column;
   }
 }
@@ -240,21 +267,34 @@
   .container {
     margin-top: 0px;
   }
+  .formsCont{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: start;
+  }
   .crearCont {
-    width: fit-content;
-    margin-left: 0%;
+    width: 45%;
+    margin-left: auto;
+    margin-right: auto;
   }
   .editarCont {
-    width: fit-content;
-    margin-left: 0%;
+    width: 45%;
+    margin-left: auto;
+    margin-right: auto;
   }
   .formInputs {
     width: 300px;
   }
   .servicesContainer {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 45% 45%;
+    gap: 2.5%;
     width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    margin-top:15px
   }
   .detalles {
     width: 400px;
@@ -265,28 +305,6 @@
   .navs {
     display: block;
     position: relative;
-  }
-  .container {
-    margin-top: 0px;
-  }
-  .crearCont {
-    width: fit-content;
-    margin-left: 0%;
-  }
-  .editarCont {
-    width: fit-content;
-    margin-left: 0%;
-  }
-  .formInputs {
-    width: 300px;
-  }
-  .servicesContainer {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-  .detalles {
-    width: 400px;
   }
 }
 
@@ -301,7 +319,29 @@
   .navRsp {
     display: none;
   }
-  .containerReservas {
-    grid-template-columns: repeat(auto-fill, minmax(40%, 40%));
+  .servicesContainer {
+    display: grid;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+    gap: 0%;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    margin-top:15px;
+    margin-left: -1%;
+  }
+}
+
+@media(min-width:1500px) {
+  .servicesContainer {
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    gap: 0%;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    margin-top:15px;
+    margin-left: -0.5%;
   }
 }

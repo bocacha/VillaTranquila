@@ -87,18 +87,6 @@ const Cabañas = () => {
     });
   }
 
-  // const handleCheckBox = (e) => {
-  //   setCabain({
-  //     ...cabain,
-  //     [e.target.name]: true,
-  //   });
-  // };
-  // const handleeditCheckBox = (e) => {
-  //   setEdit({
-  //     ...cabain,
-  //     [e.target.name]: true,
-  //   });
-  // };
   const handleSubmit = (e) => {
     const { token } = logeduser;
     e.preventDefault();
@@ -166,6 +154,7 @@ const Cabañas = () => {
     setMostrar(true);
     pruebadispatch();
   };
+
   const pruebadispatch = () => {
     const { token } = logeduser;
     dispatch(editCabains(edit, { token }));
@@ -173,12 +162,13 @@ const Cabañas = () => {
     setTimeout(function() {
       history.go(0);
     }, 2000);
-    //window.location.reload();
   };
+
   const ocultadas = () => {
     dispatch(readCabainsocultados());
     setHabilitar(true);
   };
+  
   const showtrue = () => {
     dispatch(readCabains());
     setHabilitar(false);

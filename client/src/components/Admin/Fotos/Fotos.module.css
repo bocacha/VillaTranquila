@@ -40,12 +40,12 @@
   padding-top: 10px;
 }
 
-.btns{
+.btns {
   width: 100%;
   padding: 0px;
 }
 
-#crearB{
+#crearB {
   margin-left: auto;
   margin-right: auto;
 }
@@ -97,7 +97,6 @@
   font-family: Lato, Arial, sans-serif;
   font-weight: bold;
   transition-duration: 0.4s;
- 
 }
 .btn:hover {
   background: none;
@@ -105,22 +104,22 @@
   color: #000;
 }
 
-#btnSupp{
+#btnSupp {
   display: flex;
   align-items: center;
   padding: 5px;
 }
 
 .form {
-  width: fit-content;
+  width: 100%;
 }
 
 .formsCont {
   width: 100%;
   display: flex;
-    justify-items: center;
-    justify-content: center;
-    margin-top: 10px;
+  justify-items: center;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .crearCont {
@@ -142,15 +141,15 @@
   place-content: center;
   overflow: auto;
   width: 30%;
-  margin: 0 10px 30px 10px;
+  /* margin: 0 10px 30px 10px; */
   min-width: 30%;
 }
 
-.crearCont .title{
+.crearCont .title {
   font-size: x-large;
   margin-top: 15px;
 }
-.crearCont form{
+.crearCont form {
   display: flex;
   flex-direction: column;
   justify-items: center;
@@ -158,67 +157,69 @@
   width: 100%;
 }
 
-.crearCont form input{
+.crearCont form input {
   padding: 7px 0px;
   text-align: center;
   height: 42px;
   width: 80%;
   font-size: 1em;
-  background-color: #355978 ;
+  background-color: #355978;
   color: #fff;
   border: solid #355978;
   border-radius: 8px;
   transition: all 0.25s ease;
   margin-top: 8px;
-  margin-left: 43px;
+  margin-left: auto;
+  margin-right: auto;
 }
-.crearCont form input:hover{
-  background-color: #8bafbf ;
-  color:  #1c2531;
+.crearCont form input:hover {
+  background-color: #8bafbf;
+  color: #1c2531;
   border-color: #8bafbf;
 }
 
-.crearCont form select{
+.crearCont form select {
   padding: 7px 0px;
   text-align: center;
   height: 42px;
   width: 80%;
   font-size: 1em;
-  background-color: #355978 ;
+  background-color: #355978;
   color: #fff;
   border: solid #355978;
   border-radius: 8px;
   transition: all 0.25s ease;
   margin-top: 8px;
-  margin-left: 43px;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 8px;
 }
-.crearCont form select:hover{
-  background-color: #8bafbf ;
-  color:  #1c2531;
+.crearCont form select:hover {
+  background-color: #8bafbf;
+  color: #1c2531;
   border-color: #8bafbf;
 }
-.crearCont form button{
+.crearCont form button {
   border-radius: 4px;
-    background-color: #355978 ;
-    border-color: transparent;
-    color: #fff;
-    text-align: center;
-    font-size: large;
-    transition: all 0.5s ease;
-    cursor: pointer;
-    padding: 10px 20px;
-    /* display: inline-flex; */
-    height: auto;
-    line-height: 35px;
-    width: 30%;
-    margin-left: 33%;
-    margin-top: 10px;
-    margin-bottom: 20px;
+  background-color: #355978;
+  border-color: transparent;
+  color: #fff;
+  text-align: center;
+  font-size: large;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  padding: 10px 20px;
+  /* display: inline-flex; */
+  height: auto;
+  line-height: 35px;
+  width: 30%;
+  margin-left: 33%;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
-.crearCont form button:hover{
-  background-color: #8bafbf ;
-  color: #1c2531 ;
+.crearCont form button:hover {
+  background-color: #8bafbf;
+  color: #1c2531;
   border-color: #8bafbf;
 }
 
@@ -240,59 +241,58 @@
   align-items: start;
 }
 
-.btnsGuarCanc{
+.btnsGuarCanc {
   display: flex;
   justify-items: center;
   justify-content: center;
 }
-.btnsGuarCanc button{
+.btnsGuarCanc button {
   border-radius: 4px;
-    background-color: #355978 ;
-    border-color: transparent;
-    color: #fff;
-    font-size: large;
-    transition: all 0.5s ease;
-    cursor: pointer;
-    padding: 10px 20px;
-    margin-top: 10px;
-    margin-bottom: 20px;
+  background-color: #355978;
+  border-color: transparent;
+  color: #fff;
+  font-size: large;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  padding: 10px 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
-#guardar{
+#guardar {
   min-width: 65%;
   margin-right: 2%;
   margin-left: 0%;
-  background-color: #355978 ;
+  background-color: #355978;
 }
-#guardar:hover{
-  background-color: #8bafbf ;
-  color: #1c2531 ;
+#guardar:hover {
+  background-color: #8bafbf;
+  color: #1c2531;
   border-color: solid #8bafbf;
 }
-#cancelar{
-  min-width:50%;
+#cancelar {
+  min-width: 50%;
   margin-left: 0;
-  background:#7f7979;
+  background: #7f7979;
 }
-#cancelar:hover{
+#cancelar:hover {
   background-color: #b9b9b9;
   border-color: solid #b9b9b9;
-  color:black;
+  color: black;
 }
 
-.containerForms{
-  display:flex;
+.containerForms {
+  display: flex;
   flex-direction: row;
   width: 100%;
 }
 
-.containerDetalles{
+.containerDetalles {
   margin-top: 40px;
   display: grid;
   grid-template-columns: 25% 25% 25% 25%;
 }
 .detalles {
-  width: 96%;
-  margin:2%;
+  width: 100%;
   justify-content: center;
   background: #293c4f;
   color: #fff;
@@ -307,73 +307,79 @@
   hyphens: auto;
 }
 
-
-
-
 @media (min-width: 320px) {
   .navs {
     display: none;
   }
-  .navRsp{
-    display:block;
+  .navRsp {
+    display: block;
   }
-  .btnsContainer{
+  .btnsContainer {
     margin-top: 15px;
   }
-  .crearCont{
-    width: 96%;
-    margin-left: 2%;
+  .crearCont {
+    width: 100%;
+    margin: 0 0px 30px 0px;
   }
-  .formsCont{
+  .formsCont {
     flex-direction: column;
   }
-  .containerDetalles{
+  .containerDetalles {
     display: grid;
     grid-template-columns: 100%;
   }
-  .btnsGuarCanc{
+  .btnsGuarCanc {
     width: 80%;
   }
 }
-
 
 @media (min-width: 480px) {
   .navs {
     display: none;
   }
-  .navRsp{
-    display:block;
+  .navRsp {
+    display: block;
   }
-  .btnsContainer{
+  .btnsContainer {
     margin-top: 15px;
   }
-  .crearCont{
-    width: 96%;
-    margin-left: 2%;
+  .crearCont {
+    width: 100%;
+    max-width:480px;
+    margin-left: auto;
+    margin-right: auto;
   }
-  .formsCont{
+  .formsCont {
     flex-direction: column;
   }
-  .containerDetalles{
+  .containerDetalles {
     display: grid;
     grid-template-columns: 100%;
+    max-width:480px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
 @media (min-width: 768px) {
-  .navs{
+  .navs {
     display: block;
     position: relative;
   }
-  .navRsp{
-    display:none;
+  .navRsp {
+    display: none;
   }
-  .crearCont{
+  .btnsContainer{
+    margin-top: 130px;
+  }
+  .crearCont {
     width: 100%;
   }
-  .containerDetalles{
+  .containerDetalles {
     display: grid;
     grid-template-columns: 50% 50%;
+    gap: 2%;
+    min-width: 90%;
   }
 }
 
@@ -382,14 +388,25 @@
     display: block;
     position: relative;
   }
-  .containerDetalles{
+  .containerDetalles {
     display: grid;
     grid-template-columns: 33.33% 33.33% 33.33%;
+    gap: 1%;
+    margin-left: auto;
+    margin-right: auto;
   }
-  .btnsGuarCanc{
+  .btnsGuarCanc {
     width: 80%;
   }
-  .crearCont{
+  .crearCont {
     width: 100%;
   }
+  .formsCont{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
+
