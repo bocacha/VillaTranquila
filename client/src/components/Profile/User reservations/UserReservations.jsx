@@ -253,7 +253,16 @@ setCosto(seleccionada[0].Price)
                 placeholder="A nombre de . . ."
                 className={styles.formInputs}
               />
-
+              <div>Costo final por noche:   </div>
+            <input
+              type="text"
+              value={edit.CostoFinal}
+              name="CostoFinal"
+              placeholder={"Por Noche:" + edit.CostoFinal}
+              className={styles.formInputs}
+              id={styles.precioFinal}
+              required
+            />
             </form>
             <div className={styles.p}>Servicios Adicionales:</div>
 
