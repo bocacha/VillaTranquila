@@ -51,14 +51,19 @@ export default function Reservaciones() {
   function handlePrueba(e, ID, Nuevo,Original) {
     e.preventDefault();
      if(Nuevo.Cancelar){
-      return (dispatch(removeReservations(Original)), dispatch(aceptarCancelacion(Original,{id:ID})))
+      dispatch(removeReservations(Original))
+      dispatch(aceptarCancelacion(Original,{id:ID}))
+       alert("Editado")
+     setTimeout(function () {
+      history.go(0);
+  }, 2500)
      }else{
     dispatch(aceptarCambios({...Nuevo},{ token },{id:ID}))
      alert("Editado")
-     }
      setTimeout(function () {
       history.go(0);
   }, 2000)
+     }
   }
  
   const ocultadas = () => {

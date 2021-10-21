@@ -48,7 +48,6 @@ export default function Home() {
             <div className={styles.copos}></div>
             <div className={styles.copos}></div>
             <div className={styles.copos}></div>
-            <div className={styles.copos}></div>
         </div>
         <div className={styles.sun}>
         <img src={cabañaS} alt="IMAGEN NO ENCONTRADA"/>

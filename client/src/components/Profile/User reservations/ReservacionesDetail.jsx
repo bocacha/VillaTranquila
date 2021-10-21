@@ -84,7 +84,13 @@ export default function ReservacionesDetail({
       >
         Editar
       </button>
+              <Link to="/reserva/pago">
+                <button className={styles.btnPlus}>
+                  Pagar
+                </button>
+              </Link>
     </div>
+ 
   </div>
   );
 }
