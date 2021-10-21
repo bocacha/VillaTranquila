@@ -9,14 +9,14 @@ class ActionProvider {
     }
     
     handleNext(){
-        const message = this.createChatBotMessage('Su consulta es poco especifica, seleccione alguna de las palabras clave que se le proporciono al comienzo\n como por ejemplo Registro o reserva');
+        const message = this.createChatBotMessage('Su consulta es poco especifica, si necesita algo en particular puede ir al boton CONTACTO');
         this.setState((prev) => ({
             ...prev,
             messages: [...prev.messages, message],
           }));
     }
     handlePrecios() {
-        const message = this.createChatBotMessage('Si quieres saber de nuestros precios ve a COMENZAR RESERVA y pudes filtrar nuestras cabañas por PRECIO');
+        const message = this.createChatBotMessage('Si quieres saber de nuestros precios ve a COMENZAR RESERVA y puedes filtrar nuestras cabañas por PRECIO');
     
         this.setState((prev) => ({
           ...prev,
@@ -53,6 +53,32 @@ class ActionProvider {
 
       handleDespedida() {
         const message = this.createChatBotMessage('Esperamos haber podido responder todas tus respuestas');
+    
+        this.setState((prev) => ({
+          ...prev,
+          messages: [...prev.messages, message],
+        }));
+      }
+      handlePaga() {
+        const message = this.createChatBotMessage('Puede Pagar con su tarjeta de credito o debito y Si quiere PAGAR luego de comenzar con su reserva, ingresa los dias, RESERVAR y podras abonar con  mercado pago ');
+    
+        this.setState((prev) => ({
+          ...prev,
+          messages: [...prev.messages, message],
+        }));
+      }
+
+      handleAnimales() {
+        const message = this.createChatBotMessage('No se reciben Animales de ningun tipo');
+    
+        this.setState((prev) => ({
+          ...prev,
+          messages: [...prev.messages, message],
+        }));
+      }
+      
+      handleCredito() {
+        const message = this.createChatBotMessage('Recibimos todas las Tarjetas, con el interes que mercadopago tiene');
     
         this.setState((prev) => ({
           ...prev,
