@@ -14,7 +14,6 @@ router.get("/", async (req, res) => {
     //     let token = ""
     // if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
     //   token = authorizations.substring(7)
-    //   console.log(token)
     // }
     // const decodedToken= jwt.verify(token, config.JWT_SECRET)
     // if(!token || !decodedToken.id){
@@ -37,7 +36,6 @@ router.get("/ocultadas", async (req, res) => {
     //     let token = ""
     // if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
     //   token = authorizations.substring(7)
-    //   console.log(token)
     // }
     // const decodedToken= jwt.verify(token, config.JWT_SECRET)
     // if(!token || !decodedToken.id){
@@ -76,12 +74,10 @@ router.post("/NewReservation" , (req, res)=>{
         .catch(error => { res.send(error) })
 });
 router.put("/EditReservation", (req, res) => {
-    console.log(req.body)
     const authorizations = req.get("Authorization")
     let token = ""
 if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
   token = authorizations.substring(7)
-  console.log(token)
 }
 const decodedToken= jwt.verify(token, config.JWT_SECRET)
 if(!token || !decodedToken.id){
