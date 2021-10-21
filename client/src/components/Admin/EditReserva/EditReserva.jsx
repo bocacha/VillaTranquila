@@ -58,7 +58,7 @@ export default function Reservaciones() {
      }
      setTimeout(function () {
       history.go(0);
-  }, 500)
+  }, 2000)
   }
  
   const ocultadas = () => {
