@@ -1,12 +1,20 @@
 .perfil{
     background-color: #355978;
     height: 100vh;
+    position: fixed;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    width:100%;
+}
+.perfil::-webkit-scrollbar{
+    width:0;
 }
 .container{
     display: flex;
     /* align-items: center; */
     justify-items: center;
     justify-content: center;
+    margin-bottom: 20px;
 }
 .containerDatos{
     margin-top: 100px;
@@ -79,6 +87,7 @@ details:not([open]){
 }
 details[open]{
     height: 6em;
+    width:100%;
 }
 
   .premium{
@@ -193,4 +202,119 @@ details[open]{
 
 #contra{
     margin: 20px;
+}
+
+.historial{
+    width:100%;
+    padding-top: 15px;
+}
+
+
+/* 
+@media (max-width:1024px){
+    #editarContraseñaResp form input{
+        max-width: 96%;
+    }
+    #iconoresp{
+        font-size: xx-large;
+        height:90%;
+        margin-top:5%;
+        margin-right:15px;
+    }
+    .container{
+        display: flex;
+        flex-direction: row;
+    }
+} */
+
+@media(min-width:320px){
+    .container{
+        flex-direction: column;
+    }
+    .containerDatos{
+        width:100%;
+    }
+    .editarCont{
+        width:100%;
+        margin-left: 0%;
+        margin-top:40px;
+    }
+    .editarCont form input{
+        max-width: 96%;
+    }
+}
+@media(min-width:480px){
+    .containerDatos{
+        width:100%
+    }
+    #editarResp form{
+        width:100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    #editarResp form input{
+        width:70%;
+        margin-left:15%;
+    }
+    .editarPerfil{
+        display: flex;
+        justify-content: center;
+    }
+    .botones{
+        display: flex;
+    }
+    #verResp{
+        display: flex;
+        justify-content: center;
+    }
+    #botonVerResp{
+        width:70%;
+        margin-left:15%;
+    }
+}
+@media (min-width:768px){
+    #editarContraseñaResp form{
+        width:100%;
+    }
+    #editarContraseñaResp form input{
+        width:70%;
+        margin-left:15%;
+    }
+}
+@media (min-width:1024px){
+    .container{
+        flex-direction: row;
+        align-items: start;
+        margin-top:80px;
+    }
+    .containerDatos{
+        margin-top: 0;
+    }
+    .editarCont{
+        margin-top: 0;
+    }
+    details[open]{
+        height: 8em;
+        width:100%;
+    }
+}
+@media (min-width:1155px){
+    .containerDatos,
+    .editarCont{
+        max-width: 70%;
+    }
+
+}
+@media(min-width:1264px){
+    .container{
+        justify-content: center;
+    }
+    .containerDatos,
+    .editarCont{
+        width:70%;
+        min-width:30%;
+        margin-left:1%;
+        margin-right: 1%;
+    }
 }

@@ -125,6 +125,18 @@ export default function Admin() {
             </div>
             <Link to="/admin/Solicitudes" className={styles.link}>Solicitudes de Cambios</Link>
           </button>
+          <button  className={styles.cardsContainer}>
+            <div>
+              <Link to="/admin/testimonial">
+                <img
+                  src="https://i.pinimg.com/564x/f0/99/fb/f099fbdfde2c1379d91202b17d03c81a.jpg"
+                  alt="testimonial"
+                  className={styles.img}
+                />
+              </Link>
+            </div>
+            <Link to="/admin/testimonial" className={styles.link}>Reseñas</Link>
+          </button>
         </div>
         
       </div>

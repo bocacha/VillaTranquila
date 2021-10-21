@@ -319,6 +319,6 @@ export default function Reserva() {
 
             </div>
         </div>
+        </div>
     );
 }
-

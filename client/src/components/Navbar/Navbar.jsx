@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { RiTeamLine, RiMailLine, RiLoginBoxLine } from "react-icons/ri";
+import { RiTeamLine, RiMailLine, RiLoginBoxLine, } from "react-icons/ri";
 import { GoSignIn, GoHome } from "react-icons/go";
 import { ImCalendar } from "react-icons/im";
 import { RiAdminFill } from "react-icons/ri";
@@ -12,6 +12,7 @@ import axios from "axios";
 import { BiWindows } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserData } from "../../actions";
+import { IoIosCheckmark } from "react-icons/io";
 
 export default function Navbar() {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ export default function Navbar() {
   };
 
   return (
-    <div>
+    <div className={styles.navPrincipal}>
       <nav>
         <ul className={styles.navbar}>
           <div className={styles.navbar2}>
@@ -48,9 +49,9 @@ export default function Navbar() {
                   onClick={() => {
                     setShow(!show);
                   }}
-                  className={styles.botonHamb} 
+                  className={styles.botonHamb}
                 >
-                  <GiHamburgerMenu className={styles.menu}/>
+                  <GiHamburgerMenu className={styles.menu} />
                 </button>
               </div>
               {show ? (
@@ -97,10 +98,16 @@ export default function Navbar() {
                       <Link to="/galeria" className={styles.mostrar}>
                         <button className={styles.navBtn}>
                           <strong className={styles.list}>
-                            Galeria{" "}
-                            <span className={styles.span}>
-                              <GiPhotoCamera />
-                            </span>
+                            Galeria <GiPhotoCamera className={styles.icons} />
+                          </strong>
+                        </button>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link to="/testimonial" className={styles.mostrar}>
+                        <button className={styles.navBtn}>
+                          <strong className={styles.list}>
+                            Testiomonial <IoIosCheckmark className={styles.icons} />
                           </strong>
                         </button>
                       </Link>
@@ -135,7 +142,7 @@ export default function Navbar() {
                       <div>
                         <Link to="/iniciarsesion" className={styles.mostrar}>
                           <li>
-                          <button className={styles.navBtn}>
+                            <button className={styles.navBtn}>
                               <strong className={styles.list}>
                                 Iniciar Sesion{" "}
                                 <GoSignIn className={styles.icons} />{" "}
@@ -145,9 +152,9 @@ export default function Navbar() {
                         </Link>
                         <Link to="/registrarse" className={styles.mostrar}>
                           <li>
-                          <button className={styles.navBtn}>
+                            <button className={styles.navBtn} id={styles.registrarseResp}>
                               <strong className={styles.list}>
-                              Registrarse{" "}
+                                Registrarse{" "}
                                 <RiLoginBoxLine className={styles.icons} />{" "}
                               </strong>
                             </button>
@@ -161,7 +168,7 @@ export default function Navbar() {
                           className={styles.mostrar}
                         >
                           <li>
-                          <button className={styles.navBtn}>
+                            <button className={styles.navBtn} id={styles.perfilResp}>
                               <strong className={styles.list}>
                                 Perfil <CgProfile className={styles.icons} />
                               </strong>
@@ -229,11 +236,17 @@ export default function Navbar() {
             <li>
               <Link to="/galeria" className={styles.noMostrar}>
                 <button className={styles.navBtn}>
-                  <strong>
-                    Galeria{" "}
-                    <span className={styles.span}>
-                      <GiPhotoCamera />
-                    </span>
+                  <strong className={styles.list}>
+                    Galeria <GiPhotoCamera className={styles.icons} />
+                  </strong>
+                </button>
+              </Link>
+            </li>
+            <li>
+              <Link to="/testimonial" className={styles.noMostrar}>
+                <button className={styles.navBtn}>
+                  <strong className={styles.list}>
+                    Testiomonial <IoIosCheckmark className={styles.icons} />
                   </strong>
                 </button>
               </Link>
@@ -267,7 +280,7 @@ export default function Navbar() {
               <div>
                 <Link to="/iniciarsesion" className={styles.noMostrar}>
                   <li>
-                  <button className={styles.navBtn}>
+                    <button className={styles.navBtn}>
                       <strong className={styles.list}>
                         Iniciar Sesion <GoSignIn className={styles.icons} />{" "}
                       </strong>
@@ -276,7 +289,7 @@ export default function Navbar() {
                 </Link>
                 <Link to="/registrarse" className={styles.noMostrar}>
                   <li>
-                  <button className={styles.navBtn}>
+                    <button className={styles.navBtn} >
                       <strong className={styles.list}>
                         Registrarse
                         <RiLoginBoxLine className={styles.icons} />
@@ -289,7 +302,7 @@ export default function Navbar() {
               <div>
                 <Link to={`/Profile/${user.user}`} className={styles.noMostrar}>
                   <li>
-                  <button className={styles.navBtn}>
+                    <button className={styles.navBtn}>
                       <strong className={styles.list}>
                         Perfil <CgProfile className={styles.icons} />
                       </strong>
@@ -298,7 +311,7 @@ export default function Navbar() {
                 </Link>
                 <Link to="/" className={styles.noMostrar}>
                   <li>
-                  <button className={styles.navBtn} onClick={() => Logout()}>
+                    <button className={styles.navBtn} onClick={() => Logout()}>
                       <strong className={styles.list}>
                         Cerrar Sesion{" "}
                         <RiLoginBoxLine className={styles.icons} />
