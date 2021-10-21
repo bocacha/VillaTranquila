@@ -43,8 +43,13 @@ export default function NavAdmin() {
             </Link>
           </li>
           <li className={styles.li}>
-            <Link to="/admin/caja" className={styles.link}>
-              Caja
+            <Link to="/admin/Solicitudes" className={styles.link}>
+              Cambios
+            </Link>
+          </li>
+          <li className={styles.li}>
+            <Link to="/admin/testimonial" className={styles.link}>
+              Reseñas
             </Link>
           </li>
         </ul>

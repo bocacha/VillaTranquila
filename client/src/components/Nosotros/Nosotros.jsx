@@ -54,7 +54,7 @@ export default function Nosotros(){
                     <div>
                         <h2 className={styles.info}>Joaquín Sosa</h2>
                         <img src='https://avatars.githubusercontent.com/u/81209349?v=4' alt='Joaquín Sosa' className={styles.img}/>
-                        <Link to={{pathname: ''}} target='_blank' style={{ textDecoration: 'none' }} ><button className={styles.linkedin} ><GrLinkedin/></button></Link>
+                        <Link to={{pathname: 'https://www.linkedin.com/in/spyral-dev'}} target='_blank' style={{ textDecoration: 'none' }} ><button className={styles.linkedin} ><GrLinkedin/></button></Link>
                         <Link to={{pathname: 'https://github.com/SpyraL-dev'}} target='_blank' style={{ textDecoration: 'none' }} ><button className={styles.linkedin} ><AiFillGithub/></button></Link>
                     </div>
                 </li>
