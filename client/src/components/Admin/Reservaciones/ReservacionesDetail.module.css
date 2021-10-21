@@ -14,6 +14,7 @@
   transition-duration: 0.3s;
   transition-timing-function: ease;
   transition-delay: 0s;
+  padding-bottom: 1px;
 }
 .container:hover {
   box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.2);
@@ -22,19 +23,22 @@
 .infoContainer {
   display: flex;
   padding-top: 10px;
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
 }
+
 .izquierda {
   float: left;
-  margin-left: 3%;
 }
 .derecha {
   float: right;
-  margin-right: 3%;
+  text-align: end;
 }
 
 .btnsContainer {
-  margin-top: 3%;
-  padding-bottom: 3%;
+  display: flex;
+  margin: 20px 0;
 }
 
 .btn {
@@ -46,14 +50,17 @@
   font-size: large;
   transition: all 0.5s ease;
   cursor: pointer;
+  padding: 10px 20px;
   /* display: inline-flex; */
-  height: 10%;
+  height: auto;
   line-height: 35px;
-  width: 20%;
+  margin-right: 5px;
+  width: 120px;
 }
 .btn:hover {
   background-color: #a72424;
   color: #1c2531;
+  /* border-color: #783535c0; */
 }
 
 .btnPlus {
@@ -65,9 +72,12 @@
   font-size: large;
   transition: all 0.5s ease;
   cursor: pointer;
-  height: 10%;
+  padding: 10px 20px;
+  /* display: inline-flex; */
+  height: auto;
   line-height: 35px;
-  width: 20%;
+  margin-left: 5px;
+  width: 120px;
 }
 .btnPlus:hover {
   background-color: #8bafbf;
@@ -100,21 +110,37 @@
     margin-left: 5%;
     margin-right: 5%;
   }
+  .container{
+    width: 90%;
+  }
+  .infoContainer{
+    width:90%;
+    margin-left:auto;
+    margin-right:auto;
+  }
   .btn{
     width: fit-content;
   }
   .btnPlus{
     width: fit-content;
   }
+  
 }
 
 @media (min-width: 480px) {
+  .container{
+    width:100%;
+    margin-left:0%;
+  }
   .btnsContainer{
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     margin-left: 15%;
     margin-right: 15%;
+  }
+  .infoContainer{
+    margin-left:3%
   }
 }
 
@@ -136,5 +162,8 @@
   .btnsContainer{
     margin-left: 30%;
     margin-right: 30%;
+  }
+  .infoContainer{
+    margin-left: 4%;
   }
 }

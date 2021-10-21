@@ -24,7 +24,7 @@ router.post("/", async (req, res)=>{
         Admin: user.Admin,
         Premium: user.Premium,
         Blocked:user.Blocked,
-        id: user.ID
+        id: user.ID,
     }
     const token = jwt.sign(userForToken,config.JWT_SECRET,{expiresIn:"15h"})
     res.send({

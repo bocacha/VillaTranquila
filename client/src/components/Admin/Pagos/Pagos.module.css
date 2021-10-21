@@ -148,3 +148,159 @@
     grid-template-columns: 25% 25% 25% 25%;
   }
 }
+
+
+
+
+
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #94adbc;
+}
+
+.navs2 {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  width: 100%;
+}
+
+.navs {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  align-items: start;
+}
+
+.btnsContainer {
+  width: 100%;
+  margin-top: 145px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: start;
+  /* margin-left: 290px; */
+  padding-top: 10px;
+}
+
+.btnSup {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 4px 7px;
+  background: #293c4f;
+  color: #fff;
+  border: none;
+  border: 1px solid #293c4f;
+  border-radius: 5px;
+  font-family: Lato, Arial, sans-serif;
+  font-weight: bold;
+  transition-duration: 0.4s;
+}
+.btnSup:hover {
+  background: none;
+  border: 1px solid #293c4f;
+  color: #000;
+}
+
+
+
+#btnSupp{
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.containerDetalles{
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+}
+
+.detalles {
+  width: 96%;
+  margin:2%;
+  justify-content: center;
+  background: #293c4f;
+  color: #fff;
+  border-radius: 7px;
+  padding: 10px 25px;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+}
+
+@media (min-width: 320px) {
+  .navs {
+    display: none;
+  }
+  .navRsp{
+    display:block;
+  }
+  .containerDetalles{
+    margin-top: 40px;
+  display: grid;
+  grid-template-columns: 100%;
+  }
+  .btnsContainer{
+    margin-top:15px;
+  }
+}
+
+
+@media (min-width: 480px) {
+  .navs {
+    display: none;
+  }
+  .navRsp{
+    display:block;
+  }
+  .containerDetalles{
+    display: grid;
+    grid-template-columns: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .navs{
+    display: block;
+    position: relative;
+  }
+  .navRsp{
+    display:none;
+  }
+  .containerDetalles{
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+  .btnsContainer{
+    margin-top:130px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .navs {
+    display: block;
+    position: relative;
+  }
+  .containerDetalles{
+    display: grid;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+  }
+}
+
+@media (min-width: 1155px) {
+  .containerDetalles{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+  }
+}
