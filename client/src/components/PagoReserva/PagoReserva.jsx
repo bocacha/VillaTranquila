@@ -92,7 +92,6 @@ useEffect(() => {
         return null
       }else{return null}
     })}
-      
     </div>
   );
 }
