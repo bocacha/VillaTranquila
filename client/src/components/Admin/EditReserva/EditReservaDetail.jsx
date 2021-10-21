@@ -25,7 +25,7 @@ export default function EditReserva({
         alert("su Reserva fue Eliminada con exito");
         setTimeout(function () {
             history.go(0);
-        }, 500)
+        }, 2000)
 
     };
     const handleSubmitrestore = (ID) => {
@@ -38,7 +38,7 @@ export default function EditReserva({
         }
         setTimeout(function () {
             history.go(0);
-        }, 500)
+        }, 2000)
 
     };
     return (

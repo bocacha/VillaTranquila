@@ -46,6 +46,8 @@ import {
   FILTER_PAGOS,
   READ_CAMBIOS,
   READ_CAMBIOS_DONE,
+  REMOVE_FEEDBACK,
+  READ_FEEDBACK_OCULTADOS
 
 } from "../actions";
 import fechas from "../components/Reserva/Linkreserva/algoritmofechas"
@@ -399,6 +401,16 @@ export default function rootReducer(state = initialState, action) {
             ...state,
             solicitudes: action.payload,
           };  
+      case REMOVE_FEEDBACK:
+      return {
+        ...state,
+        testimoniales: state.testimoniales.filter((testimonial) => testimonial.id !== action.payload)
+      };
+      case READ_FEEDBACK_OCULTADOS:
+        return {
+          ...state,
+          testimoniales: action.payload,
+        };
 
     default:
       return state;

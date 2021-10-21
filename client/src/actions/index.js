@@ -50,7 +50,11 @@ export const FILTER_PAYMENT='FILTER_PAYMENT';
 export const FILTER_PAGOS = 'FILTER_PAGOS';
 export const READ_CAMBIOS = "READ_CAMBIOS";
 export const READ_CAMBIOS_DONE= "READ_CAMBIOS_DONE";
+export const REMOVE_FEEDBACK = "REMOVE_FEEDBACK";
+export const RESTORE_SERVICES = "RESTORE_SERVICES";
+export const READ_FEEDBACK_OCULTADOS = "READ_FEEDBACK_OCULTADOS";
 export const CANCELAR_RESERVA= "CANCELAR_RESERVA";
+
 export function getCabins() {
   return async function (dispatch) {
     try {
@@ -95,7 +99,6 @@ export function readWeather() {
 }
 
 export function createReservation(payload) {
- 
   return async function (dispatch) {
     const response = await axios.post("/reservations/NewReservation", payload);
     return (dispatch({
@@ -391,7 +394,6 @@ export function readCabainsocultados(id) {
 }
 
 export function editUsers(payload) {
-  
   return async function (dispatch) {
     try {
       var json = await axios.put("/users/EditUser", payload);
@@ -406,7 +408,6 @@ export function editUsers(payload) {
 }
 
 export function editProfile(payload, ID) {
-
   return async function (dispatch) {
     try {
       var json = await axios.put("/users/EditProfile/" + ID, payload);
@@ -566,7 +567,6 @@ export function removeCabains(id) {
 }
 
 export function removeReservations(payload) {
-  console.log(payload)
   if(!payload.Available){
     payload.Available = fechas({Checkin:payload.Checkin,Checkout:payload.Checkout})
   }
@@ -630,7 +630,7 @@ export function removeUsers(id) {
 
 export function restoreCabains(id){
   return async function (dispatch) {
-      var json = await axios.put("/cabins/RestoreCabin", id);
+   var json = await axios.put("/cabins/RestoreCabin", id);
       return ( dispatch({
         type: REMOVE_CABAINS,
         payload: id
@@ -657,7 +657,7 @@ export function restoreReservations(payload){
 }
 
 export function restoreServices(id){
-  return async function (dispatch) {  
+  return async function (dispatch) {
       var json = await axios.put("/services/RestoreService", id);
       return dispatch({
         type: REMOVE_SERVICES,
@@ -710,7 +710,6 @@ export function readFechas(){
 }
 
 export function sendNotification(payload) {
-
 return async function (dispatch) {
       const json = await axios.post("/sendNotification", payload)
       return dispatch({
@@ -790,6 +789,7 @@ export function getTestimonials(payload) {
 }
 
 export function postTestimonials(payload , {token}) {
+  console.log('testimonial', payload);
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -915,7 +915,6 @@ export function getCambiosDone(){
 }
 
 export function getCambios(){
-  console.log("entre1")
   return async function (dispatch) {
     try {
       let json = await axios.get("/CambiosReserva");
@@ -929,6 +928,45 @@ export function getCambios(){
   };
 }
 
+export function removeFeedback(id) {
+  console.log('idf',id)
+  return async function (dispatch) {
+
+    var json = await axios.put("/feedback/RemoveFeedback", id);
+    return dispatch({
+      type: REMOVE_FEEDBACK,
+      payload: id
+
+    })
+
+  };
+}
+
+export function restoreFeedback(id){
+  console.log('idresto',id)
+  return async function (dispatch) {
+   
+      var json = await axios.put("/feedback/RestoreFeedback", id);
+      return dispatch({
+        type: RESTORE_SERVICES,
+        payload: id
+       
+       })
+       
+  };
+}
+export function readFeedbackocultados(id) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("/feedback/ocultadas");
+      return dispatch({
+        type: READ_FEEDBACK_OCULTADOS,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  }}
 export function cancelarReserva(payload){
   return async function (dispatch) {
     try {

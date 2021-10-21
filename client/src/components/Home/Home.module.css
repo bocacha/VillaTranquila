@@ -7,6 +7,7 @@
   align-items: center;
   overflow: hidden;
   margin-top: 63px;
+  z-index: 1;
 }
 
 .nombre1 {
@@ -56,6 +57,10 @@
 }
 
 @media (min-width: 320px) {
+  .snow,
+  .sun{
+    display: none;
+  }
   .chat{
     display: none;
   }
@@ -79,13 +84,16 @@
   }
   .nombre {
     width: 100%;
+    height: 100vh;
     min-height: 100vh;
+    margin-top: 0px;
+
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     width: 100%;
-    /* background-image: url("../../img/cabaña.jpg"); */
+    background-image: url("../../img/cabaña.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     overflow-x: hidden;
@@ -138,7 +146,7 @@
     align-items: center;
     min-height: 100vh;
     width: 100%;
-    /* background-image: url("../../img/cabaña_nieve.jpg"); */
+    background-image: url("../../img/cabaña_nieve.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     overflow-x: hidden;
@@ -191,7 +199,7 @@
     align-items: center;
     min-height: 100vh;
     width: 100%;
-    /* background-image: url("../../img/cabaña.jpg"); */
+    background-image: url("../../img/cabaña.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     overflow-x: hidden;
@@ -244,7 +252,7 @@
     align-items: center;
     min-height: 100vh;
     width: 100%;
-    /* background-image: url("../../img/cabaña.jpg"); */
+    background-image: url("../../img/cabaña.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     overflow-x: hidden;
@@ -323,6 +331,15 @@
   .mapa {
     min-width: 100%;
     max-width: 1024px;
+  }
+}
+@media (min-width: 1155px) {
+  .nombre{
+    background:none;
+  }
+  .snow,
+  .sun{
+    display: block;
   }
 } 
 

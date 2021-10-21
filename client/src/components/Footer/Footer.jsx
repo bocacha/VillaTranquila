@@ -42,7 +42,7 @@ export default function Footer() {
     <div className={styles.container}>
       <div className={styles.arriba}>
         <div className={styles.resp}>
-          <div className={styles.test}>
+          {/* <div className={styles.test}> */}
             <div className={styles.contacto}>
               <span className={styles.title}> Contacto </span> <br />
               <BiMailSend />
@@ -88,7 +88,7 @@ export default function Footer() {
                 <AiFillYoutube className={styles.redesIconos} />
               </Link>
             </div>
-          </div>
+          {/* </div> */}
           <div className={styles.newsletter}>
             {/* {errorEmail ? alert('Tiene que ingresar su correo') : null} */}
             <form action="" onSubmit={handleSubmit}>
@@ -97,7 +97,7 @@ export default function Footer() {
                 ¡Suscríbete a nuestra NewsLetter!{" "}
               </span>{" "}
               <br />
-              <div>
+              {/* <div> */}
                 <input
                   type="email"
                   name="email"
@@ -107,12 +107,12 @@ export default function Footer() {
                   id={styles.input}
                   required
                 />
-              </div>
-              <div>
+              {/* </div> */}
+              {/* <div> */}
                 <button type="submit" className={styles.btn}>
                   Suscribirme
                 </button>
-              </div>
+              {/* </div> */}
             </form>
           </div>
         </div>
