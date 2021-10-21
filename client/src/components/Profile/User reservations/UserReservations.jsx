@@ -79,7 +79,6 @@ export default function Reservaciones() {
     Cabinid,) {
     e.preventDefault();
 let seleccionada = allCabins.filter(e=> e.Number === CabinNumber)
-console.log(seleccionada[0].Price)
 setCosto(seleccionada[0].Price)
     setMostrar(true);
     setOriginal({
@@ -147,7 +146,6 @@ setCosto(seleccionada[0].Price)
 
       if (checkbox[i].checked) {
         suma.push(parseFloat(checkbox[i].name))
-        console.log(checkbox[i].name)
       }
     }
     for (let j = 0; j < suma.length; j++) {
@@ -175,7 +173,6 @@ setCosto(seleccionada[0].Price)
         lala.push(checkbox[i].value);
         setEdit({ ...edit, ExtraServices: [...lala] });
         contador++
-        console.log(checkbox[i].value);
       }
     }
     if (contador === 0) {

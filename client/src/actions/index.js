@@ -54,7 +54,6 @@ export const REMOVE_FEEDBACK = "REMOVE_FEEDBACK";
 export const RESTORE_SERVICES = "RESTORE_SERVICES";
 export const READ_FEEDBACK_OCULTADOS = "READ_FEEDBACK_OCULTADOS";
 export const CANCELAR_RESERVA= "CANCELAR_RESERVA";
-
 export function getCabins() {
   return async function (dispatch) {
     try {
@@ -158,8 +157,6 @@ export function createimage(payload, { token }) {
       Url: Url,
       CabainNumber: payload.cabainNumber
     }, config);
-
-    console.log(response)
     return response;
   };
 }
@@ -197,7 +194,6 @@ export function readPayment({ token }) {
 }
 
 export function filterPayment({token},mes){
-  // console.log("el mes es: " + mes);
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -214,7 +210,6 @@ export function filterPayment({token},mes){
       const pagoFiltrado=json.data.filter((e)=>{
         let miDato=formato(e.fecha);
         let miMes=miDato.substr(5,2);
-        //console.log("mi mes es:" + miMes);
         return miMes===mes;        
       })
       return dispatch({
@@ -480,7 +475,6 @@ export function editPictures(payload, { token }) {
 }
 
 export function editReservation(payload, { token }) {
-  console.log(payload)
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -494,7 +488,6 @@ export function editReservation(payload, { token }) {
       var cabinfiltrada = cabins.data.filter(e=>e.ID === filtrada[0].Cabinid)
       var Avaliable2 = cabinfiltrada[0].Available.filter((e)=> !e.includes(...fechas({Checkin:filtrada[0].Checkin,Checkout:filtrada[0].Checkout})))
       Avaliable2.push(fechas({Checkin:payload.Checkin,Checkout:payload.Checkout}))
-      console.log(Avaliable2)
     const response = await axios.put("/reservations/EditReservation", payload, config);
     return (dispatch({
       type: EDIT_RESERVATIONS,
@@ -789,7 +782,6 @@ export function getTestimonials(payload) {
 }
 
 export function postTestimonials(payload , {token}) {
-  console.log('testimonial', payload);
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -929,7 +921,6 @@ export function getCambios(){
 }
 
 export function removeFeedback(id) {
-  console.log('idf',id)
   return async function (dispatch) {
 
     var json = await axios.put("/feedback/RemoveFeedback", id);
@@ -943,7 +934,6 @@ export function removeFeedback(id) {
 }
 
 export function restoreFeedback(id){
-  console.log('idresto',id)
   return async function (dispatch) {
    
       var json = await axios.put("/feedback/RestoreFeedback", id);
@@ -1004,7 +994,6 @@ export function restaurarCancelado(payload,ID,{token}){
       var useremail = json1.data.filter((e)=> e.ID === payload.UserId)
       let lala = await axios.post("/sendNotificationCambios",{username:payload.UserName, name:payload.Anombrede, date:payload.Checkin,email:useremail[0].Email })
       let json = await axios.put("/CambiosReserva/Cambios/Restore",ID)
-      console.log(Available)
       return (dispatch({
         type: CANCELAR_RESERVA,
         payload: json.data,

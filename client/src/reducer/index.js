@@ -46,7 +46,8 @@ import {
   READ_CAMBIOS,
   READ_CAMBIOS_DONE,
   REMOVE_FEEDBACK,
-  READ_FEEDBACK_OCULTADOS
+  READ_FEEDBACK_OCULTADOS,
+  FIND_USER
 
 } from "../actions";
 import fechas from "../components/Reserva/Linkreserva/algoritmofechas"
@@ -109,7 +110,6 @@ export default function rootReducer(state = initialState, action) {
           return !nomostrar.includes(el)
 
         })
-        console.log(cabinsFiltered)
 
       // cabinsFiltered = cabinsFiltered.filter(el => {
       //   var hitDates = el.Available || [];

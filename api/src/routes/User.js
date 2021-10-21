@@ -95,7 +95,6 @@ router.post("/Singup" , async (req, res)=>{
             UserDNI
         })
         .then(doneTemp=>{
-            console.log(doneTemp)
             return res.status(200).json(doneTemp)
         })
         .catch(error=>{
@@ -105,7 +104,7 @@ router.post("/Singup" , async (req, res)=>{
     
 })
 router.put("/EditProfile/:ID", async (req,res) =>{
-    const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email,UserDNI} = req.body;
+    const {UserName, UserPassword, FirstName, LastName, Address, Phone, Email,UserDNI,Premium} = req.body;
     const ID = req.params.ID;
     const user = await User.findOne({ where: { ID: ID } });
     const passwordCorrect = user === null
@@ -118,7 +117,6 @@ router.put("/EditProfile/:ID", async (req,res) =>{
         })
     }
     if(ID){
-        console.log('modificando usuario')
         const UserPasswordHashed = await bcrypt.hash(UserPassword,10)
         const objecttoupdate={
             UserDNI:UserDNI,
@@ -129,6 +127,7 @@ router.put("/EditProfile/:ID", async (req,res) =>{
             Address: Address,
             Phone: Phone,
             Email: Email,
+            Premium: Premium,
         }
             User.update(
               objecttoupdate

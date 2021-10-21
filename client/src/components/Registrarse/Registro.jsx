@@ -92,12 +92,9 @@ export default function Usuarios() {
   const registroexitoso = async () => {
     const newuser = await axios.get("/users/");
     const existe = newuser.data.filter((e) => e.UserName === uusername);
-    console.log(existe);
     if (existe) {
       if (existe.length > 0) {
-        console.log(existe.length);
         setCreado(true);
-        console.log(creado);
       }
     }
   };
