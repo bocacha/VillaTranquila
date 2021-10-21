@@ -8,7 +8,7 @@ import {
   readReservationocultados,getUserData,readServices, selectcabin,cambiarReserva, cancelarReserva, readCabains
 } from "../../../actions";
 import ReservacionesDetail from "./ReservacionesDetail";
-import DatePicker,{registerLocale} from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import es from 'date-fns/locale/es';
 import Navbar from "../../Navbar/Navbar";
@@ -47,16 +47,17 @@ export default function Reservaciones() {
     ExtraServices: "",
     CostoFinal: costo,
   });
-  const[original,setOriginal]= useState({
-  id: "",
-  Checkin: "",
-  Checkout: "",
-  UserId: user.userid,
-  Cabinid: "",
-  ExtraServices: "",
-  CostoFinal: "",})
+  const [original, setOriginal] = useState({
+    id: "",
+    Checkin: "",
+    Checkout: "",
+    UserId: user.userid,
+    Cabinid: "",
+    ExtraServices: "",
+    CostoFinal: "",
+  })
   const dataUser = useSelector((state) => state.userData)
- // const costo = useSelector((state) => state.selectedcabin);
+  // const costo = useSelector((state) => state.selectedcabin);
   const userid = user.userid;
   const servicios = useSelector((state) => state.servicios);
   let lala = [];
@@ -64,9 +65,9 @@ export default function Reservaciones() {
   let suma = []
   let costoadicional = 0
   useEffect(() => {
-      dispatch(getUserData(userid));
+    dispatch(getUserData(userid));
   }, [dispatch, userid]);
-  function handleSubmitEdit(e,ID,
+  function handleSubmitEdit(e, ID,
     Checkin,
     Checkout,
     CabinNumber,
@@ -113,28 +114,28 @@ setCosto(seleccionada[0].Price)
       [e.target.name]: e.target.value,
     });
   }
-  const changeFechas=(e)=>{
-    if(e === null){
+  const changeFechas = (e) => {
+    if (e === null) {
       return
     }
     setSelectDateCI(e)
     mostrarFecha(e);
   }
-  const changeFechas2=async(e)=>{
-    if(e === null){
+  const changeFechas2 = async (e) => {
+    if (e === null) {
       return
     }
     setSelectDateCO(e)
     mostrarFecha2(e);
   }
 
-  const mostrarFecha = selectDateCI =>{
-    const options = {year:'numeric', month:'numeric', day:'2-digit'}
-    setEdit({...edit,  Checkin: selectDateCI.toLocaleDateString('es-ES', options)})
+  const mostrarFecha = selectDateCI => {
+    const options = { year: 'numeric', month: 'numeric', day: '2-digit' }
+    setEdit({ ...edit, Checkin: selectDateCI.toLocaleDateString('es-ES', options) })
   }
-  const mostrarFecha2 = selectDateCO =>{
-    const options = {year:'numeric', month:'numeric', day:'2-digit'}
-    setEdit({...edit,  Checkout: selectDateCO.toLocaleDateString('es-ES', options)})
+  const mostrarFecha2 = selectDateCO => {
+    const options = { year: 'numeric', month: 'numeric', day: '2-digit' }
+    setEdit({ ...edit, Checkout: selectDateCO.toLocaleDateString('es-ES', options) })
   }
   const consultarprecio=()=>{
     let contador = 0
@@ -142,7 +143,7 @@ setCosto(seleccionada[0].Price)
     costoadicional = 0
     const checkbox = Array.from(document.getElementsByClassName("Servicios"));
     for (let i = 0; i < checkbox.length; i++) {
-      
+
       if (checkbox[i].checked) {
         suma.push(parseFloat(checkbox[i].name))
         console.log(checkbox[i].name)
@@ -176,13 +177,13 @@ setCosto(seleccionada[0].Price)
         console.log(checkbox[i].value);
       }
     }
-    if(contador === 0){
-      setEdit({...edit , ExtraServices:null})
+    if (contador === 0) {
+      setEdit({ ...edit, ExtraServices: null })
     }
   };
   function handlePrueba(e, ID) {
     e.preventDefault();
-    const obj ={
+    const obj = {
       Original: original,
       Nuevo: edit,
     }
@@ -203,7 +204,7 @@ setCosto(seleccionada[0].Price)
    // 
    // window.location.reload()
   //}
-  const reservasUsuario = allreservations.filter(e=>e.UserName === logeduser.user)
+  const reservasUsuario = allreservations.filter(e => e.UserName === logeduser.user)
   return (
     <div className={styles.container}>
       <div className={styles.navs2}>
@@ -212,102 +213,99 @@ setCosto(seleccionada[0].Price)
         </div>
       </div>
       <div className={styles.container2}>
-      <div className={styles.formsCont}>
-          {/* EDITAR */}
-          {mostrar
-         ? 
-            <div className={styles.editarCont}>
+        {/* <div className={styles.formsCont}> */}
+
+        {/* EDITAR */}
+        {!mostrar
+          ?
+          null :
+          <div className={styles.edtarCont}>
             <div className={styles.title}> Editar reserva</div>
             <form >
               <DatePicker
-              selected={selectDateCI}
-              onChange={(e)=>changeFechas(e)}
-              dateFormat='dd/MM/yyyy'
-              placeholderText="Fecha de llegada"
-             // minDate={new Date()}
-              required
+                selected={selectDateCI}
+                onChange={(e) => changeFechas(e)}
+                dateFormat='dd/MM/yyyy'
+                placeholderText="Fecha de llegada"
+                // minDate={new Date()}
+                required
+                className={styles.formInputs}
               //isClearable
-              /> 
-              <DatePicker
-              selected={selectDateCO}
-              onChange={(e)=>changeFechas2(e)}
-              dateFormat='dd/MM/yyyy'
-              placeholderText="Fecha de salida"
-             // minDate={new Date()}
-              required
-              //isClearable
-              filterDate={d => {
-                return selectDateCI < d;
-              }}
               />
-               <div>Costo final por noche:   </div>
-            <input
-              type="text"
-              value={edit.CostoFinal}
-              name="CostoFinal"
-              placeholder={"Por Noche:" + edit.CostoFinal}
-              className={styles.formInputs}
-              id={styles.precioFinal}
-              required
-            />
-               <input
-                    type="text"
-                    value={edit.Anombrede}
-                    name="Anombrede"
-                    onChange={(e) => handleChangeEdit(e)}
-                    placeholder="A nombre de . . ."
-                    className={styles.formInputs}
-                  />
-                  
+              <DatePicker
+                selected={selectDateCO}
+                onChange={(e) => changeFechas2(e)}
+                dateFormat='dd/MM/yyyy'
+                placeholderText="Fecha de salida"
+                // minDate={new Date()}
+                required
+                //isClearable
+                filterDate={d => {
+                  return selectDateCI < d;
+                }}
+                className={styles.formInputs}
+              />
+              <input
+                type="text"
+                value={edit.Anombrede}
+                name="Anombrede"
+                onChange={(e) => handleChangeEdit(e)}
+                placeholder="A nombre de . . ."
+                className={styles.formInputs}
+              />
+
             </form>
             <div className={styles.p}>Servicios Adicionales:</div>
-              
-              <div>
-                {servicios.map((el) => (
-                  <div className={styles.servicios} key={el.ID}>
-                    {el.Name + " $" + el.Price}
-                    <input
-                      className="Servicios"
-                      type="checkbox"
-                      name={el.Price}
-                      value={el.Name}
-                      id={id1++}
-                      onChange={consultarprecio}
-                    />
-                    <label >{el.name}</label>
-                  </div>
-                ))}
-              </div>
-              <button onClick={checkboxselected}>Seleccionar Servicios</button>
-              <button onClick={handlePrueba}>Solicitar Cambios</button>
-              <button onClick={cancelar}>Cancelar Reserva</button>
+
+            <div className={styles.serviciosCont}>
+              {servicios.map((el) => (
+                <div className={styles.servicios} key={el.ID}>
+                  {el.Name + " $" + el.Price}
+                  <input
+                    className="Servicios"
+                    type="checkbox"
+                    name={el.Price}
+                    value={el.Name}
+                    id={id1++}
+                    onChange={consultarprecio}
+                  />
+                  <label >{el.name}</label>
+                </div>
+              ))}
             </div>
-          :
-          null
-      }
-        
-      </div>
+            <div className={styles.btnsContainer}>
+              <button className={styles.btnPlus} onClick={checkboxselected}>Seleccionar Servicios</button>
+              <button className={styles.btnPlus} onClick={handlePrueba}>Solicitar Cambios</button>
+              <button className={styles.btnPlus} id={styles.cancelarCambios} onClick={() => mostrar && setMostrar(false)}>Cancelar cambios</button>
+              <button className={styles.btnPlus} id={styles.cancelarReserva}>Cancelar reserva</button>
+            </div>
+          </div>
+        }
+
+        {/* </div> */}
         {/* VER */}
-        <div>
-          {reservasUsuario?.map((el) => {
-            return (
-              <div className={styles.detalles} key={el.ID}>
-                <ReservacionesDetail
-                  ID={el.ID}
-                  Checkin={el.Checkin}
-                  Checkout={el.Checkout}
-                  CabinNumber={el.CabinNumber}
-                  UserName={el.UserName}
-                  Anombrede={el.Anombrede}
-                  CostoFinal={el.CostoFinal}
-                  ExtraServices={el.ExtraServices}
-                  handlePrueba={handlePrueba}
-                  handleSubmitEdit={handleSubmitEdit}
-                  restaurar={habilitar}
-                />
-              </div>
-            );
-          })}
+        <div className={styles.containerDeContainerDetalles}>
+          <div id={styles.containerDetalles}>
+            {reservasUsuario?.map((el) => {
+              return (
+                <div className={styles.detalles} key={el.ID}>
+                  <ReservacionesDetail
+                    ID={el.ID}
+                    Checkin={el.Checkin}
+                    Checkout={el.Checkout}
+                    CabinNumber={el.CabinNumber}
+                    UserName={el.UserName}
+                    Anombrede={el.Anombrede}
+                    CostoFinal={el.CostoFinal}
+                    ExtraServices={el.ExtraServices}
+                    handlePrueba={handlePrueba}
+                    handleSubmitEdit={handleSubmitEdit}
+                    restaurar={habilitar}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

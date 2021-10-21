@@ -17,6 +17,7 @@
 .newsletter {
   margin-right: 1.875em;
   text-align: start;
+  
 }
 
 .derechos {
@@ -103,6 +104,7 @@
     margin-right: -30px;
     font-size: 14px;
   }
+  
 }
 
 @media (min-width: 480px) {
@@ -150,8 +152,17 @@
   }
   .newsletter {
     font-size: 0.99rem;
-    padding-top: 10px;
+    padding-top: 0px;
   }
+  .newsletter form {
+    display: flex;
+    flex-direction: column;
+  }
+  #input{
+    padding-top: 0px;
+    margin-top: -25px;
+    width: 100%;
+  } 
 }
 
 @media (min-width: 1024px) {
@@ -169,4 +180,28 @@
     font-size: 0.99rem;
     padding-top: 10px;
   }
+}
+
+@media(min-width:1155px) {
+  .resp{
+    display: grid;
+    grid-template-columns: auto auto auto auto; 
+    gap: 10%;
+    margin-left: 0px;
+    width: 100%;
+    margin-left:-30px;
+    justify-content: center;
+      }
+  .newsletter{
+    padding-top: 0px;
+  }
+  .newsletter form {
+    display: flex;
+    flex-direction: column;
+  }
+  #input{
+    padding-top: 0px;
+    margin-top: -25px;
+    width: 100%;
+  } 
 }
