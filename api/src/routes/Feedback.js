@@ -10,7 +10,6 @@ router.post("/", (req, res) => {
     let token = ""
     if (authorizations && authorizations.toLowerCase().startsWith("bearer")) {
         token = authorizations.substring(7)
-        console.log(token)
     }
     const decodedToken = jwt.verify(token, config.JWT_SECRET)
     if (!token || !decodedToken.id) {
@@ -20,14 +19,12 @@ router.post("/", (req, res) => {
     }
     
     const {name, description, stars}  = req.body;
-    console.log('reqboduy,',req.body);
     Feedback.create({
         Name:name, 
         Description:description,
         Stars:stars
     })
     .then(doneTemp => {
-        console.log('done temp')
         return res.status(200).json(doneTemp)
     })
     .catch(error => {
@@ -55,7 +52,6 @@ router.get("/ocultadas", async (req, res)=>{
 });
 router.put('/RemoveFeedback', (req,res) =>{
     const {id}= req.body;
-    console.log(id);
     if(!id){
         return res.json({status: 404},{message:"Feedback Not found"})
     }
@@ -70,7 +66,6 @@ router.put('/RemoveFeedback', (req,res) =>{
 });  
 router.put('/RestoreFeedback', (req,res) =>{
     const {id}= req.body;
-    console.log(id);
     if(!id){
         return res.json({status: 404},{message:"Feedback not found"})
     }

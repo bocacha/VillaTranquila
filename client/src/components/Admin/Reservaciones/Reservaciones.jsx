@@ -125,7 +125,6 @@ export default function Reservaciones() {
       })
     } else {
       const select = allCabins.find(el => el.ID === e.target.value)
-      console.log(select.Number)
       setEdit({
         ...edit,
         CabinNumber: select.Number,
@@ -158,7 +157,6 @@ export default function Reservaciones() {
   }
   function handlePrueba(e, ID) {
     e.preventDefault();
-    console.log(edit)
     //  setEdit({...edit,
     //   id:ID  
     //})
@@ -170,7 +168,6 @@ export default function Reservaciones() {
   }
   // const pruebadispatch=() => {
   // const { token } = logeduser;
-  // console.log(edit)
   // 
   // window.location.reload()
   //}

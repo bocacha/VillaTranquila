@@ -24,7 +24,6 @@ router.post('/', async (req, res) => {
         });
       
           transporter.verify().then(()=>{
-              console.log('listo para mandar email')
           })
     
          
@@ -40,7 +39,6 @@ router.post('/', async (req, res) => {
             if(error) {
                 res.status(500).send(error.message)
             } else {
-                console.log("Email enviado")
                 res.status(200).jsonp(req.body)
             }
         })
