@@ -27,7 +27,6 @@ export default function Home() {
   }, [dispatch]);
   const user = useSelector((state) => state.user);
   const allUsersData = useSelector((state) => state.userData);
-  console.log('all',allUsersData)
   const ID = user && user.userid;
   useEffect(() => {
     dispatch(getUserData(ID))

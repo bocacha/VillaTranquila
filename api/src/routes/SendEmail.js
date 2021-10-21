@@ -15,7 +15,7 @@ router.post("/", (req, res) => {
 });
   var mailOptions = {
       form: name,
-      to: email,
+      to: "tranquilavilla79@gmail.com",
       subject: tel,
       text: query
   };
@@ -24,7 +24,6 @@ router.post("/", (req, res) => {
       if(error) {
           res.status(500).send(error.message)
       } else {
-          console.log("Email enviado")
           res.status(200).jsonp(req.body)
       }
   })

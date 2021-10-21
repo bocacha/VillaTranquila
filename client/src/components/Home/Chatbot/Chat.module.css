@@ -10,7 +10,9 @@
   background: transparent;
   border: none;
 }
-
+.Chatbot div div div form input{
+  background-color: rgba(110, 72, 170, 0.527);
+}
 .items {
   background: rgb(110, 72, 170);
   border-radius: 50%;

@@ -22,14 +22,11 @@ export default function Gallery() {
         loadImages();
     }, []);
 
-    console.log(imageIds)
-
     return (
         <div className={styles.slidershow}>
             <Navbar />
             <div className={styles.slides}>
                 {imageIds?.map((imageId, index) => {
-                    console.log(imageId)
                     return (
                         <div className={styles.wrapper}>
                             <img

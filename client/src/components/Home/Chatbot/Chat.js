@@ -17,13 +17,15 @@ function Chat() {
         <div className={styles.containerChat}>
          <button onClick={()=>setMostrar(true)} className={styles.li} > <AiFillRobot className={styles.items} /></button>
           {/* <button onClick={()=>setMostrar(true)} className={styles.items}> X </button> */}
+         <div className={styles.Chatbot}>
           <Chatbot
             config={config}
             messageParser={MessageParser}
             actionProvider={ActionProvider}
             headerText='Villa Tranquila'
             placeholderText='Tu consulta Aqui...'
-          />
+            />
+            </div>
          
         </div>
        }

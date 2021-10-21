@@ -45,7 +45,6 @@ export default function Reservaciones() {
   let costoadicional = 0;
   let fechasintermedias = [];
   const ocupadas = useSelector((state) => state.fechasnodisponibles);
-  //console.log(ocupadas)
   const [selectDateCI, setSelectDateCI] = useState(null);
   const [selectDateCO, setSelectDateCO] = useState(null);
   const [reserva, setReserva] = useState({ Checkin: "", Checkout: "" });
@@ -73,7 +72,6 @@ export default function Reservaciones() {
     for (let i = 0; i < checkbox.length; i++) {
       if (checkbox[i].checked) {
         suma.push(parseFloat(checkbox[i].name));
-        console.log(checkbox[i].name);
       }
     }
     for (let j = 0; j < suma.length; j++) {
@@ -98,7 +96,6 @@ export default function Reservaciones() {
         lala.push(checkbox[i].value);
         setInput({ ...input, ExtraServices: [...lala] });
         contador++;
-        console.log(checkbox[i].value);
       }
     }
     if (contador === 0) {
@@ -107,7 +104,6 @@ export default function Reservaciones() {
   };
 
   useEffect(() => {
-    console.log("Entree", input.CostoFinal);
   }, [input.CostoFinal]);
 
   useEffect(() => {
@@ -129,7 +125,6 @@ export default function Reservaciones() {
       [e.target.name]: e.target.value,
     });
   }
-  //console.log(seleccionada[0].Parrilla)
   const changeFechas = (e) => {
     if (e === null) {
       return;
@@ -181,7 +176,6 @@ export default function Reservaciones() {
     if (ocupadas.length >= 0 && reserva.Checkout !== null) {
       fechasintermedias = [...ocupadas];
       fechasintermedias.push(fechas(reserva));
-      console.log(fechasintermedias);
       setEdit({ ...edit, Available: fechasintermedias });
     }
   };
@@ -193,7 +187,6 @@ export default function Reservaciones() {
   });
 
   const handlePrueba = () => {
-    console.log(input.Anombrede, logeduser.email, input.Checkin);
     const options = { year: "numeric", month: "numeric", day: "2-digit" };
     const data = {
       username: logeduser.user,
@@ -201,11 +194,9 @@ export default function Reservaciones() {
       email: logeduser.email,
       date: selectDateCI.toLocaleDateString("es-ES", options),
     };
-    console.log(input);
     dispatch(createReservation({ ...input, id: logeduser.userid }, dispatch));
     dispatch(sendNotification(data));
     dispatch(editAvailible(edit));
-    console.log(input);
     alert("Reserva creada");
   };
   const parapiker2 = [];
