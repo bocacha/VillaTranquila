@@ -11,12 +11,10 @@
 
 .arrayStar{
     display: flex;
-    flex-direction: row;
-    font-size: 50px;
-    
-    
-}
+    font-size: 40px;
+} 
 
 .paint{
     color:#ffd700;
 }
+

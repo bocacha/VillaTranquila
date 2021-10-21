@@ -53,5 +53,35 @@ router.get("/ocultadas", async (req, res)=>{
         console.log(error)
     }
 });
+router.put('/RemoveFeedback', (req,res) =>{
+    const {id}= req.body;
+    console.log(id);
+    if(!id){
+        return res.json({status: 404},{message:"Feedback Not found"})
+    }
+    Feedback.update(
+        {Show:false},
+        {where:{ID: id}}
+    ).then (doneTemp=>{
+        return res.status(200).json(doneTemp)
+    })
+    .catch(error=>{console.log(error)})
+        
+});  
+router.put('/RestoreFeedback', (req,res) =>{
+    const {id}= req.body;
+    console.log(id);
+    if(!id){
+        return res.json({status: 404},{message:"Feedback not found"})
+    }
+    Feedback.update(
+        {Show:true},
+        {where:{ID: id}}
+    ).then (doneTemp=>{
+        return res.status(200).json(doneTemp)
+    })
+    .catch(error=>{console.log(error)})
+        
+});  
 
 module.exports = router;

@@ -54,7 +54,7 @@ const GaleriaTestimonial = () => {
             </div>
             :
             <div>
-                <h3>No hay testimoniales para mostrar</h3>
+                <h3>No hay Reseñas para mostrar</h3>
                 <div>
                     <button onClick={handleVolver}>Volver</button>
                 </div>
