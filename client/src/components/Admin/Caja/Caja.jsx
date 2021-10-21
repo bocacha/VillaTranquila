@@ -80,33 +80,40 @@ export default function Caja(){
                     const fechaCompleta=el.fecha;
                     const fechaPago=fechaCompleta.substr(0,10);
                     const miFecha=formato(fechaPago);
-                    total=total + el.transaction_detail.pagoNeto;
+                    total=total + Math.ceil(el.transaction_detail.pagoNeto);
                     //total+=(el.transaction_detail.pagoNeto);
+                    
+                    return(
+                        <div>
+                    {datosUsuarios?.map((e)=>{ 
+                        if(indiceCliente===e.UserName){
                     return (
+                        
                         <div key={index} className={styles.detalle}>
-                        <div className={styles.comprobante}>A00-0{comprobante}0</div>
-                            {datosUsuarios?.map((e)=>{                          
-                                  
-                                    return(
-                                    <>
-                                        <div className={styles.nombre}>
-                                            <p >{e.FirstName}</p>                                
-                                            <p >{e.LastName}</p>
-                                        </div>                                  
-                                        <p className={styles.fecha}>{miFecha}</p> 
-                                        <p className={styles.neto}>${el.transaction_detail.pagoTotal}</p>
-                                        <p>${el.transaction_detail.pagoNeto}</p>                                        
-                                    </>                              
-                                )                              
-                                                 
-                            })}                                                 
-                        </div>
-                    )
+                            <div className={styles.comprobante}>A00-0{comprobante}0</div>
+                            <div className={styles.nombre}>
+                                <p >{e.FirstName}</p>                                
+                                <p >{e.LastName}</p>
+                            </div>                                  
+                                <p className={styles.fecha}>{miFecha}</p> 
+                                <p className={styles.neto}>${el.transaction_detail.pagoTotal}</p>
+                                <p>${el.transaction_detail.pagoNeto}</p>                                                              
+                                                  
+                        </div> 
+                                           
+                    )}else{
+                        return null
+                    }
+                    })} 
+                    </div>                                               
+                )        
+                         
                 })}
-                <hr/>
             </div>
+            <hr/>
+                
             <div className={styles.total}>
-                <h4>TOTAL : ${total}</h4>
+                <h4>TOTAL : ${total}.00</h4>
             </div>
         </div>
     )

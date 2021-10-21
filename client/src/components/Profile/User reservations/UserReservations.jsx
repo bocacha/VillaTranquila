@@ -12,6 +12,7 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import es from 'date-fns/locale/es';
 import Navbar from "../../Navbar/Navbar";
+import { useHistory } from "react-router";
 registerLocale('es', es)
 
 export default function Reservaciones() {
@@ -181,6 +182,7 @@ setCosto(seleccionada[0].Price)
       setEdit({ ...edit, ExtraServices: null })
     }
   };
+  const history = useHistory();
   function handlePrueba(e, ID) {
     e.preventDefault();
     const obj = {
@@ -188,6 +190,10 @@ setCosto(seleccionada[0].Price)
       Nuevo: edit,
     }
     dispatch(cambiarReserva(obj))
+    alert("Solicitud Enviada")
+    setTimeout(function () {
+      history.go(0);
+  }, 2000)
   }
   const cancelar=()=>{
     const obj ={
@@ -197,6 +203,10 @@ setCosto(seleccionada[0].Price)
       },
     }
     dispatch(cancelarReserva(obj))
+    alert("Solicitud Enviada")
+    setTimeout(function () {
+      history.go(0);
+  }, 2000)
   }
  // const pruebadispatch=() => {
    // const { token } = logeduser;
@@ -253,7 +263,16 @@ setCosto(seleccionada[0].Price)
                 placeholder="A nombre de . . ."
                 className={styles.formInputs}
               />
-
+              <div>Costo final por noche:   </div>
+            <input
+              type="text"
+              value={edit.CostoFinal}
+              name="CostoFinal"
+              placeholder={"Por Noche:" + edit.CostoFinal}
+              className={styles.formInputs}
+              id={styles.precioFinal}
+              required
+            />
             </form>
             <div className={styles.p}>Servicios Adicionales:</div>
 
@@ -277,7 +296,7 @@ setCosto(seleccionada[0].Price)
               <button className={styles.btnPlus} onClick={checkboxselected}>Seleccionar Servicios</button>
               <button className={styles.btnPlus} onClick={handlePrueba}>Solicitar Cambios</button>
               <button className={styles.btnPlus} id={styles.cancelarCambios} onClick={() => mostrar && setMostrar(false)}>Cancelar cambios</button>
-              <button className={styles.btnPlus} id={styles.cancelarReserva}>Cancelar reserva</button>
+              <button className={styles.btnPlus} id={styles.cancelarReserva} onClick={cancelar}>Cancelar reserva</button>
             </div>
           </div>
         }

@@ -5,7 +5,6 @@
 
 .containerNav {
   position: fixed;
-  outline: 1px solid red;
   z-index: 100;
 }
 .container {
@@ -27,8 +26,6 @@
   background-color: #293c4f;
   display: grid;
 }
-
-/* LLegue bien */
 
 .containerTestimoniales {
   border-radius: 10px;
