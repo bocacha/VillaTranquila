@@ -33,9 +33,9 @@ router.post('/', (req, res) => {
         from: 'VILLA TRANQUILA',
         to: email,
         subject: 'Reserva',
-        text:`Villa tranquila                                                                              \n                   ${fecha}
-        __________________________________________________________________________________________________________________________________\n
-        __________________________________________________________________________________________________________________________________\n
+        text:`Villa tranquila                                                                 ${fecha}
+        ____________________________________________________________________________________\n
+        ____________________________________________________________________________________\n
         \n
         \n
         \n
@@ -43,7 +43,8 @@ router.post('/', (req, res) => {
         Hola ${username}!:\n
         
         Tienes una reserva a nombre de ${name} en Villa Tranquila para el día ${date}, haz un pago para reservar tu fecha\n
-
+        Recuerda que puedes realizar tus pago con tu tarjeta de credito o debito con mercadopago, el interes agregado para\n 
+        pagos en cuotas son los que tiene mercadopago.
 
         Desde ya muchas gracias.\n
 
