@@ -197,9 +197,9 @@ export default function Usuarios() {
       <div className={styles.containerTodo}>
         <div className={styles.btnsContainer}>
           {!habilitar ? (
-            <button onClick={ocultadas} className={styles.btnSup}>Mostrar ocultadas</button>
+            <button onClick={ocultadas} className={styles.btnSup}>Mostrar bloqueados</button>
           ) : (
-            <button onClick={showtrue} className={styles.btnSup}>Mostrar habilitadas</button>
+            <button onClick={showtrue} className={styles.btnSup}>Mostrar habilitados</button>
           )
           }
         </div>
