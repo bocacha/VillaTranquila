@@ -82,6 +82,7 @@ export default function Login() {
               <button
                 className={styles.btn}
                 onClick={() => setON(true)}
+                id={styles.olvide}
               >
                 <u>Olvidé mi contraseña</u>
               </button>
