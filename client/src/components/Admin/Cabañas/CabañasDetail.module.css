@@ -124,6 +124,8 @@
 @media(min-width: 768px){
   .detailCard{
     width:100%;
+    display: flex;
+    flex-direction: column;
   }
 }
 
