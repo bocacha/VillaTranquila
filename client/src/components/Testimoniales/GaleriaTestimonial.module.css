@@ -1,7 +1,121 @@
+.containerForm {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.containerNav {
+  position: fixed;
+  z-index: 100;
+}
 .container {
-  /* margin-bottom: 50px; */
+  background-color: #293c4f;
+  width: 100%;
+  min-height: 100vh;
+
+  position: absolute;
+  margin-top: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.grilla {
+  margin-top: 80px;
+  width: 100%;
+  background-color: #293c4f;
+  display: grid;
+}
+
+.containerTestimoniales {
+  border-radius: 10px;
+  background-color: #355978;
+  color: #fff;
+  height: 90%;
+  text-align: center;
+  font-size: large;
+  transition: all 0.5s ease;
+  line-height: 35px;
+  width: 80%;
+  padding: 2% 1%;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.arrayStar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  font-size: 50px;
+}
+
+.noHay {
+  background: #293c4f;
+  width: 70%;
+  color: #fff;
+  border-radius: 10px;
+  padding: 2%;
+}
+
+.btnPlus {
+  border-radius: 4px;
+  background-color: #355978;
+  border-color: transparent;
+  color: #fff;
+  text-align: center;
+  font-size: large;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  height: 10%;
+  line-height: 35px;
+  width: 20%;
+}
+.btnPlus:hover {
+  background-color: #8bafbf;
+  color: #1c2531;
+  border-color: #355978;
 }
 
 .paint {
   color: #ffd700;
+}
+
+@media (min-width: 320px) {
+  .grilla {
+    width: 100%;
+    grid-template-columns: 100%;
+  }
+  .containerTestimoniales {
+    width: 320px;
+    overflow-wrap: break-word;
+    padding: 4%;
+  }
+  .descrip {
+    text-align: justify;
+  }
+  .arrayStar {
+    font-size: 30px;
+  }
+}
+
+@media (min-width: 480px) {
+  .containerTestimoniales {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width:90%;
+    overflow-wrap: break-word;
+  }
+}
+
+@media (min-width:768px) {
+    .arrayStar {
+        font-size: 40px;
+      }
+}
+
+@media (min-width:1265px) {
+    .grilla{
+        grid-template-columns: 50% 50%;
+    }
 }

@@ -31,14 +31,18 @@ export default function EditReserva({
     const handleSubmitrestore = (ID) => {
         if(Nuevo.Cancelar){
          dispatch(restaurarCancelado({...Original},{id:ID},{token}))
+         alert("Cambios Restaurados")
+         setTimeout(function () {
+            history.go(0);
+        }, 2500)
         }else{
             dispatch(RestaurarCambios({...Original},{id:ID},{token}))
             alert("su cabaña fue Restaurada con exito");
+            setTimeout(function () {
+                history.go(0);
+            }, 2000)
             
         }
-        setTimeout(function () {
-            history.go(0);
-        }, 2000)
 
     };
     return (
