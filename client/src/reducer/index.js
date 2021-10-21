@@ -39,12 +39,14 @@ import {
   SEND_PASSWORD_EMAIL,
   SELECTED_CABIN,
   FILTER_RESERVATIONS,
+  FILTER_PAYMENT,
   GET_TESTIMONIAL,
   POST_TESTIMONIAL,
-  FIND_USER,
   FILTER_PAGOS,
   READ_CAMBIOS,
   READ_CAMBIOS_DONE,
+  REMOVE_FEEDBACK,
+  READ_FEEDBACK_OCULTADOS
 
 } from "../actions";
 import fechas from "../components/Reserva/Linkreserva/algoritmofechas"
@@ -88,9 +90,7 @@ export default function rootReducer(state = initialState, action) {
         Checkin: inDate,
         Checkout: outDate
       }
-      console.log(obj)
       const fechasintermedias = fechas(obj)
-      console.log(fechasintermedias)
       var nomostrar = []
       cabinsFiltered.map(el => {
         el.Available.map(e=>{
@@ -371,12 +371,7 @@ export default function rootReducer(state = initialState, action) {
           testimoniales : action.payload
       }
 
-      // case FILTER_PAGOS:
-      //   let allPagos = state.pagos;
-      //   return {
-      //     ...state,
-      //     pagos: allPagos
-      //   }
+    
 
     case FIND_USER:
       let allUsers = state.allUsers;
@@ -384,12 +379,17 @@ export default function rootReducer(state = initialState, action) {
       let buscado = action.payload;
       let user = allUsers.find(el => el.UserName === buscado);
       user !== undefined ? usuarios.push(user) : usuarios = `No se encontró '${buscado}' en la lista de usuarios`;
-      console.log(user);
-      console.log(usuarios)
+     
       return {
         ...state,
         usuarios: usuarios,
       }
+    case FILTER_PAYMENT:
+      return {
+        ...state,
+        pagos: action.payload,
+      };
+
       case READ_CAMBIOS_DONE:
         return {
           ...state,
@@ -400,6 +400,16 @@ export default function rootReducer(state = initialState, action) {
             ...state,
             solicitudes: action.payload,
           };  
+      case REMOVE_FEEDBACK:
+      return {
+        ...state,
+        testimoniales: state.testimoniales.filter((testimonial) => testimonial.id !== action.payload)
+      };
+      case READ_FEEDBACK_OCULTADOS:
+        return {
+          ...state,
+          testimoniales: action.payload,
+        };
 
     default:
       return state;

@@ -48,7 +48,6 @@ export default function Home() {
             <div className={styles.copos}></div>
             <div className={styles.copos}></div>
             <div className={styles.copos}></div>
-            <div className={styles.copos}></div>
         </div>
         <div className={styles.sun}>
         <img src={cabañaS} alt="IMAGEN NO ENCONTRADA"/>
@@ -89,7 +88,7 @@ export default function Home() {
           ></iframe>
         </div>
       </div>
-      {/* {allUsersData.Premium ? */} <Testimoniales />  {/* : null } */}
+       {allUsersData.Premium ?  <Testimoniales />   : null } 
           
         <Footer />
 
