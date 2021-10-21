@@ -129,13 +129,11 @@ hr{
 }
 @media (min-width: 320px) {
     .navs{
-      display: none;
-    }
+        display: none;
+    }    
+}
     
-  }
-  
-  
- @media (min-width: 768px) {
+@media (min-width: 768px) {
     .navs{
       display: block;
       position: relative;
@@ -143,4 +141,4 @@ hr{
     .navRsp{
       display:none;
     }
-  }
+}
