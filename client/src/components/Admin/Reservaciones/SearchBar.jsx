@@ -22,7 +22,6 @@ export default function SearchBar() {
             ...busqueda,
             [e.target.name]: e.target.value
         })
-        console.log('busqueda:', busqueda)
     };
 
     function handleSubmit() {
