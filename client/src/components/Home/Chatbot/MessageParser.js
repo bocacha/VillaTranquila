@@ -36,7 +36,7 @@ class MessageParser {
             this.ActionProvider.handleAnimales()
             return;
         }
-        if(lowerCase.includes('visa')||(lowerCase.includes('mastercard'))){
+        if(lowerCase.includes('visa')||(lowerCase.includes('mastercard'))||(lowerCase.includes('american'))){
             this.ActionProvider.handleCredito()
             return;
         }
