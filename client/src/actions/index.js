@@ -50,6 +50,9 @@ export const FILTER_PAYMENT='FILTER_PAYMENT';
 export const FILTER_PAGOS = 'FILTER_PAGOS';
 export const READ_CAMBIOS = "READ_CAMBIOS";
 export const READ_CAMBIOS_DONE= "READ_CAMBIOS_DONE";
+export const REMOVE_FEEDBACK = "REMOVE_FEEDBACK";
+export const RESTORE_SERVICES = "RESTORE_SERVICES";
+export const READ_FEEDBACK_OCULTADOS = "READ_FEEDBACK_OCULTADOS";
 
 export function getCabins() {
   return async function (dispatch) {
@@ -96,7 +99,6 @@ export function readWeather() {
 }
 
 export function createReservation(payload) {
-  console.log(payload)
   return async function (dispatch) {
     const response = await axios.post("/reservations/NewReservation", payload);
     return (dispatch({
@@ -399,7 +401,6 @@ export function readCabainsocultados(id) {
 }
 
 export function editUsers(payload) {
-  console.log("action",payload)
   return async function (dispatch) {
     try {
       var json = await axios.put("/users/EditUser", payload);
@@ -414,8 +415,6 @@ export function editUsers(payload) {
 }
 
 export function editProfile(payload, ID) {
-  console.log("ID", ID);
-  console.log("pay", payload);
   return async function (dispatch) {
     try {
       var json = await axios.put("/users/EditProfile/" + ID, payload);
@@ -527,7 +526,6 @@ export function editCabains(payload, { token }) {
   };
 }
 export function editAvailible(payload) {
-  console.log(payload)
   return async function (dispatch) {
     const response = await axios.put("/cabins/EditCabin/available", payload);
     return response;
@@ -565,7 +563,6 @@ export function Logeduser() {
 
 export function removeCabains(id) {
   return async function (dispatch) {
-
     var json = await axios.put("/cabins/RemoveCabin", id);
     return (dispatch({
       type: REMOVE_CABAINS,
@@ -577,7 +574,6 @@ export function removeCabains(id) {
 }
 
 export function removeReservations(payload) {
-  console.log('remove', payload.Available);
   return async function (dispatch) {
     var cabins = await axios.get("/cabins")
     var reserva = await axios.get("/reservations")
@@ -595,7 +591,6 @@ export function removeReservations(payload) {
 }
 
 export function removeServices(id) {
-  console.log('remove', id);
   return async function (dispatch) {
 
     var json = await axios.put("/services/RemoveService", id);
@@ -609,7 +604,6 @@ export function removeServices(id) {
 }
 
 export function removePictures(id) {
-  console.log('remove', id);
   return async function (dispatch) {
 
     var json = await axios.put("/pictures/RemovePicture", id);
@@ -622,7 +616,6 @@ export function removePictures(id) {
   };
 }
 export function removePayments(id) {
-  console.log('remove', id);
   return async function (dispatch) {
 
     var json = await axios.put("/payments/RemovePayment", id);
@@ -636,7 +629,6 @@ export function removePayments(id) {
 }
 
 export function removeUsers(id) {
-  console.log('remove', id);
   return async function (dispatch) {
 
     var json = await axios.put("/users/RemoveUser", id);
@@ -651,8 +643,7 @@ export function removeUsers(id) {
 
 export function restoreCabains(id){
   return async function (dispatch) {
-   
-      var json = await axios.put("/cabins/RestoreCabin", id);
+   var json = await axios.put("/cabins/RestoreCabin", id);
       return ( dispatch({
         type: REMOVE_CABAINS,
         payload: id
@@ -663,7 +654,6 @@ export function restoreCabains(id){
 }
 
 export function restoreReservations(payload){
-  console.log(payload)
   return async function (dispatch) {
     var cabins = await axios.get("/cabins")
     var reserva = await axios.get("/reservations/ocultadas")
@@ -682,7 +672,6 @@ export function restoreReservations(payload){
 }
 
 export function restoreServices(id){
-  console.log('remove',id);
   return async function (dispatch) {
    
       var json = await axios.put("/services/RestoreService", id);
@@ -696,7 +685,6 @@ export function restoreServices(id){
 }
 
 export function restorePictures(id){
-  console.log('remove',id);
   return async function (dispatch) {
    
       var json = await axios.put("/pictures/RestorePicture", id);
@@ -709,7 +697,6 @@ export function restorePictures(id){
   };
 }
 export function restorePayments(id){
-  console.log('remove',id);
   return async function (dispatch) {
    
       var json = await axios.put("/payments/RestorePayment", id);
@@ -723,7 +710,6 @@ export function restorePayments(id){
 }
 
 export function restoreUsers(id){
-  console.log('remove',id);
   return async function (dispatch) {
    
       var json = await axios.put("/users/RestoreUser", id);
@@ -751,7 +737,6 @@ export function readFechas(){
 }
 
 export function sendNotification(payload) {
-
 return async function (dispatch) {
   console.log(payload)
       const json = await axios.post("/sendNotification", payload)
@@ -844,19 +829,7 @@ export function postTestimonials(payload , {token}) {
   }
 }
 
-export function removeTestimonials(id) {
-  console.log('remove', id);
-  return async function (dispatch) {
 
-    var json = await axios.put("/feedback/", id);
-    return dispatch({
-      type: REMOVE_PICTURES,
-      payload: id
-
-    })
-
-  };
-}
 
 export function findUser(payload){
   return {
@@ -882,7 +855,6 @@ export function cambiarReserva(payload){
   };
 }
 export function aceptarCambios(payload, { token },ID){
-  console.log(payload)
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -924,7 +896,6 @@ export function cancelarCambios(payload,ID){
   };
 }
 export function RestaurarCambios(payload,ID,{token}){
-  console.log(payload)
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
@@ -951,7 +922,6 @@ export function RestaurarCambios(payload,ID,{token}){
   };
 }
 export function getCambiosDone(){
-  console.log("entre2")
   return async function (dispatch) {
     try {
       let json = await axios.get("/CambiosReserva/Done");
@@ -966,7 +936,6 @@ export function getCambiosDone(){
   };
 }
 export function getCambios(){
-  console.log("entre1")
   return async function (dispatch) {
     try {
       let json = await axios.get("/CambiosReserva");
@@ -977,6 +946,48 @@ export function getCambios(){
       });
     } catch (err) {
       console.log(err);
+    }
+  };
+}
+
+export function removeFeedback(id) {
+  console.log('idf',id)
+  return async function (dispatch) {
+
+    var json = await axios.put("/feedback/RemoveFeedback", id);
+    return dispatch({
+      type: REMOVE_FEEDBACK,
+      payload: id
+
+    })
+
+  };
+}
+
+export function restoreFeedback(id){
+  console.log('idresto',id)
+  return async function (dispatch) {
+   
+      var json = await axios.put("/feedback/RestoreFeedback", id);
+      return dispatch({
+        type: RESTORE_SERVICES,
+        payload: id
+       
+       })
+       
+  };
+}
+
+export function readFeedbackocultados(id) {
+  return async function (dispatch) {
+    try {
+      var json = await axios.get("/feedback/ocultadas");
+      return dispatch({
+        type: READ_FEEDBACK_OCULTADOS,
+        payload: json.data,
+      });
+    } catch (err) {
+      console.error(err);
     }
   };
 }
