@@ -35,7 +35,6 @@ export default function CabinsDetail({
   };
 
   const handleSubmitrestore = (ID) => {
-    console.log('funcion', ID)
     dispatch(restoreCabains({ id: ID }));
     alert("su cabaña fue restaurada con exito");
     setTimeout(function () {

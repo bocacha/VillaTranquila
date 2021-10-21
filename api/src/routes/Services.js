@@ -31,7 +31,6 @@ router.post("/NewService" , (req, res)=>{
     let token = ""
 if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
   token = authorizations.substring(7)
-  console.log(token)
 }
 const decodedToken= jwt.verify(token, config.JWT_SECRET)
 if(!token || !decodedToken.id){
@@ -58,7 +57,6 @@ router.put("/EditService", (req,res) =>{
     let token = ""
 if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
   token = authorizations.substring(7)
-  console.log(token)
 }
 const decodedToken= jwt.verify(token, config.JWT_SECRET)
 if(!token || !decodedToken.id){

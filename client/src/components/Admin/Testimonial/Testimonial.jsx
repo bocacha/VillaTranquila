@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getTestimonials, removeFeedback, restoreFeedback, readFeedbackocultados } from "../../../actions";
+import { getTestimonials, removeFeedback, restoreFeedback, readFeedbackocultados, Logeduser } from "../../../actions";
 import styles from '../Testimonial/TestimonialAdmin.module.css';
 import { useHistory } from 'react-router-dom';
 import NavAdmin from '../NavAdmin/NavAdmin';
@@ -16,6 +16,9 @@ const Testimonial = () => {
   useEffect(() => {
     dispatch(getTestimonials());
   }, [dispatch]);
+  useEffect(() => {
+    dispatch(Logeduser());
+  }, [dispatch]);
   var array = [1, 2, 3, 4, 5]
 
   const handleSubmitDelete = (ID) => {
@@ -23,17 +26,15 @@ const Testimonial = () => {
     alert("su Reseña fue Eliminada con exito");
     setTimeout(function () {
       history.go(0);
-    }, 500)
-
+    }, 1000)
   };
 
   const handleSubmitrestore = (ID) => {
-    console.log('funcion', ID)
     dispatch(restoreFeedback({ id: ID }));
     alert("su reseña fue restaurada con exito");
     setTimeout(function () {
       history.go(0);
-    }, 500)
+    }, 1000)
   }
 
   const ocultadas = () => {

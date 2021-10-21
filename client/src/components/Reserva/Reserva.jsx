@@ -30,8 +30,6 @@ function validate(filters) {
         .split("-")
         .reverse()
         .join("/");
-    console.log("inDate", inDate, "today", today, inDate > today);
-    console.log("outDate", outDate, "today", today, outDate > today);
 
     if ((inDate < today && inDate !== '') || (outDate < today && outDate !== '')) {
         errors.today = 'Fechas inválidas';
@@ -139,16 +137,12 @@ export default function Reserva() {
             ...filters,
             [e.target.name]: e.target.value
         }))
-        console.log('filters', filters);
-        console.log('errors', errors);
     }
 
 
     function handleFilters(e) {
         e.preventDefault();
-        console.log('errors:', errors);
         if (!Object.getOwnPropertyNames(errors).length) {
-            console.log('Filters submited');
             dispatch(filterCabins(filters));
         }
         else {

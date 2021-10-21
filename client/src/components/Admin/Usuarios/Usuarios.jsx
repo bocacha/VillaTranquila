@@ -72,7 +72,6 @@ export default function Usuarios() {
   }, [dispatch, token]);
 
   function handleChange(e) {
-    console.log(e.target.value);
     setInput({
       ...input,
       [e.target.name]: e.target.value,
@@ -137,7 +136,6 @@ export default function Usuarios() {
     // const { token } = logeduser;
     e.preventDefault();
     setMostrar(true);
-    console.log(input)
     dispatch(editUsers(input));
     alert("Usuario editado con éxito");
     //  setInput({
@@ -145,7 +143,7 @@ export default function Usuarios() {
     //    id: ID,
     //  });
     //dispatch(readUsers({ token }));
-    window.location.reload();
+    //window.location.reload();
   }
   const ocultadas = () => {
     const { token } = logeduser;
