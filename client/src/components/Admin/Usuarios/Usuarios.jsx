@@ -307,16 +307,16 @@ export default function Usuarios() {
                     <option value="true">SI</option>
                     <option value="false">NO</option>
                   </select>
-                  {/* <select
+                  <select
               onChange={(e) => handleSelectPremium(e)}
               value={input.Premium}
               className={styles.formInputs}
               required
             >
               <option value="">Premium:</option>
-              <option value="true">true</option>
-              <option value="false">false</option>
-            </select> */}
+              <option value="true">SI</option>
+              <option value="false">NO</option>
+            </select>
                   {/* <select
               onChange={(e) => handleSelectBlocked(e)}
               value={input.Blocked}

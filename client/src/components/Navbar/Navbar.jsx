@@ -107,7 +107,7 @@ export default function Navbar() {
                       <Link to="/testimonial" className={styles.mostrar}>
                         <button className={styles.navBtn}>
                           <strong className={styles.list}>
-                            Testiomonial <IoIosCheckmark className={styles.icons} />
+                            Reseñas <IoIosCheckmark className={styles.icons} />
                           </strong>
                         </button>
                       </Link>
@@ -246,7 +246,7 @@ export default function Navbar() {
               <Link to="/testimonial" className={styles.noMostrar}>
                 <button className={styles.navBtn}>
                   <strong className={styles.list}>
-                    Testiomonial <IoIosCheckmark className={styles.icons} />
+                    Reseñas <IoIosCheckmark className={styles.icons} />
                   </strong>
                 </button>
               </Link>

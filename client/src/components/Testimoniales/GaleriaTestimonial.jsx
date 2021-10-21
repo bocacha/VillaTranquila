@@ -56,7 +56,7 @@ const GaleriaTestimonial = () => {
           </div>
         ) : (
           <div className={styles.noHay}>
-            <h3>No hay testimoniales para mostrar</h3>
+            <h3>No hay reseñas para mostrar</h3>
             <div>
               <button onClick={handleVolver} className={styles.btnPlus}>Volver</button>
             </div>

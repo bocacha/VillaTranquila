@@ -33,6 +33,7 @@ router.post("/", async (req, res)=>{
         user: user.UserName,
         admin: user.Admin,
         email: user.Email,
+        Premium: user.Premium,
         Blocked:user.Blocked,
         token
     })

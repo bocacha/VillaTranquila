@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Reservaciones.module.css";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import {
   editReservation,
   readReservation,
@@ -12,7 +13,9 @@ import {
   getCambiosDone,
   RestaurarCambios,
   cancelarCambios,
-  aceptarCambios
+  aceptarCambios,
+  removeReservations,
+  aceptarCancelacion
 } from "../../../actions";
 import EditReservaDetail from "./EditReservaDetail";
 import DatePicker, { registerLocale } from "react-datepicker";
@@ -43,14 +46,24 @@ export default function Reservaciones() {
   }, [dispatch]);
 
   const allReservations = useSelector((state) => state.solicitudes);
-
+  const history = useHistory();
   
-  function handlePrueba(e, ID, Nuevo) {
-      console.log(Nuevo)
-      dispatch(aceptarCambios({...Nuevo},{ token },{id:ID}))
+  function handlePrueba(e, ID, Nuevo,Original) {
     e.preventDefault();
-    alert("Editado")
-
+     if(Nuevo.Cancelar){
+      dispatch(removeReservations(Original))
+      dispatch(aceptarCancelacion(Original,{id:ID}))
+       alert("Editado")
+     setTimeout(function () {
+      history.go(0);
+  }, 2500)
+     }else{
+    dispatch(aceptarCambios({...Nuevo},{ token },{id:ID}))
+     alert("Editado")
+     setTimeout(function () {
+      history.go(0);
+  }, 2000)
+     }
   }
  
   const ocultadas = () => {
