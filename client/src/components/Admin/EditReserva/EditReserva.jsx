@@ -89,8 +89,6 @@ export default function Reservaciones() {
           )
           }
         </div>
-        <div className={styles.container2}>
-          </div>
         <div className={styles.containerReservas}>
           {allReservations.length !== 0 ?
             allReservations.map((el) => {         
