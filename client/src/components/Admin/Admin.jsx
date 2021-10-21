@@ -33,7 +33,8 @@ export default function Admin() {
             <div>
               <Link to="/admin/cabañas">
                 <img
-                  src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/f0/fd/2d/cottage-complex-velt.jpg?w=1200&h=-1&s=1"
+                  src="https://cdn.pixabay.com/photo/2014/04/03/10/24/cabin-310330_960_720.png"
+                  // src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/11/f0/fd/2d/cottage-complex-velt.jpg?w=1200&h=-1&s=1"
                   alt="cabañas"
                   className={styles.img}
                 />
@@ -45,7 +46,8 @@ export default function Admin() {
             <div>
               <Link to="/admin/reservaciones">
                 <img
-                  src="https://food.fnr.sndimg.com/content/dam/images/food/unsized/2014/6/23/0/fnd_Reserved-Sign-Thinkstock_s4x3.jpg"
+                  src="https://image.flaticon.com/icons/png/512/489/489848.png"
+                  // src="https://food.fnr.sndimg.com/content/dam/images/food/unsized/2014/6/23/0/fnd_Reserved-Sign-Thinkstock_s4x3.jpg"
                   alt="reservas"
                   className={styles.img}
                 />
@@ -57,7 +59,8 @@ export default function Admin() {
             <div>
               <Link to="/admin/servicios">
                 <img
-                  src="https://img.vixdata.io/pd/jpg-large/es/sites/default/files/imj/nuestrorumbo/q/que-servicios-debe-tener-un-hotel-para-ser-tres-estrellas-1.jpg"
+                  src="https://cdn-icons-png.flaticon.com/512/2197/2197260.png"
+                  // src="https://img.vixdata.io/pd/jpg-large/es/sites/default/files/imj/nuestrorumbo/q/que-servicios-debe-tener-un-hotel-para-ser-tres-estrellas-1.jpg"
                   alt="servicios"
                   className={styles.img}
                 />
@@ -69,9 +72,10 @@ export default function Admin() {
             <div>
               <Link to="/admin/pagos">
                 <img
-                  src="https://intl-blog.imgix.net/wp-content/uploads/2020/08/Pagos-por-movil-header.png?auto=format%2Cenhance"
+                  src="https://mcrmoviles.com/wp-content/uploads/2020/08/inversion.png"
                   alt="pagos"
                   className={styles.img}
+                  style={{marginTop:"5px"}}
                 />
               </Link>
             </div>
@@ -81,7 +85,7 @@ export default function Admin() {
             <div>
               <Link to="/admin/fotos">
                 <img
-                  src="https://i.pinimg.com/736x/d6/5a/ce/d65acea83899fa0352ab4d29fd6997a4.jpg"
+                  src="https://cdn-icons-png.flaticon.com/512/1132/1132111.png"
                   alt="fotos"
                   className={styles.img}
                 />
@@ -93,7 +97,7 @@ export default function Admin() {
             <div>
               <Link to="/admin/usuarios">
                 <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1200px-User_icon_2.svg.png"
+                  src="https://image.flaticon.com/icons/png/512/17/17115.png"
                   alt="usuarios"
                   className={styles.img}
                 />
@@ -105,7 +109,7 @@ export default function Admin() {
             <div>
               <Link to="/admin/caja">
                 <img
-                  src="https://i.pinimg.com/564x/f0/99/fb/f099fbdfde2c1379d91202b17d03c81a.jpg"
+                  src="https://cdn.pixabay.com/photo/2014/04/03/10/55/billing-machine-311746_960_720.png"
                   alt="caja"
                   className={styles.img}
                 />
@@ -117,7 +121,7 @@ export default function Admin() {
             <div>
               <Link to="/admin/Solicitudes">
                 <img
-                  src="https://food.fnr.sndimg.com/content/dam/images/food/unsized/2014/6/23/0/fnd_Reserved-Sign-Thinkstock_s4x3.jpg"
+                  src="https://image.flaticon.com/icons/png/512/16/16498.png"
                   alt="reservas"
                   className={styles.img}
                 />
@@ -129,7 +133,7 @@ export default function Admin() {
             <div>
               <Link to="/admin/testimonial">
                 <img
-                  src="https://i.pinimg.com/564x/f0/99/fb/f099fbdfde2c1379d91202b17d03c81a.jpg"
+                  src="https://i.pinimg.com/originals/aa/4f/12/aa4f1285ec14de367860146ce6e15b4b.png"
                   alt="testimonial"
                   className={styles.img}
                 />

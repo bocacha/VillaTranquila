@@ -1,0 +1,183 @@
+/* .container{
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    border: black solid 1px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 10px auto;
+   
+}
+
+ .arrayStar{
+    display: flex;
+    font-size: 40px;
+} 
+
+.paint{
+    color:#ffd700;
+} */
+
+.testimonial{
+    width: 100%;
+    background-color: #293c4f;
+}
+.contanos {
+    border-radius: 4px;
+    background-color: #355978;
+    border-color: transparent;
+    color: #fff;
+    text-align: center;
+    font-size: large;
+    transition: all 0.5s ease;
+    cursor: pointer;
+    height: 10%;
+    line-height: 35px;
+    width: 20%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .contanos:hover {
+    background-color: #8bafbf;
+    color: #1c2531;
+    border-color: #355978;
+  }
+.formCont{
+    margin-top: -552px;
+    position: absolute;
+    z-index: 9;
+    width:100%;
+    height: 760px;
+    background-color: rgba(0, 0, 0, 0.623);
+}
+.tarjeta{
+    width:50%;
+    margin-top: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #355978;
+    border-radius: 10px;
+    height: fit-content;
+    color:#fff;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: rgb(0 0 0 / 19%) 0px 10px 20px, rgb(0 0 0 / 23%) 0px 6px 6px;
+}
+.x{
+    float:left;
+    background: none;
+    color:#fff;
+    border: none;
+    transition: all ease 0.2s;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+.x:hover{
+    color:black
+}
+.container{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    width:100%;
+}
+.container label{
+    font-size: large;
+}
+.container input{
+    padding: 7px 0px;
+  text-align: center;
+  height: 42px;
+  /* width: 100%; */
+  font-size: 1em;
+  background-color: #8bafbf ;
+  color: #1c2531;
+  border: 1px solid #8bafbf;
+  border-radius: 50px;
+  transition: all 0.25s ease;
+  margin: 10px auto 10px auto;
+  width:90%;
+}
+.container input:hover{
+    background-color: #355978 ;
+  color:  #fff;
+}
+.container textarea{
+    width:90%;
+    padding: 7px 0px;
+    text-align: center;
+    /* width: 100%; */
+    height:150px;
+    font-size: 1em;
+    background-color: #8bafbf ;
+    color: #1c2531;
+    border: 1px solid #8bafbf;
+    border-radius: 25px;
+    transition: all 0.25s ease;
+    margin: 10px auto 10px auto;
+}
+.container textarea:hover{
+    background-color: #355978 ;
+    color:  #fff;
+}
+.btn{
+    border-radius: 50px;
+      background-color: #293c4f ;
+      border: 1px solid #293c4f;
+      color: #fff;
+      display: inline-flex;
+      justify-content: center;
+      text-align: center;
+      font-size: large;
+      transition: all 0.5s ease;
+      cursor: pointer;
+      padding: 10px 20px;
+      height: auto;
+      line-height: 35px;
+      margin: 20px auto 20px auto;
+      width:30%;
+  }
+  .btn:hover {
+    background-color: #355978 ;
+    color: #fff ;
+    border: 1px solid #293c4f;
+    width:50%;
+  }
+#star div div {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    width:60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (min-width:320px){
+    .contanos{
+        width:80%;
+    }
+    .formCont{
+        height: 800px;
+    }
+    .tarjeta{
+        width:90%;
+    }
+}
+@media(min-width:768px){
+    .contanos{
+        width:70%;
+    }
+    .formCont{
+        height: 771px;
+    }
+    .tarjeta{
+        width:80%;
+    }
+}
+@media(min-width:1155px){
+    .formCont{
+        height: 760px;
+    }
+    .tarjeta{
+        width:70%;
+    }
+}

@@ -60,3 +60,14 @@
   color: #1c2531;
   border-color: #8bafbf;
 }
+
+@media(min-width:320px) {
+  .containerInfo{
+    width: 100%;
+    max-width:480px
+  }
+  table{
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
