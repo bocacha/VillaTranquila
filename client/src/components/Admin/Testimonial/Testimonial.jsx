@@ -46,7 +46,16 @@ const Testimonial = () => {
       };
     return (
         
-        <div >
+        <div>
+          <div className={styles.navs2}>
+            <div className={styles.navs}>
+              <Navbar />
+              <NavAdmin  className={styles.navAdmin}/>
+            </div>
+            <div className={styles.navRsp}>
+              <Navbar />
+            </div>
+          </div>
          {!habilitar?
           <button onClick={()=>ocultadas()}>Mostrar Ocultas</button> 
           :

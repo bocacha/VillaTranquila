@@ -8,11 +8,11 @@ class MessageParser {
         const lowerCase = message.toLowerCase();
         
 
-        if (lowerCase.includes('precio') ||lowerCase.includes('paga')||lowerCase.includes('sale')||lowerCase.includes('cuesta')) {
+        if (lowerCase.includes('precio')||lowerCase.includes('sale')||lowerCase.includes('cuesta')) {
             this.ActionProvider.handlePrecios();
             return;
         }
-        if(lowerCase.includes('reserva')||lowerCase.includes('disponi')||lowerCase.includes('fecha')){
+        if(lowerCase.includes('reser')||lowerCase.includes('disponi')||lowerCase.includes('fecha')){
             this.ActionProvider.handleReservas();
             return;
         }
@@ -24,8 +24,20 @@ class MessageParser {
             this.ActionProvider.handleRegistro()
             return;
         }
-        if(lowerCase.includes('Gracias')){
+        if(lowerCase.includes('gracia')){
             this.ActionProvider.handleDespedida()
+            return;
+        }
+        if(lowerCase.includes('paga')||(lowerCase.includes('tarjeta'))){
+            this.ActionProvider.handlePaga()
+            return;
+        }
+        if(lowerCase.includes('animal')||(lowerCase.includes('perro'))||(lowerCase.includes('gato'))){
+            this.ActionProvider.handleAnimales()
+            return;
+        }
+        if(lowerCase.includes('visa')||(lowerCase.includes('mastercard'))){
+            this.ActionProvider.handleCredito()
             return;
         }
         if(lowerCase){
