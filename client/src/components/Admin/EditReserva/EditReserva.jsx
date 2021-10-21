@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./Reservaciones.module.css";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import {
   editReservation,
   readReservation,
@@ -45,7 +46,7 @@ export default function Reservaciones() {
   }, [dispatch]);
 
   const allReservations = useSelector((state) => state.solicitudes);
-
+  const history = useHistory();
   
   function handlePrueba(e, ID, Nuevo,Original) {
     e.preventDefault();
@@ -55,7 +56,9 @@ export default function Reservaciones() {
     dispatch(aceptarCambios({...Nuevo},{ token },{id:ID}))
      alert("Editado")
      }
-
+     setTimeout(function () {
+      history.go(0);
+  }, 500)
   }
  
   const ocultadas = () => {
