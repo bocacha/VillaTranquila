@@ -5,7 +5,7 @@ import {
   editReservation,
   readReservation,
   Logeduser,
-  readReservationocultados, getUserData, readServices, selectcabin, cambiarReserva
+  readReservationocultados,getUserData,readServices, selectcabin,cambiarReserva, cancelarReserva, readCabains
 } from "../../../actions";
 import ReservacionesDetail from "./ReservacionesDetail";
 import DatePicker, { registerLocale } from "react-datepicker";
@@ -15,22 +15,27 @@ import Navbar from "../../Navbar/Navbar";
 registerLocale('es', es)
 
 export default function Reservaciones() {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(Logeduser());
-  }, [dispatch]);
-  useEffect(() => {
-    dispatch(readServices());
-  }, [dispatch]);
-  useEffect(() => {
-    dispatch(readReservation());
-  }, [dispatch]);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(Logeduser());
+      }, [dispatch]);
+      useEffect(() => {
+        dispatch(readServices());
+      }, [dispatch]);
+      useEffect(() => {
+        dispatch(readReservation());
+      }, [dispatch]);
+      useEffect(() => {
+        dispatch(readCabains());
+      }, [dispatch]);
   const [selectDateCI, setSelectDateCI] = useState(null);
   const [selectDateCO, setSelectDateCO] = useState(null);
   const [mostrar, setMostrar] = useState(false);
-  const [habilitar, setHabilitar] = useState(false)
+  const [costo, setCosto] = useState(0);
+  const [habilitar, setHabilitar]= useState(false)
   const logeduser = useSelector((state) => state.user);
   const allreservations = useSelector((state) => state.allReservations);
+  const allCabins= useSelector((state) => state.cabañas)
   const { token } = logeduser;
   const user = useSelector((state) => state.user);
   const [edit, setEdit] = useState({
@@ -40,7 +45,7 @@ export default function Reservaciones() {
     UserId: user.userid,
     Cabinid: "",
     ExtraServices: "",
-    CostoFinal: "",
+    CostoFinal: costo,
   });
   const [original, setOriginal] = useState({
     id: "",
@@ -72,22 +77,10 @@ export default function Reservaciones() {
     CostoFinal,
     Cabinid,) {
     e.preventDefault();
-    console.log(edit);
-    dispatch(selectcabin({ id: Cabinid }))
+let seleccionada = allCabins.filter(e=> e.Number === CabinNumber)
+console.log(seleccionada[0].Price)
+setCosto(seleccionada[0].Price)
     setMostrar(true);
-    setEdit({
-      ...edit,
-      id: ID,
-      Checkin: Checkin,
-      Checkout: Checkout,
-      UserName: UserName,
-      Anombrede: Anombrede,
-      CabinNumber: CabinNumber,
-      ExtraServices: ExtraServices,
-      CostoFinal: CostoFinal,
-      Cabinid: Cabinid,
-      UserId: user.userid,
-    })
     setOriginal({
       ...original,
       id: ID,
@@ -99,6 +92,19 @@ export default function Reservaciones() {
       ExtraServices: ExtraServices,
       CostoFinal: CostoFinal,
       Cabinid: Cabinid,
+      UserId: user.userid,
+    })
+    setEdit({
+      ...edit,
+      id: ID,
+      Checkin: Checkin,
+      Checkout: Checkout,
+      UserName: UserName,
+      Anombrede: Anombrede,
+      CabinNumber: CabinNumber,
+      ExtraServices: ExtraServices,
+      Cabinid: Cabinid,
+      CostoFinal: seleccionada[0].Price,
       UserId: user.userid,
     })
   }
@@ -131,7 +137,8 @@ export default function Reservaciones() {
     const options = { year: 'numeric', month: 'numeric', day: '2-digit' }
     setEdit({ ...edit, Checkout: selectDateCO.toLocaleDateString('es-ES', options) })
   }
-  const consultarprecio = () => {
+  const consultarprecio=()=>{
+    let contador = 0
     suma = []
     costoadicional = 0
     const checkbox = Array.from(document.getElementsByClassName("Servicios"));
@@ -144,10 +151,13 @@ export default function Reservaciones() {
     }
     for (let j = 0; j < suma.length; j++) {
       costoadicional = costoadicional + parseFloat(suma[j])
-
+      contador++
     }
-    costoadicional = costoadicional + original.CostoFinal
-    setEdit({ ...edit, CostoFinal: costoadicional })
+    costoadicional = parseFloat(costoadicional) + parseFloat(costo)
+    setEdit({...edit,CostoFinal:costoadicional})
+    if(contador === 0){
+      setEdit({...edit , CostoFinal:costo})
+    }
   }
 
   const checkboxselected = (e) => {
@@ -179,11 +189,20 @@ export default function Reservaciones() {
     }
     dispatch(cambiarReserva(obj))
   }
-  // const pruebadispatch=() => {
-  // const { token } = logeduser;
-  // console.log(edit)
-  // 
-  // window.location.reload()
+  const cancelar=()=>{
+    const obj ={
+      Original: original,
+      Nuevo: {
+        Cancelar:true
+      },
+    }
+    dispatch(cancelarReserva(obj))
+  }
+ // const pruebadispatch=() => {
+   // const { token } = logeduser;
+   // console.log(edit)
+   // 
+   // window.location.reload()
   //}
   const reservasUsuario = allreservations.filter(e => e.UserName === logeduser.user)
   return (

@@ -116,8 +116,8 @@ export default function ReservacionesDetail({
               Anombrede,
               ExtraServices,
               CostoFinal,
-              UserDNI,
-              Cabinid,);
+              Cabinid,
+              UserDNI,);
             setMostrar(false);
             window.scrollTo({
               top: 0,

@@ -7,7 +7,8 @@ import {
   Logeduser,
   readReservationocultados,
   readUsers,
-  getCabins
+  getCabins,
+  readServices
 } from "../../../actions";
 import ReservacionesDetail from "./ReservacionesDetail";
 import DatePicker, { registerLocale } from "react-datepicker";
@@ -28,22 +29,30 @@ export default function Reservaciones() {
   useEffect(() => {
     dispatch(getCabins())
   }, [dispatch])
+  useEffect(() => {
+    dispatch(readServices());
+  }, [dispatch]);
   const logeduser = useSelector((state) => state.user);
   const { token } = logeduser;
   const [selectDateCI, setSelectDateCI] = useState(null);
   const [selectDateCO, setSelectDateCO] = useState(null);
   const [cabinid, setCabinid] = useState(null)
   const [cabinnumber, setCabinnumber] = useState(null)
+  const [costo, setCosto] = useState(null)
   const [mostrar, setMostrar] = useState(false);
   const [habilitar, setHabilitar] = useState(false);
   const allCabins = useSelector((state) => state.cabins);
+  const servicios = useSelector((state) => state.servicios);
   useEffect(() => {
     dispatch(readUsers({ token }));
   }, [dispatch]);
   useEffect(() => {
     dispatch(readReservation({ token }));
   }, [dispatch]);
-
+  let lala = [];
+  let id1 = 0;
+  let suma = []
+  let costoadicional = 0
   const allUsers = useSelector((state) => state.usuarios);
   const allReservations = useSelector((state) => state.reservaciones);
   const [edit, setEdit] = useState({
@@ -87,6 +96,7 @@ export default function Reservaciones() {
     e.preventDefault();
     setCabinid(Cabinid)
     setCabinnumber(CabinNumber)
+    setCosto(CostoFinal)
     setSelectDateCI()
     setSelectDateCO()
     setEdit({
@@ -188,7 +198,44 @@ export default function Reservaciones() {
     setCurrentPage(pageNumber);
   };
   //-------------------------------------------------------------------------
+  const checkboxselected = () => {
+    setEdit({
+      ...edit, CostoFinal: edit.CostoFinal,
+      Checkin: selectDateCI, Checkout: selectDateCO,
+    })
+    lala = [];
+    const checkbox = Array.from(document.getElementsByClassName("Servicios"));
+    let contador = 0
+    for (let i = 0; i < checkbox.length; i++) {
+      if (checkbox[i].checked) {
+        lala.push(checkbox[i].value);
+        setEdit({ ...edit, ExtraServices: [...lala] });
+        contador++
+        console.log(checkbox[i].value);
+      }
+    }
+    if(contador === 0){
+      setEdit({...edit , ExtraServices:null})
+    }
+  };
+  const consultarprecio=()=>{
+    suma = []
+    costoadicional = 0
+    const checkbox = Array.from(document.getElementsByClassName("Servicios"));
+    for (let i = 0; i < checkbox.length; i++) {
+      
+      if (checkbox[i].checked) {
+        suma.push(parseFloat(checkbox[i].name))
+        console.log(checkbox[i].name)
+      }
+    }
+    for (let j = 0; j < suma.length; j++) {
+      costoadicional = costoadicional + parseFloat(suma[j])
 
+    }
+    costoadicional = parseFloat(costoadicional) + parseFloat(costo)
+    setEdit({...edit,CostoFinal:costoadicional})
+  }
   return (
     <div className={styles.reservasAdmin}>
       <div className={styles.navs2}>
@@ -249,14 +296,17 @@ export default function Reservaciones() {
                     placeholder="A nombre de . . ."
                     className={styles.formInputs}
                   />
-                  <input
-                    type="text"
-                    value={edit.CostoFinal}
-                    name="CostoFinal"
-                    onChange={(e) => handleChangeEdit(e)}
-                    placeholder="Costo Final"
-                    className={styles.formInputs}
-                  />
+                  <div>Costo final por noche:   </div>
+                 <input
+              type="text"
+              value={edit.CostoFinal}
+              name="CostoFinal"
+              placeholder={"Por Noche:" + edit.CostoFinal}
+              className={styles.formInputs}
+              id={styles.precioFinal}
+            //  onChange={()=>checkboxselected()}
+              required
+            />
                   {/* <input
                     type="text"
                     value={edit.UserId}
@@ -279,18 +329,18 @@ export default function Reservaciones() {
                     pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                     required
                   /> */}
-                  <label>Cabaña Nº:</label>
-                  <select
-                    onChange={(e) => handleSelect(e)}
-                  >
-                    <option >Cabaña N°</option>
-                    {allCabins.map((c) => {
+              {/* <label>Cabaña Nº:</label>
+              <select
+                onChange={(e) => handleSelect(e)}
+              >
+                <option >Cabaña N°</option>
+                {allCabins.map((c) => {
 
-                      return (
-                        <option value={c.ID}>{c.Number} </option>
-                      )
-                    })}
-                  </select>
+                  return (
+                    <option value={c.ID}>{c.Number} </option>
+                  )
+                })}
+                </select> */}
                   {/* <input
                     type="text"
                     value={edit.CabinNumber}
@@ -302,16 +352,35 @@ export default function Reservaciones() {
                     pattern='^[0-9a-f]{8}-[0-9a-f]{4}-[4][0-9a-f]{3}-[0-9a-f]{4}-[0-9a-f]{12}$'
                     required
                   /> */}
-                  <input
+                  {/* <input
                     type="text" //?????
                     value={edit.ExtraServices}
                     name="ExtraServices"
                     onChange={(e) => handleChangeEdit(e)}
                     placeholder="Servicios extra"
                     className={styles.formInputs}
-                  />
+                  /> */}
+                  <div className={styles.p}>Servicios Adicionales:</div>
+              
+              <div>
+                {servicios.map((el) => (
+                  <div className={styles.servicios} key={el.ID}>
+                    {el.Name + " $" + el.Price}
+                    <input
+                      className="Servicios"
+                      type="checkbox"
+                      name={el.Price}
+                      value={el.Name}
+                      id={id1++}
+                      onChange={consultarprecio}
+                    />
+                    <label >{el.name}</label>
+                  </div>
+                ))}
+              </div>
                 </form>
                 <div className={styles.btns}>
+                <button onClick={checkboxselected}>Seleccionar Servicios</button>
                   <button type="submit" onClick={handlePrueba} id={styles.guardar}>
                     Guardar cambios
                   </button>
@@ -348,6 +417,7 @@ export default function Reservaciones() {
                         CostoFinal={el.CostoFinal}
                         ExtraServices={el.ExtraServices}
                         UserDNI= {el.UserDNI}
+                        Cabinid={el.Cabinid}
                         handlePrueba={handlePrueba}
                         handleSubmitEdit={handleSubmitEdit}
                         restaurar={habilitar}
