@@ -6,7 +6,7 @@ const botName = 'Asesor virtual';
 
 const config = {
     initialMessages: [createChatBotMessage(`Hola soy tu ${botName}`),
-    createChatBotMessage('antes de comenzar alguna palabras que pueden ayudarte en tu consulta'),
+    createChatBotMessage('antes de comenzar algunas palabras que pueden ayudarte en tu consulta'),
     createChatBotMessage(`Precio`, {
       delay: 1500,
       loading: false,
@@ -14,7 +14,7 @@ const config = {
     createChatBotMessage(`Reserva`, {
       delay: 2500,
     }),
-    createChatBotMessage(`registro`, {
+    createChatBotMessage(`registrarme`, {
       delay: 3500,
     }),
    ],

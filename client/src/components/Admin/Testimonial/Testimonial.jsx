@@ -45,7 +45,6 @@ const Testimonial = () => {
     setHabilitar(false);
   };
   return (
-
     <div className={styles.testimAdmin}>
       <div className={styles.navs2}>
         <div className={styles.navs}>
