@@ -42,6 +42,14 @@ const TestimonialForm = () => {
     <div>
         <h2>Contanos Tu experiencia</h2>
         <form className={style.container}>
+        <div className={style.star}>
+                  <ReactStars
+                count={5}
+                onChange={ratingChanged}
+                size={30}
+                activeColor="#ffd700"
+             />   
+            </div>
             <label>Nombre</label>
             <input 
                 type="text" 
@@ -57,14 +65,7 @@ const TestimonialForm = () => {
                 value={description} 
                 onChange={handleChange}>
             </textarea>
-            <div className={style.star}>
-                  <ReactStars
-                count={5}
-                onChange={ratingChanged}
-                size={30}
-                activeColor="#ffd700"
-             />   
-            </div>
+            
        
                 <button onClick={(e)=>handleClicks(e)}>Enviar</button>
            

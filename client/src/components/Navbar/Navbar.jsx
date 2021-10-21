@@ -255,7 +255,7 @@ export default function Navbar() {
               <Link to="/testimonial" className={styles.mostrar}>
                     <button className={styles.navBtn}>
                        <strong className={styles.list}>
-                          Testiomonial{" "}
+                          Reseñas{" "}
                         <span className={styles.span}>
                           <IoIosCheckmark />
                         </span>
