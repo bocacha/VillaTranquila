@@ -259,6 +259,7 @@ setCosto(seleccionada[0].Price)
                 onChange={(e) => handleChangeEdit(e)}
                 placeholder="A nombre de . . ."
                 className={styles.formInputs}
+            
               />
               <div>Costo final por noche:   </div>
             <input
