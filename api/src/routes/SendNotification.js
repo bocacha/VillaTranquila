@@ -24,7 +24,6 @@ router.post('/', (req, res) => {
     });
   
       transporter.verify().then(()=>{
-          console.log('listo para mandar email')
       })
 
      let fecha = new Date()
@@ -63,11 +62,9 @@ router.post('/', (req, res) => {
    
 
     transporter.sendMail(mailOptions, (error, info) => {
-        console.log('llego al transporter')
         if(error) {
             res.status(500).send(error.message)
         } else {
-            console.log("Email enviado")
             res.status(200).jsonp(req.body)
         }
     })

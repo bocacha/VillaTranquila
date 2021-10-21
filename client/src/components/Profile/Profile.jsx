@@ -53,7 +53,6 @@ export default function Profile(props) {
 
     function handleSubmitEdit(e) {
         e.preventDefault();
-        console.log("submit", edit)
         if (edit.UserPassword.length < 1) {
             return alert("Debe ingresar su contraseña para guardar los cambios");
         } else {
@@ -70,7 +69,6 @@ export default function Profile(props) {
     if (dataUser.ReservationsHistory) {
         const reservas = dataUser.ReservationsHistory.map(e => {
             const { Show, ID, UserId, ...history } = e
-            console.log(history)
             objetosaArray.push(Object.entries(history))
         })
     }

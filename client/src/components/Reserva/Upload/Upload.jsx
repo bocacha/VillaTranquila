@@ -15,7 +15,6 @@ export default function Upload(){
 
         Axios.post('https://api.cloudinary.com/v1_1/vt-cabin/image/upload', formData)
         .then((response)=>{
-            console.log(response)
         })
     }
 

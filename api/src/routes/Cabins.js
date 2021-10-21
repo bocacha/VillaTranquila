@@ -68,7 +68,6 @@ if(!decodedToken.Admin){
         Parrilla
     })
     .then(doneTemp=>{
-        console.log(doneTemp)
         return res.status(200).json(doneTemp)
     })
     .catch(error=>{ res.send(error)})
@@ -78,7 +77,6 @@ router.put("/EditCabin", (req,res) =>{
     let token = ""
 if(authorizations && authorizations.toLowerCase().startsWith("bearer")){
   token = authorizations.substring(7)
-  console.log(token)
 }
 const decodedToken= jwt.verify(token, config.JWT_SECRET)
 if(!token || !decodedToken.id){
@@ -109,7 +107,6 @@ if(!decodedToken.Admin){
 
         })
         .then(doneTemp=>{
-            console.log(doneTemp)
             return res.status(200).json(doneTemp)
         })
         .catch(error=>{console.log(error)})
@@ -130,7 +127,6 @@ router.put("/EditCabin/available", (req,res) =>{
 });
 router.put('/RemoveCabin', (req,res) =>{
     const {id}= req.body;
-    console.log(id);
     if(!id){
         return res.json({status: 404},{message:"Cabin not found"})
     }
@@ -145,7 +141,6 @@ router.put('/RemoveCabin', (req,res) =>{
 });  
 router.put('/RestoreCabin', (req,res) =>{
     const {id}= req.body;
-    console.log(id);
     if(!id){
         return res.json({status: 404},{message:"Cabin not found"})
     }
