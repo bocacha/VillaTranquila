@@ -57,14 +57,6 @@
   padding-top: 10px;
 }
 
-/* .izqu{
-    float: left;
-    margin-right: 80px;
-}
-.der{
-    float: right;
-    margin-left: 80px;
-} */
 .dia table{
     margin: 10px auto;
     margin-bottom: 25px;
@@ -197,7 +189,7 @@ img{
 .lightning,
 .snow {
   position: absolute;
-  z-index: 5;
+  z-index: 2;
   top: 50%;
   left: 50%;
   width: 3.75em;

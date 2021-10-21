@@ -87,7 +87,7 @@ export default function UsuariosDetail({
             onClick={() => handleSubmitrestore(ID)}
             className={styles.btn}
           >
-            Restaurar
+            Desbloquear
           </button>
         )}
         <button
