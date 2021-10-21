@@ -5,7 +5,7 @@ import {
   editReservation,
   readReservation,
   Logeduser,
-  readReservationocultados,getUserData,readServices, selectcabin,cambiarReserva
+  readReservationocultados,getUserData,readServices, selectcabin,cambiarReserva, cancelarReserva
 } from "../../../actions";
 import ReservacionesDetail from "./ReservacionesDetail";
 import DatePicker,{registerLocale} from "react-datepicker";
@@ -178,6 +178,15 @@ export default function Reservaciones() {
     }
     dispatch(cambiarReserva(obj))
   }
+  const cancelar=()=>{
+    const obj ={
+      Original: original,
+      Nuevo: {
+        Cancelar:true
+      },
+    }
+    dispatch(cancelarReserva(obj))
+  }
  // const pruebadispatch=() => {
    // const { token } = logeduser;
    // console.log(edit)
@@ -261,6 +270,7 @@ export default function Reservaciones() {
               </div>
               <button onClick={checkboxselected}>Seleccionar Servicios</button>
               <button onClick={handlePrueba}>Solicitar Cambios</button>
+              <button onClick={cancelar}>Cancelar Reserva</button>
             </div>
           :
           null
