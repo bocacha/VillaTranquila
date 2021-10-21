@@ -469,10 +469,8 @@
     margin-left:1%;
     display: grid;
     background-color: #94adbc;
-    grid-template-columns: 32% 32% 32%;
+    grid-template-columns: 33.33% 33.33% 33.33%;
     justify-content: space-between;
-    /* justify-items: center; */
-    align-items: center;
-    /* grid-gap: 3%; */
+    align-items: start;
   }
 } 

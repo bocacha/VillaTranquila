@@ -72,10 +72,10 @@ export default function Admin() {
             <div>
               <Link to="/admin/pagos">
                 <img
-                  src="https://negociosynoticias.com/wp-content/uploads/2018/04/in1496744788237.png"
-                  // src="https://intl-blog.imgix.net/wp-content/uploads/2020/08/Pagos-por-movil-header.png?auto=format%2Cenhance"
+                  src="https://mcrmoviles.com/wp-content/uploads/2020/08/inversion.png"
                   alt="pagos"
                   className={styles.img}
+                  style={{marginTop:"5px"}}
                 />
               </Link>
             </div>
@@ -86,7 +86,6 @@ export default function Admin() {
               <Link to="/admin/fotos">
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/1132/1132111.png"
-                  // src="https://i.pinimg.com/736x/d6/5a/ce/d65acea83899fa0352ab4d29fd6997a4.jpg"
                   alt="fotos"
                   className={styles.img}
                 />
@@ -98,7 +97,7 @@ export default function Admin() {
             <div>
               <Link to="/admin/usuarios">
                 <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/1200px-User_icon_2.svg.png"
+                  src="https://image.flaticon.com/icons/png/512/17/17115.png"
                   alt="usuarios"
                   className={styles.img}
                 />
@@ -110,8 +109,7 @@ export default function Admin() {
             <div>
               <Link to="/admin/caja">
                 <img
-                  src="http://www.gifde.com/gif/otros/cosas-humanas-cotidianas/dinero/cajas-registradores/caja-registradora-006.png"
-                  // src="https://i.pinimg.com/564x/f0/99/fb/f099fbdfde2c1379d91202b17d03c81a.jpg"
+                  src="https://cdn.pixabay.com/photo/2014/04/03/10/55/billing-machine-311746_960_720.png"
                   alt="caja"
                   className={styles.img}
                 />
@@ -135,7 +133,7 @@ export default function Admin() {
             <div>
               <Link to="/admin/testimonial">
                 <img
-                  src="https://images.vexels.com/media/users/3/134803/isolated/preview/dc835f4dbe0dc396f68307d6c593a1d7-icono-de-estrella-de-dibujos-animados.png"
+                  src="https://i.pinimg.com/originals/aa/4f/12/aa4f1285ec14de367860146ce6e15b4b.png"
                   alt="testimonial"
                   className={styles.img}
                 />
