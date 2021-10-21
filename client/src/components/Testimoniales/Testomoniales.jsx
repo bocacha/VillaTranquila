@@ -17,7 +17,7 @@ const Testimoniales = () => {
         dispatch(Logeduser());
     }, [dispatch]);
     const logeduser = useSelector((state) => state.user);
-    const { token } = logeduser;
+    const token = logeduser && logeduser.token;
 
 
     const { name, description, } = input;
@@ -34,7 +34,7 @@ const Testimoniales = () => {
     }
     const handleClicks = (e) => {
         e.preventDefault();
-        dispatch(postTestimonials({ ...input, stars }, { token }))
+        dispatch(postTestimonials({ ...input, stars }, { token }));
         // history.push("/testimonial");
         alert('Tu reseña a sido enviada con éxito. Te esperamos de vuelta pronto. Muchas gracias.');
         setVer(false);
@@ -43,12 +43,12 @@ const Testimoniales = () => {
 
     return (
         <div className={style.testimonial}>
-            <button onClick={() => { setVer(!ver) }} className={style.contanos}>Contanos como te fue</button>
+            <button onClick={() => { setVer(!ver) }} className={style.contanos}>Contanos cómo te fue</button>
             {
                 ver &&
                 <div className={style.formCont}>
                     <div className={style.tarjeta}>
-                        <button onClick={() => { setVer(!ver) }} className={style.x}>X</button>
+                        <button onClick={() => { setVer(!ver) }} className={style.x}>x</button>
                         <h2>Contanos tu experiencia</h2>
                         <form className={style.container}>
 
@@ -65,7 +65,7 @@ const Testimoniales = () => {
                                 cols="30"
                                 rows="10"
                                 name="description"
-                                maxlength="500"
+                                maxlength="255"
                                 value={description}
                                 onChange={handleChange}>
                             </textarea>
