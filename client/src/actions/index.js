@@ -789,7 +789,10 @@ export function getTestimonials(payload) {
 }
 
 export function postTestimonials(payload , {token}) {
+<<<<<<< HEAD
+=======
   console.log('testimonial', payload);
+>>>>>>> ee3e461a138feba0ac82d0f5c1998052aaf744e7
   const config = {
     headers: {
       Authorization: `Bearer ${token}`,
