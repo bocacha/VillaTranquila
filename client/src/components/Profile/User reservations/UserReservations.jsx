@@ -5,7 +5,7 @@ import {
   editReservation,
   readReservation,
   Logeduser,
-  readReservationocultados,getUserData,readServices, selectcabin,cambiarReserva, cancelarReserva
+  readReservationocultados,getUserData,readServices, selectcabin,cambiarReserva, cancelarReserva, readCabains
 } from "../../../actions";
 import ReservacionesDetail from "./ReservacionesDetail";
 import DatePicker,{registerLocale} from "react-datepicker";
@@ -25,12 +25,17 @@ export default function Reservaciones() {
       useEffect(() => {
         dispatch(readReservation());
       }, [dispatch]);
+      useEffect(() => {
+        dispatch(readCabains());
+      }, [dispatch]);
   const [selectDateCI, setSelectDateCI] = useState(null);
   const [selectDateCO, setSelectDateCO] = useState(null);
   const [mostrar, setMostrar] = useState(false);
+  const [costo, setCosto] = useState(0);
   const [habilitar, setHabilitar]= useState(false)
   const logeduser = useSelector((state) => state.user);
   const allreservations = useSelector((state) => state.allReservations);
+  const allCabins= useSelector((state) => state.cabañas)
   const { token } = logeduser;
   const user = useSelector((state) => state.user);
   const [edit, setEdit] = useState({
@@ -40,7 +45,7 @@ export default function Reservaciones() {
     UserId: user.userid,
     Cabinid: "",
     ExtraServices: "",
-    CostoFinal: "",
+    CostoFinal: costo,
   });
   const[original,setOriginal]= useState({
   id: "",
@@ -71,22 +76,10 @@ export default function Reservaciones() {
     CostoFinal,
     Cabinid,) {
     e.preventDefault();
-    console.log(edit);
-    dispatch(selectcabin({id:Cabinid}))
+let seleccionada = allCabins.filter(e=> e.Number === CabinNumber)
+console.log(seleccionada[0].Price)
+setCosto(seleccionada[0].Price)
     setMostrar(true);
-    setEdit({
-      ...edit,
-      id: ID,
-      Checkin: Checkin,
-      Checkout: Checkout,
-      UserName: UserName,
-      Anombrede: Anombrede,
-      CabinNumber: CabinNumber,
-      ExtraServices: ExtraServices,
-      CostoFinal: CostoFinal,
-      Cabinid: Cabinid,
-      UserId: user.userid,
-    })
     setOriginal({
       ...original,
       id: ID,
@@ -98,6 +91,19 @@ export default function Reservaciones() {
       ExtraServices: ExtraServices,
       CostoFinal: CostoFinal,
       Cabinid: Cabinid,
+      UserId: user.userid,
+    })
+    setEdit({
+      ...edit,
+      id: ID,
+      Checkin: Checkin,
+      Checkout: Checkout,
+      UserName: UserName,
+      Anombrede: Anombrede,
+      CabinNumber: CabinNumber,
+      ExtraServices: ExtraServices,
+      Cabinid: Cabinid,
+      CostoFinal: seleccionada[0].Price,
       UserId: user.userid,
     })
   }
@@ -131,6 +137,7 @@ export default function Reservaciones() {
     setEdit({...edit,  Checkout: selectDateCO.toLocaleDateString('es-ES', options)})
   }
   const consultarprecio=()=>{
+    let contador = 0
     suma = []
     costoadicional = 0
     const checkbox = Array.from(document.getElementsByClassName("Servicios"));
@@ -143,10 +150,13 @@ export default function Reservaciones() {
     }
     for (let j = 0; j < suma.length; j++) {
       costoadicional = costoadicional + parseFloat(suma[j])
-
+      contador++
     }
-    costoadicional = parseFloat(costoadicional) + parseFloat(original.CostoFinal)
+    costoadicional = parseFloat(costoadicional) + parseFloat(costo)
     setEdit({...edit,CostoFinal:costoadicional})
+    if(contador === 0){
+      setEdit({...edit , CostoFinal:costo})
+    }
   }
 
   const checkboxselected = (e) => {
