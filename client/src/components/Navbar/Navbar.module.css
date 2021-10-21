@@ -1,3 +1,7 @@
+.navPrincipal{
+  z-index: index 100;
+}
+
 .navbar {
   position: fixed;
   overflow: hidden;
@@ -37,6 +41,10 @@
 
 .span {
   color: white;
+}
+#galeria,
+#testimonial{
+  margin-left:90%
 }
 
 /* RESPONSIVE */
@@ -112,7 +120,8 @@
   margin-left: 0px;
 }
 
-@media (max-width: 1140px) {
+
+@media (max-width: 1264px) {
   .navbar{
     width: fit-content;
     min-height: 50vh;
@@ -136,4 +145,11 @@
   .containerResp{
     display: block;
   }
+  #registrarseResp{
+    margin-left: -13%;
+  }
+  #perfilResp{
+    margin-left:-45%;
+  }
 }
+

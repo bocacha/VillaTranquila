@@ -37,6 +37,7 @@
   justify-items: center;
   justify-content: center;
   margin-top: 10px;
+  width:100%;
 }
 .crearCont {
   display: flex;
@@ -236,20 +237,24 @@
 }
 .containerContainerCabañas {
   display: flex;
-  position: absolute;
+  position: relative;
+  width:100%;
   height: 100%;
   background-color: black;
 }
 .containerCabañas {
+  width:98%;
+  margin-left:1%;
   display: grid;
   background-color: #94adbc;
-  grid-template-columns: repeat(auto-fill, minmax(30%, 30%));
-  justify-content: center;
-  justify-items: center;
-  grid-gap: 3%;
+  grid-template-columns: 32% 32% 32%;
+  justify-content: space-between;
+  /* justify-items: center; */
+  align-items: center;
+  /* grid-gap: 3%; */
 }
 
-@media (min-width: 320px) {
+ @media (min-width: 320px) {
   .navs {
     display: none;
   }
@@ -276,6 +281,8 @@
     align-items: center;
     justify-content: center;
     justify-items: center;
+    margin-left: 0.5%;
+    width:100%;
   }
   .textarea,
   .inputEditar,
@@ -292,12 +299,19 @@
   #descripcionEditar{
     min-width:100%;
   }
+  .btnsGuarCanc{
+    width:68%;
+  }
+  
 }
+
 
 @media (min-width: 480px) {
   #containerContainerCabañas {
-    margin-left: 14%;
-    margin-right: auto;
+    width:100%;
+  }
+  .containerCabañas{
+    width:100%;
   }
   .textarea,
   .inputEditar,
@@ -326,9 +340,6 @@
   }
   .navRsp {
     display: none;
-  }
-  .containerReservas {
-    grid-template-columns: repeat(auto-fill, minmax(70%, 70%));
   }
   .form{
     display: flex;
@@ -371,7 +382,15 @@
   #descripcionEditar{
     min-width:100%;
   }
+  #containerContainerCabañas {
+    width:100%;
+  }
+  .containerCabañas{
+    width:77%;
+    margin-left: 11.5%;
+  }
 }
+
 
 @media (min-width: 1024px) {
   .container1 {
@@ -384,16 +403,19 @@
   .navRsp {
     display: none;
   }
+  #containerContainerCabañas {
+    width:100%;
+  }
   .containerCabañas {
     display: grid;
     background-color: #94adbc;
-    grid-template-columns: repeat(auto-fill, minmax(30%, 30%));
-    grid-gap: 3%;
+    grid-template-columns: 50% 50%;
     width: 100%;
-    margin-left: -7%;
+    margin-left:0%;
   }
   
 }
+
 
 @media (min-width: 1155px) {
   .container1 {
@@ -406,17 +428,49 @@
   .navRsp {
     display: none;
   }
-  .containerReservas {
-    grid-template-columns: repeat(auto-fill, minmax(40%, 40%));
+  .container{
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: center;
+    width:100%;
+  }
+  .crearCont{
+    margin:0;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
   
 }
+
 @media (min-width: 1355px) {
   
   .container{
     display: flex;
     flex-direction: row;
     align-items: start;
-
+    justify-content: center;
+    width:100%;
   }
-}
+  .crearCont{
+    width:50%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+  }
+  .containerContainerCabañas {
+    display: flex;
+    position: relative;
+    width:100%;
+    height: 100%;
+    background-color: black;
+  }
+  .containerCabañas {
+    width:98%;
+    margin-left:1%;
+    display: grid;
+    background-color: #94adbc;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+    justify-content: space-between;
+    align-items: start;
+  }
+} 

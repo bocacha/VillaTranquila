@@ -29,11 +29,11 @@
 
 .izquierda{
   float:left;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 .derecha{
   float:right;
-  margin-right:10px;
+  /* margin-right:10px; */
 }
 
 .btnsContainer {
@@ -110,7 +110,8 @@
 @media (min-width: 320px) {
   .infoContainer{
     width: 100%;
-    margin-left:7%;
+    margin-left:auto;
+    margin-right:auto;
   }
   .btnsContainer {
     display: flex;
@@ -141,7 +142,8 @@
   }
   .infoContainer{
     width: 100%;
-    margin-left:3%;
+    margin-left:auto;
+    margin-right:auto;
   }
 }
 

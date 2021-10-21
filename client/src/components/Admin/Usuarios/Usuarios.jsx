@@ -197,9 +197,9 @@ export default function Usuarios() {
       <div className={styles.containerTodo}>
         <div className={styles.btnsContainer}>
           {!habilitar ? (
-            <button onClick={ocultadas} className={styles.btnSup}>Mostrar ocultadas</button>
+            <button onClick={ocultadas} className={styles.btnSup}>Mostrar bloqueados</button>
           ) : (
-            <button onClick={showtrue} className={styles.btnSup}>Mostrar habilitadas</button>
+            <button onClick={showtrue} className={styles.btnSup}>Mostrar habilitados</button>
           )
           }
         </div>
@@ -307,16 +307,16 @@ export default function Usuarios() {
                     <option value="true">SI</option>
                     <option value="false">NO</option>
                   </select>
-                  {/* <select
+                  <select
               onChange={(e) => handleSelectPremium(e)}
               value={input.Premium}
               className={styles.formInputs}
               required
             >
               <option value="">Premium:</option>
-              <option value="true">true</option>
-              <option value="false">false</option>
-            </select> */}
+              <option value="true">SI</option>
+              <option value="false">NO</option>
+            </select>
                   {/* <select
               onChange={(e) => handleSelectBlocked(e)}
               value={input.Blocked}
