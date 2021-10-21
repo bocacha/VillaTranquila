@@ -965,8 +965,8 @@ export function readFeedbackocultados(id) {
       });
     } catch (err) {
       console.error(err);
-    }
-  }}
+}}}
+
 export function cancelarReserva(payload){
   return async function (dispatch) {
     try {

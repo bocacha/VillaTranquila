@@ -88,7 +88,7 @@ export default function Home() {
           ></iframe>
         </div>
       </div>
-      {/* {allUsersData.Premium ? */} <Testimoniales />  {/* : null } */}
+       {allUsersData.Premium ?  <Testimoniales />   : null } 
           
         <Footer />
 
