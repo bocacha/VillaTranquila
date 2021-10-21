@@ -59,6 +59,7 @@
 }
 .formsCont .editarCont form .datePicker {
   display: flex;
+  flex-direction: column;
 }
 #checkin {
   margin-right: -30%;
@@ -154,7 +155,24 @@
     margin-top: -125px;
   }
   .containerReservas {
+    width: 100%;
     grid-template-columns: 100%;
+  }
+  .formsCont{
+    width: 100%;
+     margin-left:auto;
+    margin-right:auto;
+  }
+  #checkin {
+    margin-right: 0%;
+  }
+  #checkout {
+    margin-left: 0%;
+  }
+  .detalles{
+    width: 100%;
+    margin-left:auto;
+    margin-right:auto;
   }
 }
 
