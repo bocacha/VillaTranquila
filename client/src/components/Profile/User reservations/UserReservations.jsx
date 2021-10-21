@@ -152,7 +152,7 @@ setCosto(seleccionada[0].Price)
       costoadicional = costoadicional + parseFloat(suma[j])
       contador++
     }
-    costoadicional = parseFloat(costoadicional) + parseFloat(edit.CostoFinal)
+    costoadicional = parseFloat(costoadicional) + parseFloat(costo)
     setEdit({...edit,CostoFinal:costoadicional})
     if(contador === 0){
       setEdit({...edit , CostoFinal:costo})
