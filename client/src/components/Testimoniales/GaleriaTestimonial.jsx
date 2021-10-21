@@ -20,16 +20,18 @@ const GaleriaTestimonial = () => {
   var array = [1, 2, 3, 4, 5];
   return (
     <div className={styles.containerForm}>
-      {/* <Navbar /> */}
+      <div className={styles.containerNav}>
+        <Navbar />
+      </div>
       <div className={styles.container}>
         {allTestimonials.length !== 0 ? (
-          <div>
+          <div className={styles.grilla} >
             {allTestimonials.map((expe, id) => {
               return (
                 <div>
-                  <div key={id} className={styles.container}>
+                  <div key={id} className={styles.containerTestimoniales}>
                     <h3>Nombre : {expe.Name} </h3>
-                    <p>Descripcion : {expe.Description} </p>
+                    <p className={styles.descrip}> {expe.Description} </p>
                     <div className={styles.arrayStar}>
                       {array.map((la) => {
                         return (
@@ -51,15 +53,12 @@ const GaleriaTestimonial = () => {
                 </div>
               );
             })}
-            <div>
-              <button onClick={handleVolver}>Volver</button>
-            </div>
           </div>
         ) : (
-          <div>
-            <h3>No hay testimoniales para mostrar</h3>
+          <div className={styles.noHay}>
+            <h3>No hay reseñas para mostrar</h3>
             <div>
-              <button onClick={handleVolver}>Volver</button>
+              <button onClick={handleVolver} className={styles.btnPlus}>Volver</button>
             </div>
           </div>
         )}
@@ -69,4 +68,3 @@ const GaleriaTestimonial = () => {
 };
 
 export default GaleriaTestimonial;
-
