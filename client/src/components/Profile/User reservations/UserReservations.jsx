@@ -5,7 +5,7 @@ import {
   editReservation,
   readReservation,
   Logeduser,
-  readReservationocultados,getUserData,readServices, selectcabin,cambiarReserva
+  readReservationocultados,getUserData,readServices, selectcabin,cambiarReserva, cancelarReserva
 } from "../../../actions";
 import ReservacionesDetail from "./ReservacionesDetail";
 import DatePicker,{registerLocale} from "react-datepicker";
@@ -145,7 +145,7 @@ export default function Reservaciones() {
       costoadicional = costoadicional + parseFloat(suma[j])
 
     }
-    costoadicional = costoadicional+ original.CostoFinal
+    costoadicional = parseFloat(costoadicional) + parseFloat(original.CostoFinal)
     setEdit({...edit,CostoFinal:costoadicional})
   }
 
@@ -177,6 +177,15 @@ export default function Reservaciones() {
       Nuevo: edit,
     }
     dispatch(cambiarReserva(obj))
+  }
+  const cancelar=()=>{
+    const obj ={
+      Original: original,
+      Nuevo: {
+        Cancelar:true
+      },
+    }
+    dispatch(cancelarReserva(obj))
   }
  // const pruebadispatch=() => {
    // const { token } = logeduser;
@@ -221,6 +230,16 @@ export default function Reservaciones() {
                 return selectDateCI < d;
               }}
               />
+               <div>Costo final por noche:   </div>
+            <input
+              type="text"
+              value={edit.CostoFinal}
+              name="CostoFinal"
+              placeholder={"Por Noche:" + edit.CostoFinal}
+              className={styles.formInputs}
+              id={styles.precioFinal}
+              required
+            />
                <input
                     type="text"
                     value={edit.Anombrede}
@@ -251,6 +270,7 @@ export default function Reservaciones() {
               </div>
               <button onClick={checkboxselected}>Seleccionar Servicios</button>
               <button onClick={handlePrueba}>Solicitar Cambios</button>
+              <button onClick={cancelar}>Cancelar Reserva</button>
             </div>
           :
           null
