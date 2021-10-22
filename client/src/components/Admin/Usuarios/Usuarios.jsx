@@ -8,6 +8,7 @@ import NavAdmin from '../NavAdmin/NavAdmin';
 import Navbar from "../../Navbar/Navbar";
 import SearchBar from "./SearchBar";
 import Paginado from "./Paginado/Paginado";
+import { useHistory } from "react-router";
 
 function validation(input) {
   var letras = "abcdefghyjklmnñopqrstuvwxyz";
@@ -132,6 +133,7 @@ export default function Usuarios() {
     //dispatch(readUsers({ token }));
     //window.location.reload();
   }
+  const history = useHistory();
   function handlePrueba(e, ID) {
     // const { token } = logeduser;
     e.preventDefault();
@@ -144,6 +146,9 @@ export default function Usuarios() {
     //  });
     //dispatch(readUsers({ token }));
     //window.location.reload();
+    setTimeout(function() {
+      history.go(0);
+    }, 2000);
   }
   const ocultadas = () => {
     const { token } = logeduser;

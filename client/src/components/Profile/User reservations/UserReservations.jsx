@@ -226,6 +226,7 @@ setCosto(seleccionada[0].Price)
         {!mostrar
           ?
           null :
+          <div className={styles.fondo}>
           <div className={styles.edtarCont}>
             <div className={styles.title}> Editar reserva</div>
             <form >
@@ -296,6 +297,7 @@ setCosto(seleccionada[0].Price)
               <button className={styles.btnPlus} id={styles.cancelarCambios} onClick={() => mostrar && setMostrar(false)}>Cancelar cambios</button>
               <button className={styles.btnPlus} id={styles.cancelarReserva} onClick={cancelar}>Cancelar reserva</button>
             </div>
+          </div>
           </div>
         }
 

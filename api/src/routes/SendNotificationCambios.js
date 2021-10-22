@@ -16,8 +16,8 @@ router.post('/', (req, res) => {
         secure:true,
         service: 'Gmail',
         auth: {
-            user: 'tranquilavilla79@gmail.com',
-            pass: 'aypeadipxrbkkwdd'
+            user: 'complejovillatranquila@gmail.com',
+            pass: 'HolaVilla1'
         },
         
 
@@ -58,8 +58,8 @@ router.post('/', (req, res) => {
         secure:true,
         service: 'Gmail',
         auth: {
-            user: 'tranquilavilla79@gmail.com',
-            pass: 'aypeadipxrbkkwdd'
+            user: 'complejovillatranquila@gmail.com',
+            pass: 'HolaVilla1'
         },
         
 
@@ -100,8 +100,8 @@ router.post('/', (req, res) => {
         secure:true,
         service: 'Gmail',
         auth: {
-            user: 'tranquilavilla79@gmail.com',
-            pass: 'aypeadipxrbkkwdd'
+            user: 'complejovillatranquila@gmail.com',
+            pass: 'HolaVilla1'
         },
         
 

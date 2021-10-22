@@ -62,7 +62,7 @@ export default function Reservaciones() {
      alert("Editado")
      setTimeout(function () {
       history.go(0);
-  }, 2000)
+  }, 2500)
      }
   }
  

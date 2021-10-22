@@ -9,9 +9,9 @@ router.post("/", (req, res) => {
     port: 465,
     service: 'Gmail',
     auth: {
-        user: 'tranquilavilla79@gmail.com',
-        pass: 'aypeadipxrbkkwdd'
-    }
+        user: 'complejovillatranquila@gmail.com',
+        pass: 'HolaVilla1'
+    },
 });
   var mailOptions = {
       form: name,

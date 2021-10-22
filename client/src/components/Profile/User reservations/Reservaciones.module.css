@@ -606,7 +606,7 @@
   border-color: #8bafbf;
 }
 
-.edtarCont form button{
+/* .edtarCont form button{
   border-radius: 4px;
     background-color: #355978 ;
     border-color: transparent;
@@ -627,7 +627,7 @@
   background-color: #8bafbf ;
   color: #1c2531 ;
   border-color: #8bafbf;
-}
+} */
 
 .serviciosCont{
   display: flex;
@@ -757,4 +757,13 @@
   -moz-hyphens: auto;
   -ms-hyphens: auto;
   hyphens: auto;
+}
+.fondo{
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.596);
+  width:100%;
+  height: 100vh;
+  padding-top: 100px;
+  padding-bottom: 10px;
+  margin-top: -199px;
 }
