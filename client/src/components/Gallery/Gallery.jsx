@@ -32,8 +32,7 @@ export default function Gallery() {
                             <img
                                 className={styles.img}
                                 src={imageId.Url}
-                                width="100px"
-                                value={imageId.Description} alt=""
+                                value={imageId.Description} alt="Imagen Cabaña"
                             />
                             <Modall className={styles.modal} url={imageId.Url} description={imageId.Description} from={imageId.CabainNumber} />
                         </div>
