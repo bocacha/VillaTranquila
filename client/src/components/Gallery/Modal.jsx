@@ -18,7 +18,7 @@ export default function Modall({url, description, from}) {
           <Modal.Header closeButton>
             <Modal.Title>{description}</Modal.Title>
           </Modal.Header>
-          <Modal.Body><img src={url} /></Modal.Body>
+          <Modal.Body><img src={url} className= {styles.imgModal} /></Modal.Body>
           <Modal.Footer>
             <p className={styles.p}>Esta imagen corresponde a la cabaña N° {from} </p>
           </Modal.Footer>
