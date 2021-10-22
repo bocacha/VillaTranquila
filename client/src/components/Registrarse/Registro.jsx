@@ -26,11 +26,11 @@ function validation(input) {
     errors.UserName = "Debe contener letras minusculas";
   } else if (!/[A-Z]/.test(input.UserName)) {
     errors.UserName = "Debe contener letras mayusculas ";
-  } else if (!/[0-9]/.test(input.UserPasssword)) {
+  } else if (!/[0-9]/.test(input.UserPassword)) {
     errors.UserPasssword = "Debe contener un número";
-  } else if (!/[a-z]/.test(input.UserPasssword)) {
+  } else if (!/[a-z]/.test(input.UserPassword)) {
     errors.UserPasssword = "Debe contener letras minusculas";
-  } else if (!/[A-Z]/.test(input.UserPasssword)) {
+  } else if (!/[A-Z]/.test(input.UserPassword)) {
     errors.UserPasssword = "Debe contener letras mayusculas ";
   } else if (!/[a-zA-Z\s]/.test(input.FirstName)) {
     errors.FirstName = "Debe contener solo letras";
