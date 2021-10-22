@@ -15,7 +15,7 @@ router.post("/", (req, res) => {
 });
   var mailOptions = {
       form: name,
-      to: "tranquilavilla79@gmail.com",
+      to: "complejovillatranquila@gmail.com",
       subject: tel,
       text: query
   };
