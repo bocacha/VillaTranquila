@@ -58,7 +58,10 @@ const Testimoniales = () => {
                                 placeholder='Dejanos tu nombre . . .'
                                 name="name"
                                 value={name}
-                                onChange={handleChange} />
+                                maxLength="20"
+                                minLength="5"
+                                onChange={handleChange} 
+                                required/>
                             <label>Reseña :</label>
                             <textarea
                                 placeholder='Contanos cómo la pasaste . . .'
@@ -67,7 +70,8 @@ const Testimoniales = () => {
                                 name="description"
                                 maxlength="255"
                                 value={description}
-                                onChange={handleChange}>
+                                onChange={handleChange}
+                                required>
                             </textarea>
                             <div id={style.star}>
                                 <ReactStars
