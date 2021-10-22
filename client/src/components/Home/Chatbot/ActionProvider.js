@@ -52,7 +52,7 @@ class ActionProvider {
       }
 
       handleDespedida() {
-        const message = this.createChatBotMessage('Esperamos haber podido responder todas tus respuestas');
+        const message = this.createChatBotMessage('Esperamos haber podido resolver todas tus dudas');
     
         this.setState((prev) => ({
           ...prev,
@@ -69,7 +69,7 @@ class ActionProvider {
       }
 
       handleAnimales() {
-        const message = this.createChatBotMessage('No se reciben Animales de ningun tipo');
+        const message = this.createChatBotMessage('Si, en Villa Tranquila con gusto aceptamos mascotas 🐶');
     
         this.setState((prev) => ({
           ...prev,

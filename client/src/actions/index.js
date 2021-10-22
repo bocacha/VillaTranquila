@@ -845,6 +845,7 @@ export function aceptarCambios(payload, { token },ID){
       var useremail = json1.data.filter((e)=> e.ID === payload.UserId)
       let json = await axios.put("/reservations/EditReservation", payload, config);
       let json2 = await axios.put("/CambiosReserva/Cambios/Done",ID)
+      console.log({username:payload.UserName, name:payload.Anombrede, date:payload.Checkin,email:useremail[0].Email })
       let lala = await axios.post("/sendNotificationCambios",{username:payload.UserName, name:payload.Anombrede, date:payload.Checkin,email:useremail[0].Email })
       return dispatch(editAvailible({id:cabinfiltrada[0].ID , Available: Avaliable2}))
     } catch (err) {
