@@ -46,7 +46,7 @@ export default function Footer() {
             <div className={styles.contacto}>
               <span className={styles.title}> Contacto </span> <br />
               <BiMailSend />
-              tranquilavilla79@gmail.com <br />
+              complejovillatranquila@gmail.com <br />
               <FaMapPin /> Ubicacion
             </div>
             <div className={styles.links}>
